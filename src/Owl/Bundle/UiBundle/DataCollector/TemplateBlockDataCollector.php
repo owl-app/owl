@@ -72,11 +72,11 @@ final class TemplateBlockDataCollector extends DataCollector
     }
 
     /**
-     * @return 'sylius_ui.template_block'
+     * @return 'owl_ui.template_block'
      */
     public function getName(): string
     {
-        return 'sylius_ui.template_block';
+        return 'owl_ui.template_block';
     }
 
     public function reset(): void

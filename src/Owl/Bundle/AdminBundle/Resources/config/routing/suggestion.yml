@@ -7,7 +7,7 @@ owl_admin_suggestion_index:
             section: admin
             permission: true
             grid: owl_admin_suggestion
-            template: "@OwlAdmin/Crud/index.html.twig"
+            template: "@OwlAdmin/shared/crud/index.html.twig"
             vars:
                 subheader: owl.ui.manage_suggestions
                 icon: question

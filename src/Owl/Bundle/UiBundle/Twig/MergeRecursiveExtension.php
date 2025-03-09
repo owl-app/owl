@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,17 +18,12 @@ use Twig\TwigFilter;
 
 final class MergeRecursiveExtension extends AbstractExtension
 {
-    /**
-     * @return list{TwigFilter}
-     */
     public function getFilters(): array
     {
         return [
             new TwigFilter(
                 'sylius_merge_recursive',
-                function (array $firstArray, array $secondArray): array {
-                    return array_merge_recursive($firstArray, $secondArray);
-                },
+                fn (array $firstArray, array $secondArray): array => array_merge_recursive($firstArray, $secondArray),
             ),
         ];
     }

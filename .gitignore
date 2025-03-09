@@ -12,6 +12,18 @@
 /tools/*
 !/tools/.gitkeep
 
+# Package managers
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+yarn-error.log
+pnpm-debug.log
+npm-debug.log
+
 ###> docker ###
 /.docker/elasticsearch/.env.local
 ###< docker ###

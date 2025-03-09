@@ -1,0 +1,26 @@
+{% set generic_hook = 'owl_admin.base' %}
+
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        {% block metatags %}
+            {% hook generic_hook ~ '#metatags' %}
+        {% endblock %}
+
+        <title>{% block title %}Sylius{% endblock %}</title>
+
+        {% block stylesheets %}
+            {% hook generic_hook ~ '#stylesheets' %}
+        {% endblock %}
+    </head>
+    <body class="{% block body_class %}{% endblock %}">
+    asdfasfd
+        <div class="page">
+            {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}
+            {% hook generic_hook ~ '#javascripts' %}
+        {% endblock %}
+    </body>
+</html>

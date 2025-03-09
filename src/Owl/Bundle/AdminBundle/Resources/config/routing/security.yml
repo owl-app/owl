@@ -7,7 +7,7 @@ owl_admin_login:
         _locale: "%locale%"
         _controller: owl_core.controller.security::loginAction
         _sylius:
-            template: "@OwlAdmin/Security/login.html.twig"
+            template: "@OwlAdmin/security/login.html.twig"
             logged_in_route: owl_admin_dashboard
 
 owl_admin_login_check:

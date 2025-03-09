@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UiBundle;
 
-use Owl\Bundle\UiBundle\DependencyInjection\Compiler\LegacySonataBlockPass;
+use Owl\Bundle\UiBundle\DependencyInjection\Compiler\LiveComponentTagPass;
+use Owl\Bundle\UiBundle\DependencyInjection\Compiler\TwigComponentTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -24,6 +25,7 @@ final class OwlUiBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new LegacySonataBlockPass());
+        $container->addCompilerPass(new LiveComponentTagPass(), priority: 500);
+        $container->addCompilerPass(new TwigComponentTagPass(), priority: 500);
     }
 }

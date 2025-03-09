@@ -1,6 +1,7 @@
 imports:
     - { resource: "@OwlUiBundle/Resources/config/app/config.yml" }
     - { resource: "@OwlAdminBundle/Resources/config/app/owl/owl_mailer.yml" }
+    - { resource: 'twig_hooks/**/*.yaml' }
     - { resource: "@OwlAdminBundle/Resources/config/grids/rbac_role.yml" }
     - { resource: "@OwlAdminBundle/Resources/config/grids/admin_user.yml" }
     - { resource: "@OwlAdminBundle/Resources/config/grids/locale.yml" }
@@ -20,6 +21,10 @@ owl_user:
     permission_provider:
         admin: 'rbac'
 
+webpack_encore:
+    builds:
+        admin: '%kernel.project_dir%/public/build/admin'
+
 sylius_grid:
     templates:
         action:
@@ -28,265 +33,279 @@ sylius_grid:
             registration_admin_user: "@OwlAdmin/AdminUser/Grid/Action/registration.html.twig"
         filter:
             entities: '@OwlUi/Grid/Filter/entities.html.twig'
+            string: '@OwlAdmin/shared/grid/filter/string.html.twig'
 
 owl_ui:
-    events:
-        sylius.admin.index:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Crud/Index/_header.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/Crud/Index/_content.html.twig"
-                    priority: 10
+    twig_ux:
+        live_component_tags:
+            admin:
+                route: owl_admin_live_component
+        anonymous_component_template_prefixes:
+            owl_admin: "@OwlAdmin/shared/components"
+        component_default_template: "@OwlUi/components/default.html.twig"
 
-        sylius.admin.create:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Crud/Create/_header.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/Crud/Create/_content.html.twig"
-                    priority: 10
+sylius_twig_hooks:
+    enable_autoprefixing: true
+    hook_name_section_separator: '#'
 
-        sylius.admin.ajax.create:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Crud/Ajax/Create/_header.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/Crud/Ajax/Create/_content.html.twig"
-                    priority: 10
+# owl_ui:
+#     events:
+#         sylius.admin.index:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Crud/Index/_header.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/Crud/Index/_content.html.twig"
+#                     priority: 10
 
-        sylius.admin.update:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Crud/Update/_header.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/Crud/Update/_content.html.twig"
-                    priority: 10
+#         sylius.admin.create:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Crud/Create/_header.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/Crud/Create/_content.html.twig"
+#                     priority: 10
 
-        sylius.admin.ajax.update:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Crud/Ajax/Update/_header.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/Crud/Ajax/Update/_content.html.twig"
-                    priority: 10
+#         sylius.admin.ajax.create:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Crud/Ajax/Create/_header.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/Crud/Ajax/Create/_content.html.twig"
+#                     priority: 10
 
-        sylius.admin.layout.sidebar:
-            blocks:
-                logo:
-                    template: "@OwlAdmin/Layout/_logo.html.twig"
-                    priority: 20
-                menu:
-                    template: "@OwlAdmin/Layout/_menu.html.twig"
-                    priority: 10
+#         sylius.admin.update:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Crud/Update/_header.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/Crud/Update/_content.html.twig"
+#                     priority: 10
 
-        sylius.admin.layout.javascripts:
-            blocks:
-                scripts:
-                    template: "@OwlAdmin/Layout/_scripts.html.twig"
-                    priority: 10
+#         sylius.admin.ajax.update:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Crud/Ajax/Update/_header.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/Crud/Ajax/Update/_content.html.twig"
+#                     priority: 10
 
-        sylius.admin.layout.stylesheets:
-            blocks:
-                styles:
-                    template: "@OwlAdmin/Layout/_styles.html.twig"
-                    priority: 10
+#         sylius.admin.layout.sidebar:
+#             blocks:
+#                 logo:
+#                     template: "@OwlAdmin/Layout/_logo.html.twig"
+#                     priority: 20
+#                 menu:
+#                     template: "@OwlAdmin/Layout/_menu.html.twig"
+#                     priority: 10
 
-        sylius.admin.login.before_form:
-            blocks:
-                flashes:
-                    template: "@OwlAdmin/Security/_flashes.html.twig"
-                    priority: 10
+#         sylius.admin.layout.javascripts:
+#             blocks:
+#                 scripts:
+#                     template: "@OwlAdmin/Layout/_scripts.html.twig"
+#                     priority: 10
 
-        # TINYMCE
-        owl.admin.tinymce:
-            blocks:
-                tinymce:
-                    template: "@OwlAdmin/_tinymce.html.twig"
+#         sylius.admin.layout.stylesheets:
+#             blocks:
+#                 styles:
+#                     template: "@OwlAdmin/Layout/_styles.html.twig"
+#                     priority: 10
 
-        sylius.admin.layout.topbar_left:
-            blocks:
-                sidebar_toggle:
-                    template: "@OwlAdmin/Layout/_sidebarToggle.html.twig"
-                    priority: 300
+#         sylius.admin.login.before_form:
+#             blocks:
+#                 flashes:
+#                     template: "@OwlAdmin/Security/_flashes.html.twig"
+#                     priority: 10
 
-        sylius.admin.layout.topbar_right:
-            blocks:
-                add_suggestion:
-                    template: "@OwlAdmin/Layout/_add_suggestion.html.twig"
-                    priority: 50
-                notifications:
-                    template: "@OwlAdmin/Layout/_notificationWidget.html.twig"
-                    priority: 30
-                security:
-                    template: "@OwlAdmin/Layout/_security.html.twig"
-                    priority: 10
+#         # TINYMCE
+#         owl.admin.tinymce:
+#             blocks:
+#                 tinymce:
+#                     template: "@OwlAdmin/_tinymce.html.twig"
 
-        sylius.admin.login.content:
-            blocks:
-                tree:
-                    template: "@OwlAdmin/Security/_content.html.twig"
-                    priority: 10
+#         sylius.admin.layout.topbar_left:
+#             blocks:
+#                 sidebar_toggle:
+#                     template: "@OwlAdmin/Layout/_sidebarToggle.html.twig"
+#                     priority: 300
 
-        owl.admin.dashboard.content:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Dashboard/_header.html.twig"
-                    priority: 40
-                statistics:
-                    template: "@OwlAdmin/Dashboard/_description.html.twig"
-                    priority: 30
+#         sylius.admin.layout.topbar_right:
+#             blocks:
+#                 add_suggestion:
+#                     template: "@OwlAdmin/Layout/_add_suggestion.html.twig"
+#                     priority: 50
+#                 notifications:
+#                     template: "@OwlAdmin/Layout/_notificationWidget.html.twig"
+#                     priority: 30
+#                 security:
+#                     template: "@OwlAdmin/Layout/_security.html.twig"
+#                     priority: 10
 
-        owl.admin.registration.ajax.show.content:
-            blocks:
-                header:
-                    template: "@OwlAdmin/AdminUser/Registration/_headerWidget.html.twig"
-                    priority: 40
-                content:
-                    template: "@OwlAdmin/AdminUser/Registration/_contentWidget.html.twig"
-                    priority: 10
+#         sylius.admin.login.content:
+#             blocks:
+#                 tree:
+#                     template: "@OwlAdmin/Security/_content.html.twig"
+#                     priority: 10
 
-        owl.admin.registration.ajax.show.header.content:
-            blocks:
-                content:
-                    template: "@OwlAdmin/AdminUser/Registration/_header.html.twig"
-                    priority: 20
+#         owl.admin.dashboard.content:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Dashboard/_header.html.twig"
+#                     priority: 40
+#                 statistics:
+#                     template: "@OwlAdmin/Dashboard/_description.html.twig"
+#                     priority: 30
 
-        # RBAC
-        # Permission
-        owl.admin.rbac_permission.index.header:
-            blocks:
-                content:
-                    template: "@OwlAdmin/Rbac/Permission/Availables/Header/_content.html.twig"
-                    priority: 20
-                breadcrumb:
-                    template: "@OwlAdmin/Rbac/Permission/Availables/Header/_breadcrumb.html.twig"
-                    priority: 10
+#         owl.admin.registration.ajax.show.content:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/AdminUser/Registration/_headerWidget.html.twig"
+#                     priority: 40
+#                 content:
+#                     template: "@OwlAdmin/AdminUser/Registration/_contentWidget.html.twig"
+#                     priority: 10
 
-        owl.admin.rbac_permission.index.content:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Rbac/Permission/Availables/_headerWidget.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/Rbac/Permission/Availables/_content.html.twig"
-                    priority: 10
+#         owl.admin.registration.ajax.show.header.content:
+#             blocks:
+#                 content:
+#                     template: "@OwlAdmin/AdminUser/Registration/_header.html.twig"
+#                     priority: 20
 
-        # Role availables
-        owl.admin.rbac_role_availables.index.header:
-            blocks:
-                content:
-                    template: "@OwlAdmin/Rbac/Role/Availables/Header/_content.html.twig"
-                    priority: 20
-                breadcrumb:
-                    template: "@OwlAdmin/Rbac/Role/Availables/Header/_breadcrumb.html.twig"
-                    priority: 10
+#         # RBAC
+#         # Permission
+#         owl.admin.rbac_permission.index.header:
+#             blocks:
+#                 content:
+#                     template: "@OwlAdmin/Rbac/Permission/Availables/Header/_content.html.twig"
+#                     priority: 20
+#                 breadcrumb:
+#                     template: "@OwlAdmin/Rbac/Permission/Availables/Header/_breadcrumb.html.twig"
+#                     priority: 10
 
-        owl.admin.rbac_role_availables.index.content:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Rbac/Role/Availables/_headerWidget.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/Rbac/Role/Availables/_content.html.twig"
-                    priority: 10
+#         owl.admin.rbac_permission.index.content:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Rbac/Permission/Availables/_headerWidget.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/Rbac/Permission/Availables/_content.html.twig"
+#                     priority: 10
 
-        # User prmission
-        owl.admin.user_permission.index.header:
-            blocks:
-                content:
-                    template: "@OwlAdmin/User/Permission/Header/_content.html.twig"
-                    priority: 20
-                breadcrumb:
-                    template: "@OwlAdmin/User/Permission/Header/_breadcrumb.html.twig"
-                    priority: 10
+#         # Role availables
+#         owl.admin.rbac_role_availables.index.header:
+#             blocks:
+#                 content:
+#                     template: "@OwlAdmin/Rbac/Role/Availables/Header/_content.html.twig"
+#                     priority: 20
+#                 breadcrumb:
+#                     template: "@OwlAdmin/Rbac/Role/Availables/Header/_breadcrumb.html.twig"
+#                     priority: 10
 
-        owl.admin.user_permission.index.content:
-            blocks:
-                header:
-                    template: "@OwlAdmin/User/Permission/_headerWidget.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/User/Permission/_content.html.twig"
-                    priority: 10
+#         owl.admin.rbac_role_availables.index.content:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Rbac/Role/Availables/_headerWidget.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/Rbac/Role/Availables/_content.html.twig"
+#                     priority: 10
 
-        owl.admin.category.index.header:
-            blocks:
-                content:
-                    template: "@OwlAdmin/Category/Index/Header/_content.html.twig"
-                    priority: 20
-                breadcrumb:
-                    template: "@OwlAdmin/Category/Index/Header/_breadcrumb.html.twig"
-                    priority: 10
+#         # User prmission
+#         owl.admin.user_permission.index.header:
+#             blocks:
+#                 content:
+#                     template: "@OwlAdmin/User/Permission/Header/_content.html.twig"
+#                     priority: 20
+#                 breadcrumb:
+#                     template: "@OwlAdmin/User/Permission/Header/_breadcrumb.html.twig"
+#                     priority: 10
 
-        owl.admin.category.index.content:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Category/Index/_headerWidget.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/Crud/Index/_content.html.twig"
-                    priority: 10
+#         owl.admin.user_permission.index.content:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/User/Permission/_headerWidget.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/User/Permission/_content.html.twig"
+#                     priority: 10
 
-        owl.admin.system_setting:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Setting/System/Index/_header.html.twig"
-                    priority: 20
-                content:
-                    template: "@OwlAdmin/Setting/System/Index/_content.html.twig"
-                    priority: 10
+#         owl.admin.category.index.header:
+#             blocks:
+#                 content:
+#                     template: "@OwlAdmin/Category/Index/Header/_content.html.twig"
+#                     priority: 20
+#                 breadcrumb:
+#                     template: "@OwlAdmin/Category/Index/Header/_breadcrumb.html.twig"
+#                     priority: 10
 
-        #NOTIFICATION
-        owl.admin.notification.show.content:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Notification/Show/_headerWidget.html.twig"
-                    priority: 40
-                breadcrumb:
-                    template: "@OwlAdmin/Notification/Show/_breadcrumb.html.twig"
-                    priority: 30
-                content:
-                    template: "@OwlAdmin/Notification/Show/_contentWidget.html.twig"
-                    priority: 10
+#         owl.admin.category.index.content:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Category/Index/_headerWidget.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/Crud/Index/_content.html.twig"
+#                     priority: 10
 
-        owl.admin.notification.show.header.content:
-            blocks:
-                content:
-                    template: "@OwlAdmin/Notification/Show/_header.html.twig"
-                    priority: 20
-                menu:
-                    template: "@OwlAdmin/Notification/Show/_headerMenu.html.twig"
-                    priority: 10
+#         owl.admin.system_setting:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Setting/System/Index/_header.html.twig"
+#                     priority: 20
+#                 content:
+#                     template: "@OwlAdmin/Setting/System/Index/_content.html.twig"
+#                     priority: 10
 
-        owl.admin.notification.show.tab_details:
-            blocks:
-                content:
-                    template: "@OwlAdmin/Notification/Show/Tab/_details.html.twig"
-                    priority: 20
+#         #NOTIFICATION
+#         owl.admin.notification.show.content:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Notification/Show/_headerWidget.html.twig"
+#                     priority: 40
+#                 breadcrumb:
+#                     template: "@OwlAdmin/Notification/Show/_breadcrumb.html.twig"
+#                     priority: 30
+#                 content:
+#                     template: "@OwlAdmin/Notification/Show/_contentWidget.html.twig"
+#                     priority: 10
 
-        owl.admin.notification.show.tab_confirmation_history:
-            blocks:
-                content:
-                    template: "@OwlAdmin/Notification/Show/Tab/_confirmation_history.html.twig"
-                    priority: 20
+#         owl.admin.notification.show.header.content:
+#             blocks:
+#                 content:
+#                     template: "@OwlAdmin/Notification/Show/_header.html.twig"
+#                     priority: 20
+#                 menu:
+#                     template: "@OwlAdmin/Notification/Show/_headerMenu.html.twig"
+#                     priority: 10
 
-        owl.admin.notification.ajax.details.content:
-            blocks:
-                header:
-                    template: "@OwlAdmin/Notification/Details/_headerWidget.html.twig"
-                    priority: 40
-                content:
-                    template: "@OwlAdmin/Notification/Details/_contentWidget.html.twig"
-                    priority: 10
+#         owl.admin.notification.show.tab_details:
+#             blocks:
+#                 content:
+#                     template: "@OwlAdmin/Notification/Show/Tab/_details.html.twig"
+#                     priority: 20
 
-        owl.admin.notification.ajax.details.header.content:
-            blocks:
-                content:
-                    template: "@OwlAdmin/Notification/Details/_header.html.twig"
-                    priority: 20
+#         owl.admin.notification.show.tab_confirmation_history:
+#             blocks:
+#                 content:
+#                     template: "@OwlAdmin/Notification/Show/Tab/_confirmation_history.html.twig"
+#                     priority: 20
+
+#         owl.admin.notification.ajax.details.content:
+#             blocks:
+#                 header:
+#                     template: "@OwlAdmin/Notification/Details/_headerWidget.html.twig"
+#                     priority: 40
+#                 content:
+#                     template: "@OwlAdmin/Notification/Details/_contentWidget.html.twig"
+#                     priority: 10
+
+#         owl.admin.notification.ajax.details.header.content:
+#             blocks:
+#                 content:
+#                     template: "@OwlAdmin/Notification/Details/_header.html.twig"
+#                     priority: 20

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,11 +13,17 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UiBundle\Tests\Functional;
 
+use Owl\Bundle\UiBundle\OwlUiBundle;
+use Owl\Bundle\UiBundle\Tests\Functional\src\SomeTwigComponent;
+use Sylius\TwigExtra\Symfony\SyliusTwigExtraBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
-use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\UX\TwigComponent\TwigComponentBundle;
+use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 
 final class Kernel extends HttpKernel
 {
@@ -26,84 +32,26 @@ final class Kernel extends HttpKernel
     public function registerBundles(): array
     {
         return [
-            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new \Symfony\Bundle\TwigBundle\TwigBundle(),
-            new \Sonata\BlockBundle\SonataBlockBundle(),
-            new \Owl\Bundle\UiBundle\SyliusUiBundle(),
+            new FrameworkBundle(),
+            new SecurityBundle(),
+            new TwigBundle(),
+            new OwlUiBundle(),
+            new WebpackEncoreBundle(),
+            new TwigComponentBundle(),
+            new SyliusTwigExtraBundle(),
         ];
     }
 
-    protected function configureContainer(ContainerBuilder $containerBuilder, LoaderInterface $loader): void
+    protected function build(ContainerBuilder $container): void
     {
-        $containerBuilder->loadFromExtension('framework', [
+        $container->register(SomeTwigComponent::class)->addTag('twig.component', ['template' => 'blocks/twigComponent/someTwigComponent.html.twig']);
+
+        $container->loadFromExtension('framework', [
             'secret' => 'S0ME_SECRET',
         ]);
 
-        $containerBuilder->loadFromExtension('security', ['firewalls' => ['main' => ['anonymous' => null]]]);
-
-        $containerBuilder->loadFromExtension(
-            'sonata_block',
-            ['blocks' => ['sonata.block.service.template' => ['settings' => ['context' => null]]]],
-        );
-
-        $containerBuilder->loadFromExtension('sylius_ui', ['events' => [
-            'first_event' => [
-                'blocks' => [
-                    'third' => ['template' => 'blocks/txt/third.txt.twig', 'priority' => -5],
-                    'first' => ['template' => 'blocks/txt/first.txt.twig', 'priority' => 5],
-                    'second' => 'blocks/txt/second.txt.twig',
-                ],
-            ],
-            'second_event' => [
-                'blocks' => [
-                    'context' => 'blocks/txt/context.txt.twig',
-                ],
-            ],
-            'event' => [
-                'blocks' => [
-                    'first' => ['template' => 'blocks/html/first.html.twig', 'priority' => 5],
-                    'context' => ['template' => 'blocks/html/context.html.twig', 'priority' => -5],
-                ],
-            ],
-            'context_template_block' => [
-                'blocks' => [
-                    'block' => [
-                        'template' => 'blocks/contextTemplateBlock/block.txt.twig',
-                        'context' => [
-                            'option1' => 'foo',
-                            'option2' => 'bar',
-                        ],
-                    ],
-                ],
-            ],
-            'multiple_events_generic' => [
-                'blocks' => [
-                    'first' => [
-                        'template' => 'blocks/multipleEvents/genericFirst.txt.twig',
-                    ],
-                    'second' => [
-                        'template' => 'blocks/multipleEvents/genericSecond.txt.twig',
-                        'context' => ['value' => 13],
-                    ],
-                ],
-            ],
-            'multiple_events_specific' => [
-                'blocks' => [
-                    'specific' => [
-                        'template' => 'blocks/multipleEvents/specific.txt.twig',
-                        'priority' => 3,
-                    ],
-                    'second' => [
-                        'context' => ['value' => 42],
-                        'priority' => 5,
-                    ],
-                ],
-            ],
-        ]]);
-    }
-
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
-    {
+        $container->loadFromExtension('webpack_encore', [
+            'output_path' => '%kernel.project_dir%/public/build',
+        ]);
     }
 }

@@ -1,0 +1,16 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.base#metatags':
+            metatags:
+                template: '@OwlAdmin/shared/layout/base/metatags.html.twig'
+                priority: 0
+                
+        'owl_admin.base#stylesheets':
+            styles:
+                template: '@OwlAdmin/shared/layout/base/stylesheets.html.twig'
+                priority: 0
+
+        'owl_admin.base#javascripts':
+            javascripts:
+                template: '@OwlAdmin/shared/layout/base/javascripts.html.twig'
+                priority: 0

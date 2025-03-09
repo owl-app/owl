@@ -31,46 +31,8 @@ final class OwlUiExtension extends Extension
 
         $loader->load('services.xml');
 
-        if ($container->getParameter('kernel.debug')) {
-            $loader->load('services/debug/template_event.xml');
-        }
-
-        $this->loadEvents($config['events'], $container);
-    }
-
-    /**
-     * @experimental
-     *
-     * @param array<string, array{blocks: array<string, array{template: string, context: array, priority: int, enabled: bool}>}> $eventsConfig
-     */
-    private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
-    {
-        $templateBlockRegistryDefinition = $container->findDefinition(TemplateBlockRegistryInterface::class);
-
-        $blocksForEvents = [];
-        foreach ($eventsConfig as $eventName => $eventConfiguration) {
-            $blocksPriorityQueue = new SplPriorityQueue();
-
-            foreach ($eventConfiguration['blocks'] as $blockName => $details) {
-                $details['name'] = $blockName;
-                $details['eventName'] = $eventName;
-
-                $blocksPriorityQueue->insert($details, $details['priority'] ?? 0);
-            }
-
-            foreach ($blocksPriorityQueue->toArray() as $details) {
-                /** @var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
-                $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
-                    $details['name'],
-                    $details['eventName'],
-                    $details['template'],
-                    $details['context'],
-                    $details['priority'],
-                    $details['enabled'],
-                ]);
-            }
-        }
-
-        $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);
+        $container->setParameter('owl_ui.twig_ux.anonymous_component_template_prefixes', $config['twig_ux']['anonymous_component_template_prefixes'] ?? []);
+        $container->setParameter('owl_ui.twig_ux.live_component_tags', $config['twig_ux']['live_component_tags'] ?? []);
+        $container->setParameter('owl_ui.twig_ux.component_default_template', $config['twig_ux']['component_default_template']);
     }
 }

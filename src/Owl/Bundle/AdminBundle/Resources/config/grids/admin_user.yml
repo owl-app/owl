@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%owl.model.admin_user.class%"
                     elasticsearch:
-                        enabled: true
+                        enabled: false
                         finder: user
             sorting:
                 createdAt: desc

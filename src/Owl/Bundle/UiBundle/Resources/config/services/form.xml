@@ -15,7 +15,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.form.type.security_login" class="Owl\Bundle\UiBundle\Form\Type\SecurityLoginType">
+        <service id="owl.form.type.security_login" class="Owl\Bundle\UiBundle\Form\Type\SecurityLoginType">
             <tag name="form.type" />
         </service>
     </services>
