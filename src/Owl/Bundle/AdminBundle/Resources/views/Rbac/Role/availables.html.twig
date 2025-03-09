@@ -1,0 +1,9 @@
+{% extends '@OwlAdmin/layout.html.twig' %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ header|trans ~': ' ~ role.setting.displayName }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    {{ sylius_template_event('owl.admin.rbac_role_availables.index.content', _context) }}
+{% endblock %}

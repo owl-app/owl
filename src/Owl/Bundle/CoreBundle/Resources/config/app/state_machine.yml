@@ -1,0 +1,2 @@
+imports:
+    - { resource: "@OwlCoreBundle/Resources/config/app/state_machine/owl_admin_user_registration.yml" }

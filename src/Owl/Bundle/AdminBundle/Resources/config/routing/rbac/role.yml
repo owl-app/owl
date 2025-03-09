@@ -1,0 +1,61 @@
+owl_admin_rbac_role:
+    resource: |
+        alias: owl.rbac_role
+        path: /
+        section: admin
+        templates: "@OwlAdmin\\Crud"
+        except: ['show']
+        grid: owl_admin_rbac_role
+        permission: true
+        vars:
+            all:
+                subheader: owl.ui.manage_rbac_roles_available_in_system
+                templates:
+                    form: "@OwlAdmin/Rbac/Role/_form.html.twig"
+            index:
+                icon: user secret
+                referer: true
+                permission:
+                    group: rbac_permission_role
+                    description: owl.ui.permission.list_roles
+            create:
+                form:
+                    ajax: true
+                permission:
+                    group: rbac_permission_role
+                    description: owl.ui.permission.create_role
+            update:
+                templates:
+                    breadcrumb: "@OwlAdmin/Rbac/Role/Update/_breadcrumb.html.twig"
+                    form: "@OwlAdmin/Rbac/Role/_form.html.twig"
+                form:
+                    ajax: true
+                permission:
+                    group: rbac_permission_role
+                    description: owl.ui.permission.update_role
+            delete:
+                redirect:
+                    header: xhr
+                permission:
+                    group: rbac_permission_role
+                    description: owl.ui.permission.delete_role
+    type: sylius.resource
+
+owl_admin_rbac_role_availables:
+    path: /{id}/availables
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.rbac_role::availablesAction
+        _sylius:
+            section: admin
+            permission: true
+            # grid: owl_admin_service
+            template: "@OwlAdmin/Rbac/Role/availables.html.twig"
+            form: Owl\Bundle\RbacBundle\Form\Type\AssignType
+            vars:
+                header: owl.ui.permissions_for_role
+                subheader: owl.ui.manage_permissions_for_role
+                icon: cube
+                permission:
+                    group: rbac_permission_role
+                    description: owl.ui.permission.list_permission_assigned_to_role

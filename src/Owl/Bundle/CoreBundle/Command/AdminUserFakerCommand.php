@@ -1,0 +1,88 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Owl\Bundle\CoreBundle\Command;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Owl\Component\Core\Model\AdminUser;
+use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
+use Owl\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+
+class AdminUserFakerCommand extends ContainerAwareCommand
+{
+    protected static $defaultName = 'owl:admin-user-faker';
+
+    public function __construct(
+        private EntityManagerInterface $adminUserManager,
+        private RepositoryInterface $roleRepository,
+        private ExampleFactoryInterface $userFactory,
+        private $hasher,
+    ) {
+        parent::__construct();
+    }
+
+    protected function configure(): void
+    {
+        $this
+            ->setDescription(
+                'Create fake admin users with random data.'
+            )
+            ->setDefinition(
+                new InputDefinition([
+                    new InputOption('count', null, InputOption::VALUE_REQUIRED),
+                ])
+            );
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $roles = $this->roleRepository->findAll();
+        $count = $input->getOption('count');
+        $faker = \Faker\Factory::create();
+        $batchSize = 500;
+
+        $connection = $this->adminUserManager->getConnection();
+        $connection->getConfiguration()->setMiddlewares([]);
+        $connection->beginTransaction();
+
+        for($i = 1; $i <= $count; ++$i)
+        {
+            $firstName = $faker->firstName();
+            $lastName = $faker->lastName();
+            shuffle($roles);
+            $role = $roles[0];
+
+            $connection->insert('owl_admin_user', [
+                'display_name' => $firstName . ' ' . $lastName,
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'phone' => $faker->phoneNumber(),
+                'email' => $faker->email(),
+                'enabled' => rand(0,1),
+                'locked' => 0,
+                'password_hash' => '',
+                'hasher_name' => $this->hasher,
+                'note' => $faker->sentence(),
+                'role_id' => $role->getName(),
+                'roles' => serialize([$role->getName()]),
+                'created_at' => date('Y-m-d H:i:s'),
+                'locale_code' => 'en',
+            ]);
+
+            if (($i % $batchSize) === 0) {
+                $connection->commit();
+                $connection->beginTransaction();
+            }
+        }
+
+        $connection->commit();
+
+        return 0;
+    }
+}

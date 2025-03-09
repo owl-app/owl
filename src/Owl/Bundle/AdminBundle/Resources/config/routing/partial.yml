@@ -1,0 +1,3 @@
+owl_admin_partial_admin_user:
+    resource: "@OwlAdminBundle/Resources/config/routing/partial/admin_user.yml"
+    prefix: /users

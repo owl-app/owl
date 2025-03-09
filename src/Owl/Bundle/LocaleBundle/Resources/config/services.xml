@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="owl.form.type.locale.validation_groups" type="collection">
+            <parameter>owl</parameter>
+        </parameter>
+    </parameters>
+
+    <services>
+        <defaults public="true" />
+
+        <service id="owl.form.type.locale" class="Owl\Bundle\LocaleBundle\Form\Type\LocaleType">
+            <argument>%owl.model.locale.class%</argument>
+            <argument>%owl.form.type.locale.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.locale_choice" class="Owl\Bundle\LocaleBundle\Form\Type\LocaleChoiceType">
+            <argument type="service" id="owl.repository.locale" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.context.locale" class="Owl\Component\Locale\Context\ImmutableLocaleContext">
+            <argument>%owl_locale.locale%</argument>
+        </service>
+        <service id="Owl\Component\Locale\Context\LocaleContextInterface" alias="owl.context.locale" />
+
+        <service id="owl.context.locale.composite" class="Owl\Component\Locale\Context\CompositeLocaleContext" decorates="owl.context.locale" decoration-priority="256" public="false" />
+
+        <service id="owl.locale_provider" class="Owl\Component\Locale\Provider\LocaleProvider">
+            <argument type="service" id="owl.repository.locale" />
+            <argument>%owl_locale.locale%</argument>
+        </service>
+        <service id="Owl\Component\Locale\Provider\LocaleProviderInterface" alias="owl.locale_provider" />
+
+        <service id="owl.locale_converter" class="Owl\Component\Locale\Converter\LocaleConverter" />
+        <service id="Owl\Component\Locale\Converter\LocaleConverterInterface" alias="owl.locale_converter" />
+
+        <service id="owl.listener.request_locale_setter" class="Owl\Bundle\LocaleBundle\Listener\RequestLocaleSetter">
+            <argument type="service" id="owl.context.locale" />
+            <argument type="service" id="owl.locale_provider" />
+            <tag name="kernel.event_listener" event="kernel.request" priority="4" />
+        </service>
+
+        <service id="owl.templating.helper.locale" class="Owl\Bundle\LocaleBundle\Templating\Helper\LocaleHelper">
+            <argument type="service" id="owl.locale_converter" />
+            <argument type="service" id="owl.context.locale" />
+            <tag name="templating.helper" alias="owl_locale" />
+        </service>
+
+        <service id="owl.twig.extension.locale" class="Owl\Bundle\LocaleBundle\Twig\LocaleExtension" public="false">
+            <argument type="service" id="owl.templating.helper.locale" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

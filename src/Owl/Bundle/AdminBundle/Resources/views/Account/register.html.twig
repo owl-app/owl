@@ -1,0 +1,40 @@
+{% extends '@OwlUi/Layout/centered.html.twig' %}
+
+{% form_theme form '@OwlAdmin/Form/theme.html.twig' %}
+
+{% block title %}{{ 'owl.ui.register'|trans }} | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ sylius_template_event('sylius.admin.layout.stylesheets') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ sylius_template_event('sylius.admin.layout.javascripts') }}
+{% endblock %}
+
+{% block content %}
+    {{ sylius_template_event('owl.admin.register.after_content_header') }}
+    <div class="ui middle aligned centered grid aligned ">
+        <div class="wrap-registration column">
+            {% include '@OwlAdmin/Account/Register/_header.html.twig' %}
+
+            {{ sylius_template_event('owl.admin.register.before_form') }}
+
+            <div class="ui padded segment">
+            {{ form_start(form, {'action': path('owl_admin_register'), 'attr': {'class': 'ui loadable form is-ajax', 'novalidate': 'novalidate'}}) }}
+                {% include '@OwlAdmin/Account/Register/_form.html.twig' %}
+
+                {{ sylius_template_event('owl.admin.register.form', {'form': form}) }}
+                <div class="ui middle aligned centered grid aligned" style="margin-top: 10px;">
+                    <div class="column">
+                        <button type="submit" class="ui fluid large primary submit button save-action" {{ sylius_test_html_attribute('request-password-reset-button') }}>
+                            {{ 'owl.ui.create_an_account'|trans }}
+                        </button>
+                    </div>
+                </div>
+            {{ form_row(form._token) }}
+            {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

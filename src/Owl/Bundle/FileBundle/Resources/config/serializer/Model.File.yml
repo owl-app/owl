@@ -1,0 +1,13 @@
+Owl\Component\File\Model\File:
+    exclusion_policy: ALL
+    xml_root_name: file
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [Uploaded]
+        name:
+            expose: true
+            type: string
+            groups: [Uploaded]

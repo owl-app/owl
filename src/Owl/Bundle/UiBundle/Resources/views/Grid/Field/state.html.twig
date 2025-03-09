@@ -1,0 +1,12 @@
+{% set prefix_translation = '' %}
+{% if options.vars.prefix_translation is defined %}
+    {% set prefix_translation = options.vars.prefix_translation ~ '_' %}
+{% endif %}
+
+{% set value = 'owl.ui.' ~ prefix_translation ~ data %}
+
+{% if options.vars.labels is defined %}
+    {% include [(options.vars.labels ~ '/' ~ data ~ '.html.twig'), '@OwlUi/Label/_default.html.twig'] with {'value': value} %}
+{% else %}
+    {% include '@OwlUi/Label/_default.html.twig' with {'value': value} %}
+{% endif %}

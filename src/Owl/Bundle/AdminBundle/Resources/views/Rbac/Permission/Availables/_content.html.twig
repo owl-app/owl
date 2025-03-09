@@ -1,0 +1,24 @@
+{% 
+    set add_url = path(
+        'owl_admin_ajax_rbac_permission_add'
+    )
+%}
+{%
+    set remove_url = path(
+        'owl_admin_ajax_rbac_permission_remove',
+        { name: 'permission_name' }
+    )
+%}
+
+<div 
+    id="list-permissions" 
+    data-add-url="{{add_url}}" 
+    data-add-with-form-data="true" 
+    data-remove-url="{{remove_url}}" 
+    data-remove-with-form-data="false" 
+    class="ui stackable grid"
+>
+    {% for name, form in forms %}
+        {% include '@OwlAdmin/Rbac/Permission/Availables/Content/_item_accordion.html.twig' %}
+    {% endfor %}
+</div>

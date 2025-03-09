@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="admin/account.xml" />
+        <import resource="admin/dashboard.xml" />
+        <import resource="admin/user.xml" />
+        <import resource="admin/impersonate_user.xml" />
+    </imports>
+
+    <parameters>
+        <parameter key="owl.behat.page.admin.crud.index.class">Owl\Behat\Page\Admin\Crud\IndexPage</parameter>
+        <parameter key="owl.behat.page.admin.crud.create.class">Owl\Behat\Page\Admin\Crud\CreatePage</parameter>
+        <parameter key="owl.behat.page.admin.crud.update.class">Owl\Behat\Page\Admin\Crud\UpdatePage</parameter>
+        <parameter key="owl.behat.page.admin.crud.show.class">Owl\Behat\Page\Admin\Crud\ShowPage</parameter>
+    </parameters>
+
+    <services>
+        <defaults public="true" />
+
+        <service id="owl.behat.page.admin.crud.index" class="%owl.behat.page.admin.crud.index.class%" parent="owl.behat.symfony_page" abstract="true" public="false">
+            <argument type="service" id="owl.behat.table_accessor" />
+        </service>
+        <service id="owl.behat.page.admin.crud.create" class="%owl.behat.page.admin.crud.create.class%" parent="owl.behat.symfony_page" abstract="true" public="false" />
+        <service id="owl.behat.page.admin.crud.update" class="%owl.behat.page.admin.crud.update.class%" parent="owl.behat.symfony_page" abstract="true" public="false" />
+        <service id="owl.behat.page.admin.crud.show" class="%owl.behat.page.admin.crud.show.class%" parent="owl.behat.symfony_page" abstract="true" public="false">
+            <argument type="service" id="owl.behat.table_accessor" />
+        </service>
+    </services>
+</container>

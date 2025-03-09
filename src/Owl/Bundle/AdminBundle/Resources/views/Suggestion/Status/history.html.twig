@@ -1,0 +1,41 @@
+{% import '@OwlUi/Macro/table.html.twig' as table %}
+{% import '@OwlUi/Macro/messages.html.twig' as messages %}
+{% import '@OwlUi/Macro/headers.html.twig' as headers %}
+
+{% set subject = suggestion %}
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.history_'~metadata.name) %}
+{% set data = resources %}
+
+{{ headers.default(header|trans, configuration.vars.icon|default('plus'), subject.name|default('')|trans) }}
+
+
+<div class="content">
+{% if data|length > 0 %}
+    <table class="ui stackable celled table">
+        <thead>
+            <tr>
+                <th>{{ 'owl.ui.status'|trans }}</th>
+                <th>{{ 'owl.ui.user'|trans }}</th>
+                <th>{{ 'owl.ui.comment'|trans }}</th>
+                <th>{{ 'owl.ui.created_at'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+                <tr>
+                    <td>{{ ('owl.ui.status_' ~ row.status)|trans }}</td>
+                    <td>{{ row.owner.displayName|default(row.owner.firstName ~ ' ' ~ row.owner.lastName) }}</td>
+                    <td>{{ row.comment }}</td>
+                    <td>{{ row.createdAt|date("d-m-Y H:i:s") }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ messages.info('owl.ui.no_results_to_display') }}
+{% endif %}
+</div>
+
+<div class="actions">
+    {% include '@OwlUi/Form/Buttons/_cancel_ajax.html.twig' with {'actions': configuration.vars.form.actions|default(owl_form.actions), 'isAjax': true} %}
+</div>

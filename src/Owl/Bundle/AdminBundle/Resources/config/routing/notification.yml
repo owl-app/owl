@@ -1,0 +1,152 @@
+owl_admin_notification_file:
+    resource: "@OwlAdminBundle/Resources/config/routing/notification/file.yml"
+    prefix: /notifications/{notificationId}/files/
+
+owl_admin_notification:
+    resource: |
+        alias: owl.notification
+        section: admin
+        templates: "@OwlAdmin\\Crud"
+        except: ['index', 'show', 'create']
+        permission: true
+        vars:
+            all:
+                subheader: owl.ui.manage_notifications
+                redirect:
+                    optional_referer: owl_admin_notification_index
+            update:
+                form:
+                    ajax: true
+                tinymce: true
+                serialization_groups: [AjaxShow]
+                templates:
+                    form: "@OwlAdmin/Notification/_update.html.twig"
+                permission:
+                    group: notification
+                    description: owl.ui.permission.update_notification
+            delete:
+                redirect:
+                    header: xhr
+                permission:
+                    group: notification
+                    description: owl.ui.permission.delete_notification
+    type: sylius.resource
+
+owl_admin_notification_index:
+    path: /notifications/
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.notification::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_notification
+            template: "@OwlAdmin/Crud/index.html.twig"
+            vars:
+                subheader: owl.ui.manage_notifications
+                icon: bullhorn
+                referer: true
+                permission:
+                    group: notification
+                    description: owl.ui.permission.list_notifications
+
+owl_admin_notification_create:
+    path: /notifications/new
+    methods: [GET,POST]
+    defaults:
+        _controller: owl.controller.notification::createAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/Crud/Ajax/create.html.twig"
+            factory:
+                method: createAction
+                arguments:
+                    - "new"
+                    - "expr:service('owl.context.admin_user').getUser()"
+            vars:
+                form:
+                    ajax: true
+                    actions: 
+                        - { name: "referer", text: "owl.form.actions.save", icon: "plus", color: "blue"}
+                serialization_groups: [AjaxShow]
+                tinymce: true
+                templates:
+                    form: "@OwlAdmin/Notification/_create.html.twig"
+                permission:
+                    group: notification
+                    description: owl.ui.permission.create_notification
+
+owl_admin_notification_show_details:
+    path: /notifications/{id}
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.notification::showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/Notification/show.html.twig"
+            vars:
+                permission:
+                    group: notification
+                    description: owl.ui.permission.show_notification
+
+owl_admin_notification_show_accepted_index:
+    path: /notifications/{id}/accepted
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.notification_accepted::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_notification_accepted
+            template: "@OwlAdmin/Notification/show.html.twig"
+            parents:
+                - 
+                    resource: owl.notification
+                    repository: 
+                        method: find
+                        arguments: 
+                            id: $id
+            vars:
+                tab: confirmation_history
+                referer: true
+                permission:
+                    group: notification
+                    description: owl.ui.permission.show_notification_accepted
+
+owl_admin_notification_details:
+    path: /notification/details/{id}
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.notification::showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/Notification/details.html.twig"
+            vars:
+                permission:
+                    group: notification
+                    description: owl.ui.permission.details_to_accept_notification
+
+owl_admin_notification_accept:
+    path: /notifications/{id}/accept
+    methods: [GET,POST]
+    defaults:
+        _controller: owl.controller.action.notification.accept
+        _format: json
+        _sylius:
+            section: admin
+            permission: true
+            serialization_groups: [AjaxShow]
+            factory:
+                method: createAction
+                arguments:
+                    - "new"
+                    - "expr:service('owl.context.admin_user').getUser()"
+            vars:
+                permission:
+                    group: notification
+                    description: owl.ui.permission.create_notification
+
+

@@ -1,0 +1,13 @@
+<div class="four wide column">
+    <div class="ui styled accordion">
+        <div class="title">
+            <i class="dropdown icon"></i>
+            {{ ('owl.ui.permission.'~name)|trans }}
+        </div>
+        <div class="content">
+            {% for form in form %}
+                {% include '@OwlAdmin/User/Permission/Content/_list_permissions.html.twig' %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

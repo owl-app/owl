@@ -1,0 +1,41 @@
+{
+    "name": "owl/core",
+    "type": "library",
+    "description": "Owl app core. It integrates all components.",
+    "keywords": [
+        "core",
+        "owl"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Kęska",
+            "homepage": "https://pawelkeska.eu"
+        }
+    ],
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Owl\\Component\\Core\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

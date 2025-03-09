@@ -1,0 +1,26 @@
+{% import '@OwlUi/Macro/labels.html.twig' as label %}
+
+<div class="ui cards list-files-cards">
+    {% for file in files %}
+    <div class="card" style="width: calc(25% - 1em);">
+        <div class="content">
+            {{ label.file(file.name , file.path, ) }}
+        </div>
+        {% if withActions is not defined or withActions == true %}
+        <div class="extra content">
+            <div class="ui three buttons mini">
+                <div data-url="{{ path(update_file_route, { (paramSubject) : file.fileSubject.id, 'id': file.id }) }}" class="ui default button ajax-modal-button">
+                    <i class="icon edit"></i>
+                    {{ 'owl.ui.edit'|trans }}
+                </div>
+                <div class="ui red button">
+                    <i class="icon delete"></i>
+                    {{ 'owl.ui.delete'|trans }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+</div>

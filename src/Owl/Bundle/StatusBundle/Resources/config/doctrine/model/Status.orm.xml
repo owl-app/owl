@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <mapped-superclass name="Owl\Component\Status\Model\Status">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="status" column="status" type="string" length="255" />
+        <field name="comment" type="text" column="comment" nullable="true" />
+        <field name="createdAt" cogdasgflumn="created_at" type="datetime">
+            <gedmo:timestampable on="create" />
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update" />
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>

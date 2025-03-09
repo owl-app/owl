@@ -1,0 +1,7 @@
+{% extends '@OwlAdmin/layout.html.twig' %}
+
+{% block title %}{{ 'owl.ui.notifications'|trans ~': '~ notification.subject }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    {{ sylius_template_event('owl.admin.notification.show.content', _context) }}
+{% endblock %}

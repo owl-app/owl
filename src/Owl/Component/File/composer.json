@@ -1,0 +1,43 @@
+{
+    "name": "owl/file",
+    "type": "library",
+    "description": "PHP component for managing files.",
+    "keywords": [
+        "file",
+        "owl"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Kęska",
+            "homepage": "https://pawelkeska.eu"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "doctrine/collections": "^1.6",
+        "sylius/resource": "^1.7"
+    },
+    "require-dev": {
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Owl\\Component\\File\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

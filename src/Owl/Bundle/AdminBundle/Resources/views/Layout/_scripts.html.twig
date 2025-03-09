@@ -1,0 +1,9 @@
+{% include '@OwlUi/_javascripts.html.twig' with {'path': 'build/admin/admin-entry.js'} %}
+
+{% if owl_is_turbo %}
+    {{ 
+        tinymce_init({
+            theme: {'advanced':{'language': app.request.locale, 'height': 180 }}
+        })
+    }}
+{% endif %}

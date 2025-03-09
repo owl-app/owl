@@ -1,0 +1,26 @@
+sylius_grid:
+    grids:
+        owl_admin_notification_accepted:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.notification_accepted.class%"
+                    repository:
+                        method: findByNotification
+                        arguments:
+                            id: $id
+            sorting:
+                acceptedAt: desc
+            fields:
+                user:
+                    type: twig
+                    label: owl.ui.user
+                    sortable: user.firstName
+                    options:
+                        template: "@OwlUi/Grid/Field/owner.html.twig"
+                acceptedAt:
+                    type: datetime
+                    label: owl.ui.accepted_at
+                    sortable: ~
+                    options:
+                        format: d-m-Y H:i:s

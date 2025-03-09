@@ -1,0 +1,22 @@
+default:
+    suites:
+        ui_user_login:
+            contexts:
+                - owl.behat.context.hook.doctrine_orm
+                - owl.behat.context.hook.rbac_permissions
+                - owl.behat.context.hook.session
+
+                - owl.behat.context.transform.rbac_role
+                - owl.behat.context.transform.admin
+                - owl.behat.context.transform.shared_storage
+
+                - owl.behat.context.setup.locale
+                - owl.behat.context.setup.rbac_role
+                - owl.behat.context.setup.admin_security
+                - owl.behat.context.setup.admin_user
+
+                - owl.behat.context.ui.admin.dashboard
+                - owl.behat.context.ui.admin.login
+
+            filters:
+                tags: "@user_login&&@ui"

@@ -1,0 +1,8 @@
+{% form_theme form '@OwlAdmin/Form/theme.html.twig' %}
+
+<div class="sylius-filters__field">
+    {{ form_row(form, { extra_fields: form.vars.extra_fields }) }}
+</div>
+<div class="sylius-filters__field">
+    {{ form_row(form.distance, {'label': 'owl.ui.distance_search'|trans}) }}
+</div>

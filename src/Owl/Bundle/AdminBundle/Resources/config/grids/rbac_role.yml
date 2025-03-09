@@ -1,0 +1,56 @@
+sylius_grid:
+    grids:
+        owl_admin_rbac_role:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.rbac_role.class%"
+            sorting:
+                name: asc
+            fields:
+                displayName:
+                    type: string
+                    path: setting.displayName
+                    label: owl.ui.name
+                name:
+                    type: string
+                    label: owl.ui.canonical_name
+                    sortable: name
+                theme:
+                    type: string
+                    path: setting.theme
+                    label: owl.ui.theme_name_for_view
+                description:
+                    type: string
+                    label: owl.ui.description
+                    sortable: description
+            filters:
+                name:
+                    type: string
+                    form_options:
+                        type: contains
+                    label: owl.ui.name
+                description:
+                    type: string
+                    form_options:
+                        type: contains
+                    label: owl.ui.description
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    assign_permissions:
+                        type: link
+                        label: owl.ui.assign_permissions
+                        options:
+                            button: primary
+                            icon: plus
+                            link:
+                                route: owl_admin_rbac_role_availables
+                                parameters:
+                                    id: resource.id
+                    delete:
+                        type: delete

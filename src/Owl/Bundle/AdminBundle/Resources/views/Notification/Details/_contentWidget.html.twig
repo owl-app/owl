@@ -1,0 +1,18 @@
+<div class="content" data-tab="details">
+    <div id="details">
+        {{ notification.description|raw }}
+    </div>
+    {% include '@OwlAdmin/Notification/Details/_files.html.twig' with { 'files' : notification.files } %}
+</div>
+
+<div class="actions">
+    <button 
+        class="ui labeled icon green button accept-notification" 
+        data-url="{{ path('owl_admin_notification_accept', { 'id': notification.id }) }}"
+        data-csrf-token="{{ csrf_token(notification.id ) }}"
+    >
+        <i class="check icon"></i>{{ 'owl.ui.accept'|trans }}
+    </button>
+    {% include '@OwlUi/Form/Buttons/_cancel_ajax.html.twig' %}
+</div>
+

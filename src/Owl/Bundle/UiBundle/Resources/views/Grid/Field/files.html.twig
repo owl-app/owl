@@ -1,0 +1,6 @@
+{% import '@OwlUi/Macro/labels.html.twig' as label %}
+
+{% for file in data %}
+    {{ label.file(file.name, file.path) }}
+    <div class="ui hidden divider" style="margin:0"></div>
+{% endfor %}

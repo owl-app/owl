@@ -1,0 +1,88 @@
+owl_admin_suggestion_index:
+    path: /suggestions/
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.suggestion::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_suggestion
+            template: "@OwlAdmin/Crud/index.html.twig"
+            vars:
+                subheader: owl.ui.manage_suggestions
+                icon: question
+                referer: true
+                permission:
+                    group: suggestion
+                    description: owl.ui.permission.list_suggestions
+
+owl_admin_suggestion_create:
+    path: /suggestions/new
+    methods: [GET,POST]
+    defaults:
+        _controller: owl.controller.suggestion::createAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/Crud/Ajax/create.html.twig"
+            factory:
+                method: createAction
+                arguments:
+                    - "new"
+                    - "expr:service('owl.context.admin_user').getUser()"
+            vars:
+                redirect:
+                    save:
+                        route: owl_admin_dashboard
+                form:
+                    ajax: true
+                    actions: 
+                        - { name: "save", icon: "plus", color: "blue"}
+                serialization_groups: [AjaxShow]
+                templates:
+                    form: "@OwlAdmin/Suggestion/_form.html.twig"
+                permission:
+                    group: suggestion
+                    description: owl.ui.permission.create_suggestion
+
+owl_admin_suggestion_bulk_delete:
+    path: /suggestions/bulk-delete
+    methods: [DELETE]
+    defaults:
+        _controller: owl.controller.suggestion::bulkDeleteAction
+        _sylius:
+            section: admin
+            redirect:
+                header: xhr
+            permission: true
+            repository:
+                method: findByIdWithOwner
+                arguments: [$ids]
+            vars:
+                permission:
+                    group: suggestion
+                    description: owl.ui.permission.bulk_delete_suggestion
+
+owl_admin_suggestion_delete:
+    path: /suggestions/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: owl.controller.suggestion::deleteAction
+        _sylius:
+            section: admin
+            redirect: 
+                header: xhr
+            permission: true
+            vars:
+                permission:
+                    group: suggestion
+                    description: owl.ui.permission.delete_suggestion
+
+
+owl_admin_suggestion_file:
+    resource: "@OwlAdminBundle/Resources/config/routing/suggestion/file.yml"
+    prefix: /suggestion/{suggestionId}/files/
+
+owl_admin_suggestion_status:
+    resource: "@OwlAdminBundle/Resources/config/routing/suggestion/status.yml"
+    prefix: /suggestion/{suggestionId}/statuses/

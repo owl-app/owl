@@ -1,0 +1,8 @@
+{% import '@OwlUi/Macro/buttons.html.twig' as buttons %}
+
+{% set route = options.link.url|default(options.link.route|default('')) %}
+{% set path = options.link.url|default(path(options.link.route, options.link.parameters|default({}))) %}
+
+{% if is_granted(route) %}
+    {{ buttons.default(path, action.label, null, options.icon, options.button) }}
+{% endif %}

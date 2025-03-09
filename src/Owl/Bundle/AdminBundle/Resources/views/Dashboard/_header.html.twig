@@ -1,0 +1,8 @@
+{% import '@OwlUi/Macro/headers.html.twig' as headers %}
+
+<div class="ui stackable grid">
+    <div class="twelve wide column">
+        {{ headers.default('owl.ui.dashboard'|trans, 'home', 'owl.ui.start_using_system'|trans) }}
+        {{ sylius_template_event('sylius.admin.dashboard.header.content') }}
+    </div>
+</div>

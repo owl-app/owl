@@ -1,0 +1,6 @@
+{% if data is defined and data is not null %}
+    {{ data.displayName|default(data.firstName ~ ' ' ~data.lastName) }}
+{% else %}
+Brak
+{% endif %}
+

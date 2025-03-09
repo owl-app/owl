@@ -1,0 +1,9 @@
+{% import '@OwlUi/Macro/buttons.html.twig' as buttons %}
+
+{% set route = options.link.url|default(options.link.route|default(grid.requestConfiguration.getRouteName('update'))) %}
+{% set path = options.link.url|default(path(route, options.link.parameters|default({'id': data.id}))) %}
+
+{% if is_granted(route) %}
+    {{ buttons.edit(path, action.label) }}
+{% endif %}
+

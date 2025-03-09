@@ -1,0 +1,64 @@
+<table class="ui very basic celled table">
+  <tbody>
+    <tr>
+      <td class="five wide">
+        <strong class="gray text">{{ 'owl.ui.date_verified_email'|trans }}</strong>
+      </td>
+      <td>
+        {% if (resource.verifiedAt is not null) %}
+          {{ resource.verifiedAt|format_datetime }}
+        {% else %}
+          <span class="ui red label">{{ 'owl.ui.user_has_not_verified_email'|trans }}</span>
+        {% endif %}
+
+      </td>
+    </tr>
+    <tr>
+      <td class="five wide">
+        <strong class="gray text">{{ 'owl.ui.status'|trans }}</strong>
+      </td>
+      <td>
+        {% include[
+          ('@OwlAdmin/AdminUser/Registration/Label/' ~ resource.registration.status ~ '.html.twig'),
+          '@OwlUi/Label/_default.html.twig'
+        ] with {
+          'value' : 'owl.ui.registration_status_' ~ resource.registration.status
+        } %}
+      </td>
+    </tr>
+    {% if(resource.registration.status == 'rejected') %}
+    <tr>
+      <td class="five wide">
+        <strong class="gray text">{{ 'owl.ui.reason_rejection_registration'|trans }}</strong>
+      </td>
+      <td>
+        {{ resource.registration.reasonRejection }}
+      </td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td class="five wide">
+        <strong class="gray text">{{ 'owl.ui.date_change_status'|trans }}</strong>
+      </td>
+      <td>
+        {% if(resource.registration.changeStatusAt is not null) %}
+            {{ resource.registration.changeStatusAt|format_datetime }}
+        {% else %}
+            {{ 'owl.ui.empty'|trans }}
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td class="five wide">
+        <strong class="gray text">{{ 'owl.ui.created_at'|trans }}</strong>
+      </td>
+      <td>
+        {% if(resource.registration.createdAt is not null) %}
+            {{ resource.registration.createdAt|format_datetime }}
+        {% else %}
+            {{ 'owl.ui.empty'|trans }}
+        {% endif %}
+      </td>
+    </tr>
+  </tbody>
+</table>

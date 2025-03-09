@@ -1,0 +1,21 @@
+owl:
+    admin_user:
+        invalid_count_role_to_user: Rola użytkownik może mieć przypisaną jedną firmę
+        invalid_count_role_to_admin_system: Administrator systemu nie może mieć przypisanej firmy
+    common:
+        not_blank: Pole nie może być puste
+        greater_then_today: Data musi być wieksza niż dzisiaj
+    locale:
+        enabled:
+            cannot_disable_base: Nie można wyłączyć podstawowych ustawień regionalnych.
+    user:
+        email:
+            unique: Ten e-mail jest już używany.
+            min: Email musi zawierać przynajmniej {{ min }} znaków.
+            max: Email nie może być dłuższy niż {{ max }} znaków.
+            invalid: Ten e-mail jest nieprawidłowy.
+        username:
+            unique: Ta nazwa użytkownika jest już używana.
+            not_blank: Wpisz swoje imię.
+        locale_code:
+            not_blank: Proszę wybrać ustawienia regionalne.

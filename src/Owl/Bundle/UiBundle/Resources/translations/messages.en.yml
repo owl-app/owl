@@ -1,0 +1,339 @@
+sylius:
+    ui:
+        contains: Contains
+        not_contains: Not contain
+        equal: Equal
+        not_equal: Different from
+        empty: Empty
+        not_empty: Not empty
+        starts_with: Starts from
+        ends_with: Ends with
+        in: In
+        not_in: Not in
+        value: Value
+        all: All
+        yes_label: Yes
+        no_label: No
+        from: From
+        to: To
+        code: Code
+
+owl:
+    form:
+        common:
+            name: Name
+            description: Description
+            status: Status
+            comment: Comment
+            first_name: First name
+            last_name: Last name
+            phone_number: Phone number
+            subject: Subject
+            date: Date
+            comments: Comment
+            symbol: Symbol
+            unit: Unit
+            price: Price
+            other: Other
+            no_category: No category assigned
+            assign_user: Assigned user
+            phone: Phone
+            password: Password
+            date_issue: Date issue
+            date_from: Date from
+            date_to: Date to
+            city: City
+            street: Address
+            nip: NIP
+            post_code: Post code
+            email: E-mail
+        role:
+            canonical_name: Canonical name for the role
+            choice_theme: Select a view template
+        notification:
+            current_from: Date from which the message is to appear
+            current_to: Date by which the message is to appear
+            group_assigned: Group for which the message is to be displayed
+        login:
+            username: Username
+            password: Password
+            remember_me: Remember me
+        registration:
+            company: Company to which the account is to be registered
+            reason_rejection: Reason for refusing registration
+        setting:
+            dashboard_description: Description main page in the panel
+            login_page_description: Description login page
+        option:
+            name: Name
+        notes: Additional remarks
+        user:
+            role: Role assigned to user
+            no_user: No user assigned
+            display_name: User display name
+            note: Private note
+            enabled: Active
+        actions:
+            referer: Save and close
+            update: Save and edit
+            save: Save
+            generate: Generate
+    ui:
+        toggle_sidebar: Toggle sidebar
+        created_by: Copyright
+        accept: Accept
+        accepted: Accepted
+        action: Action
+        actions: Actions
+        add: Add
+        address: Address
+        admin_users: Users
+        administration: Home page
+        administration_dashboard: Dashboard administration
+        administration_panel_login: Login to administration panel
+        all: All
+        back: Back
+        body: Body
+        bulk_actions: Bulk actions
+        by_position: By position
+        cancel: Cancel
+        categorization: Categorization
+        category: Category
+        change_password: Change password
+        change_your_password: Change password
+        changes: Changes
+        checkbox: Checkbox
+        choose_file: Chose file
+        city: City
+        clear: Clear
+        clear_filters: Clear filters
+        code: Code
+        color: Color
+        comment: Comment
+        complete: Complete
+        completed: Completed
+        configuration: Configuration
+        confirm_your_action: Confirm your action
+        confirmation: Confirmation
+        confirmation_title: Repeat new password
+        confirmed: Confirmed
+        contains: Contains
+        content: Content
+        countries: Countries
+        country: Country
+        country_details: Country details
+        create: New
+        save_close: Save and close
+        save_update: Save and edit
+        dashboard: Dashboard
+        data: Data
+        date: Date
+        datetime: Datetime
+        delete: Delete
+        delete_image: Delete image
+        deleted: Deleted
+        description: Decription
+        details: Details
+        disable: Disable
+        disabled: Disabled
+        display: Show
+        emails: E-mail addresses
+        enable: Enable
+        equal: Equal
+        error: Error
+        filter: Search
+        filters: Filters
+        first_name: First name
+        forgot_password: Forgot password?
+        get_support: Help
+        go: Go
+        home: Panel
+        in: In
+        lastname: Last name
+        logged_at: Logged in at
+        logged_in_as: Logged in as %username%
+        login: Login
+        login_button: Login
+        logout: Logout
+        manage: Manage
+        menus: Menu
+        my_account: My account
+        name: Name
+        new: New
+        next: Next
+        or: or
+        page: Page
+        pages: Pages
+        password: Password
+        phone_number: Phone number
+        postcode: Post code
+        roles: Roles
+        save: Save
+        save_changes: Save changes
+        search: Search
+        select: Select
+        send: Send
+        short_description: Short description
+        show: Show
+        show_all: Show all
+        sign_in: Log in
+        sign_in_here: Log in here
+        sign_out: Log out
+        sort: Sort
+        sort_by_date: Sort by date
+        state: Status
+        status: Status
+        street: Address
+        subject: Subject
+        success: Success
+        text: Text
+        textarea: Textarea
+        thank_you: Thank you!
+        title: Title
+        to: To
+        created_at: Creation date
+        nip: NIP
+        post_code: Post code
+        mobile_phone: Mobile phone
+        landline_phone: Landline phone
+        edit: Edit
+        enabled: Enabled
+        this_message_contains_errors: This form contains errors.
+        rbac_roles: Roles
+        manage_rbac_roles_available_in_system: Manage roles available in the system
+        rbac_permissions: List of accesses in the system
+        manage_permissions_in_system: Access management in the system
+        assign_permissions: Assign permissions
+        permissions_for_role: Role accesses
+        manage_permissions_for_role: Role access management
+        admin_user_permissions: User Access
+        manage_user_permissions: User access management
+        assign_permission_to_role: Assigning access to a role
+        users: Users
+        list_user_permissions: User access list
+        files: Files
+        locales: Locales
+        manage_languages_available_in_the_system: Manage languages available in the system
+        new_locale: New locale
+        edit_locale: Edit locale
+        close: Close
+        suggestions: Suggestions
+        create_suggestion: New suggestion
+        manage_suggestions: Manage suggestions
+        user: User
+        change_status_suggestion: Change status suggestion
+        status_new: New
+        status_in_progress: Status in progress
+        status_realized: Realized
+        status_cancelled: Cancelled
+        change_status: Change status
+        history_suggestion_status: History suggestion status
+        history_status: History status
+        general_info: General info
+        additional_information: Additional information
+        preferences: Preferences
+        new_admin_user: New user
+        edit_admin_user: Edit user
+        are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
+        no_label: No
+        yes_label: Yes
+        info: Info
+        no_results_to_display: No results to display
+        phone: Phone
+        email: E-mail
+        trade: Trade
+        permissions: Permissions
+        locale: Locale
+        symbol: Symbol
+        unit: Unit
+        price: Price
+        no_new_notifications: No new notifications
+        no_value: No value
+        sum: Sum
+        canonical_name: Canonical name
+        theme_name_for_view: Theme name for view
+        manage_users_able_to_access_administration_panel: Managing users who have access to the administration panel
+        user_display_name: Display user name
+        note_user: Note user
+        role: Role
+        new_rbac_role: New role
+        edit_rbac_role: Edit role
+        host: Host
+        port: Port
+        date_issue: Date issue
+        added_by: Added by
+        notifications: Notifications
+        manage_notifications: Manage notifications
+        create_notification: New notification
+        edit_notification: Edit notification
+        edit_notification_file: Edit file
+        show_notification: Details notification
+        to_all: to all
+        notification_group_assigned_role_user: to users
+        details_notification_of_the_day: Details message of the day
+        confirmation_history: Confirmation history
+        reset_password: Reset password
+        set_a_new_password_for_your_account: Set new password for your account
+        reset_button: Reset
+        system_settings: System settings
+        manage_settings_available_in_system: Manage settings available in system
+        register: Register
+        register_in: Register
+        create_a_new_system_account: Create new account in system
+        have_an_account_already: Already have an account?
+        account_credentials: Account credentials
+        personal_information: Personal information
+        create_an_account: Create account
+        company_inforamtion: Company information
+        welcome_to_our_system: Welcome to our system
+        registration: Registration
+        date_verified_email: User's email verification date
+        user_has_not_verified_email: User has not verified email address
+        registration_company: Company to which the account is to be registered
+        last_name: Last name
+        registration_inforamtion: registration information
+        registration_status_new: New registration
+        registration_status_rejected: Registration rejected
+        registration_status_accepted: Registration accepted
+        company_which_account_was_registered: Company which account was registered
+        accept_registration: Accept registration
+        reject_registration: Reject registration
+        show_registration: Details registration
+        reject: Reject
+        empty: Empty
+        date_change_status: Date change status
+        reason_rejection_registration: Reason rejection registration
+        registration_new: Registration (New)
+        registration_accepted: Registration (Accepted)
+        registration_rejected: Registration (Rejected)
+        start_using_system: Start using the system
+        type: Type
+        last_login: Date last login
+        show_dashboard: Description view to home page
+        user_history_action: Hisotry actions
+        history_action_section: Section/module
+        history_action_route_name: Action
+        history_route_module:
+            home: Home page
+            user: Users
+            suggestion: Suggestions
+            notification: Notifications
+            locale: Locale
+            system_setting: Settings
+            rbac_permission_role: Role
+            rbac_permission_availables: Permissions available in system
+        choice_attribute: - choice attribute -
+        greater: Greater
+        greater_equal: Greater or equal
+        less: Less
+        less_equal: Less or equal
+        date_label: Date
+        time_label: Time
+        value: Value
+        user_profile: Profile
+        update_profile: Update profile
+        your_profile: My profile
+        edit_your_personal_information: Edit your personal information
+        add_suggestion: Add suggestion
+        lang: Language
+

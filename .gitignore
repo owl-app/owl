@@ -1,0 +1,44 @@
+/.elasticsearch/*
+!/.elasticsearch/.gitkeep
+
+/public/build
+/public/_themes
+/public/files/*
+!/public/files/.gitkeep
+
+/etc/build/*
+!/etc/build/.gitignore
+
+/tools/*
+!/tools/.gitkeep
+
+###> docker ###
+/.docker/elasticsearch/.env.local
+###< docker ###
+
+
+###> symfony/framework-bundle ###
+/.env.*.local
+/.env.local
+/.env.local.php
+/public/bundles
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+!/config/jwt/*-test.pem
+###< lexik/jwt-authentication-bundle ###

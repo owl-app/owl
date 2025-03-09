@@ -1,0 +1,11 @@
+imports:
+     - { resource: "@OwlCoreBundle/Resources/config/app/config.yml" }
+     - { resource: "@OwlAdminBundle/Resources/config/app/config.yml" }
+     - { resource: "@OwlApiBundle/Resources/config/app/config.yaml" }
+
+sylius_theme:
+    sources:
+        filesystem:
+            scan_depth: 1
+            directories:
+                - "%kernel.project_dir%/themes"

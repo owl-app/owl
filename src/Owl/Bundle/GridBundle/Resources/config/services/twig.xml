@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="owl.grid.resource_view_factory" class="Owl\Bridge\SyliusGrid\View\ResourceGridViewFactory" decorates="sylius.grid.resource_view_factory" decoration-priority="256">
+            <argument type="service" id="owl.resource.grid.data_provider" />
+            <argument type="service" id="owl.resource.grid.elasticsearch_data_provider" />
+            <argument type="service" id="sylius.resource_controller.parameters_parser" />
+            <argument type="service" id="sylius.grid.filters_criteria_resolver" />
+        </service>
+
+        <service id="owl.grid.renderer.twig" class="Owl\Bridge\SyliusGrid\Renderer\TwigGridRenderer" decorates="sylius.custom_grid_renderer.twig" decoration-priority="256">
+            <argument type="service" id="owl.grid.renderer.twig.inner" />
+            <argument type="service" id="twig" />
+            <argument type="service" id="sylius.grid_options_parser" />
+            <argument type="service" id="sylius.registry.grid_field" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="sylius.form_registry.grid_filter" />
+            <argument type="service" id="owl.form_registry.elasticsearch_grid_filter" />
+            <argument type="service" id="sylius.grid.filters_criteria_resolver" />
+            <argument>@SyliusGrid/_grid.html.twig</argument>
+            <argument>%sylius.grid.templates.action%</argument>
+            <argument>%sylius.grid.templates.filter%</argument>
+            <argument>%owl.grid.templates.elasticsearch.filter%</argument>
+        </service>
+    </services>
+</container>

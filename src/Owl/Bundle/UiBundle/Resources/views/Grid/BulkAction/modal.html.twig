@@ -1,0 +1,11 @@
+{% import '@OwlUi/Macro/buttons.html.twig' as buttons %}
+
+{% set route = options.link.url|default(options.link.route) %}
+{% set path = options.link.url|default(path(options.link.route|default(''), options.link.parameters|default({}))) %}
+{% set class = options.button|default('') %}
+{% set icon = options.icon|default('') %}
+{% set method = options.method|default('GET') %}
+
+{% if is_granted(route) %}
+    {{ buttons.bulkModal(path, action.label, true, method, icon, class) }}
+{% endif %}

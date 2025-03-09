@@ -1,0 +1,395 @@
+sylius:
+    ui:
+        contains: Zawiera
+        not_contains: Nie zawiera
+        equal: Równe
+        not_equal: Różne od
+        empty: Brak
+        not_empty: Nie pusty
+        starts_with: Rozpoczyna się od
+        ends_with: Kończy się na
+        in: W
+        not_in: Nie w
+        value: Wartość
+        all: Wszystko
+        yes_label: Tak
+        no_label: Nie
+        from: Od
+        to: Do
+        code: Kod
+
+owl:
+    form:
+        common:
+            name: Nazwa
+            description: Opis
+            status: Status
+            comment: Komentarz
+            first_name: Imię
+            last_name: Nazwisko
+            phone_number: Numer telefonu
+            subject: Temat
+            date: Data
+            comments: Komentarz
+            symbol: Symbol
+            unit: Jednostka
+            price: Cena
+            other: Inne
+            no_category: Brak przypisanej kategorii
+            assign_user: Przypisany użytkownik
+            phone: Telefon
+            password: Hasło
+            date_issue: Data wystawienia
+            date_from: Data od
+            date_to: Data do
+            city: Miasto
+            street: Adres
+            nip: NIP
+            post_code: Kod pocztowy
+            email: E-mail
+        role:
+            canonical_name: Nazwa kanoniczna dla roli
+            choice_theme: Wybierz szablon widoku
+            name: Nazwa roli
+        notification:
+            current_from: Data od której ma się pojawiać komunikat
+            current_to: Data do której ma się pojawiać komunikat
+            group_assigned: Grupa dla której ma się wyświetlić komunikat
+        login:
+            username: Nazwa użytkownika
+            password: Hasło
+            remember_me: Zapamiętaj mnie
+        registration:
+            company: Firma na którą ma być zarejestrowane konto
+            reason_rejection: Powód odrzucenia rejestracji
+        setting:
+            dashboard_description: Opis do strony głównej w panelu
+            login_page_description: Opis do strony logowania
+        option:
+            name: Nazwa
+        notes: Dodatkowe uwagi
+        variant:
+            tracked: Śledzone
+        user:
+            role: Rola przypisana do użytkownika
+            no_user: Brak przypisanego użytkownika
+            display_name: Nazwa wyświetlana użytkownika
+            note: Notatka prywatna
+        actions:
+            referer: Zapisz i zamknij
+            update: Zapisz i edytuj
+            save: Zapisz
+            generate: Wygeneruj
+    country:
+        empty: Brak
+        pl: Polska
+        cz: Czechy
+        sk: Słowcja
+    ui:
+        toggle_sidebar: Przełącz pasek boczny
+        created_by: Copyright
+        services: Wykonawcy
+        cities: Miasta
+        abandoned: Porzucony
+        about: O stronie
+        accept: Akceptuję
+        accepted: Zaakceptowany
+        action: Akcja
+        actions: Akcje
+        add: Dodaj
+        address: Adres
+        admin_users: Użytkownicy
+        administration: Administracja
+        administration_dashboard: Panel administracyjny
+        administration_panel_login: Logowanie do panelu administracyjnego
+        all: Wszystko
+        author: Autor
+        average_rating: Ocena
+        back: Wróć
+        blocks: Bloki
+        body: Zawartość
+        build: Zbuduj
+        bulk_actions: Masowe akcje
+        by_position: Wg pozycji
+        calculator: Kalkulator
+        call_us: Zadzwoń do nas!
+        cancel: Anuluj
+        cancelled: Anulowane
+        cart: Koszyk
+        cart_locked: Koszyk zablokowany
+        cart_summary: Podsumowanie koszyka
+        categorization: Kategoria
+        category: Kategoria
+        change_password: Zmień hasło
+        change_payment_method: Zmień metodę płatności
+        change_position: Zmień położenie
+        change_shipping_method: Zmień metodę wysyłki
+        change_your_password: Zmiana hasła
+        changes: Zmiany
+        charges_and_taxes: Opłaty i podatki
+        cheapest_first: Pierwszy najtańszy
+        checkbox: Pole wyboru
+        checking_out_as: Sprawdzanie jako
+        checkout: Zamów
+        choose_file: Wybierz plik
+        city: Miejscowość
+        clear: Wyczyść
+        clear_cart: Wyczyść koszyk
+        clear_filters: Wyczyść filtry
+        code: Kod
+        color: Kolor
+        comment: Komentarz
+        complete: Zakończ
+        completed: Zakończone
+        configuration: Konfiguracja
+        confirm_your_action: Potwierdź akcję
+        confirmation: Potwierdzenie
+        confirmation_title: Powtórz nowe hasło
+        confirmed: Potwierdzony
+        contains: Zawiera
+        content: Treść
+        countries: Kraje
+        country: Kraj
+        country_details: Szczegóły kraju
+        create: Utwórz
+        save_close: Zapisz i zamknij
+        save_update: Zapisz i edytuj
+        dashboard: Dashboard
+        data: Dane
+        date: Data
+        datetime: Data i godzina
+        delete: Usuń
+        delete_image: Usuń zdjęcie
+        deleted: Usunięto
+        description: Opis
+        details: Szczegóły
+        disable: Wyłącz
+        disabled: Nieaktywny
+        display: Pokaż
+        emails: Adresy email
+        enable: Włącz
+        equal: Równe
+        error: Błąd
+        filter: Filtruj
+        filters: Filtry
+        first_name: Imię
+        forgot_password: Nie pamiętasz hasła?
+        get_support: Pomoc
+        go: Przejdź
+        home: Panel
+        in: W
+        lastname: Nazwisko
+        logged_at: Zalogowano o
+        logged_in_as: Zalogowany jako %username%
+        login: Zaloguj
+        login_button: Zaloguj
+        logout: Wyloguj
+        male: Mężczyzna
+        manage: Zarządzaj
+        menu_nodes: Węzły menu
+        menus: Menu
+        my_account: Moje konto
+        name: Nazwa
+        new: Nowy
+        next: Następne
+        or: lub
+        order: zamówienie
+        page: Strona
+        pages: Strony
+        password: Hasło
+        phone_number: Numer telefonu
+        postcode: Kod pocztowy
+        review_details: Szczegóły recenzji
+        reviews: Recenzje
+        roles: Role
+        save: Zapisz
+        save_changes: Zapisz zmiany
+        search: Szukaj
+        select: Wybierz
+        send: Wyślij
+        shop_by: Przeglądaj
+        short_description: Krótki opis
+        show: Pokaż
+        show_all: Pokaż wszystko
+        sign_in: Zaloguj
+        sign_in_here: Zaloguj się tutaj
+        sign_out: Wyloguj
+        sort: Sortowanie
+        sort_by_date: Sortuj wg daty
+        state: Status
+        status: Status
+        street: Adres
+        subject: Temat
+        success: Sukces
+        text: Tekst
+        textarea: Pole tekstowe
+        thank_you: Dziękujemy!
+        title: Tytuł
+        to: Do
+        created_at: Data utworzenia
+        show_service: Szczegóły wykonawcy
+        nip: NIP
+        post_code: Kod pocztowy
+        mobile_phone: Telefon komórkowy
+        landline_phone: Telefon stacjonarny
+        permanent_contract_number: Numer umowy stałej
+        contact_person: Osoba kontaktowa
+        settlement_notes: Uwagi rozliczenia
+        list_reviews: Lista recenzji
+        review: Recenzja
+        province: Województwo
+        manage_cities_available_in_system: Zarządzaj miastami dostępnymi w systemie
+        edit: Edytuj
+        edit_city: Edycja miasta
+        enabled: Aktywny
+        edit_service: Edycja wykonawcy
+        manage_services: Zarządzanie wykonawcami
+        new_review: Nowa recenzja
+        this_message_contains_errors: Ten formularz zawiera błędy.
+        new_service: Nowy wykonawca
+        distance_search: Odległość od miasta w km
+        rbac_roles: Role
+        manage_rbac_roles_available_in_system: Zarządzenie rolami dostępnymi w systemie
+        rbac_permissions: Lista dostępów w systemie
+        manage_permissions_in_system: Zarządzanie dostępami w systemie
+        assign_permissions: Przypisz uprawnienia
+        permissions_for_role: Dostępy dla roli
+        manage_permissions_for_role: Zarządznie dostępami dla roli
+        admin_user_permissions: Dostępy użytkownika
+        manage_user_permissions: Zarządzenie dostępami użytkownika
+        assign_permission_to_role: Przypisywanie dostępów do roli
+        users: Użytkownicy
+        list_user_permissions: Lista dostępów użytkownika
+        files: Pliki
+        locales: Ustawienia regionalne
+        manage_languages_available_in_the_system: Zarządzanie językami dostępnymi w systemie
+        new_locale: Nowe ustawienia regionalne
+        edit_locale: Edytuj ustawienia regionalne
+        close: Zamknij
+        suggestions: Sugestie
+        create_suggestion: Dodawanie sugestii
+        manage_suggestions: Zarządzanie sugestiami
+        user: Użytkownik
+        change_status_suggestion: Zmiana statusu sugestii
+        status_new: Nowy
+        status_in_progress: W trakcie realizacji
+        status_realized: Zrealizowane
+        status_cancelled: Anulowany
+        change_status: Zmień status
+        history_suggestion_status: Historia statusów sugestii
+        history_status: Historia statusów
+        general_info: Informacje ogólne
+        additional_information: Dodatkowe informacje
+        preferences: Preferencje
+        new_admin_user: Dodawanie nowego użytkownika
+        edit_admin_user: Edytuj użytkownika
+        are_your_sure_you_want_to_perform_this_action: Czy na pewno chcesz wykonać tę akcję?
+        no_label: Nie
+        yes_label: Tak
+        info: Info
+        no_results_to_display: Brak wyników do wyświetlenia
+        phone: Telefon
+        email: E-mail
+        trade: Branża
+        permissions: Uprawnienia
+        locale: Język
+        symbol: Symbol
+        unit: Jednostka
+        price: Cena
+        no_new_notifications: Brak nowych powiadomień
+        date_created: Data utworzenia
+        date_updated: Data aktualizacji
+        other: Inne
+        categories: Kategorie
+        comments: Uwagi
+        no_value: Brak wartości
+        sum: Suma
+        canonical_name: Nazwa kanoniczna
+        theme_name_for_view: Nazwa szablonu widoku
+        manage_users_able_to_access_administration_panel: Zarządzanie użytkownikami, którzy mają dostęp do panelu administracyjnego
+        user_display_name: Nazwa wyświetlana użytkownika
+        note_user: Notatka użytkownika
+        role: Rola
+        new_rbac_role: Dodawanie nowej roli
+        edit_rbac_role: Edycja roli
+        host: Host
+        port: Port
+        date_issue: Data wystawienia
+        added_by: Dodane przez
+        notifications: Komunikaty
+        manage_notifications: Zarządzanie komunikatami
+        create_notification: Dodawanie komunikatu
+        edit_notification: Edycja komunikatu
+        edit_notification_file: Edycja pliku
+        show_notification: Szczegóły komunikatu
+        to_all: do wszystkich
+        notification_group_assigned_role_user: do użytkowników
+        details_notification_of_the_day: Szczegóły komunikatu z dnia
+        confirmation_history: Historia potwierdzeń
+        reset_password: Resetuj hasło
+        set_a_new_password_for_your_account: Ustaw nowe hasło dla swojego konta
+        reset_button: Zresetuj
+        system_settings: Ustawienia systemu
+        manage_settings_available_in_system: Zarządzanie ustawieniami dostępnymi w systemie
+        register: Zarejestruj się
+        register_in: Zarejestruj się
+        create_a_new_system_account: Utwórz nowe konto w systemie
+        have_an_account_already: Czy masz już konto?
+        account_credentials: Dane konta
+        personal_information: Dane osobowe
+        create_an_account: Utwórz konto
+        company_inforamtion: Dane firmy
+        welcome_to_our_system: Zapraszamy do naszego systemu
+        registration: Rejestracja
+        date_verified_email: Data weryfikacji e-mail przez użytkownika
+        user_has_not_verified_email: Użytkownik nie zweryfikował adresu e-mail
+        registration_company: Firma na którą ma być zarejestrowane konto
+        last_name: Nazwisko
+        registration_inforamtion: Dane rejestracji
+        registration_status_new: Nowa rejestracja
+        registration_status_rejected: Rejestracja odrzucona
+        registration_status_accepted: Rejestracja zaakceptowana
+        company_which_account_was_registered: Firma na którą zarejestrowano konto
+        accept_registration: Akceptacja rejestracji
+        reject_registration: Odrzucenie rejestracji
+        show_registration: Szczegóły rejestracji
+        reject: Odrzuć
+        empty: Brak
+        date_change_status: Data zmiany statusu
+        reason_rejection_registration: Powód odrzucenia rejestracji
+        registration_new: Rejestracja (Nowa)
+        registration_accepted: Rejestracja (Zaakceptowana)
+        registration_rejected: Rejestracja (Odrzucona)
+        start_using_system: Zacznij korzystać z systemu
+        type: Typ
+        date_notify: Data przypomnienia
+        accepted_at: Data zaakceptowania
+        last_login: Data ostatniego logowania
+        show_dashboard: Widok opisu do strony głównej
+        user_history_action: Historia akcji
+        history_action_section: Sekcja/moduł
+        history_action_route_name: Akcja
+        history_route_module:
+            home: Strona główna
+            user: Użytkownicy
+            suggestion: Sugestie
+            notification: Komunikaty
+            locale: Języki
+            system_setting: Ustawienia
+            rbac_permission_role: Role
+            rbac_permission_availables: Dostępne role w systemie
+        choice_attribute: - wybierz atrybut -
+        greater: Większe
+        greater_equal: Większe lub równe
+        less: Mniejsze
+        less_equal: Mniejsze lub równe
+        date_label: Data
+        time_label: Godzina
+        generate_report: Wygeneruj raport
+        user_profile: Profil
+        update_profile: Aktualizacja profilu
+        your_profile: Mój profil
+        edit_your_personal_information: Edycja moich danych
+        add_suggestion: Dodaj sugestię
+        lang: Język
+

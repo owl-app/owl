@@ -1,0 +1,3 @@
+security:
+    password_hashers:
+        Owl\Component\User\Model\UserInterface: plaintext

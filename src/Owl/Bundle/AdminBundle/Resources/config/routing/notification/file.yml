@@ -1,0 +1,82 @@
+owl_admin_notification_file:
+    resource: |
+        alias: owl.notification_file
+        section: admin
+        path: /
+        templates: "@OwlAdmin\\Crud"
+        only: ['show', 'delete']
+        permission: true
+        vars:
+            delete:
+                redirect:
+                    header: xhr
+                form:
+                    ajax: true
+                permission:
+                    group: notification
+                    description: owl.ui.permission.delete_file
+    type: sylius.resource
+
+owl_admin_notification_file_create:
+    path: /create
+    methods: [POST]
+    defaults:
+        _controller: owl.controller.notification_file::createAction
+        _format: json
+        _sylius:
+            section: admin
+            serialization_groups: [Uploaded]
+            permission: true
+            form: Owl\Bundle\CoreBundle\Form\Type\Notification\NotificationUploadFileType
+            parents:
+                - 
+                    resource: owl.notification
+                    repository: 
+                        method: find
+                        arguments: 
+                            id: $notificationId
+            factory:
+                method: createForSubjectWithUploader
+                arguments:
+                    - notification
+                    - "expr:service('owl.context.admin_user').getUser()"
+            vars:
+                permission:
+                    group: notification
+                    description: owl.ui.permission.create_file
+
+owl_admin_notification_file_update:
+    path: /{id}/update
+    methods: [GET,PUT]
+    defaults:
+        _controller: owl.controller.notification_file::updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/Crud/Ajax/update.html.twig"
+            parents:
+                - 
+                    resource: owl.notification
+                    repository: 
+                        method: find
+                        arguments: 
+                            id: $notificationId
+            vars:
+                redirect:
+                    save:
+                        route: owl_admin_notification_update
+                        parameters: 
+                            id: $notificationId
+                        hash: files
+                form:
+                    ajax: true
+                    actions: 
+                        - { name: "save", icon: "plus", color: "blue"}
+                serialization_groups: [AjaxShow]
+                route:
+                    parameters:
+                        notificationId: $notificationId
+                        id: $id
+                permission:
+                    group: notification
+                    description: owl.ui.permission.update_file

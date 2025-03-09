@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <mapped-superclass name="Owl\Component\Notification\Model\Notification">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="subject" column="subject" type="text" />
+        <field name="description" column="description" type="text" />
+        <field name="dateIssue" column="date_issue" type="date" />
+        <field name="currentFrom" column="current_from" type="date" />
+        <field name="currentTo" column="current_to" type="date" />
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>

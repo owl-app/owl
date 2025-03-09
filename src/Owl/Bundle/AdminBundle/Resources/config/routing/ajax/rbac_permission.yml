@@ -1,0 +1,38 @@
+owl_admin_ajax_rbac_permission_add:
+    path: /add
+    methods: [POST]
+    defaults:
+        _controller: owl.controller.rbac_permission::addAction
+        _format: json
+        _sylius:
+            form: Owl\Bundle\RbacBundle\Form\Type\AvailablePermissionType
+            section: admin
+            permission: true
+            vars:
+                form:
+                  ajax: true
+                serialization_groups: [ADD]
+                permission:
+                    group: rbac_permission_availables
+                    description: owl.ui.permission.add_permission_to_system
+
+owl_admin_ajax_rbac_permission_remove:
+    path: /{name}
+    methods: [DELETE]
+    defaults:
+        _controller: owl.controller.rbac_permission::removeAction
+        _format: json
+        _sylius:
+            section: admin
+            permission: true
+            repository:
+                method: findOneByName
+                arguments:
+                    name: $name
+            vars:
+                form:
+                  ajax: true
+                serialization_groups: [DELETE]
+                permission:
+                    group: rbac_permission_availables
+                    description: owl.ui.permission.remove_permission_to_system

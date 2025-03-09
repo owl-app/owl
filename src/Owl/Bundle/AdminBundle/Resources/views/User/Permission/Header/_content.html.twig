@@ -1,0 +1,4 @@
+{% import '@OwlUi/Macro/headers.html.twig' as headers %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{{ headers.default(header|trans ~': ' ~ user.firstName ~ ' ' ~ user.lastName, configuration.vars.icon|default('cube'), configuration.vars.subheader|default('owl.ui.manage_your_product_catalog')|trans) }}

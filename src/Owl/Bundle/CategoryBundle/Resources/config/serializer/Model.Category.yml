@@ -1,0 +1,13 @@
+Owl\Component\Category\Model\Category:
+    exclusion_policy: ALL
+    xml_root_name: category
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [Uploaded]
+        name:
+            expose: true
+            type: string
+            groups: [Uploaded]

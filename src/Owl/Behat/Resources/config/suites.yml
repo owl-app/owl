@@ -1,0 +1,3 @@
+imports:
+    - suites/ui/user/login_user.yml
+    - suites/ui/user/managing_users.yml

@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/templating.xml" />
+        <import resource="services/form.xml" />
+    </imports>
+
+    <services>
+        <defaults public="true" />
+
+        <service id="owl.file_uploader" class="Owl\Component\File\Uploader\FileUploader">
+            <argument type="service">
+                <service class="Gaufrette\Filesystem">
+                    <argument>%owl.uploader.filesystem%</argument>
+                    <factory service="knp_gaufrette.filesystem_map" method="get" />
+                </service>
+            </argument>
+            <argument type="service" id="Owl\Component\File\Generator\FilePathGeneratorInterface" />
+        </service>
+        <service id="Owl\Component\File\Uploader\FileUploaderInterface" alias="owl.file_uploader" />
+
+        <service
+            id="Owl\Component\File\Generator\FilePathGeneratorInterface"
+            class="Owl\Component\File\Generator\UploadedFilePathGenerator"
+        />
+
+    </services>
+</container>

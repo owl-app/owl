@@ -1,0 +1,7 @@
+{% extends '@OwlAdmin/layout.html.twig' %}
+
+{% block title %}{{ 'owl.ui.dashboard'|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    {{ sylius_template_event('owl.admin.dashboard.content', _context) }}
+{% endblock %}

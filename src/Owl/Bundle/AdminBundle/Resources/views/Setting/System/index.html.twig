@@ -1,0 +1,28 @@
+{% extends '@OwlAdmin/layout.html.twig' %}
+
+{% set header = configuration.vars.header|default() %}
+{% set tinymce = configuration.vars.tinymce|default(false) %}
+
+{% block title %}{{ 'owl.ui.system_settings'|trans }} {{ parent() }}{% endblock %}
+
+{% form_theme form '@OwlAdmin/Form/theme.html.twig' %}
+
+{% block content %}
+    {{ sylius_template_event(['owl.admin.system_setting'], _context) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ sylius_template_event(['sylius.admin.create.stylesheets']) }}
+{% endblock %}
+
+{% block javascripts %}
+    {% import '@OwlAdmin/Macro/tinymce.html.twig' as _tinymce %}
+
+    {{ parent() }}
+
+    {{ sylius_template_event(['sylius.admin.create.javascripts']) }}
+    {{ _tinymce.add_event(tinymce) }}
+
+{% endblock %}

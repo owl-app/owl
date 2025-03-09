@@ -1,0 +1,3 @@
+owl_api:
+    resource: "@OwlApiBundle/Resources/config/routing.yml"
+    prefix: "%owl.security.api_route%"

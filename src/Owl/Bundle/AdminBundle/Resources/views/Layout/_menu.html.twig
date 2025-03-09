@@ -1,0 +1,10 @@
+<div class="item">
+    <div class="ui icon inverted transparent input">
+        <input class="owl-admin-menu-search-input" type="text" placeholder="{{ 'owl.ui.search'|trans }}">
+        <i class="search icon"></i>
+    </div>
+</div>
+
+<div class="owl-admin-menu">
+    {{ knp_menu_render('owl.admin.main', {'template': '@OwlUi/Menu/sidebar.html.twig', 'currentClass': 'active'}) }}
+</div>

@@ -1,0 +1,3 @@
+# main:
+#     controller: App\Web\Controller\InfoController::info
+#     path: /

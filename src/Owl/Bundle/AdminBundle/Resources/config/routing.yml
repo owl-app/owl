@@ -1,0 +1,37 @@
+sylius_admin_partial:
+    resource: "@OwlAdminBundle/Resources/config/routing/partial.yml"
+    prefix: /_partial
+
+owl_admin_dashboard: 
+    path: /dashboard
+    defaults:
+        _controller: owl.controller.admin.dashboard::indexAction
+
+owl_admin_profile:
+    resource: "@OwlAdminBundle/Resources/config/routing/profile.yml"
+
+owl_admin_suggestion:
+    resource: "@OwlAdminBundle/Resources/config/routing/suggestion.yml"
+
+owl_admin_notification:
+    resource: "@OwlAdminBundle/Resources/config/routing/notification.yml"
+
+owl_admin_locale:
+    resource: "@OwlAdminBundle/Resources/config/routing/locale.yml"
+
+owl_admin_permission:
+    resource: "@OwlAdminBundle/Resources/config/routing/rbac.yml"
+    prefix: /rbac/
+
+sylius_admin_admin_user:
+    resource: "@OwlAdminBundle/Resources/config/routing/admin_user.yml"
+
+owl_admin_setting:
+    resource: "@OwlAdminBundle/Resources/config/routing/setting.yml"
+
+owl_admin_security:
+    resource: "@OwlAdminBundle/Resources/config/routing/security.yml"
+
+sylius_admin_ajax:
+    resource: "@OwlAdminBundle/Resources/config/routing/ajax.yml"
+    prefix: /ajax

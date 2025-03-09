@@ -1,0 +1,21 @@
+<div class="ui buttons">
+{% for key, action in actions %}
+    {% if action.text is defined %} 
+        {% set text = action.text %}
+    {% else %} 
+        {% set text = 'owl.form.actions.' ~ action.name %}
+    {% endif %}
+
+    <button class="ui labeled icon {{ action.color|default('primary') }} button save-action save-action-{{ action.name }}" type="submit" name="save_action" value="{{ action.name  }}">
+        <i class="{{ action.icon }} icon"></i>{{- (text)|trans -}}
+    </button>
+{% endfor %}
+
+{% if isAjax is defined and isAjax == true %}
+    {% include '@OwlUi/Form/Buttons/_cancel_ajax.html.twig' %}
+{% else %}
+    {% include '@OwlUi/Form/Buttons/_cancel.html.twig' with {'path': paths.cancel|default(null)} %}
+{% endif %}
+
+
+</div>

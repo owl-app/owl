@@ -1,0 +1,15 @@
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.edit_'~metadata.name) %}
+{% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.update' %}
+{% set tinymce = configuration.vars.tinymce|default(false) %}
+
+{% form_theme form '@OwlAdmin/Form/theme.html.twig' %}
+
+{% block content %}
+    {{ sylius_template_event([event_prefix, 'sylius.admin.ajax.update'], _context) }}
+{% endblock %}
+
+{% block javascripts %}
+    {% import '@OwlAdmin/Macro/tinymce.html.twig' as _tinymce %}
+
+    {{ _tinymce.add_event(tinymce) }}
+{% endblock %}

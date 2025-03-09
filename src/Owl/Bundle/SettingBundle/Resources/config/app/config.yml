@@ -1,0 +1,6 @@
+jms_serializer:
+    metadata:
+        directories:
+            owl-setting:
+                namespace_prefix: "Owl\\Component\\Setting"
+                path: "@OwlSettingBundle/Resources/config/serializer"

@@ -1,0 +1,7 @@
+suites:
+    main:
+        namespace: Owl\Bundle\UiBundle
+        psr4_prefix: Owl\Bundle\UiBundle
+        src_path: .
+
+runner.maintainers.errors.level: 14335 # E_ALL & ~E_USER_DEPRECATED ^ E_STRICT

@@ -1,0 +1,7 @@
+{% set value = 'owl.ui.' ~ data %}
+
+{% if options.vars.labels is defined %}
+    {% include [(options.vars.labels ~ '/' ~ data ~ '.html.twig'), '@OwlUi/Label/_default.html.twig'] with {'value': value} %}
+{% else %}
+    {% include '@OwlUi/Label/_default.html.twig' with {'value': value} %}
+{% endif %}

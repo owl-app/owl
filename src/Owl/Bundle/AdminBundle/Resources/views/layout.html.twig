@@ -1,0 +1,41 @@
+{% set layout = 'sidebar.html.twig' %}
+
+{% extends '@OwlUi/Layout/' ~ layout %}
+
+{% block title %} | Owl{% endblock %}
+
+{# {% block metatags %}
+    <meta name="turbo-cache-control" content="no-preview">
+{% endblock %} #}
+
+{% block stylesheets %}
+    {{ sylius_template_event('sylius.admin.layout.stylesheets') }}
+{% endblock %}
+
+{% block flash_messages %}
+    {% include '@OwlAdmin/Layout/_flashes.html.twig' %}
+{% endblock %}
+
+{% block topbar %}
+    {{ sylius_template_event('sylius.admin.layout.topbar_left') }}
+
+    <div class="ui left floated dividing empty item"></div>
+
+    {{ sylius_template_event('sylius.admin.layout.topbar_middle') }}
+
+    <div class="ui right floated dividing empty item"></div>
+
+    {{ sylius_template_event('sylius.admin.layout.topbar_right') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ sylius_template_event('sylius.admin.layout.sidebar') }}
+{% endblock %}
+
+{% block footer %}
+{{ 'owl.ui.created_by'|trans }} &copy; <a href="mailto:projekty@pawelkeska.eu" target="_blank">Paweł Kęska</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ sylius_template_event('sylius.admin.layout.javascripts') }}
+{% endblock %}

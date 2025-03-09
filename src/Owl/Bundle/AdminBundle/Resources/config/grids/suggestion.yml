@@ -1,0 +1,108 @@
+sylius_grid:
+    grids:
+        owl_admin_suggestion:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.suggestion.class%"
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                createdAt: desc
+            fields:
+                title:
+                    type: twig
+                    label: owl.ui.title
+                    sortable: title
+                    options:
+                        template: "@OwlUi/Grid/Field/rawLabel.html.twig"
+                description:
+                    type: string
+                    label: owl.ui.description
+                    sortable: ~
+                user:
+                    type: twig
+                    label: owl.ui.user
+                    sortable: user.displayName
+                    options:
+                        template: "@OwlUi/Grid/Field/owner.html.twig"
+                status:
+                    type: twig
+                    label: owl.ui.status
+                    sortable: ~
+                    options:
+                        template: "@OwlUi/Grid/Field/state.html.twig"
+                        vars:
+                            prefix_translation: 'status'
+                            labels: "@OwlAdmin/Suggestion/Label/Status"
+                files:
+                    type: twig
+                    label: owl.ui.files
+                    options:
+                        template: "@OwlUi/Grid/Field/files.html.twig"
+                createdAt:
+                    type: datetime
+                    label: owl.ui.created_at
+                    sortable: ~
+                    options:
+                        format: d-m-Y H:i
+            filters:
+                search:
+                    type: string
+                    label: owl.ui.search
+                    options:
+                        fields: [title, description]
+                status:
+                    type: select
+                    label: owl.ui.status
+                    form_options:
+                        choices:
+                            owl.ui.status_new: new
+                            owl.ui.status_in_progress: in_progress
+                            owl.ui.shirealizedpped: realized
+                            owl.ui.status_cancelled: cancelled
+                owner:
+                    type: string
+                    form_options:
+                        type: contains
+                    label: owl.ui.user
+                    options:
+                        fields: [owner.email, owner.firstName, owner.lastName]
+                date:
+                    type: date
+                    label: owl.ui.date
+                    options:
+                        from:
+                            label: owl.ui.from
+                        field: createdAt
+                        inclusive_to: true
+            actions:
+                item:
+                    change_status:
+                        type: modal
+                        label: owl.ui.change_status
+                        options:
+                            button: primary
+                            icon: exchange
+                            link:
+                                route: owl_admin_suggestion_status_change_status
+                                parameters:
+                                    suggestionId: resource.id
+                    history_status:
+                        type: modal
+                        label: owl.ui.history_status
+                        options:
+                            button: primary
+                            icon: list
+                            link:
+                                route: owl_admin_suggestion_status_history_status
+                                parameters:
+                                    suggestionId: resource.id
+                    delete:
+                        type: delete
+                bulk:
+                    delete:
+                        type: delete
+                        options:
+                            link:
+                                route: owl_admin_suggestion_bulk_delete

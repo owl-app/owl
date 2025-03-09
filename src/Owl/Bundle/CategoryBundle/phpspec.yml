@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Owl\Bundle\CategoryBundle
+        psr4_prefix: Owl\Bundle\CategoryBundle
+        src_path: .

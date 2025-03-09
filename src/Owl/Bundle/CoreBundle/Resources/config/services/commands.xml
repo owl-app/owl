@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="Owl\Bundle\CoreBundle\Command\AdminUserFakerCommand">
+            <argument type="service" id="owl.manager.admin_user" />
+            <argument type="service" id="owl.repository.rbac_role" />
+            <argument type="service" id="owl.fixture.example_factory.admin_user" />
+            <argument>%owl.user.admin.hasher%</argument>
+            <tag name="console.command" />
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,8 @@
+{% import '@OwlAdmin/Macro/breadcrumb.html.twig' as breadcrumb %}
+{% set breadcrumbs = [
+        { label: 'owl.ui.administration'|trans, url: path('owl_admin_dashboard') },
+        { label: 'owl.ui.rbac_permissions'|trans },
+    ]
+%}
+
+{{ breadcrumb.crumble(breadcrumbs) }}

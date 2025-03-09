@@ -1,0 +1,19 @@
+imports:
+    - { resource: "@OwlFileBundle/Resources/config/app/parameters.yml" }
+
+jms_serializer:
+    metadata:
+        directories:
+            owl-file:
+                namespace_prefix: "Owl\\Component\\File"
+                path: "@OwlFileBundle/Resources/config/serializer"
+
+knp_gaufrette:
+    adapters:
+        owl_file:
+            local:
+                directory: "%owl_file.file_dir%"
+                create: true
+    filesystems:
+        owl_file:
+            adapter: "%owl.uploader.filesystem%"

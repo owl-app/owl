@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Yiisoft\Rbac\Doctrine\ItemTreeTraversal;
+
+/**
+ * An RBAC item tree traversal strategy based on CTE (common table expression) for Oracle.
+ *
+ * @internal
+ */
+final class OracleCteItemTreeTraversal extends CteItemTreeTraversal
+{
+    protected function getTrimConcatChildrenExpression(): string
+    {
+        return "TRIM ('$this->namesSeparator' FROM children || '$this->namesSeparator' || item_child_recursive.child)";
+    }
+}

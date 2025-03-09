@@ -1,0 +1,7 @@
+{% include '@OwlAdmin/Notification/_form.html.twig' %}
+<br />
+<div 
+    class="uploader dropzone" 
+    data-url="{{ path('owl_admin_notification_file_create', { 'notificationId': 'param_id' }) }}" 
+    id="notification-files">
+</div>

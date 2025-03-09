@@ -1,0 +1,65 @@
+sylius_fixtures:
+    suites:
+        default:
+            listeners:
+                orm_purger: ~
+                logger: ~
+                user_role_assigner: ~
+
+            fixtures:
+                locale:
+                    options:
+                        locales:
+                            - 'en'
+                            - 'pl'
+
+                rbac_permission:
+
+                rbac_role:
+                    options:
+                        custom:
+                            admin_system:
+                                reference: true
+                                name: ROLE_ADMIN_SYSTEM
+                                description: ''
+                                setting:
+                                    display_name: 'Administrator'
+                                    theme: owl/admin
+                                all_permissions: true
+                            user:
+                                reference: true
+                                name: ROLE_USER
+                                description: ''
+                                setting:
+                                    display_name: 'User'
+                                    theme: owl/user
+
+                admin_user:
+                    name: 'admin_user'
+                    options:
+                        custom:
+                            admin_system:
+                                role_reference: admin_system
+                                display_name: John Doe
+                                first_name: 'John'
+                                last_name: 'Doe'
+                                phone: '1111111111'
+                                email: 'owl@owl.com'
+                                password: 'test123'
+                                enabled: true
+                                locale_code: pl
+                                role: ROLE_ADMIN_SYSTEM
+
+                setting:
+                    options:
+                        custom:
+                            login_page:
+                                section: system
+                                name: description_login_page
+                                lang: pl
+                            dashboard:
+                                section: system
+                                name: description_dashboard
+                                lang: pl
+
+

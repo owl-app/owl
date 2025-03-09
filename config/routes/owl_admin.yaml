@@ -1,0 +1,3 @@
+owl_admin:
+    resource: "@OwlAdminBundle/Resources/config/routing.yml"
+    prefix: '/%owl_admin.path_name%'

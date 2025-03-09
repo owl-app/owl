@@ -1,0 +1,13 @@
+{% form_theme form '@OwlAdmin/Form/theme.html.twig' %}
+
+<div style="margin-bottom: 10px;">
+    {{ form_start(form, {'name' : name~'-'~form.vars.value.name, 'attr': { 'data-route' :form.vars.value.name }}) }}
+        <div class="ui toggle checkbox checkbox-permission {{form.vars.disabled}}">
+            <input type="checkbox" {{form.vars.checked}} />
+            <label>{{form.vars.description_permission|trans}}</label>
+        </div>
+        {{ form_row(form.name, { 'id' : form.vars.value.name~'-name'}) }}
+        {{ form_row(form.type, { 'id' : form.vars.value.name~'-type'}) }}
+        {{ form_row(form._csrf_token, { 'id' : form.vars.value.name~'-_csrf_token'}) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

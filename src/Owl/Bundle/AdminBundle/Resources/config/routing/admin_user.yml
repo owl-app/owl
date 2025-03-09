@@ -1,0 +1,78 @@
+owl_admin_admin_user:
+    resource: |
+        alias: owl.admin_user
+        section: admin
+        path: users
+        templates: "@OwlAdmin\\Crud"
+        except: ['show']
+        redirect: index
+        grid: owl_admin_admin_user
+        permission: true
+        vars:
+            all:
+                subheader: owl.ui.manage_users_able_to_access_administration_panel
+                templates:
+                    form: "@OwlAdmin/AdminUser/_form.html.twig"
+                redirect:
+                    optional_referer: owl_admin_admin_user_index
+            index:
+                icon: users
+                referer: true
+                permission:
+                    group: user
+                    description: owl.ui.permission.list_users
+            create:
+                form:
+                    ajax: true
+                permission:
+                    group: user
+                    description: owl.ui.permission.create_user
+            update:
+                form:
+                    ajax: true
+                permission:
+                    group: user
+                    description: owl.ui.permission.update_user
+            bulkDelete:
+                redirect:
+                    header: xhr
+                form:
+                    ajax: true
+                permission:
+                    group: user
+                    description: owl.ui.permission.bulk_delete_user
+    type: sylius.resource
+
+owl_admin_admin_user_permission_availables:
+    path: /users/{id}/permissions/availables
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.admin_user_permission::availablesAction
+        _sylius:
+            section: admin
+            permission: true
+            # grid: owl_admin_service
+            template: "@OwlAdmin/User/Permission/availables.html.twig"
+            form: Owl\Bundle\RbacBundle\Form\Type\AssignType
+            vars:
+                subheader: owl.ui.manage_user_permissions
+                icon: cube
+                permission:
+                    group: user
+                    description: owl.ui.permission.list_permissions_assign_to_user
+
+owl_admin_confirm_registration:
+    path: /{id}/registration
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.admin_user::updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/AdminUser/Registration/details.html.twig"
+            vars:
+                header: owl.ui.registration
+                icon: user
+                permission:
+                    group: user
+                    description: owl.ui.permission.registration

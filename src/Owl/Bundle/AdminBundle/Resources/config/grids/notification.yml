@@ -1,0 +1,75 @@
+sylius_grid:
+    grids:
+        owl_admin_notification:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.notification.class%"
+            sorting:
+                dateIssue: desc
+            fields:
+                subject:
+                    type: string
+                    label: owl.ui.subject
+                    sortable: ~
+                description:
+                    type: twig
+                    label: owl.ui.description
+                    sortable: ~
+                    options:
+                        template: "@OwlUi/Grid/Field/html.html.twig"
+                dateIssue:
+                    type: datetime
+                    label: owl.ui.date_issue
+                    sortable: ~
+                    options:
+                        format: d-m-Y
+                files:
+                    type: twig
+                    label: owl.ui.files
+                    options:
+                        template: "@OwlUi/Grid/Field/files.html.twig"
+                user:
+                    type: twig
+                    label: owl.ui.added_by
+                    sortable: user.firstName
+                    options:
+                        template: "@OwlUi/Grid/Field/owner.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: owl.ui.search
+                    options:
+                        fields: [subject, description]
+                user:
+                    type: string
+                    form_options:
+                        type: contains
+                    label: owl.ui.user
+                    options:
+                        fields: [owner.email, owner.firstName, owner.lastName]
+            actions:
+                main:
+                    create:
+                        type: modal
+                        label: owl.ui.create
+                        options:
+                            button: primary
+                            icon: plus
+                            link:
+                                route: owl_admin_notification_create
+                item:
+                    show:
+                        type: link
+                        label: owl.ui.show
+                        options:
+                            button: default
+                            icon: search
+                            link:
+                                route: owl_admin_notification_show_details
+                                parameters:
+                                    id: resource.id
+                    update:
+                        type: update
+                    delete:
+                        type: delete

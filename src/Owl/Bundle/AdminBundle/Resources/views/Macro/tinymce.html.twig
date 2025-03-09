@@ -1,0 +1,9 @@
+{% macro add_event(tinymce = false) %}
+    {% if owl_is_turbo == false %}
+        {% if tinymce == '1' %}
+            {{ sylius_template_event('owl.admin.tinymce') }}
+        {% else %}
+            {{ sylius_template_event(tinymce) }}
+        {% endif %}
+    {% endif %}
+{% endmacro %}

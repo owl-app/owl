@@ -1,0 +1,56 @@
+{% macro default(text, trans = true) %}
+    {%- set text2 = trans ? text|trans : text -%}
+    <span class="ui label">{{ text2 }}</span>
+{% endmacro %}
+
+{% macro status(status) %}
+    {% import _self as labels %}
+
+    {% if status %}
+        {{ labels.enabled() }}
+    {% else %}
+        {{ labels.disabled() }}
+    {% endif %}
+{% endmacro %}
+
+{% macro enabled() %}
+    <span class="ui teal label">
+        <i class="checkmark icon"></i>
+        {{ 'owl.ui.enabled'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro disabled() %}
+    <span class="ui red label">
+        <i class="remove icon"></i>
+        {{ 'owl.ui.disabled'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro yesNo(value) %}
+    {% import _self as labels %}
+
+    {% if value %}
+        {{ labels.yes() }}
+    {% else %}
+        {{ labels.no() }}
+    {% endif %}
+{% endmacro %}
+
+{% macro yes() %}
+    <span class="ui basic label">
+        <i class="checkmark icon"></i>
+        {{ 'owl.ui.yes_label'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro no() %}
+    <span class="ui basic label">
+        <i class="remove icon"></i>
+        {{ 'owl.ui.no_label'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro file(name, path) %}
+    <a class="ui blue label" href="{{ path|owl_file_path }}" style="margin-left: 0" target="_blank">{{ name }}</a>
+{% endmacro %}

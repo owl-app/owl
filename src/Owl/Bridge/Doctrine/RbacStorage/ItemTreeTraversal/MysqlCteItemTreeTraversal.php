@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Yiisoft\Rbac\Doctrine\ItemTreeTraversal;
+
+/**
+ * A RBAC item tree traversal strategy based on CTE (common table expression) for MySQL 8 and above (lower versions
+ * don't support this functionality).
+ *
+ * @internal
+ */
+final class MysqlCteItemTreeTraversal extends CteItemTreeTraversal
+{
+    protected function getEmptyChildrenExpression(): string
+    {
+        return "CAST('' AS CHAR(21844))";
+    }
+}

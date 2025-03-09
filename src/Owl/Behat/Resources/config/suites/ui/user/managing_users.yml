@@ -1,0 +1,25 @@
+default:
+    suites:
+        ui_managing_users:
+            contexts:
+                - owl.behat.context.hook.doctrine_orm
+                - owl.behat.context.hook.rbac_permissions
+
+                - owl.behat.context.transform.rbac_role
+                - owl.behat.context.transform.admin
+                - owl.behat.context.transform.shared_storage
+                - owl.behat.context.transform.lexical
+                # - owl.behat.context.transform.locale
+
+                - owl.behat.context.setup.locale
+                - owl.behat.context.setup.rbac_role
+                - owl.behat.context.setup.admin_security
+                - owl.behat.context.setup.admin_user
+
+                # - owl.behat.context.ui.admin.dashboard
+                - owl.behat.context.ui.admin.managing_users
+                - owl.behat.context.ui.admin.notification
+                - owl.behat.context.ui.admin.login
+
+            filters:
+                tags: "@managing_users&&@ui"

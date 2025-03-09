@@ -1,0 +1,7 @@
+owl_admin_rbac_permission:
+    resource: "@OwlAdminBundle/Resources/config/routing/rbac/permission.yml"
+    prefix: /permission/
+
+owl_admin_rbac_role:
+    resource: "@OwlAdminBundle/Resources/config/routing/rbac/role.yml"
+    prefix: /role/

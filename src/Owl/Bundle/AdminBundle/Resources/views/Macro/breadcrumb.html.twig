@@ -1,0 +1,5 @@
+{% macro crumble(crumbs = {}) %}
+    {% import '@OwlUi/Macro/breadcrumb.html.twig' as _breadcrumb %}
+
+    {{ _breadcrumb.crumble(crumbs, path('owl_admin_dashboard'), 'owl.ui.administration'|trans) }}
+{% endmacro %}

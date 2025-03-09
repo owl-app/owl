@@ -1,0 +1,77 @@
+parameters:
+    owl.security.admin_regex: "(?!%owl.security.api_route%)^/%owl_admin.path_name%"
+    owl.security.api_regex: "(?!%owl.security.api_route%/docs)^%owl.security.api_route%"
+
+security:
+    enable_authenticator_manager: true
+    providers:
+        owl_admin_user_provider:
+            id: owl.admin_user_provider.email_based
+        owl_api_user_provider:
+            id: owl.admin_user_provider.email_based
+    access_decision_manager:
+        strategy: unanimous
+    password_hashers:
+        Owl\Component\User\Model\UserInterface: bcrypt
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin:
+            switch_user: true
+            context: admin
+            pattern: "%owl.security.admin_regex%|%owl.security.api_route%/docs"
+            provider: owl_admin_user_provider
+            form_login:
+                provider: owl_admin_user_provider
+                login_path: owl_admin_login
+                check_path: owl_admin_login_check
+                failure_path: owl_admin_login
+                default_target_path: owl_admin_dashboard
+                use_forward: false
+                use_referer: true
+                enable_csrf: true
+                csrf_parameter: _csrf_admin_security_token
+                csrf_token_id: admin_authenticate
+            remember_me:
+                secret: "%env(APP_SECRET)%"
+                path: "%owl_admin.path_name%"
+                name: APP_ADMIN_REMEMBER_ME
+                lifetime: 31536000
+                remember_me_parameter: _remember_me
+            logout:
+                path: owl_admin_logout
+                target: owl_admin_login
+
+        api:
+            pattern: "%owl.security.api_regex%"
+            provider: owl_api_user_provider
+            stateless: true
+            entry_point: jwt
+            json_login:
+                check_path: "%owl.security.api_route%/authentication-token"
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            jwt: true
+
+    access_control:
+        - { path: "%owl.security.api_regex%/reset-password-requests", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%owl.security.api_regex%/.*", role: ROLE_API_ACCESS }
+        - { path: "%owl.security.api_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%owl.security.api_route%/docs", role: ROLE_ADMIN_SYSTEM }
+
+        - { path: "%owl.security.admin_regex%_partial", role: PUBLIC_ACCESS, ips: [127.0.0.1, ::1] }
+        - { path: "%owl.security.admin_regex%_partial", roles: ROLE_NO_ACCESS, methods: [GET] }
+
+        - { path: "%owl.security.admin_regex%$", role: PUBLIC_ACCESS }
+        - { path: "%owl.security.admin_regex%(forgotten-password|register|verify)", role: PUBLIC_ACCESS }
+
+        - { path: "%owl.security.admin_regex%([A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?)$", role: PUBLIC_ACCESS }
+        - { path: "%owl.security.admin_regex%([A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?)/(forgotten-password|register|verify)", role: PUBLIC_ACCESS }
+
+        - { path: "%owl.security.admin_regex%.*", role: [ROLE_ADMIN_COMPANY, ROLE_ADMIN_SYSTEM, ROLE_USER] }
+
+

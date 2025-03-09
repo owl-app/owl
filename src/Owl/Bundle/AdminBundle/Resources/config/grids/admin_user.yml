@@ -1,0 +1,99 @@
+sylius_grid:
+    grids:
+        owl_admin_admin_user:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.admin_user.class%"
+                    elasticsearch:
+                        enabled: true
+                        finder: user
+            sorting:
+                createdAt: desc
+            fields:
+                displayName:
+                    type: string
+                    label: owl.ui.user_display_name
+                    sortable: ~
+                email:
+                    type: string
+                    label: owl.ui.email
+                    sortable: ~
+                role:
+                    type: twig
+                    label: owl.ui.role
+                    path: role
+                    sortable: role.name
+                    options:
+                        template: "@OwlAdmin/AdminUser/Grid/Field/role.html.twig"
+                note:
+                    type: string
+                    label: owl.ui.note_user
+                    sortable: ~
+                createdAt:
+                    type: datetime
+                    label: owl.ui.created_at
+                    sortable: ~
+                    options:
+                        format: d-m-Y H:i
+            filters:
+                search:
+                    type: string
+                    label: owl.ui.search
+                    options:
+                        fields: [
+                            email,
+                            displayName,
+                            firstName,
+                            lastName,
+                            note,
+                            role.name,
+                            role.setting.displayName,
+                        ]
+                enabled:
+                    type: boolean
+                    label: owl.ui.enabled
+                role:
+                    type: entity
+                    label: owl.ui.role
+                    options:
+                        fields: [role_id]
+                    form_options:
+                        class: "%owl.model.rbac_role.class%"
+                        multiple: true
+                        attr: { class: 'search' }
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update_admin_user
+                    delete:
+                        type: delete
+                    assign_permissions:
+                        type: assign_permissions_admin_user
+                        label: owl.ui.assign_permissions
+                        options:
+                            button: primary
+                            icon: plus
+                            link:
+                                route: owl_admin_admin_user_permission_availables
+                                parameters:
+                                    id: resource.id
+                    registration:
+                        type: registration_admin_user
+                        label: owl.ui.registration
+                        options:
+                            button: red
+                            icon: list
+                            link:
+                                route: owl_admin_confirm_registration
+                                parameters:
+                                    id: resource.id
+                bulk:
+                    delete:
+                        type: delete
+                        options:
+                            link:
+                                route: owl_admin_admin_user_bulk_delete

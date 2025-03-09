@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/integrations/monolog.xml" />
+        <import resource="services/templating.xml" />
+        <import resource="services/form.xml" />
+        <import resource="services/listeners.xml" />
+        <import resource="services/context.xml" />
+        <import resource="services/templating.xml" />
+        <import resource="services/validators.xml" />
+        <import resource="services/actions.xml" />
+        <import resource="services/authorization.xml" />
+        <import resource="services/emails.xml" />
+        <import resource="services/controller.xml" />
+        <import resource="services/checkers.xml" />
+        <import resource="services/fixtures_listeners.xml" />
+        <import resource="services/fixtures_factories.xml" />
+        <import resource="services/fixtures.xml" />
+        <import resource="services/commands.xml" />
+        <import resource="services/resource_filter.xml" />
+        <import resource="services/messenger.xml" />
+    </imports>
+
+    <services>
+        <defaults public="true" />
+
+        <service id="owl.grid_filter.entities" class="Owl\Component\Core\Grid\Filter\EntitiesFilter">
+            <tag name="sylius.grid_filter" type="entities" form-type="Owl\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType" />
+        </service>
+
+        <service id="owl.grid_filter.date" class="Owl\Component\Core\Grid\Filter\DateFilter" />
+
+        <service id="owl.custom_factory.suggestion" class="Owl\Component\Core\Factory\SuggestionFactory" decorates="owl.factory.suggestion" decoration-priority="256" public="false">
+            <argument type="service" id="owl.custom_factory.suggestion.inner" />
+        </service>
+
+        <service id="owl.custom_factory.notification" class="Owl\Component\Core\Factory\NotificationFactory" decorates="owl.factory.notification" decoration-priority="256" public="false">
+            <argument type="service" id="owl.custom_factory.notification.inner" />
+        </service>
+
+        <service id="Owl\Component\Core\Factory\NotificationFactoryInterface" alias="owl.custom_factory.notification" />
+
+        <service id="owl.custom_factory.notification_accepted" class="Owl\Component\Core\Factory\NotificationAcceptedFactory" decorates="owl.factory.notification_accepted" decoration-priority="256" public="false">
+            <argument type="service" id="owl.custom_factory.notification_accepted.inner" />
+        </service>
+
+         <service id="owl.expression_language" class="Owl\Bridge\SyliusResource\ExpressionLanguage\ExpressionLanguage" decorates="sylius.expression_language" decoration-priority="256" public="false">
+            <argument type="service" id="Psr\Cache\CacheItemPoolInterface" />
+            <argument type="collection"> 
+                <argument type="service" id="owl.expression_language.provider.is_granted" />    
+            </argument>
+         </service>
+
+         <service id="owl.expression_language.provider.is_granted" class="Owl\Bridge\SyliusResource\ExpressionLanguage\IsGrantedExpressionFunctionProvider" public="false">
+            <argument type="service" id="security.authorization_checker" />
+         </service>
+
+        <service id="owl.single_role_updater" class="Owl\Bundle\CoreBundle\Updater\SingleRoleUpdater">
+            <argument type="service" id="owl_rbac.manager" />
+        </service>
+
+        <service id="owl.form.type.user_update_profile" class="Owl\Bundle\CoreBundle\Form\Type\User\UserUpdateProfileType">
+            <argument>%owl.model.admin_user.class%</argument>
+            <argument>%owl.form.type.admin_user_update_profile.validation_groups%</argument>
+            <argument type="service" id="owl.repository.locale" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="Owl\Bundle\CoreBundle\EventListener\LocaleAwareListener" decorates="locale_aware_listener">
+            <argument type="service" id="Owl\Bundle\CoreBundle\EventListener\LocaleAwareListener.inner" />
+        </service>
+
+        <service id="owl.custom_resource_controller.resource_update_handler" class="Owl\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
+            <argument type="service" id="owl.custom_resource_controller.resource_update_handler.inner" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="owl.custom_resource_controller.resource_delete_handler" class="Owl\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler" decorates="sylius.resource_controller.resource_delete_handler" public="false">
+            <argument type="service" id="owl.custom_resource_controller.resource_delete_handler.inner" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+    </services>
+</container>

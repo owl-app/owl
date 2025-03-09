@@ -1,0 +1,5 @@
+{% macro extra_fields_autocompletet(form, extra_fields) %}
+    {% for name in extra_fields %}
+        {{ form_widget(form[name], { 'attr': { 'data-name': name }} ) }}
+    {% endfor %}
+{% endmacro %}

@@ -1,0 +1,9 @@
+{% extends '@OwlAdmin/layout.html.twig' %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    {{ sylius_template_event('owl.admin.rbac_permission.index.content', _context) }}
+{% endblock %}

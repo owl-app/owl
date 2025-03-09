@@ -1,0 +1,9 @@
+{% import '@OwlUi/Macro/buttons.html.twig' as buttons %}
+
+{% set route = options.link.url|default(options.link.route|default(grid.requestConfiguration.getRouteName('create'))) %}
+{% set path = options.link.url|default(path(route, options.link.parameters|default([]))) %}
+
+{% if is_granted(route) %}
+    {{ buttons.create(path, action.label) }}
+{% endif %}
+

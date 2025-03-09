@@ -1,0 +1,135 @@
+owl:
+    email:
+        password_reset:
+            hello: Witaj
+            reset_your_password: Zresetuj swoje hasło
+            subject: Resetowanie hasła
+            to_reset_your_password: Aby zresetować hasło - kliknij na poniższy link
+        user_registration:
+            start_using_system: Rozpocznij korzystanie z systemu
+            subject: Rejestracja użytkownika
+            welcome_to_our_system: Zapraszamy do naszego systemu !
+            you_have_just_been_registered: Właśnie zostałeś zarejestrowany. Dziękujęmy
+        verification_token:
+            hello: Witaj
+            subject: Weryfikacja adresu e-mail
+            to_verify_your_email_address: Aby zweryfikować swój adres e-mail - kliknij poniższy link
+            verify_your_email_address: Zweryfikuj swój adres email
+        registration_accepted:
+            subject: Akceptacja konta w systemie
+            thank_you_for_your_patience: Dziękujemy za cierpliwość
+            you_have_just_been_accepted: Twoje konto zostało właśnie zaakceptowane
+            start_using_system: Zacznij w pełni korzystać z możliwości systemu
+        registration_rejected:
+            subject: Odrzucenie rejestracji w systemie
+            thank_you_for_your_patience: Dziękujemy za cierpliwość
+            your_registration_to_email_address: Twoja rejestracja na adres e-mail
+            in_system_has_unfortunately_been_rejected: w systemie została niestety odrzucona
+            reason_for_rejection: Powód odrzucenia
+        user_new_registration:
+            subject: Nowa rejestracja użytkownika
+            desc: Nowa rejestracja użytkownika
+        new_suggestion:
+            subject: Nowa sugestia w systemie
+            desc: Nowa sugestia w systemie
+
+    menu:
+        admin:
+            main:
+                suggestion:
+                    header: Sugestie
+                notification:
+                    header: Komunikaty
+                catalog:
+                    attributes: Atrybuty
+                    header: Katalog
+                configuration:
+                    users: Użytkownicy
+                    settings: Ustawienia
+                    countries: Kraje
+                    header: Konfiguracja
+                    cities: Miasta
+                    locales: Języki
+                permission:
+                    header: Uprawnienia
+                    available: Dostępne
+                    roles: Role
+                stats:
+                    header: Analizy
+    ui:
+        permission:
+            availables_roles: Dostępne role w systemie
+            service: Wykonawcy
+            list_services: Lista wykonawców
+            create_service: Dodawanie wykonawcy
+            update_service: Edycja wykonawcy
+            show_services: Widok wykonawcy
+            delete_service: Usuwanie wykonawcy
+            add_new_review: Dodawanie nowej oceny
+            city: Miasta
+            list_cities: Lista miast
+            create_city: Dodawanie miasta
+            update_city: Edycja miasta
+            rbac_permission_availables: Uprawnienia - dostępy
+            list_permission_availables_in_system: Lista dostępów w systemie
+            add_permission_to_system: Dodawanie uprawniania do systemu
+            remove_permission_to_system: Usuwanie uprawniania z systemu
+            rbac_permission_role: Uprawnienia - role
+            list_roles: Lista ról
+            create_role: Dodawanie roli
+            update_role: Edycja roli
+            delete_role: Usuwanie roli
+            list_permission_assigned_to_role: Lista uprawnień przypisanych do roli
+            add_permission_to_role: Dodawanie uprawnienia do roli
+            revoke_permission_to_role: Usuwanie uprawnienia do roli
+            user: Użytkownicy
+            list_users: Lista użytkowników
+            show_user: Szczegóły użytkownika
+            create_user: Dodawanie użytkownika
+            update_user: Edycja użytkownika
+            bulk_delete_user: Usuwanie wielu użytkowników
+            show_history_route: Historia akcji
+            list_permissions_assign_to_user: Lista uprawnień przypisanych do użytkownika
+            assign_permission_to_user: Przypisywanie uprawnień do użytkownika
+            revoke_permission_to_user: Usuwanie uprawnienia użytkownika
+            get_city_by_name: Pobieranie mista po nazwie
+            get_city_by_id: Pobieranie miasta po id
+            locale: Ustawienia regionalne
+            list_locales: Lista języków
+            create_locale: Dodawanie języka
+            update_locale: Edycja języka
+            suggestion: Sugestie
+            list_suggestions: Lista sugestii
+            create_suggestion: Dodawanie sugestii
+            update_suggestion: Edycja sugestii
+            delete_suggestion: Usuwanie sugestii
+            show_suggestions: Widok sugestii
+            bulk_delete_suggestion: Usuwanie wielu sugestii
+            change_status_suggestion: Zmiana statusu sugestii
+            history_status_suggestion: Historia statusów sugestii
+            create_file: Dodawanie pliku
+            update_file: Edycja pliku
+            delete_file: Usuwanie pliku
+            change_status: Zmiana statusu
+            list_category: Lista kategorii
+            create_category: Dodawanie kategorii
+            update_category: Edycja kategorii
+            delete_category: Kasowanie kategorii
+            notification: Komunikaty
+            update_notification: Edycja komunikatu
+            delete_notification: Usuwanie komunikatu
+            show_notification: Szczegóły komunikatu
+            details_to_accept_notification: Szczegóły - akceptacja komunikatu
+            list_notifications: Lista komunikatów
+            create_notification: Dodawanie komunikatu
+            show_notification_accepted: Lista akceptacji komunikatów
+            system_setting: Ustawienia systemu
+            edit_system_settings: Edycja ustawień systemu
+            registration: Rejestracja
+            reject_registration: Odrzucenie rejestracji
+            accept_registration: Akceptacja rejestracji
+            profile_user: Profil użytkownika
+
+
+
+

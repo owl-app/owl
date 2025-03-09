@@ -1,0 +1,17 @@
+owl_admin_rbac_permission_availables:
+    path: /availables
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.rbac_permission::availablesAction
+        _sylius:
+            section: admin
+            permission: true
+            # grid: owl_admin_service
+            template: "@OwlAdmin/Rbac/Permission/availables.html.twig"
+            form: Owl\Bundle\RbacBundle\Form\Type\AvailablePermissionType
+            vars:
+                subheader: owl.ui.manage_permissions_in_system
+                icon: lock
+                permission:
+                    group: rbac_permission_availables
+                    description: owl.ui.permission.list_permission_availables_in_system

@@ -1,0 +1,9 @@
+{% macro registration(status = false) %}
+    {% if status == 'new' %}
+        {{ 'yellow' }}
+    {% elseif status == 'accepted' %}
+        {{ 'green' }}
+    {% elseif status == 'rejected' %}
+        {{ 'red' }}
+    {% endif %}
+{% endmacro %}

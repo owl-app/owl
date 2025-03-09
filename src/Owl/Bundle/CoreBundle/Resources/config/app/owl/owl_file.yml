@@ -1,0 +1,20 @@
+owl_file:
+    resources:
+        suggestion:
+            subject: "%owl.model.suggestion.class%"
+            file:
+                classes:
+                    model: Owl\Component\Core\Model\SuggestionFile
+                    form: Owl\Bundle\CoreBundle\Form\Type\Suggestion\SuggestionFileType
+            uploader:
+                classes:
+                    model: "%owl.model.admin_user.class%"
+        notification:
+            subject: "%owl.model.notification.class%"
+            file:
+                classes:
+                    model: Owl\Component\Core\Model\NotificationFile
+                    form: Owl\Bundle\CoreBundle\Form\Type\Notification\NotificationFileType
+            uploader:
+                classes:
+                    model: "%owl.model.admin_user.class%"

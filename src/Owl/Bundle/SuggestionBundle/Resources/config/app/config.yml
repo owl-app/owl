@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+jms_serializer:
+    metadata:
+        directories:
+            owl-suggestion:
+                namespace_prefix: "Owl\\Component\\Suggestion"
+                path: "@OwlSuggestionBundle/Resources/config/serializer"

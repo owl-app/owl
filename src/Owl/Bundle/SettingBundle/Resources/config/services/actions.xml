@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="true" autoconfigure="true" public="true" />
+
+        <service id="owl.controller.action.setting.section" class="Owl\Bundle\SettingBundle\Action\SectionAction">
+            <argument type="service" id="sylius.resource_controller.request_configuration_factory"/>
+            <argument type="service" id="owl.setting.form_factory" />
+            <argument type="service" id="owl.setting.storage.doctrine" />
+            <argument type="service" id="sylius.resource_controller.view_handler" />
+            <argument type="service" id="owl.resource_controller.redirect_handler" />
+            <tag name="owl.controller.action" alias="owl.setting" />
+        </service>
+    </services>
+</container>

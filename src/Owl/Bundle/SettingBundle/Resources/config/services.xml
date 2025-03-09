@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/actions.xml" />
+    </imports>
+
+    <services>
+        <defaults public="true" />
+
+        <service id="owl.setting.request_configuration_factory" class="Owl\Bundle\SettingBundle\Factory\RequestConfigurationFactory" public="false">
+            <argument>Owl\Bundle\SettingBundle\Configuration\RequestConfiguration</argument>
+        </service>
+
+        <service id="owl.setting.form_factory" class="Owl\Bundle\SettingBundle\Factory\SettingFormFactory" public="false">
+            <argument type="service" id="form.factory" />
+        </service>
+
+        <service id="owl.setting.storage.doctrine" class="Owl\Component\Setting\Storage\DoctrineSettingStorage" public="false">
+            <argument>%owl.model.setting.class%</argument>
+            <argument type="service" id="owl.repository.setting" />
+            <argument type="service" id="owl.manager.setting" />
+        </service>
+    </services>
+</container>

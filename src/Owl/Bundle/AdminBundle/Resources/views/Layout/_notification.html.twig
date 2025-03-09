@@ -1,0 +1,28 @@
+{% set quantity = owl.notifications|length %}
+
+<div class="ui floated simple dropdown icon item owl-notification-list">
+        <div class="ui label-quantity-notifications {% if quantity > 0 %}red label{% endif %}" style="font-size: 14px; margin-left:0;">
+            <i class="outline bell icon"></i>
+            {% if quantity > 0 %}
+                <span class="quantity-notifications" data-quantity="{{ quantity }}">{{ quantity }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="menu">
+            {% if quantity > 0 %}
+                {% for notification in owl.notifications %}
+                    <div class="item notification-{{ notification.id }}">
+                        <a class="ajax-modal-button" data-url="{{ path('owl_admin_notification_details', { 'id': notification.id }) }}">
+                            <span class="text">{{ notification.subject }}</span>
+                            <span class="date">{{ notification.createdAt|date("d-m-Y") }}</span>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="item">
+                    <span>{{ 'owl.ui.no_new_notifications'|trans }}</span>
+                </div>
+            {% endif %}
+        </div>
+
+</div>

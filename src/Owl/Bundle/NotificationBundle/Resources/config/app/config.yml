@@ -1,0 +1,6 @@
+jms_serializer:
+    metadata:
+        directories:
+            owl-notification:
+                namespace_prefix: "Owl\\Component\\Notification"
+                path: "@OwlNotificationBundle/Resources/config/serializer"

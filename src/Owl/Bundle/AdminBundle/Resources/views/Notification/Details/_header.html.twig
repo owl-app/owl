@@ -1,0 +1,8 @@
+<h1 class="ui header">
+    <i class="circular bullhorn icon"></i>
+    <div class="content">
+        <span>{{ notification.subject|default('owl.ui.notification'|trans) }}</span>
+        <div class="sub header">{{ 'owl.ui.details_notification_of_the_day'|trans }}: {{ notification.dateIssue|date('d-m-Y') }}</div>
+    </div>
+</h1>
+

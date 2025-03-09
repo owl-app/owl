@@ -1,0 +1,121 @@
+owl:
+    email:
+        password_reset:
+            hello: Hello
+            reset_your_password: Reset your password
+            subject: Password reset
+            to_reset_your_password: To reset your password - click on the link below
+        user_registration:
+            start_using_system: Start using system
+            subject: User registration
+            welcome_to_our_system: Welcome to our record system!
+            you_have_just_been_registered: You have just been registered. Thank you
+        verification_token:
+            hello: Hello
+            subject: Email address verification
+            to_verify_your_email_address: To verify your email address - click the link below
+            verify_your_email_address: Verify your email address
+        registration_accepted:
+            subject: Account acceptance in the Records system
+            thank_you_for_your_patience: Thank you for your patience
+            you_have_just_been_accepted: Your account has just been approved
+            start_using_system: Start taking full advantage of the capabilities of the Records system
+        registration_rejected:
+            subject: Rejection of registration in the Records system
+            thank_you_for_your_patience: Thank you for your patience
+            your_registration_to_email_address: Your e-mail registration
+            in_system_has_unfortunately_been_rejected: was unfortunately rejected in the Records system
+            reason_for_rejection: Reason for rejection
+        user_new_registration:
+            subject: New user registration
+            desc: New user registration
+        new_suggestion:
+            subject: New suggestion in the system
+            desc: New suggestion in the system
+
+    menu:
+        admin:
+            main:
+                suggestion:
+                    header: Suggestion
+                mailbox:
+                    header: Mailboxes
+                notification:
+                    header: Notifications
+                catalog:
+                    attributes: Attributes
+                    header: Catalog
+                configuration:
+                    users: Users
+                    settings: Settings
+                    header: Configuration
+                    locales: Locales
+                permission:
+                    header: Permissions
+                    available: Available
+                    roles: Roles
+                stats:
+                    header: Stats
+    ui:
+        permission:
+            availables_roles: Available roles in the system
+            rbac_permission_availables: Permissions - accesses
+            list_permission_availables_in_system: List of accesses in the system
+            add_permission_to_system: Adding permissions to the system
+            remove_permission_to_system: Removing permission from the system
+            rbac_permission_role: Permissions - roles
+            list_roles: Role list
+            create_role: New role
+            update_role: Edit role
+            delete_role: Delete role
+            list_permission_assigned_to_role: List permissions assigned to the role
+            add_permission_to_role: Adding permission to role
+            revoke_permission_to_role: Remove role permission
+            user: Users
+            list_users: List users
+            show_user: Details user
+            create_user: New user
+            update_user: Edit user
+            bulk_delete_user: Bulk delete user
+            show_history_route: History route
+            list_permissions_assign_to_user: List permissions assigned to user
+            assign_permission_to_user: Assigning permissions to user
+            revoke_permission_to_user: Remove user permission
+            locale: Locale
+            list_locales: List locales
+            create_locale: New locale
+            update_locale: Edit locale
+            suggestion: Suggestion
+            list_suggestions: List suggestions
+            create_suggestion: New suggestion
+            update_suggestion: Edit suggestion
+            delete_suggestion: Delete suggestion
+            show_suggestions: Show suggestion
+            bulk_delete_suggestion: Delete multiple suggestions
+            change_status_suggestion: Suggestion status change
+            history_status_suggestion: Suggestion status history
+            create_file: Add file
+            update_file: Edit file
+            delete_file: Delete file
+            change_status: Change status
+            list_category: List categories
+            create_category: New category
+            update_category: Edit category
+            delete_category: Delete category
+            notification: Notifications
+            update_notification: Edit notification
+            delete_notification: Delete notification
+            show_notification: Details notification
+            details_to_accept_notification: Details - acceptance of the message
+            list_notifications: List notifications
+            create_notification: New notification
+            show_notification_accepted: Message acceptance list
+            system_setting: System settings
+            edit_system_settings: Edit system settings
+            registration: Registration
+            reject_registration: Reject registration
+            accept_registration: Accept registration 
+
+
+
+

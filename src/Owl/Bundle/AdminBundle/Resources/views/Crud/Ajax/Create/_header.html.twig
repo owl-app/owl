@@ -1,0 +1,3 @@
+{% include configuration.vars.templates.header_title|default('@OwlAdmin/Crud/Create/_headerTitle.html.twig') %}
+
+{{ sylius_template_event([event_prefix ~ '.header', 'sylius.admin.create.header'], {'metadata': metadata, 'resource': resource|default({})}) }}

@@ -1,0 +1,31 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% if 'create' in app.request.attributes.get('_route') %}
+    {% set action = 'create' %}
+{% else %}
+    {% set action = 'update' %}
+{% endif %}
+
+{% block list %}
+<div class="ui top attached tabular menu owl-tabular-show">
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+</div>
+{% for item in item.children %}
+    {% include item.attribute('template') with {'action' : action, 'model': options.model} %}
+{% endfor %}
+
+{% endblock %}
+
+{% block item %}
+    {%- set attributes = item.attributes %}
+    {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+    {%- if item.actsLikeFirst %}
+        {%- set classes = classes|merge(['active']) %}
+    {%- endif %}
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+    <a class="item{% if attributes.class is defined %} {{ attributes.class }}{% endif %}" data-tab="{{ item.name }}">{{ item.label|trans }}</a>
+{% endblock %}

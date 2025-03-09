@@ -1,0 +1,20 @@
+owl_admin_setting_index:
+    path: /settings
+    methods: [GET, POST]
+    defaults:
+        _controller: owl.controller.action.setting.section
+        _sylius:
+            section: system
+            template: "@OwlAdmin/Setting/System/index.html.twig"
+            form:
+                type: Owl\Bundle\CoreBundle\Form\Type\SystemSettingType
+            vars:
+                setting_section: system
+                referer: true
+                header: owl.ui.system_settings
+                subheader: owl.ui.manage_settings_available_in_system
+                form:
+                    ajax: true
+                permission:
+                    group: system_setting
+                    description: owl.ui.permission.edit_system_settings

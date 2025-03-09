@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+parameters:
+    owl.uploader.filesystem: owl_file
+    owl_file.file_path: 'files'
+    owl_file.file_dir: "%kernel.project_dir%/public/%owl_file.file_path%"

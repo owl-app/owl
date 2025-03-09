@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="owl.form_registry.elasticsearch_grid_filter" class="Sylius\Bundle\GridBundle\Form\Registry\FormTypeRegistry" public="false" />
+
+        <service id="Owl\Bridge\SyliusGrid\Filter\StringFilter">
+            <tag name="owl.elasticsearch_grid_filter" type="string" form-type="Owl\Bundle\GridBundle\Form\Type\Filter\StringFilterType" />
+        </service>
+        <service id="sylius.grid_filter.string" alias="Owl\Bridge\SyliusGrid\Filter\StringFilter" />
+
+        <service id="Owl\Bridge\SyliusGrid\Filter\BooleanFilter">
+            <tag name="owl.elasticsearch_grid_filter" type="boolean" form-type="Owl\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType" />
+        </service>
+        <service id="sylius.grid_filter.boolean" alias="Owl\Bridge\SyliusGrid\Filter\StringFilter" />
+
+        <service id="Owl\Bridge\SyliusGrid\Filter\EntityFilter">
+            <tag name="owl.elasticsearch_grid_filter" type="entity" form-type="Owl\Bundle\GridBundle\Form\Type\Filter\EntityFilterType" />
+        </service>
+        <service id="sylius.grid_filter.boolean" alias="Owl\Bridge\SyliusGrid\Filter\StringFilter" />
+
+        <service id="Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType">
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.grid_filter.string" alias="Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType" />
+
+        <service id="Sylius\Component\Grid\Filter\BooleanFilter">
+            <tag name="sylius.grid_filter" type="boolean" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType" />
+        </service>
+        <service id="sylius.grid_filter.boolean" alias="Sylius\Component\Grid\Filter\BooleanFilter" />
+
+        <service id="Sylius\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType">
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.grid_filter.boolean" alias="Sylius\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType" />
+
+        <service id="Sylius\Component\Grid\Filter\DateFilter">
+            <tag name="sylius.grid_filter" type="date" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\DateFilterType" />
+        </service>
+        <service id="sylius.grid_filter.date" alias="Sylius\Component\Grid\Filter\DateFilter" />
+
+        <service id="Sylius\Bundle\GridBundle\Form\Type\Filter\DateFilterType">
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.grid_filter.date" alias="Sylius\Bundle\GridBundle\Form\Type\Filter\DateFilterType" />
+
+        <service id="Sylius\Component\Grid\Filter\EntityFilter">
+            <tag name="sylius.grid_filter" type="entity" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\EntityFilterType" />
+        </service>
+        <service id="sylius.grid_filter.entity" alias="Sylius\Component\Grid\Filter\EntityFilter" />
+
+        <service id="Sylius\Bundle\GridBundle\Form\Type\Filter\EntityFilterType">
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.grid_filter.entity" alias="Sylius\Bundle\GridBundle\Form\Type\Filter\EntityFilterType" />
+
+        <service id="Sylius\Component\Grid\Filter\ExistsFilter">
+            <tag name="sylius.grid_filter" type="exists" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\ExistsFilterType" />
+        </service>
+        <service id="sylius.grid_filter.exists" alias="Sylius\Component\Grid\Filter\ExistsFilter" />
+
+        <service id="Sylius\Bundle\GridBundle\Form\Type\Filter\ExistsFilterType">
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.grid_filter.exists" alias="Sylius\Bundle\GridBundle\Form\Type\Filter\ExistsFilterType" />
+
+        <service id="Sylius\Component\Grid\Filter\NumericRangeFilter">
+            <tag name="sylius.grid_filter" type="numeric_range" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\NumericRangeFilterType" />
+        </service>
+        <service id="sylius.grid_filter.numeric_range" alias="Sylius\Component\Grid\Filter\NumericRangeFilter" />
+
+        <service id="Sylius\Bundle\GridBundle\Form\Type\Filter\NumericRangeFilterType">
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.grid_filter.numeric_range" alias="Sylius\Bundle\GridBundle\Form\Type\Filter\NumericRangeFilterType" />
+
+        <service id="Sylius\Component\Grid\Filter\SelectFilter">
+            <tag name="sylius.grid_filter" type="select" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\SelectFilterType" />
+        </service>
+        <service id="sylius.grid_filter.select" alias="Sylius\Component\Grid\Filter\SelectFilter" />
+
+        <service id="Sylius\Bundle\GridBundle\Form\Type\Filter\SelectFilterType">
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.grid_filter.select" alias="Sylius\Bundle\GridBundle\Form\Type\Filter\SelectFilterType" />
+    </services>
+</container>

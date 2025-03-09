@@ -1,0 +1,13 @@
+{% import '@OwlUi/Macro/labels.html.twig' as label %}
+
+{% if files|length %}
+<div class="ui message" style="background: rgba(26, 187, 156, 0.1);">
+    <div class="header">
+        {{ 'owl.ui.files'|trans }}
+    </div>
+    <br />
+    {% for file in files %}
+        {{ label.file(file.name , file.path, ) }}
+    {% endfor %}
+</div>
+{% endif %}

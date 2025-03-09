@@ -1,0 +1,20 @@
+owl:
+    rbac:
+        permission:
+            add_success: Dostęp został pomyślnie dodany
+            remove_success: Dostęp został pomyślnie usunięty
+
+sylius:
+    resource:
+        create: Pozycja został pomyślnie utworzona.
+        update: Pozycja został pomyślnie uaktualniona.
+        delete: Pozycja został pomyślnie usunięta.
+        move: Pozycja został pomyślnie przeniesiona.
+        generate: Pozycje zostały pomyślnie wygenerowane.
+        revert: Pozycja został pomyślnie przywrócona.
+        restore_deleted: Pozycja został pomyślnie odzyskana.
+        enable: Pozycja został pomyślnie włączona.
+        disable: Pozycja został pomyślnie wyłączona.
+        delete_error: Nie można usunąć pozycji jest w użyciu.
+        race_condition_error: Nie można uaktualnić, pozycja został już wcześniej zmodyfikowana.
+        something_went_wrong_error: Coś poszło nie tak, spróbuj ponownie.

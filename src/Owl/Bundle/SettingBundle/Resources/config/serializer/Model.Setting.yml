@@ -1,0 +1,9 @@
+Owl\Component\Setting\Model\Setting:
+    exclusion_policy: ALL
+    xml_root_name: setting
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [AjaxShow]

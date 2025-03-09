@@ -1,0 +1,9 @@
+{% if app.user.avatar is defined and app.user.avatar is not empty and app.user.avatar.path is not empty %}
+    {% set path = app.user.avatar.path %}
+{% endif %}
+
+{% if path is defined %}
+<img style="margin-right: 10px;" class="ui avatar image" src="{{ path }}">
+{% else %}
+<div style="margin-right: 10px;" class="ui avatar empty"><i class="icon user"></i></div>
+{% endif %}

@@ -1,0 +1,33 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block list %}
+<div class="ui pointing menu">
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+</div>
+
+{{ sylius_template_event(['owl.admin.show.tab_'~ options.activeTab ], options.context) }}
+
+{% endblock %}
+
+{% block item %}
+    {%- set attributes = item.attributes %}
+    {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+    {%- if options.activeTab == item.name %}
+        {%- set classes = classes|merge(['active']) %}
+    {%- endif %}
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+
+    {% if item.extras.route is defined %}
+        <a 
+            class="item{% if attributes.class is defined %} {{ attributes.class }}{% endif %}" 
+            data-tab="{{ item.name }}"
+            href="{{ path(item.extras.route.path, item.extras.route.params) }}"
+        >
+            {{ item.label|trans }}
+        </a>
+    {% endif %}
+{% endblock %}

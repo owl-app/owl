@@ -1,0 +1,5 @@
+{% import '@OwlUi/Macro/messages.html.twig' as messages %}
+
+{% if form.vars.valid == false %}
+    {{ messages.error('owl.ui.this_message_contains_errors') }}
+{% endif %}

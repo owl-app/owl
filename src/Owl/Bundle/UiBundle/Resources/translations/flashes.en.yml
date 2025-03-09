@@ -1,0 +1,20 @@
+owl:
+    rbac:
+        permission:
+            add_success: Access has been successfully added
+            remove_success: Access has been successfully removed
+
+sylius:
+    resource:
+        create: The item has been successfully created.
+        update: The item has been successfully upgraded.
+        delete: The item has been successfully deleted.
+        move: The item has been successfully transferred.
+        generate: Items have been successfully generated.
+        revert: The item has been successfully restored.
+        restore_deleted: The item was successfully recovered.
+        enable: The item has been successfully enabled.
+        disable: The item has been successfully disabled.
+        delete_error: Cannot delete, item is in use.
+        race_condition_error: Unable to update, item has already been modified.
+        something_went_wrong_error: Something went wrong, please try again.

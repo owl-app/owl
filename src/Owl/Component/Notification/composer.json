@@ -1,0 +1,42 @@
+{
+    "name": "owl/notification",
+    "type": "library",
+    "description": "PHP component for managing notifications.",
+    "keywords": [
+        "notification",
+        "owl"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Kęska",
+            "homepage": "https://pawelkeska.eu"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "sylius/resource": "^1.7"
+    },
+    "require-dev": {
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Owl\\Component\\Notification\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

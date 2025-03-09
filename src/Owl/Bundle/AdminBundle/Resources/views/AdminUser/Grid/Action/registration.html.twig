@@ -1,0 +1,18 @@
+{% import '@OwlUi/Macro/buttons.html.twig' as buttons %}
+{% import '@OwlAdmin/Macro/status.html.twig' as status %}
+
+{% if (data.registration is not null) %}
+    {% set route = options.link.url|default(options.link.route) %}
+    {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default([]))) %}
+    {% set label = ('owl.ui.registration_' ~ data.registration.status)|trans %}
+
+    {% if is_granted(route) and (data.registration is not null) %}
+        {{ buttons.modal(
+            path, 
+            label, 
+            '', 
+            options.icon, 
+            status.registration(data.registration.status)
+        ) }}
+    {% endif %}
+{% endif %}

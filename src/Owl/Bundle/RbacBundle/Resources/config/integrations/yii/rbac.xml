@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <!-- Manager -->
+        <service id="owl_rbac.manager" class="Yiisoft\Rbac\Manager">
+            <argument type="service" id="owl_rbac.manager.storage_item" />
+            <argument type="service" id="owl_rbac.manager.storage_assignment" />
+            <argument>null</argument>
+            <argument>%owl_rbac.enable_direct_permissions%</argument>
+            <argument>%owl_rbac.include_roles_in_access_checks%</argument>
+        </service>
+        <service id="Yiisoft\Rbac\ManagerInterface" alias="owl_rbac.manager" public="true" />
+
+        <!-- Storage manager -->
+        <service id="owl_rbac.manager.storage_item" class="Yiisoft\Rbac\Doctrine\ItemsStorage">
+            <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument>%owl_rbac.item_table%</argument>
+            <argument>%owl_rbac.item_child_table%</argument>
+        </service>
+        <service id="Yiisoft\Rbac\ItemsStorageInterface" alias="owl_rbac.manager.storage_item" public="true" />
+
+        <service id="owl_rbac.manager.storage_assignment" class="Yiisoft\Rbac\Doctrine\AssignmentsStorage">
+            <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument>%owl_rbac.assignment_table%</argument>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,14 @@
+<div class="ui tab" data-tab="files">
+    <h3 class="ui top attached header">{{ 'owl.ui.files'|trans }}</h3>
+
+    <div class="ui attached segment">
+        <div 
+            class="uploader dropzone" 
+            data-name="notification-files"
+            data-url="{{ path('owl_admin_notification_file_create', { 'notificationId': 'param_id' }) }}" 
+            id="notification-files">
+        </div>
+        <br />
+        {% include '@OwlAdmin/File/_list.html.twig' with {'update_file_route': 'owl_admin_notification_file_update', 'paramSubject': 'notificationId', 'files' : model.files} %}
+    </div>
+</div>

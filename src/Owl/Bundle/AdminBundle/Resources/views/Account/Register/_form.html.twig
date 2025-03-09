@@ -1,0 +1,25 @@
+<h4 class="ui dividing header">{{ 'owl.ui.personal_information'|trans }}</h4>
+<div class="two fields">
+    {{ form_row(form.firstName, sylius_test_form_attribute('first-name')) }}
+    {{ form_row(form.lastName, sylius_test_form_attribute('last-name')) }}
+</div>
+<div class="two fields">
+    {{ form_row(form.phone, sylius_test_form_attribute('phone')) }}
+    {{ form_row(form.email, sylius_test_form_attribute('email')) }}
+</div>
+
+<h4 class="ui dividing header">{{ 'owl.ui.company_inforamtion'|trans }}</h4>
+<div class="fields">
+        {{ form_row(form.registration.company, {row_attr: { wrap_field_classes: 'eleven wide' }} ) }}
+        {{ form_row(form.registration.nip, {row_attr: { wrap_field_classes: 'five wide' }}) }}
+</div>
+<div class="three fields">
+    {{ form_row(form.registration.city, sylius_test_form_attribute('city')) }}
+    {{ form_row(form.registration.street, sylius_test_form_attribute('street')) }}
+    {{ form_row(form.registration.postCode, sylius_test_form_attribute('post-code')) }}
+</div>
+<h4 class="ui dividing header">{{ 'owl.ui.account_credentials'|trans }}</h4>
+<div class="two fields">
+    {{ form_row(form.plainPassword.first, sylius_test_form_attribute('password-first')) }}
+    {{ form_row(form.plainPassword.second, sylius_test_form_attribute('password-second')) }}
+</div>

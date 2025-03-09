@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="owl.controller.action.notification.accept" class="Owl\Bundle\AdminBundle\Controller\Action\AcceptNotificationAction">
+            <argument type="service" id="owl.context.admin_user" />
+            <argument type="service" id="owl.repository.notification_accepted" />
+            <argument type="service" id="owl.factory.notification_accepted" />
+            <argument type="service" id="sylius.resource_controller.request_configuration_factory"/>
+            <argument type="service" id="sylius.resource_controller.view_handler" />
+            <tag name="owl.controller.action" alias="owl.notification" />
+        </service>
+
+    </services>
+</container>

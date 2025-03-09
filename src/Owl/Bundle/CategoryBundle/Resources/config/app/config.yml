@@ -1,0 +1,6 @@
+jms_serializer:
+    metadata:
+        directories:
+            owl-categories:
+                namespace_prefix: "Owl\\Component\\Category"
+                path: "@OwlCategoryBundle/Resources/config/serializer"

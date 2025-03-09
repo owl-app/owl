@@ -1,0 +1,8 @@
+{{ form_row(form.title) }}
+{{ form_row(form.description) }}
+
+<div 
+    class="uploader dropzone" 
+    data-url="{{ path('owl_admin_suggestion_file_create', { 'suggestionId': 'param_id' }) }}" 
+    id="suggestion-files">
+</div>

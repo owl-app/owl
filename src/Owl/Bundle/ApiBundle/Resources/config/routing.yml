@@ -1,0 +1,12 @@
+owl_api:
+    resource: .
+    type: api_platform
+    prefix: /
+
+api_doc:
+    path: /docs
+    controller: api_platform.swagger_ui.action
+
+owl_api_admin_authentication_token:
+    path: /authentication-token
+    methods: ['POST']

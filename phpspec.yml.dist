@@ -1,0 +1,10 @@
+suites:
+    # Attribute: { namespace: Owl\Component\Attribute, psr4_prefix: Owl\Component\Attribute, spec_path: src/Owl/Component/Attribute, src_path: src/Owl/Component/Attribute }
+    Category: { namespace: Owl\Component\Category, psr4_prefix: Owl\Component\Category, spec_path: src/Owl/Component/Category, src_path: src/Owl/Component/Category }
+
+    CategoryBundle: { namespace: Owl\Bundle\CategoryBundle, psr4_prefix: Owl\Bundle\CategoryBundle, spec_path: src/Owl/Bundle/CategoryBundle, src_path: src/Owl/Bundle/CategoryBundle }
+    AdminBundle: { namespace: Owl\Bundle\AdminBundle, psr4_prefix: Owl\Bundle\AdminBundle, spec_path: src/Owl/Bundle/AdminBundle, src_path: src/Owl/Bundle/AdminBundle }
+    CoreBundle: { namespace: Owl\Bundle\CoreBundle, psr4_prefix: Owl\Bundle\CoreBundle, spec_path: src/Owl/Bundle/CoreBundle, src_path: src/Owl/Bundle/CoreBundle }
+    # Behat: { namespace: Owl\Behat, psr4_prefix: Sylius\Behat, spec_path: src/Owl/Behat, src_path: src/Owl/Behat }
+
+    SyliusResource: { namespace: Owl\Bridge\SyliusResource, psr4_prefix: Owl\Bridge\SyliusResource, spec_path: src/Owl/Bridge/SyliusResource, src_path: src/Owl/Bridge/SyliusResource }

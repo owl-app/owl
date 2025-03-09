@@ -1,0 +1,115 @@
+version: '3.4'
+
+services:
+  php:
+    container_name: php
+    build:
+      context: .
+      target: owl_php_dev
+    depends_on:
+      - migrations
+    environment:
+      - APP_ENV=dev
+      - APP_DEBUG=1
+      - APP_SECRET=EDITME
+      - DATABASE_URL=mysql://owl_user:${MYSQL_PASSWORD:-nopassword}@mysql/owl
+      - MAILER_DSN=smtp://mailhog:1025
+      - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
+    volumes:
+      - .:/srv/owl:rw,cached
+      # if you develop on Linux, you may use a bind-mounted host directory instead
+      # - ./var:/srv/owl/var:rw
+      - ./public:/srv/owl/public:rw,delegated
+
+  migrations:
+    container_name: migrations
+    build:
+      context: .
+      target: owl_migrations_dev
+    depends_on:
+      - mysql
+    environment:
+      - APP_ENV=dev
+      - APP_DEBUG=1
+      - APP_SECRET=EDITME
+      - DATABASE_URL=mysql://owl_user:${MYSQL_PASSWORD:-nopassword}@mysql/owl
+      - LOAD_FIXTURES=1
+      - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.7 # Sylius is fully working on mysql 8.0 version
+    platform: linux/amd64
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-nopassword}
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_DATABASE=owl
+      - MYSQL_USER=owl_user
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-nopassword}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    volumes:
+      - mysql-data:/var/lib/mysql:rw
+      # you may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/mysql/data:/var/lib/mysql:rw,delegated
+    ports:
+      - "${MYSQL_PORT:-3310}:3306"
+    cap_add:
+      - SYS_NICE # prevent "mbind: Operation not permitted" errors
+
+  node:
+    container_name: node
+    build:
+      context: .
+      target: owl_node
+    command: ["yarn", "watch"]
+    depends_on:
+      - php
+    environment:
+      - GULP_ENV=dev
+      - PHP_HOST=php
+      - PHP_PORT=9000
+    volumes:
+      - .:/srv/owl:rw,cached
+      - ./public:/srv/owl/public:rw,delegated
+    ports:
+      - "${NODE_PORT:-35729}:35729"
+
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      target: owl_nginx
+    depends_on:
+      - php
+      - node
+    volumes:
+      - ./public:/srv/owl/public:ro
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+
+  mailhog:
+    # do not use in production!
+    image: mailhog/mailhog:latest
+    environment:
+      - MH_STORAGE=maildir
+    # volumes:
+    #   - ./docker/mailhog/maildir:/maildir:rw,delegated
+    ports:
+      - "${MAILHOG_PORT:-8025}:8025"
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    ports:
+      - 8088:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+
+volumes:
+  mysql-data:

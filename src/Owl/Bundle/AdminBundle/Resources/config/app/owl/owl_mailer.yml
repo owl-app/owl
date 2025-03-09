@@ -1,0 +1,20 @@
+sylius_mailer:
+    sender:
+        name: System
+        address: owl@owl.com
+    emails:
+        reset_password_token:
+            subject: owl.emails.user.password_reset.subject
+            template: "@OwlAdmin/Email/passwordReset.html.twig"
+        user_registration:
+            subject: owl.emails.user_registration.subject
+            template: "@OwlAdmin/Email/userRegistration.html.twig"
+        verification_token:
+            subject: owl.emails.user.verification_token.subject
+            template: "@OwlAdmin/Email/verification.html.twig"
+        registration_accepted:
+            subject: owl.emails.user.registration_accepted.subject
+            template: "@OwlAdmin/Email/registrationAccepted.html.twig"
+        registration_rejected:
+            subject: owl.emails.user.registration_rejected.subject
+            template: "@OwlAdmin/Email/registrationRejected.html.twig"

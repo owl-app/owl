@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+owl_user:
+    resources:
+        admin:
+            user:
+                classes:
+                    model: Owl\Component\Core\Model\AdminUser
+                    controller: Owl\Bundle\CoreBundle\Controller\UserController
+                    interface: Owl\Component\Core\Model\AdminUserInterface
+                    repository: Owl\Bundle\CoreBundle\Doctrine\ORM\AdminUserRepository
+                    form: Owl\Bundle\CoreBundle\Form\Type\User\AdminUserType

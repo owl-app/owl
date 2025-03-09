@@ -1,0 +1,8 @@
+{% import '@OwlUi/Macro/buttons.html.twig' as buttons %}
+
+{% set route = options.link.route|default(grid.requestConfiguration.getRouteName('bulk_delete')) %}
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('bulk_delete')), options.link.parameters|default({}))) %}
+
+{% if is_granted(route) %}
+    {{ buttons.bulkDelete(path, action.label, true) }}
+{% endif %}

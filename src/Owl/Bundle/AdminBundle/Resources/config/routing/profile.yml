@@ -1,0 +1,21 @@
+owl_admin_profile_update:
+    path: /profile
+    methods: [GET, PUT]
+    defaults:
+        _controller: owl.controller.admin_user::updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/Account/profileUpdate.html.twig"
+            form: Owl\Bundle\CoreBundle\Form\Type\User\UserUpdateProfileType
+            repository:
+                method: find
+                arguments:
+                    - "expr:service('owl.context.admin_user').getUser()"
+            vars:
+                referer: true
+                form:
+                    ajax: true
+                permission:
+                    group: user
+                    description: owl.ui.permission.profile_user

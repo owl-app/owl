@@ -1,0 +1,219 @@
+name: 'Packages Split'
+
+on:
+    push:
+        branches:
+            - main
+        tags:
+            - '*'
+
+env:
+    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+jobs:
+    bundles_list:
+        runs-on: ubuntu-latest
+
+        name: "Create list of bundles"
+
+        steps:
+            -
+                uses: actions/checkout@v3
+
+            -
+                name: "Provide the list bundles"
+                id: create-list-bundles
+                run: echo "::set-output name=packages::$(find src/Owl/Bundle -mindepth 1 -maxdepth 2 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Owl\/Bundle\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c .)"
+
+        outputs:
+            packages: "${{ steps.create-list-bundles.outputs.packages }}"
+
+    components_list:
+        runs-on: ubuntu-latest
+
+        name: "Create list of components"
+
+        steps:
+            -
+                uses: actions/checkout@v3
+
+            -
+                name: "Provide the list components"
+                id: create-list-components
+                run: echo "::set-output name=packages::$(find src/Owl/Component -mindepth 1 -maxdepth 2 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Owl\/Component\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c .)"
+
+        outputs:
+            packages: "${{ steps.create-list-components.outputs.packages }}"
+
+    bridges_list:
+        runs-on: ubuntu-latest
+
+        name: "Create list of bridges"
+
+        steps:
+            -
+                uses: actions/checkout@v3
+
+            -
+                name: "Provide the list bridges"
+                id: create-list-bridges
+                run: echo "::set-output name=packages::$(find src/Owl/Bridge -mindepth 1 -maxdepth 2 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Owl\/Bridge\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c .)"
+
+        outputs:
+            packages: "${{ steps.create-list-bridges.outputs.packages }}"
+
+    split_monorepo_bundles:
+        needs: bundles_list
+
+        name: Split bundle ${{ matrix.package }}
+
+        runs-on: ${{ matrix.os }}
+                
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ ubuntu-latest ]
+                package: "${{ fromJson(needs.bundles_list.outputs.packages) }}"
+
+        steps:
+            - uses: actions/checkout@v3
+
+            -
+                name: "Provide name repository"
+                id: name-repository
+                run: echo "::set-output name=repo::$(echo ${{ matrix.package }} | sed 's/.*/\l&/' | sed 's/\([A-Z]\)/-\l&/g')"
+
+            # no tag
+            - 
+                if: "!startsWith(github.ref, 'refs/tags/')"
+                name: Monorepo Split of ${{ steps.name-repository.outputs.repo }}
+                uses: "symplify/monorepo-split-github-action@v2.3.0"
+                env:
+                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                with:
+                    branch: "main"
+                    package_directory: 'src/Owl/Bundle/${{ matrix.package }}'
+                    repository_organization: 'owl-app'
+                    repository_name: '${{ steps.name-repository.outputs.repo }}'
+                    user_name: "owl-app"
+                    user_email: "owl@pawelkeska.eu"
+
+            # with tag
+            - 
+                if: "startsWith(github.ref, 'refs/tags/')"
+                name: Monorepo Tagged Split of ${{ steps.name-repository.outputs.repo }}
+                uses: "symplify/monorepo-split-github-action@v2.3.0"
+                env:
+                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                with:
+                    tag: ${GITHUB_REF#refs/tags/}
+                    branch: "main"
+                    package_directory: 'src/Owl/Bundle/${{ matrix.package }}'
+                    repository_organization: 'owl-app'
+                    repository_name: '${{ steps.name-repository.outputs.repo }}'
+                    user_name: "owl-app"
+                    user_email: "owl@pawelkeska.eu"
+
+    split_monorepo_bridges:
+        needs: bridges_list
+
+        name: Split bridge ${{ matrix.package }}
+
+        runs-on: ${{ matrix.os }}
+
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ ubuntu-latest ]
+                package: "${{ fromJson(needs.bridges_list.outputs.packages) }}"
+
+        steps:
+            - uses: actions/checkout@v3
+
+            -
+                name: "Provide name repository"
+                id: name-repository
+                run: echo "::set-output name=repo::$(echo ${{ matrix.package }}-bridge | sed 's/.*/\l&/' | sed 's/\([A-Z]\)/-\l&/g')"
+
+            # no tag
+            - 
+                if: "!startsWith(github.ref, 'refs/tags/')"
+                name: Monorepo Split of ${{ steps.name-repository.outputs.repo }}
+                uses: "symplify/monorepo-split-github-action@v2.3.0"
+                env:
+                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                with:
+                    branch: "main"
+                    package_directory: 'src/Owl/Bridge/${{ matrix.package }}'
+                    repository_organization: 'owl-app'
+                    repository_name: '${{ steps.name-repository.outputs.repo }}'
+                    user_name: "owl-app"
+                    user_email: "owl@pawelkeska.eu"
+
+            # with tag
+            - 
+                if: "startsWith(github.ref, 'refs/tags/')"
+                name: Monorepo Tagged Split of ${{ steps.name-repository.outputs.repo }}
+                uses: "symplify/monorepo-split-github-action@v2.3.0"
+                env:
+                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                with:
+                    tag: ${GITHUB_REF#refs/tags/}
+                    branch: "main"
+                    package_directory: 'src/Owl/Bridge/${{ matrix.package }}'
+                    repository_organization: 'owl-app'
+                    repository_name: '${{ steps.name-repository.outputs.repo }}'
+                    user_name: "owl-app"
+                    user_email: "owl@pawelkeska.eu"
+
+    split_monorepo_components:
+        needs: components_list
+
+        name: Split component ${{ matrix.package }}
+
+        runs-on: ${{ matrix.os }}
+                
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ ubuntu-latest ]
+                package: "${{ fromJson(needs.components_list.outputs.packages) }}"
+
+        steps:
+            - uses: actions/checkout@v3
+
+            -
+                name: "Provide name repository"
+                id: name-repository
+                run: echo "::set-output name=repo::$(echo ${{ matrix.package }} | sed 's/.*/\l&/' | sed 's/\([A-Z]\)/-\l&/g')"
+
+            # no tag
+            - 
+                if: "!startsWith(github.ref, 'refs/tags/')"
+                name: Monorepo Split of ${{ steps.name-repository.outputs.repo }}
+                uses: "symplify/monorepo-split-github-action@v2.3.0"
+                env:
+                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                with:
+                    branch: "main"
+                    package_directory: 'src/Owl/Component/${{ matrix.package }}'
+                    repository_organization: 'owl-app'
+                    repository_name: '${{ steps.name-repository.outputs.repo }}'
+                    user_name: "owl-app"
+                    user_email: "owl@pawelkeska.eu"
+
+            # with tag
+            - 
+                if: "startsWith(github.ref, 'refs/tags/')"
+                name: Monorepo Tagged Split of ${{ steps.name-repository.outputs.repo }}
+                uses: "symplify/monorepo-split-github-action@v2.3.0"
+                env:
+                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                with:
+                    tag: ${GITHUB_REF#refs/tags/}
+                    branch: "main"
+                    package_directory: 'src/Owl/Component/${{ matrix.package }}'
+                    repository_organization: 'owl-app'
+                    repository_name: '${{ steps.name-repository.outputs.repo }}'
+                    user_name: "owl-app"
+                    user_email: "owl@pawelkeska.eu"

@@ -1,0 +1,45 @@
+owl_admin_partial_admin_user_accept_registration:
+    path: /accept-registration/{id}
+    methods: [GET,PUT]
+    defaults:
+        _controller: owl.controller.admin_user_registration_data::updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/AdminUser/Registration/_accept_registration_form.html.twig"
+            form: Owl\Bundle\CoreBundle\Form\Type\AcceptRegistrationType
+            event: change_status_registration
+            state_machine:
+                graph: owl_admin_user_registration
+                transition: accept
+            vars:
+                form:
+                    ajax: true
+                serialization_groups: [AjaxShow]
+                permission:
+                    group: user
+                    description: owl.ui.permission.accept_registration
+
+owl_admin_partial_admin_user_reject_registration:
+    path: /reject-registration/{id}
+    methods: [GET,PUT]
+    defaults:
+        _controller: owl.controller.admin_user_registration_data::updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/AdminUser/Registration/_reject_registration_form.html.twig"
+            form: Owl\Bundle\CoreBundle\Form\Type\RejectRegistrationType
+            event: change_status_registration
+            state_machine:
+                graph: owl_admin_user_registration
+                transition: reject
+            vars:
+                form:
+                    ajax: true
+                serialization_groups: [AjaxShow]
+                permission:
+                    group: user
+                    description: owl.ui.permission.reject_registration
+            
+

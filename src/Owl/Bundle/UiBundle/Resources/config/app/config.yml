@@ -1,0 +1,40 @@
+sylius_grid:
+    templates:
+        action:
+            default: "@OwlUi/Grid/Action/default.html.twig"
+            create: "@OwlUi/Grid/Action/create.html.twig"
+            delete: "@OwlUi/Grid/Action/delete.html.twig"
+            show: "@OwlUi/Grid/Action/show.html.twig"
+            update: "@OwlUi/Grid/Action/update.html.twig"
+            apply_transition: "@OwlUi/Grid/Action/applyTransition.html.twig"
+            links: "@OwlUi/Grid/Action/links.html.twig"
+            archive: "@OwlUi/Grid/Action/archive.html.twig"
+            link: "@OwlUi/Grid/Action/link.html.twig"
+            modal: "@OwlUi/Grid/Action/modal.html.twig"
+            custom: "@OwlUi/Grid/Action/custom.html.twig"
+        filter:
+            string: "@OwlUi/Grid/Filter/string.html.twig"
+            boolean: "@OwlUi/Grid/Filter/boolean.html.twig"
+            date: "@OwlUi/Grid/Filter/date.html.twig"
+            datetime: "@OwlUi/Grid/Filter/date.html.twig"
+            entity: "@OwlUi/Grid/Filter/entity.html.twig"
+            money: "@OwlUi/Grid/Filter/money.html.twig"
+            exists: "@OwlUi/Grid/Filter/exists.html.twig"
+            select: "@OwlUi/Grid/Filter/select.html.twig"
+        bulk_action:
+            delete: "@OwlUi/Grid/BulkAction/delete.html.twig"
+            default: "@OwlUi/Grid/BulkAction/default.html.twig"
+            modal: "@OwlUi/Grid/BulkAction/modal.html.twig"
+
+owl_grid:
+    templates:
+        elasticsearch:
+            filter:
+                string: "@OwlUi/Grid/Filter/string.html.twig"
+                boolean: "@OwlUi/Grid/Filter/boolean.html.twig"
+                date: "@OwlUi/Grid/Filter/date.html.twig"
+                datetime: "@OwlUi/Grid/Filter/date.html.twig"
+                entity: "@OwlUi/Grid/Filter/entity.html.twig"
+                money: "@OwlUi/Grid/Filter/money.html.twig"
+                exists: "@OwlUi/Grid/Filter/exists.html.twig"
+                select: "@OwlUi/Grid/Filter/select.html.twig"

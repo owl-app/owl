@@ -1,0 +1,8 @@
+<div class="top-mailboxes">
+    {% if app.user.mailboxes is not null and app.user.mailboxes|length > 0 %}
+        <h4>Skrzynki pocztowe:</h4>
+        {% for mailbox in app.user.mailboxes %}
+            <a href="" class="ui olive button tiny button-mailbox">{{ mailbox.name }}</a>
+        {% endfor %}
+    {% endif %}
+</div>

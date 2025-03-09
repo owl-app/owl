@@ -1,0 +1,11 @@
+{% set tab = configuration.vars.tab|default('details') %}
+
+<div class="ui pointing menu">
+  <a class="{% if tab == 'details' %}active {% endif %}item" href="{{ path('owl_admin_notification_show_details', {'id': notification.id}) }}">
+    {{ 'owl.ui.details'|trans }}
+  </a>
+  <a class="{% if tab == 'confirmation_history' %}active {% endif %}item" href="{{ path('owl_admin_notification_show_accepted_index', {'id': notification.id}) }}">
+    {{ 'owl.ui.confirmation_history'|trans }}
+  </a>
+</div>
+{{ sylius_template_event(['owl.admin.notification.show.tab_'~ tab ], _context) }}
