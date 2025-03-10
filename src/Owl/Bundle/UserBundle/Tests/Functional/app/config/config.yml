@@ -61,7 +61,7 @@ security:
             form_login:
                 provider: sylius_admin_user_provider
                 login_path: sylius_admin_login
-                check_path: sylius_admin_login_check
+                check_path: owl_admin_login_check
                 failure_path: sylius_admin_login
                 default_target_path: owl_admin_dashboard
                 use_forward: false

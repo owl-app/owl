@@ -25,5 +25,5 @@ import './scripts/bootstrap';
 import './images/404.svg';
 import './images/loader.svg';
 import './images/no_data.svg';
-import './images/sylius-logo.svg';
-import './images/sylius-logo-dark-text.png';
+import './images/logo.jpg';
+import './images/admin-logo.jpg';

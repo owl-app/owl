@@ -5,5 +5,5 @@
 {% block body_class %}d-flex flex-column{% endblock %}
 
 {% block body %}
-    {% hook 'sylius_admin.security.login' with { form, last_error, last_username } %}
+    {% hook 'owl_admin.security.login' with { form, last_error, last_username } %}
 {% endblock %}

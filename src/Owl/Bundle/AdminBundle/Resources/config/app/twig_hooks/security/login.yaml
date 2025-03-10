@@ -1,0 +1,65 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.security.login':
+            page:
+                template: '@OwlAdmin/security/common/page.html.twig'
+                priority: 0
+
+        'owl_admin.security.login.page':
+            logo:
+                template: '@OwlAdmin/security/common/logo.html.twig'
+                priority: 100
+            content:
+                template: '@OwlAdmin/security/common/content.html.twig'
+                priority: 0
+
+        'owl_admin.security.login.page.logo':
+            image:
+                template: '@OwlAdmin/security/common/logo/image.html.twig'
+                priority: 0
+
+        'owl_admin.security.login.page.content':
+            flashes:
+                template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 100
+            form:
+                template: '@OwlAdmin/security/login/page/content/form.html.twig'
+                priority: 0
+
+        'owl_admin.security.login.page.content.form':
+            error:
+                template: '@OwlAdmin/security/login/page/content/form/error.html.twig'
+                priority: 500
+            username:
+                template: '@OwlAdmin/security/login/page/content/form/username.html.twig'
+                priority: 400
+            password:
+                template: '@OwlAdmin/security/login/page/content/form/password.html.twig'
+                priority: 300
+            options:
+                template: '@OwlAdmin/security/login/page/content/form/options.html.twig'
+                priority: 200
+            submit:
+                template: '@OwlAdmin/security/login/page/content/form/submit.html.twig'
+                priority: 100
+
+        'owl_admin.security.login.page.content.form.options':
+            left:
+                template: '@OwlAdmin/security/login/page/content/form/options/left.html.twig'
+                priority: 100
+            right:
+                template: '@OwlAdmin/security/login/page/content/form/options/right.html.twig'
+                priority: 0
+
+        'owl_admin.security.login.page.content.form.options.left':
+            remember_me:
+                template: '@OwlAdmin/security/login/page/content/form/options/left/remember_me.html.twig'
+                priority: 0
+
+        'owl_admin.security.login.page.content.form.options.right':
+            forgot_password:
+                template: '@OwlAdmin/security/login/page/content/form/options/right/forgot_password.html.twig'
+                priority: 100
+            register:
+                template: '@OwlAdmin/security/login/page/content/form/options/right/register.html.twig'
+                priority: 0
