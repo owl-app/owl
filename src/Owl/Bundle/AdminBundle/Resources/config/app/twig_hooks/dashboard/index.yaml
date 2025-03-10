@@ -1,0 +1,50 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.dashboard.index':
+            sidebar:
+                template: '@OwlAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
+            navbar:
+                template: '@OwlAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
+            content:
+                template: '@OwlAdmin/shared/crud/common/content.html.twig'
+                priority: 0
+
+        'owl_admin.dashboard.index.content':
+            header:
+                template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
+                priority: 200
+            grid:
+                enabled: false
+            # latest_statistics:
+            #     template: '@OwlAdmin/dashboard/index/content/latest_statistics.html.twig'
+            #     priority: 0
+
+        'owl_admin.dashboard.index.content.header':
+            breadcrumbs:
+                enabled: false
+            title_block:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block.html.twig'
+                priority: 0
+
+        'owl_admin.dashboard.index.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: owl.ui.dashboard
+                    owl_test_html_attribute: 'dashboard-header'
+                priority: 0
+
+        'sylius_admin.dashboard.index.content.latest_statistics':
+            new_customers:
+                component: 'sylius_admin:dashboard:new_customers'
+                props:
+                    template: '@SyliusAdmin/dashboard/index/component/new_customers.html.twig'
+                priority: 100
+            new_orders:
+                component: 'sylius_admin:dashboard:new_orders'
+                props:
+                    channelCode: '@=_context.channel_code'
+                    template: '@SyliusAdmin/dashboard/index/component/new_orders.html.twig'
+                priority: 0

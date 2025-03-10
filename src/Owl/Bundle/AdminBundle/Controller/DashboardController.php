@@ -28,7 +28,7 @@ final class DashboardController
     {
         $settings = $this->settingStorage->getBySectionAndKeys('system', ['description_dashboard']);
 
-        return new Response($this->templatingEngine->render('@OwlAdmin/Dashboard/index.html.twig', [
+        return new Response($this->templatingEngine->render('@OwlAdmin/dashboard/index.html.twig', [
             'settings' => $settings,
         ]));
     }

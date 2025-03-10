@@ -8,6 +8,12 @@ sylius_twig_hooks:
         'owl_admin.security.login.page':
             logo:
                 template: '@OwlAdmin/security/common/logo.html.twig'
+                priority: 300
+            langs:
+                template: '@OwlAdmin/security/common/langs.html.twig'
+                priority: 200
+            description:
+                template: '@OwlAdmin/security/common/description.html.twig'
                 priority: 100
             content:
                 template: '@OwlAdmin/security/common/content.html.twig'

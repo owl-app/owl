@@ -1,0 +1,10 @@
+{% extends '@OwlAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}
+    {{ 'owl.ui.dashboard'|trans }} {{ parent() }}
+{% endblock %}
+
+{% block body %}
+test
+    {% hook ['owl_admin.dashboard.index'] with { description: settings.description_dashboard|default('')|raw } %}
+{% endblock %}

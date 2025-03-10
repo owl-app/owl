@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 final class MainMenuBuilder
 {
-    public const EVENT_NAME = 'sylius.menu.admin.main';
+    public const EVENT_NAME = 'owl_admin.main';
 
     /** @var AuthorizationChecker */
     public $authorizationChecker;
