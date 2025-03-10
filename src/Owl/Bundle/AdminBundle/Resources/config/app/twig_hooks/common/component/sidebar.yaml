@@ -1,11 +1,14 @@
 sylius_twig_hooks:
     hooks:
         'owl_admin.common.component.sidebar':
+            toggle_button:
+                template: '@OwlAdmin/shared/crud/common/sidebar/toggle_button.html.twig'
+                priority: 300
             logo:
                 template: '@OwlAdmin/shared/crud/common/sidebar/logo.html.twig'
                 priority: 200
-            toggle_button:
-                template: '@OwlAdmin/shared/crud/common/sidebar/toggle_button.html.twig'
+            menu_vanbar:
+                template: '@OwlAdmin/shared/crud/common/sidebar/menu_navbar.html.twig'
                 priority: 100
             menu:
                 template: '@OwlAdmin/shared/crud/common/sidebar/menu.html.twig'

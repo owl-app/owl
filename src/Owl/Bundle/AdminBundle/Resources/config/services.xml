@@ -7,6 +7,7 @@
         <import resource="services/provider.xml" />
         <import resource="services/actions.xml" />
         <import resource="services/context.xml" />
+        <import resource="services/twig.xml" />
     </imports>
 
     <services>
@@ -25,5 +26,13 @@
 
         <service id="sylius.http_client" class="GuzzleHttp\Client" public="false" />
         <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false" />
+
+        <service id="owl_admin.provider.logged_in_admin_user" class="Owl\Bundle\AdminBundle\Provider\LoggedInAdminUserProvider">
+            <argument type="service" id="security.helper" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="owl.repository.admin_user" />
+        </service>
+        <service id="Owl\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface" alias="owl_admin.provider.logged_in_admin_user" />
     </services>
 </container>

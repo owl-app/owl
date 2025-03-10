@@ -1,5 +1,8 @@
-<header class="navbar d-print-none">
-    <div class="container-xl d-flex gap-2 flex-nowrap">
-        {% hook 'sylius_admin.common.component.navbar' with { _prefixes: [] } %}
+<header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
+    <div class="container-xl">
+        <div class="navbar-nav flex-row order-md-last">
+        {% hook 'owl_admin.common.component.navbar' with { _prefixes: [] } %}
+        </div>
+        <div></div>
     </div>
 </header>

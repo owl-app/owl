@@ -4,7 +4,8 @@
     {{ 'owl.ui.dashboard'|trans }} {{ parent() }}
 {% endblock %}
 
+{% block body_class %}layout-fluid{% endblock %}
+
 {% block body %}
-test
     {% hook ['owl_admin.dashboard.index'] with { description: settings.description_dashboard|default('')|raw } %}
 {% endblock %}

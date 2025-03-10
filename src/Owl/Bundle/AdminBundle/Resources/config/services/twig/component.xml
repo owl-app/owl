@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service
+            id="owl_admin.twig.component.render_entity_with_template"
+            class="Owl\Bundle\AdminBundle\Twig\Component\Shared\RenderEntityWithTemplateComponent"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager" />
+
+            <tag name="owl.twig_component" key="owl_admin:render_entity_with_template" />
+        </service>
+
+        <!-- <service
+            id="owl_admin.twig.component.shared.navbar.notifications"
+            class="Owl\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponent"
+        >
+            <argument type="service" id="owl_admin.provider.notification" />
+            <argument>%sylius.admin.notification.enabled%</argument>
+            <tag name="owl.twig_component" key="owl_admin:navbar:notifications" />
+        </service> -->
+
+        <service
+            id="owl_admin.twig.component.shared.navbar.user_dropdown"
+            class="Owl\Bundle\AdminBundle\Twig\Component\Shared\Navbar\UserDropdownComponent"
+        >
+            <argument type="service" id="router" />
+            <argument type="service" id="owl_admin.provider.logged_in_admin_user" />
+
+            <tag name="owl.twig_component" key="owl_admin:navbar:user_dropdown" />
+        </service>
+    </services>
+</container>

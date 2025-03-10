@@ -115,6 +115,8 @@ owl:
             registration: Registration
             reject_registration: Reject registration
             accept_registration: Accept registration 
+        
+        search_menu: Search menu
 
 
 

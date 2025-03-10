@@ -52,7 +52,7 @@ final class MainMenuBuilder
             $menu
                 ->addChild('notification', ['route' => 'owl_admin_notification_index'])
                 ->setLabel('owl.menu.admin.main.notification.header')
-                ->setLabelAttribute('icon', 'bullhorn');
+                ->setLabelAttribute('icon', 'flowbite:bullhorn-outline');
         }
     }
 
@@ -64,7 +64,7 @@ final class MainMenuBuilder
             $menu
                 ->addChild('suggestion', ['route' => 'owl_admin_suggestion_index'])
                 ->setLabel('owl.menu.admin.main.suggestion.header')
-                ->setLabelAttribute('icon', 'question');
+                ->setLabelAttribute('icon', 'flowbite:question-circle-outline');
         }
     }
 
@@ -78,6 +78,7 @@ final class MainMenuBuilder
             $configuration = $menu
                 ->addChild('configuration')
                 ->setLabel('owl.menu.admin.main.configuration.header')
+                ->setLabelAttribute('icon', 'flowbite:cog-outline');
             ;
 
             if ($isGrantedLocales) {
@@ -112,6 +113,7 @@ final class MainMenuBuilder
             $configuration = $menu
                 ->addChild('permission')
                 ->setLabel('owl.menu.admin.main.permission.header')
+                ->setLabelAttribute('icon', 'flowbite:lock-outline')
             ;
 
             if ($isGrantedPermissionRoles) {

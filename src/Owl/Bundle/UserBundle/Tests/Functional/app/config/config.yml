@@ -67,8 +67,8 @@ security:
                 use_forward: false
                 use_referer: true
             logout:
-                path: sylius_admin_logout
-                target: sylius_admin_login
+                path: owl_admin_logout
+                target: owl_admin_login
             anonymous: true
 
         oauth_token:

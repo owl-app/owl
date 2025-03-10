@@ -26,3 +26,15 @@
         background: transparent;
     }
 }
+.navbar {
+    .navbar-brand {
+        a {
+            background-color: #fff;
+            padding: 0 0.8rem;
+        }
+
+        .navbar-brand-image {
+            height: 2.5rem;
+        }
+    }
+}
