@@ -17,9 +17,9 @@ sylius_twig_hooks:
                 priority: 200
             grid:
                 enabled: false
-            # latest_statistics:
-            #     template: '@OwlAdmin/dashboard/index/content/latest_statistics.html.twig'
-            #     priority: 0
+            description:
+                template: '@OwlAdmin/dashboard/index/content/description.html.twig'
+                priority: 0
 
         'owl_admin.dashboard.index.content.header':
             breadcrumbs:
@@ -34,17 +34,4 @@ sylius_twig_hooks:
                 configuration:
                     title: owl.ui.dashboard
                     owl_test_html_attribute: 'dashboard-header'
-                priority: 0
-
-        'sylius_admin.dashboard.index.content.latest_statistics':
-            new_customers:
-                component: 'sylius_admin:dashboard:new_customers'
-                props:
-                    template: '@SyliusAdmin/dashboard/index/component/new_customers.html.twig'
-                priority: 100
-            new_orders:
-                component: 'sylius_admin:dashboard:new_orders'
-                props:
-                    channelCode: '@=_context.channel_code'
-                    template: '@SyliusAdmin/dashboard/index/component/new_orders.html.twig'
                 priority: 0

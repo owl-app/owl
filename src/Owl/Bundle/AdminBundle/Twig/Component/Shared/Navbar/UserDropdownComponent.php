@@ -46,32 +46,14 @@ class UserDropdownComponent
         // TODO: Would be nice to have these set via hook //
         return [
             [
-                'title' => 'sylius.ui.my_account',
+                'title' => 'owl.ui.my_account',
                 'url' => $this->urlGenerator->generate('owl_admin_admin_user_update', ['id' => $this->getUser()->getId()]),
-                'icon' => 'tabler:user',
+                'icon' => 'flowbite:user-outline',
             ],
             [
-                'title' => 'sylius.ui.logout',
+                'title' => 'owl.ui.logout',
                 'url' => $this->urlGenerator->generate('owl_admin_logout'),
-                'icon' => 'tabler:logout',
-            ],
-            [
-                'type' => 'divider',
-            ],
-            [
-                'title' => 'sylius.ui.documentation',
-                'url' => 'https://docs.sylius.com',
-                'class' => 'small text-muted',
-            ],
-            [
-                'title' => 'sylius.ui.join_slack',
-                'url' => 'https://sylius.com/slack',
-                'class' => 'small text-muted',
-            ],
-            [
-                'title' => 'sylius.ui.report_an_issue',
-                'url' => 'https://github.com/Sylius/Sylius/issues',
-                'class' => 'small text-muted',
+                'icon' => 'flowbite:arrow-left-to-bracket-outline',
             ],
         ];
     }

@@ -1,3 +1,12 @@
-<div class="ui piled segment">
-    {{ settings.description_dashboard|default('')|raw }}
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="card-status-top bg-primary"></div>
+            <div class="card-body">
+                <p class="text-secondary">
+                    {{ hookable_metadata.context.description|default('')|raw }}
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
