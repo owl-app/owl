@@ -1,0 +1,70 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.common.index':
+            sidebar:
+                template: '@OwlAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
+            navbar:
+                template: '@OwlAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
+            content:
+                template: '@OwlAdmin/shared/crud/common/content.html.twig'
+                priority: 0
+
+        'owl_admin.common.index.content':
+            flashes:
+                template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 300
+            header:
+                template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
+                priority: 200
+            grid:
+                template: '@OwlAdmin/shared/crud/index/content/grid.html.twig'
+                priority: 100
+            modal:
+                template: '@OwlAdmin/shared/crud/index/content/modal.html.twig'
+                priority: 100
+            footer:
+                template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100
+
+        'owl_admin.common.index.content.header':
+            breadcrumbs:
+                template: '@OwlAdmin/shared/crud/index/content/header/breadcrumbs.html.twig'
+                priority: 100
+            title_block:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block.html.twig'
+                priority: 0
+
+        'owl_admin.common.index.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                priority: 100
+            actions:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions.html.twig'
+                priority: 0
+        
+        'owl_admin.common.index.content.grid':
+            filters:
+                template: '@OwlAdmin/shared/crud/index/content/grid/filters.html.twig'
+                priority: 200
+            data_table:
+                template: '@OwlAdmin/shared/crud/index/content/grid/data_table.html.twig'
+                priority: 100
+            no_data_block:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results.html.twig'
+                priority: 0
+
+        'owl_admin.common.index.content.grid.no_results':
+            image:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results/image.html.twig'
+                priority: 300
+            title:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results/title.html.twig'
+                priority: 200
+            subtitle:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results/subtitle.html.twig'
+                priority: 100
+            action:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results/action.html.twig'
+                priority: 0

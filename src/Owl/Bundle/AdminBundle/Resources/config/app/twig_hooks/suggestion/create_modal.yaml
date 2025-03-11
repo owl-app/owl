@@ -1,0 +1,11 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.suggestion.modal':
+            # form:
+            #     component: 'owl_admin:suggestion:form'
+            #     props:
+            #         resource: '@=_context.resource'
+            #         form: '@=_context.form'
+            #         template: '@OwlAdmin/suggestion/form.html.twig'
+            #     priority: 0
+

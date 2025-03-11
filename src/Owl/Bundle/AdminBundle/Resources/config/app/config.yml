@@ -28,11 +28,42 @@ webpack_encore:
 sylius_grid:
     templates:
         action:
+            apply_transition: '@OwlAdmin/shared/grid/action/apply_transition.html.twig'
+            archive: '@OwlAdmin/shared/grid/action/archive.html.twig'
+            create: '@OwlAdmin/shared/grid/action/create.html.twig'
+            default: '@OwlAdmin/shared/grid/action/default.html.twig'
+            delete: '@OwlAdmin/shared/grid/action/delete.html.twig'
+            links: '@OwlAdmin/shared/grid/action/links.html.twig'
+            list: '@OwlAdmin/shared/grid/action/list.html.twig'
+            show: '@OwlAdmin/shared/grid/action/show.html.twig'
+            update: '@OwlAdmin/shared/grid/action/update.html.twig'
+            modal: "@OwlAdmin/shared/grid/action/modal.html.twig"
+            custom: "@OwlUi/shared/grid/action//custom.html.twig"
+            # Resource specific actions
+            create_payment_method: "@OwlAdmin/payment_method/grid/action/create.html.twig"
+            create_product_attribute: "@OwlAdmin/product_attribute/grid/action/create.html.twig"
+            delete_catalog_promotion: "@OwlAdmin/catalog_promotion/grid/action/delete.html.twig"
+            generate_variants: "@OwlAdmin/product/grid/action/generate_variants.html.twig"
+            ship_with_tracking_code: '@OwlAdmin/shipment/grid/action/ship_with_tracking_code.html.twig'
+            update_product_taxon_positions: "@OwlAdmin/product_taxon/grid/action/update_positions.html.twig"
+            update_product_variant_positions: "@OwlAdmin/product_variant/grid/action/update_positions.html.twig"
+            price_history: "@OwlAdmin/product_variant/grid/action/price_history.html.twig"
             update_admin_user: "@OwlAdmin/AdminUser/Grid/Action/update.html.twig"
             assign_permissions_admin_user: "@OwlAdmin/AdminUser/Grid/Action/assign_permissions.html.twig"
             registration_admin_user: "@OwlAdmin/AdminUser/Grid/Action/registration.html.twig"
+        bulk_action:
+            delete: '@OwlAdmin/shared/grid/bulk_action/delete.html.twig'
         filter:
-            entities: '@OwlUi/Grid/Filter/entities.html.twig'
+            boolean: '@OwlAdmin/shared/grid/filter/boolean.html.twig'
+            date: '@OwlAdmin/shared/grid/filter/date.html.twig'
+            entities: '@OwlAdmin/shared/grid/filter/entities.html.twig'
+            entity: '@OwlAdmin/shared/grid/filter/entity.html.twig'
+            exists: '@OwlAdmin/shared/grid/filter/exists.html.twig'
+            money: '@OwlAdmin/shared/grid/filter/money.html.twig'
+            resource_autocomplete: '@OwlAdmin/shared/grid/filter/resource_autocomplete.html.twig'
+            select: '@OwlAdmin/shared/grid/filter/select.html.twig'
+            ux_autocomplete: '@OwlAdmin/shared/grid/filter/autocomplete.html.twig'
+            ux_translatable_autocomplete: '@OwlAdmin/shared/grid/filter/autocomplete.html.twig'
             string: '@OwlAdmin/shared/grid/filter/string.html.twig'
 
 owl_ui:

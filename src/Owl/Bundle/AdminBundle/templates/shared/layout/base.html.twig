@@ -12,14 +12,14 @@
         {% block stylesheets %}
             {% hook generic_hook ~ '#stylesheets' %}
         {% endblock %}
+
+        {% block javascripts %}
+            {% hook generic_hook ~ '#javascripts' %}
+        {% endblock %}
     </head>
     <body class="{% block body_class %}{% endblock %}">
         <div class="page">
             {% block body %}{% endblock %}
         </div>
-
-        {% block javascripts %}
-            {% hook generic_hook ~ '#javascripts' %}
-        {% endblock %}
     </body>
 </html>

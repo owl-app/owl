@@ -117,6 +117,10 @@ owl:
             accept_registration: Accept registration 
         
         search_menu: Search menu
+        no_results: No results found
+        no_results_adjust_your_search: 'Adjust your search and try again.'
+        pagination:
+            number_of_results: 'Showing %from% to %to% of %total% entries'
 
 
 

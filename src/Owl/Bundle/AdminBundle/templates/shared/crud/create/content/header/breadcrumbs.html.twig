@@ -1,4 +1,4 @@
-{% from '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
+{% from '@OwlAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
 
 {% if hookable_metadata.context.metadata is defined %}
     {% set metadata = hookable_metadata.context.metadata %}
@@ -15,7 +15,7 @@
 %}
 
 {{ breadcrumbs([
-    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: 'owl.ui.dashboard', url: path('wol_admin_dashboard'), active: false },
     { name: resource_name, url: index_url, active: false },
-    { name: 'sylius.ui.new'|trans, active: true}
+    { name: 'owl.ui.new'|trans, active: true}
 ]) }}

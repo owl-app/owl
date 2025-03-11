@@ -378,7 +378,7 @@ owl:
             system_setting: Ustawienia
             rbac_permission_role: Role
             rbac_permission_availables: Dostępne role w systemie
-        choice_attribute: - wybierz atrybut -
+        choice_attribute: '- wybierz atrybut -'
         greater: Większe
         greater_equal: Większe lub równe
         less: Mniejsze
@@ -392,4 +392,5 @@ owl:
         edit_your_personal_information: Edycja moich danych
         add_suggestion: Dodaj sugestię
         lang: Język
+        date_filter: '%label% | %altLabel%'
 

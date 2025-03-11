@@ -336,4 +336,5 @@ owl:
         edit_your_personal_information: Edit your personal information
         add_suggestion: Add suggestion
         lang: Language
+        date_filter: '%label% | %altLabel%'
 

@@ -1,0 +1,9 @@
+.btn-system-primary {
+    background-color: $primary;
+    border: 1px solid $primary;
+    color: #fff;
+
+    svg.icon * {
+        stroke-width: 2;
+    }
+}

@@ -15,7 +15,7 @@ sylius_grid:
                     label: owl.ui.title
                     sortable: title
                     options:
-                        template: "@OwlUi/Grid/Field/rawLabel.html.twig"
+                        template: "@OwlUi/grid/field/raw_label.html.twig"
                 description:
                     type: string
                     label: owl.ui.description
@@ -25,13 +25,13 @@ sylius_grid:
                     label: owl.ui.user
                     sortable: user.displayName
                     options:
-                        template: "@OwlUi/Grid/Field/owner.html.twig"
+                        template: "@OwlAdmin/shared/grid/field/owner.html.twig"
                 status:
                     type: twig
                     label: owl.ui.status
                     sortable: ~
                     options:
-                        template: "@OwlUi/Grid/Field/state.html.twig"
+                        template: "@OwlUi/grid/field/state.html.twig"
                         vars:
                             prefix_translation: 'status'
                             labels: "@OwlAdmin/Suggestion/Label/Status"
@@ -39,7 +39,7 @@ sylius_grid:
                     type: twig
                     label: owl.ui.files
                     options:
-                        template: "@OwlUi/Grid/Field/files.html.twig"
+                        template: "@OwlAdmin/shared/grid/field/files.html.twig"
                 createdAt:
                     type: datetime
                     label: owl.ui.created_at
@@ -67,7 +67,7 @@ sylius_grid:
                         type: contains
                     label: owl.ui.user
                     options:
-                        fields: [owner.email, owner.firstName, owner.lastName]
+                        fields: [user.email, user.firstName, user.lastName]
                 date:
                     type: date
                     label: owl.ui.date
@@ -82,8 +82,9 @@ sylius_grid:
                         type: modal
                         label: owl.ui.change_status
                         options:
-                            button: primary
-                            icon: exchange
+                            button: btn-system-primary
+                            icon: flowbite:arrows-repeat-count-outline
+                            form_component: 'owl_admin:suggestion:form'
                             link:
                                 route: owl_admin_suggestion_status_change_status
                                 parameters:
@@ -92,8 +93,9 @@ sylius_grid:
                         type: modal
                         label: owl.ui.history_status
                         options:
-                            button: primary
-                            icon: list
+                            button: btn-system-primary
+                            icon: flowbite:list-outline
+                            form_component: 'owl_admin:suggestion:form'
                             link:
                                 route: owl_admin_suggestion_status_history_status
                                 parameters:

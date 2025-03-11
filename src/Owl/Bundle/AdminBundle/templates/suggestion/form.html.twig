@@ -1,0 +1,14 @@
+{% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {% if hookable_metadata.configuration.method is defined %}
+        <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}" />
+    {% endif %}
+    {{ form_errors(form) }}
+    {{ form_widget(form._token) }}
+
+    {{ form_row(form.title) }}
+
+    {{ form_end(form, {render_rest: false}) }}
+</div>
