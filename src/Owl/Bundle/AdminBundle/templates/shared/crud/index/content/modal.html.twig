@@ -3,12 +3,32 @@
     'owl_admin.%resource_name%'|replace({'%resource_name%': resource_name|default(hookable_metadata.context.metadata.name)}),
 ]) %}
 
-{{ dump(prefixes)}}
 
-{% 
+{# {{
+    component(
+        'owl_admin:live_open_modal',
+    ) 
+}} #}
+
+
+{{
+    component(
+        'owl_admin:form_modal_test',
+    ) 
+}}
+
+<turbo-frame id="modal"></turbo-frame>
+
+<div class="modal modal-form fade">
+    <div class="modal-dialog modal-dialog-centered d-flex justify-content-center">
+
+    </div>
+</div>
+
+{# {% 
     hook 'modal' with { 
         _prefixes: prefixes,
         metadata: hookable_metadata.context.metadata,
         resources: hookable_metadata.context.resources,
     } 
-%}
+%} #}
