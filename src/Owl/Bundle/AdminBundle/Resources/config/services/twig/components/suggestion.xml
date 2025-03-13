@@ -23,6 +23,18 @@
         </service>
 
         <service
+            id="owl_admin.twig.component.suggestion.status.form"
+            class="Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="owl.repository.suggestion_status" />
+            <argument type="service" id="form.factory" />
+            <argument>%owl.model.suggestion_status.class%</argument>
+            <argument>Owl\Bundle\CoreBundle\Form\Type\Suggestion\SuggestionStatusType</argument>
+
+            <tag name="owl.live_component.admin" key="owl_admin:suggestion_status:form" />
+        </service>
+
+        <service
             id="owl_admin.twig.component.form_modal"
             class="Owl\Bundle\UiBundle\Twig\Component\ModalFormComponent"
         >

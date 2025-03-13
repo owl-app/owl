@@ -3,16 +3,16 @@ import { Modal } from 'bootstrap';
 
 export default class extends Controller {
 
-    modalTarget = null;
-
     connect() {
-        this.modalTarget = document.querySelector('.modal-form');
+        this.element.addEventListener('hidden.bs.modal', () => {
+            this.clearContent();
+        });
     }
 
-    open({ params }) {
-        const modal = new Modal(this.modalTarget);
+    open({ params: { url } }) {
+        const modal = new Modal(this.element);
 
-        this.modalTarget
+        this.element
             .querySelector('.modal-dialog')
             .insertAdjacentHTML(
                 'beforeend', 
@@ -21,12 +21,8 @@ export default class extends Controller {
         
         modal.show();
 
-        this.modalTarget.addEventListener('hidden.bs.modal', () => {
-            this.clearContent();
-        });
-
         setTimeout(() => {
-            fetch(params.url)
+            fetch(url)
                 .then(response => {
                     this.clearContent();
 
@@ -36,10 +32,10 @@ export default class extends Controller {
                     return response.text();
                 })
                 .then(html => {
-                    this.modalTarget.querySelector('.modal-dialog').innerHTML = html;
+                    this.element.querySelector('.modal-dialog').innerHTML = html;
                 })
                 .catch(() => {
-                    this.modalTarget
+                    this.element
                         .querySelector('.modal-dialog')
                         .innerHTML = '<div class="alert alert-danger">An error occurred while loading the form</div>';
                 });
@@ -47,6 +43,6 @@ export default class extends Controller {
     }
 
     clearContent() {
-        this.modalTarget.querySelector('.modal-dialog').innerHTML = '';
+        this.element.querySelector('.modal-dialog').innerHTML = '';
     }
 }

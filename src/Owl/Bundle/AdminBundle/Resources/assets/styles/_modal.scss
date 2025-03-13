@@ -11,3 +11,9 @@
     --tblr-backdrop-bg: #000;
     --tblr-backdrop-opacity: 0.75;
 }
+
+.modal-form {
+    .modal-dialog {
+        pointer-events: auto;
+    }
+}

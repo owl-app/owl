@@ -1,11 +1,11 @@
 sylius_twig_hooks:
     hooks:
-        'owl_admin.common.create':
+        'owl_admin.suggestion_status.create':
             content:
                 template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
                 priority: 0
 
-        'owl_admin.common.create.content':
+        'owl_admin.suggestion_status.create.content':
             # flashes:
             #     template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
             #     priority: 400
@@ -16,10 +16,14 @@ sylius_twig_hooks:
             #     template: '@OwlAdmin/shared/crud/common/content/form_error_alert.html.twig'
             #     priority: 200
             form:
-                template: '@OwlAdmin/shared/crud/common/content/form.html.twig'
+                component: 'owl_admin:suggestion_status:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/suggestion/status/form.html.twig'
                 configuration:
-                    render_rest: true
-                priority: 100
+                    method: 'POST'
+                priority: 0
 
         'owl_admin.common.create.content.header':
             breadcrumbs:

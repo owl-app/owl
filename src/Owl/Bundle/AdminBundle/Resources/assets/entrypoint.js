@@ -11,14 +11,13 @@ import './styles/main.scss';
 
 import './app';
 
-import $ from 'jquery';
-
 import './sylius-bulk-action-require-confirmation';
 import './owl-bulk-action';
 import './sylius-form-collection';
 import './sylius-require-confirmation';
 import './sylius-toggle';
 import './sylius-check-all';
+import './scripts/sticky-header';
 
 import './scripts/bootstrap';
 

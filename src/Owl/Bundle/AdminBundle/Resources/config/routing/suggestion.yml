@@ -24,7 +24,7 @@ owl_admin_suggestion_create:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/Crud/Ajax/create.html.twig"
+            template: "@OwlAdmin/shared/crud/create.html.twig"
             factory:
                 method: createAction
                 arguments:

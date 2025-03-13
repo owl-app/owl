@@ -9,7 +9,6 @@
 
 .page-wrapper {
     .page-header {
-        position: sticky;
         top: -1px;
         z-index: 999;
         margin-top: 0;
@@ -17,6 +16,7 @@
         padding-bottom: var(--tblr-page-padding-y);
 
         &.is-sticky {
+            position: sticky;
             background: #fff;
             border-bottom: var(--tblr-border-width) solid var(--tblr-border-color);
             box-shadow: var(--tblr-shadow-card);
