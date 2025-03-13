@@ -29,6 +29,7 @@
             <call method="setLiveResponder">
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>
+
             <tag
                 name="owl.live_component.admin"
                 key="owl_admin:form_modal_test"

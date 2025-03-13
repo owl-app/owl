@@ -22,13 +22,13 @@ export default class extends Controller {
         modal.show();
 
         this.modalTarget.addEventListener('hidden.bs.modal', () => {
-            this.removeLoading();
+            this.clearContent();
         });
 
         setTimeout(() => {
             fetch(params.url)
                 .then(response => {
-                    this.removeLoading();
+                    this.clearContent();
 
                     if (!response.ok) {
                         throw new Error(response);
@@ -46,11 +46,7 @@ export default class extends Controller {
         }, 300);
     }
 
-    close() {
-        // this.modalTarget.remove();
-    }
-
-    removeLoading() {
+    clearContent() {
         this.modalTarget.querySelector('.modal-dialog').innerHTML = '';
     }
 }
