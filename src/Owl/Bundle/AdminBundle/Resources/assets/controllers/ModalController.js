@@ -7,6 +7,8 @@ export default class extends Controller {
         this.element.addEventListener('hidden.bs.modal', () => {
             this.clearContent();
         });
+
+        console.log('connect')
     }
 
     open({ params: { url } }) {

@@ -18,9 +18,9 @@ import ButtonModalController from './controllers/ButtonModalController';
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const appSymfonyStimulus = startStimulusApp(require.context(
-  '@symfony/stimulus-bridge/lazy-controller-loader!./controllers',
-  true,
-  /\.[jt]sx?$/
+    '@symfony/stimulus-bridge/lazy-controller-loader!./controllers',
+    true,
+    /\.[jt]sx?$/
 ));
 
 appSymfonyStimulus.register('live', LiveController);
@@ -28,8 +28,11 @@ appSymfonyStimulus.register('modal-form', ModalFormController);
 
 appSymfonyStimulus.debug = process.env.NODE_ENV !== 'production';
 
+if (window.Stimulus) {
+    window.Stimulus.stop();
+}
 
-export const appStimulus = Application.start();
+const appStimulus = window.Stimulus = Application.start();
 
 appStimulus.register('modal', ModalController);
 appStimulus.register('button-modal', ButtonModalController);
