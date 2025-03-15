@@ -14,7 +14,7 @@
     </div>
 {% endmacro %}
 
-{% macro info(message, icon = 'flowbite:info-circle-outline') %}
+{% macro info(message, icon = 'flowbite:exclamation-circle-outline') %}
     {% import _self as messages %}
     {{ messages.default(message, 'alert-info', 'owl.ui.info', icon) }}
 {% endmacro %}

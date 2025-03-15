@@ -1,0 +1,26 @@
+<div  data-modal-target="error" class="modal-content d-none">
+    <div class="modal-header">
+        <div class="row row-gap-2">
+            <div class="col-12 col-md">
+                <div class="d-md-flex gap-2 py-3 align-items-center">
+                    <div class="d-flex gap-2 align-items-center">
+                        {{ ux_icon('flowbite:bug-outline', { 'class': 'icon icon-md text-danger'}) }}
+                        <div class="d-flex flex-column gap-2">
+                            <h1 class="page-title text-danger">
+                                {{ 'owl.ui.error_modal_title'|trans }}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-danger mb-0">
+            {{ 'owl.ui.error_modal_content'|trans|raw }}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn" data-action="modal#close" data-form-target="action">Cancel</button>
+    </div>
+</div>

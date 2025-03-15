@@ -1,9 +1,11 @@
 import { Controller } from '@hotwired/stimulus';
 import { Modal } from 'bootstrap';
 
+import { showLoader, hideLoader } from '../../../scripts/loader';
+
 export default class extends Controller {
 
-    static targets = ['dialog', 'content', 'loading'];
+    static targets = ['dialog', 'content', 'error'];
 
     modal = null;
 
@@ -40,7 +42,7 @@ export default class extends Controller {
             }).then(html => {
                 this.dialogTarget.insertAdjacentHTML('afterbegin', html);
             }).catch(() => {
-                this.addError();
+                this.showError();
             });
         }, 300);
     }
@@ -52,31 +54,39 @@ export default class extends Controller {
     }
 
     loadingShow(size) {
+        const loaderOptions = {
+            class: { 
+                spinner: 'text-light'
+            }, 
+            width: '5rem',
+            height: '5rem' 
+        };
+
         if (size && size !== 'default') {
             this.size = size;
             this.element.classList.add(`modal-${size}`);
         }
 
-        this.loadingTarget.style = 'display: block';
+        showLoader(this.dialogTarget, loaderOptions);
     }
 
     loadingHide() {
-        this.loadingTarget.style = 'display: none';
+        hideLoader(this.dialogTarget);
     }
 
     removeContent() {
         this.element.classList.remove(`modal-${this.size}`);
-        this.contentTarget.remove();
+
+        if (this.hasContentTarget) {
+            this.contentTarget.remove();
+        }
+
+        if (this.hasErrorTarget) {
+            this.errorTarget.classList.add('d-none');
+        }
     }
 
-    addError() {
-        this.dialogTarget.insertAdjacentHTML(
-            'afterbegin',
-            `<div data-modal-target="content" class="modal-content">
-                <div class="alert alert-danger m-3">
-                    An error occurred while loading content
-                </div>
-            </div>`
-        );
+    showError() {
+        this.errorTarget.classList.remove('d-none');
     }
 }

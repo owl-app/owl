@@ -1,7 +1,9 @@
 import { Controller } from '@hotwired/stimulus';
+import { getComponent } from '@symfony/ux-live-component';
+
 import redirect from '../../../utils/redirect';
 import flattenObject from '../../../utils/flatten-object';
-import { getComponent } from '@symfony/ux-live-component';
+import { showLoader, hideLoader } from '../../../scripts/loader';
 
 export default class extends Controller {
 
@@ -13,7 +15,6 @@ export default class extends Controller {
 
     save({ params }) {
         this.showLoading();
-        this.loadingTarget.classList.add('d-flex');
 
         this.actionTargets.forEach((action) => {
             action.setAttribute('disabled', true);
@@ -45,7 +46,7 @@ export default class extends Controller {
     }
 
     showLoading() {
-        this.loadingTarget.classList.add('d-flex');
+        showLoader(this.contentTarget, { class: { loader: 'content' }});
 
         this.actionTargets.forEach((action) => {
             action.setAttribute('disabled', true);
@@ -53,7 +54,7 @@ export default class extends Controller {
     }
 
     hideLoading() {
-        this.loadingTarget.classList.remove('d-flex');
+        hideLoader(this.contentTarget);
 
         this.actionTargets.forEach((action) => {
             action.removeAttribute('disabled');

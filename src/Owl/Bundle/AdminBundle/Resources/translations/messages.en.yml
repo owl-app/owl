@@ -122,6 +122,8 @@ owl:
         pagination:
             number_of_results: 'Showing %from% to %to% of %total% entries'
         none: None
+        error_modal_content: 'An error occurred while processing the request. <br /> Please try again.'
+        error_modal_title: 'Error'
 
 
 

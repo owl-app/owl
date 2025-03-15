@@ -21,9 +21,6 @@ sylius_twig_hooks:
             grid:
                 template: '@OwlAdmin/shared/crud/index/content/grid.html.twig'
                 priority: 100
-            modal:
-                template: '@OwlAdmin/shared/crud/index/content/modal.html.twig'
-                priority: 100
             footer:
                 template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'
                 priority: -100

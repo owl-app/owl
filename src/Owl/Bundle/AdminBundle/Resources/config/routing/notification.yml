@@ -41,7 +41,7 @@ owl_admin_notification_index:
             section: admin
             permission: true
             grid: owl_admin_notification
-            template: "@OwlAdmin/Crud/index.html.twig"
+            template: "@OwlAdmin/shared/crud/index.html.twig"
             vars:
                 subheader: owl.ui.manage_notifications
                 icon: bullhorn

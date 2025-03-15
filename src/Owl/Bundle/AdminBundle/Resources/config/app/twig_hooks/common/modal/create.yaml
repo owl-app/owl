@@ -10,25 +10,25 @@ sylius_twig_hooks:
         'owl_admin.common.modal.create.content':
             header:
                 template: '@OwlAdmin/shared/crud/common/modal/content/header.html.twig'
-                priority: 200
+                priority: 300
             body:
                 template: '@OwlAdmin/shared/crud/common/modal/content/body.html.twig'
-                priority: 100
+                priority: 200
             actions:
                 template: '@OwlAdmin/shared/crud/common/modal/content/actions.html.twig'
-                priority: 0
+                priority: 100
 
         'owl_admin.common.modal.create.content.body':
             form:
                 template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
                 priority: 0
-            loading:
-                template: '@OwlAdmin/shared/crud/common/modal/content/body/loading.html.twig'
-                priority: 0
 
         'owl_admin.common.modal.create.content.header':
             title_block:
                 template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block.html.twig'
+                priority: 0
+            button_close:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/button_close.html.twig'
                 priority: 0
 
         'owl_admin.common.modal.create.content.header.title_block':
