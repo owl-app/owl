@@ -1,0 +1,9 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.notification.index.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'owl.ui.notifications'
+                    icon: 'flowbite:bullhorn-outline'
+                priority: 100

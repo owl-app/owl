@@ -17,7 +17,7 @@
         {% endif %}
     {% endfor %}
     {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
-        <th class="w-1 text-body text-center sylius-table-column-actions {{ field.options.vars.th_class|default('') }}">{{ 'sylius.ui.actions'|trans }}</th>
+        <th class="w-1 text-body text-center sylius-table-column-actions {{ field.options.vars.th_class|default('') }}">{{ 'owl.ui.actions'|trans }}</th>
     {% endif %}
 {% endmacro %}
 

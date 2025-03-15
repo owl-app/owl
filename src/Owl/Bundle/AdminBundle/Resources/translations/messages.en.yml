@@ -36,6 +36,8 @@ owl:
     menu:
         admin:
             main:
+                dashboard:
+                    header: Dashboard
                 suggestion:
                     header: Suggestion
                 mailbox:

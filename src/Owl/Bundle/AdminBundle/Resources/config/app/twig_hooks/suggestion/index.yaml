@@ -1,0 +1,9 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.suggestion.index.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'owl.ui.suggestions'
+                    icon: 'flowbite:question-circle-outline'
+                priority: 100

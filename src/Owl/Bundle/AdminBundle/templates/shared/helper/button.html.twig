@@ -92,9 +92,11 @@
     {{ _self.default(params) }}
 {% endmacro %}
 
-{% macro modal(url, message = '', id, icon, class, disabled = false, optionsModal = {}) %}
+{% macro modal(url, message = '', tooltip = '', id, icon, class, disabled = false, optionsModal = {}) %}
     <button 
-        class="btn btn-icon {% if class is not empty %}{{ class }}{% endif %}" 
+        class="btn 
+        {% if message is empty %}btn-icon{% endif %}
+        {% if class is not empty %}{{ class }}{% endif %}" 
         {% if id is not null %}id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }} 
         {% if disabled %}disabled="disabled"{% endif %}
         data-bs-toggle="tooltip"
@@ -111,6 +113,9 @@
     >
         {% if icon is not empty %}
             {{ ux_icon(icon, { class: 'icon icon-sm' }) }}
+        {% endif %}
+        {% if message is not empty %}
+            {{ message|trans }}
         {% endif %}
     </button>
 {% endmacro %}

@@ -3,7 +3,19 @@
 {% set route = options.link.url|default(options.link.route) %}
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default([]))) %}
 {% set optionsModal = options.modal|default({}) %}
+{% set tooltip = options.tooltip|default('') %}
 
 {% if is_granted(route) %}
-    {{ buttons.modal(path, action.label, '', options.icon, options.button, options.disabled|default(false), optionsModal) }}
+    {{ 
+        buttons.modal(
+            path,
+            action.label,
+            tooltip,
+            '',
+            options.icon,
+            options.button,
+            options.disabled|default(false),
+            optionsModal
+        )
+    }}
 {% endif %}

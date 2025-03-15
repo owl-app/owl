@@ -80,8 +80,8 @@ sylius_grid:
                 item:
                     change_status:
                         type: modal
-                        label: owl.ui.change_status
                         options:
+                            tooltip: owl.ui.change_status
                             button: btn-system-primary
                             icon: flowbite:arrows-repeat-count-outline
                             modal:
@@ -92,8 +92,8 @@ sylius_grid:
                                     suggestionId: resource.id
                     history_status:
                         type: modal
-                        label: owl.ui.history_status
                         options:
+                            tooltip: owl.ui.history_status
                             button: btn-system-primary
                             icon: flowbite:list-outline
                             modal:

@@ -34,6 +34,7 @@ final class MainMenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
+        $this->addDashboardMenu($menu);
         $this->addSuggestionMenu($menu);
         $this->addNotificationMenu($menu);
         $this->addConfigurationSubMenu($menu);
@@ -44,16 +45,12 @@ final class MainMenuBuilder
         return $menu;
     }
 
-    public function addNotificationMenu(ItemInterface $menu): void
+    public function addDashboardMenu(ItemInterface $menu): void
     {
-        $isGranted = $this->authorizationChecker->isGranted('owl_admin_notification_index');
-
-        if ($isGranted) {
-            $menu
-                ->addChild('notification', ['route' => 'owl_admin_notification_index'])
-                ->setLabel('owl.menu.admin.main.notification.header')
-                ->setLabelAttribute('icon', 'flowbite:bullhorn-outline');
-        }
+        $menu
+            ->addChild('dashboard', ['route' => 'owl_admin_dashboard'])
+            ->setLabel('owl.menu.admin.main.dashboard.header')
+            ->setLabelAttribute('icon', 'flowbite:home-outline');
     }
 
     private function addSuggestionMenu(ItemInterface $menu): void
@@ -65,6 +62,18 @@ final class MainMenuBuilder
                 ->addChild('suggestion', ['route' => 'owl_admin_suggestion_index'])
                 ->setLabel('owl.menu.admin.main.suggestion.header')
                 ->setLabelAttribute('icon', 'flowbite:question-circle-outline');
+        }
+    }
+
+    public function addNotificationMenu(ItemInterface $menu): void
+    {
+        $isGranted = $this->authorizationChecker->isGranted('owl_admin_notification_index');
+
+        if ($isGranted) {
+            $menu
+                ->addChild('notification', ['route' => 'owl_admin_notification_index'])
+                ->setLabel('owl.menu.admin.main.notification.header')
+                ->setLabelAttribute('icon', 'flowbite:bullhorn-outline');
         }
     }
 

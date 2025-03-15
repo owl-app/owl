@@ -22,6 +22,8 @@
             {% block body %}{% endblock %}
         </div>
 
-        {% include '@OwlAdmin/shared/modal.html.twig' %}
+        {% block modal %}
+            {% include '@OwlAdmin/shared/modal.html.twig' %}
+        {% endblock %}
     </body>
 </html>
