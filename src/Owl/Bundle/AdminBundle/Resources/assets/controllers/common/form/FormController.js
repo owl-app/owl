@@ -16,10 +16,6 @@ export default class extends Controller {
     save({ params }) {
         this.showLoading();
 
-        this.actionTargets.forEach((action) => {
-            action.setAttribute('disabled', true);
-        });
-
         const formData = new FormData(this.formTarget);
 
         if (params.saveAction) {
