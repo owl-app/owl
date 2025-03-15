@@ -10,7 +10,7 @@ export default class extends Controller {
     static targets = ['content', 'live', 'form', 'action', 'loading'];
 
     async initialize() {
-        this.liveFormComponent = await getComponent(this.liveTarget);
+        this.formLiveComponent = await getComponent(this.liveTarget);
     }
 
     save({ params }) {
@@ -79,11 +79,11 @@ export default class extends Controller {
         Object.keys(errors).map((key) => {
             const name = `${this.formTarget.name}.${key}`;
 
-            if (this.liveFormComponent.valueStore.has(name)) {
-                this.liveFormComponent.set(name);
+            if (this.formLiveComponent.valueStore.has(name)) {
+                this.formLiveComponent.set(name);
             }
         });
 
-        await this.liveFormComponent.debouncedStartRequest();
+        await this.formLiveComponent.debouncedStartRequest();
     }
 }
