@@ -1,18 +1,9 @@
-{% import '@OwlUi/macro/buttons.html.twig' as buttons %}
+{% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
 
 {% set route = options.link.url|default(options.link.route) %}
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default([]))) %}
+{% set optionsModal = options.modal|default({}) %}
 
 {% if is_granted(route) %}
-    {{ buttons.modal(path, action.label, '', options.icon, options.button) }}
-
-    <button
-        onclick="window.dispatchEvent(new CustomEvent('owl_admin:modal:open', { detail: { name: 'delete-modal', resourceId: '{{ data.id }}' } }));"
-        data-action="live#action:prevent"
-        data-live-action-param="toggle"
-        data-live-resource-id-param="{{ data.id }}"
-        {{ sylius_test_html_attribute('delete') }}
-    >
-        Test live
-    </button>
+    {{ buttons.modal(path, action.label, '', options.icon, options.button, options.disabled|default(false), optionsModal) }}
 {% endif %}

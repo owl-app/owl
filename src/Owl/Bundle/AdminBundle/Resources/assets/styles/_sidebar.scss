@@ -19,8 +19,8 @@
             font-size: 0.95rem;
             font-weight: 500;
 
-            &:active {
-               transform: translateY(1px);
+            &.active {
+                color: $primary;
             }
         }
 
@@ -35,10 +35,6 @@
 
                 &.active {
                     color: $primary;
-                }
-
-                &:active {
-                    transform: translateY(1px);
                 }
             }
         }

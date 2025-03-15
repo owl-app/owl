@@ -1,23 +1,9 @@
-/*
- * This file is part of the Sylius package.
- *
- * (c) Sylius Sp. z o.o.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 import './styles/main.scss';
 
 import './app';
 
-import './sylius-bulk-action-require-confirmation';
-import './owl-bulk-action';
-import './sylius-form-collection';
-import './sylius-require-confirmation';
-import './sylius-toggle';
-import './sylius-check-all';
 import './scripts/sticky-header';
+import './scripts/turbo';
 
 import './scripts/bootstrap';
 

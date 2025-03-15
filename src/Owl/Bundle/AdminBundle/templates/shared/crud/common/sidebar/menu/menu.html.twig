@@ -60,7 +60,7 @@
         </li>
     {% else %}
         <li class="nav-item">
-            <a class="nav-link" href="{{ item.uri }}">
+            <a class="nav-link {{ is_active ? 'active' : '' }}" href="{{ item.uri }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     {{ block('icon') }}
                 </span>

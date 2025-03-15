@@ -6,7 +6,7 @@ owl_admin_suggestion_status_history_status:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/Suggestion/Status/history.html.twig"
+            template: "@OwlAdmin/suggestion/status/history.html.twig"
             repository:
                 method: createHistoryListQueryBuilder
                 arguments: 
@@ -21,7 +21,6 @@ owl_admin_suggestion_status_history_status:
             vars:
                 subheader: owl.ui.manage_suggestions
                 icon: list
-                referer: true
                 permission:
                     group: suggestion
                     description: owl.ui.permission.history_status_suggestion
@@ -48,15 +47,12 @@ owl_admin_suggestion_status_change_status:
                         arguments: 
                             id: $suggestionId
             vars:
-                header: owl.ui.change_status_suggestion
                 route:
                     name: owl_admin_suggestion_status_change_status
                     parameters: 
                         suggestionId: $suggestionId
                 form:
                     ajax: true
-                    actions: 
-                        - { name: "referer", text: "owl.form.actions.save", icon: "plus", color: "blue"}
                 serialization_groups: [AjaxShow]
                 permission:
                     group: suggestion

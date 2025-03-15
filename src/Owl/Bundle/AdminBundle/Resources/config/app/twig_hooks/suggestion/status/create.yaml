@@ -1,21 +1,7 @@
 sylius_twig_hooks:
     hooks:
-        'owl_admin.suggestion_status.create':
+        'owl_admin.suggestion_status.modal.create.content.body.form':
             content:
-                template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
-                priority: 0
-
-        'owl_admin.suggestion_status.create.content':
-            # flashes:
-            #     template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
-            #     priority: 400
-            # # header:
-            # #     template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
-            # #     priority: 300
-            # form_error_alert:
-            #     template: '@OwlAdmin/shared/crud/common/content/form_error_alert.html.twig'
-            #     priority: 200
-            form:
                 component: 'owl_admin:suggestion_status:form'
                 props:
                     resource: '@=_context.resource'
@@ -25,41 +11,10 @@ sylius_twig_hooks:
                     method: 'POST'
                 priority: 0
 
-        'owl_admin.common.create.content.header':
-            breadcrumbs:
-                template: '@OwlAdmin/shared/crud/create/content/header/breadcrumbs.html.twig'
-                priority: 100
-            title_block:
-                template: '@OwlAdmin/shared/crud/common/content/header/title_block.html.twig'
-                priority: 0
-
-        'owl_admin.common.create.content.header.title_block':
+        'owl_admin.suggestion_status.modal.create.content.header.title_block':
             title:
-                template: '@OwlAdmin/shared/crud/create/content/header/title_block/title.html.twig'
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'owl.ui.change_status_suggestion'
+                    icon: 'flowbite:arrows-repeat-count-outline'
                 priority: 100
-            actions:
-                template: '@OwlAdmin/shared/crud/create/content/header/title_block/actions.html.twig'
-                priority: 0
-
-        'owl_admin.common.create.content.header.title_block.actions':
-            cancel:
-                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
-                priority: 100
-            create:
-                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/create.html.twig'
-                priority: 0
-
-        'owl_admin.common.create.content.form':
-            sections:
-                template: '@OwlAdmin/shared/crud/common/content/form/sections.html.twig'
-                priority: 0
-
-        'owl_admin.common.create.content.form.sections':
-            general:
-                template: '@OwlAdmin/shared/crud/common/content/form/sections/general.html.twig'
-                priority: 0
-
-        'owl_admin.common.create.content.form.sections.general':
-            default:
-                template: '@OwlAdmin/shared/crud/common/content/form/sections/general/default.html.twig'
-                priority: 0

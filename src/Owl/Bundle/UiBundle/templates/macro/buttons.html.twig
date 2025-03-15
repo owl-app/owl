@@ -47,7 +47,7 @@
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">
         <button class="btn btn-sm btn-icon btn-outline-danger w-full" type="submit" data-requires-confirmation {{ sylius_test_html_attribute('button', 'delete') }}>
-            {{ ux_icon('tabler:trash', {'class': 'icon icon-xs'})}} {{ ((message is empty and labeled) ? 'sylius.ui.delete' : message)|trans }}
+            {{ ux_icon('tabler:trash', {'class': 'icon icon-xs'})}} {{ ((message is empty and labeled) ? 'owl.ui.delete' : message)|trans }}
         </button>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
     </form>
@@ -60,10 +60,10 @@
         {% if disabled %}disabled="disabled"{% endif %}
         data-bs-toggle="tooltip"
         data-bs-title="{{ message|trans }}"
-        data-controller="button-modal"
-        data-button-modal-modal-outlet=".modal-form"
-        data-action="click->button-modal#open"
-        data-button-modal-url-param="{{ url }}"
+        data-controller="show-modal"
+        data-show-modal-modal-outlet=".owl-modal"
+        data-action="click->show-modal#open"
+        data-show-modal-url-param="{{ url }}"
     >
         {% if icon is not empty %}
             {{ ux_icon(icon, { class: 'icon icon-sm' }) }}

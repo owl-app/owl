@@ -1,0 +1,13 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
+
+{{ 
+    button.default(
+        { 
+            text: 'owl.ui.cancel'|trans,
+            attr: {
+                'data-action': 'modal#close',
+                'data-form-target': 'action'
+            }
+        }
+    )
+}}

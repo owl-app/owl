@@ -6,15 +6,15 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.common.create.content':
-            # flashes:
-            #     template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
-            #     priority: 400
-            # # header:
-            # #     template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
-            # #     priority: 300
-            # form_error_alert:
-            #     template: '@OwlAdmin/shared/crud/common/content/form_error_alert.html.twig'
-            #     priority: 200
+            flashes:
+                template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 400
+            header:
+                template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
+                priority: 300
+            form_error_alert:
+                template: '@OwlAdmin/shared/crud/common/content/form_error_alert.html.twig'
+                priority: 200
             form:
                 template: '@OwlAdmin/shared/crud/common/content/form.html.twig'
                 configuration:

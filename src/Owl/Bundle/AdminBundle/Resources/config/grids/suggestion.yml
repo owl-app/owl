@@ -84,7 +84,8 @@ sylius_grid:
                         options:
                             button: btn-system-primary
                             icon: flowbite:arrows-repeat-count-outline
-                            form_component: 'owl_admin:suggestion:form'
+                            modal:
+                                size: 'lg'
                             link:
                                 route: owl_admin_suggestion_status_change_status
                                 parameters:
@@ -95,7 +96,8 @@ sylius_grid:
                         options:
                             button: btn-system-primary
                             icon: flowbite:list-outline
-                            form_component: 'owl_admin:suggestion:form'
+                            modal:
+                                size: 'xl'
                             link:
                                 route: owl_admin_suggestion_status_history_status
                                 parameters:

@@ -1,1 +1,8 @@
-{% hook 'content' %}
+
+<div 
+    data-modal-target="content"
+    class="modal-content"
+    {% if hookable_metadata.configuration.controller is defined %}{{ stimulus_controller(hookable_metadata.configuration.controller|join(' ')) }}{% endif %}
+>
+    {% hook 'content' %}
+</div>

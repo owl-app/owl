@@ -1,0 +1,18 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
+
+{% set configuration = hookable_metadata.context.configuration %}
+{% set path = path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})) %}
+
+{{ 
+    button.primary(
+        { 
+            text: 'owl.ui.save'|trans,
+            attr: {
+                'data-action': 'form:save@window->modal#close form#save',
+                'data-form-target': 'action',
+                'data-form-url-param': path,
+                'data-form-save-action-param': 'referer'
+            }
+        }
+    )
+}}

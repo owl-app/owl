@@ -85,11 +85,34 @@
 {% macro cancel(params = {}) %}
     {% set params = {
         class: null,
-        text: 'sylius.ui.cancel'|trans,
+        text: 'owl.ui.cancel'|trans,
         url: app.request.headers.get('referer'),
     }|merge(params)%}
 
     {{ _self.default(params) }}
+{% endmacro %}
+
+{% macro modal(url, message = '', id, icon, class, disabled = false, optionsModal = {}) %}
+    <button 
+        class="btn btn-icon {% if class is not empty %}{{ class }}{% endif %}" 
+        {% if id is not null %}id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }} 
+        {% if disabled %}disabled="disabled"{% endif %}
+        data-bs-toggle="tooltip"
+        data-bs-title="{{ message|trans }}"
+        data-controller="show-modal"
+        data-show-modal-modal-outlet=".owl-modal"
+        data-action="click->show-modal#open"
+        data-show-modal-url-param="{{ url }}"
+        {% if optionsModal is not empty %}
+            {% for key, value in optionsModal %}
+                data-show-modal-{{ key }}-param="{{ value }}"
+            {% endfor %}
+        {% endif %}
+    >
+        {% if icon is not empty %}
+            {{ ux_icon(icon, { class: 'icon icon-sm' }) }}
+        {% endif %}
+    </button>
 {% endmacro %}
 
 {% block attributes -%}

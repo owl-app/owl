@@ -78,8 +78,8 @@ final class MainMenuBuilder
             $configuration = $menu
                 ->addChild('configuration')
                 ->setLabel('owl.menu.admin.main.configuration.header')
-                ->setLabelAttribute('icon', 'flowbite:cog-outline');
-            ;
+                ->setLabelAttribute('icon', 'flowbite:cog-outline')
+                ->setExtra('always_open', true);
 
             if ($isGrantedLocales) {
                 $configuration
@@ -114,7 +114,7 @@ final class MainMenuBuilder
                 ->addChild('permission')
                 ->setLabel('owl.menu.admin.main.permission.header')
                 ->setLabelAttribute('icon', 'flowbite:lock-outline')
-            ;
+                ->setExtra('always_open', true);
 
             if ($isGrantedPermissionRoles) {
                 $configuration
