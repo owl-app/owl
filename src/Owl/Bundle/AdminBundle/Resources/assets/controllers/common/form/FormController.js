@@ -37,6 +37,7 @@ export default class extends Controller {
             this.afterSave(response);
         }).catch(async ({ cause: { errors }}) => {
             await this.synchronizeLiveComponent(errors);
+
             this.hideLoading();
         });
     }
@@ -71,15 +72,18 @@ export default class extends Controller {
 
     async synchronizeLiveComponent(data) {
         let errors = flattenObject(data);
+        const promises = [];
     
         Object.keys(errors).map((key) => {
             const name = `${this.formTarget.name}.${key}`;
 
             if (this.formLiveComponent.valueStore.has(name)) {
-                this.formLiveComponent.set(name);
+                promises.push(this.formLiveComponent.set(name));
             }
         });
 
         await this.formLiveComponent.debouncedStartRequest();
+
+        await Promise.all(promises);
     }
 }
