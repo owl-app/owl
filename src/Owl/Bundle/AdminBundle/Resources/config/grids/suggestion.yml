@@ -34,7 +34,7 @@ sylius_grid:
                         template: "@OwlUi/grid/field/state.html.twig"
                         vars:
                             prefix_translation: 'status'
-                            labels: "@OwlAdmin/Suggestion/Label/Status"
+                            labels: "@OwlAdmin/suggestion/label/status"
                 files:
                     type: twig
                     label: owl.ui.files

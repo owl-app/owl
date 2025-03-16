@@ -1,0 +1,11 @@
+{% set path = path(hookable_metadata.configuration.path.route, hookable_metadata.configuration.path.params) %}
+
+<div
+    class="owl-uploader"
+    data-controller="uploader"
+    data-uploader-url-value="{{ path }}"
+    data-uploader-replace-value="id"
+    data-action="form:upload@window->uploader#afterSaveFormEvent"
+>
+    {% hook 'uploader' %}
+</div>

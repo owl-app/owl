@@ -1,8 +1,32 @@
 
+{% set controllerNames = [] %}
+{% set controllerValues = [] %}
+
+{% if hookable_metadata.configuration.stimulus.controllers is defined %}
+    {% for controllerName, options in hookable_metadata.configuration.stimulus.controllers %}
+        {% set controllerNames = controllerNames|merge([controllerName]) %}
+
+        {% if options.values is defined %}
+            {% for valueName, valueContent in options.values %}
+                {% set controllerValues = controllerValues|merge([{
+                    name: 'data-' ~ controllerName ~ '-'  ~ valueName ~ '-value',
+                    value: valueContent is iterable ? valueContent|json_encode : valueContent
+                }]) %}
+            {% endfor %}
+        {% endif %}
+
+    {% endfor %}
+{% endif %}
+
 <div 
     data-modal-target="content"
     class="modal-content"
-    {% if hookable_metadata.configuration.controller is defined %}{{ stimulus_controller(hookable_metadata.configuration.controller|join(' ')) }}{% endif %}
+    {% if controllerNames is not empty %} {{ stimulus_controller(controllerNames|join(' ')) }} {% endif %}
+    {% if controllerValues is not empty %}
+        {% for controllerValue in controllerValues %}
+            {{ controllerValue.name }}='{{ controllerValue.value }}'
+        {% endfor %}
+    {% endif %}
 >
     {% hook 'content' %}
 </div>

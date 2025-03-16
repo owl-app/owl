@@ -7,6 +7,8 @@ import { showLoader, hideLoader } from '../../../scripts/loader';
 
 export default class extends Controller {
 
+    static values = { asyncEvents: Array };
+
     static targets = ['content', 'live', 'form', 'action', 'loading'];
 
     async initialize() {
@@ -58,16 +60,33 @@ export default class extends Controller {
         });
     }
 
-    afterSave(response) {
-        setTimeout(() => {
-            this.hideLoading();
+    async afterSave(response) {
+        const resource = await response.json();
 
-            this.dispatch('save');
+        if (this.asyncEventsValue.length) {
+            const awaited = [];
+
+            this.asyncEventsValue.map((event) => {
+                awaited.push(
+                    new Promise((resolve) => {
+                        this.dispatch(event, { detail: { resolve, resource } });
+                    })
+                );
+            });
+
+            await Promise.all(awaited);
+        }
+
+        this.dispatch('saved');
+
+        setTimeout(async () => {
+            this.hideLoading();
 
             if (response.headers.has('x-owl-location')) {
                 redirect(response.headers.get('x-owl-location'));
             }
         }, 300);
+        
     }
 
     async synchronizeLiveComponent(data) {

@@ -6,6 +6,9 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.common.component.navbar.items':
+            add_suggestion:
+                template: '@OwlAdmin/shared/crud/common/navbar/items/add_suggestion.html.twig'
+                priority: 0
             # notifications:
             #     component: 'sylius_admin:navbar:notifications'
             #     props:

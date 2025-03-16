@@ -59,6 +59,15 @@ owl:
                 stats:
                     header: Stats
     ui:
+        search_menu: Search menu
+        no_results: No results found
+        no_results_adjust_your_search: 'Adjust your search and try again.'
+        pagination:
+            number_of_results: 'Showing %from% to %to% of %total% entries'
+        none: None
+        error_modal_content: 'An error occurred while processing the request. <br /> Please try again.'
+        error_modal_title: 'Error'
+        drop_files_here_to_upload: 'Drop files here to upload'
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses
@@ -117,16 +126,3 @@ owl:
             registration: Registration
             reject_registration: Reject registration
             accept_registration: Accept registration 
-        
-        search_menu: Search menu
-        no_results: No results found
-        no_results_adjust_your_search: 'Adjust your search and try again.'
-        pagination:
-            number_of_results: 'Showing %from% to %to% of %total% entries'
-        none: None
-        error_modal_content: 'An error occurred while processing the request. <br /> Please try again.'
-        error_modal_title: 'Error'
-
-
-
-

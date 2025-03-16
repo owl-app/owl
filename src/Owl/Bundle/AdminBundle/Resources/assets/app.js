@@ -10,6 +10,8 @@ import ModalController from './controllers/common/modal/ModalController';
 import ShowModalController from './controllers/common/modal/ShowModalController';
 //form
 import FormController from './controllers/common/form/FormController';
+//uploader
+import UploaderController from './controllers/common/uploader/UploaderController';
 
 export function startApp() {
     const appSymfonyStimulus = startStimulusApp(require.context(
@@ -23,6 +25,7 @@ export function startApp() {
     appSymfonyStimulus.register('modal', ModalController);
     appSymfonyStimulus.register('show-modal', ShowModalController);
     appSymfonyStimulus.register('form', FormController);
+    appSymfonyStimulus.register('uploader', UploaderController);
     
     appSymfonyStimulus.debug = process.env.NODE_ENV !== 'production';
     

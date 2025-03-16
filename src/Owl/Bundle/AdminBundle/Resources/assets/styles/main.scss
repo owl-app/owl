@@ -10,11 +10,13 @@
 @import "variables";
 
 @import "@tabler/core/src/scss/tabler.scss";
+@import "dropzone/dist/dropzone.css";
 
 @import "body";
 @import "accordion";
 @import "alert";
 @import "avatar";
+@import "badge";
 @import "bg";
 @import "button";
 @import "collapse";

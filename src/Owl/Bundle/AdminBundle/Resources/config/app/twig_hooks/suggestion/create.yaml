@@ -1,11 +1,51 @@
 sylius_twig_hooks:
     hooks:
-        'owl_admin.suggestion.modal':
-            # form:
-            #     component: 'owl_admin:suggestion:form'
-            #     props:
-            #         resource: '@=_context.resource'
-            #         form: '@=_context.form'
-            #         template: '@OwlAdmin/suggestion/form.html.twig'
-            #     priority: 0
+        'owl_admin.suggestion.modal.create':
+            content:
+                template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
+                configuration:
+                    stimulus:
+                        controllers: {
+                            form: {
+                                values: {
+                                    'async-events': ['upload']
+                                }
+                            }
+                        }
+                priority: 0
+        'owl_admin.suggestion.modal.create.content.body':
+            form:
+                template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                priority: 0
+            uploader:
+                template: '@OwlAdmin/shared/uploader.html.twig'
+                configuration:
+                    path:
+                        route: 'owl_admin_suggestion_file_create'
+                        params:
+                            suggestionId: 'replaceParamId'
+                priority: 0
+        'owl_admin.suggestion.modal.create.content.body.form':
+            content:
+                component: 'owl_admin:suggestion:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/suggestion/form.html.twig'
+                configuration:
+                    method: 'POST'
+                priority: 0
+
+        'owl_admin.suggestion.modal.create.content.body.uploader':
+            content:
+                template: '@OwlAdmin/shared/uploader/content.html.twig'
+                priority: 0
+
+        'owl_admin.suggestion.modal.create.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'owl.ui.add_suggestion'
+                    icon: 'flowbite:plus-outline'
+                priority: 100
 

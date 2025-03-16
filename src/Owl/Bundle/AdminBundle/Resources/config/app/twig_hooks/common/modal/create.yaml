@@ -4,7 +4,10 @@ sylius_twig_hooks:
             content:
                 template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
                 configuration:
-                    controller: ['form']
+                    stimulus:
+                        controllers: {
+                            form: {}
+                        }
                 priority: 0
 
         'owl_admin.common.modal.create.content':

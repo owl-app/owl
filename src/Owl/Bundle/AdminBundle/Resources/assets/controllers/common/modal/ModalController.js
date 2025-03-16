@@ -10,9 +10,7 @@ export default class extends Controller {
     modal = null;
 
     connect() {
-        this.element.addEventListener('hidden.bs.modal', () => {
-            this.removeContent();
-        });
+        this.element.addEventListener('hidden.bs.modal', this.removeContent.bind(this));
     }
 
     open({ params: { url, size = 'lg'} }) {
@@ -88,5 +86,9 @@ export default class extends Controller {
 
     showError() {
         this.errorTarget.classList.remove('d-none');
+    }
+
+    disconnect() {
+        this.element.removeEventListener('hidden.bs.modal', this.removeContent);
     }
 }

@@ -59,6 +59,15 @@ owl:
                 stats:
                     header: Analizy
     ui:
+        search_menu: Wyszukaj
+        no_results: Brak wyników
+        no_results_adjust_your_search: Brak wyników, dostosuj swoje wyszukiwanie
+        pagination:
+            number_of_results: 'Wyników od %from% do %to% z %total%'
+        none: Brak
+        error_modal_content: 'Wystąpił błąd podczas przetwarzania żądania. <br /> Spróbuj ponownie.'
+        error_modal_title: 'Błąd'
+        drop_files_here_to_upload: 'Upuść pliki tutaj, aby je przesłać'
         permission:
             availables_roles: Dostępne role w systemie
             service: Wykonawcy
@@ -131,8 +140,3 @@ owl:
             reject_registration: Odrzucenie rejestracji
             accept_registration: Akceptacja rejestracji
             profile_user: Profil użytkownika
-        none: Brak
-
-
-
-

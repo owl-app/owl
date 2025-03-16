@@ -1,6 +1,4 @@
-{% import '@OwlUi/macro/labels.html.twig' as label %}
-
 {% for file in data %}
-    {{ label.file(file.name, file.path) }}
-    <div class="ui hidden divider" style="margin:0"></div>
+    <a class="badge bg-blue text-blue-fg text-decoration-none mb-1" href="{{ file.path|owl_file_path }}" target="_blank">{{ file.name }}</a>
+    <div class="clearfix"></div>
 {% endfor %}

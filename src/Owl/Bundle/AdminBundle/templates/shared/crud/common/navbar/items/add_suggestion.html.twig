@@ -1,0 +1,16 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
+
+<div class="mb-2 mt-2 me-4">
+    {{ 
+        buttons.modal(
+            path('owl_admin_suggestion_create'),
+            'owl.ui.add_suggestion',
+            '',
+            '',
+            'flowbite:plus-outline',
+            'btn-primary',
+            options.disabled|default(false),
+            { size: 'lg' }
+        )
+    }}
+</div>
