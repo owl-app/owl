@@ -38,3 +38,15 @@
         }
     }
 }
+.navbar-nav {
+    --tblr-nav-link-hover-bg: rgba(0, 0, 0, 0.04);
+}
+
+.nav-item-user {
+    .nav-link {
+        &:hover,
+        &:focus {
+          background-color: var(--#{$prefix}nav-link-hover-bg);
+        }
+    }
+}

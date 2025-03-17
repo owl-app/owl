@@ -8,7 +8,7 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/crud/common/sidebar/logo.html.twig'
                 priority: 200
             menu_vanbar:
-                template: '@OwlAdmin/shared/crud/common/sidebar/menu_navbar.html.twig'
+                template: '@OwlAdmin/shared/crud/common/sidebar/do_poprawy_na_komorki.html.twig'
                 priority: 100
             menu:
                 template: '@OwlAdmin/shared/crud/common/sidebar/menu.html.twig'

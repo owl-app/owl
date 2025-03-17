@@ -1,19 +1,17 @@
 {% import '@OwlAdmin/shared/helper/dropdown.html.twig' as dropdown %}
+{% import '@OwlAdmin/shared/helper/avatar.html.twig' as avatar %}
 
 {% set dropdown_trigger %}
+<div class="nav-link dropdown-toggle pt-1 pb-1">
     <div class="d-flex lh-1 text-reset p-0 cursor-pointer">
-        <div {{ sylius_test_html_attribute('user-avatar', user.avatar.path|default(null)) }}>
-            {# {% if user.avatar.path is not defined or user.avatar.path is empty %}
-                {{ avatar.small() }}
-            {% else %}
-                {{ avatar.small(user.avatar.path|imagine_filter('sylius_admin_avatar')) }}
-            {% endif %} #}
+        <div {{ sylius_test_html_attribute('user-avatar') }}>
+            {{ avatar.small() }}
         </div>
-        <div class="d-none d-xl-block ps-2">
-            <div class="mb-1 small text-muted">{{ 'sylius.ui.hello'|trans }}</div>
-            <div>{{ user.firstName|default(user.username) }}</div>
+        <div class="d-none d-xl-block ps-2 pe-2 align-self-center">
+            <div>{{ user.displayName|default(user.email) }}</div>
         </div>
     </div>
+</div>
 {% endset %}
 
-{{ dropdown.list({ custom_trigger: dropdown_trigger, direction: 'down-end' }, menu_items) }}
+{{ dropdown.list({ custom_trigger: dropdown_trigger, direction: 'down-end', class: 'dropdown-menu-arrow'}, menu_items) }}
