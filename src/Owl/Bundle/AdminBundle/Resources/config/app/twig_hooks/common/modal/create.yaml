@@ -36,7 +36,7 @@ sylius_twig_hooks:
 
         'owl_admin.common.modal.create.content.header.title_block':
             title:
-                template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block/title.html.twig'
+                template: '@OwlAdmin/shared/crud/common/modal/create/content/header/title_block/title.html.twig'
                 priority: 0
 
         'owl_admin.common.modal.create.content.body.form':

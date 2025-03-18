@@ -8,16 +8,12 @@
     <services>
         <service
             id="owl_admin.twig.component.suggestion.form"
-            class="Owl\Bundle\UiBundle\Twig\Component\ResourceModalFormComponent"
+            class="Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="owl.repository.suggestion" />
             <argument type="service" id="form.factory" />
             <argument>%owl.model.suggestion.class%</argument>
             <argument>Owl\Bundle\SuggestionBundle\Form\Type\SuggestionType</argument>
-
-            <call method="setLiveResponder">
-                <argument type="service" id="ux.live_component.live_responder"/>
-            </call>
 
             <tag name="owl.live_component.admin" key="owl_admin:suggestion:form" />
         </service>
@@ -34,19 +30,5 @@
             <tag name="owl.live_component.admin" key="owl_admin:suggestion_status:form" />
         </service>
 
-        <service
-            id="owl_admin.twig.component.form_modal"
-            class="Owl\Bundle\UiBundle\Twig\Component\ModalFormComponent"
-        >
-            <call method="setLiveResponder">
-                <argument type="service" id="ux.live_component.live_responder"/>
-            </call>
-
-            <tag
-                name="owl.live_component.admin"
-                key="owl_admin:form_modal_test"
-                template="@OwlAdmin/shared/components/form_modal_test.html.twig"
-            />
-        </service>
     </services>
 </container>

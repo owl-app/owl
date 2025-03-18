@@ -1,6 +1,6 @@
 sylius_twig_hooks:
     hooks:
-        'owl_admin.suggestion.modal.create':
+        'owl_admin.notification.modal.create':
             content:
                 template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
                 configuration:
@@ -13,7 +13,8 @@ sylius_twig_hooks:
                             }
                         }
                 priority: 0
-        'owl_admin.suggestion.modal.create.content.body':
+
+        'owl_admin.notification.modal.create.content.body':
             form:
                 template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
                 priority: 0
@@ -21,22 +22,23 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/uploader.html.twig'
                 configuration:
                     path:
-                        route: 'owl_admin_suggestion_file_create'
+                        route: 'owl_admin_notification_file_create'
                         params:
-                            suggestionId: 'replaceParamId'
+                            notificationId: 'replaceParamId'
                 priority: 0
-        'owl_admin.suggestion.modal.create.content.body.form':
+
+        'owl_admin.notification.modal.create.content.body.form':
             content:
-                component: 'owl_admin:suggestion:form'
+                component: 'owl_admin:notification:form'
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
-                    template: '@OwlAdmin/suggestion/form.html.twig'
+                    template: '@OwlAdmin/notification/form.html.twig'
                 configuration:
                     method: 'POST'
                 priority: 0
 
-        'owl_admin.suggestion.modal.create.content.body.uploader':
+        'owl_admin.notification.modal.create.content.body.uploader':
             content:
                 template: '@OwlAdmin/shared/uploader/content.html.twig'
                 priority: 0

@@ -56,6 +56,8 @@ sylius_grid:
                         options:
                             button: primary
                             icon: flowbite:plus-outline
+                            modal:
+                                size: 'xl'
                             link:
                                 route: owl_admin_notification_create
                 item:

@@ -16,8 +16,7 @@ export default class extends Controller {
     open({ params: { url, size = 'lg'} }) {
         this.modal = new Modal(this.element, {
             backdrop: 'static',
-            keyboard: true,
-            focus: true
+            keyboard: true
         });
 
         this.loadingShow(size);
@@ -30,8 +29,6 @@ export default class extends Controller {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             }).then(response => {
-                this.loadingHide();
-
                 if (!response.ok) {
                     throw new Error(response);
                 }
@@ -39,6 +36,12 @@ export default class extends Controller {
                 return response.text();
             }).then(html => {
                 this.dialogTarget.insertAdjacentHTML('afterbegin', html);
+
+                setTimeout(() => {
+                    this.loadingHide();
+                    this.showContent();
+                }, 200);
+                
             }).catch(() => {
                 this.showError();
             });
@@ -70,6 +73,10 @@ export default class extends Controller {
 
     loadingHide() {
         hideLoader(this.dialogTarget);
+    }
+
+    showContent() {
+        this.contentTarget.classList.add('show');
     }
 
     removeContent() {

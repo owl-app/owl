@@ -76,6 +76,13 @@ $font-family-sans-serif: 'InterVariable', 'Arial', sans-serif;
 $h1-font-size: 1.6rem;
 $h1-line-height: 2.1rem;
 
+// Modal
+$modal-xxl: 1140px !default;
+$modal-xl: 900px !default;
+$modal-lg: 720px !default;
+$modal-md: 540px !default;
+$modal-sm: 380px !default;
+
 // Page
 $page-title-font-size: var(--#{$prefix}font-size-h1);
 

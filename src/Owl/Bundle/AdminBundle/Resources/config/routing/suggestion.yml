@@ -31,16 +31,12 @@ owl_admin_suggestion_create:
                     - "new"
                     - "expr:service('owl.context.admin_user').getUser()"
             vars:
+                serialization_groups: [AjaxShow]
                 redirect:
                     save:
                         route: owl_admin_dashboard
                 form:
                     ajax: true
-                    actions: 
-                        - { name: "save", icon: "plus", color: "blue"}
-                serialization_groups: [AjaxShow]
-                templates:
-                    form: "@OwlAdmin/Suggestion/_form.html.twig"
                 permission:
                     group: suggestion
                     description: owl.ui.permission.create_suggestion

@@ -26,15 +26,6 @@
             <tag name="owl.twig_component" key="owl_admin:render_entity_with_template" />
         </service>
 
-        <!-- <service
-            id="owl_admin.twig.component.shared.navbar.notifications"
-            class="Owl\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponent"
-        >
-            <argument type="service" id="owl_admin.provider.notification" />
-            <argument>%sylius.admin.notification.enabled%</argument>
-            <tag name="owl.twig_component" key="owl_admin:navbar:notifications" />
-        </service> -->
-
         <service
             id="owl_admin.twig.component.shared.navbar.user_dropdown"
             class="Owl\Bundle\AdminBundle\Twig\Component\Shared\Navbar\UserDropdownComponent"

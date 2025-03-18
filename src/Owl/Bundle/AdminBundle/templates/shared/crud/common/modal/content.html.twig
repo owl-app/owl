@@ -20,7 +20,7 @@
 
 <div 
     data-modal-target="content"
-    class="modal-content"
+    class="modal-content fade"
     {% if controllerNames is not empty %} {{ stimulus_controller(controllerNames|join(' ')) }} {% endif %}
     {% if controllerValues is not empty %}
         {% for controllerValue in controllerValues %}

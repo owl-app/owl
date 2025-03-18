@@ -58,21 +58,17 @@ owl_admin_notification_create:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/Crud/Ajax/create.html.twig"
+            template: "@OwlAdmin/shared/crud/modal/create.html.twig"
             factory:
                 method: createAction
                 arguments:
                     - "new"
                     - "expr:service('owl.context.admin_user').getUser()"
             vars:
+                serialization_groups: [AjaxShow]
                 form:
                     ajax: true
-                    actions: 
-                        - { name: "referer", text: "owl.form.actions.save", icon: "plus", color: "blue"}
-                serialization_groups: [AjaxShow]
                 tinymce: true
-                templates:
-                    form: "@OwlAdmin/Notification/_create.html.twig"
                 permission:
                     group: notification
                     description: owl.ui.permission.create_notification

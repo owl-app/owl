@@ -16,11 +16,6 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/crud/common/modal/content/actions.html.twig'
                 priority: 0
 
-        'owl_admin.suggestion_status.modal.history.content.body':
-            list:
-                template: '@OwlAdmin/suggestion/status/history/list.html.twig'
-                priority: 0
-
         'owl_admin.suggestion_status.modal.history.content.header':
             title_block:
                 template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block.html.twig'
@@ -32,6 +27,11 @@ sylius_twig_hooks:
                 configuration:
                     title: 'owl.ui.history_suggestion_status'
                     icon: 'flowbite:list-outline'
+                priority: 0
+
+        'owl_admin.suggestion_status.modal.history.content.body':
+            list:
+                template: '@OwlAdmin/suggestion/status/history/list.html.twig'
                 priority: 0
 
         'owl_admin.suggestion_status.modal.history.content.actions':

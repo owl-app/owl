@@ -1,10 +1,28 @@
 .modal-backdrop {
-    --tblr-backdrop-bg: #000;
-    --tblr-backdrop-opacity: 0.75;
+    --tblr-backdrop-opacity: 0.5;
+}
+.owl-modal {
+  &.modal-blur {
+    // fix chrome bug
+    .modal-dialog {
+      backdrop-filter: blur(0px);
+    }
+  }
 }
 
-.owl-modal {
-    .modal-dialog {
-        pointer-events: auto;
+@include media-breakpoint-up(lg) {
+    .modal-lg {
+      --#{$prefix}modal-width: #{$modal-lg};
+    }
+
+    .modal-xl,
+    .modal-xxl {
+      --#{$prefix}modal-width: #{$modal-xl};
+    }
+  }
+
+@include media-breakpoint-up(xl) {
+    .modal-xxl {
+      --#{$prefix}modal-width: #{$modal-xxl};
     }
 }
