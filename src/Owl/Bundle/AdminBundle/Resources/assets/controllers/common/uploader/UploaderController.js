@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import Dropzone from 'dropzone';
+import { debounce } from '../../../utils/debounce';
 
 export default class extends Controller {
 
@@ -24,9 +25,7 @@ export default class extends Controller {
         });
 
         this.dropzone.on('queuecomplete', () => {
-            setTimeout(() => {
-                resolve();
-            }, 500);
+            debounce(resolve, 500)();
         });
 
         if (this.dropzone.getQueuedFiles().length > 0) {

@@ -9,6 +9,10 @@
     justify-content: center;
     z-index: 100;
 
+    &.modal {
+        z-index: 9999;
+    }
+
     &.content {
         background: rgba(255, 255, 255, 0.5);
     }

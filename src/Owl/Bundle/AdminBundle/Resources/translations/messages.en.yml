@@ -68,6 +68,7 @@ owl:
         error_modal_content: 'An error occurred while processing the request. <br /> Please try again.'
         error_modal_title: 'Error'
         drop_files_here_to_upload: 'Drop files here to upload'
+        update_notification: Edit notification
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

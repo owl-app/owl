@@ -28,3 +28,13 @@
         position: relative;
     }
 }
+
+.layout-fluid-crud {
+    .navbar {
+        .container,
+        [class^="container-"],
+        [class*=" container-"] {
+          max-width: 100%;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.notification.update.content.body':
+            form:
+                component: 'owl_admin:notification:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/notification/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'owl_admin.notification.update.content.header':
+            breadcrumbs:
+                template: '@OwlAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field: subject
+                priority: 0

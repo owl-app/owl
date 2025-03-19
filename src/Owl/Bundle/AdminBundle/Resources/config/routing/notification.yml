@@ -6,7 +6,7 @@ owl_admin_notification:
     resource: |
         alias: owl.notification
         section: admin
-        templates: "@OwlAdmin\\Crud"
+        templates: "@OwlAdmin\\shared\\crud"
         except: ['index', 'show', 'create']
         permission: true
         vars:

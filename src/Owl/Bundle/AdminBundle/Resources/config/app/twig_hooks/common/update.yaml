@@ -1,73 +1,85 @@
 sylius_twig_hooks:
     hooks:
-        'sylius_admin.common.update':
+        'owl_admin.common.update':
             sidebar:
-                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+                template: '@OwlAdmin/shared/crud/common/sidebar.html.twig'
                 priority: 200
             navbar:
-                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+                template: '@OwlAdmin/shared/crud/common/navbar.html.twig'
                 priority: 100
             content:
-                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content.html.twig'
+                configuration:
+                    stimulus:
+                        controllers: {
+                            form: {}
+                        }
                 priority: 0
 
-        'sylius_admin.common.update.content':
+        'owl_admin.common.update.content':
             flashes:
-                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
                 priority: 400
             header:
-                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
                 priority: 300
             form_error_alert:
-                template: '@SyliusAdmin/shared/crud/common/content/form_error_alert.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/form_error_alert.html.twig'
                 priority: 200
-            form:
-                template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
-                configuration:
-                    render_rest: true
-                priority: 100
+            body:
+                template: '@OwlAdmin/shared/crud/common/content/body.html.twig'
+                priority: 200
             footer:
-                template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'
                 priority: -100
 
-        'sylius_admin.common.update.content.header':
+        'owl_admin.common.update.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
+                template: '@OwlAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
                 priority: 100
             title_block:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block.html.twig'
                 priority: 0
 
-        'sylius_admin.common.update.content.header.title_block':
+        'owl_admin.common.update.content.header.title_block':
             title:
-                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/title.html.twig'
+                template: '@OwlAdmin/shared/crud/update/content/header/title_block/title.html.twig'
                 priority: 100
             actions:
-                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions.html.twig'
+                template: '@OwlAdmin/shared/crud/update/content/header/title_block/actions.html.twig'
                 priority: 0
 
-        'sylius_admin.common.update.content.header.title_block.actions':
+        'owl_admin.common.update.content.header.title_block.actions':
             show:
-                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
+                template: '@OwlAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
                 priority: 200
             cancel:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                configuration:
+                    hasForm: true
                 priority: 100
             update:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/update.html.twig'
+                template: '@OwlAdmin/shared/crud/update/content/header/title_block/actions/update.html.twig'
                 priority: 0
 
-        'sylius_admin.common.update.content.form':
+        'owl_admin.common.modal.create.content.body':
+            form:
+                template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
+                configuration:
+                    render_rest: true
+                priority: 0
+
+        'owl_admin.common.modal.create.content.body.form':
             sections:
-                template: '@SyliusAdmin/shared/crud/common/content/form/sections.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/body/form/sections.html.twig'
                 priority: 0
                 
-        'sylius_admin.common.update.content.form.sections':
+        'owl_admin.common.modal.create.content.bodyform.sections':
             general:
-                template: '@SyliusAdmin/shared/crud/common/content/form/sections/general.html.twig'      
+                template: '@OwlAdmin/shared/crud/common/content/body/form/sections/general.html.twig'
                 priority: 0
 
-        'sylius_admin.common.update.content.form.sections.general':
+        'owl_admin.common.modal.create.content.bodyform.sections.general':
             default:
-                template: '@SyliusAdmin/shared/crud/common/content/form/sections/general/default.html.twig'       
+                template: '@OwlAdmin/shared/crud/common/content/body/form/sections/general/default.html.twig'
                 priority: 0

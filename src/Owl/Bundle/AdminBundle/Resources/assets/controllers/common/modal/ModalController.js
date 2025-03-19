@@ -2,6 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 import { Modal } from 'bootstrap';
 
 import { showLoader, hideLoader } from '../../../scripts/loader';
+import { debounce } from '../../../utils/debounce';
 
 export default class extends Controller {
 
@@ -13,39 +14,17 @@ export default class extends Controller {
         this.element.addEventListener('hidden.bs.modal', this.removeContent.bind(this));
     }
 
-    open({ params: { url, size = 'lg'} }) {
+    open({ params: { url, size = 'lg' } }) {
         this.modal = new Modal(this.element, {
             backdrop: 'static',
             keyboard: true
         });
 
         this.loadingShow(size);
-        
+
         this.modal.show();
 
-        setTimeout(() => {
-            fetch(url, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            }).then(response => {
-                if (!response.ok) {
-                    throw new Error(response);
-                }
-
-                return response.text();
-            }).then(html => {
-                this.dialogTarget.insertAdjacentHTML('afterbegin', html);
-
-                setTimeout(() => {
-                    this.loadingHide();
-                    this.showContent();
-                }, 50);
-                
-            }).catch(() => {
-                this.showError();
-            });
-        }, 50);
+        debounce(this.loadContent.bind(this), 200)(url);
     }
 
     close() {
@@ -54,13 +33,39 @@ export default class extends Controller {
         }
     }
 
+    loadContent(url) {
+        fetch(url, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(response);
+            }
+
+            return response.text();
+        }).then(html => {
+            this.dialogTarget.insertAdjacentHTML('afterbegin', html);
+
+            debounce(this.afterLoadContent.bind(this), 100)();
+        }).catch(() => {
+            this.showError();
+        });
+    }
+
+    afterLoadContent() {
+        this.loadingHide();
+        this.showContent();
+    }
+
     loadingShow(size) {
         const loaderOptions = {
-            class: { 
+            class: {
+                loader: 'modal',
                 spinner: 'text-light'
-            }, 
+            },
             width: '5rem',
-            height: '5rem' 
+            height: '5rem'
         };
 
         if (size && size !== 'default') {
@@ -68,11 +73,11 @@ export default class extends Controller {
             this.element.classList.add(`modal-${size}`);
         }
 
-        showLoader(this.dialogTarget, loaderOptions);
+        showLoader(document.body, loaderOptions);
     }
 
     loadingHide() {
-        hideLoader(this.dialogTarget);
+        hideLoader(document.body);
     }
 
     showContent() {
@@ -93,9 +98,5 @@ export default class extends Controller {
 
     showError() {
         this.errorTarget.classList.remove('d-none');
-    }
-
-    disconnect() {
-        this.element.removeEventListener('hidden.bs.modal', this.removeContent);
     }
 }

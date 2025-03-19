@@ -1,0 +1,14 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
+
+{{ button.primary(
+    sylius_test_form_attribute('update-changes-button')|merge({
+        text: 'sylius.ui.update'|trans,
+        attr: {
+            'data-action': 'form#save',
+            'data-form-target': 'action',
+            'data-form-url-param': hookable_metadata.context.form.vars.action,
+            'data-form-method-param': 'PUT',
+            'data-form-save-action-param': 'referer'
+        }
+    })
+) }}

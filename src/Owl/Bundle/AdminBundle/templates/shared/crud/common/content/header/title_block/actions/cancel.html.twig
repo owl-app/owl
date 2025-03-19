@@ -1,4 +1,12 @@
-{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
+
+{% set attr = {} %}
+{% set hasForm = hookable_metadata.configuration.hasForm|default(false) %}
+
+{% if hasForm %}
+ {% set attr = attr|merge({ 'data-form-target': 'action' }) %}
+{% endif %}
+
 
 {% set configuration = hookable_metadata.context.configuration %}
 
@@ -7,4 +15,13 @@
     configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
 ))) %}
 
-{{ button.cancel(sylius_test_form_attribute('cancel-changes-button')|merge({ text: 'owl.ui.cancel'|trans, url: index_url, class: 'btn' })) }}
+{{ 
+    button.cancel(
+        sylius_test_form_attribute('cancel-changes-button')|merge({ 
+            text: 'owl.ui.cancel'|trans,
+            url: index_url,
+            class: 'btn',
+            attr: attr
+        })
+    ) 
+}}

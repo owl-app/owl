@@ -4,10 +4,11 @@ import { getComponent } from '@symfony/ux-live-component';
 import redirect from '../../../utils/redirect';
 import flattenObject from '../../../utils/flatten-object';
 import { showLoader, hideLoader } from '../../../scripts/loader';
+import { debounce } from '../../../utils/debounce';
 
 export default class extends Controller {
 
-    static values = { asyncEvents: Array };
+    static values = { asyncEvents: Array};
 
     static targets = ['content', 'live', 'form', 'action', 'loading'];
 
@@ -16,19 +17,20 @@ export default class extends Controller {
     }
 
     save({ params }) {
-        this.showLoading();
-
         const formData = new FormData(this.formTarget);
+
+        this.showLoading();
 
         if (params.saveAction) {
             formData.append('save_action', params.saveAction);
         }
 
         fetch(params.url, {
-            method: 'POST',
-            body: formData,
+            method: params.method ?? 'POST',
+            body: this.serializeForm(formData),
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(async response => {
             if (!response.ok && response.status === 422) {
@@ -44,11 +46,19 @@ export default class extends Controller {
         });
     }
 
+    serializeForm(formData) {
+        return new URLSearchParams(formData).toString();
+    }
+
     showLoading() {
         showLoader(this.contentTarget, { class: { loader: 'content' }});
 
         this.actionTargets.forEach((action) => {
-            action.setAttribute('disabled', true);
+            if (action.tagName === 'BUTTON') {
+                action.setAttribute('disabled', true);
+            } else {
+                action.classList.add('disabled');
+            }
         });
     }
 
@@ -79,14 +89,13 @@ export default class extends Controller {
 
         this.dispatch('saved');
 
-        setTimeout(async () => {
+        debounce(async () => {
             this.hideLoading();
 
             if (response.headers.has('x-owl-location')) {
                 redirect(response.headers.get('x-owl-location'));
             }
-        }, 300);
-        
+        }, 300)();
     }
 
     async synchronizeLiveComponent(data) {
