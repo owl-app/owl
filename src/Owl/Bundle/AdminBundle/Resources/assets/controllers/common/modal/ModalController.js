@@ -40,12 +40,12 @@ export default class extends Controller {
                 setTimeout(() => {
                     this.loadingHide();
                     this.showContent();
-                }, 100);
+                }, 50);
                 
             }).catch(() => {
                 this.showError();
             });
-        }, 150);
+        }, 50);
     }
 
     close() {
