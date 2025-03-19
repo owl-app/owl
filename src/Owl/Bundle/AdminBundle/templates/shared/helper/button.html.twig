@@ -100,7 +100,7 @@
         {% if id is not null %}id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }} 
         {% if disabled %}disabled="disabled"{% endif %}
         data-bs-toggle="tooltip"
-        data-bs-title="{{ message|trans }}"
+        title="{{ tooltip|trans }}"
         data-controller="show-modal"
         data-show-modal-modal-outlet=".owl-modal"
         data-action="click->show-modal#open"

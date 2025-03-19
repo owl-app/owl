@@ -61,16 +61,8 @@ sylius_grid:
                             link:
                                 route: owl_admin_notification_create
                 item:
-                    # show:
-                    #     type: link
-                    #     label: owl.ui.show
-                    #     options:
-                    #         button: default
-                    #         icon: flowbite:eye-outline
-                    #         link:
-                    #             route: owl_admin_notification_show_details
-                    #             parameters:
-                    #                 id: resource.id
+                    show:
+                        type: show
                     update:
                         type: update
                     delete:

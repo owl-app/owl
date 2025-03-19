@@ -73,7 +73,7 @@ owl_admin_notification_create:
                     group: notification
                     description: owl.ui.permission.create_notification
 
-owl_admin_notification_show_details:
+owl_admin_notification_show:
     path: /notifications/{id}
     methods: [GET]
     defaults:

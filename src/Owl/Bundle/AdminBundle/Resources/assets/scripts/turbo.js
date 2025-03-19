@@ -1,8 +1,11 @@
+import { initializeBootstrap } from './bootstrap';
 import { syliusCheckAll } from './check-all';
 import { showLoader } from './loader';
 
 document.addEventListener('turbo:load', () => {
     document.querySelectorAll('[data-check-all]').forEach(syliusCheckAll);
+
+    initializeBootstrap();
 });
 
 document.addEventListener('turbo:before-fetch-request', () => {

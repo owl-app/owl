@@ -1,8 +1,7 @@
 /* eslint-env browser */
 import * as bootstrap from 'bootstrap';
 
-// Fix dropdowns
-(() => {
+export const initializeBootstrap = () => {
     document.querySelectorAll('.dropdown-static').forEach((dropdownToggleEl) => {
         const parent = dropdownToggleEl.closest('[data-bs-toggle="dropdown"]');
         if (parent) {
@@ -13,13 +12,13 @@ import * as bootstrap from 'bootstrap';
             });
         }
     });
-})();
 
-// Initialize tooltips
-(() => {
     document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((tooltipTriggerEl) => {
-        new bootstrap.Tooltip(tooltipTriggerEl);
+        if (tooltipTriggerEl != null) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        }
+        
     });
-})();
+};
 
 window.bootstrap = bootstrap;
