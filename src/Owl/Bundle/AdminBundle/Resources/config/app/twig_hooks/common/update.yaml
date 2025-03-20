@@ -52,14 +52,29 @@ sylius_twig_hooks:
         'owl_admin.common.update.content.header.title_block.actions':
             show:
                 template: '@OwlAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
-                priority: 200
+                priority: 300
             cancel:
                 template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
                 configuration:
                     hasForm: true
+                priority: 200
+            save_close:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/save.html.twig'
+                configuration:
+                    method: 'PUT'
+                    button:
+                        text: 'owl.ui.save_close'
+                        class: 'btn-primary'
+                    saveAction: 'referer'
                 priority: 100
-            update:
-                template: '@OwlAdmin/shared/crud/update/content/header/title_block/actions/update.html.twig'
+            save_update:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/save.html.twig'
+                configuration:
+                    method: 'PUT'
+                    button:
+                        text: 'owl.ui.save_update'
+                        class: 'btn-blue'
+                    saveAction: 'update'
                 priority: 0
 
         'owl_admin.common.modal.create.content.body':

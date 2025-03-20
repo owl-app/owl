@@ -43,7 +43,7 @@ class Notification implements NotificationInterface
         return $this->subject;
     }
 
-    public function setSubject(string $subject): void
+    public function setSubject(?string $subject): void
     {
         $this->subject = $subject;
     }

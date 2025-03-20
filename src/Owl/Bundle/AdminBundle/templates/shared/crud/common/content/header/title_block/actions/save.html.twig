@@ -1,0 +1,15 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
+
+{{ button.default(
+    sylius_test_form_attribute('update-changes-button')|merge({
+        text: hookable_metadata.configuration.button.text|default('owl.ui.save')|trans,
+        class: hookable_metadata.configuration.button.class|default('btn-primary'),
+        attr: {
+            'data-action': 'form#save',
+            'data-form-target': 'action',
+            'data-form-url-param': hookable_metadata.context.form.vars.action,
+            'data-form-method-param': hookable_metadata.configuration.method|default('POST'),
+            'data-form-save-action-param': hookable_metadata.configuration.saveAction|default('referer')
+        }
+    })
+) }}

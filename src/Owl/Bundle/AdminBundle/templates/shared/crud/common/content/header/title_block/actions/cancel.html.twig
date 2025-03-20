@@ -4,9 +4,8 @@
 {% set hasForm = hookable_metadata.configuration.hasForm|default(false) %}
 
 {% if hasForm %}
- {% set attr = attr|merge({ 'data-form-target': 'action' }) %}
+    {% set attr = attr|merge({ 'data-form-target': 'action' }) %}
 {% endif %}
-
 
 {% set configuration = hookable_metadata.context.configuration %}
 

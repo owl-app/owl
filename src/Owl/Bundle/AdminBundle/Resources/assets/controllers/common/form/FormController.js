@@ -66,7 +66,11 @@ export default class extends Controller {
         hideLoader(this.contentTarget);
 
         this.actionTargets.forEach((action) => {
-            action.removeAttribute('disabled');
+            if (action.tagName === 'BUTTON') {
+                action.removeAttribute('disabled');
+            } else {
+                action.classList.remove('disabled');
+            }
         });
     }
 
