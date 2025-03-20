@@ -1,14 +1,62 @@
 sylius_twig_hooks:
     hooks:
+        'owl_admin.notification.update':
+            content:
+                template: '@OwlAdmin/shared/crud/common/content.html.twig'
+                configuration:
+                    stimulus:
+                        controllers: {
+                            form: {
+                                values: {
+                                    'async-events': ['upload']
+                                }
+                            }
+                        }
+                priority: 0
+
         'owl_admin.notification.update.content.body':
             form:
                 component: 'owl_admin:notification:form'
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
-                    template: '@OwlAdmin/notification/form.html.twig'
+                    template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
                 configuration:
                     render_rest: false
+                priority: 0
+
+        'owl_admin.notification.update.content.body.form':
+            sections:
+                template: '@OwlAdmin/notification/form/sections.html.twig'
+                priority: 0
+
+        'owl_admin.notification.update.content.body.form.sections#left':
+            general:
+                template: '@OwlAdmin/notification/form/sections/general.html.twig'
+                priority: 0
+
+        'owl_admin.notification.update.content.body.form.sections#right':
+            upload:
+                template: '@OwlAdmin/notification/form/sections/files.html.twig'
+                priority: 0
+
+        'owl_admin.notification.update.content.body.form.sections.general':
+            form:
+                template: '@OwlAdmin/notification/form/sections/general/form.html.twig'
+                priority: 0
+
+        'owl_admin.notification.update.content.body.form.sections.files':
+            uploader:
+                template: '@OwlAdmin/shared/uploader.html.twig'
+                configuration:
+                    path:
+                        route: 'owl_admin_notification_file_create'
+                        params:
+                            notificationId: '@=_context.resource.getId()'
+
+        'owl_admin.notification.update.content.body.form.sections.files.uploader':
+            content:
+                template: '@OwlAdmin/shared/uploader/content.html.twig'
                 priority: 0
 
         'owl_admin.notification.update.content.header':

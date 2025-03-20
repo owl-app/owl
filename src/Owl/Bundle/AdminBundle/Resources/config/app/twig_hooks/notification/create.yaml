@@ -33,7 +33,7 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
-                    template: '@OwlAdmin/notification/form.html.twig'
+                    template: '@OwlAdmin/notification/modal/form.html.twig'
                 configuration:
                     method: 'POST'
                 priority: 0

@@ -1,0 +1,24 @@
+{% set form = hookable_metadata.context.form %}
+
+<div class="row">
+    <div class="col-lg-8 col-sm-12">
+        {{ form_row(form.subject) }}
+    </div>
+    <div class="col-lg-4 col-sm-12">
+        {{ form_row(form.dateIssue) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        {{ form_row(form.currentFrom) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.currentTo) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.assignedGroup) }}
+    </div>
+</div>
+<div class="col-12">
+    {{ form_row(form.description) }}
+</div>
