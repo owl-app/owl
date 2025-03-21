@@ -70,6 +70,7 @@ owl:
         drop_files_here_to_upload: 'Drop files here to upload'
         update_notification: Edit notification
         general: General
+        upload: Upload
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

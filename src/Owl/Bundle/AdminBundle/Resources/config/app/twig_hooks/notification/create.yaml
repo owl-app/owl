@@ -21,6 +21,8 @@ sylius_twig_hooks:
             uploader:
                 template: '@OwlAdmin/shared/uploader.html.twig'
                 configuration:
+                    action: form:upload@window->uploader#afterSaveFormEvent
+                    replace: 'id'
                     path:
                         route: 'owl_admin_notification_file_create'
                         params:
@@ -37,9 +39,3 @@ sylius_twig_hooks:
                 configuration:
                     method: 'POST'
                 priority: 0
-
-        'owl_admin.notification.modal.create.content.body.uploader':
-            content:
-                template: '@OwlAdmin/shared/uploader/content.html.twig'
-                priority: 0
-

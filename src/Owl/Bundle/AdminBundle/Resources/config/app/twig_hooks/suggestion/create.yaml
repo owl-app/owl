@@ -13,18 +13,22 @@ sylius_twig_hooks:
                             }
                         }
                 priority: 0
+
         'owl_admin.suggestion.modal.create.content.body':
             form:
                 template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
-                priority: 0
+                priority: 100
             uploader:
                 template: '@OwlAdmin/shared/uploader.html.twig'
                 configuration:
+                    action: form:upload@window->uploader#afterSaveFormEvent
+                    replace: 'id'
                     path:
                         route: 'owl_admin_suggestion_file_create'
                         params:
                             suggestionId: 'replaceParamId'
                 priority: 0
+
         'owl_admin.suggestion.modal.create.content.body.form':
             content:
                 component: 'owl_admin:suggestion:form'
@@ -36,8 +40,12 @@ sylius_twig_hooks:
                     method: 'POST'
                 priority: 0
 
-        'owl_admin.suggestion.modal.create.content.body.uploader':
-            content:
-                template: '@OwlAdmin/shared/uploader/content.html.twig'
+        'owl_admin.suggestion.modal.create.content.actions':
+            save:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions/save.html.twig'
+                configuration:
+                    params:
+                        save_action: 'save'
                 priority: 0
+
 

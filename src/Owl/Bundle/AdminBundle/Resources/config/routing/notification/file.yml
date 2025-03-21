@@ -9,7 +9,10 @@ owl_admin_notification_file:
         vars:
             delete:
                 redirect:
-                    header: xhr
+                    save:
+                        route: owl_admin_notification_update
+                        parameters: 
+                            id: $notificationId
                 form:
                     ajax: true
                 permission:

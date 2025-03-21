@@ -1,0 +1,13 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
+
+<div class="modal-footer">
+    {{ button.default({ text: 'owl.ui.cancel'|trans, attr: 'data-action=modal-static#close' }) }}
+    {{
+        button.default({
+            text: 'owl.ui.delete'|trans,
+            type: 'submit',
+            class: 'btn-danger',
+            attr: [sylius_test_html_attribute('confirm-button')]|merge({'data-action': 'modal-static#run'}) 
+        })
+    }}
+</div>

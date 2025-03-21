@@ -1,0 +1,14 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.common.modal.delete':
+            content:
+                template: '@OwlAdmin/shared/modal/static.html.twig'
+                priority: 0
+
+        'owl_admin.common.modal.delete.content':
+            header:
+                template: '@OwlAdmin/shared/modal/static/delete/header.html.twig'
+                priority: 100
+            footer:
+                template: '@OwlAdmin/shared/modal/static/delete/footer.html.twig'
+                priority: 0

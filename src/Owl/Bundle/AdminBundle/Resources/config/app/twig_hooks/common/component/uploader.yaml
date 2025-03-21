@@ -1,0 +1,11 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.common.component.uploader':
+            content:
+                template: '@OwlAdmin/shared/uploader/content.html.twig'
+                priority: 0
+
+        'owl_admin.common.component.uploader.content':
+            button:
+                template: '@OwlAdmin/shared/uploader/content/button.html.twig'
+                priority: 0

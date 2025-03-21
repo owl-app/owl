@@ -34,7 +34,7 @@ owl_admin_suggestion_create:
                 serialization_groups: [AjaxShow]
                 redirect:
                     save:
-                        route: owl_admin_dashboard
+                        route: owl_admin_suggestion_index
                 form:
                     ajax: true
                 permission:

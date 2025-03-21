@@ -370,6 +370,11 @@ class BaseController extends ResourceController
 
         $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
+        /** @var RequestConfiguration $configuration */
+        if ($configuration->isAjaxRequest()) {
+            return $this->createAjaxView($configuration, null, Response::HTTP_NO_CONTENT);
+        }
+
         if (!$configuration->isHtmlRequest()) {
             return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
         }
@@ -405,7 +410,7 @@ class BaseController extends ResourceController
         }
 
         $view = new View();
-        $view->setData($data ?? []);
+        $view->setData($data ?? null);
         $view->setStatusCode($statusCode);
         $view->setFormat('json');
         $view->setHeaders($this->redirectHandler->getRedirectHeaders($configuration, $data));

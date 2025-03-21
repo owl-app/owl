@@ -16,6 +16,10 @@
     {% hook 'update' with { _prefixes: prefixes, resource, metadata, configuration, form } %}
 {% endblock %}
 
+{% block modal %}
+    {% hook 'update#modals' with { _prefixes: prefixes, resource, metadata, configuration, form } %}
+{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {% hook 'update#stylesheets' with { _prefixes: prefixes } %}

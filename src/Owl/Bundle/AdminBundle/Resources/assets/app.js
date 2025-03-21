@@ -7,6 +7,7 @@ import '@symfony/ux-live-component/styles/live.css';
 import ModalFormController from './controllers/symfony/ModalFormController';
 //modal
 import ModalController from './controllers/common/modal/ModalController';
+import StaticModalController from './controllers/common/modal/StaticModalController';
 import ShowModalController from './controllers/common/modal/ShowModalController';
 //form
 import FormController from './controllers/common/form/FormController';
@@ -23,6 +24,7 @@ export function startApp() {
     appSymfonyStimulus.register('live', LiveController);
     appSymfonyStimulus.register('symfony-modal-form', ModalFormController);
     appSymfonyStimulus.register('modal', ModalController);
+    appSymfonyStimulus.register('modal-static', StaticModalController);
     appSymfonyStimulus.register('show-modal', ShowModalController);
     appSymfonyStimulus.register('form', FormController);
     appSymfonyStimulus.register('uploader', UploaderController);

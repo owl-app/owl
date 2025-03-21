@@ -8,7 +8,7 @@
 
 {% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
 
-<div class="container-xl" {% if attributes is defined %} {{ attributes }} data-form-target="live" {% endif %}>
+<div {% if attributes is defined %} {{ attributes }} data-form-target="live" {% endif %}>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id, 'data-form-target':'form'}}) }}
     <div class="card-body">
         {% if hookable_metadata.configuration.method is defined %}

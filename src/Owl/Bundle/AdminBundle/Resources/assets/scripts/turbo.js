@@ -1,3 +1,4 @@
+import { runAllAnimations } from './animations';
 import { initializeBootstrap } from './bootstrap';
 import { syliusCheckAll } from './check-all';
 import { showLoader } from './loader';
@@ -5,6 +6,7 @@ import { showLoader } from './loader';
 document.addEventListener('turbo:load', () => {
     document.querySelectorAll('[data-check-all]').forEach(syliusCheckAll);
 
+    runAllAnimations();
     initializeBootstrap();
 });
 

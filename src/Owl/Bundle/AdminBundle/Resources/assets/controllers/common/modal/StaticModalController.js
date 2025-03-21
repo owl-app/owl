@@ -3,6 +3,7 @@ import { Modal } from 'bootstrap';
 
 import { showLoader, hideLoader } from '../../../scripts/loader';
 import { debounce } from '../../../utils/debounce';
+import redirect from '../../../utils/redirect';
 
 export default class extends Controller {
 
@@ -14,16 +15,17 @@ export default class extends Controller {
         this.element.addEventListener('hidden.bs.modal', this.removeContent.bind(this));
     }
 
-    open({ params: { url, size = 'lg' } }) {
+    open({ params }) {
+        this.configuration = params.configuration ?? {};
+        this.request = params.request;
         this.modal = new Modal(this.element, {
             backdrop: 'static',
             keyboard: true
         });
 
-        this.showLoading(size);
-        this.modal.show();
+        this.setSize(this.configuration?.size);
 
-        debounce(this.loadContent.bind(this), 200)(url);
+        this.modal.show();
     }
 
     close() {
@@ -32,34 +34,42 @@ export default class extends Controller {
         }
     }
 
-    loadContent(url) {
-        fetch(url, {
+    run() {
+        this.showLoading();
+
+        fetch(this.request.url, {
+            method: 'POST',
+            body: new URLSearchParams(this.request.data).toString(),
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then(response => {
-            if (!response.ok) {
-                throw new Error(response);
+        }).then(async response => {
+            if (response.ok) {
+                debounce(() => {
+                    this.hide();
+                    this.close();
+                }, 100)();
+
+                debounce(async () => {
+                    if (response.headers.has('x-owl-location')) {
+                        redirect(response.headers.get('x-owl-location'));
+                    }
+                }, 200)();
             }
-
-            return response.text();
-        }).then(html => {
-            this.dialogTarget.insertAdjacentHTML('afterbegin', html);
-
-            debounce(this.afterLoadContent.bind(this), 100)();
         }).catch(() => {
-            this.showError();
-
-            this.hideLoading();
+            this.hide();
         });
     }
 
-    afterLoadContent() {
-        this.hideLoading();
-        this.showContent();
+    setSize(size) {
+        if (size && size !== 'default') {
+            this.size = size;
+            this.element.classList.add(`modal-${size}`);
+        }
     }
 
-    showLoading(size) {
+    showLoading() {
         const loaderOptions = {
             class: {
                 loader: 'modal',
@@ -69,16 +79,15 @@ export default class extends Controller {
             height: '5rem'
         };
 
-        if (size && size !== 'default') {
-            this.size = size;
-            this.element.classList.add(`modal-${size}`);
-        }
+        this.element.classList.remove('show');
 
         showLoader(document.body, loaderOptions);
     }
 
-    hideLoading() {
+    hide() {
         hideLoader(document.body);
+
+        this.close();
     }
 
     showContent() {
@@ -94,15 +103,10 @@ export default class extends Controller {
 
         if (this.hasErrorTarget) {
             this.errorTarget.classList.add('d-none');
-            this.errorTarget.classList.remove('show');
         }
     }
 
     showError() {
         this.errorTarget.classList.remove('d-none');
-
-        debounce(() => {
-            this.errorTarget.classList.add('show');
-        }, 100)();
     }
 }

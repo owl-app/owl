@@ -1,0 +1,30 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
+
+{% set files = hookable_metadata.context.files %}
+{% set path = hookable_metadata.configuration.path %}
+
+<div class="list-group list-group-flush">
+    {% for file in files %}
+        <div class="row p-2">
+            <div class="col-10 align-self-center">
+                <a href="{{ file.path|owl_file_path }}" class="badge bg-blue text-blue-fg text-wrap text-break w-100">{{ file.name }}</a>
+            </div>
+            <div class="col-2 align-self-center text-end">
+                {{
+                    buttons.modalDelete(
+                        {
+                            request: {
+                                url: path(path,  { 'notificationId' : file.fileSubject.id, 'id': file.id }),
+                                data: {
+                                    '_csrf_token':  csrf_token(file.id),
+                                    '_method': 'DELETE',
+                                    'save_action': 'save',
+                                }
+                            }
+                        }
+                    )
+                }}
+            </div>
+        </div>
+    {% endfor %}
+</div>

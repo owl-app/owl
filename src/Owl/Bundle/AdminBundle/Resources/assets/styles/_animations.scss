@@ -1,0 +1,9 @@
+.slide-down {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+
+  &.active {
+      max-height: 200px;
+  }
+}

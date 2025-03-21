@@ -1,8 +1,10 @@
 <div class="card mb-3">
     <div class="card-header">
         <div class="card-title">
-            {{ 'owl.ui.files'|trans }}
+            {{ 'owl.ui.upload'|trans }}
         </div>
     </div>
-    {% hook 'files' with { files: hookable_metadata.context.resource.files} %}
+    <div class="card-body">
+        {% hook 'uploader' %}
+    </div>
 </div>

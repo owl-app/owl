@@ -1,11 +1,14 @@
-{% set path = path(hookable_metadata.configuration.path.route, hookable_metadata.configuration.path.params) %}
+{% set configuration = hookable_metadata.configuration %}
+{% set path = path(configuration.path.route, configuration.path.params) %}
 
 <div
     class="owl-uploader"
     data-controller="uploader"
     data-uploader-url-value="{{ path }}"
-    data-uploader-replace-value="id"
-    data-action="form:upload@window->uploader#afterSaveFormEvent"
+    data-uploader-replace-value="{{ configuration.replace|default('id') }}"
+    data-action="{{ configuration.action }}"
 >
-    {% hook 'uploader' %}
+    {% hook 'owl_admin.common.component.uploader' with { _prefixes: [] } %}
 </div>
+
+

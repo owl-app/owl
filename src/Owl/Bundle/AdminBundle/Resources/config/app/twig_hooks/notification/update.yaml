@@ -1,5 +1,10 @@
 sylius_twig_hooks:
     hooks:
+        'owl_admin.notification.update#modals':
+            delete:
+                template: '@OwlAdmin/shared/crud/modal/delete.html.twig'
+                priority: 0
+
         'owl_admin.notification.update':
             content:
                 template: '@OwlAdmin/shared/crud/common/content.html.twig'
@@ -12,7 +17,7 @@ sylius_twig_hooks:
                                 }
                             }
                         }
-                priority: 0
+                priority: 100
 
         'owl_admin.notification.update.content.body':
             form:
@@ -36,7 +41,10 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.notification.update.content.body.form.sections#right':
-            upload:
+            uploader:
+                template: '@OwlAdmin/notification/form/sections/uploader.html.twig'
+                priority: 0
+            files:
                 template: '@OwlAdmin/notification/form/sections/files.html.twig'
                 priority: 0
 
@@ -45,18 +53,23 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/notification/form/sections/general/form.html.twig'
                 priority: 0
 
-        'owl_admin.notification.update.content.body.form.sections.files':
+        'owl_admin.notification.update.content.body.form.sections.uploader':
             uploader:
                 template: '@OwlAdmin/shared/uploader.html.twig'
                 configuration:
+                    action: form:upload@window->uploader#afterSaveFormEvent
+                    replace: 'id'
                     path:
                         route: 'owl_admin_notification_file_create'
                         params:
                             notificationId: '@=_context.resource.getId()'
+                priority: 0
 
-        'owl_admin.notification.update.content.body.form.sections.files.uploader':
-            content:
-                template: '@OwlAdmin/shared/uploader/content.html.twig'
+        'owl_admin.notification.update.content.body.form.sections.files':
+            files:
+                template: '@OwlAdmin/shared/file/list.html.twig'
+                configuration:
+                    path: 'owl_admin_notification_file_delete'
                 priority: 0
 
         'owl_admin.notification.update.content.header':

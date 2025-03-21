@@ -2,6 +2,7 @@
 
 {% set configuration = hookable_metadata.context.configuration %}
 {% set path = path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})) %}
+{% set saveActionParam = hookable_metadata.configuration.params.save_action|default('referer') %}
 
 {{ 
     button.primary(
@@ -11,7 +12,7 @@
                 'data-action': 'form:saved@window->modal#close form#save',
                 'data-form-target': 'action',
                 'data-form-url-param': path,
-                'data-form-save-action-param': 'referer'
+                'data-form-save-action-param': saveActionParam
             }
         }
     )

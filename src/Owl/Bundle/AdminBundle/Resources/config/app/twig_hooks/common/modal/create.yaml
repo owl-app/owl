@@ -67,4 +67,7 @@ sylius_twig_hooks:
                 priority: 100
             save:
                 template: '@OwlAdmin/shared/crud/common/modal/content/actions/save.html.twig'
+                configuration:
+                    params:
+                        save_action: 'referer'
                 priority: 0
