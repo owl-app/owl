@@ -26,10 +26,12 @@
             </div>
         {% endset %}
 
-        {{ accordion([{
-            title: 'owl.ui.filters'|trans,
-            content: content,
-            icon: 'flowbite:adjustments-vertical-outline',
-        }], are_criteria_set) }}
+        <div class="accordion-filters">
+            {{ accordion([{
+                title: 'owl.ui.filters'|trans,
+                content: content,
+                icon: 'flowbite:adjustments-vertical-outline',
+            }], are_criteria_set) }}
+        </div>
     </div>
 {% endif %}

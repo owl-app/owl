@@ -1,0 +1,47 @@
+{% set notification = hookable_metadata.context.resource %}
+
+<div class="col-12 col-lg-8">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">{{ 'owl.ui.general'|trans }}</h5>
+        </div>
+        <div class="card-body">
+            <div class="divide-y">
+                <div class="row">
+                    <div class="col-12 col-md-4 fw-bold">{{ 'owl.form.common.subject'|trans }}</div>
+                    <div class="col-12 col-md-8">{{ notification.subject }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 fw-bold">{{ 'owl.form.common.description'|trans }}</div>
+                    <div class="col-12 col-md-8">{{ notification.description|raw }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 fw-bold">{{ 'owl.form.common.date_issue'|trans }}</div>
+                    <div class="col-12 col-md-8">{{ notification.dateIssue|format_date }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 fw-bold">{{ 'owl.form.notification.current_from'|trans }}</div>
+                    <div class="col-12 col-md-8">{{ notification.currentFrom|format_date }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 fw-bold">{{ 'owl.form.notification.current_to'|trans }}</div>
+                    <div class="col-12 col-md-8">{{ notification.currentTo|format_date }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 fw-bold">{{ 'owl.ui.date_created'|trans }}</div>
+                    <div class="col-12 col-md-8">{{ notification.createdAt|format_date }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 fw-bold">{{ 'owl.ui.date_updated'|trans }}</div>
+                    <div class="col-12 col-md-8">{{ notification.updatedAt|format_date }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

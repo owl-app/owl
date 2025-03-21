@@ -6,7 +6,7 @@
 
     {% set singular_name = hookable_metadata.configuration.resource_name|default(metadata.applicationName ~ '.ui.update_' ~ _context.metadata.name) %}
     {% set header = hookable_metadata.configuration.header|default(null) %}
-    {% set icon = hookable_metadata.configuration.icon|default('flowbite:plus-outline') %}
+    {% set icon = hookable_metadata.configuration.icon|default('flowbite:file-pen-outline') %}
 {% else %}
     {% set singular_name = hookable_metadata.configuration.resource_name %}
     {% set header = hookable_metadata.configuration.header %}

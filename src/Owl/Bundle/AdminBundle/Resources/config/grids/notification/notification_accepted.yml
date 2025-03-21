@@ -17,7 +17,7 @@ sylius_grid:
                     label: owl.ui.user
                     sortable: user.firstName
                     options:
-                        template: "@OwlUi/Grid/Field/owner.html.twig"
+                        template: "@OwlAdmin/shared/grid/field/user.html.twig"
                 acceptedAt:
                     type: datetime
                     label: owl.ui.accepted_at

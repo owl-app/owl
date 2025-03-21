@@ -11,22 +11,20 @@
             {% set item_id = item.id|default('collapse' ~ loop.index) %}
 
             <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button {{ item.open == true ? '' : 'collapsed' }}"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#{{ item_id }}"
-                            aria-expanded="{{ item.open == true ? 'true' : 'false' }}"
-                            aria-controls="{{ item_id }}">
+                <button class="accordion-header accordion-button {{ item.open == true ? '' : 'collapsed' }}"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#{{ item_id }}"
+                        aria-expanded="{{ item.open == true ? 'true' : 'false' }}"
+                        aria-controls="{{ item_id }}">
 
-                        <span class="d-flex gap-2">
-                            {% if item.icon %}
-                                <span class="d-flex align-items-center">{{ ux_icon(item.icon) }}</span>
-                            {% endif %}
-                            {{ item.title|default('Title') }}
-                        </span>
-                    </button>
-                </h2>
+                    <span class="d-flex gap-2">
+                        {% if item.icon %}
+                            <span class="d-flex align-items-center">{{ ux_icon(item.icon) }}</span>
+                        {% endif %}
+                        {{ item.title|default('Title') }}
+                    </span>
+                </button>
                 <div id="{{ item_id }}"
                      class="accordion-collapse collapse {{ item.open == true ? 'show' : '' }}"
                      {% if auto_close == true %}data-bs-parent="#{{ id }}"{% endif %}>

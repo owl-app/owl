@@ -14,7 +14,7 @@ export default class extends Controller {
         this.element.addEventListener('hidden.bs.modal', this.removeContent.bind(this));
     }
 
-    open({ params: { url, size = 'lg' } }) {
+    open({ params: { url, size = 'lg', hasTinymce = false } }) {
         this.modal = new Modal(this.element, {
             backdrop: 'static',
             keyboard: true
@@ -23,7 +23,7 @@ export default class extends Controller {
         this.showLoading(size);
         this.modal.show();
 
-        debounce(this.loadContent.bind(this), 200)(url);
+        debounce(this.loadContent.bind(this), 200)(url, hasTinymce);
     }
 
     close() {
@@ -32,7 +32,7 @@ export default class extends Controller {
         }
     }
 
-    loadContent(url) {
+    loadContent(url, hasTinymce) {
         fetch(url, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
@@ -46,7 +46,7 @@ export default class extends Controller {
         }).then(html => {
             this.dialogTarget.insertAdjacentHTML('afterbegin', html);
 
-            debounce(this.afterLoadContent.bind(this), 100)();
+            debounce(this.afterLoadContent.bind(this), 100)(hasTinymce);
         }).catch(() => {
             this.showError();
 
@@ -54,9 +54,13 @@ export default class extends Controller {
         });
     }
 
-    afterLoadContent() {
+    afterLoadContent(hasTinymce) {
         this.hideLoading();
         this.showContent();
+
+        if (hasTinymce) {
+            initTinyMCE();
+        }
     }
 
     showLoading(size) {

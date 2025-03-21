@@ -1,0 +1,9 @@
+{% set resource = hookable_metadata.context.resource %}
+{% set active = hookable_metadata.configuration.active|default(false) %}
+
+<a 
+    href="{{ path('owl_admin_notification_show_accepted_index', {'id': resource.id}) }}"
+    class="nav-link flex-grow-0 {% if active %}active fw-bold{% endif %}"
+>
+    {{ 'owl.ui.confirmation_history'|trans }}
+</a>

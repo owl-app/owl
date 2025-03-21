@@ -1,5 +1,12 @@
 .owl {
     &.alert {
         background-color: #fff;
+        border-left: .25rem var(--tblr-border-style) var(--tblr-alert-color);
+        gap: .5rem;
+
+        .alert-heading {
+            font-weight: var(--tblr-font-weight-bold);
+            color: var(--tblr-alert-color);
+        }
     }
 }

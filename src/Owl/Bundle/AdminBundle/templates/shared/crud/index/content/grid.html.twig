@@ -1,4 +1,7 @@
-<div class="owl-grid page-body">
+{% set metadata = hookable_metadata.context.metadata %}
+{% set grid_class_name = hookable_metadata.configuration.grid_name|default(metadata.applicationName ~ '-grid-' ~ _context.metadata.name)|replace({'_': '-'}) %}
+
+<div class="owl-grid page-body {{ grid_class_name}}">
     <div class="container-xl">
         {% hook 'grid' %}
     </div>

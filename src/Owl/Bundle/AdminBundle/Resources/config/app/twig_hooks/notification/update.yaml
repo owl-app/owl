@@ -70,6 +70,8 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/file/list.html.twig'
                 configuration:
                     path: 'owl_admin_notification_file_delete'
+                    paramSubject: 'notificationId'
+                    saveAction: 'update'
                 priority: 0
 
         'owl_admin.notification.update.content.header':

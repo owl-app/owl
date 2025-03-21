@@ -9,8 +9,12 @@ owl_admin_notification_file:
         vars:
             delete:
                 redirect:
-                    save:
+                    update:
                         route: owl_admin_notification_update
+                        parameters: 
+                            id: $notificationId
+                    show:
+                        route: owl_admin_notification_show
                         parameters: 
                             id: $notificationId
                 form:

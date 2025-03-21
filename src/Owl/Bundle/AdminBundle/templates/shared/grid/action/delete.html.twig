@@ -1,5 +1,19 @@
-{% set id = options.link.parameters['id']|default(data.id)  %}
+{% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
 
+{% set id = options.link.parameters['id']|default(data.id)  %}
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('delete')), options.link.parameters|default({'id': id}))) %}
 
-{{ component('owl_admin:delete_modal', {id: id, path: path, label: action.label, icon: action.icon}) }}
+{{
+    buttons.modalDelete(
+        {
+            request: {
+                url: path,
+                data: {
+                    '_csrf_token':  csrf_token(id),
+                    '_method': 'DELETE',
+                    'save_action': 'referer',
+                }
+            }
+        }
+    )
+}}

@@ -50,3 +50,16 @@
         }
     }
 }
+
+.nav {
+    &.nav-pills {
+        &.nav-show {
+            .nav-link {
+                &.active {
+                    --tblr-nav-pills-link-active-bg: var(--tblr-primary);
+                    color: $white;
+                }
+            }
+        }
+    }
+}

@@ -71,6 +71,10 @@ owl:
         update_notification: Edit notification
         general: General
         upload: Upload
+        confirmation_history: Confirmation history
+        date_created: Data created
+        date_updated: Date updated
+        accepted_at: Date accepted
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

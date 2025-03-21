@@ -1,1 +1,7 @@
 {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
+
+{% if owl_is_turbo %}
+    {{ tinymce_init({
+        theme: {'advanced':{'language': app.request.locale, 'height': 180 }}
+    }) }}
+{% endif %}

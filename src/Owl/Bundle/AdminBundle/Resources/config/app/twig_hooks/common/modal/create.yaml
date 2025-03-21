@@ -24,6 +24,8 @@ sylius_twig_hooks:
         'owl_admin.common.modal.create.content.body':
             form:
                 template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                configuration:
+                    render_rest: true
                 priority: 0
 
         'owl_admin.common.modal.create.content.header':
@@ -39,26 +41,14 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/crud/common/modal/create/content/header/title_block/title.html.twig'
                 priority: 0
 
-        'owl_admin.common.modal.create.content.body.form':
-            content:
-                template: '@OwlAdmin/shared/crud/common/modal/content/body/form/content.html.twig'
-                configuration:
-                    render_rest: true
-                priority: 0
-
-        'owl_admin.common.modal.create.content.body.form.content':
-            sections:
-                template: '@OwlAdmin/shared/crud/common/content/form/sections.html.twig'
-                priority: 0
-
-        'owl_admin.common.modal.create.content.body.form.content.sections':
+        'owl_admin.common.modal.create.content.body.form.sections':
             general:
-                template: '@OwlAdmin/shared/crud/common/content/form/sections/general.html.twig'
+                template: '@OwlAdmin/shared/crud/common/modal/content/body/form/sections/general.html.twig'
                 priority: 0
 
-        'owl_admin.common.modal.create.content.body.form.content.sections.general':
+        'owl_admin.common.modal.create.content.body.form.sections.general':
             default:
-                template: '@OwlAdmin/shared/crud/common/content/form/sections/general/default.html.twig'
+                template: '@OwlAdmin/shared/crud/common/modal/content/body/form/sections/general/default.html.twig'
                 priority: 0
 
         'owl_admin.common.modal.create.content.actions':

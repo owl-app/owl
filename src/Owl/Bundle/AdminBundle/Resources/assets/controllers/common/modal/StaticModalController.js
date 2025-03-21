@@ -12,7 +12,7 @@ export default class extends Controller {
     modal = null;
 
     connect() {
-        this.element.addEventListener('hidden.bs.modal', this.removeContent.bind(this));
+        this.element.addEventListener('hidden.bs.modal', this.eventHiddenModal.bind(this));
     }
 
     open({ params }) {
@@ -46,9 +46,10 @@ export default class extends Controller {
             }
         }).then(async response => {
             if (response.ok) {
+                this.close();
+
                 debounce(() => {
-                    this.hide();
-                    this.close();
+                    hideLoader(document.body);
                 }, 100)();
 
                 debounce(async () => {
@@ -84,29 +85,15 @@ export default class extends Controller {
         showLoader(document.body, loaderOptions);
     }
 
-    hide() {
-        hideLoader(document.body);
-
-        this.close();
-    }
-
     showContent() {
         this.contentTarget.classList.add('show');
     }
 
-    removeContent() {
-        this.element.classList.remove(`modal-${this.size}`);
-
-        if (this.hasContentTarget) {
-            this.contentTarget.remove();
-        }
-
-        if (this.hasErrorTarget) {
-            this.errorTarget.classList.add('d-none');
-        }
-    }
-
     showError() {
         this.errorTarget.classList.remove('d-none');
+    }
+
+    eventHiddenModal() {
+        this.element.classList.remove(`modal-${this.size}`);
     }
 }

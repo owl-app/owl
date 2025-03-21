@@ -10,7 +10,10 @@
     z-index: 100;
 
     &.modal {
+        position: fixed;
         z-index: 9999;
+        width: 100vw;
+        height: 100vh
     }
 
     &.content {

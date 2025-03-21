@@ -1,7 +1,7 @@
 sylius_twig_hooks:
     hooks:
-        'owl_admin.suggestion_status.modal.create.content.body.form':
-            content:
+        'owl_admin.suggestion_status.modal.create.content.body':
+            form:
                 component: 'owl_admin:suggestion_status:form'
                 props:
                     resource: '@=_context.resource'

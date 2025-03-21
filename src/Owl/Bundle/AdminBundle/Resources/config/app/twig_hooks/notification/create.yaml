@@ -16,7 +16,13 @@ sylius_twig_hooks:
 
         'owl_admin.notification.modal.create.content.body':
             form:
-                template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                component: 'owl_admin:notification:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
+                configuration:
+                    render_rest: false
                 priority: 0
             uploader:
                 template: '@OwlAdmin/shared/uploader.html.twig'
@@ -30,12 +36,6 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.notification.modal.create.content.body.form':
-            content:
-                component: 'owl_admin:notification:form'
-                props:
-                    resource: '@=_context.resource'
-                    form: '@=_context.form'
-                    template: '@OwlAdmin/notification/modal/form.html.twig'
-                configuration:
-                    method: 'POST'
+            general:
+                template: '@OwlAdmin/notification/form/sections/general/form.html.twig'
                 priority: 0

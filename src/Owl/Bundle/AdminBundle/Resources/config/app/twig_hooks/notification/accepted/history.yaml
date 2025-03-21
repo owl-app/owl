@@ -1,0 +1,71 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.common.show#modals':
+            delete:
+                template: '@OwlAdmin/shared/crud/modal/delete.html.twig'
+                priority: 0
+
+        'owl_admin.notification_accepted.show.content':
+            page_body:
+                template: '@OwlAdmin/notification/show/content/page_body.html.twig'
+                priority: 0
+
+        'owl_admin.notification_accepted.show.content.header':
+            breadcrumbs:
+                template: '@OwlAdmin/notification/accepted/history/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field: subject
+                priority: 100
+
+        'owl_admin.notification_accepted.show.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/show/content/header/title_block/title.html.twig'
+                configuration:
+                    header: 'owl.ui.confirmation_history'
+                    icon: 'flowbite:clipboard-list-outline'
+                priority: 0
+
+        'owl_admin.notification_accepted.show.content.page_body':
+            nav:
+                template: '@OwlAdmin/notification/show/content/page_body/nav.html.twig'
+                priority: 100
+            grid:
+                template: '@OwlAdmin/shared/crud/index/content/grid.html.twig'
+                priority: 0
+
+        'owl_admin.notification_accepted.show.content.page_body.nav':
+            details:
+                template: '@OwlAdmin/notification/show/content/page_body/nav/details.html.twig'
+                priority: 100
+            confirmation_history:
+                template: '@OwlAdmin/notification/show/content/page_body/nav/confirmation_history.html.twig'
+                configuration:
+                    active: true
+                priority: 0
+
+        'owl_admin.notification_accepted.show.content.page_body.grid':
+            filters:
+                template: '@OwlAdmin/shared/crud/index/content/grid/filters.html.twig'
+                priority: 200
+            data_table:
+                template: '@OwlAdmin/shared/crud/index/content/grid/data_table.html.twig'
+                priority: 100
+            no_data_block:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results.html.twig'
+                priority: 0
+
+        'owl_admin.notification_accepted.show.content.page_body.grid.no_results':
+            image:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results/image.html.twig'
+                priority: 300
+            title:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results/title.html.twig'
+                priority: 200
+            subtitle:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results/subtitle.html.twig'
+                priority: 100
+            action:
+                template: '@OwlAdmin/shared/crud/index/content/grid/no_results/action.html.twig'
+                priority: 0
+
+

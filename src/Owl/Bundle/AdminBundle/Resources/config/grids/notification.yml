@@ -34,7 +34,7 @@ sylius_grid:
                     label: owl.ui.added_by
                     sortable: user.firstName
                     options:
-                        template: "@OwlUi/grid/field/raw.html.twig"
+                        template: "@OwlAdmin/shared/grid/field/user.html.twig"
             filters:
                 search:
                     type: string
@@ -47,7 +47,7 @@ sylius_grid:
                         type: contains
                     label: owl.ui.user
                     options:
-                        fields: [owner.email, owner.firstName, owner.lastName]
+                        fields: [user.email, user.firstName, user.lastName]
             actions:
                 main:
                     create:
@@ -58,6 +58,7 @@ sylius_grid:
                             icon: flowbite:plus-outline
                             modal:
                                 size: 'xl'
+                                'has-tinymce': true
                             link:
                                 route: owl_admin_notification_create
                 item:

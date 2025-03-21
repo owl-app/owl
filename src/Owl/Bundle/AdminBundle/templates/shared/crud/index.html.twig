@@ -16,6 +16,10 @@
     {% hook 'index' with { _prefixes: prefixes, metadata, resources } %}
 {% endblock %}
 
+{% block modal %}
+    {% hook 'index#modals' with { _prefixes: prefixes, resources, metadata } %}
+{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {% hook 'index#stylesheets' with { _prefixes: prefixes } %}

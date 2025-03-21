@@ -2,23 +2,25 @@
 
 {% set files = hookable_metadata.context.files %}
 {% set path = hookable_metadata.configuration.path %}
+{% set paramSubject = hookable_metadata.configuration.paramSubject %}
+{% set saveAction = hookable_metadata.configuration.saveAction|default('delete') %}
 
-<div class="list-group list-group-flush">
+{% if files is not empty %}
     {% for file in files %}
-        <div class="row p-2">
-            <div class="col-10 align-self-center">
-                <a href="{{ file.path|owl_file_path }}" class="badge bg-blue text-blue-fg text-wrap text-break w-100">{{ file.name }}</a>
-            </div>
-            <div class="col-2 align-self-center text-end">
+        <div class="row h-100 mb-1 mt-1">
+            <a target="_blank" href="{{ file.path|owl_file_path }}" class="col-10 d-flex align-items-center badge bg-blue text-blue-fg text-decoration-none">
+                <div class="text-truncate">{{ file.name }}</div>
+            </a>
+            <div class="col-2 text-end pe-0">
                 {{
                     buttons.modalDelete(
                         {
                             request: {
-                                url: path(path,  { 'notificationId' : file.fileSubject.id, 'id': file.id }),
+                                url: path(path,  { (paramSubject) : file.fileSubject.id, 'id': file.id }),
                                 data: {
                                     '_csrf_token':  csrf_token(file.id),
                                     '_method': 'DELETE',
-                                    'save_action': 'save',
+                                    'save_action': saveAction,
                                 }
                             }
                         }
@@ -28,3 +30,6 @@
         </div>
     {% endfor %}
 </div>
+{% else %}
+    {{ 'owl.ui.none'|trans }}
+{% endif %}

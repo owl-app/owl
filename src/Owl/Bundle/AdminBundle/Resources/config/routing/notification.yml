@@ -81,7 +81,7 @@ owl_admin_notification_show:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/Notification/show.html.twig"
+            template: "@OwlAdmin/shared/crud/show.html.twig"
             vars:
                 permission:
                     group: notification
@@ -96,7 +96,7 @@ owl_admin_notification_show_accepted_index:
             section: admin
             permission: true
             grid: owl_admin_notification_accepted
-            template: "@OwlAdmin/Notification/show.html.twig"
+            template: "@OwlAdmin/notification/accepted/history.html.twig"
             parents:
                 - 
                     resource: owl.notification

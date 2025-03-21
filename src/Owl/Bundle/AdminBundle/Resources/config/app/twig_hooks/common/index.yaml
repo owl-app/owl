@@ -1,5 +1,10 @@
 sylius_twig_hooks:
     hooks:
+        'owl_admin.common.index#modals':
+            delete:
+                template: '@OwlAdmin/shared/crud/modal/delete.html.twig'
+                priority: 0
+
         'owl_admin.common.index':
             sidebar:
                 template: '@OwlAdmin/shared/crud/common/sidebar.html.twig'

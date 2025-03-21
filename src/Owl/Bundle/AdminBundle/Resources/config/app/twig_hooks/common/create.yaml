@@ -8,18 +8,20 @@ sylius_twig_hooks:
         'owl_admin.common.create.content':
             flashes:
                 template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
-                priority: 400
+                priority: 500
             header:
                 template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
-                priority: 300
+                priority: 400
             form_error_alert:
                 template: '@OwlAdmin/shared/crud/common/content/form_error_alert.html.twig'
+                priority: 300
+            body:
+                template: '@OwlAdmin/shared/crud/common/content/body.html.twig'
                 priority: 200
-            form:
-                template: '@OwlAdmin/shared/crud/common/content/form.html.twig'
-                configuration:
-                    render_rest: true
-                priority: 100
+            footer:
+                template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100
+
 
         'owl_admin.common.create.content.header':
             breadcrumbs:
@@ -45,17 +47,24 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/create.html.twig'
                 priority: 0
 
-        'owl_admin.common.create.content.form':
+        'owl_admin.common.create.content.body':
+            form:
+                template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                configuration:
+                    render_rest: true
+                priority: 0
+
+        'owl_admin.common.create.content.body.form':
             sections:
-                template: '@OwlAdmin/shared/crud/common/content/form/sections.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/body/form/sections.html.twig'
                 priority: 0
 
-        'owl_admin.common.create.content.form.sections':
+        'owl_admin.common.create.content.body.form.sections':
             general:
-                template: '@OwlAdmin/shared/crud/common/content/form/sections/general.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/body/form/sections/general.html.twig'
                 priority: 0
 
-        'owl_admin.common.create.content.form.sections.general':
+        'owl_admin.common.create.content.body.form.sections.general':
             default:
-                template: '@OwlAdmin/shared/crud/common/content/form/sections/general/default.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/body/form/sections/general/default.html.twig'
                 priority: 0

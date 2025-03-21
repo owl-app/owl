@@ -76,25 +76,3 @@ sylius_twig_hooks:
                         class: 'btn-blue'
                     saveAction: 'update'
                 priority: 0
-
-        'owl_admin.common.modal.create.content.body':
-            form:
-                template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
-                configuration:
-                    render_rest: true
-                priority: 0
-
-        'owl_admin.common.modal.create.content.body.form':
-            sections:
-                template: '@OwlAdmin/shared/crud/common/content/body/form/sections.html.twig'
-                priority: 0
-                
-        'owl_admin.common.modal.create.content.bodyform.sections':
-            general:
-                template: '@OwlAdmin/shared/crud/common/content/body/form/sections/general.html.twig'
-                priority: 0
-
-        'owl_admin.common.modal.create.content.bodyform.sections.general':
-            default:
-                template: '@OwlAdmin/shared/crud/common/content/body/form/sections/general/default.html.twig'
-                priority: 0

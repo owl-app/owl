@@ -1,0 +1,52 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.common.show#modals':
+            delete:
+                template: '@OwlAdmin/shared/crud/modal/delete.html.twig'
+                priority: 0
+
+        'owl_admin.notification.show.content':
+            page_body:
+                template: '@OwlAdmin/notification/show/content/page_body.html.twig'
+                priority: 0
+
+        'owl_admin.notification.show.content.header':
+            breadcrumbs:
+                template: '@OwlAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field: subject
+                priority: 100
+
+        'owl_admin.notification.show.content.page_body':
+            nav:
+                template: '@OwlAdmin/notification/show/content/page_body/nav.html.twig'
+                priority: 0
+            content:
+                template: '@OwlAdmin/notification/show/content/page_body/content.html.twig'
+                priority: 0
+
+        'owl_admin.notification.show.content.page_body.nav':
+            details:
+                template: '@OwlAdmin/notification/show/content/page_body/nav/details.html.twig'
+                configuration:
+                    active: true
+                priority: 100
+            confirmation_history:
+                template: '@OwlAdmin/notification/show/content/page_body/nav/confirmation_history.html.twig'
+                priority: 0
+
+        'owl_admin.notification.show.content.page_body.content':
+            general:
+                template: '@OwlAdmin/notification/show/content/page_body/content/general.html.twig'
+                priority: 100
+            files:
+                template: '@OwlAdmin/notification/show/content/page_body/content/files.html.twig'
+                priority: 0
+
+        'owl_admin.notification.show.content.page_body.content.files':
+            files:
+                template: '@OwlAdmin/shared/file/list.html.twig'
+                configuration:
+                    path: 'owl_admin_notification_file_delete'
+                    paramSubject: 'notificationId'
+                    saveAction: 'show'

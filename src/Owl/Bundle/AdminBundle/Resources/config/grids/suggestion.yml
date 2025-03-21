@@ -25,7 +25,7 @@ sylius_grid:
                     label: owl.ui.user
                     sortable: user.displayName
                     options:
-                        template: "@OwlAdmin/shared/grid/field/owner.html.twig"
+                        template: "@OwlAdmin/shared/grid/field/user.html.twig"
                 status:
                     type: twig
                     label: owl.ui.status

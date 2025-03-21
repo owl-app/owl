@@ -8,6 +8,10 @@ document.addEventListener('turbo:load', () => {
 
     runAllAnimations();
     initializeBootstrap();
+
+    if (document.querySelectorAll('.tinymce').length) {
+        initTinyMCE();
+    }
 });
 
 document.addEventListener('turbo:before-fetch-request', () => {

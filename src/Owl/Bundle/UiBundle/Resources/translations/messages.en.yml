@@ -271,7 +271,6 @@ owl:
         to_all: to all
         notification_group_assigned_role_user: to users
         details_notification_of_the_day: Details message of the day
-        confirmation_history: Confirmation history
         reset_password: Reset password
         set_a_new_password_for_your_account: Set new password for your account
         reset_button: Reset

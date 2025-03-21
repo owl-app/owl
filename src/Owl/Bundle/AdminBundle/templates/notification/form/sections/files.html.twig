@@ -4,5 +4,7 @@
             {{ 'owl.ui.files'|trans }}
         </div>
     </div>
-    {% hook 'files' with { files: hookable_metadata.context.resource.files} %}
+    <div class="card-body">
+        {% hook 'files' with { files: hookable_metadata.context.resource.files } %}
+    </div>
 </div>

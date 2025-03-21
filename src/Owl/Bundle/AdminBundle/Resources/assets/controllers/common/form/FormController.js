@@ -8,12 +8,14 @@ import { debounce } from '../../../utils/debounce';
 
 export default class extends Controller {
 
-    static values = { asyncEvents: Array};
+    static values = { asyncEvents: Array };
 
     static targets = ['content', 'live', 'form', 'action', 'loading'];
 
     async initialize() {
-        this.formLiveComponent = await getComponent(this.liveTarget);
+        if (this.hasLiveTarget) {
+            this.formLiveComponent = await getComponent(this.liveTarget);
+        }
     }
 
     save({ params }) {
@@ -34,12 +36,12 @@ export default class extends Controller {
             }
         }).then(async response => {
             if (!response.ok && response.status === 422) {
-                const error = { cause: { errors: (await response.json()).errors }};
+                const error = { cause: { errors: (await response.json()).errors } };
                 throw new Error('Error validation', error);
             }
 
             this.afterSave(response);
-        }).catch(async ({ cause: { errors }}) => {
+        }).catch(async ({ cause: { errors } }) => {
             await this.synchronizeLiveComponent(errors);
 
             this.hideLoading();
@@ -51,7 +53,7 @@ export default class extends Controller {
     }
 
     showLoading() {
-        showLoader(this.contentTarget, { class: { loader: 'content' }});
+        showLoader(this.contentTarget, { class: { loader: 'content' } });
 
         this.actionTargets.forEach((action) => {
             if (action.tagName === 'BUTTON') {
@@ -104,18 +106,40 @@ export default class extends Controller {
 
     async synchronizeLiveComponent(data) {
         let errors = flattenObject(data);
-        const promises = [];
-    
-        Object.keys(errors).map((key) => {
-            const name = `${this.formTarget.name}.${key}`;
 
-            if (this.formLiveComponent.valueStore.has(name)) {
-                promises.push(this.formLiveComponent.set(name));
-            }
-        });
+        if (this.hasLiveTarget) {
+            const promises = [];
 
-        await this.formLiveComponent.debouncedStartRequest();
+            Object.keys(errors).map((key) => {
+                const name = `${this.formTarget.name}.${key}`;
 
-        await Promise.all(promises);
+                if (this.formLiveComponent.valueStore.has(name)) {
+                    promises.push(this.formLiveComponent.set(name));
+                }
+            });
+
+            await this.formLiveComponent.debouncedStartRequest();
+
+            await Promise.all(promises);
+        } else {
+            this.formTarget.querySelectorAll('.field').forEach(function(field) {
+                field.classList.remove('error');
+            });
+
+            Object.keys(errors).map((key) => {
+                let field = document.getElementById(this.formTarget.name + '_' + key)?.closest('.field');
+
+                if (field) {
+                    field.querySelector('.form-control')?.classList.add('is-invalid');
+
+                    let errorLabel = document.createElement('div');
+                    errorLabel.className = 'invalid-feedback d-block';
+                    errorLabel.textContent = errors[key];
+
+                    field.appendChild(errorLabel);
+                }
+            });
+        }
+
     }
 }

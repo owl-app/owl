@@ -1,0 +1,10 @@
+{% set resource = hookable_metadata.context.resource %}
+{% set active = hookable_metadata.configuration.active|default(false) %}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <nav class="nav nav-show nav-pills nav-2 w-100">
+            {% hook 'nav' %}
+        </nav>
+    </div>
+</div>

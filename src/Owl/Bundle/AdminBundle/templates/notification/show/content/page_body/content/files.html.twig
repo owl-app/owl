@@ -1,0 +1,10 @@
+<div class="col-12 col-lg-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">{{ 'owl.ui.files'|trans }}</h5>
+        </div>
+        <div class="card-body">
+            {% hook 'files' with { files: hookable_metadata.context.resource.files } %}
+        </div>
+    </div>
+</div>

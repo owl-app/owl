@@ -68,6 +68,7 @@ owl:
         error_modal_content: 'Wystąpił błąd podczas przetwarzania żądania. <br /> Spróbuj ponownie.'
         error_modal_title: 'Błąd'
         drop_files_here_to_upload: 'Upuść pliki tutaj, aby je przesłać'
+        accepted_at: Zaakceptowano
         permission:
             availables_roles: Dostępne role w systemie
             service: Wykonawcy
