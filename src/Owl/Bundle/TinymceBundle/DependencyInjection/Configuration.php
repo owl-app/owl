@@ -29,6 +29,7 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     // Include jQuery (true) library or not (false)
                     ->booleanNode('include_jquery')->defaultFalse()->end()
+                    ->booleanNode('turbo_enabled')->defaultFalse()->end()
                     // Use jQuery (true) or standalone (false) build of the TinyMCE
                     ->booleanNode('tinymce_jquery')->defaultFalse()->end()
                     // Set init to true to use callback on the event init

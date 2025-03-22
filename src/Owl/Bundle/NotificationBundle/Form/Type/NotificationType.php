@@ -21,7 +21,7 @@ final class NotificationType extends AbstractResourceType
             ->add('description', TextareaType::class, [
                 'label' => 'owl.form.common.description',
                 'attr' => [
-                    'class' => 'tinymce',
+                    'class' => 'editor',
                     'data-theme' => 'advanced',
                 ],
             ])

@@ -1,5 +1,15 @@
 sylius_twig_hooks:
     hooks:
+        'owl_admin.notification.index#javascripts':
+            tinymce:
+                template: '@OwlAdmin/shared/layout/base/javascripts/tinymce.html.twig'
+                configuration:
+                    tinymce:
+                        theme:
+                            advanced: 
+                                height: '180'
+                priority: 0
+
         'owl_admin.notification.index.content.header.title_block':
             title:
                 template: '@OwlAdmin/shared/crud/common/content/header/title_block/title.html.twig'

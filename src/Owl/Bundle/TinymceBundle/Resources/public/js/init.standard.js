@@ -6,97 +6,97 @@
 function initTinyMCE(options) {
     if (typeof tinymce == 'undefined') return false;
     if (typeof options == 'undefined') options = stfalcon_tinymce_config;
-    // Load when DOM is ready
-    domready(function() {
-        var i, t = tinymce.editors, textareas = [];
-        for (i in t) {
-            if (t.hasOwnProperty(i)) t[i].remove();
-        }
-        options.selector.forEach(function(selector) {
-            textareas = processSelector(selector, textareas);
-        });
-        if (!textareas.length) {
-            return false;
-        }
 
-        var externalPlugins = [];
-        // Load external plugins
-        if (typeof options.external_plugins == 'object') {
-            for (var pluginId in options.external_plugins) {
-                if (!options.external_plugins.hasOwnProperty(pluginId)) {
-                    continue;
+    var i, t = tinymce.editors, textareas = [];
+    for (i in t) {
+        if (t.hasOwnProperty(i)) t[i].remove();
+    }
+    options.selector.forEach(function (selector) {
+        textareas = processSelector(selector, textareas);
+    });
+    if (!textareas.length) {
+        return false;
+    }
+
+    var externalPlugins = [];
+    // Load external plugins
+    if (typeof options.external_plugins == 'object') {
+        for (var pluginId in options.external_plugins) {
+            if (!options.external_plugins.hasOwnProperty(pluginId)) {
+                continue;
+            }
+            var opts = options.external_plugins[pluginId],
+                url = opts.url || null;
+            if (url) {
+                externalPlugins.push({
+                    'id': pluginId,
+                    'url': url
+                });
+                tinymce.PluginManager.load(pluginId, url);
+            }
+        }
+    }
+
+    for (i = 0; i < textareas.length; i++) {
+        // Get editor's theme from the textarea data
+        var theme = textareas[i].getAttribute("data-theme") || 'simple';
+        // Get selected theme options
+        var settings = (typeof options.theme[theme] != 'undefined')
+            ? options.theme[theme]
+            : options.theme['simple'];
+
+        settings.external_plugins = settings.external_plugins || {};
+        for (var p = 0; p < externalPlugins.length; p++) {
+            settings.external_plugins[externalPlugins[p]['id']] = externalPlugins[p]['url'];
+        }
+        // workaround for an incompatibility with html5-validation
+        if (textareas[i].getAttribute("required") !== '') {
+            textareas[i].removeAttribute("required")
+        }
+        var textAreaId = textareas[i].getAttribute('id');
+        if (textAreaId === '' || textAreaId === null) {
+            textareas[i].setAttribute("id", "tinymce_" + Math.random().toString(36).substr(2));
+        }
+        // Add custom buttons to current editor
+        if (typeof options.tinymce_buttons == 'object') {
+            settings.setup = function (editor) {
+                if (options.setup) {
+                    options.setup(editor);
                 }
-                var opts = options.external_plugins[pluginId],
-                    url = opts.url || null;
-                if (url) {
-                    externalPlugins.push({
-                        'id': pluginId,
-                        'url': url
-                    });
-                    tinymce.PluginManager.load(pluginId, url);
-                }
-            }
-        }
 
-        for (i = 0; i < textareas.length; i++) {
-            // Get editor's theme from the textarea data
-            var theme = textareas[i].getAttribute("data-theme") || 'simple';
-            // Get selected theme options
-            var settings = (typeof options.theme[theme] != 'undefined')
-                ? options.theme[theme]
-                : options.theme['simple'];
+                for (var buttonId in options.tinymce_buttons) {
+                    if (!options.tinymce_buttons.hasOwnProperty(buttonId)) continue;
 
-            settings.external_plugins = settings.external_plugins || {};
-            for (var p = 0; p < externalPlugins.length; p++) {
-                settings.external_plugins[externalPlugins[p]['id']] = externalPlugins[p]['url'];
-            }
-            // workaround for an incompatibility with html5-validation
-            if (textareas[i].getAttribute("required") !== '') {
-                textareas[i].removeAttribute("required")
-            }
-            var textAreaId = textareas[i].getAttribute('id');
-            if (textAreaId === '' || textAreaId === null) {
-                textareas[i].setAttribute("id", "tinymce_" + Math.random().toString(36).substr(2));
-            }
-            // Add custom buttons to current editor
-            if (typeof options.tinymce_buttons == 'object') {
-                settings.setup = function(editor) {
-                    for (var buttonId in options.tinymce_buttons) {
-                        if (!options.tinymce_buttons.hasOwnProperty(buttonId)) continue;
-
-                        // Some tricky function to isolate variables values
-                        (function(id, opts) {
-                            opts.onclick = function() {
-                                var callback = window['tinymce_button_' + id];
-                                if (typeof callback == 'function') {
-                                    callback(editor);
-                                } else {
-                                    alert('You have to create callback function: "tinymce_button_' + id + '"');
-                                }
-                            }
-                            editor.addButton(id, opts);
-
-                        })(buttonId, clone(options.tinymce_buttons[buttonId]));
-                    }
-                    //Init Event
-                    if (options.use_callback_tinymce_init) {
-                        editor.on('init', function() {
-                            var callback = window['callback_tinymce_init'];
+                    // Some tricky function to isolate variables values
+                    (function (id, opts) {
+                        opts.onclick = function () {
+                            var callback = window['tinymce_button_' + id];
                             if (typeof callback == 'function') {
                                 callback(editor);
                             } else {
-                                alert('You have to create callback function: callback_tinymce_init');
+                                alert('You have to create callback function: "tinymce_button_' + id + '"');
                             }
-                        });
-                    }
+                        }
+                        editor.addButton(id, opts);
+
+                    })(buttonId, clone(options.tinymce_buttons[buttonId]));
+                }
+                //Init Event
+                if (options.use_callback_tinymce_init) {
+                    editor.on('init', function () {
+                        var callback = window['callback_tinymce_init'];
+                        if (typeof callback == 'function') {
+                            callback(editor);
+                        } else {
+                            alert('You have to create callback function: callback_tinymce_init');
+                        }
+                    });
                 }
             }
-            // Initialize textarea by its ID attribute
-            tinymce
-                .createEditor(textareas[i].getAttribute('id'), settings)
-                .render();
         }
-    });
+
+        tinymce.init({target: textareas[i], ...settings})
+    }
 }
 
 /**

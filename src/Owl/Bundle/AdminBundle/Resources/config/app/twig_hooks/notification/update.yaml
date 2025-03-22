@@ -1,5 +1,15 @@
 sylius_twig_hooks:
     hooks:
+        'owl_admin.notification.update#javascripts':
+            tinymce:
+                template: '@OwlAdmin/shared/layout/base/javascripts/tinymce.html.twig'
+                configuration:
+                    tinymce:
+                        theme:
+                            advanced: 
+                                height: '180'
+                priority: 0
+
         'owl_admin.notification.update#modals':
             delete:
                 template: '@OwlAdmin/shared/crud/modal/delete.html.twig'

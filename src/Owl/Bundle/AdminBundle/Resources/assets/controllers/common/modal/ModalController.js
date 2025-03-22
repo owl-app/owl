@@ -1,8 +1,9 @@
 import { Controller } from '@hotwired/stimulus';
 import { Modal } from 'bootstrap';
 
-import { showLoader, hideLoader } from '../../../scripts/loader';
 import { debounce } from '../../../utils/debounce';
+import { showLoader, hideLoader } from '../../../scripts/loader';
+import { initializeTinyMce } from '../../../scripts/tinymce';
 
 export default class extends Controller {
 
@@ -59,7 +60,7 @@ export default class extends Controller {
         this.showContent();
 
         if (hasTinymce) {
-            initTinyMCE();
+            initializeTinyMce();
         }
     }
 

@@ -1,0 +1,7 @@
+{% set default = { theme: {'advanced': { 'language': app.request.locale }, 'simple': { 'language': app.request.locale }}} %}
+
+{% set configuration = hookable_metadata.configuration.tinymce|default({})|owl_merge_recursive(default) %}
+
+{{
+    tinymce_init(configuration)
+}}

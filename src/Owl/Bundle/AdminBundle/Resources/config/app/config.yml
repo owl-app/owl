@@ -15,7 +15,8 @@ parameters:
     sylius.security.admin_regex: "^/%owl_admin.path_name%"
 
 tinymce:
-    selector: '.tinymce'
+    selector: '.editor'
+    turbo_enabled: true
 
 owl_user:
     permission_provider:

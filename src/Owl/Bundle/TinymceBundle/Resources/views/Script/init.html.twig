@@ -6,14 +6,21 @@
     <script type="text/javascript" src="{{ asset(base_url~'bundles/tinymce/vendor/tinymce/jquery.tinymce.min.js', asset_package_name) }}"></script>
     <script type="text/javascript" src="{{ asset(base_url~'bundles/tinymce/js/init.jquery.js', asset_package_name) }}"></script>
 {%- else -%}
-    <script type="text/javascript" src="{{ asset(base_url~'bundles/tinymce/vendor/tinymce/tinymce.min.js', asset_package_name) }}"></script>
-    <script type="text/javascript" src="{{ asset(base_url~'bundles/tinymce/js/ready.min.js', asset_package_name) }}"></script>
-    <script type="text/javascript" src="{{ asset(base_url~'bundles/tinymce/js/init.standard.js', asset_package_name) }}"></script>
+    <script type="text/javascript" data-turbo-track="dynamic" src="{{ asset(base_url~'bundles/tinymce/vendor/tinymce/tinymce.min.js', asset_package_name) }}"></script>
+    <script type="text/javascript" data-turbo-track="dynamic" src="{{ asset(base_url~'bundles/tinymce/js/init.standard.js', asset_package_name) }}"></script>
 {%- endif -%}
 
-<script type="text/javascript">
-    //<![CDATA[
-    stfalcon_tinymce_config = {{ tinymce_config|raw }};
-    {# initTinyMCE(); #}
-    //]]>
-</script>
+{% if turbo_enabled %}
+    <tinymce-config>
+        {{ tinymce_config|raw }}
+    </tinymce-config>
+{% else %}
+    <script type="text/javascript">
+        stfalcon_tinymce_config = {{ tinymce_config|raw }};
+
+        document.addEventListener("DOMContentLoaded", function() {
+            initTinyMCE();
+        });
+    </script>
+{% endif %}
+

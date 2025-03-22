@@ -182,6 +182,7 @@ class TinymceExtension extends AbstractExtension
                 'tinymce_config' => $tinymceConfiguration,
                 'include_jquery' => $config['include_jquery'],
                 'tinymce_jquery' => $config['tinymce_jquery'],
+                'turbo_enabled' => $config['turbo_enabled'],
                 'asset_package_name' => $assetPackageName,
                 'base_url' => $this->baseUrl,
             ],

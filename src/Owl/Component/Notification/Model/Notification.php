@@ -53,7 +53,7 @@ class Notification implements NotificationInterface
         return $this->description;
     }
 
-    public function setDescription(string $description): void
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }

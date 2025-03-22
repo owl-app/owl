@@ -20,9 +20,9 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
-                    template: '@OwlAdmin/suggestion/form.html.twig'
+                    template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
                 configuration:
-                    method: 'POST'
+                    render_rest: false
                 priority: 0
             uploader:
                 template: '@OwlAdmin/shared/uploader.html.twig'
@@ -33,6 +33,11 @@ sylius_twig_hooks:
                         route: 'owl_admin_suggestion_file_create'
                         params:
                             suggestionId: 'replaceParamId'
+                priority: 0
+
+        'owl_admin.suggestion.modal.create.content.body.form':
+            general:
+                template: '@OwlAdmin/suggestion/form.html.twig'
                 priority: 0
 
         'owl_admin.suggestion.modal.create.content.actions':
