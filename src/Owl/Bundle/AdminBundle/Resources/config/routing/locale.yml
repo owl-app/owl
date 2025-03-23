@@ -2,34 +2,38 @@ owl_admin_locale:
     resource: |
         alias: owl.locale
         section: admin
-        templates: "@OwlAdmin\\Crud"
-        except: ['show', 'delete']
+        templates: "@OwlAdmin\\shared\\crud"
+        except: ['show', 'create', 'update']
         redirect: index
         grid: owl_admin_locale
         permission: true
         vars:
-            all:
-                subheader: owl.ui.manage_languages_available_in_the_system
-                templates:
-                    form: "@OwlAdmin/Locale/_form.html.twig"
             index:
                 referer: true
                 icon: flag
                 permission:
                     group: locale
                     description: owl.ui.permission.list_locales
-            create:
+            delete:
+                permission:
+                    group: locale
+                    description: owl.ui.permission.delete_locale
+    type: sylius.resource
+
+owl_admin_locale_create:
+    path: /locales/new
+    methods: [GET,POST]
+    defaults:
+        _controller: owl.controller.locale::createAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/shared/crud/modal/create.html.twig"
+            vars:
+                serialization_groups: [AjaxShow]
                 form:
                     ajax: true
-                serialization_groups: [AjaxShow]
+                tinymce: true
                 permission:
                     group: locale
                     description: owl.ui.permission.create_locale
-            update:
-                form:
-                    ajax: true
-                serialization_groups: [AjaxShow]
-                permission:
-                    group: locale
-                    description: owl.ui.permission.update_locale
-    type: sylius.resource

@@ -1,0 +1,8 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.locale.index.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    icon: 'flowbite:language-outline'
+                priority: 100

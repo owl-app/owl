@@ -8,17 +8,19 @@ sylius_grid:
             sorting:
                 code: asc
             fields:
-                code:
-                    type: string
-                    label: owl.ui.code
-                    sortable: ~
                 name:
                     type: twig
                     label: owl.ui.name
                     path: .
                     sortable: code
                     options:
-                        template: "@OwlAdmin/Locale/Grid/Field/name.html.twig"
+                        template: "@OwlAdmin/locale/grid/field/name.html.twig"
+                code:
+                    type: twig
+                    label: owl.ui.code
+                    sortable: ~
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/code.html.twig"
             filters:
                 code:
                     type: string
@@ -26,7 +28,15 @@ sylius_grid:
             actions:
                 main:
                     create:
-                        type: create
+                        type: modal
+                        label: owl.ui.create
+                        options:
+                            button: primary
+                            icon: flowbite:plus-outline
+                            modal:
+                                size: 'sm'
+                            link:
+                                route: owl_admin_locale_create
                 item:
-                    update:
-                        type: update
+                    delete:
+                        type: delete

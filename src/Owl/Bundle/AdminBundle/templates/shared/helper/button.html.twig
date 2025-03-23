@@ -67,7 +67,7 @@
 {% macro create(params = {}) %}
     {% set params = {
         type: 'submit',
-        text: 'sylius.ui.create'|trans,
+        text: 'owl.ui.create'|trans,
     }|merge(params) %}
 
     {{ _self.primary(params) }}

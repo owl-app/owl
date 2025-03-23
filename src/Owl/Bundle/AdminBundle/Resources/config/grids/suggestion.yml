@@ -82,7 +82,6 @@ sylius_grid:
                         type: modal
                         options:
                             tooltip: owl.ui.change_status
-                            button: btn-system-primary
                             icon: flowbite:arrows-repeat-count-outline
                             modal:
                                 size: 'lg'
@@ -94,7 +93,6 @@ sylius_grid:
                         type: modal
                         options:
                             tooltip: owl.ui.history_status
-                            button: btn-system-primary
                             icon: flowbite:list-outline
                             modal:
                                 size: 'xl'

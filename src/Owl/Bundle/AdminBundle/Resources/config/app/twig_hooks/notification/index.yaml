@@ -5,6 +5,7 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/layout/base/javascripts/tinymce.html.twig'
                 configuration:
                     tinymce:
+                        selector: '.editor-notification'
                         theme:
                             advanced: 
                                 height: '180'

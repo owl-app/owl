@@ -6,14 +6,14 @@
     <script type="text/javascript" src="{{ asset(base_url~'bundles/tinymce/vendor/tinymce/jquery.tinymce.min.js', asset_package_name) }}"></script>
     <script type="text/javascript" src="{{ asset(base_url~'bundles/tinymce/js/init.jquery.js', asset_package_name) }}"></script>
 {%- else -%}
-    <script type="text/javascript" data-turbo-track="dynamic" src="{{ asset(base_url~'bundles/tinymce/vendor/tinymce/tinymce.min.js', asset_package_name) }}"></script>
-    <script type="text/javascript" data-turbo-track="dynamic" src="{{ asset(base_url~'bundles/tinymce/js/init.standard.js', asset_package_name) }}"></script>
+    <script type="text/javascript" src="{{ asset(base_url~'bundles/tinymce/vendor/tinymce/tinymce.min.js', asset_package_name) }}"></script>
+    <script type="text/javascript" src="{{ asset(base_url~'bundles/tinymce/js/init.standard.js', asset_package_name) }}"></script>
 {%- endif -%}
 
 {% if turbo_enabled %}
-    <tinymce-config>
+    <script data-tinymce-setting type="application/json">
         {{ tinymce_config|raw }}
-    </tinymce-config>
+    </script>
 {% else %}
     <script type="text/javascript">
         stfalcon_tinymce_config = {{ tinymce_config|raw }};

@@ -86,6 +86,10 @@ class TinymceExtension extends AbstractExtension
 
         $this->baseUrl = $config['base_url'] ?? null;
 
+        if (isset($options['selector'])) {
+            $config['selector'] = [$options['selector']];
+        }
+
         // Asset package name
         $assetPackageName = $config['asset_package_name'] ?? null;
         unset($config['asset_package_name']);

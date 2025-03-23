@@ -75,6 +75,7 @@ owl:
         date_created: Data created
         date_updated: Date updated
         accepted_at: Date accepted
+        create_locale: New locale
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses
@@ -103,6 +104,7 @@ owl:
             list_locales: List locales
             create_locale: New locale
             update_locale: Edit locale
+            delete_locale: Delete locale
             suggestion: Suggestion
             list_suggestions: List suggestions
             create_suggestion: New suggestion
