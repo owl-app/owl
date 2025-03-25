@@ -1,0 +1,19 @@
+{% if (data.registration is not null) %}
+    {% if data.registration.status == 'new' %}
+        {% set statusColor = 'yellow' %}
+    {% elseif status == 'accepted' %}
+        {% set statysColor = 'green' %}
+    {% elseif status == 'rejected' %}
+        {% set statysColor = 'red' %}
+    {% endif %}
+
+    {% set route = options.link.url|default(options.link.route) %}
+    {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default([]))) %}
+    {% set label = ('owl.ui.registration_' ~ data.registration.status)|trans %}
+
+    {% if is_granted(route) and (data.registration is not null) %}
+        <a href="{{ path }}" class="btn btn-icon btn-{{ statusColor }}" data-bs-toggle="tooltip" data-bs-title="{{ label|trans }}">
+            {{ ux_icon(options.icon|default('tabler:pencil')) }}
+        </a>
+    {% endif %}
+{% endif %}

@@ -13,6 +13,8 @@ import ShowModalController from './controllers/common/modal/ShowModalController'
 import FormController from './controllers/common/form/FormController';
 //uploader
 import UploaderController from './controllers/common/uploader/UploaderController';
+//bulk-delete
+import BulkDelete from './controllers/BulkDelete';
 
 export function startApp() {
     const appSymfonyStimulus = startStimulusApp(require.context(
@@ -28,6 +30,7 @@ export function startApp() {
     appSymfonyStimulus.register('show-modal', ShowModalController);
     appSymfonyStimulus.register('form', FormController);
     appSymfonyStimulus.register('uploader', UploaderController);
+    appSymfonyStimulus.register('bulk-delete', BulkDelete);
     
     appSymfonyStimulus.debug = process.env.NODE_ENV !== 'production';
     

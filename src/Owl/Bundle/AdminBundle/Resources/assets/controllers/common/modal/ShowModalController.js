@@ -6,6 +6,12 @@ export default class extends Controller {
     open(event) {
         event.preventDefault();
 
+        const dispatchedEvent = this.dispatch('show:modal', { detail: event.params });
+
+        if (Object.keys(dispatchedEvent.detail).length !== 0 ) {
+            Object.assign(event.params, dispatchedEvent.detail);
+        }
+
         if (this.hasModalOutlet) {
             this.modalOutlet.open(event);
         } else if (this.hasModalStaticOutlet) {

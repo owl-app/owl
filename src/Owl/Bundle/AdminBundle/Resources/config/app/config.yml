@@ -49,9 +49,9 @@ sylius_grid:
             update_product_taxon_positions: "@OwlAdmin/product_taxon/grid/action/update_positions.html.twig"
             update_product_variant_positions: "@OwlAdmin/product_variant/grid/action/update_positions.html.twig"
             price_history: "@OwlAdmin/product_variant/grid/action/price_history.html.twig"
-            update_admin_user: "@OwlAdmin/AdminUser/Grid/Action/update.html.twig"
-            assign_permissions_admin_user: "@OwlAdmin/AdminUser/Grid/Action/assign_permissions.html.twig"
-            registration_admin_user: "@OwlAdmin/AdminUser/Grid/Action/registration.html.twig"
+            update_admin_user: "@OwlAdmin/admin_user/grid/action/update.html.twig"
+            assign_permissions_admin_user: "@OwlAdmin/admin_user/grid/action/assign_permissions.html.twig"
+            registration_admin_user: "@OwlAdmin/admin_user/grid/action/registration.html.twig"
         bulk_action:
             delete: '@OwlAdmin/shared/grid/bulk_action/delete.html.twig'
         filter:

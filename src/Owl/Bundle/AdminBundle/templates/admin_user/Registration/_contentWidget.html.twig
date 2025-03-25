@@ -1,0 +1,52 @@
+<div class="content">
+  <div class="ui top attached tabular menu owl-tabular-show">
+    <a class="item active" data-tab="personal-information">{{ 'owl.ui.personal_information'|trans }}</a>
+    <a class="item" data-tab="company-inforamtion">{{ 'owl.ui.company_inforamtion'|trans }}</a>
+    <a class="item" data-tab="registration-inforamtion">{{ 'owl.ui.registration_inforamtion'|trans }}</a>
+  </div>
+  <div class="ui bottom attached active tab segment" data-tab="personal-information">
+    {% include '@OwlAdmin/AdminUser/Registration/Tab/_personal_information.html.twig' with {
+      'resource' : resource
+    } %}
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="company-inforamtion">
+    {% include '@OwlAdmin/AdminUser/Registration/Tab/_company_inforamtion.html.twig' with {
+      'resource' : resource
+    } %}
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="registration-inforamtion">
+    {% include '@OwlAdmin/AdminUser/Registration/Tab/_registration_inforamtion.html.twig' with {
+      'resource' : resource
+    } %}
+  </div>
+  {% if(resource.registration.status == 'new') %}
+  <div class="ui segment">
+      <div class="ui two column stackable center aligned grid">
+          <div class="ui vertical divider">{{ 'owl.ui.or'|trans }}</div>
+          <div class="middle aligned row">
+              <div class="column" style="padding-left: 30px; padding-right: 30px" >
+                  <div class="ui icon header">
+                      {{ 'owl.ui.accept_registration'|trans }}
+                  </div>
+                      {{ render(url('owl_admin_partial_admin_user_accept_registration', {'id': resource.registration.id})) }}
+              </div>
+              <div class="column" style="padding-left: 30px; padding-right: 30px">
+                  <div class="ui icon header">
+                    {{ 'owl.ui.reject_registration'|trans }}
+                  </div>
+                    {{ render(url('owl_admin_partial_admin_user_reject_registration', {'id': resource.registration.id})) }}
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endif %}
+
+</div>
+
+<div class="actions">
+  <div class="buttons">
+    <button class="ui cancel button">Zamknij</button>
+  </div>
+</div>
+
+

@@ -1,0 +1,34 @@
+{% form_theme form '@OwlAdmin/Form/theme.html.twig' %}
+
+{% 
+    set index_url = configuration.vars.referer_url
+%}
+{% set classes = ['ui', 'loadable', 'form', 'initial'] %}
+{% if configuration.vars.form.ajax is defined  %}
+    {%- set classes = configuration.vars.form.ajax == true ? classes|merge(['is-modal-ajax']) : classes %}
+{% else %}
+    {%- set classes = classes|merge(['is-modal-ajax']) %}
+{% endif %}
+
+{{ form_start(form, {'action': path('owl_admin_partial_admin_user_accept_registration', configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': classes|join(' '), 'novalidate': 'novalidate'}}) }}
+{% include '@OwlAdmin/Crud/form_validation_errors_checker.html.twig' %}
+    {% if configuration.vars.templates.form is defined %}
+        {% include configuration.vars.templates.form %}
+        {% if not form._token.isRendered %}
+            {{ form_row(form._token) }}
+        {% endif %}
+    {% else %}
+        <div style="text-align: left">
+            {{ form_row(form.user.role) }}
+            {{ form_row(form._token) }}
+        </div>
+        <div class="actions">
+            <div class="buttons">
+                <button class="ui labeled icon primary button save-action" type="submit" data-target="owl_accept_registration" name="save_action" value="referer">
+                    <i class="plus icon"></i>{{ 'owl.ui.accept'|trans }}
+                </button>
+            </div>
+        </div>
+    {% endif %}
+<input type="hidden" name="_method" value="PUT" />
+{{ form_end(form, {'render_rest': false}) }}

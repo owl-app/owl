@@ -3,7 +3,7 @@ owl_admin_admin_user:
         alias: owl.admin_user
         section: admin
         path: users
-        templates: "@OwlAdmin\\Crud"
+        templates: "@OwlAdmin\\shared\\crud"
         except: ['show']
         redirect: index
         grid: owl_admin_admin_user
@@ -51,7 +51,6 @@ owl_admin_admin_user_permission_availables:
         _sylius:
             section: admin
             permission: true
-            # grid: owl_admin_service
             template: "@OwlAdmin/User/Permission/availables.html.twig"
             form: Owl\Bundle\RbacBundle\Form\Type\AssignType
             vars:

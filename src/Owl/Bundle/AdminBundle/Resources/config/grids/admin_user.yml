@@ -25,7 +25,7 @@ sylius_grid:
                     path: role
                     sortable: role.name
                     options:
-                        template: "@OwlAdmin/AdminUser/Grid/Field/role.html.twig"
+                        template: "@OwlAdmin/admin_user/grid/field/role.html.twig"
                 note:
                     type: string
                     label: owl.ui.note_user
@@ -69,14 +69,12 @@ sylius_grid:
                 item:
                     update:
                         type: update_admin_user
-                    delete:
-                        type: delete
                     assign_permissions:
                         type: assign_permissions_admin_user
                         label: owl.ui.assign_permissions
                         options:
                             button: primary
-                            icon: plus
+                            icon: flowbite:arrow-up-right-from-square-solid
                             link:
                                 route: owl_admin_admin_user_permission_availables
                                 parameters:
@@ -91,6 +89,8 @@ sylius_grid:
                                 route: owl_admin_confirm_registration
                                 parameters:
                                     id: resource.id
+                    delete:
+                        type: delete
                 bulk:
                     delete:
                         type: delete
