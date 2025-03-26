@@ -10,10 +10,22 @@ export default class extends Controller {
 
     connect() {
         this.checkboxTargets.forEach(checkbox => {
-            checkbox.addEventListener('change', this.handleChangeCheckbox.bind(this));
+            checkbox.addEventListener('change', this.handleChangeCheckbox);
         });
 
-        this.checkAllTarget.addEventListener('change', this.handleCheckAll.bind(this));
+        this.checkAllTarget.addEventListener('change', this.handleCheckAll);
+
+        document.addEventListener('turbo:before-cache', this.cleanup);
+    }
+
+    disconnect() {
+        this.checkboxTargets.forEach(checkbox => {
+            checkbox.removeEventListener('change', this.handleChangeCheckbox);
+        });
+
+        this.checkAllTarget.removeEventListener('change', this.handleCheckAll);
+
+        document.removeEventListener('turbo:before-cache', this.cleanup);
     }
 
     confirmAction(event) {
@@ -33,7 +45,13 @@ export default class extends Controller {
         this.modalStaticOutlet.open(event);
     }
 
-    handleChangeCheckbox(event) {
+    changeVisbililityActions() {
+        this.actionTargets.forEach(action => {
+            action.disabled = this.countChecked > 0 ? false : true;
+        });
+    }
+
+    handleChangeCheckbox = (event) => {
         if (event.target.checked) {
             this.countChecked++;
         } else {
@@ -56,9 +74,9 @@ export default class extends Controller {
         }
 
         this.changeVisbililityActions();
-    }
+    };
 
-    handleCheckAll() {
+    handleCheckAll = () => {
         const checked = this.countChecked > 0;
 
         this.checkAllTarget.checked = !checked;
@@ -73,20 +91,15 @@ export default class extends Controller {
         }
 
         this.changeVisbililityActions();
-    }
+    };
 
-    changeVisbililityActions() {
-        this.actionTargets.forEach(action => {
-            action.disabled = this.countChecked > 0 ? false : true;
-        });
-    }
-
-    disconnect() {
+    cleanup = () => {
+        this.countChecked = 0;
+        this.checkAllTarget.checked = false;
         this.checkboxTargets.forEach(checkbox => {
-            checkbox.removeEventListener('change', this.handleChangeCheckbox);
+            checkbox.checked = false;
         });
 
-        this.checkAllTarget.removeEventListener('change', this.handleChangeCheckbox);
-    }
-
+        this.changeVisbililityActions();
+    };
 }
