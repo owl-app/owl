@@ -80,7 +80,6 @@
 
 {% block child_item %}
     {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
-    {%- set target = item.linkAttributes and item.linkAttributes['target'] ? item.linkAttributes['target'] : '_self' %}
     {%- if matcher.isCurrent(item) %}
         {%- set classes = classes|merge([options.currentClass]) %}
     {%- endif %}
@@ -89,8 +88,8 @@
         {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
     {%- endif %}
 
-    <a class="dropdown-item {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
-        {{ item.label|trans }}{% if target == '_blank' %}{{ ux_icon('tabler:external-link', {'class': 'icon icon-sm ms-1 mb-2 opacity-75'}) }}{% endif %}
+    <a class="dropdown-item {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}">
+        {{ item.label|trans }}
     </a>
 {% endblock %}
 
