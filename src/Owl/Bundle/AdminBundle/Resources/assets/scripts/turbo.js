@@ -10,5 +10,5 @@ document.addEventListener('turbo:load', () => {
 });
 
 document.addEventListener('turbo:before-fetch-request', () => {
-    showLoader(document.querySelector('.owl-grid'), { class: { loader: 'content' }});
+    showLoader(document.querySelector('.owl-grid').querySelector('.content'), { class: { loader: 'content' }});
 });
