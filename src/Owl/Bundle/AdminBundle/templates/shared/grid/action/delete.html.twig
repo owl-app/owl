@@ -17,18 +17,3 @@
         }
     )
 }}
-
-{{
-    buttons.modalBulkDelete(
-        {
-            request: {
-                url: path,
-                data: {
-                    '_csrf_token':  csrf_token(id),
-                    '_method': 'DELETE',
-                    'save_action': 'referer',
-                }
-            }
-        }
-    )
-}}

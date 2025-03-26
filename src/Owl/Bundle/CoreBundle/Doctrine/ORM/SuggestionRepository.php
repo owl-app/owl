@@ -16,14 +16,12 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class SuggestionRepository extends EntityRepository implements SuggestionRepositoryInterface
 {
-    public function findByIdWithOwner(array $ids, QueryBuilder $queryBuilder = null): array
+    public function findByIdWithOwner(array $ids, ?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('o');
 
         return $queryBuilder
             ->andWhere($queryBuilder->expr()->in('o.id', $ids))
-            ->getQuery()
-            ->getResult()
         ;
     }
 

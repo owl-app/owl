@@ -4,9 +4,25 @@
 {% set resources = hookable_metadata.context.resources %}
 {% set data = resources.data %}
 {% set definition = resources.definition %}
+{% set stimulusControllers = [] %}
+{% set stimulusOutlets = [] %}
+
+{% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+    {% set stimulusControllers = stimulusControllers|merge(['grid-bulk']) %}
+    {% set stimulusOutlets = stimulusOutlets|merge([{name: 'modal-static', value: '.owl-modal-static'}]) %}
+{% endif %}
 
 {% if data|length > 0 %}
-    <div class="card">
+    <div 
+        class="card"
+        {% if stimulusControllers|length > 0 %}
+            data-controller="{{ stimulusControllers|join(' ') }}"
+
+            {% for outlet in stimulusOutlets %}
+                data-grid-bulk-{{ outlet.name }}-outlet="{{ outlet.value }}"
+            {% endfor %}
+        {% endif %}
+    >
         <div class="card-body border-bottom py-3">
             <div class="d-flex">
                 {% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}

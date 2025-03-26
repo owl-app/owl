@@ -2,7 +2,6 @@ import './styles/main.scss';
 
 import './app';
 
-import './scripts/sticky-header';
 import './scripts/turbo';
 
 import './scripts/bootstrap';

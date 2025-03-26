@@ -141,20 +141,20 @@
 
 {% macro modalBulkDelete(options = {}) %}
     <button 
-        class="btn btn-icon btn-danger"
+        class="btn btn-ghost-danger"
         {{ sylius_test_html_attribute('button', id|default('delete-modal')) }} 
-        data-bs-toggle="tooltip"
-        title="{{ 'owl.ui.delete'|trans }}"
-        data-controller="show-modal bulk-delete"
-        data-show-modal-modal-static-outlet=".owl-modal-static"
-        data-action="click->show-modal#open show-modal:show:modal->bulk-delete#onOpenModal"
+        data-controller="bulk-delete"
+        data-grid-bulk-target="action"
+        data-action="click->grid-bulk#confirmAction"
+        disabled
         {% if options is not empty %}
             {% for key, value in options %}
-                data-show-modal-{{ key }}-param="{{ value is iterable ? value|json_encode : value }}"
+                data-grid-bulk-{{ key }}-param="{{ value is iterable ? value|json_encode : value }}"
             {% endfor %}
         {% endif %}
     >
         {{ ux_icon('flowbite:trash-bin-outline', { class: 'icon icon-sm' }) }}
+        {{ 'owl.ui.delete'|trans }}
     </button>
 {% endmacro %}
 

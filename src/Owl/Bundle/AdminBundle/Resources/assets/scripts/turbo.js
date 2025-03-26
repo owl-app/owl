@@ -1,12 +1,9 @@
 import { runAllAnimations } from './animations';
 import { initializeBootstrap } from './bootstrap';
-import { syliusCheckAll } from './check-all';
 import { showLoader } from './loader';
 import { initializeTinyMce } from './tinymce';
 
 document.addEventListener('turbo:load', () => {
-    document.querySelectorAll('[data-check-all]').forEach(syliusCheckAll);
-
     runAllAnimations();
     initializeBootstrap();
     initializeTinyMce();
