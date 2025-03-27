@@ -61,7 +61,7 @@ sylius_twig_hooks:
             save_close:
                 template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/save.html.twig'
                 configuration:
-                    method: 'PUT'
+                    method: 'POST'
                     button:
                         text: 'owl.ui.save_close'
                         class: 'btn-primary'
@@ -70,7 +70,7 @@ sylius_twig_hooks:
             save_update:
                 template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/save.html.twig'
                 configuration:
-                    method: 'PUT'
+                    method: 'POST'
                     button:
                         text: 'owl.ui.save_update'
                         class: 'btn-blue'
