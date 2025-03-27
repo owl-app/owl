@@ -2,4 +2,15 @@
     > .content {
         position: relative;
     }
+    
+    .table-placeholder {
+        td {
+            color: transparent;
+            border: 0;
+    
+            > * {
+                opacity: 0;
+            }
+        }
+    }
 }

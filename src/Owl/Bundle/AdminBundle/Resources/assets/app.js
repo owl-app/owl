@@ -14,6 +14,7 @@ import FormController from './controllers/common/form/FormController';
 //uploader
 import UploaderController from './controllers/common/uploader/UploaderController';
 //grid
+import GridController from './controllers/common/grid/GridController';
 import GridBulkController from './controllers/common/grid/BulkController';
 
 export function startApp() {
@@ -30,6 +31,7 @@ export function startApp() {
     appSymfonyStimulus.register('show-modal', ShowModalController);
     appSymfonyStimulus.register('form', FormController);
     appSymfonyStimulus.register('uploader', UploaderController);
+    appSymfonyStimulus.register('grid', GridController);
     appSymfonyStimulus.register('grid-bulk', GridBulkController);
     
     appSymfonyStimulus.debug = process.env.NODE_ENV !== 'production';
