@@ -1,0 +1,83 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.admin_user.update.content.body':
+            form:
+                component: 'owl_admin:admin_user:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'owl_admin.admin_user.update.content.body.form':
+            sections:
+                template: '@OwlAdmin/admin_user/form/sections.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.update.content.body.form.sections':
+            general:
+                enabled: false
+
+        'owl_admin.admin_user.update.content.body.form.sections#left':
+            account:
+                template: '@OwlAdmin/admin_user/form/sections/account.html.twig'
+                priority: 0
+            permission:
+                template: '@OwlAdmin/admin_user/form/sections/permission.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.update.content.body.form.sections#right':
+            personal_information:
+                template: '@OwlAdmin/admin_user/form/sections/personal_information.html.twig'
+                priority: 0
+            preferences:
+                template: '@OwlAdmin/admin_user/form/sections/preferences.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.update.content.body.form.sections.account':
+            email:
+                template: '@OwlAdmin/admin_user/form/sections/account/email.html.twig'
+                priority: 200
+            password:
+                template: '@OwlAdmin/admin_user/form/sections/account/password.html.twig'
+                priority: 100
+            enabled:
+                template: '@OwlAdmin/admin_user/form/sections/account/enabled.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.update.content.body.form.sections.permission':
+            role:
+                template: '@OwlAdmin/admin_user/form/sections/permission/role.html.twig'
+                priority: 200
+
+        'owl_admin.admin_user.update.content.body.form.sections.personal_information':
+            display_name_phone.html:
+                template: '@OwlAdmin/admin_user/form/sections/personal_information/display_name_phone.html.twig'
+                priority: 200
+            first_last_name:
+                template: '@OwlAdmin/admin_user/form/sections/personal_information/first_last_name.html.twig'
+                priority: 100
+            description:
+                template: '@OwlAdmin/admin_user/form/sections/personal_information/description.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.update.content.body.form.sections.preferences':
+            role:
+                template: '@OwlAdmin/admin_user/form/sections/preferences/locale.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.update.content.header':
+            breadcrumbs:
+                template: '@OwlAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field: displayName
+                priority: 0
+
+        'owl_admin.admin_user.update.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/update/content/header/title_block/title.html.twig'
+                configuration:
+                    header: 'owl.ui.edit_user'
+                priority: 100

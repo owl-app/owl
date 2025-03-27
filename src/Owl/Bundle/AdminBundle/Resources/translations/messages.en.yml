@@ -76,6 +76,9 @@ owl:
         date_updated: Date updated
         accepted_at: Date accepted
         create_locale: New locale
+        account: Account
+        personal_information: Personal information
+        edit_user: Edit user
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

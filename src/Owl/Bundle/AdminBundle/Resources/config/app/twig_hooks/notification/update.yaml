@@ -46,6 +46,10 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/notification/form/sections.html.twig'
                 priority: 0
 
+        'owl_admin.notification.update.content.body.form.sections':
+            general:
+                enabled: false
+
         'owl_admin.notification.update.content.body.form.sections#left':
             general:
                 template: '@OwlAdmin/notification/form/sections/general.html.twig'
@@ -60,6 +64,8 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.notification.update.content.body.form.sections.general':
+            default:
+                enabled: false
             form:
                 template: '@OwlAdmin/notification/form/sections/general/form.html.twig'
                 priority: 0

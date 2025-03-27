@@ -1,8 +1,19 @@
 sylius_twig_hooks:
     hooks:
         'owl_admin.common.create':
+            sidebar:
+                template: '@OwlAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
+            navbar:
+                template: '@OwlAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
             content:
-                template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content.html.twig'
+                configuration:
+                    stimulus:
+                        controllers: {
+                            form: {}
+                        }
                 priority: 0
 
         'owl_admin.common.create.content':
@@ -22,7 +33,6 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'
                 priority: -100
 
-
         'owl_admin.common.create.content.header':
             breadcrumbs:
                 template: '@OwlAdmin/shared/crud/create/content/header/breadcrumbs.html.twig'
@@ -40,16 +50,36 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.common.create.content.header.title_block.actions':
+            show:
+                template: '@OwlAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
+                priority: 300
             cancel:
                 template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                configuration:
+                    hasForm: true
+                priority: 200
+            save_close:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/save.html.twig'
+                configuration:
+                    method: 'PUT'
+                    button:
+                        text: 'owl.ui.save_close'
+                        class: 'btn-primary'
+                    saveAction: 'referer'
                 priority: 100
-            create:
-                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/create.html.twig'
+            save_update:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/save.html.twig'
+                configuration:
+                    method: 'PUT'
+                    button:
+                        text: 'owl.ui.save_update'
+                        class: 'btn-blue'
+                    saveAction: 'update'
                 priority: 0
 
         'owl_admin.common.create.content.body':
             form:
-                template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
                 configuration:
                     render_rest: true
                 priority: 0

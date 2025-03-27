@@ -1,0 +1,8 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.admin_user.index.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    icon: 'flowbite:users-group-outline'
+                priority: 100

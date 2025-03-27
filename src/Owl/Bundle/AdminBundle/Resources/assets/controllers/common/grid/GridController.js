@@ -37,33 +37,30 @@ export default class extends Controller {
         } else {
             if (this.hasTableTarget) {
                 debounce(async () => {
-                    this.tableTarget.querySelectorAll('td').forEach(tbody => {
-                        tbody.classList.add('show');
-                    });
+                    this.addClassCells(this.tableTarget.querySelectorAll('td'), 'show');
                 }, 200)();
             }
         }
     };
 
     turboBeforeRender = (event) => {
-        event.detail.newBody.querySelectorAll('[data-grid-target="table"]').forEach(table => {
-            table.querySelectorAll('td').forEach(tbody => {
-                tbody.classList.add('fade');
-            });
-        });
+        this.addClassCells(event.detail.newBody.querySelectorAll('[data-grid-target="table"] td'), 'fade');
     };
 
     turboBeforeFetchRequest = () => {
         this.disabledFilters();
 
-        this.tableTarget.querySelectorAll('td').forEach(tbody => {
-            tbody.classList.add('table-placeholder');
-        });
-
         if (this.hasTableTarget) {
-            showLoader(this.tableTarget, {});
+            this.addClassCells(this.tableTarget.querySelectorAll('td'), 'table-placeholder');
+            showLoader(this.tableTarget);
         }
     };
+
+    addClassCells(cells, className) {
+        return cells.forEach(cell => {
+            cell.classList.add(className);
+        });
+    }
 
     disabledFilters() {
         this.filtersTarget.querySelector('.accordion-button').setAttribute('disabled', true);
