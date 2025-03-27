@@ -33,22 +33,21 @@ export default class extends Controller {
 
             if (this.hasTableTarget) {
                 showLoader(this.tableTarget);
-                this.tableTarget.classList.add('table-placeholder');
             }
         } else {
             if (this.hasTableTarget) {
                 debounce(async () => {
-                    this.tableTarget.querySelectorAll('tbody').forEach(tbody => {
+                    this.tableTarget.querySelectorAll('td').forEach(tbody => {
                         tbody.classList.add('show');
                     });
-                }, 100)();
+                }, 200)();
             }
         }
     };
 
     turboBeforeRender = (event) => {
         event.detail.newBody.querySelectorAll('[data-grid-target="table"]').forEach(table => {
-            table.querySelectorAll('tbody').forEach(tbody => {
+            table.querySelectorAll('td').forEach(tbody => {
                 tbody.classList.add('fade');
             });
         });
@@ -57,8 +56,12 @@ export default class extends Controller {
     turboBeforeFetchRequest = () => {
         this.disabledFilters();
 
+        this.tableTarget.querySelectorAll('td').forEach(tbody => {
+            tbody.classList.add('table-placeholder');
+        });
+
         if (this.hasTableTarget) {
-            showLoader(this.tableTarget, { class: { loader: 'content' }});
+            showLoader(this.tableTarget, {});
         }
     };
 

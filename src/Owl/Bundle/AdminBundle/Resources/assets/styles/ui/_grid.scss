@@ -2,15 +2,16 @@
     > .content {
         position: relative;
     }
-    
-    .table-placeholder {
-        td {
-            color: transparent;
-            border-color: #fff;
-    
-            > * {
-                opacity: 0;
-            }
+
+    .fade {
+        transition: opacity 0.2s linear;
+
+        &:not(.show) {
+            opacity: 0.2;
         }
+    }
+
+    .table-placeholder {
+        opacity: 0.2;
     }
 }
