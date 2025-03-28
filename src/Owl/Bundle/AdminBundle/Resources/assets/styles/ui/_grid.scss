@@ -4,14 +4,28 @@
     }
 
     .fade {
-        transition: opacity 0.2s linear;
+        transition: opacity .20s linear;
 
         &:not(.show) {
             opacity: 0.2;
         }
     }
 
-    .table-placeholder {
+    .faded {
         opacity: 0.2;
+    }
+
+    .fade-in {
+        opacity: 0.2;
+        animation: fadeIn 0.20s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0.2;
+        }
+        to {
+            opacity: 1;
+        }
     }
 }

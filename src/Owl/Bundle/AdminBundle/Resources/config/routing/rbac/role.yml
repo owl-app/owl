@@ -3,7 +3,7 @@ owl_admin_rbac_role:
         alias: owl.rbac_role
         path: /
         section: admin
-        templates: "@OwlAdmin\\Crud"
+        templates: "@OwlAdmin\\shared\\crud"
         except: ['show']
         grid: owl_admin_rbac_role
         permission: true

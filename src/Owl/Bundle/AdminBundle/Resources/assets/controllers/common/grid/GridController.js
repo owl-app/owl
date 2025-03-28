@@ -25,40 +25,51 @@ export default class extends Controller {
     turboBeforeCache = () => {
         const fiiltersCollapse = new bootstrap.Collapse(this.filtersTarget.querySelector('.accordion-collapse'), { toggle: false });
         fiiltersCollapse.hide();
+
+        this.addClassCells(this.tableTarget.querySelectorAll('td'), 'faded');
+        this.removeClassCells(this.tableTarget.querySelectorAll('td'), 'fade-in');
     };
 
-    turboRender = (event) => {
+    turboRender = async (event) => {
         if (event.target.hasAttribute('data-turbo-preview')) {
-            this.disabledFilters();
-
             if (this.hasTableTarget) {
+                this.disabledFilters();
                 showLoader(this.tableTarget);
             }
         } else {
             if (this.hasTableTarget) {
-                debounce(async () => {
-                    this.addClassCells(this.tableTarget.querySelectorAll('td'), 'show');
-                }, 200)();
+                await debounce(() => {
+                    this.addClassCells(this.tableTarget.querySelectorAll('td'), 'fade-in');
+                }, 100)();
             }
         }
     };
 
     turboBeforeRender = (event) => {
-        this.addClassCells(event.detail.newBody.querySelectorAll('[data-grid-target="table"] td'), 'fade');
+        if (!event.target.hasAttribute('data-turbo-preview')) {
+            this.addClassCells(event.detail.newBody.querySelectorAll('.owl-grid td'), 'faded');
+        }
     };
 
     turboBeforeFetchRequest = () => {
         this.disabledFilters();
 
         if (this.hasTableTarget) {
-            this.addClassCells(this.tableTarget.querySelectorAll('td'), 'table-placeholder');
+            this.removeClassCells(this.tableTarget.querySelectorAll('td'), 'fade-in');
             showLoader(this.tableTarget);
+            this.addClassCells(this.tableTarget.querySelectorAll('td'), 'faded');
         }
     };
 
     addClassCells(cells, className) {
         return cells.forEach(cell => {
             cell.classList.add(className);
+        });
+    }
+
+    removeClassCells(cells, className) {
+        return cells.forEach(cell => {
+            cell.classList.remove(className);
         });
     }
 

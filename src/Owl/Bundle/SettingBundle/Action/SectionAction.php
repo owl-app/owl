@@ -48,7 +48,7 @@ final class SectionAction extends AbstractResourceAction
             }
         }
 
-        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+        if ($request->isMethod('PUT') && $form->isSubmitted() && $form->isValid()) {
             $this->storage->saveValues($settingSection, $form->getData(), $settings);
 
             return $this->createRedirect($configuration);

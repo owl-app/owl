@@ -73,8 +73,6 @@ sylius_grid:
                         type: assign_permissions_admin_user
                         label: owl.ui.assign_permissions
                         options:
-                            button: primary
-                            icon: flowbite:arrow-up-right-from-square-solid
                             link:
                                 route: owl_admin_admin_user_permission_availables
                                 parameters:

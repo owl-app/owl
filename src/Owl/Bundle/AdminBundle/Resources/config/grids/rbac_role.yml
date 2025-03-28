@@ -43,11 +43,9 @@ sylius_grid:
                     update:
                         type: update
                     assign_permissions:
-                        type: link
+                        type: assing_permission
                         label: owl.ui.assign_permissions
                         options:
-                            button: primary
-                            icon: plus
                             link:
                                 route: owl_admin_rbac_role_availables
                                 parameters:

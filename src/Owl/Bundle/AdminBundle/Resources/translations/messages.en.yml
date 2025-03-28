@@ -78,7 +78,9 @@ owl:
         create_locale: New locale
         account: Account
         personal_information: Personal information
+        new_user: New user
         edit_user: Edit user
+        system_settings: System settings
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

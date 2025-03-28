@@ -1,11 +1,11 @@
 owl_admin_setting_index:
     path: /settings
-    methods: [GET, POST]
+    methods: [GET, PUT]
     defaults:
         _controller: owl.controller.action.setting.section
         _sylius:
             section: system
-            template: "@OwlAdmin/Setting/System/index.html.twig"
+            template: "@OwlAdmin/setting/system/index.html.twig"
             form:
                 type: Owl\Bundle\CoreBundle\Form\Type\SystemSettingType
             vars:

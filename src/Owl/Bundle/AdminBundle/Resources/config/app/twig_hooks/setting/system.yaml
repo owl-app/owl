@@ -1,0 +1,100 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.system_setting.index#javascripts':
+            tinymce:
+                template: '@OwlAdmin/shared/layout/base/javascripts/tinymce.html.twig'
+                configuration:
+                    tinymce:
+                        selector: '.editor-system-setting'
+                        theme:
+                            advanced: 
+                                height: '180'
+                priority: 0
+        'owl_admin.system_setting.index':
+            sidebar:
+                template: '@OwlAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
+            navbar:
+                template: '@OwlAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
+            content:
+                template: '@OwlAdmin/shared/crud/common/content.html.twig'
+                configuration:
+                    stimulus:
+                        controllers: {
+                            form: {}
+                        }
+                priority: 0
+
+        'owl_admin.system_setting.index.content':
+            flashes:
+                template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 400
+            header:
+                template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
+                priority: 300
+            form_error_alert:
+                template: '@OwlAdmin/shared/crud/common/content/form_error_alert.html.twig'
+                priority: 200
+            body:
+                template: '@OwlAdmin/shared/crud/common/content/body.html.twig'
+                priority: 200
+            footer:
+                template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100
+
+        'owl_admin.system_setting.index.content.header':
+            breadcrumbs:
+                template: '@OwlAdmin/setting/system/content/header/breadcrumbs.html.twig'
+                priority: 100
+            title_block:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block.html.twig'
+                priority: 0
+
+        'owl_admin.system_setting.index.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'owl.ui.system_settings'
+                    icon: 'flowbite:cog-outline'
+                priority: 100
+            actions:
+                template: '@OwlAdmin/setting/system/content/header/title_block/actions.html.twig'
+                priority: 0
+
+        'owl_admin.system_setting.index.content.header.title_block.actions':
+            save:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/save.html.twig'
+                configuration:
+                    method: 'PUT'
+                    button:
+                        text: 'owl.ui.save'
+                        class: 'btn-primary'
+                    saveAction: 'referer'
+                priority: 100
+
+        'owl_admin.system_setting.index.content.body':
+            form:
+                component: 'owl_admin:setting:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'owl_admin.system_setting.index.content.body.form':
+            sections:
+                template: '@OwlAdmin/shared/crud/common/content/body/form/sections.html.twig'
+                priority: 0
+
+        'owl_admin.system_setting.index.content.body.form.sections':
+            general:
+                template: '@OwlAdmin/shared/crud/common/content/body/form/sections/general.html.twig'
+                priority: 0
+
+        'owl_admin.system_setting.index.content.body.form.sections.general':
+            default:
+                template: '@OwlAdmin/shared/crud/common/content/body/form/sections/general/default.html.twig'
+                priority: 0

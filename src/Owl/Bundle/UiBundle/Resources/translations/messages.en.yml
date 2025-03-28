@@ -274,7 +274,7 @@ owl:
         reset_password: Reset password
         set_a_new_password_for_your_account: Set new password for your account
         reset_button: Reset
-        system_settings: System settings
+        
         manage_settings_available_in_system: Manage settings available in system
         register: Register
         register_in: Register

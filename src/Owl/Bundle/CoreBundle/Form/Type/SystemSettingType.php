@@ -17,7 +17,7 @@ final class SystemSettingType extends AbstractType
             ->add('description_dashboard', TextareaType::class, [
                 'label' => 'owl.form.setting.dashboard_description',
                 'attr' => [
-                    'class' => 'tinymce',
+                    'class' => 'editor-system-setting',
                     'data-theme' => 'advanced',
                 ],
                 'constraints' => [
@@ -28,7 +28,7 @@ final class SystemSettingType extends AbstractType
             ->add('description_login_page', TextareaType::class, [
                 'label' => 'owl.form.setting.login_page_description',
                 'attr' => [
-                    'class' => 'tinymce',
+                    'class' => 'editor-system-setting',
                     'data-theme' => 'advanced',
                 ],
                 'constraints' => [

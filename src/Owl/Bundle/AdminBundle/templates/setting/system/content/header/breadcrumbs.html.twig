@@ -1,0 +1,6 @@
+{% from '@OwlAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
+
+{{ breadcrumbs([
+    { name: 'owl.ui.dashboard', url: path('owl_admin_dashboard'), active: false },
+    { name: 'owl.ui.system_settings'|trans, active: true}
+]) }}
