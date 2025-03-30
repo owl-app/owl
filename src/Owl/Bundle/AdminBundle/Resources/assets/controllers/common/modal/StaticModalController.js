@@ -1,19 +1,13 @@
-import { Controller } from '@hotwired/stimulus';
 import { Modal } from 'bootstrap';
 
-import { showLoader, hideLoader } from '../../../scripts/loader';
 import { debounce } from '../../../utils/debounce';
 import redirect from '../../../utils/redirect';
 
-export default class extends Controller {
+import { BaseModal } from './BaseModal';
+
+export default class extends BaseModal {
 
     static targets = ['dialog', 'content', 'error'];
-
-    modal = null;
-
-    connect() {
-        this.element.addEventListener('hidden.bs.modal', this.eventHiddenModal.bind(this));
-    }
 
     open({ params }) {
         this.configuration = params.configuration ?? {};
@@ -26,12 +20,6 @@ export default class extends Controller {
         this.setSize(this.configuration?.size);
 
         this.modal.show();
-    }
-
-    close() {
-        if (this.modal) {
-            this.modal.hide();
-        }
     }
 
     run() {
@@ -48,7 +36,7 @@ export default class extends Controller {
                 this.close();
 
                 debounce(() => {
-                    hideLoader(document.body);
+                    this.hideLoading();
                 }, 100)();
 
                 debounce(async () => {
@@ -84,37 +72,7 @@ export default class extends Controller {
         return formData;
     }
 
-    setSize(size) {
-        if (size && size !== 'default') {
-            this.size = size;
-            this.element.classList.add(`modal-${size}`);
-        }
-    }
-
-    showLoading() {
-        const loaderOptions = {
-            class: {
-                loader: 'modal',
-                spinner: 'text-light'
-            },
-            width: '5rem',
-            height: '5rem'
-        };
-
-        this.element.classList.remove('show');
-
-        showLoader(document.body, loaderOptions);
-    }
-
-    showContent() {
-        this.contentTarget.classList.add('show');
-    }
-
-    showError() {
-        this.errorTarget.classList.remove('d-none');
-    }
-
-    eventHiddenModal() {
+    eventHiddenModal = () => {
         this.element.classList.remove(`modal-${this.size}`);
-    }
+    };
 }

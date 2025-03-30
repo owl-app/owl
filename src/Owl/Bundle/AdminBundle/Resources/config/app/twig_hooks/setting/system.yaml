@@ -10,6 +10,7 @@ sylius_twig_hooks:
                             advanced: 
                                 height: '180'
                 priority: 0
+
         'owl_admin.system_setting.index':
             sidebar:
                 template: '@OwlAdmin/shared/crud/common/sidebar.html.twig'

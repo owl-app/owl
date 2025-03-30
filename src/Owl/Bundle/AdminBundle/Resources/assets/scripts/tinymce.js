@@ -1,3 +1,5 @@
+import { debounce } from "../utils/debounce";
+
 export const initializeTinyMce = () => {
     const settings = document.querySelectorAll('[data-tinymce-setting]') ?? null;
 
@@ -13,7 +15,7 @@ export const initializeTinyMce = () => {
                 });
             };
 
-            initTinyMCE(parsedSettings);
+            debounce(() => initTinyMCE(parsedSettings), 0)();
         }
     });
 };

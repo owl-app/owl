@@ -9,45 +9,22 @@ export default class extends Controller {
     static targets = ['content', 'filters', 'table'];
 
     connect() {
-        document.addEventListener('turbo:before-cache', this.turboBeforeCache);
         document.addEventListener('turbo:render', this.turboRender);
-        document.addEventListener('turbo:before-render', this.turboBeforeRender);
         document.addEventListener('turbo:before-fetch-request', this.turboBeforeFetchRequest);
     }
 
     disconnect() {
-        document.removeEventListener('turbo:before-cache', this.turboBeforeCache);
         document.removeEventListener('turbo:render', this.turboRender);
-        document.removeEventListener('turbo:before-render', this.turboBeforeRender);
         document.removeEventListener('turbo:before-fetch-request', this.turboBeforeFetchRequest);
     }
 
-    turboBeforeCache = () => {
-        const fiiltersCollapse = new bootstrap.Collapse(this.filtersTarget.querySelector('.accordion-collapse'), { toggle: false });
-        fiiltersCollapse.hide();
+    turboRender = () => {
+        if (this.hasTableTarget) {
+            this.addClassCells(this.tableTarget.querySelectorAll('td'), 'faded');
 
-        this.addClassCells(this.tableTarget.querySelectorAll('td'), 'faded');
-        this.removeClassCells(this.tableTarget.querySelectorAll('td'), 'fade-in');
-    };
-
-    turboRender = async (event) => {
-        if (event.target.hasAttribute('data-turbo-preview')) {
-            if (this.hasTableTarget) {
-                this.disabledFilters();
-                showLoader(this.tableTarget);
-            }
-        } else {
-            if (this.hasTableTarget) {
-                await debounce(() => {
-                    this.addClassCells(this.tableTarget.querySelectorAll('td'), 'fade-in');
-                }, 100)();
-            }
-        }
-    };
-
-    turboBeforeRender = (event) => {
-        if (!event.target.hasAttribute('data-turbo-preview')) {
-            this.addClassCells(event.detail.newBody.querySelectorAll('.owl-grid td'), 'faded');
+            debounce(() => {
+                this.addClassCells(this.tableTarget.querySelectorAll('td'), 'fade-in');
+            }, 200)();
         }
     };
 

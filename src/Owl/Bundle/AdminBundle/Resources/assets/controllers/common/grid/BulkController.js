@@ -14,8 +14,6 @@ export default class extends Controller {
         });
 
         this.checkAllTarget.addEventListener('change', this.handleCheckAll);
-
-        document.addEventListener('turbo:before-cache', this.cleanup);
     }
 
     disconnect() {
@@ -24,12 +22,9 @@ export default class extends Controller {
         });
 
         this.checkAllTarget.removeEventListener('change', this.handleCheckAll);
-
-        document.removeEventListener('turbo:before-cache', this.cleanup);
     }
 
     confirmAction(event) {
-
         if (event.params.request.url === undefined) {
             throw new Error('The request.url parameter is required.');
         }
@@ -89,16 +84,6 @@ export default class extends Controller {
         } else {
             this.countChecked = 0;
         }
-
-        this.changeVisbililityActions();
-    };
-
-    cleanup = () => {
-        this.countChecked = 0;
-        this.checkAllTarget.checked = false;
-        this.checkboxTargets.forEach(checkbox => {
-            checkbox.checked = false;
-        });
 
         this.changeVisbililityActions();
     };

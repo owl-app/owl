@@ -1,36 +1,26 @@
-import { Controller } from '@hotwired/stimulus';
 import { Modal } from 'bootstrap';
 
 import { debounce } from '../../../utils/debounce';
-import { showLoader, hideLoader } from '../../../scripts/loader';
 import { initializeTinyMce } from '../../../scripts/tinymce';
 
-export default class extends Controller {
+import { BaseModal } from './BaseModal';
+
+export default class extends BaseModal {
 
     static targets = ['dialog', 'content', 'error'];
 
-    modal = null;
-
-    connect() {
-        this.element.addEventListener('hidden.bs.modal', this.removeContent.bind(this));
-    }
-
     open({ params: { url, size = 'lg', hasTinymce = false } }) {
+        this.setSize(size);
+        this.showLoading(size);
+
         this.modal = new Modal(this.element, {
             backdrop: 'static',
             keyboard: true
         });
 
-        this.showLoading(size);
         this.modal.show();
 
         debounce(this.loadContent.bind(this), 200)(url, hasTinymce);
-    }
-
-    close() {
-        if (this.modal) {
-            this.modal.hide();
-        }
     }
 
     loadContent(url, hasTinymce) {
@@ -64,33 +54,7 @@ export default class extends Controller {
         }
     }
 
-    showLoading(size) {
-        const loaderOptions = {
-            class: {
-                loader: 'modal',
-                spinner: 'text-light'
-            },
-            width: '5rem',
-            height: '5rem'
-        };
-
-        if (size && size !== 'default') {
-            this.size = size;
-            this.element.classList.add(`modal-${size}`);
-        }
-
-        showLoader(document.body, loaderOptions);
-    }
-
-    hideLoading() {
-        hideLoader(document.body);
-    }
-
-    showContent() {
-        this.contentTarget.classList.add('show');
-    }
-
-    removeContent() {
+    eventHiddenModal = () => {
         this.element.classList.remove(`modal-${this.size}`);
 
         if (this.hasContentTarget) {
@@ -101,13 +65,5 @@ export default class extends Controller {
             this.errorTarget.classList.add('d-none');
             this.errorTarget.classList.remove('show');
         }
-    }
-
-    showError() {
-        this.errorTarget.classList.remove('d-none');
-
-        debounce(() => {
-            this.errorTarget.classList.add('show');
-        }, 100)();
-    }
+    };
 }
