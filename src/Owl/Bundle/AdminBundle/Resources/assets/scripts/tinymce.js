@@ -15,7 +15,7 @@ export const initializeTinyMce = () => {
                 });
             };
 
-            debounce(() => initTinyMCE(parsedSettings), 0)();
+            debounce(() => initTinyMCE(parsedSettings), 50)();
         }
     });
 };

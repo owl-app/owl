@@ -4,7 +4,7 @@ owl_admin_rbac_role:
         path: /
         section: admin
         templates: "@OwlAdmin\\shared\\crud"
-        except: ['show']
+        except: ['show', 'create', 'update']
         grid: owl_admin_rbac_role
         permission: true
         vars:
@@ -18,21 +18,6 @@ owl_admin_rbac_role:
                 permission:
                     group: rbac_permission_role
                     description: owl.ui.permission.list_roles
-            create:
-                form:
-                    ajax: true
-                permission:
-                    group: rbac_permission_role
-                    description: owl.ui.permission.create_role
-            update:
-                templates:
-                    breadcrumb: "@OwlAdmin/Rbac/Role/Update/_breadcrumb.html.twig"
-                    form: "@OwlAdmin/Rbac/Role/_form.html.twig"
-                form:
-                    ajax: true
-                permission:
-                    group: rbac_permission_role
-                    description: owl.ui.permission.update_role
             delete:
                 redirect:
                     header: xhr
@@ -41,8 +26,42 @@ owl_admin_rbac_role:
                     description: owl.ui.permission.delete_role
     type: sylius.resource
 
-owl_admin_rbac_role_availables:
-    path: /{id}/availables
+owl_admin_rbac_role_create:
+    path: /new
+    methods: [GET,POST]
+    defaults:
+        _controller: owl.controller.rbac_role::createAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/shared/crud/modal/create.html.twig"
+            vars:
+                serialization_groups: [AjaxShow]
+                form:
+                    ajax: true
+                permission:
+                    group: rbac_permission_role
+                    description: owl.ui.permission.create_role
+
+owl_admin_rbac_role_update:
+    path: /{id}/update
+    methods: [GET,PUT]
+    defaults:
+        _controller: owl.controller.rbac_role::updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/shared/crud/modal/update.html.twig"
+            vars:
+                serialization_groups: [AjaxShow]
+                form:
+                    ajax: true
+                permission:
+                    group: rbac_permission_role
+                    description: owl.ui.permission.update_role
+
+owl_admin_rbac_role_permissions:
+    path: /{id}/assing-permissions
     methods: [GET]
     defaults:
         _controller: owl.controller.rbac_role::availablesAction
@@ -50,12 +69,9 @@ owl_admin_rbac_role_availables:
             section: admin
             permission: true
             # grid: owl_admin_service
-            template: "@OwlAdmin/Rbac/Role/availables.html.twig"
+            template: "@OwlAdmin/rbac/role/permissions.html.twig"
             form: Owl\Bundle\RbacBundle\Form\Type\AssignType
             vars:
-                header: owl.ui.permissions_for_role
-                subheader: owl.ui.manage_permissions_for_role
-                icon: cube
                 permission:
                     group: rbac_permission_role
-                    description: owl.ui.permission.list_permission_assigned_to_role
+                    description: owl.ui.permissions

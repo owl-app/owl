@@ -47,10 +47,6 @@ owl_admin_suggestion_status_change_status:
                         arguments: 
                             id: $suggestionId
             vars:
-                route:
-                    name: owl_admin_suggestion_status_change_status
-                    parameters: 
-                        suggestionId: $suggestionId
                 form:
                     ajax: true
                 serialization_groups: [AjaxShow]

@@ -1,0 +1,15 @@
+{% set configuration = hookable_metadata.configuration %}
+
+<div
+    class="toast-container position-fixed bottom-0 end-0 p-3 fade"
+    data-controller="toast"
+    data-action="{{ configuration.stimulus.action }}"
+>
+    <div class="toast fade show" id="toast-simple" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+        <div class="toast-header" data-toast-target="header">
+            <strong class="me-auto" data-toast-target="title"></strong>
+            <button type="button" class="ms-2 btn-close text-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" data-toast-target="body"></div>
+    </div>
+</div>

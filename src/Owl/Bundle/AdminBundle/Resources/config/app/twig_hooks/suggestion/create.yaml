@@ -42,7 +42,7 @@ sylius_twig_hooks:
 
         'owl_admin.suggestion.modal.create.content.actions':
             save:
-                template: '@OwlAdmin/shared/crud/common/modal/content/actions/save.html.twig'
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions/create.html.twig'
                 configuration:
                     params:
                         save_action: 'save'

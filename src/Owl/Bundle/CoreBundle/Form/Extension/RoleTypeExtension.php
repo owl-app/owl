@@ -25,7 +25,7 @@ final class RoleTypeExtension extends AbstractTypeExtension
             ])
             ->add('name', TextType::class, [
                 'label' => 'owl.ui.canonical_name',
-                'disabled' => $data->getId() !== null ? true : false,
+                'disabled' => $data?->getId() !== null ? true : false,
             ])
         ;
     }

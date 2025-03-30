@@ -1,0 +1,5 @@
+{% set forms = hookable_metadata.context.forms %}
+
+{% for form in forms %}
+    {% hook 'forms' with { name: hookable_metadata.context.name, form: form } %}
+{% endfor %}

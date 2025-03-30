@@ -3,7 +3,7 @@
 
 {% if is_granted(route) and (data.registration is null or data.registration.status == 'accepted') %}
     <a href="{{ path }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ 'owl.ui.edit'|trans }}">
-        {{ ux_icon(action.icon|default('tabler:pencil')) }}
+        {{ ux_icon(action.icon|default('flowbite:pen-outline')) }}
     </a>
 {% endif %}
 

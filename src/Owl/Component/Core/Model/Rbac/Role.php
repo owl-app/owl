@@ -14,7 +14,7 @@ class Role extends BaseRole implements RoleInterface
 
     public function __toString(): string
     {
-        return (string) $this->getSetting()->getDisplayName();
+        return (string) $this->getSetting()?->getDisplayName();
     }
 
     /**

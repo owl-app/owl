@@ -1,0 +1,17 @@
+{% set prefixes = configuration.vars.hook_prefix is defined ? [configuration.vars.hook_prefix] %}
+{% set prefixes = prefixes|default({})|merge([
+    'owl_admin.%resource_name%.modal'|replace({'%resource_name%': resource_name|default(metadata.name)}),
+    'owl_admin.common.modal'
+]) %}
+
+{% block content %}
+    {% hook 'update' with { _prefixes: prefixes, resource, metadata, configuration, form } %}
+{% endblock %}
+
+{% block stylesheets %}
+    {% hook 'update#stylesheets' with { _prefixes: prefixes } %}
+{% endblock %}
+
+{% block javascripts %}
+    {% hook 'update#javascripts' with { _prefixes: prefixes } %}
+{% endblock %}

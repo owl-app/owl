@@ -122,7 +122,7 @@ export default class extends Controller {
 
             await Promise.all(promises);
         } else {
-            this.formTarget.querySelectorAll('.field').forEach(function(field) {
+            this.formTarget.querySelectorAll('.field').forEach(function (field) {
                 field.classList.remove('error');
             });
 

@@ -23,7 +23,7 @@ final class RoleChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => $this->getOptions(),
-            'choice_label' => fn (RoleInterface $role): string => $role->getSetting()->getDisplayName(),
+            'choice_label' => fn (RoleInterface $role): string => $role->getSetting()?->getDisplayName(),
             'choice_value' => 'id',
             'label' => false,
             'placeholder' => false,

@@ -13,7 +13,7 @@
 
     {% if is_granted(route) and (data.registration is not null) %}
         <a href="{{ path }}" class="btn btn-icon btn-{{ statusColor }}" data-bs-toggle="tooltip" data-bs-title="{{ label|trans }}">
-            {{ ux_icon(options.icon|default('tabler:pencil')) }}
+            {{ ux_icon(options.icon|default('flowbite:pen-outline')) }}
         </a>
     {% endif %}
 {% endif %}

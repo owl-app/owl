@@ -23,3 +23,18 @@ sylius_twig_hooks:
                     title: 'owl.ui.change_status_suggestion'
                     icon: 'flowbite:arrows-repeat-count-outline'
                 priority: 100
+
+        'owl_admin.suggestion_status.modal.create.content.actions':
+            save:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions/save.html.twig'
+                props:
+                configuration:
+                    path:
+                        route: 'owl_admin_suggestion_status_change_status'
+                        params:
+                            suggestionId: '@=_context.configuration.getRequest().attributes.get("suggestionId")'
+                    method: 
+                        name: 'POST'
+                    params:
+                        save_action: 'referer'
+                priority: 0

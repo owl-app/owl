@@ -11,11 +11,6 @@
 <div {% if attributes is defined %} {{ attributes }} data-form-target="live" {% endif %}>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id, 'data-form-target':'form'}}) }}
     <div class="card-body">
-        {% if hookable_metadata.configuration.method is defined %}
-            <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}"/>
-        {% elseif form.vars.data.id|default(null) is not null %}
-            <input type="hidden" name="_method" value="PUT"/>
-        {% endif %}
         {{ form_errors(form) }}
         {{ form_widget(form._token) }}
 

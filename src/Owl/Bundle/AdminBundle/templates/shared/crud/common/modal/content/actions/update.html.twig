@@ -1,0 +1,9 @@
+{% extends "@OwlAdmin/shared/crud/common/modal/content/actions/save.html.twig" %}
+
+{% set configuration = hookable_metadata.configuration %}
+
+{% block button %}
+    {% set path = path(configuration.path.route|default( hookable_metadata.context.configuration.getRouteName('update')), configuration.path.params|default({ id: hookable_metadata.context.resource.id })) %}
+
+    {{ parent() }}
+{% endblock %}

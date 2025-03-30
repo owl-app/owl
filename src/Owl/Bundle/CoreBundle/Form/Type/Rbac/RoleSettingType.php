@@ -15,13 +15,13 @@ final class RoleSettingType extends AbstractResourceType
     {
         $builder
             ->add('displayName', TextType::class, [
-                'label' => 'owl.form.role.name',
+                'label' => 'owl.ui.name',
                 'empty_data' => null,
             ])
             ->add('theme', ThemeNameChoiceType::class, [
-                'label' => 'owl.form.role.choice_theme',
+                'label' => 'owl.ui.choice_theme',
                 'empty_data' => null,
-                'placeholder' => 'owl.ui.no_theme',
+                'placeholder' => 'owl.ui.none',
             ])
         ;
     }

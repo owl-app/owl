@@ -1,0 +1,22 @@
+{% from "@OwlAdmin/shared/helper/accordion.html.twig" import accordion %}
+
+{% for name, forms in hookable_metadata.context.forms %}
+    <div class="col-12 col-lg-6 col-xl-4">
+        <div class="position-relative z-1 bg-white mb-3">
+            {% set content %}
+                {% hook 'accordion.content' with { name, forms } %}
+            {% endset %}
+
+            {% set title %}
+                {% hook 'accordion.title' with { name, forms } %}
+            {% endset %}
+
+            {{ accordion([{
+                title: title,
+                content: content|raw,
+                icon: 'flowbite:adjustments-vertical-outline',
+                id: random()
+            }]) }}
+        </div>
+    </div>
+{% endfor %}

@@ -81,6 +81,13 @@ owl:
         new_user: New user
         edit_user: Edit user
         system_settings: System settings
+        choice_theme: Select a view template
+        name: Name
+        canonical_name: Canonical name
+        create_rbac_role: New role
+        update_rbac_role: Edit role
+        no_theme: No theme
+        role_permissions: Role permissions
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

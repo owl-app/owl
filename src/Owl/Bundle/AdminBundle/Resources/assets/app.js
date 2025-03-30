@@ -3,12 +3,12 @@ import { startStimulusApp } from '@symfony/stimulus-bridge';
 import LiveController from '@symfony/ux-live-component';
 import '@symfony/ux-live-component/styles/live.css';
 
-// symfony
-import ModalFormController from './controllers/symfony/ModalFormController';
 //modal
 import ModalController from './controllers/common/modal/ModalController';
 import StaticModalController from './controllers/common/modal/StaticModalController';
 import ShowModalController from './controllers/common/modal/ShowModalController';
+//toast
+import ToastController from './controllers/common/toast/ToastController';
 //form
 import FormController from './controllers/common/form/FormController';
 //uploader
@@ -16,6 +16,9 @@ import UploaderController from './controllers/common/uploader/UploaderController
 //grid
 import GridController from './controllers/common/grid/GridController';
 import GridBulkController from './controllers/common/grid/BulkController';
+
+// modules
+import PermissionController from './controllers/PermissionController';
 
 export function startApp() {
     const appSymfonyStimulus = startStimulusApp(require.context(
@@ -25,7 +28,6 @@ export function startApp() {
     ));
     
     appSymfonyStimulus.register('live', LiveController);
-    appSymfonyStimulus.register('symfony-modal-form', ModalFormController);
     appSymfonyStimulus.register('modal', ModalController);
     appSymfonyStimulus.register('modal-static', StaticModalController);
     appSymfonyStimulus.register('show-modal', ShowModalController);
@@ -33,6 +35,8 @@ export function startApp() {
     appSymfonyStimulus.register('uploader', UploaderController);
     appSymfonyStimulus.register('grid', GridController);
     appSymfonyStimulus.register('grid-bulk', GridBulkController);
+    appSymfonyStimulus.register('permission', PermissionController);
+    appSymfonyStimulus.register('toast', ToastController);
     
     appSymfonyStimulus.debug = process.env.NODE_ENV !== 'production';
     
