@@ -1,11 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 import { Toast } from 'bootstrap';
 
-import { debounce } from '../../../utils/debounce';
-
 export default class extends Controller {
-
-    toasts = [];
 
     static values = { headersTxt: Object, icons: Object };
 
@@ -23,18 +19,22 @@ export default class extends Controller {
             message
         );
 
-        this.toasts[uniqueId] = Toast.getOrCreateInstance(this.element.querySelector(`#${uniqueId}`));
+        const messageElement = this.element.querySelector(`#${uniqueId}`);
+        const hiddenToastHandler = () => {
+            messageElement.removeEventListener('hidden.bs.toast', hiddenToastHandler);
+            messageElement.remove();
+        };
 
-        this.toasts[uniqueId].show();
+        (Toast.getOrCreateInstance(messageElement)).show();
 
-        debounce(this.hide, 5000)(uniqueId);
+        messageElement.addEventListener('hidden.bs.toast', hiddenToastHandler);
     }
 
     appendToast(uniqueId, type,  message) {
         const toast = `
             <div
                 id="${uniqueId}"
-                class="toast mt-3 fade owl owl-toast alert alert-dismissible alert-${this.colors[type]}"
+                class="toast mt-2 fade owl owl-toast alert alert-dismissible alert-${this.colors[type]}"
                 role="alert"
             >
                 <div class="alert-icon">
@@ -58,14 +58,4 @@ export default class extends Controller {
     generateUniqueToastId() {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
-
-    hide = (uniqueId) => {
-        if (this.toasts[uniqueId].isShown()) {
-            this.toasts[uniqueId].hide();
-        }
-
-        this.element.querySelector(`#${uniqueId}`).remove();
-
-        delete this.toasts[uniqueId];
-    };
 }

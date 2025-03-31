@@ -1,0 +1,5 @@
+.flashes-toast-container {
+    & > :not(:last-child) {
+        --tblr-toast-spacing: calc(var(--tblr-page-padding));
+    }
+}
