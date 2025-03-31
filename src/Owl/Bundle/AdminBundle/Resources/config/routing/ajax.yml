@@ -1,11 +1,3 @@
-owl_admin_ajax_rbac_permission:
-    resource: "@OwlAdminBundle/Resources/config/routing/ajax/rbac_permission.yml"
-    prefix: /rbac/permission
-
-owl_admin_ajax_rbac_role:
-    resource: "@OwlAdminBundle/Resources/config/routing/ajax/rbac_role.yml"
-    prefix: /rbac/role/{id}
-
 owl_admin_ajax_user_permission:
     resource: "@OwlAdminBundle/Resources/config/routing/ajax/user_permission.yml"
     prefix: /user/{id}/permission

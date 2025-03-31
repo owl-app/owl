@@ -1,10 +1,12 @@
 import { Controller } from '@hotwired/stimulus';
 
+import flattenObject from '../utils/flatten-object';
+
 export default class extends Controller {
 
     static targets = ['form', 'checkbox'];
 
-    static values = { assignUrl: String, revokeUrl: String, messages: Object };
+    static values = { assignUrl: String, revokeUrl: String, defaultMessageError: String };
 
     connect() {
         this.checkboxTarget.addEventListener('change', this.handleChangeCheckbox);
@@ -32,13 +34,13 @@ export default class extends Controller {
 
     handleChangeCheckbox = async (event) => {
         if (event.target.checked) {
-            await this.sendRequest(this.assignUrlValue, 'POST', this.messagesValue.assign);
+            await this.sendRequest(this.assignUrlValue, 'POST');
         } else {
-            await this.sendRequest(this.revokeUrlValue, 'DELETE', this.messagesValue.revoke);
+            await this.sendRequest(this.revokeUrlValue, 'DELETE');
         }
     };
 
-    sendRequest(url, method, message) {
+    sendRequest(url, method) {
         const formData = new FormData(this.element);
 
         this.checkboxTarget.setAttribute('disabled', true);
@@ -50,10 +52,29 @@ export default class extends Controller {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then(() => {
-            this.dispatch('changed', { detail: { message: message.success, type: 'success' } });
-        }).catch(async ({ cause: { errors } }) => {
-            this.dispatch('changed', { detail: { message: message.error, type: 'error' } });
+        }).then(async (response) => {
+            if (!response.ok && response.status === 422) {
+                const error = { cause: { errors: (await response.json()).errors } };
+                throw new Error('Error validation', error);
+            } else if (!response.ok) {
+                throw new Error();
+            }
+
+            const responseData = await response.json();
+
+            this.dispatch('changed', { detail: { message: responseData.message, type: 'success' } });
+        }).catch(async ({ cause }) => {
+            let errors = [];
+
+            if (cause?.errors !== undefined) {
+                errors = flattenObject(cause?.errors);
+            }
+
+            if (Object.keys(errors).length === 0) {
+                errors = { default: this.defaultMessageErrorValue };
+            }
+
+            this.dispatch('changed', { detail: { message: Object.values(errors).join('<br />'), type: 'error' } });
         }).finally(() => {
             this.checkboxTarget.removeAttribute('disabled');
         });

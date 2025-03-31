@@ -113,10 +113,8 @@ class UserController extends BaseUserController
             }
         } else {
             $responseData = [
-                'message' => [
-                    'status' => 'error',
-                    'errors' => $this->getErrorMessages($form),
-                ],
+                'status' => 'error',
+                'errors' => $this->getErrorMessages($form),
             ];
 
             return $this->createRestView($configuration, $responseData, Response::HTTP_UNPROCESSABLE_ENTITY);

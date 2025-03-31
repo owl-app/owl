@@ -75,3 +75,45 @@ owl_admin_rbac_role_permissions:
                 permission:
                     group: rbac_permission_role
                     description: owl.ui.permissions
+
+owl_admin_rbac_role_assign:
+    path: /{id}/assign
+    methods: [POST]
+    defaults:
+        _controller: owl.controller.rbac_role::assignAction
+        _format: json
+        _sylius:
+            serialization_groups: [ADD]
+            form: Owl\Bundle\RbacBundle\Form\Type\AssignType
+            section: admin
+            permission: true
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                form:
+                  ajax: true
+                permission:
+                    group: rbac_permission_role
+                    description: owl.ui.permission.add_permission_to_role
+
+owl_admin_rbac_role_revoke:
+    path: /{id}/revoke
+    methods: [DELETE]
+    defaults:
+        _controller: owl.controller.rbac_role::revokeAction
+        _format: json
+        _sylius:
+            serialization_groups: [DELETE]
+            form: Owl\Bundle\RbacBundle\Form\Type\AssignType
+            section: admin
+            permission: true
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                form:
+                  ajax: true
+                permission:
+                    group: rbac_permission_role
+                    description: owl.ui.permission.revoke_permission_to_role

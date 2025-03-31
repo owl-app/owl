@@ -1,19 +1,19 @@
 {% extends '@OwlAdmin/shared/layout/base.html.twig' %}
 
 {% set prefixes = [
-    'owl_admin.role_permissions'
+    'owl_admin.permission_available'
 ] %}
 
-{% block title %}{{ 'owl.ui.permissions'|trans ~ ': ' ~ role.setting.displayName }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'owl.ui.list_permission_availables_in_system' }} | {{ parent() }}{% endblock %}
 
 {% block body_class %}layout-fluid{% endblock %}
 
 {% block body %}
-    {% hook 'index' with { _prefixes: prefixes, role, configuration, forms, metadata} %}
+    {% hook 'index' with { _prefixes: prefixes, configuration, forms, metadata} %}
 {% endblock %}
 
 {% block modal %}
-    {% hook 'index#modals' with { _prefixes: prefixes, role, configuration, forms, metadata } %}
+    {% hook 'index#modals' with { _prefixes: prefixes, configuration, forms, metadata } %}
 {% endblock %}
 
 {% block stylesheets %}

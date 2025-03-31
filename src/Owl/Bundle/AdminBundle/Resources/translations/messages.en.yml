@@ -92,6 +92,8 @@ owl:
         error_while_adding_permissions: Error while adding permissions
         permission_removed_successfully: Permission removed successfully
         error_while_removing_permission: Error while removing permission
+        list_permission_availables_in_system: List of accesses in the system
+        server_error_while_changing: Server error while changing
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

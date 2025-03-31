@@ -4,9 +4,7 @@
     'owl_admin.system_setting'
 ] %}
 
-{% set header = configuration.vars.header|default() %}
-
-{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'owl.ui.system_settings'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body_class %}layout-fluid{% endblock %}
 

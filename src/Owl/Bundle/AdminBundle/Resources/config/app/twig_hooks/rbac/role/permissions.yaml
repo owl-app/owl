@@ -1,10 +1,5 @@
 sylius_twig_hooks:
     hooks:
-        'owl_admin.role_permissions.index#modals':
-            delete:
-                template: '@OwlAdmin/shared/crud/modal/delete.html.twig'
-                priority: 0
-
         'owl_admin.role_permissions.index':
             sidebar:
                 template: '@OwlAdmin/shared/crud/common/sidebar.html.twig'
@@ -30,7 +25,7 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
                 priority: 200
             body:
-                template: '@OwlAdmin/rbac/role/permissions/content/body.html.twig'
+                template: '@OwlAdmin/shared/permission/content/body.html.twig'
                 priority: 200
             footer:
                 template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'
@@ -51,22 +46,22 @@ sylius_twig_hooks:
 
         'owl_admin.role_permissions.index.content.body':
             accordions:
-                template: '@OwlAdmin/rbac/role/permissions/content/body/accordions.html.twig'
+                template: '@OwlAdmin/shared/permission/content/body/accordions.html.twig'
                 priority: 0
 
         'owl_admin.role_permissions.index.content.body.accordions':
             accordion:
-                template: '@OwlAdmin/rbac/role/permissions/content/body/accordions/accordion.html.twig'
+                template: '@OwlAdmin/shared/permission/content/body/accordions/accordion.html.twig'
                 priority: 0
 
         'owl_admin.role_permissions.index.content.body.accordions.accordion.title':
             accordion:
-                template: '@OwlAdmin/rbac/role/permissions/content/body/accordions/accordion/title.html.twig'
+                template: '@OwlAdmin/shared/permission/content/body/accordions/accordion/title.html.twig'
                 priority: 0
 
         'owl_admin.role_permissions.index.content.body.accordions.accordion.content':
             forms:
-                template: '@OwlAdmin/rbac/role/permissions/content/body/accordions/accordion/content/forms.html.twig'
+                template: '@OwlAdmin/shared/permission/content/body/accordions/accordion/content/forms.html.twig'
                 priority: 0
 
         'owl_admin.role_permissions.index.content.body.accordions.accordion.content.forms':
@@ -75,18 +70,11 @@ sylius_twig_hooks:
                 configuration:
                     path:
                         assign:
-                            route: 'owl_admin_ajax_rbac_role_assign'
+                            route: 'owl_admin_rbac_role_assign'
                             params:
                                 id: '@=_context.role.getId()'
                         revoke:
-                            route: 'owl_admin_ajax_rbac_role_revoke'
+                            route: 'owl_admin_rbac_role_revoke'
                             params:
                                 id: '@=_context.role.getId()'
-                    messages:
-                        assign:
-                            success: 'owl.ui.permissions_added_successfully'
-                            error: 'owl.ui.error_while_adding_permissions'
-                        revoke:
-                            success: 'owl.ui.permission_removed_successfully'
-                            error: 'owl.ui.error_while_removing_permission'
                 priority: 0

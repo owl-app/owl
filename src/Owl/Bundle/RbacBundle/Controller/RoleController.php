@@ -76,7 +76,7 @@ final class RoleController extends BaseController
 
                 if (!$configuration->isHtmlRequest()) {
                     $responseData = [
-                        'message' => $this->get('translator')->trans('owl.rbac.permission.add_success', [], 'flashes'),
+                        'message' => $this->get('translator')->trans('owl.rbac.permission.' . $action . '_success', [], 'flashes'),
                     ];
 
                     return $this->createRestView($configuration, $responseData, Response::HTTP_OK);
@@ -90,10 +90,8 @@ final class RoleController extends BaseController
             }
         } else {
             $responseData = [
-                'message' => [
-                    'status' => 'error',
-                    'errors' => $this->getErrorMessages($form),
-                ],
+                'status' => 'error',
+                'errors' => $this->getErrorMessages($form),
             ];
 
             return $this->createRestView($configuration, $responseData, Response::HTTP_UNPROCESSABLE_ENTITY);
