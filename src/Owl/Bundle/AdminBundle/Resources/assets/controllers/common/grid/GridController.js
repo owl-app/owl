@@ -1,4 +1,3 @@
-import * as bootstrap from 'bootstrap';
 import { Controller } from '@hotwired/stimulus';
 
 import { showLoader } from '../../../scripts/loader';
@@ -51,6 +50,8 @@ export default class extends Controller {
     }
 
     disabledFilters() {
-        this.filtersTarget.querySelector('.accordion-button').setAttribute('disabled', true);
+        if (this.hasFiltersTarget) {
+            this.filtersTarget.querySelector('.accordion-button').setAttribute('disabled', true);
+        }
     }
 }

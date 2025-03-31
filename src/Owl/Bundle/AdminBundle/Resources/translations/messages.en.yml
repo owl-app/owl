@@ -88,6 +88,10 @@ owl:
         update_rbac_role: Edit role
         no_theme: No theme
         role_permissions: Role permissions
+        permissions_added_successfully: Permissions added successfully
+        error_while_adding_permissions: Error while adding permissions
+        permission_removed_successfully: Permission removed successfully
+        error_while_removing_permission: Error while removing permission
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

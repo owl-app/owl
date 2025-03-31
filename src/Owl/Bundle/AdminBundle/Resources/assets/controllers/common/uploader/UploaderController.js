@@ -11,7 +11,8 @@ export default class extends Controller {
             this.element.querySelector('.dropzone'),
             {
                 url: this.urlValue,
-                autoProcessQueue: false
+                autoProcessQueue: false,
+                addRemoveLinks: true
             }
         );
     }

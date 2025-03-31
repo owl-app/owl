@@ -47,7 +47,7 @@ sylius_twig_hooks:
         'owl_admin.role_permissions.index.content.header.title_block':
             title:
                 template: '@OwlAdmin/rbac/role/permissions/content/header/title_block/title.html.twig'
-                priority: 100
+                priority: 0
 
         'owl_admin.role_permissions.index.content.body':
             accordions:
@@ -84,9 +84,9 @@ sylius_twig_hooks:
                                 id: '@=_context.role.getId()'
                     messages:
                         assign:
-                            success: 'owl.ui.permission.assign_success'
-                            error: 'owl.ui.permission.assign_error'
+                            success: 'owl.ui.permissions_added_successfully'
+                            error: 'owl.ui.error_while_adding_permissions'
                         revoke:
-                            success: 'owl.ui.permission.revoke_success'
-                            error: 'owl.ui.permission.revoke_error'
+                            success: 'owl.ui.permission_removed_successfully'
+                            error: 'owl.ui.error_while_removing_permission'
                 priority: 0

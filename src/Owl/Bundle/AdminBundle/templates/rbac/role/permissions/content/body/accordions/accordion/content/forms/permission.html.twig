@@ -1,5 +1,15 @@
 {% set form = hookable_metadata.context.form %}
 {% set configuration = hookable_metadata.configuration %}
+{% set messages = {
+    assign: {
+        success: configuration.messages.assign.success|default('owl.ui.permissions_added_successfully')|trans,
+        error: configuration.messages.assign.error|default('owl.ui.error_while_adding_permissions')|trans,
+    },
+    revoke: {
+        success: configuration.messages.revoke.success|default('owl.ui.permission_removed_successfully')|trans,
+        error: configuration.messages.revoke.error|default('owl.ui.error_while_removing_permission')|trans,
+    }
+} %}
 
 <div>
     {{ 
@@ -10,7 +20,7 @@
                 'data-action': 'permission:changed@window->toast#show',
                 'data-permission-assign-url-value': path(configuration.path.assign.route, configuration.path.assign.params),
                 'data-permission-revoke-url-value': path(configuration.path.revoke.route, configuration.path.revoke.params),
-                'data-permission-messages-value': configuration.messages|json_encode,
+                'data-permission-messages-value': messages|json_encode,
             }
         }) }}
     <div class="form-check form-switch">
