@@ -51,7 +51,7 @@ owl_admin_admin_user_permission_availables:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/User/Permission/availables.html.twig"
+            template: "@OwlAdmin/admin_user/permissions.html.twig"
             form: Owl\Bundle\RbacBundle\Form\Type\AssignType
             vars:
                 subheader: owl.ui.manage_user_permissions

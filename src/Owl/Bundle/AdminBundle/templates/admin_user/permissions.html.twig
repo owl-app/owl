@@ -1,0 +1,27 @@
+{% extends '@OwlAdmin/shared/layout/base.html.twig' %}
+
+{% set prefixes = [
+    'owl_admin.admin_user_permissions'
+] %}
+
+{% block title %}{{ 'owl.ui.permissions'|trans ~ ': ' ~ user.displayName }} | {{ parent() }}{% endblock %}
+
+{% block body_class %}layout-fluid{% endblock %}
+
+{% block body %}
+    {% hook 'index' with { _prefixes: prefixes, user, configuration, forms, metadata} %}
+{% endblock %}
+
+{% block modal %}
+    {% hook 'index#modals' with { _prefixes: prefixes, user, configuration, forms, metadata } %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% hook 'index#stylesheets' with { _prefixes: prefixes } %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% hook 'index#javascripts' with { _prefixes: prefixes } %}
+{% endblock %}
