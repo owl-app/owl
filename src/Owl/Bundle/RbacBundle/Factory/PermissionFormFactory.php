@@ -12,7 +12,6 @@ use Owl\Component\Rbac\Repository\PermissionRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Routing\Route;
 
 final class PermissionFormFactory implements PermissionFormFactoryInterface
 {
@@ -90,17 +89,5 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
         $form = $this->formFactory->createNamed('', $requestConfiguration->getFormType(), $permission, $formOptions);
 
         return $form->createView();
-    }
-
-    /**
-     * @return list{false|mixed, mixed|string}
-     */
-    private function getDataFromRoute(string $name, Route $route): array
-    {
-        $vars = $route->getDefaults()['_sylius']['vars'] ?? [];
-        $group = $vars['permission']['group'] ?? false;
-        $description = $vars['permission']['description'] ?? 'owl.ui.permission.' . $name;
-
-        return [$group, $description];
     }
 }

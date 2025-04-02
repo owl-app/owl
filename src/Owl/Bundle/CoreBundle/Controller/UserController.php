@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Owl\Bundle\CoreBundle\Controller;
 
 use Exception;
+use Owl\Bundle\CoreBundle\Rbac\DirectPermissionUserProviderInterface;
 use Owl\Bundle\RbacBundle\Factory\PermissionFormFactoryInterface;
 use Owl\Bundle\UserBundle\Controller\UserController as BaseUserController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,21 +47,31 @@ class UserController extends BaseUserController
         ]);
     }
 
-    public function assignAction(Request $request, ManagerInterface $rbacManager): Response
-    {
-        return $this->changePermission('assign', $request, $rbacManager);
+    public function assignAction(
+        Request $request,
+        ManagerInterface $rbacManager,
+        DirectPermissionUserProviderInterface $directPermissionUserProvider
+    ): Response {
+        return $this->changePermission('assign', $request, $rbacManager, $directPermissionUserProvider);
     }
 
-    public function revokeAction(Request $request, ManagerInterface $rbacManager): Response
-    {
-        return $this->changePermission('revoke', $request, $rbacManager);
+    public function revokeAction(
+        Request $request,
+        ManagerInterface $rbacManager,
+        DirectPermissionUserProviderInterface $directPermissionUserProvider
+    ): Response {
+        return $this->changePermission('revoke', $request, $rbacManager, $directPermissionUserProvider);
     }
 
     /**
      * @return Response|null
      */
-    private function changePermission(string $action, Request $request, ManagerInterface $rbacManager)
-    {
+    private function changePermission(
+        string $action,
+        Request $request,
+        ManagerInterface $rbacManager,
+        DirectPermissionUserProviderInterface $directPermissionUserProvider
+    ): ?Response {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $formOptions = array_merge(
             $configuration->getFormOptions(),
@@ -84,8 +95,7 @@ class UserController extends BaseUserController
                 $rbacManager->{$action}($formData['name'], $user->getId());
 
                 if (!$configuration->isHtmlRequest()) {
-                    $allPermissions = $rbacManager->getPermissionsByUserId($user->getId());
-                    $userRoles = $rbacManager->getRolesByUserId($user->getId());
+                    $allPermissions = $directPermissionUserProvider->getPermission($user->getId());
                     $permissionsFromRole = [];
 
                     foreach ($rbacManager->getItemsByUserId($user->getId()) as $item) {
@@ -97,27 +107,27 @@ class UserController extends BaseUserController
                     $responseData = [
                         'message' => $this->get('translator')->trans('owl.rbac.permission.add_success', [], 'flashes'),
                         'permissions' => [
-                            'direct' => array_keys(array_merge($allPermissions, $userRoles)),
+                            'direct' => array_keys($allPermissions),
                             'inherited' => array_keys($permissionsFromRole),
                         ],
                     ];
 
                     return $this->createRestView($configuration, $responseData, Response::HTTP_OK);
                 }
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 $responseData = [
                     'message' => $e->getMessage(),
                 ];
 
                 return $this->createRestView($configuration, $responseData, Response::HTTP_BAD_REQUEST);
             }
-        } else {
-            $responseData = [
-                'status' => 'error',
-                'errors' => $this->getErrorMessages($form),
-            ];
-
-            return $this->createRestView($configuration, $responseData, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+
+        $responseData = [
+            'status' => 'error',
+            'errors' => $this->getErrorMessages($form),
+        ];
+
+        return $this->createRestView($configuration, $responseData, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

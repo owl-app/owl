@@ -16,22 +16,6 @@ export default class extends Controller {
         this.checkboxTarget.removeEventListener('change', this.handleChangeCheckbox);
     }
 
-    confirmAction(event) {
-        if (event.params.request.url === undefined) {
-            throw new Error('The request.url parameter is required.');
-        }
-
-        const data = Object.assign(event.params.request?.data ?? {}, {
-            ids: this.checkboxTargets
-                .filter(checkbox => checkbox.checked)
-                .map(checkbox => checkbox.value)
-        });
-
-        event.params.request.data = data;
-
-        this.modalStaticOutlet.open(event);
-    }
-
     handleChangeCheckbox = async (event) => {
         if (event.target.checked) {
             await this.sendRequest(this.assignUrlValue, 'POST');
@@ -62,7 +46,7 @@ export default class extends Controller {
 
             const responseData = await response.json();
 
-            this.dispatch('changed', { detail: { message: responseData.message, type: 'success' } });
+            this.dispatch('changed', { detail: { message: responseData.message, response: responseData, type: 'success' } });
         }).catch(async ({ cause }) => {
             let errors = [];
 

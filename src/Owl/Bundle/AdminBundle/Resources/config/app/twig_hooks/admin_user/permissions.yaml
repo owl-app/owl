@@ -25,7 +25,7 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
                 priority: 200
             body:
-                template: '@OwlAdmin/shared/permission/content/body.html.twig'
+                template: '@OwlAdmin/admin_user/permissions/content/body.html.twig'
                 priority: 200
             footer:
                 template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'

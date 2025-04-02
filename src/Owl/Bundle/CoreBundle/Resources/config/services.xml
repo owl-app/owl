@@ -20,6 +20,7 @@
         <import resource="services/commands.xml" />
         <import resource="services/resource_filter.xml" />
         <import resource="services/messenger.xml" />
+        <import resource="services/rbac.xml" />
     </imports>
 
     <services>

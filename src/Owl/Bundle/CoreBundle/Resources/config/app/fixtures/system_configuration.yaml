@@ -21,7 +21,7 @@ sylius_fixtures:
                             admin_system:
                                 reference: true
                                 name: ROLE_ADMIN_SYSTEM
-                                description: ''
+                                description: 'System administrator'
                                 setting:
                                     display_name: 'Administrator'
                                     theme: owl/admin
@@ -29,7 +29,7 @@ sylius_fixtures:
                             user:
                                 reference: true
                                 name: ROLE_USER
-                                description: ''
+                                description: 'User'
                                 setting:
                                     display_name: 'User'
                                     theme: owl/user

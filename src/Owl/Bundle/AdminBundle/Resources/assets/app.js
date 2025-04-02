@@ -19,6 +19,7 @@ import GridBulkController from './controllers/common/grid/BulkController';
 
 // modules
 import PermissionController from './controllers/PermissionController';
+import UserPermissionController from './controllers/UserPermissionController';
 
 export function startApp() {
     const appSymfonyStimulus = startStimulusApp(require.context(
@@ -35,8 +36,10 @@ export function startApp() {
     appSymfonyStimulus.register('uploader', UploaderController);
     appSymfonyStimulus.register('grid', GridController);
     appSymfonyStimulus.register('grid-bulk', GridBulkController);
-    appSymfonyStimulus.register('permission', PermissionController);
     appSymfonyStimulus.register('toast', ToastController);
+    appSymfonyStimulus.register('permission', PermissionController);
+    appSymfonyStimulus.register('user-permission', UserPermissionController);
+    
     
     appSymfonyStimulus.debug = process.env.NODE_ENV !== 'production';
     
