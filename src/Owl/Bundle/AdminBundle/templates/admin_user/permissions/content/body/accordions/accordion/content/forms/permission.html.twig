@@ -1,0 +1,38 @@
+{% set form = hookable_metadata.context.form %}
+{% set configuration = hookable_metadata.configuration %}
+
+{% set defaultMessageError = configuration.default_message_error|default('owl.ui.error_while_adding_permissions')|trans %}
+
+<div>
+    {{ 
+        form_start(form, {
+            'name' : hookable_metadata.context.name~'-'~form.vars.value.name ,
+            attr: {
+                'data-controller': 'permission',
+                'data-action': 'permission:changed@window->toast#show',
+                'data-permission-assign-url-value': path(configuration.path.assign.route, configuration.path.assign.params),
+                'data-permission-revoke-url-value': path(configuration.path.revoke.route, configuration.path.revoke.params),
+                'data-permission-default-message-error-value': defaultMessageError,
+            }
+        }) }}
+    <div class="form-check form-switch" {{form.vars.disabled}}>
+        <input {{form.vars.checked}} type="checkbox" class="form-check-input" data-permission-target="checkbox">
+        <label class="checkbox-switch form-check-label">{{form.vars.description_permission|trans}}</label>
+    </div>
+    {{ form_row(form.name, { 'id' : form.vars.value.name~'-name'}) }}
+    {{ form_row(form.type, { 'id' : form.vars.value.name~'-type'}) }}
+    {{ form_row(form._csrf_token, { 'id' : form.vars.value.name~'-_csrf_token'}) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>
+
+{# <div style="margin-bottom: 10px;">
+    {{ form_start(form, {'name' : name~'-'~form.vars.value.name, 'attr': { 'data-route' :form.vars.value.name }}) }}
+        <div class="ui toggle checkbox checkbox-permission {{form.vars.disabled}}">
+            <input type="checkbox" {{form.vars.checked}} />
+            <label>{{form.vars.description_permission|trans}}</label>
+        </div>
+        {{ form_row(form.name, { 'id' : form.vars.value.name~'-name'}) }}
+        {{ form_row(form.type, { 'id' : form.vars.value.name~'-type'}) }}
+        {{ form_row(form._csrf_token, { 'id' : form.vars.value.name~'-_csrf_token'}) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div> #}

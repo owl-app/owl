@@ -43,8 +43,8 @@ owl_admin_admin_user:
                     description: owl.ui.permission.bulk_delete_user
     type: sylius.resource
 
-owl_admin_admin_user_permission_availables:
-    path: /users/{id}/permissions/availables
+owl_admin_admin_user_permissions:
+    path: /users/{id}/permissions
     methods: [GET]
     defaults:
         _controller: owl.controller.admin_user_permission::availablesAction
@@ -59,6 +59,48 @@ owl_admin_admin_user_permission_availables:
                 permission:
                     group: user
                     description: owl.ui.permission.list_permissions_assign_to_user
+
+owl_admin_admin_user_permission_assign:
+    path: /users/{id}/assign
+    methods: [POST]
+    defaults:
+        _controller: owl.controller.admin_user_permission::assignAction
+        _format: json
+        _sylius:
+            serialization_groups: [ADD]
+            form: Owl\Bundle\RbacBundle\Form\Type\AssignType
+            section: admin
+            permission: true
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                form:
+                  ajax: true
+                permission:
+                    group: user
+                    description: owl.ui.permission.assign_permission_to_user
+
+owl_admin_admin_user_permission_revoke:
+    path: /users/{id}/revoke
+    methods: [DELETE]
+    defaults:
+        _controller: owl.controller.admin_user_permission::revokeAction
+        _format: json
+        _sylius:
+            serialization_groups: [DELETE]
+            form: Owl\Bundle\RbacBundle\Form\Type\AssignType
+            section: admin
+            permission: true
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                form:
+                  ajax: true
+                permission:
+                    group: user
+                    description: owl.ui.permission.revoke_permission_to_user
 
 owl_admin_confirm_registration:
     path: /{id}/registration

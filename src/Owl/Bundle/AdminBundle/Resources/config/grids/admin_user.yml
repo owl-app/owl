@@ -74,7 +74,7 @@ sylius_grid:
                         label: owl.ui.assign_permissions
                         options:
                             link:
-                                route: owl_admin_admin_user_permission_availables
+                                route: owl_admin_admin_user_permissions
                                 parameters:
                                     id: resource.id
                     registration:

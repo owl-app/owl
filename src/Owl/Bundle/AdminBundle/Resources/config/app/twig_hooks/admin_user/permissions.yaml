@@ -1,0 +1,80 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.admin_user_permissions.index':
+            sidebar:
+                template: '@OwlAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
+            navbar:
+                template: '@OwlAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
+            content:
+                template: '@OwlAdmin/shared/crud/common/content.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user_permissions.index.content':
+            toast:
+                template: '@OwlAdmin/shared/toast.html.twig'
+                configuration:
+                    stimulus:
+                        action: permission:changed@window->toast#show
+                priority: 300
+            flashes:
+                template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 300
+            header:
+                template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
+                priority: 200
+            body:
+                template: '@OwlAdmin/shared/permission/content/body.html.twig'
+                priority: 200
+            footer:
+                template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100
+
+        'owl_admin.admin_user_permissions.index.content.header':
+            breadcrumbs:
+                template: '@OwlAdmin/admin_user/permissions/content/header/breadcrumbs.html.twig'
+                priority: 100
+            title_block:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user_permissions.index.content.header.title_block':
+            title:
+                template: '@OwlAdmin/admin_user/permissions/content/header/title_block/title.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user_permissions.index.content.body':
+            accordions:
+                template: '@OwlAdmin/shared/permission/content/body/accordions.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user_permissions.index.content.body.accordions':
+            accordion:
+                template: '@OwlAdmin/shared/permission/content/body/accordions/accordion.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user_permissions.index.content.body.accordions.accordion.title':
+            accordion:
+                template: '@OwlAdmin/shared/permission/content/body/accordions/accordion/title.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user_permissions.index.content.body.accordions.accordion.content':
+            forms:
+                template: '@OwlAdmin/shared/permission/content/body/accordions/accordion/content/forms.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user_permissions.index.content.body.accordions.accordion.content.forms':
+            form:
+                template: '@OwlAdmin/admin_user/permissions/content/body/accordions/accordion/content/forms/permission.html.twig'
+                configuration:
+                    path:
+                        assign:
+                            route: 'owl_admin_admin_user_permission_assign'
+                            params:
+                                id: '@=_context.user.getId()'
+                        revoke:
+                            route: 'owl_admin_admin_user_permission_revoke'
+                            params:
+                                id: '@=_context.user.getId()'
+                priority: 0
