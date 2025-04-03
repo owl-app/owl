@@ -1,0 +1,28 @@
+{% import '@OwlAdmin/shared/helper/header.html.twig' as header %}
+
+{% if hookable_metadata.context.metadata is defined and hookable_metadata.context.configuration is defined %}
+    {% set configuration = hookable_metadata.context.configuration %}
+    {% set metadata = hookable_metadata.context.metadata %}
+    {% set resource = hookable_metadata.context.resource %}
+
+    {% set singular_name = hookable_metadata.configuration.resource_name|default(metadata.applicationName ~ '.ui.show_' ~ _context.metadata.name) %}
+
+    {% set rendered_field_prefix = hookable_metadata.configuration.rendered_field_prefix|default(null) %}
+    {% set field_name = hookable_metadata.configuration.rendered_field|default('') %}
+    {% set rendered_field = rendered_field_prefix ~ (attribute(resource, field_name) is defined ? attribute(resource, field_name) : null) %}
+
+    {% set header = hookable_metadata.configuration.header|default(singular_name)|trans ~ (attribute(resource, field_name) is defined ? ': ' ~ attribute(resource, field_name) : null) %}
+    {% set icon = hookable_metadata.configuration.icon|default('flowbite:plus-outline') %}
+{% else %}
+    {% set singular_name = hookable_metadata.configuration.resource_name %}
+    {% set header = hookable_metadata.configuration.header is not null ? hookable_metadata.configuration.header|trans : singular_name|trans %}
+    {% set icon = hookable_metadata.configuration.icon %}
+{% endif %}
+
+<div class="col-12 col-md">
+    <div class="d-md-flex gap-2 py-3 align-items-center">
+        {{ 
+            header.h1(header, icon)
+        }}
+    </div>
+</div>

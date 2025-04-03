@@ -4,9 +4,11 @@
     <services>
         <defaults public="true" />
 
-        <service id="owl.admin.twig_global_data_provider" class="Owl\Bundle\AdminBundle\Provider\AdminTwigGlobalDataProvider" >
+        <service id="owl_admin.provider.notification" class="Owl\Bundle\AdminBundle\Notification\NotificationProvider">
             <argument type="service" id="owl.repository.notification"/>
             <argument type="service" id="owl.context.admin_user" />
         </service>
+
     </services>
 </container>
+

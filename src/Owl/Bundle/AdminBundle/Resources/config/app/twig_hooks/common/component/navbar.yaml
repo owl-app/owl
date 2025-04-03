@@ -8,12 +8,12 @@ sylius_twig_hooks:
         'owl_admin.common.component.navbar.items':
             add_suggestion:
                 template: '@OwlAdmin/shared/crud/common/navbar/items/add_suggestion.html.twig'
-                priority: 0
-            # notifications:
-            #     component: 'sylius_admin:navbar:notifications'
-            #     props:
-            #         template: '@OwlAdmin/shared/components/navbar/notifications.html.twig'
-            #     priority: 100
+                priority: 200
+            notifications:
+                component: 'owl_admin:navbar:notifications'
+                props:
+                    template: '@OwlAdmin/shared/components/navbar/notifications.html.twig'
+                priority: 100
             user_dropdown:
                 template: '@OwlAdmin/shared/crud/common/navbar/items/user.html.twig'
                 priority: 0

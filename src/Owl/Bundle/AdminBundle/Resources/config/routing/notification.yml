@@ -119,7 +119,7 @@ owl_admin_notification_details:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/Notification/details.html.twig"
+            template: "@OwlAdmin/shared/crud/modal/show.html.twig"
             vars:
                 permission:
                     group: notification

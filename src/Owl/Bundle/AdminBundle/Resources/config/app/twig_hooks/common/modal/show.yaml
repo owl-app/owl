@@ -1,0 +1,40 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.common.modal.show':
+            content:
+                template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
+                configuration:
+                    stimulus:
+                        controllers: {
+                            form: {}
+                        }
+                priority: 0
+
+        'owl_admin.common.modal.show.content':
+            header:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header.html.twig'
+                priority: 300
+            body:
+                template: '@OwlAdmin/shared/crud/common/modal/content/body.html.twig'
+                priority: 200
+            actions:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions.html.twig'
+                priority: 100
+
+        'owl_admin.common.modal.show.content.header':
+            title_block:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block.html.twig'
+                priority: 0
+            button_close:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/button_close.html.twig'
+                priority: 0
+
+        'owl_admin.common.modal.show.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/modal/show/content/header/title_block/title.html.twig'
+                priority: 0
+
+        'owl_admin.common.modal.show.content.actions':
+            cancel:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions/cancel.html.twig'
+                priority: 100

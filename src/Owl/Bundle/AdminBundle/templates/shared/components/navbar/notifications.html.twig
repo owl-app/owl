@@ -1,0 +1,64 @@
+{# Rendered by \Owl\Bundle\AdminBundle\TwigComponent\Shared\Navbar\NotificationsComponent #}
+
+{% import '@OwlAdmin/shared/helper/dropdown.html.twig' as dropdown %}
+
+<div class="nav-item dropdown">
+    {% set dropdown_trigger %}
+        {% if notifications %}
+            <a href="#" class="nav-link px-0">
+                {{ ux_icon('tabler:bell') }}
+                <span class="badge bg-red"></span>
+            </a>
+        {% else %}
+            <div class="nav-link px-0">
+                {{ ux_icon('tabler:bell') }}
+            </div>
+        {% endif %}
+    {% endset %}
+
+    {% set dropdown_content %}
+        <div class="card" style="min-width: 15rem; max-width: 25rem">
+            {% if notifications is empty %}
+                <div class="card-header border-bottom-0">
+                    <h3 class="card-title">{{ 'owl.ui.no_new_notifications'|trans }}</h3>
+                </div>
+            {% else %}
+                <div class="list-group list-group-flush list-group-hoverable">
+                    {% for notification in notifications %}
+                        <div class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <span class="status-dot status-dot-animated bg-red d-block"></span>
+                                </div>
+                                <div class="col">
+                                    <div
+                                        class="d-block mt-n1"
+                                        data-controller="show-modal"
+                                        data-show-modal-modal-outlet=".owl-modal"
+                                        data-action="click->show-modal#open"
+                                        data-show-modal-url-param="{{ path('owl_admin_notification_details', { id: notification.id }) }}"
+                                         data-show-modal-size-param="default"
+                                    >
+                                        <div class="text-reset d-block">
+                                            {{ notification.subject }}
+                                        </div>
+                                        <div class="d-block text-secondary text-truncate mt-n1">
+                                            {{ notification.createdAt|date("d-m-Y") }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endset %}
+
+    {{ dropdown.default({
+        class: 'dropdown-menu-card dropdown-menu-arrow',
+        custom_trigger: dropdown_trigger,
+        content: dropdown_content,
+        direction: 'down-end'
+    }) }}
+</div>

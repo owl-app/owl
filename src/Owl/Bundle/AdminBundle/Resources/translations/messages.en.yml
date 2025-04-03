@@ -96,6 +96,7 @@ owl:
         server_error_while_changing: Server error while changing
         your_profile: My profile
         edit_your_personal_information: Edit your personal information
+        show_notification: Details notification
         permission:
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

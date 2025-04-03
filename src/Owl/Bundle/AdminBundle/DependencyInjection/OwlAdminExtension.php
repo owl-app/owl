@@ -16,8 +16,7 @@ class OwlAdminExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        $container->setParameter('sylius.admin.notification.enabled', $config['notifications']['enabled']);
-        $container->setParameter('sylius.admin.notification.frequency', $config['notifications']['frequency']);
+        $container->setParameter('owl.admin.notification.enabled', $config['notifications']['enabled']);
 
         $loader->load('services.xml');
     }

@@ -17,7 +17,6 @@ framework:
     session:
         handler_id: ~
         storage_id: session.storage.mock_file
-    http_method_override: true
     test: ~
 
 twig:

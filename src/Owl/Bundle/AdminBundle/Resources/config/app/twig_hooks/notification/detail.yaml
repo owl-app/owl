@@ -1,0 +1,9 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.common.modal.show.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/modal/show/content/header/title_block/title.html.twig'
+                configuration:
+                    rendered_field: subject
+                    icon: 'flowbite:bullhorn-outline'
+                priority: 0

@@ -167,5 +167,4 @@ twig:
                 - { name: "update", icon: "plus", color: "blue", permission: true}
         sylius_base_locale: "%locale%"
         owl_base_currency: "%owl_core.default_currency%"
-        owl: '@owl.admin.twig_global_data_provider'
         owl_is_turbo: true
