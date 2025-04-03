@@ -1,17 +1,22 @@
-{% set controllerNames = [] %}
-{% set controllerValues = [] %}
+{% set controller_names = [] %}
+{% set controller_values = [] %}
+{% set default_page_wrapper_class = '' %}
 
-{% set metadata = hookable_metadata.context.metadata %}
-{% set page_wrapper_class = hookable_metadata.configuration.page_wrapper_class|default(metadata.applicationName ~ '-page-wrapper-' ~ _context.metadata.name)|replace({'_': '-'}) %}
+{% if hookable_metadata.context.metadata is defined %}
+    {% set metadata = hookable_metadata.context.metadata %}
+    {% set default_page_wrapper_class = (metadata.applicationName ~ '-page-wrapper-' ~ _context.metadata.name)|replace({'_': '-'}) %}
+{% endif %}
+
+{% set page_wrapper_class = hookable_metadata.configuration.page_wrapper_class|default(default_page_wrapper_class) %}
 
 {% if hookable_metadata.configuration.stimulus.controllers is defined %}
-    {% for controllerName, options in hookable_metadata.configuration.stimulus.controllers %}
-        {% set controllerNames = controllerNames|merge([controllerName]) %}
+    {% for controller_name, options in hookable_metadata.configuration.stimulus.controllers %}
+        {% set controller_names = controller_names|merge([controller_name]) %}
 
         {% if options.values is defined %}
             {% for valueName, valueContent in options.values %}
-                {% set controllerValues = controllerValues|merge([{
-                    name: 'data-' ~ controllerName ~ '-'  ~ valueName ~ '-value',
+                {% set controller_values = controller_values|merge([{
+                    name: 'data-' ~ controller_name ~ '-'  ~ valueName ~ '-value',
                     value: valueContent is iterable ? valueContent|json_encode : valueContent
                 }]) %}
             {% endfor %}
@@ -22,10 +27,10 @@
 
 <div 
     class="page-wrapper {{ page_wrapper_class}}"
-    {% if controllerNames is not empty %} {{ stimulus_controller(controllerNames|join(' ')) }} {% endif %}
-    {% if controllerValues is not empty %}
-        {% for controllerValue in controllerValues %}
-            {{ controllerValue.name }}='{{ controllerValue.value }}'
+    {% if controller_names is not empty %} {{ stimulus_controller(controller_names|join(' ')) }} {% endif %}
+    {% if controller_values is not empty %}
+        {% for controller_value in controller_values %}
+            {{ controller_value.name }}='{{ controller_value.value }}'
         {% endfor %}
     {% endif %}
 >
