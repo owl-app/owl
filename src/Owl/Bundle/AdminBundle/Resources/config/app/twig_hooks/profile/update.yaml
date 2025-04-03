@@ -11,6 +11,23 @@ sylius_twig_hooks:
                         }
                 priority: 0
 
+        'owl_admin.profile.update.content':
+            flashes:
+                template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 400
+            header:
+                template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
+                enabled: false
+            form_error_alert:
+                template: '@OwlAdmin/shared/crud/common/content/form_error_alert.html.twig'
+                priority: 200
+            body:
+                template: '@OwlAdmin/profile/update/content/body.html.twig'
+                priority: 200
+            footer:
+                template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100
+
         'owl_admin.profile.update.content.body':
             form:
                 component: 'owl_admin:profile:form'
@@ -25,6 +42,9 @@ sylius_twig_hooks:
         'owl_admin.profile.update.content.header':
             breadcrumbs:
                 enabled: false
+            title_block:
+                template: '@OwlAdmin/profile/update/content/header/title_block.html.twig'
+                priority: 0
 
         'owl_admin.profile.update.content.header.title_block':
             title:
@@ -47,21 +67,23 @@ sylius_twig_hooks:
                     button:
                         text: 'owl.ui.save'
                         class: 'btn-primary'
-                    saveAction: 'referer'
+                    saveAction: 'save'
                 priority: 100
 
-        'owl_admin.profile.update.content.body.form.sections.general':
+        'owl_admin.profile.update.content.body.form':
+            sections:
+                enabled: false
             default:
                 enabled: false
             display_name:
-                template: '@OwlAdmin/profile/update/content/body/form/sections/general/display_name.html.twig'
+                template: '@OwlAdmin/profile/update/content/body/form/display_name.html.twig'
                 priority: 0
             first_last_name:
-                template: '@OwlAdmin/profile/update/content/body/form/sections/general/first_last_name.html.twig'
+                template: '@OwlAdmin/profile/update/content/body/form/first_last_name.html.twig'
                 priority: 0
             phone_locale:
-                template: '@OwlAdmin/profile/update/content/body/form/sections/general/phone_locale.html.twig'
+                template: '@OwlAdmin/profile/update/content/body/form/phone_locale.html.twig'
                 priority: 0
             password:
-                template: '@OwlAdmin/profile/update/content/body/form/sections/general/password.html.twig'
+                template: '@OwlAdmin/profile/update/content/body/form/password.html.twig'
                 priority: 0

@@ -28,6 +28,9 @@ sylius_twig_hooks:
                 priority: 200
             body:
                 template: '@OwlAdmin/shared/crud/common/content/body.html.twig'
+                configuration:
+                    page_body_attributes:
+                        'data-form-target': 'content'
                 priority: 200
             footer:
                 template: '@OwlAdmin/shared/crud/common/content/footer.html.twig'

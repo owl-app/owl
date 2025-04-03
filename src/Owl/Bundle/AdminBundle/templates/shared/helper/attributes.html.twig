@@ -1,0 +1,6 @@
+{% macro attributes(attr) -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+            {{- attrname }}="{{ attrvalue }}"
+    {%- endfor -%}
+{%- endmacro attributes -%}

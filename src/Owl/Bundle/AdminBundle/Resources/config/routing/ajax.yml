@@ -1,3 +1,0 @@
-owl_admin_ajax_user_permission:
-    resource: "@OwlAdminBundle/Resources/config/routing/ajax/user_permission.yml"
-    prefix: /user/{id}/permission

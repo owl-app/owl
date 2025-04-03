@@ -61,7 +61,7 @@ owl_admin_rbac_role_update:
                     description: owl.ui.permission.update_role
 
 owl_admin_rbac_role_permissions:
-    path: /{id}/assing-permissions
+    path: /{id}/permissions
     methods: [GET]
     defaults:
         _controller: owl.controller.rbac_role::availablesAction

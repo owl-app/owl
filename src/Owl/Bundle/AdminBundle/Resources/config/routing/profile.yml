@@ -14,6 +14,9 @@ owl_admin_profile_update:
                     - "expr:service('owl.context.admin_user').getUser()"
             vars:
                 referer: true
+                redirect:
+                    save:
+                        route: owl_admin_profile_update
                 form:
                     ajax: true
                 permission:

@@ -71,7 +71,16 @@ final class MainMenuBuilder
 
         if ($isGranted) {
             $menu
-                ->addChild('notification', ['route' => 'owl_admin_notification_index'])
+                ->addChild('notification', [
+                    'route' => 'owl_admin_notification_index',
+                    'extras' => [
+                        'routes' => [
+                            ['route' => 'owl_admin_notification_update'],
+                            ['route' => 'owl_admin_notification_show'],
+                            ['route' => 'owl_admin_notification_show_accepted_index'],
+                        ]
+                    ]
+                ])
                 ->setLabel('owl.menu.admin.main.notification.header')
                 ->setLabelAttribute('icon', 'flowbite:bullhorn-outline');
         }
@@ -99,7 +108,16 @@ final class MainMenuBuilder
 
             if ($isGrantedUsers) {
                 $configuration
-                    ->addChild('admin_users', ['route' => 'owl_admin_admin_user_index'])
+                    ->addChild('admin_users', [
+                        'route' => 'owl_admin_admin_user_index',
+                        'extras' => [
+                            'routes' => [
+                                ['route' => 'owl_admin_admin_user_create'],
+                                ['route' => 'owl_admin_admin_user_update'],
+                                ['route' => 'owl_admin_admin_user_permissions'],
+                            ]
+                        ]
+                    ])
                     ->setLabel('owl.menu.admin.main.configuration.users')
                     ->setLabelAttribute('icon', 'users');
             }
@@ -127,7 +145,14 @@ final class MainMenuBuilder
 
             if ($isGrantedPermissionRoles) {
                 $configuration
-                    ->addChild('admin_permission_roles', ['route' => 'owl_admin_rbac_role_index'])
+                    ->addChild('admin_permission_roles', [
+                        'route' => 'owl_admin_rbac_role_index',
+                        'extras' => [
+                            'routes' => [
+                                ['route' => 'owl_admin_rbac_role_permissions']
+                            ]
+                        ]
+                    ])
                     ->setLabel('owl.menu.admin.main.permission.roles')
                     ->setLabelAttribute('icon', 'user secret')
                     ->setExtra('is_granted', $isGrantedPermissionRoles);

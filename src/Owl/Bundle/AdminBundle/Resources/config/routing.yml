@@ -36,7 +36,3 @@ owl_admin_setting:
 
 owl_admin_security:
     resource: "@OwlAdminBundle/Resources/config/routing/security.yml"
-
-sylius_admin_ajax:
-    resource: "@OwlAdminBundle/Resources/config/routing/ajax.yml"
-    prefix: /ajax
