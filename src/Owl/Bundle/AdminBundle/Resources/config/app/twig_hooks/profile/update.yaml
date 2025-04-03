@@ -1,0 +1,67 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.profile.update':
+            content:
+                template: '@OwlAdmin/shared/crud/common/content.html.twig'
+                configuration:
+                    page_wrapper_class: 'owl-page-wrapper-profile'
+                    stimulus:
+                        controllers: {
+                            form: {}
+                        }
+                priority: 0
+
+        'owl_admin.profile.update.content.body':
+            form:
+                component: 'owl_admin:profile:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'owl_admin.profile.update.content.header':
+            breadcrumbs:
+                enabled: false
+
+        'owl_admin.profile.update.content.header.title_block':
+            title:
+                template: '@OwlAdmin/profile/update/content/header/title_block/title.html.twig'
+                priority: 0
+
+        'owl_admin.profile.update.content.header.title_block.actions':
+            show:
+                enabled: false
+            cancel:
+                enabled: false
+            save_close:
+                enabled: false
+            save_update:
+                enabled: false
+            save:
+                template: '@OwlAdmin/shared/crud/common/content/header/title_block/actions/save.html.twig'
+                configuration:
+                    method: 'PUT'
+                    button:
+                        text: 'owl.ui.save'
+                        class: 'btn-primary'
+                    saveAction: 'referer'
+                priority: 100
+
+        'owl_admin.profile.update.content.body.form.sections.general':
+            default:
+                enabled: false
+            display_name:
+                template: '@OwlAdmin/profile/update/content/body/form/sections/general/display_name.html.twig'
+                priority: 0
+            first_last_name:
+                template: '@OwlAdmin/profile/update/content/body/form/sections/general/first_last_name.html.twig'
+                priority: 0
+            phone_locale:
+                template: '@OwlAdmin/profile/update/content/body/form/sections/general/phone_locale.html.twig'
+                priority: 0
+            password:
+                template: '@OwlAdmin/profile/update/content/body/form/sections/general/password.html.twig'
+                priority: 0

@@ -6,7 +6,7 @@ owl_admin_profile_update:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/Account/profileUpdate.html.twig"
+            template: "@OwlAdmin/profile/update.html.twig"
             form: Owl\Bundle\CoreBundle\Form\Type\User\UserUpdateProfileType
             repository:
                 method: find

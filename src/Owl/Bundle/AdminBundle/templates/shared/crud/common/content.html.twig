@@ -1,6 +1,9 @@
 {% set controllerNames = [] %}
 {% set controllerValues = [] %}
 
+{% set metadata = hookable_metadata.context.metadata %}
+{% set page_wrapper_class = hookable_metadata.configuration.page_wrapper_class|default(metadata.applicationName ~ '-page-wrapper-' ~ _context.metadata.name)|replace({'_': '-'}) %}
+
 {% if hookable_metadata.configuration.stimulus.controllers is defined %}
     {% for controllerName, options in hookable_metadata.configuration.stimulus.controllers %}
         {% set controllerNames = controllerNames|merge([controllerName]) %}
@@ -18,7 +21,7 @@
 {% endif %}
 
 <div 
-    class="page-wrapper"
+    class="page-wrapper {{ page_wrapper_class}}"
     {% if controllerNames is not empty %} {{ stimulus_controller(controllerNames|join(' ')) }} {% endif %}
     {% if controllerValues is not empty %}
         {% for controllerValue in controllerValues %}

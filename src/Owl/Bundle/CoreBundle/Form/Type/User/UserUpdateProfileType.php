@@ -27,6 +27,10 @@ final class UserUpdateProfileType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('displayName', TextType::class, [
+                'required' => false,
+                'label' => 'owl.form.user.display_name',
+            ])
             ->add('firstName', TextType::class, [
                 'required' => false,
                 'label' => 'owl.form.common.first_name',

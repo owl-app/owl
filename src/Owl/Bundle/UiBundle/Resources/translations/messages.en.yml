@@ -331,8 +331,6 @@ owl:
         value: Value
         user_profile: Profile
         update_profile: Update profile
-        your_profile: My profile
-        edit_your_personal_information: Edit your personal information
         add_suggestion: Add suggestion
         lang: Language
         date_filter: '%label% | %altLabel%'

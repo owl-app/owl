@@ -47,7 +47,7 @@ class UserDropdownComponent
         return [
             [
                 'title' => 'owl.ui.my_account',
-                'url' => $this->urlGenerator->generate('owl_admin_admin_user_update', ['id' => $this->getUser()->getId()]),
+                'url' => $this->urlGenerator->generate('owl_admin_profile_update', ['id' => $this->getUser()->getId()]),
                 'icon' => 'flowbite:user-outline',
             ],
             [

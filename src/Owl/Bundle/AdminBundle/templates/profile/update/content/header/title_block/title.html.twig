@@ -1,0 +1,13 @@
+{% import '@OwlAdmin/shared/helper/header.html.twig' as header %}
+
+{% set header = hookable_metadata.configuration.title|default('owl.ui.your_profile') %}
+
+{% set icon = hookable_metadata.configuration.icon|default('flowbite:user-outline') %}
+{% set subheader = hookable_metadata.configuration.subheader|default('owl.ui.edit_your_personal_information') %}
+{% set test_attribute = hookable_metadata.configuration.owl_test_html_attribute is defined ? sylius_test_html_attribute(hookable_metadata.configuration.owl_test_html_attribute) : null %}
+
+<div class="col-12 col-md" {{ test_attribute }}>
+    <div class="d-md-flex gap-2 align-items-center">
+        {{ header.h1(header|trans, icon, subheader|trans) }}
+    </div>
+</div>
