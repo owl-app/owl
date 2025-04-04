@@ -62,6 +62,14 @@
             right: 1px !important;
         }
     }
+
+    .text-reset {
+        .date {
+            --tblr-badge-padding-y: 0rem;
+            font-size: 0.55rem !important;
+            line-height: 1 !important;
+        }
+    }
 }
 
 .nav {

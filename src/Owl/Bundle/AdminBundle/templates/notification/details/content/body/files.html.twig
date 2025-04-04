@@ -1,0 +1,17 @@
+
+{% set files = hookable_metadata.context.resource.files %}
+
+{% if files is not empty %}
+    <h3 class="mb-2">{{ 'owl.ui.files'|trans }}</h3>
+    <div>
+        {% for file in files %}
+            <a 
+                target="_blank"
+                href="{{ file.path|owl_file_path }}"
+                class="col-12 d-flex align-items-center badge bg-blue text-blue-fg text-decoration-none mb-1"
+            >
+                <div class="text-truncate">{{ file.name }}</div>
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}

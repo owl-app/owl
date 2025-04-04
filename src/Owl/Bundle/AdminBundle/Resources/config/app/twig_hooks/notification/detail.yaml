@@ -26,8 +26,17 @@ sylius_twig_hooks:
             title:
                 template: '@OwlAdmin/shared/crud/common/modal/show/content/header/title_block/title.html.twig'
                 configuration:
+                    header: false
                     rendered_field: subject
                     icon: 'flowbite:bullhorn-outline'
+                priority: 0
+
+        'owl_admin.notification.modal.show.content.body':
+            description:
+                template: '@OwlAdmin/notification/details/content/body/description.html.twig'
+                priority: 100
+            files:
+                template: '@OwlAdmin/notification/details/content/body/files.html.twig'
                 priority: 0
 
         'owl_admin.common.modal.show.content.actions':

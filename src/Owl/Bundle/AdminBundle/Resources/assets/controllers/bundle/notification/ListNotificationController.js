@@ -16,7 +16,6 @@ export default class extends Controller {
 
         if (this.count === 0) {
             this.emptyTarget.classList.remove('d-none');
-            this.listTarget.classList.add('d-none');
             this.countTarget.classList.add('d-none');
         } else {
             this.countTarget.innerText = this.count;

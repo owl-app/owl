@@ -17,17 +17,17 @@
     {% endset %}
 
     {% set dropdown_content %}
-        <div class="card" style="min-width: 15rem; max-width: 25rem">
-            <div class="card-header border-bottom-0 d-none" data-list-notification-target="empty">
-                <h3 class="card-title">{{ 'owl.ui.no_new_notifications'|trans }}</h3>
+        <div class="card" style="min-width: 25rem; max-width: 25rem">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'owl.ui.notifications'|trans }}</h3>
             </div>
             <div class="list-group list-group-flush list-group-hoverable" data-list-notification-target="list">
+                <div class="list-group-item {% if notifications is empty %} d-block {% else %}d-none{% endif %}" data-list-notification-target="empty">
+                    {{ 'owl.ui.no_new_notifications'|trans }}
+                </div>
                 {% for notification in notifications %}
                     <div class="list-group-item" data-list-notification-target="notification" data-notification-id="{{ notification.id }}">
                         <div class="row align-items-center">
-                            <div class="col-auto">
-                                <span class="status-dot status-dot-animated bg-red d-block"></span>
-                            </div>
                             <div class="col">
                                 <div
                                     class="d-block mt-n1"
@@ -37,11 +37,14 @@
                                     data-show-modal-url-param="{{ path('owl_admin_notification_details', { id: notification.id }) }}"
                                         data-show-modal-size-param="default"
                                 >
-                                    <div class="text-reset d-block">
-                                        {{ notification.subject }}
+                                    <div class="text-reset d-block mb-2">
+                                        <div class="d-flex">
+                                            <div class="me-auto">{{ notification.subject }}</div>
+                                            <div class="badge bg-light text-light-fg date">{{ notification.createdAt|date("d-m-Y") }}</div>
+                                        </div>
                                     </div>
                                     <div class="d-block text-secondary text-truncate mt-n1">
-                                        {{ notification.createdAt|date("d-m-Y") }}
+                                        {{ notification.description|striptags }}
                                     </div>
                                 </div>
                             </div>

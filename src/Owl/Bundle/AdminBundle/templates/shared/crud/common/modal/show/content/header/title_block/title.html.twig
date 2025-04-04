@@ -4,14 +4,18 @@
     {% set configuration = hookable_metadata.context.configuration %}
     {% set metadata = hookable_metadata.context.metadata %}
     {% set resource = hookable_metadata.context.resource %}
-
     {% set singular_name = hookable_metadata.configuration.resource_name|default(metadata.applicationName ~ '.ui.show_' ~ _context.metadata.name) %}
+    {% set intro_text_header = hookable_metadata.configuration.header|default(singular_name)|trans %}
 
     {% set rendered_field_prefix = hookable_metadata.configuration.rendered_field_prefix|default(null) %}
     {% set field_name = hookable_metadata.configuration.rendered_field|default('') %}
     {% set rendered_field = rendered_field_prefix ~ (attribute(resource, field_name) is defined ? attribute(resource, field_name) : null) %}
 
-    {% set header = hookable_metadata.configuration.header|default(singular_name)|trans ~ (attribute(resource, field_name) is defined ? ': ' ~ attribute(resource, field_name) : null) %}
+    {% if hookable_metadata.configuration.header == false %}
+        {% set intro_text_header = '' %}
+    {% endif %}
+
+    {% set header = intro_text_header ~ (attribute(resource, field_name) is defined ? attribute(resource, field_name) : null) %}
     {% set icon = hookable_metadata.configuration.icon|default('flowbite:plus-outline') %}
 {% else %}
     {% set singular_name = hookable_metadata.configuration.resource_name %}
