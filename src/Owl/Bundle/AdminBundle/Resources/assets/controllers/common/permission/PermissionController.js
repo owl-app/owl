@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 
-import flattenObject from '../utils/flatten-object';
+import flattenObject from '../../../utils/flatten-object';
 
 export default class extends Controller {
 

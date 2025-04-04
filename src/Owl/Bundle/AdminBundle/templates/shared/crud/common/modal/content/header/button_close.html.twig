@@ -1,1 +1,8 @@
-<button type="button" class="btn-close" data-action="modal#close" data-form-target="action"></button>
+{% from "@OwlAdmin/shared/helper/attributes.html.twig" import attributes %}
+
+<button 
+    type="button"
+    class="btn-close"
+    data-action="modal#close"
+    {{ attributes(hookable_metadata.configuration.attributes|default({})) }}
+></button>

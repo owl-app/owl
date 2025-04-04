@@ -3,23 +3,27 @@ import { startStimulusApp } from '@symfony/stimulus-bridge';
 import LiveController from '@symfony/ux-live-component';
 import '@symfony/ux-live-component/styles/live.css';
 
-//modal
+// modal
 import ModalController from './controllers/common/modal/ModalController';
 import StaticModalController from './controllers/common/modal/StaticModalController';
 import ShowModalController from './controllers/common/modal/ShowModalController';
-//toast
+// toast
 import ToastController from './controllers/common/toast/ToastController';
-//form
+// form
 import FormController from './controllers/common/form/FormController';
-//uploader
+// uploader
 import UploaderController from './controllers/common/uploader/UploaderController';
-//grid
+// grid
 import GridController from './controllers/common/grid/GridController';
 import GridBulkController from './controllers/common/grid/BulkController';
+// permission
+import PermissionController from './controllers/common/permission/PermissionController';
 
-// modules
-import PermissionController from './controllers/PermissionController';
-import UserPermissionController from './controllers/UserPermissionController';
+// bundle
+import DetailsNotificationController from './controllers/bundle/notification/DetailsNotificationController';
+
+import UserPermissionController from './controllers/bundle/user/UserPermissionController';
+import ListNotificationController from './controllers/bundle/notification/ListNotificationController';
 
 export function startApp() {
     const appSymfonyStimulus = startStimulusApp(require.context(
@@ -39,6 +43,8 @@ export function startApp() {
     appSymfonyStimulus.register('toast', ToastController);
     appSymfonyStimulus.register('permission', PermissionController);
     appSymfonyStimulus.register('user-permission', UserPermissionController);
+    appSymfonyStimulus.register('details-notification', DetailsNotificationController);
+    appSymfonyStimulus.register('list-notification', ListNotificationController);
     
     
     appSymfonyStimulus.debug = process.env.NODE_ENV !== 'production';

@@ -7,7 +7,9 @@
             attr: {
                 'data-action': 'modal#close',
                 'data-form-target': 'action'
-            }
+            }|merge(
+                hookable_metadata.configuration.attributes|default({})
+            )
         }
     )
 }}

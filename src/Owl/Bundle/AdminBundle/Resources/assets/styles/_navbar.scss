@@ -51,6 +51,19 @@
     }
 }
 
+.nav-item-notification {
+    .badge {
+        &.badge-notification {
+            --tblr-badge-font-size: 0.6em;
+            --tblr-badge-border-radius: 7px;;
+
+            line-height: 1;
+            top: 1px !important;
+            right: 1px !important;
+        }
+    }
+}
+
 .nav {
     &.nav-pills {
         &.nav-show {

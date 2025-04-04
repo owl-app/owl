@@ -1,9 +1,49 @@
 sylius_twig_hooks:
     hooks:
-        'owl_admin.common.modal.show.content.header.title_block':
+        'owl_admin.notification.modal.show':
+            content:
+                template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
+                configuration:
+                    stimulus:
+                        controllers: {
+                            'details-notification': {
+                                outlets: {
+                                    'modal': '.owl-modal'
+                                }
+                            }
+                        }
+                priority: 0
+
+        'owl_admin.notification.modal.show.content.header':
+            button_close:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/button_close.html.twig'
+                configuration:
+                    attributes:
+                        'data-details-controller-target': 'action'
+                priority: 0
+
+        'owl_admin.notification.modal.show.content.header.title_block':
             title:
                 template: '@OwlAdmin/shared/crud/common/modal/show/content/header/title_block/title.html.twig'
                 configuration:
                     rendered_field: subject
                     icon: 'flowbite:bullhorn-outline'
+                priority: 0
+
+        'owl_admin.common.modal.show.content.actions':
+            cancel:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions/cancel.html.twig'
+                configuration:
+                    button:
+                        attributes:
+                            'data-details-notification-target': 'action'
+                priority: 100
+            accept:
+                template: '@OwlAdmin/notification/details/content/actions/accept.html.twig'
+                configuration:
+                    method: 'POST'
+                    path:
+                        route: 'owl_admin_notification_accept'
+                        params:
+                            id: '@=_context.resource.getId()'
                 priority: 0

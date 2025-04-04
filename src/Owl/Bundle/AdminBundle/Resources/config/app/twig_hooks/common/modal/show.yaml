@@ -24,7 +24,7 @@ sylius_twig_hooks:
         'owl_admin.common.modal.show.content.header':
             title_block:
                 template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block.html.twig'
-                priority: 0
+                priority: 100
             button_close:
                 template: '@OwlAdmin/shared/crud/common/modal/content/header/button_close.html.twig'
                 priority: 0

@@ -15,11 +15,12 @@
             text: 'owl.ui.save'|trans,
             attr: {
                 'data-action': 'form:saved@window->modal#close form#save',
-                'data-form-target': 'action',
                 'data-form-url-param': path,
                 'data-form-method-param': method,
                 'data-form-save-action-param': saveActionParam
-            }
+            }|merge(
+                hookable_metadata.configuration.button.attributes|default({'data-form-target' : 'action'})
+            )
         }
     ) }}
 {% endblock %}

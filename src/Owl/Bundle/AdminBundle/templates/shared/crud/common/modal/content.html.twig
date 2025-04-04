@@ -1,16 +1,26 @@
 
-{% set controllerNames = [] %}
-{% set controllerValues = [] %}
+{% set controller_names = [] %}
+{% set controller_values = [] %}
+{% set controller_outlets = [] %}
 
 {% if hookable_metadata.configuration.stimulus.controllers is defined %}
-    {% for controllerName, options in hookable_metadata.configuration.stimulus.controllers %}
-        {% set controllerNames = controllerNames|merge([controllerName]) %}
+    {% for controller_name, options in hookable_metadata.configuration.stimulus.controllers %}
+        {% set controller_names = controller_names|merge([controller_name]) %}
 
         {% if options.values is defined %}
-            {% for valueName, valueContent in options.values %}
-                {% set controllerValues = controllerValues|merge([{
-                    name: 'data-' ~ controllerName ~ '-'  ~ valueName ~ '-value',
-                    value: valueContent is iterable ? valueContent|json_encode : valueContent
+            {% for value_name, value_content in options.values %}
+                {% set controller_values = controller_values|merge([{
+                    name: 'data-' ~ controller_name ~ '-'  ~ value_name ~ '-value',
+                    value: value_content is iterable ? value_content|json_encode : value_content
+                }]) %}
+            {% endfor %}
+        {% endif %}
+
+        {% if options.outlets is defined %}
+            {% for outlet_name, outlet_value in options.outlets %}
+                {% set controller_outlets = controller_outlets|merge([{
+                    name: 'data-' ~ controller_name ~ '-'  ~ outlet_name ~ '-outlet',
+                    value: outlet_value,
                 }]) %}
             {% endfor %}
         {% endif %}
@@ -21,10 +31,21 @@
 <div 
     data-modal-target="content"
     class="modal-content fade"
-    {% if controllerNames is not empty %} {{ stimulus_controller(controllerNames|join(' ')) }} {% endif %}
-    {% if controllerValues is not empty %}
-        {% for controllerValue in controllerValues %}
+    {% if controller_names is not empty %} {{ stimulus_controller(controller_names|join(' ')) }} {% endif %}
+
+    {% if hookable_metadata.configuration.stimulus.actions is defined %}
+        data-action="{{ hookable_metadata.configuration.stimulus.actions|join(' ') }}"
+    {% endif %}
+
+    {% if controller_values is not empty %}
+        {% for controllerValue in controller_values %}
             {{ controllerValue.name }}='{{ controllerValue.value }}'
+        {% endfor %}
+    {% endif %}
+
+    {% if controller_outlets is not empty %}
+        {% for controller_outlet in controller_outlets %}
+            {{ controller_outlet.name }}='{{ controller_outlet.value }}'
         {% endfor %}
     {% endif %}
 >

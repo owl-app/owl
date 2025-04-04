@@ -1,0 +1,29 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
+
+{% set configuration = hookable_metadata.configuration %}
+
+{% set method = configuration.method|default('POST') %}
+
+{% block button %}
+    {% if path is not defined %}
+        {% set path = path(configuration.path.route, configuration.path.params|default({})) %}
+    {% endif %}
+
+    {{ button.primary(
+        { 
+            text: 'owl.ui.accept'|trans,
+            attr: {
+                'data-action': 'details-notification#accept',
+                'data-details-notification-target': 'action',
+                'data-details-notification-notification-id-param': hookable_metadata.context.resource.id,
+                'data-details-notification-method-param': method,
+                'data-details-notification-request-param': {
+                    url: path,
+                    data: {
+                        '_csrf_token':  csrf_token(hookable_metadata.context.resource.id)
+                    }
+                }|json_encode
+            }
+        }
+    ) }}
+{% endblock %}

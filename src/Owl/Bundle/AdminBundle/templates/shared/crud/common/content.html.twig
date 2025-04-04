@@ -1,5 +1,7 @@
 {% set controller_names = [] %}
 {% set controller_values = [] %}
+{% set controller_outlets = [] %}
+{% set controller_actions = [] %}
 {% set default_page_wrapper_class = '' %}
 
 {% if hookable_metadata.context.metadata is defined %}
@@ -14,12 +16,28 @@
         {% set controller_names = controller_names|merge([controller_name]) %}
 
         {% if options.values is defined %}
-            {% for valueName, valueContent in options.values %}
+            {% for value_name, value_content in options.values %}
                 {% set controller_values = controller_values|merge([{
-                    name: 'data-' ~ controller_name ~ '-'  ~ valueName ~ '-value',
-                    value: valueContent is iterable ? valueContent|json_encode : valueContent
+                    name: 'data-' ~ controller_name ~ '-'  ~ value_name ~ '-value',
+                    value: value_content is iterable ? value_content|json_encode : value_content
                 }]) %}
             {% endfor %}
+        {% endif %}
+
+        {% if options.outlets is defined %}
+            {% for outlet_name, outlet_value in options.outlets %}
+                {% set controller_outlets = controller_outlets|merge([{
+                    name: 'data-' ~ controller_name ~ '-'  ~ outlet_name ~ '-outlet',
+                    value: outlet_value,
+                }]) %}
+            {% endfor %}
+        {% endif %}
+
+        {% if options.actions is defined %}
+            {% set controller_actions = controller_outlets|merge([{
+                name: 'data-' ~ controller_name ~ '-'  ~ outlet_name ~ '-outlet',
+                value: outlet_value,
+            }]) %}
         {% endif %}
 
     {% endfor %}
@@ -28,9 +46,20 @@
 <div 
     class="page-wrapper {{ page_wrapper_class}}"
     {% if controller_names is not empty %} {{ stimulus_controller(controller_names|join(' ')) }} {% endif %}
+
+    {% if hookable_metadata.configuration.stimulus.actions is defined %}
+        data-action="{{ hookable_metadata.configuration.stimulus.actions|join(' ') }}"
+    {% endif %}
+
     {% if controller_values is not empty %}
         {% for controller_value in controller_values %}
             {{ controller_value.name }}='{{ controller_value.value }}'
+        {% endfor %}
+    {% endif %}
+
+    {% if controller_outlets is not empty %}
+        {% for controller_outlet in controller_outlets %}
+            {{ controller_outlet.name }}='{{ controller_outlet.value }}'
         {% endfor %}
     {% endif %}
 >

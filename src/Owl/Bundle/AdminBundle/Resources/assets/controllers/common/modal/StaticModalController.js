@@ -4,6 +4,7 @@ import { debounce } from '../../../utils/debounce';
 import redirect from '../../../utils/redirect';
 
 import { BaseModal } from './BaseModal';
+import { objectToFormData } from '../../../utils/format';
 
 export default class extends BaseModal {
 
@@ -27,7 +28,7 @@ export default class extends BaseModal {
 
         fetch(this.request.url, {
             method: 'POST',
-            body: this.objectToFormData(this.request.data),
+            body: objectToFormData(this.request.data),
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
@@ -48,28 +49,6 @@ export default class extends BaseModal {
         }).catch(() => {
             this.hide();
         });
-    }
-
-    objectToFormData(obj, formData = new FormData(), parentKey = '') {
-        for (const key in obj) {
-            if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                const fullKey = parentKey ? `${parentKey}[${key}]` : key;
-                const value = obj[key];
-    
-                if (value instanceof File) {
-                    formData.append(fullKey, value);
-                } else if (Array.isArray(value)) {
-                    value.forEach((val, index) => {
-                        formData.append(`${fullKey}[${index}]`, val);
-                    });
-                } else if (typeof value === 'object' && value !== null) {
-                    this.objectToFormData(value, formData, fullKey);
-                } else {
-                    formData.append(fullKey, value);
-                }
-            }
-        }
-        return formData;
     }
 
     eventHiddenModal = () => {

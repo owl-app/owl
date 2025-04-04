@@ -24,9 +24,12 @@ sylius_twig_hooks:
         'owl_admin.common.modal.create.content.header':
             title_block:
                 template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block.html.twig'
-                priority: 0
+                priority: 100
             button_close:
                 template: '@OwlAdmin/shared/crud/common/modal/content/header/button_close.html.twig'
+                configuration:
+                    attributes:
+                        'data-form-target': 'action'
                 priority: 0
 
         'owl_admin.common.modal.create.content.header.title_block':
@@ -55,6 +58,10 @@ sylius_twig_hooks:
         'owl_admin.common.modal.create.content.actions':
             cancel:
                 template: '@OwlAdmin/shared/crud/common/modal/content/actions/cancel.html.twig'
+                configuration:
+                    button:
+                        attributes:
+                            'data-form-target': 'action'
                 priority: 100
             save:
                 template: '@OwlAdmin/shared/crud/common/modal/content/actions/create.html.twig'
