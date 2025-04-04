@@ -1,11 +1,11 @@
 sylius_mailer:
     sender:
         name: System
-        address: owl@owl.com
+        address: '%owl.mail_sender%'
     emails:
         reset_password_token:
             subject: owl.emails.user.password_reset.subject
-            template: "@OwlAdmin/Email/passwordReset.html.twig"
+            template: "@OwlCore/Email/passwordReset.html.twig"
         user_registration:
             subject: owl.emails.user_registration.subject
             template: "@OwlAdmin/Email/userRegistration.html.twig"

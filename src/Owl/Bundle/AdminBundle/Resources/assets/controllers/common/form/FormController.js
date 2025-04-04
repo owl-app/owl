@@ -77,7 +77,8 @@ export default class extends Controller {
     }
 
     async afterSave(response) {
-        const resource = await response.json();
+        const text = response.text();
+        const resource = !text ? await response.json() : {};
 
         if (this.asyncEventsValue.length) {
             const awaited = [];
@@ -123,7 +124,11 @@ export default class extends Controller {
             await Promise.all(promises);
         } else {
             this.formTarget.querySelectorAll('.field').forEach(function (field) {
-                field.classList.remove('error');
+                const error = field.querySelector('.invalid-feedback');
+
+                if (error) {
+                    error.remove();
+                }
             });
 
             Object.keys(errors).map((key) => {

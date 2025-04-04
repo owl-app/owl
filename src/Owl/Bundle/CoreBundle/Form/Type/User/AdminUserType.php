@@ -11,6 +11,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class AdminUserType extends UserType
@@ -36,6 +37,10 @@ final class AdminUserType extends UserType
         parent::buildForm($builder, $options);
 
         $builder
+            ->add('plainPassword', PasswordType::class, [
+                'label' => 'sylius.form.user.password.label',
+                'always_empty' => false,
+            ])
             ->add('displayName', TextType::class, [
                 'required' => true,
                 'label' => 'owl.form.user.display_name',

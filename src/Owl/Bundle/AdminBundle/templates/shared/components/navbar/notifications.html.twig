@@ -38,9 +38,9 @@
                                         data-show-modal-size-param="default"
                                 >
                                     <div class="text-reset d-block mb-2">
-                                        <div class="d-flex">
-                                            <div class="me-auto">{{ notification.subject }}</div>
-                                            <div class="badge bg-light text-light-fg date">{{ notification.createdAt|date("d-m-Y") }}</div>
+                                        <div class="d-flex align-items-start">
+                                            <div class="col-9 text-truncate pe-3">{{ notification.subject }}</div>
+                                            <div class="badge bg-light text-light-fg date col-3">{{ notification.createdAt|date("d-m-Y") }}</div>
                                         </div>
                                     </div>
                                     <div class="d-block text-secondary text-truncate mt-n1">

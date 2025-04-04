@@ -1,3 +1,15 @@
-{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
 
-{{ button.primary({ text: 'sylius.ui.reset_password'|trans, type: 'submit', class: 'btn btn-primary w-100' }) }}
+{{ 
+    button.default({
+        text: 'owl.ui.reset_password'|trans,
+        class: 'btn btn-primary w-100',
+        attr: {
+            'data-action': 'form#save',
+            'data-form-target': 'action',
+            'data-form-url-param': path('owl_admin_request_password_reset'),
+            'data-form-method-param': 'POST',
+        }
+    })
+}}
+
