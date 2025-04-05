@@ -8,6 +8,7 @@ imports:
     - { resource: "@OwlSettingBundle/Resources/config/app/config.yml" }
 
     - { resource: "@OwlCoreBundle/Resources/config/app/state_machine.yml" }
+    - { resource: "@OwlCoreBundle/Resources/config/app/messenger.yaml" }
     - { resource: "@OwlCoreBundle/Resources/config/app/fixtures.yml" }
 
 parameters:

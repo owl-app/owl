@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Owl\Bundle\CoreBundle\Command;
+namespace Owl\Bundle\CoreBundle\Console\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Owl\Component\Core\Model\AdminUser;
 use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

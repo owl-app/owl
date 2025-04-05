@@ -4,7 +4,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="Owl\Bundle\CoreBundle\Command\AdminUserFakerCommand">
+        <service id="Owl\Bundle\CoreBundle\Console\Command\AdminUserFakerCommand">
             <argument type="service" id="owl.manager.admin_user" />
             <argument type="service" id="owl.repository.rbac_role" />
             <argument type="service" id="owl.fixture.example_factory.admin_user" />

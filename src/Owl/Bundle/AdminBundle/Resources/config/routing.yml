@@ -10,7 +10,7 @@ sylius_admin_partial:
 owl_admin_dashboard: 
     path: /dashboard
     defaults:
-        _controller: owl.controller.admin.dashboard::indexAction
+        _controller: owl_admin.controller.dashboard::indexAction
 
 owl_admin_profile:
     resource: "@OwlAdminBundle/Resources/config/routing/profile.yml"

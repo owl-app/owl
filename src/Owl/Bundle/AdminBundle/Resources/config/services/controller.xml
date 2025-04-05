@@ -8,10 +8,23 @@
     <services>
         <defaults public="true" />
 
-        <service id="owl.controller.admin.dashboard" class="Owl\Bundle\AdminBundle\Controller\DashboardController" public="true">
+        <service id="owl_admin.controller.dashboard" class="Owl\Bundle\AdminBundle\Controller\DashboardController" public="true">
             <argument type="service" id="owl.setting.storage.doctrine" />
             <argument type="service" id="twig" />
             <argument type="service" id="router" />
+        </service>
+
+        <service id="owl_admin.controller.account.render_request_password_reset_page" class="Owl\Bundle\AdminBundle\Action\Account\RenderRequestPasswordResetPageAction">
+            <argument type="service" id="twig"/>
+            <argument type="service" id="form.factory"/>
+        </service>
+
+        <service id="owl_admin.controller.account.request_password_reset" class="Owl\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="owl.command_bus"/>
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="router"/>
+            <argument type="service" id="twig" />
         </service>
 
     </services>

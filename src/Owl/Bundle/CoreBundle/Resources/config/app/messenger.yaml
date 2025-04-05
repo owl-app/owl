@@ -1,26 +1,29 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+parameters:
+    env(OWL_MESSENGER_TRANSPORT_MAIN_DSN): 'doctrine://default'
+    env(OWL_MESSENGER_TRANSPORT_MAIN_FAILED_DSN): 'doctrine://default?queue_name=main_failed'
+
+    owl_messenger_transport_main_dsn: '%env(resolve:OWL_MESSENGER_TRANSPORT_MAIN_DSN)%'
+    owl_messenger_transport_main_failed_dsn: '%env(resolve:OWL_MESSENGER_TRANSPORT_MAIN_FAILED_DSN)%'
+
 framework:
     messenger:
-        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
-        # failure_transport: failed
-
         transports:
-        # https://symfony.com/doc/current/messenger.html#transport-configuration
-        # async: '%env(MESSENGER_TRANSPORT_DSN)%'
-        # failed: 'doctrine://default?queue_name=failed'
-        # sync: 'sync://'
-
-        routing:
-        # Route your messages to the transports
-        # 'App\Message\YourMessage': async
-
-        default_bus: sylius.command_bus
+            main:
+                dsn: '%owl_messenger_transport_main_dsn%'
+                failure_transport: 'main_failed'
+            main_failed:
+                dsn: '%owl_messenger_transport_main_failed_dsn%'
+        default_bus: owl.command_bus
         buses:
-            sylius.command_bus: &command_bus
+            owl.command_bus:
                 middleware:
                     - 'validation'
                     - 'doctrine_transaction'
-            sylius.event_bus: &event_bus
+            owl.query_bus:
+                middleware:
+                    - validation
+            owl.event_bus:
                 default_middleware: allow_no_handlers
-            sylius_default.bus: *command_bus
-            sylius_event.bus: *event_bus
-        
