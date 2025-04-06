@@ -2,25 +2,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/integrations/monolog.xml" />
-        <import resource="services/templating.xml" />
-        <import resource="services/form.xml" />
-        <import resource="services/listeners.xml" />
-        <import resource="services/context.xml" />
-        <import resource="services/templating.xml" />
-        <import resource="services/validators.xml" />
-        <import resource="services/actions.xml" />
-        <import resource="services/authorization.xml" />
-        <import resource="services/emails.xml" />
-        <import resource="services/controller.xml" />
-        <import resource="services/checkers.xml" />
-        <import resource="services/fixtures_listeners.xml" />
-        <import resource="services/fixtures_factories.xml" />
-        <import resource="services/fixtures.xml" />
-        <import resource="services/commands.xml" />
-        <import resource="services/resource_filter.xml" />
-        <import resource="services/messenger.xml" />
-        <import resource="services/rbac.xml" />
+        <import resource="services/integrations/*.xml" />
+        <import resource="services/*.xml" />
     </imports>
 
     <services>
@@ -80,6 +63,12 @@
         <service id="owl.custom_resource_controller.resource_delete_handler" class="Owl\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler" decorates="sylius.resource_controller.resource_delete_handler" public="false">
             <argument type="service" id="owl.custom_resource_controller.resource_delete_handler.inner" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="owl.resetter.user_password.admin" class="Owl\Bundle\CoreBundle\Security\UserPasswordResetter">
+            <argument type="service" id="owl.repository.admin_user" />
+            <argument type="service" id="owl.security.password_updater" />
+            <argument type="string">%owl.admin_user.token.password_reset.ttl%</argument>
         </service>
 
     </services>

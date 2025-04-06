@@ -48,6 +48,7 @@ final class OwlUserExtension extends AbstractResourceExtension
 
         $loader->load('services.xml');
 
+        $this->createParameters($config['resources'], $container);
         $this->createServices($config['resources'], $container);
         $this->loadHashersAwareServices($config['hasher'], $config['resources'], $container);
 
@@ -71,6 +72,13 @@ final class OwlUserExtension extends AbstractResourceExtension
         }
 
         return $resolvedResources;
+    }
+
+    private function createParameters(array $resources, ContainerBuilder $container): void
+    {
+        foreach ($resources as $userType => $config) {
+            $this->createResettingTokenParameters($userType, $config['user'], $container);
+        }
     }
 
     private function createServices(array $resources, ContainerBuilder $container): void
@@ -114,18 +122,6 @@ final class OwlUserExtension extends AbstractResourceExtension
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('owl.%s_user.token_uniqueness_checker.password_reset', $userType)),
                     $config['resetting']['token']['length'],
-                ],
-            ),
-        )->setPublic(true);
-
-        $container->setDefinition(
-            sprintf('owl.%s_user.pin_generator.password_reset', $userType),
-            $this->createTokenGeneratorDefinition(
-                UniquePinGenerator::class,
-                [
-                    new Reference('sylius.random_generator'),
-                    new Reference(sprintf('owl.%s_user.pin_uniqueness_checker.password_reset', $userType)),
-                    $config['resetting']['pin']['length'],
                 ],
             ),
         )->setPublic(true);
@@ -281,5 +277,10 @@ final class OwlUserExtension extends AbstractResourceExtension
             sprintf('owl.%s_user.listener.update_user_hasher', $userType),
             $updateUserHasherListenerDefinition,
         );
+    }
+
+    private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container): void
+    {
+        $container->setParameter(sprintf('owl.%s_user.token.password_reset.ttl', $userType), $config['resetting']['token']['ttl']);
     }
 }

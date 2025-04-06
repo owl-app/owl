@@ -33,6 +33,13 @@ owl:
             subject: Nowa sugestia w systemie
             desc: Nowa sugestia w systemie
 
+    form:
+        admin:
+            reset_password:
+                password:
+                    label: Nowe hasło
+                    confirmation: Potwierdź nowe hasło
+
     menu:
         admin:
             main:
@@ -59,6 +66,7 @@ owl:
                 stats:
                     header: Analizy
     ui:
+        set_new_password: Ustaw nowe hasło
         search_menu: Wyszukaj
         no_results: Brak wyników
         no_results_adjust_your_search: Brak wyników, dostosuj swoje wyszukiwanie

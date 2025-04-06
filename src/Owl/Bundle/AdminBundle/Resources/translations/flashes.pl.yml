@@ -1,3 +1,5 @@
 owl:
-    admin_user:
+    admin:
+        request_reset_password:
+            success: Jeśli adres e-mail, który podałeś istnieje w systemie, wysłaliśmy na niego wiadomość z instrukcjami dotyczącymi resetowania hasła.
         register: Dziękujemy za rejestrację ! Wkrótce się skontaktujemy.

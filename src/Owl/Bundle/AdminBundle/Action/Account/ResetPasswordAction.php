@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Action\Account;
 
-use Owl\Bundle\AdminBundle\Form\Model\PasswordResetRequest;
-use Owl\Bundle\AdminBundle\Form\Type\RequestPasswordResetType;
-use Owl\Bundle\CoreBundle\Command\Admin\Account\RequestResetPasswordEmail;
+use Owl\Bundle\CoreBundle\Command\Admin\Account\ResetPassword;
+use Owl\Bundle\AdminBundle\Form\Model\PasswordReset;
+use Owl\Bundle\AdminBundle\Form\Type\ResetPasswordType;
 use Owl\Bundle\CoreBundle\Extractor\FormErrorExtractor;
 use Owl\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Owl\Component\Core\Factory\Http\RedirectResponseFactoryInterface;
@@ -27,7 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Twig\Environment;
 
-final readonly class RequestPasswordResetAction
+final class ResetPasswordAction
 {
     public function __construct(
         private FormFactoryInterface $formFactory,
@@ -38,29 +38,26 @@ final readonly class RequestPasswordResetAction
     ) {
     }
 
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, string $token): Response
     {
-        $form = $this->formFactory->create(RequestPasswordResetType::class);
+        $form = $this->formFactory->create(ResetPasswordType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var PasswordResetRequest $formData */
-            $formData = $form->getData();
-            $requestPasswordResetMessage = new RequestResetPasswordEmail(
-                $formData->getEmail(),
-            );
+            /** @var PasswordReset $passwordReset */
+            $passwordReset = $form->getData();
 
-            $this->messageBus->dispatch($requestPasswordResetMessage);
+            $this->messageBus->dispatch(new ResetPassword($token, $passwordReset->getPassword()));
 
             FlashBagProvider
                 ::getFlashBag($this->requestStack)
-                ->add('success', 'owl.admin.request_reset_password.success')
+                ->add('success', 'owl.admin.password_reset.success')
             ;
 
-            $options = $request->attributes->get('_sylius', []);
-            $redirectRoute = $options['redirect'] ?? 'owl_admin_login';
+            $attributes = $request->attributes->get('_sylius', []);
+            $redirect = $attributes['redirect'] ?? 'owl_admin_login';
 
-            return $this->redirecResponse->create($request, $redirectRoute);
+            return $this->redirecResponse->create($request, $redirect);
         }
 
         if ($request->isXmlHttpRequest()) {
@@ -71,7 +68,7 @@ final readonly class RequestPasswordResetAction
         }
 
         return new Response(
-            $this->twig->render('@OwlAdmin/security/request_password_reset.html.twig', [
+            $this->twig->render('@OwlAdmin/security/reset_password.html.twig', [
                 'form' => $form->createView(),
             ]),
         );

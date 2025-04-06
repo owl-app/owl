@@ -13,14 +13,14 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="sylius.form.type.user_request_password_reset.validation_groups" type="collection">
-            <parameter>sylius</parameter>
+        <parameter key="owl.form.type.user_request_password_reset.validation_groups" type="collection">
+            <parameter>owl</parameter>
         </parameter>
-        <parameter key="sylius.form.type.user_reset_password.validation_groups" type="collection">
-            <parameter>sylius</parameter>
+        <parameter key="owl.form.type.user_reset_password.validation_groups" type="collection">
+            <parameter>owl</parameter>
         </parameter>
-        <parameter key="sylius.form.type.user_change_password.validation_groups" type="collection">
-            <parameter>sylius</parameter>
+        <parameter key="owl.form.type.user_change_password.validation_groups" type="collection">
+            <parameter>owl</parameter>
         </parameter>
     </parameters>
 
@@ -91,19 +91,19 @@
 
         <service id="sylius.form.type.user_request_password_reset" class="Owl\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType">
             <argument type="string">Owl\Bundle\UserBundle\Form\Model\PasswordResetRequest</argument>
-            <argument>%sylius.form.type.user_request_password_reset.validation_groups%</argument>
+            <argument>%owl.form.type.user_request_password_reset.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.user_reset_password" class="Owl\Bundle\UserBundle\Form\Type\UserResetPasswordType">
             <argument type="string">Owl\Bundle\UserBundle\Form\Model\PasswordReset</argument>
-            <argument>%sylius.form.type.user_reset_password.validation_groups%</argument>
+            <argument>%owl.form.type.user_reset_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.user_change_password" class="Owl\Bundle\UserBundle\Form\Type\UserChangePasswordType">
             <argument type="string">Owl\Bundle\UserBundle\Form\Model\ChangePassword</argument>
-            <argument>%sylius.form.type.user_change_password.validation_groups%</argument>
+            <argument>%owl.form.type.user_change_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>

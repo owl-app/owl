@@ -33,6 +33,13 @@ owl:
             subject: New suggestion in the system
             desc: New suggestion in the system
 
+    form:
+        admin:
+            reset_password:
+                password:
+                    label: New password
+                    confirmation: Confirm new password
+
     menu:
         admin:
             main:
@@ -59,6 +66,7 @@ owl:
                 stats:
                     header: Stats
     ui:
+        set_new_password: Set new password
         search_menu: Search menu
         no_results: No results found
         no_results_adjust_your_search: 'Adjust your search and try again.'

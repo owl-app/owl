@@ -1,4 +1,17 @@
 owl:
+    admin:
+        password_reset_request:
+            email:
+                invalid: This email is not valid.
+                max: Email must be at most {{ limit }} characters long.
+                min: Email must be at least {{ limit }} characters long.
+                not_blank: Please enter an email.
+        reset_password:
+            mismatch: The entered passwords do not match.
+            password:
+                min: Password must be at least {{ limit }} characters long.
+                max: Password must be at most {{ limit }} characters long.
+                not_blank: Please enter the password.
     common:
         not_blank: Field cannot be empty
         greater_then_today: Date must be greater than today

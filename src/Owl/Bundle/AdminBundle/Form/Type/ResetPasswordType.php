@@ -34,7 +34,7 @@ final class ResetPasswordType extends AbstractType
                 'first_name' => 'newPassword',
                 'first_options' => ['label' => 'owl.form.admin.reset_password.password.label'],
                 'second_name' => 'confirmNewPassword',
-                'second_options' => ['label' => 'sylius.form.admin.reset_password.password.confirmation'],
+                'second_options' => ['label' => 'owl.form.admin.reset_password.password.confirmation'],
                 'invalid_message' => 'owl.admin.reset_password.mismatch',
             ])
         ;

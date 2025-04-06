@@ -52,6 +52,8 @@ final class OwlCoreExtension extends AbstractResourceExtension implements Prepen
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
+        $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
+
         $this->registerResources('owl', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
@@ -60,8 +62,6 @@ final class OwlCoreExtension extends AbstractResourceExtension implements Prepen
         if ('test' === $env || 'test_cached' === $env) {
             $loader->load('test_services.xml');
         }
-
-        $loader->load(sprintf('integrations/%s.xml', $config['driver']));
     }
 
     public function prepend(ContainerBuilder $container): void

@@ -1,4 +1,17 @@
 owl:
+    admin:
+        password_reset_request:
+            email:
+                invalid: Ten e-mail jest nieprawidłowy.
+                max:  E-mail może mieć maksymalnie {{ limit }} znaków długości.
+                min: E-mail musi mieć co najmniej {{ limit }} znaków długości.
+                not_blank: Proszę wpisać e-mail.
+        reset_password:
+            mismatch: Wprowadzone hasła nie pasują do siebie.
+            password:
+                min: Hasło musi mieć co najmniej {{ limit }} znaków długości.
+                max: Hasło może mieć maksymalnie {{ limit }} znaków długości.
+                not_blank: Proszę wpisać hasło.
     admin_user:
         invalid_count_role_to_user: Rola użytkownik może mieć przypisaną jedną firmę
         invalid_count_role_to_admin_system: Administrator systemu nie może mieć przypisanej firmy

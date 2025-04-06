@@ -45,6 +45,6 @@ final class RequestPasswordResetType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'sylius_admin_request_password_reset';
+        return 'owl_admin_request_password_reset';
     }
 }

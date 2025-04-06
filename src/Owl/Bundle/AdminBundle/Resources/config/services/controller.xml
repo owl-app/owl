@@ -23,7 +23,24 @@
             <argument type="service" id="form.factory"/>
             <argument type="service" id="owl.command_bus"/>
             <argument type="service" id="request_stack" />
-            <argument type="service" id="router"/>
+            <argument type="service" id="owl.http.redirect_response_factory"/>
+            <argument type="service" id="twig" />
+        </service>
+
+        <service id="owl_admin.controller.account.render_reset_password_page" class="Owl\Bundle\AdminBundle\Action\Account\RenderResetPasswordPageAction">
+            <argument type="service" id="owl.repository.admin_user" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="owl.http.redirect_response_factory"/>
+            <argument type="service" id="twig" />
+            <argument type="string">%owl.admin_user.token.password_reset.ttl%</argument>
+        </service>
+
+        <service id="owl_admin.controller.account.reset_password" class="Owl\Bundle\AdminBundle\Action\Account\ResetPasswordAction">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="owl.command_bus"/>
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="owl.http.redirect_response_factory"/>
             <argument type="service" id="twig" />
         </service>
 

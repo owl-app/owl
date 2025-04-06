@@ -2,8 +2,9 @@ sylius_mailer:
     sender:
         name: System
         address: '%owl.mail_sender%'
+    sender_adapter: sylius.email_sender.adapter.symfony_mailer
     emails:
-        reset_password_token:
+        admin_password_reset:
             subject: owl.emails.user.password_reset.subject
             template: "@OwlCore/Email/passwordReset.html.twig"
         user_registration:

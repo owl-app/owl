@@ -106,9 +106,9 @@ export default class extends Controller {
     }
 
     async synchronizeLiveComponent(data) {
-        let errors = flattenObject(data);
-
         if (this.hasLiveTarget) {
+            let errors = flattenObject(data);
+
             const promises = [];
 
             Object.keys(errors).map((key) => {
@@ -123,6 +123,8 @@ export default class extends Controller {
 
             await Promise.all(promises);
         } else {
+            let errors = flattenObject(data, '_');
+
             this.formTarget.querySelectorAll('.field').forEach(function (field) {
                 const error = field.querySelector('.invalid-feedback');
 
