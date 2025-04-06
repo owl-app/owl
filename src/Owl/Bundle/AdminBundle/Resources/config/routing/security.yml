@@ -67,23 +67,6 @@ owl_admin_request_password_reset:
         _controller: owl_admin.controller.account.request_password_reset
         _locale: "%locale%"
 
-# owl_admin_request_password_reset:
-#     path: /{_locale}/forgotten-password
-#     methods: [GET, POST]
-#     requirements:
-#         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
-#     defaults:
-#         _locale: "%locale%"
-#         _controller: owl.controller.admin_user::requestPasswordResetTokenAction
-#         _sylius:
-#             template: "@OwlAdmin/security/request_password_reset.html.twig"
-#             redirect: 
-#                 route: owl_admin_login
-#                 parameters: []
-#                 xhr: true
-#             vars:
-#                 form:
-#                     ajax: true
 owl_admin_render_password_reset:
     path: /{_locale}/forgotten-password/{token}
     methods: [GET]
@@ -101,21 +84,3 @@ owl_admin_password_reset:
     defaults:
         _controller: owl_admin.controller.account.reset_password
         _locale: "%locale%"
-
-# owl_admin_password_reset:
-#     path: /{_locale}/forgotten-password/{token}
-#     methods: [GET, POST]
-#     requirements:
-#         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
-#     defaults:
-#         _locale: "%locale%"
-#         _controller: owl.controller.admin_user::resetPasswordAction
-#         _sylius:
-#             template: "@OwlAdmin/security/reset_password.html.twig"
-#             redirect: 
-#                 route: owl_admin_login
-#                 parameters: []
-#                 xhr: true
-#             vars:
-#                 form:
-#                     ajax: true
