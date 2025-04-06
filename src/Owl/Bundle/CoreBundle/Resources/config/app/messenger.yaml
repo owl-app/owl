@@ -4,9 +4,13 @@
 parameters:
     env(OWL_MESSENGER_TRANSPORT_MAIN_DSN): 'doctrine://default'
     env(OWL_MESSENGER_TRANSPORT_MAIN_FAILED_DSN): 'doctrine://default?queue_name=main_failed'
+    env(OWL_MESSENGER_TRANSPORT_ELASTICSEARCH_DSN): 'doctrine://default?queue_name=elasticsearch'
+    env(OWL_MESSENGER_TRANSPORT_ELASTICSEARCH_FAILED_DSN): 'doctrine://default?queue_name=elasticsearch_failed'
 
     owl_messenger_transport_main_dsn: '%env(resolve:OWL_MESSENGER_TRANSPORT_MAIN_DSN)%'
     owl_messenger_transport_main_failed_dsn: '%env(resolve:OWL_MESSENGER_TRANSPORT_MAIN_FAILED_DSN)%'
+    owl_messenger_transport_elasticsearch_dsn: '%env(resolve:OWL_MESSENGER_TRANSPORT_ELASTICSEARCH_DSN)%'
+    owl_messenger_transport_elasticsearch_failed_dsn: '%env(resolve:OWL_MESSENGER_TRANSPORT_ELASTICSEARCH_FAILED_DSN)%'
 
 framework:
     messenger:
@@ -16,6 +20,13 @@ framework:
                 failure_transport: 'main_failed'
             main_failed:
                 dsn: '%owl_messenger_transport_main_failed_dsn%'
+            elasticsearch: 
+                dsn: '%owl_messenger_transport_elasticsearch_dsn%'
+                failure_transport: 'elasticsearch_failed'
+            elasticsearch_failed:
+                dsn: '%owl_messenger_transport_elasticsearch_failed_dsn%'
+        routing:
+            FOS\ElasticaBundle\Message\AsyncPersistPage: elasticsearch
         default_bus: owl.command_bus
         buses:
             owl.command_bus:
