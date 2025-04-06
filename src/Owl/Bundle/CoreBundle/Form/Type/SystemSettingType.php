@@ -31,9 +31,6 @@ final class SystemSettingType extends AbstractType
                     'class' => 'editor-system-setting',
                     'data-theme' => 'advanced',
                 ],
-                'constraints' => [
-                    new NotBlank(),
-                ],
                 'required' => true,
             ])
         ;

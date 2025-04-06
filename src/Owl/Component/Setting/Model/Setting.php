@@ -19,7 +19,7 @@ class Setting implements SettingInterface
     /** @var string */
     protected $name;
 
-    /** @var string */
+    /** @var string|null */
     protected $value;
 
     /** @var string */
@@ -55,7 +55,7 @@ class Setting implements SettingInterface
         $this->name = $name;
     }
 
-    public function getValue(): string
+    public function getValue(): ?string
     {
         return $this->value;
     }

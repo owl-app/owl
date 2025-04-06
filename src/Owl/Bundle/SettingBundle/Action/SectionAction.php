@@ -16,11 +16,10 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class SectionAction extends AbstractResourceAction
 {
-    public const AJAX_VALIDATION_EVENT = 'owl_setting.ajax_validation';
-
     public function __construct(
         private RequestConfigurationFactoryInterface $requestConfigurationFactory,
         private SettingFormFactoryInterface $settingFormFactory,
@@ -50,6 +49,10 @@ final class SectionAction extends AbstractResourceAction
 
         if ($request->isMethod('PUT') && $form->isSubmitted() && $form->isValid()) {
             $this->storage->saveValues($settingSection, $form->getData(), $settings);
+            /** @var FlashBagInterface $flashBag */
+            $flashBag = $request->getSession()->getBag('flashes');
+
+            $flashBag->add('success', 'owl_setting.settings_save_success');
 
             return $this->createRedirect($configuration);
         }

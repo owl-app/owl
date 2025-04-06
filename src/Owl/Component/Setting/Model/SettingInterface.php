@@ -17,7 +17,7 @@ interface SettingInterface extends TimestampableInterface, ResourceInterface
 
     public function setName(?string $name): void;
 
-    public function getValue(): string;
+    public function getValue(): ?string;
 
     public function setValue(?string $value): void;
 

@@ -10,6 +10,7 @@
             <argument type="service" id="owl.setting.storage.doctrine" />
             <argument type="service" id="sylius.resource_controller.view_handler" />
             <argument type="service" id="owl.resource_controller.redirect_handler" />
+
             <tag name="owl.controller.action" alias="owl.setting" />
         </service>
     </services>
