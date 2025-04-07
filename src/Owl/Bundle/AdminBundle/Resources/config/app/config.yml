@@ -74,6 +74,8 @@ owl_ui:
         live_component_tags:
             admin:
                 route: owl_admin_live_component
+            admin_public:
+                route: owl_admin_live_component_public
         anonymous_component_template_prefixes:
             owl_admin: "@OwlAdmin/shared/components"
         component_default_template: "@OwlUi/components/default.html.twig"

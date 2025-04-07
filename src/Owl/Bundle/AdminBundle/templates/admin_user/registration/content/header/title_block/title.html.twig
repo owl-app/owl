@@ -1,0 +1,40 @@
+{% if hookable_metadata.context.has("metadata") %}
+    {% set metadata = hookable_metadata.context.metadata %}
+    {% set header = hookable_metadata.configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{% else %}
+    {% set header = hookable_metadata.configuration.title %}
+{% endif %}
+
+{% set icon = hookable_metadata.configuration.icon|default(null) %}
+{% set subheader = hookable_metadata.configuration.subheader|default(null) %}
+{% set test_attribute = hookable_metadata.configuration.owl_test_html_attribute is defined ? sylius_test_html_attribute(hookable_metadata.configuration.owl_test_html_attribute) : null %}
+{% set status = hookable_metadata.context.resource.registration.status|default(null) %}
+
+{% if status == 'new' %}
+    {% set statusColor = 'bg-yellow text-yellow-fg' %}
+{% elseif status == 'accepted' %}
+    {% set statusColor = 'bg-green text-green-fg' %}
+{% elseif status == 'rejected' %}
+    {% set statusColor = 'bg-red text-red-fg' %}
+{% endif %}
+
+{% set badgeText = ('owl.ui.registration_status_name_' ~ status)|trans %}
+
+<div class="col-12 col-md" {{ test_attribute }}>
+    <div class="d-md-flex gap-2 py-3 align-items-center">
+    <div class="header d-flex gap-3 align-items-center">
+        {% if icon %}
+            <div class="circular">{{ ux_icon(icon, {'class': 'icon icon-md text-primary'}) }}</div>
+        {% endif %}
+        <div class="d-flex flex-column gap-1">
+            <h1 class="page-title">
+                {{ header|trans }}
+                <span class="badge ms-2 {{ statusColor }}">{{ badgeText }}</span>
+            </h1>
+            {% if subheader %}
+                <div class="text-gray-500">{{ subheader|trans }}</div>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+</div>

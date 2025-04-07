@@ -1,0 +1,13 @@
+{% set prefixes = ['owl_admin.admin_user.modal.registration'] %}
+
+{% if form is not defined %}
+    {% set form = hookable_metadata.context.form %}
+{% endif %}
+
+{% if resource is not defined %}
+    {% set resource = hookable_metadata.context.resource|default(null) %}
+{% endif %}
+
+<div data-controller="form">
+    {% hook 'reject' with { _prefixes: prefixes, form, resource } %}
+</div>

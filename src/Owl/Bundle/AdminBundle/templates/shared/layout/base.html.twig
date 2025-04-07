@@ -25,5 +25,9 @@
         {% block modal %} {% endblock %}
 
         {% include '@OwlAdmin/shared/modal.html.twig' %}
+
+        {% block toast %}
+            {% hook generic_hook ~ '#toast' %}
+        {% endblock %}
     </body>
 </html>

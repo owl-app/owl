@@ -1,0 +1,17 @@
+{% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
+
+<div {% if attributes is defined %} {{ attributes }} data-form-target="live" {% endif %}>
+    {{ 
+        form_start(form, {
+            'action': path('owl_admin_register'),
+            'attr': {
+                'class': 'ui large loadable form',
+                'novalidate': 'novalidate',
+                'data-form-target': 'form',
+            }
+        })
+    }}
+        {% hook 'form' with { form } %}
+        {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

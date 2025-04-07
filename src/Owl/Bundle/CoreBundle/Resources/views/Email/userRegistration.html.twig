@@ -10,12 +10,7 @@
         <div style="font-size: 24px;">
             {{ 'owl.email.user_registration.welcome_to_our_system'|trans }}<br>
         </div>
-        {{ 'owl.email.user_registration.you_have_just_been_registered'|trans }} {{ user.displayName }}.
-    </div>
-
-    <div style="text-align: center;">
-        <a href="{{ url|raw }}" style="display: inline-block; text-align: center; background: #1abb9c; padding: 18px 28px; color: #fff; text-decoration: none; border-radius: 3px;">
-            {{ 'owl.email.user_registration.start_using_system'|trans }}
-        </a>
+        {{ 'owl.email.user_registration.you_have_just_been_registered'|trans }} {{ user.displayName }}.<br />
+        {{ 'owl.email.user_registration.start_using_system'|trans }}
     </div>
 {% endblock %}

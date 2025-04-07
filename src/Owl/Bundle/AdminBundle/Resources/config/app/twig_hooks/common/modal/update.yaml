@@ -16,6 +16,9 @@ sylius_twig_hooks:
                 priority: 300
             body:
                 template: '@OwlAdmin/shared/crud/common/modal/content/body.html.twig'
+                configuration:
+                    page_body_attributes:
+                        'data-form-target': 'content'
                 priority: 200
             actions:
                 template: '@OwlAdmin/shared/crud/common/modal/content/actions.html.twig'

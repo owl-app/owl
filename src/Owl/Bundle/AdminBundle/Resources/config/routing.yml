@@ -3,6 +3,11 @@ owl_admin_live_component:
     defaults:
         _live_action: 'get'
 
+owl_admin_live_component_public:
+    path: '/{_locale}/_components_public/{_live_component}/{_live_action}'
+    defaults:
+        _live_action: 'get'
+
 sylius_admin_partial:
     resource: "@OwlAdminBundle/Resources/config/routing/partial.yml"
     prefix: /_partial

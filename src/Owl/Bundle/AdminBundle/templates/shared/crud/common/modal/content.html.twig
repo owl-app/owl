@@ -2,6 +2,7 @@
 {% set controller_names = [] %}
 {% set controller_values = [] %}
 {% set controller_outlets = [] %}
+{% set class = [hookable_metadata.configuration.class|default('')]|merge(['modal-content', 'fade'])|join('  ') %}
 
 {% if hookable_metadata.configuration.stimulus.controllers is defined %}
     {% for controller_name, options in hookable_metadata.configuration.stimulus.controllers %}
@@ -30,7 +31,7 @@
 
 <div 
     data-modal-target="content"
-    class="modal-content fade"
+    class="{{ class }}"
     {% if controller_names is not empty %} {{ stimulus_controller(controller_names|join(' ')) }} {% endif %}
 
     {% if hookable_metadata.configuration.stimulus.actions is defined %}

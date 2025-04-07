@@ -1,0 +1,17 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
+
+<div class="w-100 align-items-center d-flex justify-content-center">
+    {{ 
+        button.default({
+            text: 'owl.ui.accept'|trans,
+            class: 'btn btn-primary w-25',
+            attr: {
+                'data-action': 'form:saved@window->modal#close form#save',
+                'data-form-target': 'action',
+                'data-form-url-param': path('owl_admin_partial_admin_user_accept_registration', {'id': hookable_metadata.context.resource.id}),
+                'data-form-method-param': 'PUT',
+                'data-form-save-action-param': 'referer'
+            }
+        })
+    }}
+</div>

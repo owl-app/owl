@@ -9,7 +9,7 @@
             'name' : hookable_metadata.context.name~'-'~form.vars.value.name ,
             attr: {
                 'data-controller': 'permission',
-                'data-action': 'permission:changed@window->toast#show permission:changed->user-permission#changed',
+                'data-action': 'permission:changed->user-permission#changed',
                 'data-permission-assign-url-value': path(configuration.path.assign.route, configuration.path.assign.params),
                 'data-permission-revoke-url-value': path(configuration.path.revoke.route, configuration.path.revoke.params),
                 'data-permission-default-message-error-value': defaultMessageError,
@@ -31,15 +31,3 @@
     {{ form_row(form._csrf_token, { 'id' : form.vars.value.name~'-_csrf_token'}) }}
     {{ form_end(form, {'render_rest': false}) }}
 </div>
-
-{# <div style="margin-bottom: 10px;">
-    {{ form_start(form, {'name' : name~'-'~form.vars.value.name, 'attr': { 'data-route' :form.vars.value.name }}) }}
-        <div class="ui toggle checkbox checkbox-permission {{form.vars.disabled}}">
-            <input type="checkbox" {{form.vars.checked}} />
-            <label>{{form.vars.description_permission|trans}}</label>
-        </div>
-        {{ form_row(form.name, { 'id' : form.vars.value.name~'-name'}) }}
-        {{ form_row(form.type, { 'id' : form.vars.value.name~'-type'}) }}
-        {{ form_row(form._csrf_token, { 'id' : form.vars.value.name~'-_csrf_token'}) }}
-    {{ form_end(form, {'render_rest': false}) }}
-</div> #}

@@ -6,13 +6,11 @@ namespace Owl\Bundle\CoreBundle\Mailer;
 
 interface Emails
 {
-    public const USER_REGISTRATION = 'user_registration';
+    public const ADMIN_USER_REGISTRATION = 'admin_user_registration';
 
     public const ADMIN_PASSWORD_RESET = 'admin_password_reset';
 
-    public const ACCOUNT_VERIFICATION_TOKEN = 'account_verification_token';
+    public const ADMIN_USER_REGISTRATION_ACCEPTED = 'admin_user_registration_accepted';
 
-    public const REGISTRATION_ACCEPTED = 'registration_accepted';
-
-    public const REGISTRATION_REJECTED = 'registration_rejected';
+    public const ADMIN_USER_REGISTRATION_REJECTED = 'admin_user_registration_rejected';
 }

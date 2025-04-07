@@ -45,8 +45,16 @@ export default class extends Controller {
             }
 
             const responseData = await response.json();
+            const detailEvent = {
+                detail: {
+                    message: responseData.message,
+                    response: responseData,
+                    type: 'success'
+                }
+            };
 
-            this.dispatch('changed', { detail: { message: responseData.message, response: responseData, type: 'success' } });
+            this.dispatch('changed', detailEvent);
+            window.dispatchEvent(new CustomEvent('owl_admin.toast.show', detailEvent));
         }).catch(async ({ cause }) => {
             let errors = [];
 
@@ -58,7 +66,15 @@ export default class extends Controller {
                 errors = { default: this.defaultMessageErrorValue };
             }
 
-            this.dispatch('changed', { detail: { message: Object.values(errors).join('<br />'), type: 'error' } });
+            const detailEvent = {
+                detail: {
+                    message: Object.values(errors).join('<br />'),
+                    type: 'error'
+                }
+            };
+
+            this.dispatch('changed', detailEvent);
+            window.dispatchEvent(new CustomEvent('owl_admin.toast.show', detailEvent));
         }).finally(() => {
             this.checkboxTarget.removeAttribute('disabled');
         });

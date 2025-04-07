@@ -20,8 +20,9 @@ export default class extends Controller {
 
     save({ params }) {
         const formData = new FormData(this.formTarget);
+        const { disableAllButtons = false } = params;
 
-        this.showLoading();
+        this.showLoading(disableAllButtons);
 
         if (params.saveAction) {
             formData.append('save_action', params.saveAction);
@@ -40,11 +41,11 @@ export default class extends Controller {
                 throw new Error('Error validation', error);
             }
 
-            this.afterSave(response);
+            this.afterSave(response, disableAllButtons);
         }).catch(async ({ cause: { errors } }) => {
             await this.synchronizeLiveComponent(errors);
 
-            this.hideLoading();
+            this.hideLoading(disableAllButtons);
         });
     }
 
@@ -52,10 +53,10 @@ export default class extends Controller {
         return new URLSearchParams(formData).toString();
     }
 
-    showLoading() {
+    showLoading(disableAllButtons) {
         showLoader(this.contentTarget, { class: { loader: 'content' } });
 
-        this.actionTargets.forEach((action) => {
+        this.getAllButtons(disableAllButtons).forEach((action) => {
             if (action.tagName === 'BUTTON') {
                 action.setAttribute('disabled', true);
             } else {
@@ -64,10 +65,10 @@ export default class extends Controller {
         });
     }
 
-    hideLoading() {
+    hideLoading(disableAllButtons) {
         hideLoader(this.contentTarget);
 
-        this.actionTargets.forEach((action) => {
+        this.getAllButtons(disableAllButtons).forEach((action) => {
             if (action.tagName === 'BUTTON') {
                 action.removeAttribute('disabled');
             } else {
@@ -76,9 +77,26 @@ export default class extends Controller {
         });
     }
 
-    async afterSave(response) {
-        const text = response.text();
-        const resource = !text ? await response.json() : {};
+    getAllButtons(disableAllButtons) {
+        let buttons = [];
+
+        if (disableAllButtons) {
+            disableAllButtons.map((selector) => {
+                buttons = [...buttons, ...document.querySelectorAll(selector)];
+            });
+        } else {
+            buttons = this.actionTargets;
+        }
+
+        return buttons;
+    }
+
+    async afterSave(response, disableAllButtons) {
+        let resource = await response.text();
+
+        try {
+            resource = JSON.parse(resource);
+        } catch (e) { /* empty */ }
 
         if (this.asyncEventsValue.length) {
             const awaited = [];
@@ -97,7 +115,7 @@ export default class extends Controller {
         this.dispatch('saved');
 
         debounce(async () => {
-            this.hideLoading();
+            this.hideLoading(disableAllButtons);
 
             if (response.headers.has('x-owl-location')) {
                 redirect(response.headers.get('x-owl-location'));

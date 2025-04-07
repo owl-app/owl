@@ -1,0 +1,32 @@
+{% set resource = hookable_metadata.context.resource %}
+
+<div class="card tab-pane show pt-3" id="tabs-company-information">
+    <div class="col-12 card-body">
+        <div class="divide-y">
+            <div class="row">
+                <div class="col-12 col-md-5 fw-bold">{{ 'owl.ui.company_which_account_was_registered'|trans }}</div>
+                <div class="col-12 col-md-7">{{ resource.registration.company }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-5 fw-bold">{{ 'owl.ui.nip'|trans }}</div>
+                <div class="col-12 col-md-7">{{ resource.registration.nip }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-5 fw-bold">{{ 'owl.ui.city'|trans }}</div>
+                <div class="col-12 col-md-7">{{ resource.registration.city }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-5 fw-bold">{{ 'owl.ui.street'|trans }}</div>
+                <div class="col-12 col-md-7">{{ resource.registration.street }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-5 fw-bold">{{ 'owl.ui.post_code'|trans }}</div>
+                <div class="col-12 col-md-7">{{ resource.registration.postCode }}</div>
+            </div>
+        </div>
+    </div>
+</div>

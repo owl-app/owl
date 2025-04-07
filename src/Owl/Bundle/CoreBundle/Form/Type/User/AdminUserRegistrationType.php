@@ -40,8 +40,8 @@ final class AdminUserRegistrationType extends AbstractResourceType
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'sylius.form.user.password.label'],
-                'second_options' => ['label' => 'sylius.form.user.password.confirmation'],
+                'first_options' => ['label' => 'owl.form.admin.register.password.label', 'always_empty' => false],
+                'second_options' => ['label' => 'owl.form.admin.register.password.confirmation', 'always_empty' => false],
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
             ])
             ->add('registration', AdminUserRegistrationDataType::class, [

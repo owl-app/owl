@@ -1,0 +1,9 @@
+{% extends '@OwlAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ 'owl.ui.register'|trans }}{% endblock %}
+
+{% block body_class %}d-flex flex-column{% endblock %}
+
+{% block body %}
+    {% hook 'owl_admin.security.register' with { form } %}
+{% endblock %}

@@ -337,15 +337,14 @@ owl:
         have_an_account_already: Czy masz już konto?
         account_credentials: Dane konta
         personal_information: Dane osobowe
-        create_an_account: Utwórz konto
-        company_inforamtion: Dane firmy
+        
+        company_information: Dane firmy
         welcome_to_our_system: Zapraszamy do naszego systemu
         registration: Rejestracja
         date_verified_email: Data weryfikacji e-mail przez użytkownika
         user_has_not_verified_email: Użytkownik nie zweryfikował adresu e-mail
         registration_company: Firma na którą ma być zarejestrowane konto
         last_name: Nazwisko
-        registration_inforamtion: Dane rejestracji
         registration_status_new: Nowa rejestracja
         registration_status_rejected: Rejestracja odrzucona
         registration_status_accepted: Rejestracja zaakceptowana
@@ -360,6 +359,9 @@ owl:
         registration_new: Rejestracja (Nowa)
         registration_accepted: Rejestracja (Zaakceptowana)
         registration_rejected: Rejestracja (Odrzucona)
+        registration_status_name_new: Nowa
+        registration_status_name_accepted: Zaakceptowana
+        registration_status_name_rejected: Odrzucona
         start_using_system: Zacznij korzystać z systemu
         type: Typ
         date_notify: Data przypomnienia

@@ -1,3 +1,0 @@
-{%- macro format(amount, currency) -%}
-    {{ amount|sylius_format_money(currency|default(owl_base_currency), app.user.localeCode) }}
-{%- endmacro -%}

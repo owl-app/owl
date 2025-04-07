@@ -6,25 +6,25 @@ owl:
             subject: Password reset
             to_reset_your_password: To reset your password - click on the link below
         user_registration:
-            start_using_system: Start using system
             subject: User registration
-            welcome_to_our_system: Welcome to our record system!
+            welcome_to_our_system: Welcome to our system!
             you_have_just_been_registered: You have just been registered. Thank you
+            start_using_system: To start using the system, you must wait for the administrator's approval
         verification_token:
             hello: Hello
             subject: Email address verification
             to_verify_your_email_address: To verify your email address - click the link below
             verify_your_email_address: Verify your email address
         registration_accepted:
-            subject: Account acceptance in the Records system
+            subject: Account has been activated
             thank_you_for_your_patience: Thank you for your patience
             you_have_just_been_accepted: Your account has just been approved
-            start_using_system: Start taking full advantage of the capabilities of the Records system
+            start_using_system: Start taking full advantage of the capabilities of the system
         registration_rejected:
-            subject: Rejection of registration in the Records system
+            subject: Rejection of registration
             thank_you_for_your_patience: Thank you for your patience
             your_registration_to_email_address: Your e-mail registration
-            in_system_has_unfortunately_been_rejected: was unfortunately rejected in the Records system
+            in_system_has_unfortunately_been_rejected: was unfortunately rejected
             reason_for_rejection: Reason for rejection
         user_new_registration:
             subject: New user registration
@@ -39,6 +39,10 @@ owl:
                 password:
                     label: New password
                     confirmation: Confirm new password
+            register:
+                password:
+                    label: Password
+                    confirmation: Confirm password
 
     menu:
         admin:
@@ -65,7 +69,17 @@ owl:
                     roles: Roles
                 stats:
                     header: Stats
+
     ui:
+        registration_information: Registration information
+        reject_registration: Reject registration
+        accept_registration: Accept registration 
+        create_an_account: Create account
+        account_credentials: Account credentials
+        company_information: Company information
+        sign_in_here: Log in here
+        have_an_account_already: Already have an account?
+        create_a_new_system_account: Create new account in system
         set_new_password: Set new password
         search_menu: Search menu
         no_results: No results found

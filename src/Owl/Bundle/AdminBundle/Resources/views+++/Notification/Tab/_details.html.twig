@@ -1,8 +1,0 @@
-<div class="ui active tab" data-tab="details">
-    <h3 class="ui top attached header">{{ 'owl.ui.details'|trans }}</h3>
-
-    <div class="ui attached segment">
-        {% include '@OwlAdmin/Notification/_form.html.twig' %}
-        {{ sylius_template_event(['owl.admin.notification.' ~ action ~ '.tab_details', 'owl.admin.notification.tab_details'], {'form': form}) }}
-    </div>
-</div>

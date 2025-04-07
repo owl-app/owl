@@ -10,7 +10,15 @@ export default class extends Controller {
         error: 'danger'
     };
 
-    show({ detail: { message, type } }) {
+    initialize() {
+        window.addEventListener('owl_admin.toast.show', this.show);
+    }
+
+    disconnect() {
+        window.removeEventListener('owl_admin.toast.show', this.show);
+    }
+
+    show = ({ detail: { message, type } }) => {
         const uniqueId = `message-${this.generateUniqueToastId()}`;
 
         this.appendToast(

@@ -6,3 +6,10 @@ owl:
             success: 'Your password has been changed successfully!'
             token_expired: 'The password reset token has expired.'
         register: Thank you for your registration ! We'll be in touch soon.
+    admin_user:
+        create: User has been created successfully.
+        update: User has been updated successfully.
+        bulk_delete: Users have been deleted successfully.
+    accept_notification:
+            success: 'Notification has been accepted successfully'
+            error: 'Error while accepting notification'

@@ -6,10 +6,10 @@ owl:
             subject: Resetowanie hasła
             to_reset_your_password: Aby zresetować hasło - kliknij na poniższy link
         user_registration:
-            start_using_system: Rozpocznij korzystanie z systemu
             subject: Rejestracja użytkownika
             welcome_to_our_system: Zapraszamy do naszego systemu !
             you_have_just_been_registered: Właśnie zostałeś zarejestrowany. Dziękujęmy
+            start_using_system: Aby rozpocząć korzystanie z systemu, musisz poczekać na akceptację administratora
         verification_token:
             hello: Witaj
             subject: Weryfikacja adresu e-mail
@@ -65,7 +65,16 @@ owl:
                     roles: Role
                 stats:
                     header: Analizy
+
     ui:
+        registration_information: Dane rejestracji
+        reject_registration: Odrzuć rejestrację
+        create_an_account: Utwórz konto
+        account_credentials: Dane konta
+        company_information: Dane firmy
+        sign_in_here: Zaloguj się
+        have_an_account_already: Już masz konto?
+        create_a_new_system_account: Utwórz nowe konto w systemie
         set_new_password: Ustaw nowe hasło
         search_menu: Wyszukaj
         no_results: Brak wyników

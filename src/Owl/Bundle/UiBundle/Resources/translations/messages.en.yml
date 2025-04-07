@@ -177,7 +177,6 @@ owl:
         show: Show
         show_all: Show all
         sign_in: Log in
-        sign_in_here: Log in here
         sign_out: Log out
         sort: Sort
         sort_by_date: Sort by date
@@ -274,29 +273,22 @@ owl:
         reset_password: Reset password
         set_a_new_password_for_your_account: Set new password for your account
         reset_button: Reset
-        
         manage_settings_available_in_system: Manage settings available in system
         register: Register
         register_in: Register
-        create_a_new_system_account: Create new account in system
-        have_an_account_already: Already have an account?
-        account_credentials: Account credentials
         personal_information: Personal information
         create_an_account: Create account
-        company_inforamtion: Company information
         welcome_to_our_system: Welcome to our system
         registration: Registration
         date_verified_email: User's email verification date
         user_has_not_verified_email: User has not verified email address
         registration_company: Company to which the account is to be registered
         last_name: Last name
-        registration_inforamtion: registration information
         registration_status_new: New registration
         registration_status_rejected: Registration rejected
         registration_status_accepted: Registration accepted
         company_which_account_was_registered: Company which account was registered
         accept_registration: Accept registration
-        reject_registration: Reject registration
         show_registration: Details registration
         reject: Reject
         empty: Empty
@@ -305,6 +297,9 @@ owl:
         registration_new: Registration (New)
         registration_accepted: Registration (Accepted)
         registration_rejected: Registration (Rejected)
+        registration_status_name_new: New
+        registration_status_name_accepted: Accepted
+        registration_status_name_rejected: Rejected
         start_using_system: Start using the system
         type: Type
         last_login: Date last login

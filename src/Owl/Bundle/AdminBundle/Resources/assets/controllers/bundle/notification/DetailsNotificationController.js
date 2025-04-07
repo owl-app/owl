@@ -12,7 +12,7 @@ export default class extends Controller {
     static outlets = ['modal'];
 
     accept({ params }) {
-        const { request, method, notificationId } = params;
+        const { request, method, notificationId, message } = params;
 
         if (request.url === undefined) {
             throw new Error('The request.url parameter is required.');
@@ -33,11 +33,30 @@ export default class extends Controller {
                 this.dispatch('read', { detail: { notificationId } });
 
                 debounce(() => {
+                    const detailEvent = {
+                        detail: {
+                            message: message.success,
+                            type: 'success'
+                        }
+                    };
+
                     this.modalOutlet.hideLoading();
+
+                    window.dispatchEvent(new CustomEvent('owl_admin.toast.show', detailEvent));
                 }, 100)();
             }
         }).catch(() => {
-            this.modalOutlet.hide();
+            const detailEvent = {
+                detail: {
+                    message: message.error,
+                    type: 'error'
+                }
+            };
+
+            this.modalOutlet.close();
+            this.modalOutlet.hideLoading();
+
+            window.dispatchEvent(new CustomEvent('owl_admin.toast.show', detailEvent));
         });
     }
 }

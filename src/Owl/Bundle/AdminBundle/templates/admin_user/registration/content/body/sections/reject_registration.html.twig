@@ -1,0 +1,9 @@
+{% set registration = hookable_metadata.context.resource.registration %}
+
+{% if(registration.status == 'new') %}
+    <div class="col-md-6 col-lg-6 mt-3">
+        <div class="card registration-card-form">
+            {{ render(url('owl_admin_partial_admin_user_reject_registration', {'id': hookable_metadata.context.resource.registration.id})) }}
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,73 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.security.register':
+            page:
+                template: '@OwlAdmin/security/register/page.html.twig'
+                priority: 0
+
+        'owl_admin.security.register.page':
+            header:
+                template: '@OwlAdmin/security/register/page/header.html.twig'
+                priority: 100
+            content:
+                template: '@OwlAdmin/security/common/content.html.twig'
+                priority: 0
+
+        'owl_admin.security.register.page.header':
+            title_block:
+                template: '@OwlAdmin/security/register/page/header/title_block.html.twig'
+                priority: 0
+
+        'owl_admin.security.register.page.header.title_block':
+            title:
+                template: '@OwlAdmin/security/register/page/header/title_block/title.html.twig'
+                priority: 100
+            back_to_login_page:
+                template: '@OwlAdmin/security/register/page/header/title_block/back_to_login_page.html.twig'
+                priority: 0
+
+        'owl_admin.security.register.page.content':
+            form:
+                component: 'owl_admin:admin_user_register:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/security/register/page/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'owl_admin.security.register.page.content.form':
+            personal_information:
+                template: '@OwlAdmin/security/register/page/form/personal_information.html.twig'
+                priority: 300
+            company_information:
+                template: '@OwlAdmin/security/register/page/form/company_information.html.twig'
+                priority: 200
+            account_credentials:
+                template: '@OwlAdmin/security/register/page/form/account_credentials.html.twig'
+                priority: 100
+            submit:
+                template: '@OwlAdmin/security/register/page/form/submit.html.twig'
+                priority: 0
+
+        'owl_admin.security.register.page.content.form.personal_information':
+            fist_last_name:
+                template: '@OwlAdmin/security/register/page/form/personal_information/first_last_name.html.twig'
+                priority: 100
+            phone_email:
+                template: '@OwlAdmin/security/register/page/form/personal_information/phone_email.html.twig'
+                priority: 0
+
+        'owl_admin.security.register.page.content.form.company_information':
+            company_name_nip:
+                template: '@OwlAdmin/security/register/page/form/company_information/company_name_nip.html.twig'
+                priority: 100
+            full_address:
+                template: '@OwlAdmin/security/register/page/form/company_information/full_address.html.twig'
+                priority: 0
+
+        'owl_admin.security.register.page.content.form.account_credentials':
+            password:
+                template: '@OwlAdmin/security/register/page/form/account_credentials/password.html.twig'
+                priority: 0

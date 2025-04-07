@@ -22,6 +22,10 @@
                     data: {
                         '_csrf_token':  csrf_token(hookable_metadata.context.resource.id)
                     }
+                }|json_encode,
+                'data-details-notification-message-param': {
+                    success: 'owl.accept_notification.success'|trans(domain = 'flashes'),
+                    error: 'owl.accept_notification.error'|trans(domain = 'flashes'),
                 }|json_encode
             }
         }

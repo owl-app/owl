@@ -1,0 +1,32 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.admin_user.modal.registration.reject':
+            content:
+              template: '@OwlAdmin/admin_user/registration/content/body/form/reject/content.html.twig'
+              priority: 0
+
+        'owl_admin.admin_user.modal.registration.reject.content':
+            body:
+              template: '@OwlAdmin/admin_user/registration/content/body/form/reject/content/body.html.twig'
+              priority: 0
+            footer:
+              template: '@OwlAdmin/admin_user/registration/content/body/form/reject/content/footer.html.twig'
+              priority: 0
+
+        'owl_admin.admin_user.modal.registration.reject.content.body':
+            title:
+              template: '@OwlAdmin/admin_user/registration/content/body/form/reject/content/body/title.html.twig'
+              priority: 0
+            form:
+              template: '@OwlAdmin/admin_user/registration/content/body/form/reject/content/body/form.html.twig'
+              priority: 0
+
+        'owl_admin.admin_user.modal.registration.reject.content.footer':
+            submit:
+              template: '@OwlAdmin/admin_user/registration/content/body/form/reject/content/footer/submit.html.twig'
+              priority: 0
+
+        'owl_admin.admin_user.modal.registration.reject.content.body.form':
+            reason:
+                template: '@OwlAdmin/admin_user/registration/content/body/form/reject/content/body/form/reason.html.twig'
+                priority: 100

@@ -14,3 +14,8 @@ sylius_twig_hooks:
             javascripts:
                 template: '@OwlAdmin/shared/layout/base/javascripts.html.twig'
                 priority: 0
+
+        'owl_admin.base#toast':
+            toast:
+                template: '@OwlAdmin/shared/toast.html.twig'
+                priority: 0

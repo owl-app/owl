@@ -12,12 +12,6 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.admin_user_permissions.index.content':
-            toast:
-                template: '@OwlAdmin/shared/toast.html.twig'
-                configuration:
-                    stimulus:
-                        action: permission:changed@window->toast#show
-                priority: 300
             flashes:
                 template: '@OwlAdmin/shared/crud/common/content/flashes.html.twig'
                 priority: 300

@@ -1,0 +1,36 @@
+{% set resource = hookable_metadata.context.resource %}
+
+<div class="card tab-pane show pt-3" id="tabs-registration-information">
+    <div class="col-12 card-body">
+        <div class="divide-y">
+            {% if(resource.registration.status == 'rejected') %}
+                <div class="row">
+                    <div class="col-12 col-md-5 fw-bold">{{ 'owl.ui.reason_rejection_registration'|trans }}</div>
+                    <div class="col-12 col-md-7">{{ resource.registration.reasonRejection }}</div>
+                </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-12 col-md-5 fw-bold">{{ 'owl.ui.date_change_status'|trans }}</div>
+                <div class="col-12 col-md-7">
+                    {% if(resource.registration.changeStatusAt is not null) %}
+                        {{ resource.registration.changeStatusAt|format_datetime }}
+                    {% else %}
+                        {{ 'owl.ui.empty'|trans }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-5 fw-bold">{{ 'owl.ui.created_at'|trans }}</div>
+                <div class="col-12 col-md-7">
+                    {% if(resource.registration.createdAt is not null) %}
+                        {{ resource.registration.createdAt|format_datetime }}
+                    {% else %}
+                        {{ 'owl.ui.empty'|trans }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

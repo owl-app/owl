@@ -1,0 +1,16 @@
+{% if form is not defined %}
+    {% set form = hookable_metadata.context.form %}
+{% endif %}
+
+{% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
+
+<div {% if attributes is defined %} {{ attributes }} data-form-target="live" {% endif %} class="text-secondary">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id, 'data-form-target':'form'}}) }}
+    <div class="ps-2 pe-2">
+        {{ form_errors(form) }}
+        {{ form_widget(form._token) }}
+
+        {% hook 'form' with { form } %}
+    </div>
+    {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
+</div>

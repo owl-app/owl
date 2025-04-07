@@ -25,11 +25,6 @@ final class MailerListener
         $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_TOKEN);
     }
 
-    public function sendResetPasswordPinEmail(GenericEvent $event): void
-    {
-        $this->sendEmail($event->getSubject(), UserBundleEmails::RESET_PASSWORD_PIN);
-    }
-
     public function sendVerificationTokenEmail(GenericEvent $event): void
     {
         $this->sendEmail($event->getSubject(), UserBundleEmails::EMAIL_VERIFICATION_TOKEN);
@@ -46,17 +41,17 @@ final class MailerListener
             return;
         }
 
-        $this->sendEmail($user, CoreBundleEmails::USER_REGISTRATION);
+        $this->sendEmail($user, CoreBundleEmails::ADMIN_USER_REGISTRATION);
     }
 
     public function sendUserRegistrationAccepted(GenericEvent $event): void
     {
-        $this->sendEmail($this->getUserFromRegistrationData($event), CoreBundleEmails::REGISTRATION_ACCEPTED);
+        $this->sendEmail($this->getUserFromRegistrationData($event), CoreBundleEmails::ADMIN_USER_REGISTRATION_ACCEPTED);
     }
 
     public function sendUserRegistrationRejected(GenericEvent $event): void
     {
-        $this->sendEmail($this->getUserFromRegistrationData($event), CoreBundleEmails::REGISTRATION_REJECTED);
+        $this->sendEmail($this->getUserFromRegistrationData($event), CoreBundleEmails::ADMIN_USER_REGISTRATION_REJECTED);
     }
 
     private function sendEmail(UserInterface $user, string $emailCode): void

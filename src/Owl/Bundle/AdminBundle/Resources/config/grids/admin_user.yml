@@ -79,10 +79,8 @@ sylius_grid:
                                     id: resource.id
                     registration:
                         type: registration_admin_user
-                        label: owl.ui.registration
                         options:
                             button: red
-                            icon: list
                             link:
                                 route: owl_admin_confirm_registration
                                 parameters:

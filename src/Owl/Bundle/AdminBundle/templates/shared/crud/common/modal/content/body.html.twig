@@ -1,3 +1,8 @@
-<div data-form-target="content" class="modal-body">
+{% from "@OwlAdmin/shared/helper/attributes.html.twig" import attributes %}
+
+<div
+    {{ attributes(hookable_metadata.configuration.page_body_attributes|default({})) }}
+    class="modal-body"
+>
     {% hook 'body' %}
 </div>

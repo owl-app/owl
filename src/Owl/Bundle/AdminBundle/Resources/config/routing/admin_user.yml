@@ -110,10 +110,8 @@ owl_admin_confirm_registration:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/AdminUser/Registration/details.html.twig"
+            template: "@OwlAdmin/admin_user/registration.html.twig"
             vars:
-                header: owl.ui.registration
-                icon: user
                 permission:
                     group: user
                     description: owl.ui.permission.registration

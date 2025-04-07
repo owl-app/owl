@@ -1,0 +1,90 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.admin_user.modal.registration':
+            content:
+                template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
+                configuration:
+                    class: 'registration-modal'
+                priority: 0
+
+        'owl_admin.admin_user.modal.registration.content':
+            header:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header.html.twig'
+                priority: 300
+            body:
+                template: '@OwlAdmin/shared/crud/common/modal/content/body.html.twig'
+                priority: 200
+            actions:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions.html.twig'
+                priority: 100
+
+        'owl_admin.admin_user.modal.registration.content.header':
+            title_block:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block.html.twig'
+                priority: 100
+            button_close:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/button_close.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.modal.registration.content.header.title_block':
+            title:
+                template: '@OwlAdmin/admin_user/registration/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'owl.ui.registration'
+                    icon: 'flowbite:user-outline'
+                priority: 0
+
+        'owl_admin.admin_user.modal.registration.content.body':
+            sections:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.modal.registration.content.body.sections':
+            details:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/details.html.twig'
+                priority: 200
+            accept_registration:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/accept_registration.html.twig'
+                priority: 100
+            reject_registration:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/reject_registration.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.modal.registration.content.body.sections.details':
+            nav:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/details/nav.html.twig'
+                priority: 100
+            tab_content:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/details/tab_content.html.twig'
+                priority: 100
+
+        'owl_admin.admin_user.modal.registration.content.body.sections.details.nav':
+            personal_information:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/details/nav/personal_information.html.twig'
+                priority: 200
+            company_information:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/details/nav/company_information.html.twig'
+                priority: 100
+            registration_information:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/details/nav/registration_information.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.modal.registration.content.body.sections.details.tab_content':
+            personal_information:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/details/tab_content/personal_information.html.twig'
+                priority: 200
+            company_information:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/details/tab_content/company_information.html.twig'
+                priority: 100
+            registration_information:
+                template: '@OwlAdmin/admin_user/registration/content/body/sections/details/tab_content/registration_information.html.twig'
+                priority: 0
+
+        'owl_admin.admin_user.modal.registration.content.actions':
+            cancel:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions/cancel.html.twig'
+                configuration:
+                    button:
+                        attributes:
+                            'data-form-target': 'action'
+                priority: 100

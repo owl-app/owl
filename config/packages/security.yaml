@@ -70,7 +70,7 @@ security:
         - { path: "%owl.security.admin_regex%(forgotten-password|register|verify)", role: PUBLIC_ACCESS }
 
         - { path: "%owl.security.admin_regex%([A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?)$", role: PUBLIC_ACCESS }
-        - { path: "%owl.security.admin_regex%([A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?)/(forgotten-password|register|verify)", role: PUBLIC_ACCESS }
+        - { path: "%owl.security.admin_regex%([A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?)/(forgotten-password|register|verify|_components_public)", role: PUBLIC_ACCESS }
 
         - { path: "%owl.security.admin_regex%.*", role: [ROLE_ADMIN_COMPANY, ROLE_ADMIN_SYSTEM, ROLE_USER] }
 

@@ -1,7 +1,0 @@
-{% include '@OwlUi/Security/_login.html.twig' with {
-    'action': path('owl_admin_login_check'), 
-    'paths': {'logo': 'build/admin/images/logo.jpg'},
-    'actions_reset_password': 'owl_admin_request_password_reset_token',
-    'actions_register': 'owl_admin_register',
-    'description': settings.description_login_page|default('')
-} %}

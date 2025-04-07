@@ -6,7 +6,7 @@ owl_admin_partial_admin_user_accept_registration:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/AdminUser/Registration/_accept_registration_form.html.twig"
+            template: "@OwlAdmin/admin_user/registration/content/body/form/accept.html.twig"
             form: Owl\Bundle\CoreBundle\Form\Type\AcceptRegistrationType
             event: change_status_registration
             state_machine:
@@ -28,7 +28,7 @@ owl_admin_partial_admin_user_reject_registration:
         _sylius:
             section: admin
             permission: true
-            template: "@OwlAdmin/AdminUser/Registration/_reject_registration_form.html.twig"
+            template: "@OwlAdmin/admin_user/registration/content/body/form/reject.html.twig"
             form: Owl\Bundle\CoreBundle\Form\Type\RejectRegistrationType
             event: change_status_registration
             state_machine:

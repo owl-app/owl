@@ -7,15 +7,15 @@ sylius_mailer:
         admin_password_reset:
             subject: owl.emails.user.password_reset.subject
             template: "@OwlCore/Email/passwordReset.html.twig"
-        user_registration:
+        admin_user_registration:
             subject: owl.emails.user_registration.subject
-            template: "@OwlAdmin/Email/userRegistration.html.twig"
+            template: "@OwlCore/Email/userRegistration.html.twig"
         verification_token:
             subject: owl.emails.user.verification_token.subject
-            template: "@OwlAdmin/Email/verification.html.twig"
-        registration_accepted:
+            template: "@OwlCore/Email/verification.html.twig"
+        admin_user_registration_accepted:
             subject: owl.emails.user.registration_accepted.subject
-            template: "@OwlAdmin/Email/registrationAccepted.html.twig"
-        registration_rejected:
+            template: "@OwlCore/Email/registrationAccepted.html.twig"
+        admin_user_registration_rejected:
             subject: owl.emails.user.registration_rejected.subject
-            template: "@OwlAdmin/Email/registrationRejected.html.twig"
+            template: "@OwlCore/Email/registrationRejected.html.twig"

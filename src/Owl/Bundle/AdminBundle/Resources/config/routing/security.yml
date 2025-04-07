@@ -29,7 +29,7 @@ owl_admin_register:
         _locale: "%locale%"
         _controller: owl.controller.admin_user::createAction
         _sylius:
-            template: "@OwlAdmin/Account/register.html.twig"
+            template: "@OwlAdmin/security/register.html.twig"
             form: Owl\Bundle\CoreBundle\Form\Type\User\AdminUserRegistrationType
             event: register
             redirect: 
