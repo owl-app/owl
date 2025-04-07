@@ -57,7 +57,7 @@ sylius_grid:
                     type: entity
                     label: owl.ui.role
                     options:
-                        fields: [role_id]
+                        fields: [role.name]
                     form_options:
                         class: "%owl.model.rbac_role.class%"
                         multiple: true
