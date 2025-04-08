@@ -1,7 +1,7 @@
 .header {
     .circular {
-        width: 3.5em;
-        height: 3.5em;
+        min-width: 3.5em;
+        min-height: 3.5em;
         font-size: 1em;
         color: #1abb9c;
         background: rgba(26, 187, 156, 0.1);
