@@ -8,11 +8,14 @@ owl_admin_live_component_public:
     defaults:
         _live_action: 'get'
 
-sylius_admin_partial:
+owl_admin_ux:
+    resource: "@OwlAdminBundle/Resources/config/routing/ux.yml"
+
+owl_admin_partial:
     resource: "@OwlAdminBundle/Resources/config/routing/partial.yml"
     prefix: /_partial
 
-owl_admin_dashboard: 
+owl_admin_dashboard:
     path: /dashboard
     defaults:
         _controller: owl_admin.controller.dashboard::indexAction
@@ -33,7 +36,7 @@ owl_admin_permission:
     resource: "@OwlAdminBundle/Resources/config/routing/rbac.yml"
     prefix: /rbac/
 
-sylius_admin_admin_user:
+owl_admin_admin_user:
     resource: "@OwlAdminBundle/Resources/config/routing/admin_user.yml"
 
 owl_admin_setting:
@@ -41,6 +44,3 @@ owl_admin_setting:
 
 owl_admin_security:
     resource: "@OwlAdminBundle/Resources/config/routing/security.yml"
-
-owl_admin_ux:
-    resource: "@OwlAdminBundle/Resources/config/routing/ux.yml"

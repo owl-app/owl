@@ -1,17 +1,12 @@
 imports:
     - { resource: "@OwlUiBundle/Resources/config/app/config.yml" }
     - { resource: "@OwlAdminBundle/Resources/config/app/owl/owl_mailer.yml" }
-    - { resource: "@OwlAdminBundle/Resources/config/grids/rbac_role.yml" }
-    - { resource: "@OwlAdminBundle/Resources/config/grids/admin_user.yml" }
-    - { resource: "@OwlAdminBundle/Resources/config/grids/locale.yml" }
-    - { resource: "@OwlAdminBundle/Resources/config/grids/suggestion.yml" }
-    - { resource: "@OwlAdminBundle/Resources/config/grids/notification.yml" }
-    - { resource: "@OwlAdminBundle/Resources/config/grids/notification/notification_accepted.yml" }
+    - { resource: "@OwlAdminBundle/Resources/config/grids/**/*.yml" }
     - { resource: 'twig_hooks/**/*.yaml' }
 
 parameters:
-    env(SYLIUS_ADMIN_ROUTING_PATH_NAME): ""
-    owl_admin.path_name: '%env(resolve:SYLIUS_ADMIN_ROUTING_PATH_NAME)%'
+    env(OWL_ADMIN_ROUTING_PATH_NAME): ""
+    owl_admin.path_name: '%env(resolve:OWL_ADMIN_ROUTING_PATH_NAME)%'
     sylius.security.admin_regex: "^/%owl_admin.path_name%"
     owl.mail_sender: ewidencjasystem@bokk.pl
 
@@ -83,3 +78,6 @@ owl_ui:
 sylius_twig_hooks:
     enable_autoprefixing: true
     hook_name_section_separator: '#'
+
+framework:
+    http_method_override: true
