@@ -41,3 +41,6 @@ owl_admin_setting:
 
 owl_admin_security:
     resource: "@OwlAdminBundle/Resources/config/routing/security.yml"
+
+owl_admin_ux:
+    resource: "@OwlAdminBundle/Resources/config/routing/ux.yml"

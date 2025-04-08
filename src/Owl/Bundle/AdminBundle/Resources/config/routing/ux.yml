@@ -1,0 +1,3 @@
+owl_admin_entity_autocomplete:
+    controller: ux.autocomplete.entity_autocomplete_controller
+    path: '/autocomplete/{alias}'

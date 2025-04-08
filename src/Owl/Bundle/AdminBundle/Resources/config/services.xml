@@ -8,6 +8,7 @@
         <import resource="services/context.xml" />
         <import resource="services/twig.xml" />
         <import resource="services/form.xml" />
+        <import resource="services/grid.xml" />
         <import resource="services/notification.xml" />
     </imports>
 
