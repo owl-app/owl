@@ -106,7 +106,7 @@ owl_admin_confirm_registration:
     path: /{id}/registration
     methods: [GET]
     defaults:
-        _controller: owl.controller.admin_user::updateAction
+        _controller: owl.controller.admin_user::showAction
         _sylius:
             section: admin
             permission: true
