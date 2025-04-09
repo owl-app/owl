@@ -149,6 +149,8 @@ export default class extends Controller {
                 if (error) {
                     error.remove();
                 }
+
+                field.querySelector('.form-control')?.classList.remove('is-invalid');
             });
 
             Object.keys(errors).map((key) => {

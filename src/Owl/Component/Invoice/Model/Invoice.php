@@ -9,6 +9,10 @@ use Sylius\Resource\Model\TimestampableTrait;
 
 class Invoice implements InvoiceInterface, ResourceInterface
 {
+    public const PAYMENT_STATE_COMPLETED = 'completed';
+
+    public const PAYMENT_STATE_PENDING = 'pending';
+
     use TimestampableTrait;
 
     /** @var mixed */
@@ -32,7 +36,12 @@ class Invoice implements InvoiceInterface, ResourceInterface
     /** @var BuyerInterface|null */
     protected BuyerInterface $buyer;
 
-    public function getId(): string
+    public function __construct()
+    {
+        $this->paymentState = self::PAYMENT_STATE_PENDING;
+    }
+
+    public function getId(): string|int
     {
         return $this->id;
     }

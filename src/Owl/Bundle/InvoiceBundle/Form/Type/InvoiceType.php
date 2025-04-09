@@ -16,22 +16,21 @@ final class InvoiceType extends AbstractResourceType
         $builder
             ->add('number', TextType::class, [
                 'label' => 'owl.invoice.number',
-                'required' => true,
             ])
             ->add('issueDate', DateType::class, [
-                'required' => false,
                 'label' => 'owl.invoice.issue_date',
                 'widget' => 'single_text',
+                'invalid_message' => 'owl.invoice.issue_date.invalid',
             ])
             ->add('transactionDate', DateType::class, [
-                'required' => false,
                 'label' => 'owl.invoice.transaction_date',
                 'widget' => 'single_text',
+                'invalid_message' => 'owl.invoice.transaction_date.invalid',
             ])
             ->add('paymentDate', DateType::class, [
-                'required' => false,
                 'label' => 'owl.invoice.payment_date',
                 'widget' => 'single_text',
+                'invalid_message' => 'owl.invoice.payment_date.invalid',
             ])
         ;
     }

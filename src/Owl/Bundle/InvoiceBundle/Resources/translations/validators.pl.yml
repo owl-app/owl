@@ -1,0 +1,6 @@
+owl:
+    invoice:
+        number:
+            not_blank: Numer faktury nie może być pusty
+            regex: Numer faktury powinien być w formacie numer/miesiąc/rok
+            unique: Numer faktury musi być unikalny

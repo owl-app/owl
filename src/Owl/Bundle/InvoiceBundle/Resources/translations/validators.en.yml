@@ -1,0 +1,12 @@
+owl:
+    invoice:
+        number:
+            not_blank: Invoice number cannot be empty
+            regex: Invoice number should be in the format number/month/yaer
+            unique: Invoice number must be unique
+        issue_date:
+            invalid: Issue date is not valid
+        transaction_date:
+            invalid: Transaction date is not valid
+        payment_date:
+            invalid: Payment date is not valid
