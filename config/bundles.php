@@ -21,6 +21,7 @@ return [
     Owl\Bundle\StatusBundle\OwlStatusBundle::class => ['all' => true],
     Owl\Bundle\FileBundle\OwlFileBundle::class => ['all' => true],
     Owl\Bundle\RbacBundle\OwlRbacBundle::class => ['all' => true],
+    Owl\Bundle\InvoiceBundle\OwlInvoiceBundle::class => ['all' => true],
     Sylius\Bundle\ResourceBundle\SyliusResourceBundle::class => ['all' => true],
     Sylius\Bundle\GridBundle\SyliusGridBundle::class => ['all' => true],
     Sylius\Bundle\MailerBundle\SyliusMailerBundle::class => ['all' => true],

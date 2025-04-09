@@ -69,8 +69,11 @@ owl:
                     roles: Roles
                 stats:
                     header: Stats
+                invoice:
+                    header: Invoices
 
     ui:
+        invoices: Invoices
         registration_information: Registration information
         reject_registration: Reject registration
         accept_registration: Accept registration 
@@ -120,6 +123,11 @@ owl:
         edit_your_personal_information: Edit your personal information
         show_notification: Details notification
         permission:
+            invoice: Invoices
+            list_invoices: List invoices
+            create_invoice: New invoice
+            update_invoice: Edit invoice
+            bulk_delete_invoice: Bulk delete invoice
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses
             list_permission_availables_in_system: List of accesses in the system

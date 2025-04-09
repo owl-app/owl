@@ -1,0 +1,40 @@
+owl_admin_admin_invoice:
+    resource: |
+        alias: owl.invoice
+        section: admin
+        path: invoices
+        templates: "@OwlAdmin\\shared\\crud"
+        except: ['show']
+        redirect: index
+        grid: owl_admin_invoice
+        permission: true
+        vars:
+            all:
+                redirect:
+                    optional_referer: owl_admin_invoice_index
+            index:
+                referer: true
+                permission:
+                    group: invoice
+                    description: owl.ui.permission.list_invoices
+            create:
+                form:
+                    ajax: true
+                permission:
+                    group: invoice
+                    description: owl.ui.permission.create_invoice
+            update:
+                form:
+                    ajax: true
+                permission:
+                    group: invoice
+                    description: owl.ui.permission.update_invoice
+            bulkDelete:
+                redirect:
+                    header: xhr
+                form:
+                    ajax: true
+                permission:
+                    group: invoice
+                    description: owl.ui.permission.bulk_delete_invoice
+    type: sylius.resource

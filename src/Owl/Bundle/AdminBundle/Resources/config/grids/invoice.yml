@@ -1,0 +1,25 @@
+sylius_grid:
+    grids:
+        owl_admin_invoice:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.invoice.class%"
+            sorting:
+                number: asc
+            fields:
+                number:
+                    type: string
+                    label: owl.ui.number
+                    sortable: ~
+            filters:
+                number:
+                    type: string
+                    label: owl.ui.number
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    delete:
+                        type: delete

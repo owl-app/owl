@@ -37,6 +37,7 @@ final class MainMenuBuilder
         $this->addDashboardMenu($menu);
         $this->addSuggestionMenu($menu);
         $this->addNotificationMenu($menu);
+        $this->addInvoiceMenu($menu);
         $this->addConfigurationSubMenu($menu);
         $this->addPermissionSubMenu($menu);
 
@@ -82,6 +83,26 @@ final class MainMenuBuilder
                     ]
                 ])
                 ->setLabel('owl.menu.admin.main.notification.header')
+                ->setLabelAttribute('icon', 'flowbite:bullhorn-outline');
+        }
+    }
+
+    public function addInvoiceMenu(ItemInterface $menu): void
+    {
+        $isGranted = $this->authorizationChecker->isGranted('owl_admin_invoice_index');
+
+        if ($isGranted) {
+            $menu
+                ->addChild('invoice', [
+                    'route' => 'owl_admin_invoice_index',
+                    'extras' => [
+                        'routes' => [
+                            ['route' => 'owl_admin_invoice_update'],
+                            ['route' => 'owl_admin_invoice_show'],
+                        ]
+                    ]
+                ])
+                ->setLabel('owl.menu.admin.main.invoice.header')
                 ->setLabelAttribute('icon', 'flowbite:bullhorn-outline');
         }
     }

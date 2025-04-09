@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <mapped-superclass name="Owl\Component\Invoice\Model\Buyer" table="owl_invoice_buyer">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="company" column="company" nullable="true" />
+        <field name="street" column="street" />
+        <field name="city" column="city" />
+        <field name="postcode" column="postcode" />
+        <field name="countryCode" column="country_code" />
+    </mapped-superclass>
+</doctrine-mapping>
