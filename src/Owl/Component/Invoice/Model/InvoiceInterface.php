@@ -4,34 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-
-interface InvoiceInterface extends ResourceInterface
+interface InvoiceInterface extends BaseInvoiceInterface, BuyerAwareInterface
 {
-    public const PAYMENT_STATE_COMPLETED = 'completed';
-
-    public const PAYMENT_STATE_PENDING = 'pending';
-
-    public function getNumber(): string;
-
-    public function setNumber(string $number): void;
-
-    public function getIssueDate(): \DateTimeInterface;
-
-    public function setIssueDate(\DateTimeInterface $issueDate): void;
-
-    public function getTransactionDate(): \DateTimeInterface;
-
-    public function setTransactionDate(?\DateTimeInterface $transactionDate): void;
-
-    public function getPaymentDate(): \DateTimeInterface;
-
-    public function setPaymentDate(?\DateTimeInterface $paymentDate): void;
-
-    public function getPaymentState(): string;
-
-    public function setPaymentState(string $paymentState): void;
-
     public function getBuyer(): BuyerInterface;
 
     public function setBuyer(BuyerInterface $buyer): void;

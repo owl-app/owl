@@ -37,7 +37,7 @@ final class MainMenuBuilder
         $this->addDashboardMenu($menu);
         $this->addSuggestionMenu($menu);
         $this->addNotificationMenu($menu);
-        $this->addInvoiceMenu($menu);
+        $this->addSaleMenu($menu);
         $this->addConfigurationSubMenu($menu);
         $this->addPermissionSubMenu($menu);
 
@@ -87,23 +87,45 @@ final class MainMenuBuilder
         }
     }
 
-    public function addInvoiceMenu(ItemInterface $menu): void
+    public function addSaleMenu(ItemInterface $menu): void
     {
-        $isGranted = $this->authorizationChecker->isGranted('owl_admin_invoice_index');
+        $isGrantedInvoices = $this->authorizationChecker->isGranted('owl_admin_invoice_index');
+        $isGrantedContractors = $this->authorizationChecker->isGranted('owl_admin_contractor_index');
 
-        if ($isGranted) {
-            $menu
-                ->addChild('invoice', [
-                    'route' => 'owl_admin_invoice_index',
-                    'extras' => [
-                        'routes' => [
-                            ['route' => 'owl_admin_invoice_update'],
-                            ['route' => 'owl_admin_invoice_show'],
+        if ($isGrantedInvoices || $isGrantedContractors) {
+            $configuration = $menu
+                ->addChild('sale')
+                ->setLabel('owl.menu.admin.main.sale.header')
+                ->setLabelAttribute('icon', 'flowbite:cash-outline')
+                ->setExtra('always_open', true);
+
+            if ($isGrantedInvoices) {
+                $configuration
+                    ->addChild('admin_invoices', [
+                        'route' => 'owl_admin_invoice_index',
+                        'extras' => [
+                            'routes' => [
+                                ['route' => 'owl_admin_invoice_create'],
+                                ['route' => 'owl_admin_invoice_update'],
+                            ]
                         ]
-                    ]
-                ])
-                ->setLabel('owl.menu.admin.main.invoice.header')
-                ->setLabelAttribute('icon', 'flowbite:bullhorn-outline');
+                    ])
+                    ->setLabel('owl.menu.admin.main.sale.invoices');
+            }
+
+            if ($isGrantedContractors) {
+                $configuration
+                    ->addChild('admin_contractors', [
+                        'route' => 'owl_admin_contractor_index',
+                        'extras' => [
+                            'routes' => [
+                                ['route' => 'owl_admin_contractor_create'],
+                                ['route' => 'owl_admin_contractor_update'],
+                            ]
+                        ]
+                    ])
+                    ->setLabel('owl.menu.admin.main.sale.contractors');
+            }
         }
     }
 

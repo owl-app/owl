@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <mapped-superclass name="Owl\Component\Invoice\Model\BaseInvoice">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="number" column="number" />
+        <field name="issueDate" column="issue_date" type="datetime" />
+        <field name="transactionDate" column="transaction_date" type="datetime" />
+        <field name="duePaymentDate" column="due_payment_date" type="datetime" />
+        <field name="paymentState" column="payment_state" />
+
+    </mapped-superclass>
+</doctrine-mapping>

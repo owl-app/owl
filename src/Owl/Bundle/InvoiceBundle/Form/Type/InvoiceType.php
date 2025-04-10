@@ -27,8 +27,8 @@ final class InvoiceType extends AbstractResourceType
                 'widget' => 'single_text',
                 'invalid_message' => 'owl.invoice.transaction_date.invalid',
             ])
-            ->add('paymentDate', DateType::class, [
-                'label' => 'owl.invoice.payment_date',
+            ->add('duePaymentDate', DateType::class, [
+                'label' => 'owl.invoice.due_payment_date',
                 'widget' => 'single_text',
                 'invalid_message' => 'owl.invoice.payment_date.invalid',
             ])

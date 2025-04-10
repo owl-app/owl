@@ -6,12 +6,14 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
-                    template: '@OwlAdmin/shared/crud/common/content/body/form.html.twig'
+                    template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
                 configuration:
                     render_rest: false
                 priority: 0
 
         'owl_admin.rbac_role.modal.create.content.body.form':
+            sections:
+                enabled: false
             general:
                 template: '@OwlAdmin/rbac/role/form.html.twig'
                 priority: 0

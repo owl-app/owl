@@ -1,9 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 jms_serializer:
     metadata:
         directories:
-            sylius-locale:
-                namespace_prefix: "Owl\\Component\\Locale"
-                path: "@OwlLocaleBundle/Resources/config/serializer"
+            owl-invoice:
+                namespace_prefix: "Owl\\Component\\Invoice"
+                path: "@OwlInvoiceBundle/Resources/config/serializer"

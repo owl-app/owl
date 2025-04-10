@@ -1,0 +1,13 @@
+Owl\Component\Invoice\Model\Invoice:
+    exclusion_policy: ALL
+    xml_root_name: invoice
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [Default, Detailed]
+        number:
+            expose: true
+            type: string
+            groups: [Default, Detailed]

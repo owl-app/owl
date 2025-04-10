@@ -27,5 +27,11 @@
             <tag name="ux.entity_autocomplete_field" />
         </service>
 
+        <service id="owl_admin.form.type.contractor_autocomplete" class="Owl\Bundle\AdminBundle\Form\Type\ContractorAutocompleteType" >
+            <argument>%owl.model.contractor.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
+        </service>
+
     </services>
 </container>

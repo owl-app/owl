@@ -45,5 +45,8 @@ owl_admin_setting:
 owl_admin_invoice:
     resource: "@OwlAdminBundle/Resources/config/routing/invoice.yml"
 
+owl_admin_contractor:
+    resource: "@OwlAdminBundle/Resources/config/routing/contractor.yml"
+
 owl_admin_security:
     resource: "@OwlAdminBundle/Resources/config/routing/security.yml"

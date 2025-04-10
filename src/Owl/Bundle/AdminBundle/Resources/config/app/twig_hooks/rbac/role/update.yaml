@@ -12,6 +12,8 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.rbac_role.modal.update.content.body.form':
+            sections:
+                enabled: false
             general:
                 template: '@OwlAdmin/rbac/role/form.html.twig'
                 priority: 0

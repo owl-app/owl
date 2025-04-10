@@ -1,0 +1,31 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.contractor.modal.create.content.body':
+            form:
+                component: 'owl_admin:contractor:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'owl_admin.contractor.modal.create.content.body.form':
+            sections:
+                enabled: false
+            company_name:
+                template: '@OwlAdmin/contractor/form/company_name.html.twig'
+                priority: 400
+            tax_number:
+                template: '@OwlAdmin/contractor/form/tax_number.html.twig'
+                priority: 300
+            address:
+                template: '@OwlAdmin/contractor/form/address.html.twig'
+                priority: 200
+            post_code_city:
+                template: '@OwlAdmin/contractor/form/post_code_city.html.twig'
+                priority: 100
+            email:
+                template: '@OwlAdmin/contractor/form/email.html.twig'
+                priority: 0

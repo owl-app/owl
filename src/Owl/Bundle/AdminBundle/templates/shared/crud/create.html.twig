@@ -10,6 +10,8 @@
 
 {% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
+{% block body_class %}layout-fluid-crud{% endblock %}
+
 {% block body %}
     {% hook 'create' with { _prefixes: prefixes, resource, metadata, configuration, form } %}
 {% endblock %}

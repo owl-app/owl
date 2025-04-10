@@ -1,0 +1,9 @@
+Owl\Component\Contractor\Model\Contractor:
+    exclusion_policy: ALL
+    xml_root_name: contractor
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [Default, Detailed]

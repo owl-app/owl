@@ -12,6 +12,17 @@ sylius_grid:
                     type: string
                     label: owl.ui.number
                     sortable: ~
+                issueDate:
+                    type: datetime
+                    label: owl.invoice.issue_date
+                    sortable: ~
+                    options:
+                        format: d-m-Y
+                contractor:
+                    type: string
+                    label: owl.ui.contractor
+                    path: buyer.company
+                    sortable: buyer.company
             filters:
                 number:
                     type: string

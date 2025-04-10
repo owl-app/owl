@@ -1,0 +1,4 @@
+owl:
+    invoice:
+        contractor:
+            not_blank: Please select contractor

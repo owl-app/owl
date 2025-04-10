@@ -7,9 +7,10 @@
         </id>
 
         <field name="company" column="company" nullable="true" />
+        <field name="taxNumber" column="tax_number" nullable="true" />
         <field name="street" column="street" />
         <field name="city" column="city" />
         <field name="postcode" column="postcode" />
-        <field name="countryCode" column="country_code" />
+        <field name="countryCode" column="country_code" nullable="true" />
     </mapped-superclass>
 </doctrine-mapping>

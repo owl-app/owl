@@ -1,0 +1,6 @@
+jms_serializer:
+    metadata:
+        directories:
+            owl-contractor:
+                namespace_prefix: "Owl\\Component\\Contractor"
+                path: "@OwlContractorBundle/Resources/config/serializer"

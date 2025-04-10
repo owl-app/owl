@@ -1,5 +1,7 @@
+{% set isFullWidth = hookable_metadata.configuration.full_width|default(false) %}
+
 <div class="page-header">
-    <div class="container-xl">
+    <div class="container-xl {{ isFullWidth ? 'mw-100' : '' }}">
         {% hook 'header' %}
     </div>
 </div>

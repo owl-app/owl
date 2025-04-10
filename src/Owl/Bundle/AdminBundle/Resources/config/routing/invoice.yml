@@ -1,4 +1,4 @@
-owl_admin_admin_invoice:
+owl_admin_invoice:
     resource: |
         alias: owl.invoice
         section: admin
@@ -7,6 +7,8 @@ owl_admin_admin_invoice:
         except: ['show']
         redirect: index
         grid: owl_admin_invoice
+        form:
+            type: Owl\Bundle\AdminBundle\Form\Type\InvoiceType
         permission: true
         vars:
             all:

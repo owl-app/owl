@@ -69,11 +69,18 @@ owl:
                     roles: Roles
                 stats:
                     header: Stats
-                invoice:
-                    header: Invoices
+                sale:
+                    header: Sale
+                    invoices: Invoices
+                    contractors: Contractors
 
     ui:
+        contractors: Contractors
+        contractor: Contractor
+        create_contractor: New contractor
+        update_contractor: Edit contractor
         invoices: Invoices
+        create_invoice: New invoice
         registration_information: Registration information
         reject_registration: Reject registration
         accept_registration: Accept registration 
@@ -128,6 +135,11 @@ owl:
             create_invoice: New invoice
             update_invoice: Edit invoice
             bulk_delete_invoice: Bulk delete invoice
+            contractor: Contractors
+            list_contractors: List contractors
+            create_contractor: New contractor
+            update_contractor: Edit contractor
+            bulk_delete_contractor: Bulk delete contractor
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses
             list_permission_availables_in_system: List of accesses in the system

@@ -1,0 +1,10 @@
+owl:
+    contractor:
+        company_name: Company name
+        tax_number: NIP
+        street: Street
+        building_number: Building No.
+        flat_number: Flat No.
+        city: City
+        post_code: Post code
+        email: Email

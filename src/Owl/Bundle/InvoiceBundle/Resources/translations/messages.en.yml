@@ -1,0 +1,6 @@
+owl:
+    invoice:
+        issue_date: Issue date
+        transaction_date: Transaction date
+        due_payment_date: Payment date
+        number: Invoice number

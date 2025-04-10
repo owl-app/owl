@@ -1,0 +1,42 @@
+sylius_grid:
+    grids:
+        owl_admin_contractor:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.contractor.class%"
+            fields:
+                companyName:
+                    type: string
+                    label: owl.contractor.company_name
+                    sortable: ~
+            filters:
+                companyName:
+                    type: string
+                    label: owl.contractor.company_name
+            actions:
+                main:
+                    create:
+                        type: modal
+                        label: owl.ui.create
+                        options:
+                            button: primary
+                            icon: flowbite:plus-outline
+                            modal:
+                                size: 'default'
+                            link:
+                                route: owl_admin_contractor_create
+                item:
+                    update:
+                        type: modal
+                        options:
+                            tooltip: owl.ui.edit
+                            icon: flowbite:pen-solid
+                            modal:
+                                size: 'default'
+                            link:
+                                route: owl_admin_contractor_update
+                                parameters:
+                                    id: resource.id
+                    delete:
+                        type: delete

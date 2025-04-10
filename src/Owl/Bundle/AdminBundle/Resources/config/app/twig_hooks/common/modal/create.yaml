@@ -48,6 +48,11 @@ sylius_twig_hooks:
                     render_rest: true
                 priority: 0
 
+        'owl_admin.common.modal.create.content.body.form':
+            sections:
+                template: '@OwlAdmin/shared/crud/common/modal/content/body/form/sections.html.twig'
+                priority: 0
+
         'owl_admin.common.modal.create.content.body.form.sections':
             general:
                 template: '@OwlAdmin/shared/crud/common/modal/content/body/form/sections/general.html.twig'

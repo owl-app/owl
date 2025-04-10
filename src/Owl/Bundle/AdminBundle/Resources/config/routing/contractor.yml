@@ -1,0 +1,51 @@
+owl_admin_contractor:
+    resource: |
+        alias: owl.contractor
+        section: admin
+        path: contractors
+        templates: "@OwlAdmin\\shared\\crud\\modal"
+        except: ['show', 'index']
+        redirect: index
+        grid: owl_admin_contractor
+        permission: true
+        vars:
+            all:
+                redirect:
+                    optional_referer: owl_admin_contractor_index
+            create:
+                form:
+                    ajax: true
+                permission:
+                    group: contractor
+                    description: owl.ui.permission.create_contractor
+            update:
+                form:
+                    ajax: true
+                permission:
+                    group: contractor
+                    description: owl.ui.permission.update_contractor
+            bulkDelete:
+                redirect:
+                    header: xhr
+                form:
+                    ajax: true
+                permission:
+                    group: contractor
+                    description: owl.ui.permission.bulk_delete_contractor
+    type: sylius.resource
+
+owl_admin_contractor_index:
+    path: /contractors/
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.contractor::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_contractor
+            template: "@OwlAdmin/shared/crud/index.html.twig"
+            vars:
+                referer: true
+                permission:
+                    group: contractor
+                    description: owl.ui.permission.list_contractors

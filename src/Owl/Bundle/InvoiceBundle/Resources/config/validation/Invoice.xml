@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="Owl\Component\Invoice\Model\Invoice">
+    <class name="Owl\Component\Invoice\Model\BaseInvoice">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">number</option>
             <option name="message">owl.invoice.number.unique</option>
@@ -34,7 +34,7 @@
             </constraint>
         </property>
 
-        <property name="paymentDate">
+        <property name="duePaymentDate">
             <constraint name="NotBlank">
                 <option name="message">owl.common.not_blank</option>
                 <option name="groups">owl</option>

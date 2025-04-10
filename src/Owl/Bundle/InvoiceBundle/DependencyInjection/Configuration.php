@@ -7,6 +7,7 @@ namespace Owl\Bundle\InvoiceBundle\DependencyInjection;
 use Owl\Bridge\SyliusResource\Controller\BaseController;
 use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType;
 use Owl\Component\Invoice\Model\Buyer;
+use Owl\Component\Invoice\Model\BuyerInterface;
 use Owl\Component\Invoice\Model\Invoice;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -67,6 +68,7 @@ final class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Buyer::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(BuyerInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(BaseController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()

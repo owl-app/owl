@@ -39,12 +39,6 @@
             <tag name="form.type_extension" extended-type="Owl\Bundle\ServiceBundle\Form\Type\ServiceType" />
         </service>
 
-        <!-- <service id="sylius.form.type.product_review" class="Owl\Bundle\CoreBundle\Form\Type\Service\ServiceReviewType">
-            <argument>%owl.model.service_review.class%</argument>
-            <argument>%owl.form.type.service_review.validation_groups%</argument>
-            <tag name="form.type" />
-        </service> -->
-
         <service id="owl.form.type.admin_user" class="Owl\Bundle\CoreBundle\Form\Type\User\AdminUserType">
             <argument>%owl.model.admin_user.class%</argument>
             <argument>%owl.form.type.admin_user.validation_groups%</argument>
@@ -52,17 +46,6 @@
             <argument type="service" id="owl.form.subscriber.add_owner" />
             <tag name="form.type" />
         </service>
-
-        <!-- <service id="sylius.form.type.service_file" class="Owl\Bundle\CoreBundle\Form\Type\Service\ServiceFileType">
-            <argument>%owl.model.service_file.class%</argument>
-            <argument>%owl.form.type.file.validation_groups%</argument>
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.service_upload_file" class="Owl\Bundle\CoreBundle\Form\Type\Service\ServiceUploadFileType">
-            <argument>%owl.model.service_file.class%</argument>
-            <tag name="form.type" />
-        </service> -->
 
         <service id="owl.form.type.suggestion_file" class="Owl\Bundle\CoreBundle\Form\Type\Suggestion\SuggestionFileType">
             <argument>%owl.model.suggestion_file.class%</argument>
@@ -175,6 +158,10 @@
             <argument>%owl.model.admin_user_registration_data.class%</argument>
             <argument>%owl.form.type.admin_user_registration_reject.validation_groups%</argument>
             <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.extension.type.invoice" class="Owl\Bundle\CoreBundle\Form\Extension\InvoiceTypeExtension">
+            <tag name="form.type_extension" priority="100" />
         </service>
 
     </services>

@@ -15,6 +15,9 @@ class Buyer implements BuyerInterface, ResourceInterface
     protected string $company;
 
     /** @var string|null */
+    protected string $taxNumber;
+
+    /** @var string|null */
     protected string $street;
 
     /** @var string|null */
@@ -36,9 +39,19 @@ class Buyer implements BuyerInterface, ResourceInterface
         return $this->company;
     }
 
-    public function setCompanty(?string $company): void
+    public function setCompany(?string $company): void
     {
         $this->company = $company;
+    }
+
+    public function getTaxNumber(): ?string
+    {
+        return $this->taxNumber;
+    }
+
+    public function setTaxNumber(?string $taxNumber): void
+    {
+        $this->taxNumber = $taxNumber;
     }
 
     public function getStreet(): string

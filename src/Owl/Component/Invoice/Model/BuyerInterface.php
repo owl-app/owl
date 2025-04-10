@@ -8,7 +8,11 @@ interface BuyerInterface
 {
     public function getCompany(): ?string;
 
-    public function setCompanty(?string $company): void;
+    public function setCompany(?string $company): void;
+
+    public function getTaxNumber(): ?string;
+
+    public function setTaxNumber(?string $taxNumber): void;
 
     public function getStreet(): string;
 

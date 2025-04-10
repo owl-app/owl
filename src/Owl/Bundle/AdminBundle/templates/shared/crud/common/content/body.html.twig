@@ -1,8 +1,9 @@
 {% from "@OwlAdmin/shared/helper/attributes.html.twig" import attributes %}
+{% set isFullWidth = hookable_metadata.configuration.full_width|default(false) %}
 
 <div
     {{ attributes(hookable_metadata.configuration.page_body_attributes|default({})) }}
-    class="container-xl page-body"
+    class="container-xl {{ isFullWidth ? 'mw-100' : '' }} page-body"
 >
     {% hook 'body' %}
 </div>

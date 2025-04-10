@@ -1,0 +1,50 @@
+{
+    "name": "owl/contractor",
+    "type": "library",
+    "description": "Contractor handling for PHP applications.",
+    "keywords": [
+        "contractor"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Kęska",
+            "homepage": "https://pawelkeska.eu"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "sylius/resource": "^1.7",
+        "symfony/intl": "^4.4 || ^5.2",
+        "laminas/laminas-stdlib": "^3.2"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^7.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Owl\\Component\\Contractor\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Owl\\Component\\Contractor\\spec\\": "spec/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
