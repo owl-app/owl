@@ -1,0 +1,40 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.invoice_serie.modal.available':
+            content:
+                template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
+                priority: 0
+
+        'owl_admin.invoice_serie.modal.available.content':
+            header:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header.html.twig'
+                priority: 200
+            body:
+                template: '@OwlAdmin/shared/crud/common/modal/content/body.html.twig'
+                priority: 100
+            actions:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions.html.twig'
+                priority: 0
+
+        'owl_admin.invoice_serie.modal.available.content.header':
+            title_block:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block.html.twig'
+                priority: 0
+
+        'owl_admin.invoice_serie.modal.available.content.header.title_block':
+            title:
+                template: '@OwlAdmin/shared/crud/common/modal/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'owl.ui.invoice_numbering'
+                    icon: 'flowbite:list-outline'
+                priority: 0
+
+        'owl_admin.invoice_serie.modal.available.content.body':
+            list:
+                template: '@OwlAdmin/invoice/number_format/available/list.html.twig'
+                priority: 0
+
+        'owl_admin.invoice_serie.modal.available.content.actions':
+            cancel:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions/cancel.html.twig'
+                priority: 0

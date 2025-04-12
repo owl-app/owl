@@ -1,0 +1,13 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.invoice_serie.modal.update.content.body':
+            form:
+                component: 'owl_admin:admin_invoice_serie:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                configuration:
+                    method: 'PUT'
+                    render_rest: true
+                priority: 0

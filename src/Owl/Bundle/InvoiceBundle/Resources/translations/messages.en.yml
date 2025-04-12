@@ -4,3 +4,14 @@ owl:
         transaction_date: Transaction date
         due_payment_date: Payment date
         number: Invoice number
+        type: Invoice type
+        format_number: Format invoice number
+        types:
+            sales: Sales
+            proforma: Proforma
+            correction: Correction
+        sequence_increment: Sequence increment
+        sequence:
+            increment_monthly: Increment monthly
+            increment_yearly: Increment yearly
+        is_default_serie: Is default serie

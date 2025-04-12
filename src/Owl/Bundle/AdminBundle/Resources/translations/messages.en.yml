@@ -63,6 +63,7 @@ owl:
                     settings: Settings
                     header: Configuration
                     locales: Locales
+                    invoice_series: Invoice series
                 permission:
                     header: Permissions
                     available: Available
@@ -75,6 +76,15 @@ owl:
                     contractors: Contractors
 
     ui:
+        invoice_series: Invoice series
+        create_invoice_serie: New invoice serie
+        update_invoice_serie: Edit invoice serie
+        number: Number
+        month: Month
+        year: Year
+        change: Change
+        invoice_numbering: Invoice numbering
+        format: Format
         contractors: Contractors
         contractor: Contractor
         create_contractor: New contractor
@@ -197,4 +207,10 @@ owl:
             edit_system_settings: Edit system settings
             registration: Registration
             reject_registration: Reject registration
-            accept_registration: Accept registration 
+            accept_registration: Accept registration
+            invoice_serie: Invoice - serie
+            create_invoice_serie: New invoice serie
+            update_invoice_serie: Edit invoice serie
+            bulk_delete_invoice_series: Bulk delete invoice series
+            list_invoice_series: List invoice number series
+            available_invoice_series: Available invoice series

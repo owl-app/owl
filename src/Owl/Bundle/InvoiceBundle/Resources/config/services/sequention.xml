@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="owl.sequence_increment_strategy.interface">Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface</parameter>
+    </parameters>
+
+    <services>
+        <service id="owl.registry.invoice_sequence_increment_strategy" class="Sylius\Component\Registry\ServiceRegistry">
+            <argument>%owl.sequence_increment_strategy.interface%</argument>
+            <argument>Invoice increment strategy</argument>
+        </service>
+
+        <service id="owl.strategy.invoice.sequence_increment.yearly_based" class="Owl\Component\Invoice\Sequention\Strategy\YearlyInvoiceSequenceStrategy">
+            <argument type="service" id="owl.repository.invoice_sequence" />
+            <argument type="service" id="owl.custom_factory.invoice_sequence" />
+            <tag name="owl.invoice.sequence_increment_strategy" type="yearly_based" label="owl.invoice.sequence.increment_yearly" />
+        </service>
+
+        <service id="owl.strategy.invoice.sequence_increment.monthly_based" class="Owl\Component\Invoice\Sequention\Strategy\YearlyInvoiceSequenceStrategy">
+            <argument type="service" id="owl.repository.invoice_sequence" />
+            <argument type="service" id="owl.custom_factory.invoice_sequence" />
+            <tag name="owl.invoice.sequence_increment_strategy" type="monthly_based" label="owl.invoice.sequence.increment_monthly" />
+        </service>
+    </services>
+</container>

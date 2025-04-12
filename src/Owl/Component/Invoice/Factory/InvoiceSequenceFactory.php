@@ -1,0 +1,49 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Owl\Component\Invoice\Factory;
+
+use Owl\Component\Invoice\Model\InvoiceSequenceInterface;
+use Owl\Component\Invoice\Model\InvoiceSerieInterface;
+use Sylius\Resource\Exception\UnsupportedMethodException;
+use Sylius\Resource\Factory\FactoryInterface;
+
+/**
+ * @template T of InvoiceSequenceInterface
+ *
+ * @implements InvoiceSequenceFactoryInterface<T>
+ */
+final class InvoiceSequenceFactory implements InvoiceSequenceFactoryInterface
+{
+    public function __construct(
+        private FactoryInterface $decoratedFactory,
+    ) {
+    }
+
+    /**
+     * @throws UnsupportedMethodException
+     */
+    public function createNew(): object
+    {
+        throw new UnsupportedMethodException('createNew');
+    }
+
+    /** @inheritdoc */
+    public function create(
+        InvoiceSerieInterface $serie,
+        int $year,
+        int|null $month = null,
+        int $nextCounter = 1,
+        
+    ): InvoiceSequenceInterface
+    {
+        $sequence = $this->decoratedFactory->createNew();
+        $sequence->setSerie($serie);
+        $sequence->setYear($year);
+        $sequence->setMonth($month);
+        $sequence->setNextCounter($nextCounter);
+
+        return $sequence;
+    }
+}

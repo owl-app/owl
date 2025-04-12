@@ -4,7 +4,7 @@ owl_invoice:
             classes:
                 model: Owl\Component\Core\Model\Invoice\Invoice
                 interface: Owl\Component\Core\Model\Invoice\InvoiceInterface
-        buyer:
+        invoice_buyer:
             classes:
                 model: Owl\Component\Core\Model\Invoice\Buyer
                 interface: Owl\Component\Core\Model\Invoice\BuyerInterface

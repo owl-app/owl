@@ -35,6 +35,6 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.suggestion_status.modal.history.content.actions':
-            title_block:
+            cancel:
                 template: '@OwlAdmin/shared/crud/common/modal/content/actions/cancel.html.twig'
                 priority: 0

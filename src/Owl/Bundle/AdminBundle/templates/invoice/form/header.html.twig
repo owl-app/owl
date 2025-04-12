@@ -1,0 +1,19 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
+
+{% set form = hookable_metadata.context.form %}
+
+<div class="card-header">
+    <h3 class="card-title">{{ 'owl.invoice.number'|trans }}: {{ form.fullNumber.vars.value }}</h3>
+    {{
+        buttons.modal(
+            path('owl_admin_invoice_serie_available'),
+            'owl.ui.change',
+            '',
+            '',
+            '',
+            'btn-primary ms-3',
+            options.disabled|default(false),
+            { size: 'lg' }
+        )
+    }}
+</div>

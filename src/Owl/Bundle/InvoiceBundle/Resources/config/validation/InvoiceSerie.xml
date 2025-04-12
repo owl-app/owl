@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Owl\Component\Invoice\Model\InvoiceSerie">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">format</option>
+            <option name="message">owl.invoice.number_format.format.unique</option>
+            <option name="groups">owl</option>
+        </constraint>
+
+        <property name="format">
+            <constraint name="NotBlank">
+                <option name="message">owl.common.not_blank</option>
+                <option name="groups">owl</option>
+            </constraint>
+        </property>
+
+        <property name="invoiceType">
+            <constraint name="NotBlank">
+                <option name="message">owl.common.not_blank</option>
+                <option name="groups">owl</option>
+            </constraint>
+        </property>
+
+        <property name="isDefault">
+            <constraint name="Owl\Bundle\InvoiceBundle\Validator\UniqueDefaultSerieConstraint">
+                <option name="message">owl.invoice.serie.default.used</option>
+                <option name="groups">
+                    <value>owl</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

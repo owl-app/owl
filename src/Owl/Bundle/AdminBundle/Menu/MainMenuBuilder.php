@@ -134,13 +134,29 @@ final class MainMenuBuilder
         $isGrantedLocales = $this->authorizationChecker->isGranted('owl_admin_locale_index');
         $isGrantedUsers = $this->authorizationChecker->isGranted('owl_admin_admin_user_index');
         $isGrantedSettings = $this->authorizationChecker->isGranted('owl_admin_setting_index');
+        $isGrantedInvoiceNumberFormat = $this->authorizationChecker->isGranted('owl_admin_invoice_serie_index');
 
-        if ($isGrantedLocales || $isGrantedUsers || $isGrantedSettings) {
+        if ($isGrantedLocales || $isGrantedUsers || $isGrantedSettings || $isGrantedInvoiceNumberFormat) {
             $configuration = $menu
                 ->addChild('configuration')
                 ->setLabel('owl.menu.admin.main.configuration.header')
                 ->setLabelAttribute('icon', 'flowbite:cog-outline')
                 ->setExtra('always_open', true);
+
+            if ($isGrantedInvoiceNumberFormat) {
+                $configuration
+                    ->addChild('admin_invoice_serie', [
+                        'route' => 'owl_admin_invoice_serie_index',
+                        'extras' => [
+                            'routes' => [
+                                ['route' => 'owl_admin_invoice_serie_create'],
+                                ['route' => 'owl_admin_invoice_serie_update'],
+                            ]
+                        ]
+                    ])
+                    ->setLabel('owl.menu.admin.main.configuration.invoice_series')
+                    ->setLabelAttribute('icon', 'flowbite:document-text-outline');
+            }
 
             if ($isGrantedLocales) {
                 $configuration

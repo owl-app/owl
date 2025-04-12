@@ -10,3 +10,9 @@ owl:
             invalid: Transaction date is not valid
         payment_date:
             invalid: Payment date is not valid
+        number_format:
+            format:
+                unique: Format must be unique
+        serie:
+            default: 
+                used: Only one serie can be default. Plase change serie with format {{ format }}.

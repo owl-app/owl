@@ -1,0 +1,42 @@
+sylius_grid:
+    grids:
+        owl_admin_invoice_serie:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.invoice_serie.class%"
+            fields:
+                format:
+                    type: string
+                    label: owl.ui.format
+                    sortable: ~
+            filters:
+                format:
+                    type: string
+                    label: owl.ui.format
+            actions:
+                main:
+                    create:
+                        type: modal
+                        label: owl.ui.create
+                        options:
+                            button: primary
+                            icon: flowbite:plus-outline
+                            modal:
+                                size: 'default'
+                            link:
+                                route: owl_admin_invoice_serie_create
+                item:
+                    update:
+                        type: modal
+                        options:
+                            tooltip: owl.ui.edit
+                            icon: flowbite:pen-solid
+                            modal:
+                                size: 'default'
+                            link:
+                                route: owl_admin_invoice_serie_update
+                                parameters:
+                                    id: resource.id
+                    delete:
+                        type: delete

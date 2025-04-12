@@ -1,0 +1,25 @@
+{% import '@OwlUi/macro/messages.html.twig' as messages %}
+
+{% set resources = hookable_metadata.context.resources %}
+{% set replacesForamt = 
+    {
+        '{NUMBER}': '<span class="badge bg-lime-lt text-dark ms-1 me-1 pt-2 pb-2">' ~ 'owl.ui.number'|trans ~ '</span>',
+        '{MM}': '<span class="badge bg-azure-lt text-dark ms-1 me-1 pt-2 pb-2">' ~ 'owl.ui.month'|trans ~ ' - MM </span>',
+        '{YYYY}': '<span class="badge bg-purple-lt text-dark ms-1 me-1 pt-2 pb-2">' ~ 'owl.ui.year'|trans ~ ' - YYYY </span>'
+    }
+%}
+
+{% if resources|length > 0 %}
+    {% for row in resources %}
+        <div class="col-12 border-bottom mb-3">
+            <div class="form-check d-flex align-items-center">
+                <input class="form-check-input me-3" type="radio" name="format" id="format_{{ loop.index }}">
+                <label class="form-check-label d-flex align-items-center" for="format_{{ loop.index }}">
+                    {{ row.format|replace(replacesForamt)|raw }}
+                </label>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    {{ messages.info('owl.ui.no_results_to_display') }}
+{% endif %}

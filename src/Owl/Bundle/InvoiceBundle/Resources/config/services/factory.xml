@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="owl.custom_factory.invoice" class="Owl\Component\Invoice\Factory\InvoiceFactory" decorates="owl.factory.invoice" decoration-priority="256">
+            <argument type="service" id=".inner" />
+            <argument type="service" id="owl.registry.invoice_sequence_increment_strategy" />
+            <argument type="service" id="owl.generator.invoice.invoice_number_generator" />
+            <argument type="service" id="owl.provider.invoice.default_serie" />
+        </service>
+
+        <service
+            id="owl.custom_factory.invoice_sequence"
+            class="Owl\Component\Invoice\Factory\InvoiceSequenceFactory"
+            decorates="owl.factory.invoice_sequence"
+            decoration-priority="256"
+        >
+            <argument type="service" id="owl.custom_factory.invoice_sequence.inner" />
+        </service>
+    </services>
+</container>
+
+

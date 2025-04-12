@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+    <mapped-superclass name="Owl\Component\Invoice\Model\InvoiceSequence" table="owl_invoice_sequence">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="nextCounter" column="next_counter" type="integer" />
+        <field name="year" column="year" type="integer" />
+        <field name="month" column="month" type="integer" nullable="true" />
+        <field name="version" type="integer" version="true" />
+
+        <many-to-one field="serie" target-entity="Owl\Component\Invoice\Model\InvoiceSerieInterface" inversed-by="sequences">
+            <join-column name="serie_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </mapped-superclass>
+</doctrine-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service
+            id="owl_admin.twig.component.admin_invoice_serie.form"
+            class="Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+        >
+            <argument type="service" id="owl.repository.invoice_serie" />
+            <argument type="service" id="form.factory" />
+            <argument>%owl.model.invoice_serie.class%</argument>
+            <argument>Owl\Bundle\InvoiceBundle\Form\Type\InvoiceSerieType</argument>
+
+            <tag name="owl.live_component.admin" key="owl_admin:admin_invoice_serie:form" />
+        </service>
+
+    </services>
+</container>

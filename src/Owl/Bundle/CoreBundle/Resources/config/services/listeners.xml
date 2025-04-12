@@ -63,5 +63,13 @@
         <service id="Owl\Bundle\CoreBundle\EventListener\LocaleAwareListener" decorates="locale_aware_listener">
             <argument type="service" id="Owl\Bundle\CoreBundle\EventListener\LocaleAwareListener.inner" />
         </service>
+
+        <service id="owl.listener.invoice_increment_squence" class="Owl\Bundle\InvoiceBundle\EventListener\InvoiceSequenceIncrementListener">
+            <argument type="service" id="owl.manager.invoice_sequence" />
+            <argument type="service" id="owl.provider.invoice.default_serie" />
+            <argument type="service" id="owl.registry.invoice_sequence_increment_strategy" />
+
+            <tag name="kernel.event_listener" event="owl.invoice.pre_create" method="preCreate" />
+        </service>
     </services>
 </container>

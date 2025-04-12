@@ -6,11 +6,3 @@
 {% block content %}
     {% hook 'history' with { _prefixes: prefixes, resources, metadata, configuration } %}
 {% endblock %}
-
-{% block stylesheets %}
-    {% hook 'create#stylesheets' with { _prefixes: prefixes } %}
-{% endblock %}
-
-{% block javascripts %}
-    {% hook 'create#javascripts' with { _prefixes: prefixes } %}
-{% endblock %}

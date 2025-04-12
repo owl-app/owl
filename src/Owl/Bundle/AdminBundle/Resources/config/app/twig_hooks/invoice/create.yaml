@@ -20,10 +20,22 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
-                    template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                    template: '@OwlAdmin/invoice/form.html.twig'
                 configuration:
                     render_rest: false
                 priority: 0
+
+        'owl_admin.common.create.content.body.form':
+            header:
+                template: '@OwlAdmin/invoice/form/header.html.twig'
+                priority: 100
+            sections:
+                template: '@OwlAdmin/invoice/form/sections.html.twig'
+                priority: 0
+
+        # 'owl_admin.invoice.create.content.body.form.sections':
+        #     general:
+        #         enabled: false
 
         'owl_admin.invoice.create.content.body.form.sections.general':
             default:

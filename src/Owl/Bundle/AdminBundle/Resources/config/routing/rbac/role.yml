@@ -9,11 +9,9 @@ owl_admin_rbac_role:
         permission: true
         vars:
             all:
-                subheader: owl.ui.manage_rbac_roles_available_in_system
                 templates:
                     form: "@OwlAdmin/Rbac/Role/_form.html.twig"
             index:
-                icon: user secret
                 referer: true
                 permission:
                     group: rbac_permission_role

@@ -17,6 +17,9 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
     /** @var string|null */
     protected $number;
 
+    /** @var string|null */
+    protected $fullNumber;
+
     /** @var \DateTimeInterface|null */
     protected $issueDate;
 
@@ -47,6 +50,16 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
     public function setNumber(string $number): void
     {
         $this->number = $number;
+    }
+
+    public function getFullNumber(): string
+    {
+        return $this->fullNumber;
+    }
+
+    public function setFullNumber(string $fullNumber): void
+    {
+        $this->fullNumber = $fullNumber;
     }
 
     public function getIssueDate(): \DateTimeInterface

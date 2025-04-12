@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Owl\Component\Core\Model\Invoice\BuyerInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 final class InvoiceType extends AbstractType
 {
@@ -20,6 +21,9 @@ final class InvoiceType extends AbstractType
         $builder
             ->add('buyer', BuyerType::class, [
                 'label' => false,
+                'required' => true,
+            ])
+            ->add('fullNumber', TextType::class, [
                 'required' => true,
             ])
         ;

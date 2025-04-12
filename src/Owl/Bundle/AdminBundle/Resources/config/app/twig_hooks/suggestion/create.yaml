@@ -36,6 +36,8 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.suggestion.modal.create.content.body.form':
+            sections:
+                enabled: false
             general:
                 template: '@OwlAdmin/suggestion/form.html.twig'
                 priority: 0

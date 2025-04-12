@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+    <mapped-superclass name="Owl\Component\Invoice\Model\InvoiceSerie" table="owl_invoice_serie">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="format" column="format" unique="true" />
+        <field name="invoiceType" column="invoice_type" nullable="true" />
+        <field name="sequenceIncrement" column="sequence_increment" />
+        <field name="isDefault" column="is_default" type="boolean" />
+
+        <one-to-many
+            field="sequences"
+            target-entity="Owl\Component\Invoice\Model\InvoiceSequenceInterface"
+            mapped-by="serie"
+            orphan-removal="true"
+        >
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </mapped-superclass>
+</doctrine-mapping>

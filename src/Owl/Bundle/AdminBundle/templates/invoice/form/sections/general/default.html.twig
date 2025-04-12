@@ -6,6 +6,12 @@
 
 <div class="row">
     <div class="col-6">
+        {{ form_row(hookable_metadata.context.form.fullNumber, sylius_test_form_attribute('fullNumber')|merge({ row_attr: { class: 'mb-2' }})) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
         {{ form_row(hookable_metadata.context.form.buyer.contractor, sylius_test_form_attribute('address')|merge({ row_attr: { class: 'mb-2' }})) }}
     </div>
 </div>

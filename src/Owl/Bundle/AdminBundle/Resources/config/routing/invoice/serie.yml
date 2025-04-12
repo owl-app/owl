@@ -1,0 +1,64 @@
+owl_admin_invoice_serie:
+    resource: |
+        alias: owl.invoice_serie
+        section: admin
+        path: number-formats
+        templates: "@OwlAdmin\\shared\\crud\\modal"
+        except: ['show', 'index']
+        redirect: index
+        permission: true
+        vars:
+            all:
+                redirect:
+                    optional_referer: owl_admin_invoice_serie_index
+            create:
+                form:
+                    ajax: true
+                permission:
+                    group: invoice_serie
+                    description: owl.ui.permission.create_invoice_serie
+            update:
+                form:
+                    ajax: true
+                permission:
+                    group: invoice_serie
+                    description: owl.ui.permission.update_invoice_serie
+            bulkDelete:
+                redirect:
+                    header: xhr
+                form:
+                    ajax: true
+                permission:
+                    group: invoice_serie
+                    description: owl.ui.permission.bulk_delete_invoice_series
+    type: sylius.resource
+
+owl_admin_invoice_serie_index:
+    path: /series/
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.invoice_serie::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_invoice_serie
+            template: "@OwlAdmin/shared/crud/index.html.twig"
+            vars:
+                referer: true
+                permission:
+                    group: invoice_serie
+                    description: owl.ui.permission.list_invoice_series
+
+owl_admin_invoice_serie_available:
+    path: /available-series/
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.invoice_serie::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/invoice/number_format/available.html.twig"
+            vars:
+                permission:
+                    group: invoice_serie
+                    description: owl.ui.permission.available_invoice_series

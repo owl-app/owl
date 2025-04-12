@@ -4,7 +4,7 @@ owl_admin_invoice:
         section: admin
         path: invoices
         templates: "@OwlAdmin\\shared\\crud"
-        except: ['show']
+        except: ['show', 'create']
         redirect: index
         grid: owl_admin_invoice
         form:
@@ -19,12 +19,6 @@ owl_admin_invoice:
                 permission:
                     group: invoice
                     description: owl.ui.permission.list_invoices
-            create:
-                form:
-                    ajax: true
-                permission:
-                    group: invoice
-                    description: owl.ui.permission.create_invoice
             update:
                 form:
                     ajax: true
@@ -40,3 +34,25 @@ owl_admin_invoice:
                     group: invoice
                     description: owl.ui.permission.bulk_delete_invoice
     type: sylius.resource
+
+owl_admin_invoice_create:
+    path: /invoices/new
+    methods: [GET,POST]
+    defaults:
+        _controller: owl.controller.invoice::createAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@OwlAdmin/shared/crud/create.html.twig"
+            form:
+                type: Owl\Bundle\AdminBundle\Form\Type\InvoiceType
+            factory:
+                method: createWithDefaults
+            vars:
+                serialization_groups: [AjaxShow]
+                form:
+                    ajax: true
+                tinymce: true
+                permission:
+                    group: invoice
+                    description: owl.ui.permission.create_invoice
