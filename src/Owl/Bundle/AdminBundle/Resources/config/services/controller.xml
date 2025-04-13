@@ -44,5 +44,12 @@
             <argument type="service" id="twig" />
         </service>
 
+        <service id="owl_admin.controller.invoice.available_series" class="Owl\Bundle\AdminBundle\Action\Invoice\AvailabletSeriesAction">
+            <argument type="service" id="owl.repository.invoice_serie" />
+            <argument type="service" id="owl.generator.invoice.invoice_number_generator" />
+            <argument type="service" id="owl.registry.invoice_sequence_increment_strategy" />
+            <argument type="service" id="twig" />
+        </service>
+
     </services>
 </container>

@@ -31,10 +31,10 @@ class UniqueDefaultSerieConstraintValidator extends ConstraintValidator
             }
         }
 
-        /** @var InvoiceSerieInterface|null $serie */
-        $serie = $this->invoiceSequenceRepository->findOneBy(['isDefault' => true]);
         /** @var InvoiceSerieInterface|null $validatedSerie */
         $validatedSerie = $this->context->getObject();
+        /** @var InvoiceSerieInterface|null $serie */
+        $serie = $this->invoiceSequenceRepository->findOneBy(['isDefault' => true, 'invoiceType' => $validatedSerie->getInvoiceType()]);
 
         if ($serie !== null && $validatedSerie->getId() !== $serie->getId()) {
             $this->context->buildViolation($constraint->message)

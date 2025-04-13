@@ -12,18 +12,27 @@
 
 <div class="row">
     <div class="col-6">
-        {{ form_row(hookable_metadata.context.form.buyer.contractor, sylius_test_form_attribute('address')|merge({ row_attr: { class: 'mb-2' }})) }}
+        {{ form_row(hookable_metadata.context.form.buyer.contractor, sylius_test_form_attribute('buyer.contractor')|merge({ row_attr: { class: 'mb-2' }})) }}
     </div>
 </div>
 
 <div class="row">
     <div class="col-3">
-        {{ form_row(hookable_metadata.context.form.issueDate, sylius_test_form_attribute('address')|merge({ row_attr: { class: 'mb-2' }})) }}
+        {{
+            form_row(hookable_metadata.context.form.issueDate, sylius_test_form_attribute('issueDate')|merge(
+                {
+                    row_attr: { class: 'mb-2' },
+                    attr: {
+                        'data-invoice-form-target': 'issueDate',
+                    }
+                }
+            ))
+        }}
     </div>
     <div class="col-3">
-        {{ form_row(hookable_metadata.context.form.transactionDate, sylius_test_form_attribute('address')|merge({ row_attr: { class: 'mb-2' }})) }}
+        {{ form_row(hookable_metadata.context.form.transactionDate, sylius_test_form_attribute('transactionDate')|merge({ row_attr: { class: 'mb-2' }})) }}
     </div>
     <div class="col-3">
-        {{ form_row(hookable_metadata.context.form.duePaymentDate, sylius_test_form_attribute('address')|merge({ row_attr: { class: 'mb-2' }})) }}
+        {{ form_row(hookable_metadata.context.form.duePaymentDate, sylius_test_form_attribute('duePaymentDate')|merge({ row_attr: { class: 'mb-2' }})) }}
     </div>
 </div>

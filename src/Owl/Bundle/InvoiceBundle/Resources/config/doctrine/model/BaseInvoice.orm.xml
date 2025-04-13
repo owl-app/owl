@@ -9,6 +9,7 @@
 
         <field name="number" column="number" />
         <field name="fullNumber" column="full_number" />
+        <field name="type" column="type" />
         <field name="issueDate" column="issue_date" type="datetime" />
         <field name="transactionDate" column="transaction_date" type="datetime" />
         <field name="duePaymentDate" column="due_payment_date" type="datetime" />

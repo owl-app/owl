@@ -20,6 +20,10 @@ interface BaseInvoiceInterface extends ResourceInterface
 
     public function setFullNumber(string $fullNumber): void;
 
+    public function getType(): ?string;
+
+    public function setType(?string $type): void;
+
     public function getIssueDate(): \DateTimeInterface;
 
     public function setIssueDate(\DateTimeInterface $issueDate): void;

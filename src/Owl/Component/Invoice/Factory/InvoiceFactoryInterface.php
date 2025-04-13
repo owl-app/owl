@@ -14,5 +14,5 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 interface InvoiceFactoryInterface extends FactoryInterface
 {
-    public function createWithDefaults(): BaseInvoiceInterface;
+    public function createWithDefaults(?string $type): BaseInvoiceInterface;
 }

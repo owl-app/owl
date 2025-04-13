@@ -13,9 +13,9 @@ class DefaultInvoiceSerieProvider implements InvoiceSerieProviderInterface
         private readonly RepositoryInterface $serieRepository,
     ) {}
 
-    public function getSerie(): InvoiceSerieInterface
+    public function getSerie(string $type): InvoiceSerieInterface
     {
-        $default =  $this->serieRepository->findOneBy(['isDefault' => true]);
+        $default =  $this->serieRepository->findOneBy(['isDefault' => true, 'invoiceType' => $type]);
 
         if ($default) {
             return $default;

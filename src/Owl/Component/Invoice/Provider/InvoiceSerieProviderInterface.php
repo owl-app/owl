@@ -8,5 +8,5 @@ use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 
 interface InvoiceSerieProviderInterface
 {
-    public function getSerie(): InvoiceSerieInterface;
+    public function getSerie(string $type): InvoiceSerieInterface;
 }

@@ -20,10 +20,16 @@ import GridBulkController from './controllers/common/grid/BulkController';
 import PermissionController from './controllers/common/permission/PermissionController';
 
 // bundle
+// notification
 import DetailsNotificationController from './controllers/bundle/notification/DetailsNotificationController';
 
+// permission
 import UserPermissionController from './controllers/bundle/user/UserPermissionController';
 import ListNotificationController from './controllers/bundle/notification/ListNotificationController';
+
+// invoice
+import InvoiceForm from './controllers/bundle/invoice/InvoiceForm';
+import InvoiceAvailableSeries from './controllers/bundle/invoice/InvoiceAvailableSeries';
 
 export function startApp() {
     const appSymfonyStimulus = startStimulusApp(require.context(
@@ -42,11 +48,13 @@ export function startApp() {
     appSymfonyStimulus.register('grid-bulk', GridBulkController);
     appSymfonyStimulus.register('toast', ToastController);
     appSymfonyStimulus.register('permission', PermissionController);
+    // bundle
     appSymfonyStimulus.register('user-permission', UserPermissionController);
     appSymfonyStimulus.register('details-notification', DetailsNotificationController);
     appSymfonyStimulus.register('list-notification', ListNotificationController);
-    
-    
+    appSymfonyStimulus.register('invoice-form', InvoiceForm);
+    appSymfonyStimulus.register('invoice-available-series', InvoiceAvailableSeries);
+
     appSymfonyStimulus.debug = process.env.NODE_ENV !== 'production';
     
     window.appIsStarted = true;

@@ -3,6 +3,11 @@ sylius_twig_hooks:
         'owl_admin.invoice_serie.modal.available':
             content:
                 template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
+                configuration:
+                    stimulus:
+                        controllers: {
+                            invoice-available-series: {},
+                        }
                 priority: 0
 
         'owl_admin.invoice_serie.modal.available.content':
@@ -31,7 +36,7 @@ sylius_twig_hooks:
 
         'owl_admin.invoice_serie.modal.available.content.body':
             list:
-                template: '@OwlAdmin/invoice/number_format/available/list.html.twig'
+                template: '@OwlAdmin/invoice/serie/available/list.html.twig'
                 priority: 0
 
         'owl_admin.invoice_serie.modal.available.content.actions':

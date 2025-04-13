@@ -1,0 +1,5 @@
+{% set prefixes = ['owl_admin.invoice_serie.modal'] %}
+
+{% block content %}
+    {% hook 'available' with { _prefixes: prefixes, series } %}
+{% endblock %}

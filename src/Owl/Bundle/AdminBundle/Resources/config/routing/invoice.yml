@@ -48,6 +48,8 @@ owl_admin_invoice_create:
                 type: Owl\Bundle\AdminBundle\Form\Type\InvoiceType
             factory:
                 method: createWithDefaults
+                arguments:
+                    - !php/const Owl\Component\Invoice\Enum\InvoiceTypeEnum::SALES
             vars:
                 serialization_groups: [AjaxShow]
                 form:
@@ -56,3 +58,15 @@ owl_admin_invoice_create:
                 permission:
                     group: invoice
                     description: owl.ui.permission.create_invoice
+
+owl_admin_invoice_available_series:
+    path: /available-series/{type}
+    methods: [GET]
+    defaults:
+        _controller: owl_admin.controller.invoice.available_series
+        _sylius:
+            permission: true
+            vars:
+                permission:
+                    group: invoice_serie
+                    description: owl.ui.permission.available_invoice_series

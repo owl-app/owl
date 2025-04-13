@@ -48,17 +48,3 @@ owl_admin_invoice_serie_index:
                 permission:
                     group: invoice_serie
                     description: owl.ui.permission.list_invoice_series
-
-owl_admin_invoice_serie_available:
-    path: /available-series/
-    methods: [GET]
-    defaults:
-        _controller: owl.controller.invoice_serie::indexAction
-        _sylius:
-            section: admin
-            permission: true
-            template: "@OwlAdmin/invoice/number_format/available.html.twig"
-            vars:
-                permission:
-                    group: invoice_serie
-                    description: owl.ui.permission.available_invoice_series

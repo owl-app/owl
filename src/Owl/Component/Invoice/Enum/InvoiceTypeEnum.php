@@ -11,4 +11,10 @@ enum InvoiceTypeEnum: string
     case proforma = 'proforma';
 
     case correction = 'correction';
+
+    public const SALES = self::sales->value;
+
+    public const PROFORMA = self::proforma->value;
+
+    public const CORRECTION = self::correction->value;
 }

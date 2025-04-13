@@ -28,7 +28,7 @@ final class InvoiceSequenceIncrementListener
         /** @var BaseInvoiceInterface $invoice */
         Assert::isInstanceOf($invoice, BaseInvoiceInterface::class);
 
-        $defaultSerie = $this->invoiceSerieProvider->getSerie();
+        $defaultSerie = $this->invoiceSerieProvider->getSerie($invoice->getType());
         /** @var InvoiceSequenceStrategyInterface $incrementStrategy */
         $strategy = $this->registryInvoiceSequenceStrategy->get($defaultSerie->getSequenceIncrement());
         $invoiceSequence = $strategy->incrementNextCounter($defaultSerie, $invoice->getIssueDate());

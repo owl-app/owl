@@ -76,6 +76,7 @@ owl:
                     contractors: Contractors
 
     ui:
+        preview: Preview
         invoice_series: Invoice series
         create_invoice_serie: New invoice serie
         update_invoice_serie: Edit invoice serie

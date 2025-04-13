@@ -33,16 +33,18 @@ final class InvoiceFactory implements InvoiceFactoryInterface
     }
 
     /** @inheritdoc */
-    public function createWithDefaults(): BaseInvoiceInterface
+    public function createWithDefaults(?string $type): BaseInvoiceInterface
     {
         $now = new \DateTimeImmutable();
-        $defaultSerie = $this->invoiceSerieProvider->getSerie();
+        $defaultSerie = $this->invoiceSerieProvider->getSerie($type);
         /** @var InvoiceSequenceStrategyInterface $incrementStrategy */
         $strategy = $this->registryInvoiceSequenceStrategy->get($defaultSerie->getSequenceIncrement());
         $invoiceSequence = $strategy->getNextCounter($defaultSerie, $now);
 
         $invoice = $this->decoratedFactory->createNew();
         $invoice->setFullNumber($this->invoiceNumberGenerator->generate($defaultSerie, $invoiceSequence->getNextCounter(), $now));
+        $invoice->setType($type);
+        $invoice->setIssueDate($now);
 
         return $invoice;
     }
