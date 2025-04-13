@@ -14,7 +14,7 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
+    /** @var int|null */
     protected $number;
 
     /** @var string|null */
@@ -35,6 +35,9 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
     /** @var string|null */
     protected $paymentState;
 
+    /** @var InvoiceSerieInterface */
+    protected $serie;
+
     public function __construct()
     {
         $this->paymentState = self::PAYMENT_STATE_PENDING;
@@ -45,12 +48,12 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
         return $this->id;
     }
 
-    public function getNumber(): string
+    public function getNumber(): int
     {
         return $this->number;
     }
 
-    public function setNumber(string $number): void
+    public function setNumber(int $number): void
     {
         $this->number = $number;
     }
@@ -113,5 +116,15 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
     public function setPaymentState(string $paymentState): void
     {
         $this->paymentState = $paymentState;
+    }
+
+    public function getSerie(): ?InvoiceSerieInterface
+    {
+        return $this->serie;
+    }
+
+    public function setSerie(?InvoiceSerieInterface $serie): void
+    {
+        $this->serie = $serie;
     }
 }

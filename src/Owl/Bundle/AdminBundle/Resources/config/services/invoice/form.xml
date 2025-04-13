@@ -6,7 +6,12 @@
             <tag name="form.type" />
         </service>
 
-        <service id="owl_admin.form.type.invoice_buyer" class="Owl\Bundle\AdminBundle\Form\Type\BuyerType">
+        <service id="owl_admin.form.type.invoice_buyer" class="Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceBuyerType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl_admin.form.type.invoice_serie_hidden" class="Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceSerieHiddenType">
+            <argument type="service" id="owl.repository.invoice_serie" />
             <tag name="form.type" />
         </service>
     </services>

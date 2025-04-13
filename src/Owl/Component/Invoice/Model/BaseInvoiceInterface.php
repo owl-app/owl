@@ -12,9 +12,9 @@ interface BaseInvoiceInterface extends ResourceInterface
 
     public const PAYMENT_STATE_PENDING = 'pending';
 
-    public function getNumber(): string;
+    public function getNumber(): int;
 
-    public function setNumber(string $number): void;
+    public function setNumber(int $number): void;
 
     public function getFullNumber(): string;
 
@@ -39,4 +39,8 @@ interface BaseInvoiceInterface extends ResourceInterface
     public function getPaymentState(): string;
 
     public function setPaymentState(string $paymentState): void;
+
+    public function getSerie(): ?InvoiceSerieInterface;
+
+    public function setSerie(?InvoiceSerieInterface $serie): void;
 }

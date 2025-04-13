@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Bundle\AdminBundle\Form\Type;
+namespace Owl\Bundle\AdminBundle\Form\Type\Invoice;
 
 use Owl\Bundle\AdminBundle\Form\Type\ContractorAutocompleteType;
 use Owl\Component\Core\Model\Invoice\Buyer;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class BuyerType extends AbstractType
+final class InvoiceBuyerType extends AbstractType
 {
     /** @param array<string, mixed> $options */
     public function buildForm(FormBuilderInterface $builder, array $options): void

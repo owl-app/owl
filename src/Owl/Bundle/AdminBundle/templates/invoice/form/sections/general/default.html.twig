@@ -1,12 +1,47 @@
+{# {% if hookable_metadata.context.form.has('number') %}
+    <div class="error">
+        {{ _errors.get('number') }}
+    </div>
+{% endif %} #}
+
+{% for error in hookable_metadata.context.form.number.vars.errors %}
+    <div class="text-red-600 text-sm">
+        {{ error.message }}
+
+        {% set cause = error.cause %}
+        {% if cause is iterable %}
+            <pre>{{ dump(cause) }}</pre> {# albo użyj konkretnych danych #}
+        {% endif %}
+    </div>
+{% endfor %}
+
 <div class="row">
     <div class="col-6">
-        {{ form_row(hookable_metadata.context.form.number, sylius_test_form_attribute('address')|merge({ row_attr: { class: 'mb-2' }})) }}
+        {{
+            form_row(hookable_metadata.context.form.number, sylius_test_form_attribute('number')|merge(
+                {
+                    row_attr: { class: 'mb-2' },
+                    attr: {
+                        'data-invoice-form-target': 'number',
+                    }
+                }
+            ))
+        }}
     </div>
 </div>
 
 <div class="row">
     <div class="col-6">
-        {{ form_row(hookable_metadata.context.form.fullNumber, sylius_test_form_attribute('fullNumber')|merge({ row_attr: { class: 'mb-2' }})) }}
+        {{
+            form_row(hookable_metadata.context.form.fullNumber, sylius_test_form_attribute('fullNumber')|merge(
+                {
+                    row_attr: { class: 'mb-2' },
+                    attr: {
+                        'data-invoice-form-target': 'fullNumber',
+                    }
+                }
+            ))
+        }}
     </div>
 </div>
 
@@ -35,4 +70,14 @@
     <div class="col-3">
         {{ form_row(hookable_metadata.context.form.duePaymentDate, sylius_test_form_attribute('duePaymentDate')|merge({ row_attr: { class: 'mb-2' }})) }}
     </div>
+    {{
+        form_row(hookable_metadata.context.form.serie, sylius_test_form_attribute('serie')|merge(
+            {
+                row_attr: { class: 'mb-2' },
+                attr: {
+                    'data-invoice-form-target': 'serie',
+                }
+            }
+        ))
+    }}
 </div>

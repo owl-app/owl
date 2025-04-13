@@ -42,9 +42,11 @@ final class InvoiceFactory implements InvoiceFactoryInterface
         $invoiceSequence = $strategy->getNextCounter($defaultSerie, $now);
 
         $invoice = $this->decoratedFactory->createNew();
+        $invoice->setNumber($invoiceSequence->getNextCounter());
         $invoice->setFullNumber($this->invoiceNumberGenerator->generate($defaultSerie, $invoiceSequence->getNextCounter(), $now));
         $invoice->setType($type);
         $invoice->setIssueDate($now);
+        $invoice->setSerie($defaultSerie);
 
         return $invoice;
     }

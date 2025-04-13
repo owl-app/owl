@@ -19,6 +19,7 @@
 
         <service id="owl.form.type.invoice" class="Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType">
             <argument>%owl.model.invoice.class%</argument>
+            <argument>%owl.model.invoice_serie.class%</argument>
             <argument>%owl.form.type.invoice.validation_groups%</argument>
 
             <tag name="form.type" />

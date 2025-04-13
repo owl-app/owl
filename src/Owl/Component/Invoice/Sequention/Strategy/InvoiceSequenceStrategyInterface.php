@@ -11,5 +11,5 @@ interface InvoiceSequenceStrategyInterface
 {
     public function getNextCounter(InvoiceSerieInterface $invoiceSerie, \DateTimeInterface $date): InvoiceSequenceInterface;
 
-    public function incrementNextCounter(InvoiceSerieInterface $invoiceSerie, \DateTimeInterface $date): InvoiceSequenceInterface;
+    public function updateCounter(InvoiceSerieInterface $invoiceSerie, int $number, \DateTimeInterface $date): InvoiceSequenceInterface;
 }

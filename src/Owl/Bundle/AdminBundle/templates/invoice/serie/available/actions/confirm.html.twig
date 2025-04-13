@@ -1,0 +1,10 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
+    
+{{ button.primary(
+    { 
+        text: 'owl.ui.confirm'|trans,
+        attr: {
+            'data-action': 'invoice-available-series:confirmed@window->modal#close invoice-available-series#confirm',
+        }
+    }
+) }}

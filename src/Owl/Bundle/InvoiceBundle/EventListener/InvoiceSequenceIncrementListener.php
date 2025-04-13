@@ -6,7 +6,6 @@ namespace Owl\Bundle\InvoiceBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Owl\Component\Invoice\Model\BaseInvoiceInterface;
-use Owl\Component\Invoice\Provider\InvoiceSerieProviderInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
@@ -16,7 +15,6 @@ final class InvoiceSequenceIncrementListener
 {
     public function __construct(
         private EntityManagerInterface $manager,
-        private InvoiceSerieProviderInterface $invoiceSerieProvider,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
     ) {
     }
@@ -28,10 +26,11 @@ final class InvoiceSequenceIncrementListener
         /** @var BaseInvoiceInterface $invoice */
         Assert::isInstanceOf($invoice, BaseInvoiceInterface::class);
 
-        $defaultSerie = $this->invoiceSerieProvider->getSerie($invoice->getType());
-        /** @var InvoiceSequenceStrategyInterface $incrementStrategy */
-        $strategy = $this->registryInvoiceSequenceStrategy->get($defaultSerie->getSequenceIncrement());
-        $invoiceSequence = $strategy->incrementNextCounter($defaultSerie, $invoice->getIssueDate());
+        $serie = $invoice->getSerie();
+
+        /** @var InvoiceSequenceStrategyInterface $strategy */
+        $strategy = $this->registryInvoiceSequenceStrategy->get($serie->getSequenceIncrement());
+        $invoiceSequence = $strategy->updateCounter($serie, $invoice->getNumber(), $invoice->getIssueDate());
 
         $this->manager->persist($invoiceSequence);
     }

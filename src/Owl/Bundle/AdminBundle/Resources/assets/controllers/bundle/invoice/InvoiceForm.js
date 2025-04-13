@@ -2,11 +2,11 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
 
-    static targets = ['changeNumber', 'issueDate'];
+    static targets = ['changeNumber', 'previewNumber', 'issueDate', 'serie', 'number', 'fullNumber'];
 
     static outlets = ['modal'];
 
-    openModalSeries({ params }) {
+    async openModalSeries({ params }) {
         const { url } = params;
         const modalParams = {
             params: {
@@ -15,7 +15,7 @@ export default class extends Controller {
         };
 
         if (this.hasModalOutlet) {
-            this.modalOutlet.open(modalParams);
+            await this.modalOutlet.open(modalParams);
         }
     }
 }

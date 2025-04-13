@@ -10,7 +10,7 @@ class InvoiceNumberGenerator implements InvoiceNumberGeneratorInterface
 {
     public function generate(InvoiceSerieInterface $invoiceSerie, int $number, \DateTimeInterface $date): string
     {
-        $search  = ['{YYYY}', '{MM}', '{NUMBER}'];
+        $search  = ['__YYYY__', '__MM__', '__NUMBER__'];
         $replace = [$date->format('Y'), $date->format('m'), $number];
 
         return str_replace($search, $replace, $invoiceSerie->getFormat());

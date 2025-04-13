@@ -4,7 +4,10 @@
 {% set resource = hookable_metadata.context.resource %}
 
 <div class="card-header">
-    <h3 class="card-title" data-invoice-form-target="changeNumber" >{{ 'owl.invoice.number'|trans }}: {{ form.fullNumber.vars.value }}</h3>
+    <h3 class="card-title">
+        {{ 'owl.invoice.number'|trans }}:
+        <span data-invoice-form-target="previewNumber" class="ps-2">{{ form.fullNumber.vars.value }}</span>
+    </h3>
     <a 
         class="btn btn-primary ms-3"
         title="{{ 'owl.ui.change'|trans }}"

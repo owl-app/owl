@@ -76,6 +76,8 @@ owl:
                     contractors: Contractors
 
     ui:
+        full_number: Full number
+        confirm: Confirm
         preview: Preview
         invoice_series: Invoice series
         create_invoice_serie: New invoice serie

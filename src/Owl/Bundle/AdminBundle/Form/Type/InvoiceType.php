@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Form\Type;
 
+use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceSerieHiddenType;
+use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceBuyerType;
 use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType as BaseInvoiceType;
+use Owl\Component\Core\Model\Invoice\BuyerInterface;
+use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Owl\Component\Core\Model\Invoice\BuyerInterface;
-use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 final class InvoiceType extends AbstractType
@@ -19,13 +21,14 @@ final class InvoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('buyer', BuyerType::class, [
+            ->add('buyer', InvoiceBuyerType::class, [
                 'label' => false,
                 'required' => true,
             ])
             ->add('fullNumber', TextType::class, [
                 'required' => true,
             ])
+            ->add('serie', InvoiceSerieHiddenType::class)
         ;
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
