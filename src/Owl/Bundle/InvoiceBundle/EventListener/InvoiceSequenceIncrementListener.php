@@ -28,9 +28,13 @@ final class InvoiceSequenceIncrementListener
 
         $serie = $invoice->getSerie();
 
+        if (empty($serie) || empty($invoice->getSequenceNumber())) {
+            return;
+        }
+
         /** @var InvoiceSequenceStrategyInterface $strategy */
         $strategy = $this->registryInvoiceSequenceStrategy->get($serie->getSequenceIncrement());
-        $invoiceSequence = $strategy->updateCounter($serie, $invoice->getNumber(), $invoice->getIssueDate());
+        $invoiceSequence = $strategy->updateCounter($serie, $invoice->getSequenceNumber(), $invoice->getIssueDate());
 
         $this->manager->persist($invoiceSequence);
     }

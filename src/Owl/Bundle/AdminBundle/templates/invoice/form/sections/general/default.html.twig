@@ -1,10 +1,4 @@
-{# {% if hookable_metadata.context.form.has('number') %}
-    <div class="error">
-        {{ _errors.get('number') }}
-    </div>
-{% endif %} #}
-
-{% for error in hookable_metadata.context.form.number.vars.errors %}
+{% for error in hookable_metadata.context.form.sequenceNumber.vars.errors %}
     <div class="text-red-600 text-sm">
         {{ error.message }}
 
@@ -18,11 +12,11 @@
 <div class="row">
     <div class="col-6">
         {{
-            form_row(hookable_metadata.context.form.number, sylius_test_form_attribute('number')|merge(
+            form_row(hookable_metadata.context.form.sequenceNumber, sylius_test_form_attribute('sequenceNumber')|merge(
                 {
                     row_attr: { class: 'mb-2' },
                     attr: {
-                        'data-invoice-form-target': 'number',
+                        'data-invoice-form-target': 'sequenceNumber',
                     }
                 }
             ))

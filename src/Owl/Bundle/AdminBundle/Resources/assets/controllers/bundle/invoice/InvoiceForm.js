@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
 
-    static targets = ['changeNumber', 'previewNumber', 'issueDate', 'serie', 'number', 'fullNumber'];
+    static targets = ['changeNumber', 'previewNumber', 'issueDate', 'serie', 'sequenceNumber', 'fullNumber'];
 
     static outlets = ['modal'];
 

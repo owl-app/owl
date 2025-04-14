@@ -12,9 +12,9 @@ interface BaseInvoiceInterface extends ResourceInterface
 
     public const PAYMENT_STATE_PENDING = 'pending';
 
-    public function getNumber(): ?int;
+    public function getSequenceNumber(): ?int;
 
-    public function setNumber(int $number): void;
+    public function setSequenceNumber(?int $number): void;
 
     public function getFullNumber(): string;
 

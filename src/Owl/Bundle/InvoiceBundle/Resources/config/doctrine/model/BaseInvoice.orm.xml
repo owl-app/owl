@@ -7,7 +7,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="number" column="number" type="integer" />
+        <field name="sequenceNumber" column="sequence_number" type="integer" nullable="true" />
         <field name="fullNumber" column="full_number" />
         <field name="type" column="type" />
         <field name="issueDate" column="issue_date" type="datetime" />

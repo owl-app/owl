@@ -58,7 +58,7 @@ class NumberFormatInvoiceConstraintValidator extends ConstraintValidator
     private function translationFormat(string $format, BaseInvoiceInterface $invoice): string
     {
         $date = $invoice->getIssueDate();
-        $number = $invoice->getNumber();
+        $number = $invoice->getSequenceNumber();
 
         $search  = ['__YYYY__', '__MM__', '__NUMBER__'];
         $replace = [

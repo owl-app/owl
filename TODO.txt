@@ -1,4 +1,5 @@
 1. Walidacja po formacie - zrobione
 2. Walidacja po numerze i wyświetlenie kounikatu i mozliwość zmiany numeru odrazu na wyższy
 3. Po zmianie daty pobieranie kolejnego numeru
-4. Wyłącz automatyczną numerację dla tej faktury
+4. Wyłącz automatyczną numerację dla tej faktury - zrobione
+5. Walidacja w serii, że rok i numer jest wymagany w formacie

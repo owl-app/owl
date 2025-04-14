@@ -10,19 +10,17 @@
             <option name="groups">owl</option>
         </constraint>
 
-        <property name="number">
-            <constraint name="NotBlank">
-                <option name="message">owl.invoice.number.not_blank</option>
-                <option name="groups">owl</option>
-            </constraint>
-        </property>
-
         <property name="fullNumber">
             <constraint name="Owl\Bundle\InvoiceBundle\Validator\NumberFormatInvoiceConstraint">
                 <option name="message">owl.invoice.number.format</option>
                 <option name="groups">
                     <value>owl</value>
                 </option>
+            </constraint>
+
+            <constraint name="NotBlank">
+                <option name="message">owl.common.not_blank</option>
+                <option name="groups">owl</option>
             </constraint>
         </property>
 

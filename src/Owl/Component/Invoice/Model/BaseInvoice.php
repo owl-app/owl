@@ -15,7 +15,7 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
     protected $id;
 
     /** @var int|null */
-    protected $number;
+    protected $sequenceNumber;
 
     /** @var string|null */
     protected $fullNumber;
@@ -48,14 +48,14 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
         return $this->id;
     }
 
-    public function getNumber(): ?int
+    public function getSequenceNumber(): ?int
     {
-        return $this->number;
+        return $this->sequenceNumber;
     }
 
-    public function setNumber(int $number): void
+    public function setSequenceNumber(?int $sequenceNumber): void
     {
-        $this->number = $number;
+        $this->sequenceNumber = $sequenceNumber;
     }
 
     public function getFullNumber(): string

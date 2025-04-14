@@ -4,9 +4,16 @@ export default class extends Controller {
 
     selectedForamt = null;
 
-    fullNumber = null;
+    squenceFullNumber = null;
 
-    static targets = ['serieRadio', 'valueNumber', 'previewNumber'];
+    static targets = [
+        'serieRadio',
+        'valueSequenceNumber',
+        'previewSequenceNumber',
+        'sequenceNumberBox',
+        'valueFullNumber',
+        'fullNumberBox'
+    ];
 
     static outlets = ['modal', 'invoice-form'];
 
@@ -14,7 +21,8 @@ export default class extends Controller {
         this.serieRadioTargets.forEach(checkbox => {
             checkbox.addEventListener('change', this.handleChangeFormat);
         });
-        this.valueNumberTarget.addEventListener('change', this.handleChangeNumber);
+        this.valueSequenceNumberTarget.addEventListener('change', this.handleChangeSequenceNumber);
+        this.valueFullNumberTarget.addEventListener('change', this.handleChangeFullNumber);
 
         this.initializeSelectedRadio();
     }
@@ -27,38 +35,49 @@ export default class extends Controller {
 
     initializeSelectedRadio() {
         this.serieRadioTargets.forEach((radio) => {
-            const { numberTarget, serieTarget } = this.invoiceFormOutlet;
+            const { sequenceNumberTarget, serieTarget, fullNumberTarget } = this.invoiceFormOutlet;
 
             if (radio.dataset.formatId === serieTarget.value) {
                 radio.checked = true;
                 
-                this.setNumber(numberTarget.value);
-                this.setFullNumber(numberTarget.value, radio.dataset.format);
+                this.setNumber(sequenceNumberTarget.value);
+                this.setFullNumber(fullNumberTarget.value, radio.dataset.formatId != '');
                 this.setSelectedFormat(radio.dataset);
+                this.toggleBoxNumber(radio.dataset.formatId);
             }
         });
     }
 
     confirm() {
-        const { numberTarget, fullNumberTarget, serieTarget, previewNumberTarget } = this.invoiceFormOutlet;
+        const { sequenceNumberTarget, fullNumberTarget, serieTarget, previewNumberTarget } = this.invoiceFormOutlet;
         const event = new Event('change', { bubbles: true });
 
-        numberTarget.value = this.valueNumberTarget.value;
+        sequenceNumberTarget.value = this.valueSequenceNumberTarget.value;
         fullNumberTarget.value = previewNumberTarget.innerHTML = this.fullNumber;
         serieTarget.value = this.selectedForamt.id;
 
         fullNumberTarget.dispatchEvent(event);
-        numberTarget.dispatchEvent(event);
+        sequenceNumberTarget.dispatchEvent(event);
         serieTarget.dispatchEvent(event);
 
         this.modalOutlet.close();
     }
 
     setNumber(number) {
-        this.valueNumberTarget.value = number;
+        this.valueSequenceNumberTarget.value = number;
     }
 
-    setFullNumber(number, format) {
+    setFullNumber(number, sequence = false) {
+        this.fullNumber = number;
+
+        if(sequence) {
+            this.previewSequenceNumberTarget.innerHTML = number;
+        } else {
+            this.valueFullNumberTarget.value = number;
+        }
+    }
+
+    generateFullNumber(number, format) {
         const { issueDateTarget } = this.invoiceFormOutlet;
         const date = new Date(issueDateTarget.value);
 
@@ -72,12 +91,12 @@ export default class extends Controller {
             result = result.replace(regex, replace[index]);
         });
 
-        this.fullNumber = this.previewNumberTarget.innerHTML = result;
+        this.fullNumber = this.previewSequenceNumberTarget.innerHTML = result;
     }
 
     setNextNumber(fullNumber, nextNumber) {
-        this.fullNumber = this.previewNumberTarget.innerHTML = fullNumber;
-        this.valueNumberTarget.value = nextNumber;
+        this.fullNumber = this.previewSequenceNumberTarget.innerHTML = fullNumber;
+        this.valueSequenceNumberTarget.value = nextNumber;
     }
 
     setSelectedFormat(data) {
@@ -89,12 +108,33 @@ export default class extends Controller {
         };
     }
 
+    toggleBoxNumber(formatId) {
+        let show = this.sequenceNumberBoxTarget;
+        let hide = this.fullNumberBoxTarget;
+
+        if (formatId === '') {
+            show = this.fullNumberBoxTarget;
+            hide = this.sequenceNumberBoxTarget;
+        }
+
+        show.classList.add('d-flex');
+        show.classList.remove('d-none');
+        hide.classList.add('d-none');
+        hide.classList.remove('d-flex');
+    }
+
     handleChangeFormat = (event) => {
         this.setSelectedFormat(event.target.dataset);
         this.setNextNumber(event.target.dataset.nextValue, event.target.dataset.nextCounter);
+
+        this.toggleBoxNumber(event.target.dataset.formatId);
     };
 
-    handleChangeNumber = (event) => {
-        this.setFullNumber(event.target.value, this.selectedForamt.format);
+    handleChangeSequenceNumber = (event) => {
+        this.generateFullNumber(event.target.value, this.selectedForamt.format);
+    };
+
+    handleChangeFullNumber = (event) => {
+        this.setFullNumber(event.target.value, false);
     };
 }
