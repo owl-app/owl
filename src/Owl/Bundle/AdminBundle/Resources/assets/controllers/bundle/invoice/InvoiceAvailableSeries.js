@@ -42,14 +42,26 @@ export default class extends Controller {
                 radio.checked = true;
                 
                 this.setNumber(sequenceNumberTarget.value);
-                this.setFullNumber(fullNumberTarget.value, radio.dataset.formatId != '');
+                this.initializeFullNumber(fullNumberTarget.value, radio.dataset.formatId);
                 this.setSelectedFormat(radio.dataset);
                 this.toggleBoxNumber(radio.dataset.formatId);
             }
         });
     }
 
+    initializeFullNumber(number, formatId) {
+        this.fullNumber = number;
+
+        if(formatId !== '') {
+            this.previewNumberTextTarget.innerHTML = number;
+        } else {
+            this.valueFullNumberTarget.value = number;
+        }
+    }
+
     confirm() {
+        if (!this.validation()) return;
+    
         const { sequenceNumberTarget, fullNumberTarget, serieTarget, previewNumberTarget } = this.invoiceFormOutlet;
         const event = new Event('change', { bubbles: true });
 
@@ -66,16 +78,6 @@ export default class extends Controller {
 
     setNumber(number) {
         this.valueSequenceNumberTarget.value = number;
-    }
-
-    setFullNumber(number, sequence = false) {
-        this.fullNumber = number;
-
-        if(sequence) {
-            this.previewNumberTextTarget.innerHTML = number;
-        } else {
-            this.valueFullNumberTarget.value = number;
-        }
     }
 
     generateFullNumber(number, format) {
@@ -124,6 +126,23 @@ export default class extends Controller {
         hide.classList.remove('d-block');
     }
 
+    validation() {
+        let isValidSequenceNumber = this.valueSequenceNumberTarget.value.match(/^[0-9]+$/);
+        let isValidFullNumber = true;
+
+        this.valueSequenceNumberTarget.classList[isValidSequenceNumber ? 'remove' : 'add']('is-invalid');
+        this.valueSequenceNumberTarget.nextElementSibling.classList[isValidSequenceNumber ? 'add' : 'remove']('d-none');
+
+        if (this.selectedForamt.id === '') {
+            isValidFullNumber = this.valueFullNumberTarget.value !== '';
+
+            this.valueFullNumberTarget.classList[isValidFullNumber ? 'remove' : 'add']('is-invalid');
+            this.valueFullNumberTarget.nextElementSibling.classList[isValidFullNumber ? 'add' : 'remove']('d-none');
+        }
+
+        return isValidSequenceNumber && isValidFullNumber;
+    }
+
     handleChangeFormat = (event) => {
         this.setSelectedFormat(event.target.dataset);
         this.setNextNumber(event.target.dataset.nextValue, event.target.dataset.nextCounter);
@@ -132,15 +151,18 @@ export default class extends Controller {
     };
 
     handleChangeSequenceNumber = (event) => {
+        this.validation();
+
         if (this.selectedForamt.id !== '') {
-            this.setFullNumber(
-                this.generateFullNumber(event.target.value, this.selectedForamt.format),
-                true
+            this.fullNumber = this.previewNumberTextTarget.innerHTML = this.generateFullNumber(
+                event.target.value, this.selectedForamt.format
             );
         }
     };
 
     handleChangeFullNumber = (event) => {
+        this.validation();
+
         this.fullNumber = event.target.value;
     };
 }

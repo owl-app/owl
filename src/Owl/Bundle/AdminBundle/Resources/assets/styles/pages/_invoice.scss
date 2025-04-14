@@ -1,4 +1,4 @@
-.owl-modal-available-serie {
+.owl-modal-available-series {
     .number-invoice {
         -moz-appearance: textfield;
     
@@ -7,5 +7,17 @@
             -webkit-appearance: none;
             margin: 0;
         }
+    }
+
+    .field {
+        height: 80px;
+    }
+
+    .field-invoice-number {
+        width: 130px;
+    }
+
+    .field-peview {
+        margin-top: 0.7rem;
     }
 }
