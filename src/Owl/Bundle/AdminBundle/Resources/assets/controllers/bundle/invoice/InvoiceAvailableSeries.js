@@ -143,11 +143,20 @@ export default class extends Controller {
         return isValidSequenceNumber && isValidFullNumber;
     }
 
+    resetValidation() {
+        [this.valueSequenceNumberTarget, this.valueFullNumberTarget].forEach((input) => {
+            input.classList.remove('is-invalid');
+            input.nextElementSibling.classList.add('d-none');
+        });
+    }
+
     handleChangeFormat = (event) => {
         this.setSelectedFormat(event.target.dataset);
         this.setNextNumber(event.target.dataset.nextValue, event.target.dataset.nextCounter);
 
         this.toggleBoxNumber(event.target.dataset.formatId);
+
+        this.resetValidation();
     };
 
     handleChangeSequenceNumber = (event) => {
