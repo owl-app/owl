@@ -11,8 +11,8 @@
 
 {% if series|length > 0 %}
     {% for serie in series %}
-        <div class="col-12 border-bottom mb-3">
-            <div class="form-check d-flex align-items-center">
+        <div class="col-12 d-flex border-bottom mb-3">
+            <div class="form-check d-flex align-items-center me-auto">
                 <input
                     data-next-counter="{{ serie.nextCounter }}"
                     data-next-value="{{ serie.nextValue }}"
@@ -27,45 +27,53 @@
                 <label class="form-check-label d-flex align-items-center ms-2" for="format_{{ loop.index }}">
                     {{ serie.format|replace(replacesForamt)|raw }}
                 </label>
+                <small class="text-secondary">
+                    <em>({{ ('owl.ui.invoice.increment.' ~ serie.sequenceIncrement)|trans }})</em>
+                </small>
+            </div>
+            <div class="d-flex align-items-center text-secondary lead">
+                <small>{{ 'owl.ui.system'|trans }}</small>
             </div>
         </div>
     {% endfor %}
-    <div class="form-check d-flex align-items-center">
-        <input
-            data-next-counter=""
-            data-next-value=""
-            data-format-id=""
-            data-format=""
-            data-invoice-available-series-target="serieRadio"
-            class="form-check-input"
-            type="radio"
-            name="format"
-            id="format_disabled"
-        >
-        <label class="form-check-label d-flex align-items-center ms-2" for="format_disabled">
-            {{ 'owl.ui.turn_off_automatic_numbering_for_this_invoice'|trans }}
-        </label>
+    <div class="col-12 d-flex border-bottom mb-5">
+        <div class="form-check d-flex align-items-center me-auto">
+            <input
+                data-next-counter=""
+                data-next-value=""
+                data-format-id=""
+                data-format=""
+                data-invoice-available-series-target="serieRadio"
+                class="form-check-input"
+                type="radio"
+                name="format"
+                id="format_disabled"
+            >
+            <label class="form-check-label d-flex align-items-center ms-2" for="format_disabled">
+                {{ 'owl.ui.turn_off_automatic_numbering_for_this_invoice'|trans }}
+            </label>
+        </div>
+        <div class="d-flex align-items-center text-danger lead">
+            <small>{{ 'owl.ui.not_recommended'|trans }}</small>
+        </div>
     </div>
 {% else %}
     {{ messages.info('owl.ui.no_results_to_display') }}
 {% endif %}
 
-<div class="d-flex align-items-center mt-3" data-invoice-available-series-target="sequenceNumberBox">
-    <div class="field" style="width: 80px">
+<div class="d-flex align-items-center mt-3">
+    <div class="field me-5" style="width: 80px">
         <label class="form-label required">{{ 'owl.ui.number'|trans }}</label>
-        <input type="text" required="required" data-test-address="" class="form-control" data-invoice-available-series-target="valueSequenceNumber">
+        <input type="number" required="required" data-test-address="" class="form-control number-invoice" data-invoice-available-series-target="valueSequenceNumber">
     </div>
-    <div class="field ms-5">
+    <div class="field" data-invoice-available-series-target="previewNumberBox">
         <label class="form-label">&nbsp;</label>
         <div class="d-flex align-items-center">
             <strong>{{ 'owl.ui.preview'|trans }}:</strong>
-            <span class="badge bg-lime-lt text-dark ms-2 me-1 pt-2 pb-2" data-invoice-available-series-target="previewSequenceNumber"></span>
+            <span class="badge bg-lime-lt text-dark ms-2 me-1 pt-2 pb-2" data-invoice-available-series-target="previewNumberText"></span>
         </div>
     </div>
-</div>
-
-<div class="d-flex align-items-center mt-3" data-invoice-available-series-target="fullNumberBox">
-    <div class="field" style="width: 200px">
+    <div class="field" style="width: 200px" data-invoice-available-series-target="fullNumberBox">
         <label class="form-label required">{{ 'owl.ui.full_number'|trans }}</label>
         <input type="text" required="required" data-test-address="" class="form-control" data-invoice-available-series-target="valueFullNumber">
     </div>

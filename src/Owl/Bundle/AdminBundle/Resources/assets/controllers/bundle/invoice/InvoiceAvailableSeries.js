@@ -9,7 +9,8 @@ export default class extends Controller {
     static targets = [
         'serieRadio',
         'valueSequenceNumber',
-        'previewSequenceNumber',
+        'previewNumberText',
+        'previewNumberBox',
         'sequenceNumberBox',
         'valueFullNumber',
         'fullNumberBox'
@@ -71,7 +72,7 @@ export default class extends Controller {
         this.fullNumber = number;
 
         if(sequence) {
-            this.previewSequenceNumberTarget.innerHTML = number;
+            this.previewNumberTextTarget.innerHTML = number;
         } else {
             this.valueFullNumberTarget.value = number;
         }
@@ -91,11 +92,11 @@ export default class extends Controller {
             result = result.replace(regex, replace[index]);
         });
 
-        this.fullNumber = this.previewSequenceNumberTarget.innerHTML = result;
+        return result;
     }
 
     setNextNumber(fullNumber, nextNumber) {
-        this.fullNumber = this.previewSequenceNumberTarget.innerHTML = fullNumber;
+        this.fullNumber = this.previewNumberTextTarget.innerHTML = fullNumber;
         this.valueSequenceNumberTarget.value = nextNumber;
     }
 
@@ -109,18 +110,18 @@ export default class extends Controller {
     }
 
     toggleBoxNumber(formatId) {
-        let show = this.sequenceNumberBoxTarget;
+        let show = this.previewNumberBoxTarget;
         let hide = this.fullNumberBoxTarget;
 
         if (formatId === '') {
             show = this.fullNumberBoxTarget;
-            hide = this.sequenceNumberBoxTarget;
+            hide = this.previewNumberBoxTarget;
         }
 
-        show.classList.add('d-flex');
+        show.classList.add('d-block');
         show.classList.remove('d-none');
         hide.classList.add('d-none');
-        hide.classList.remove('d-flex');
+        hide.classList.remove('d-block');
     }
 
     handleChangeFormat = (event) => {
@@ -131,10 +132,15 @@ export default class extends Controller {
     };
 
     handleChangeSequenceNumber = (event) => {
-        this.generateFullNumber(event.target.value, this.selectedForamt.format);
+        if (this.selectedForamt.id !== '') {
+            this.setFullNumber(
+                this.generateFullNumber(event.target.value, this.selectedForamt.format),
+                true
+            );
+        }
     };
 
     handleChangeFullNumber = (event) => {
-        this.setFullNumber(event.target.value, false);
+        this.fullNumber = event.target.value;
     };
 }

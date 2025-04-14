@@ -133,3 +133,4 @@ doctrine:
                  substring_index: DoctrineExtensions\Query\Mysql\SubstringIndex
                  unhex: DoctrineExtensions\Query\Mysql\Unhex
                  uuid_short: DoctrineExtensions\Query\Mysql\UuidShort
+                 regexp_replace: Owl\Bundle\CoreBundle\Doctrine\DQL\RegexpReplace

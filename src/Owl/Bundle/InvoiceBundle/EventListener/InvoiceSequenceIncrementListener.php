@@ -28,7 +28,7 @@ final class InvoiceSequenceIncrementListener
 
         $serie = $invoice->getSerie();
 
-        if (empty($serie) || empty($invoice->getSequenceNumber())) {
+        if (empty($serie)) {
             return;
         }
 

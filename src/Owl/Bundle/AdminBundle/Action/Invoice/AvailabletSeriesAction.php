@@ -42,7 +42,8 @@ final class AvailabletSeriesAction
                 'id' => $serie->getId(),
                 'format' => $serie->getFormat(),
                 'nextCounter' => $invoiceSequence->getNextCounter(),
-                'nextValue' => $this->invoiceNumberGenerator->generate($serie, $invoiceSequence->getNextCounter(), $date)
+                'nextValue' => $this->invoiceNumberGenerator->generate($serie, $invoiceSequence->getNextCounter(), $date),
+                'sequenceIncrement' => $serie->getSequenceIncrement(),
             ];
         }
 

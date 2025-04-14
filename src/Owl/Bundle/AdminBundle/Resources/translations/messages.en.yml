@@ -76,6 +76,14 @@ owl:
                     contractors: Contractors
 
     ui:
+        invoice:
+            increment:
+                monthly_based: Monthly based increment
+                yearly_based: Yearly based increment
+        yearly_based_invoice_number_increment: Yearly based invoice number increment
+        monthly_based_invoice_number_increment: Monthly based invoice number increment
+        not_recommended: Not recommended
+        system: System
         turn_off_automatic_numbering_for_this_invoice: Turn off automatic numbering for this invoice
         full_number: Full number
         confirm: Confirm

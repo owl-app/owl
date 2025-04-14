@@ -4,6 +4,7 @@ sylius_twig_hooks:
             content:
                 template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
                 configuration:
+                    class: 'owl-modal-available-series'
                     stimulus:
                         controllers: {
                             invoice-available-series: {

@@ -7,7 +7,7 @@ Owl\Component\Invoice\Model\Invoice:
             type: integer
             xml_attribute: true
             groups: [Default, Detailed]
-        number:
+        sequenceNumber:
             expose: true
             type: string
             groups: [Default, Detailed]

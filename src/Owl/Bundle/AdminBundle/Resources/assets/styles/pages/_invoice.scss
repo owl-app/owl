@@ -1,0 +1,11 @@
+.owl-modal-available-serie {
+    .number-invoice {
+        -moz-appearance: textfield;
+    
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}

@@ -6,12 +6,12 @@ sylius_grid:
                 options:
                     class: "%owl.model.invoice.class%"
             sorting:
-                fullNumber: asc
+                fullNumber: desc
             fields:
                 fullNumber:
                     type: string
                     label: owl.ui.full_number
-                    sortable: ~
+                    sortable: sequenceNumber
                 issueDate:
                     type: datetime
                     label: owl.invoice.issue_date
