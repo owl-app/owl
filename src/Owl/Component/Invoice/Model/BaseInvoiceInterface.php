@@ -12,7 +12,7 @@ interface BaseInvoiceInterface extends ResourceInterface
 
     public const PAYMENT_STATE_PENDING = 'pending';
 
-    public function getNumber(): int;
+    public function getNumber(): ?int;
 
     public function setNumber(int $number): void;
 
@@ -24,7 +24,7 @@ interface BaseInvoiceInterface extends ResourceInterface
 
     public function setType(?string $type): void;
 
-    public function getIssueDate(): \DateTimeInterface;
+    public function getIssueDate(): ?\DateTimeInterface;
 
     public function setIssueDate(\DateTimeInterface $issueDate): void;
 

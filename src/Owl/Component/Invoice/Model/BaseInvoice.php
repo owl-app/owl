@@ -48,7 +48,7 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
         return $this->id;
     }
 
-    public function getNumber(): int
+    public function getNumber(): ?int
     {
         return $this->number;
     }
@@ -78,7 +78,7 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
         $this->type = $type;
     }
 
-    public function getIssueDate(): \DateTimeInterface
+    public function getIssueDate(): ?\DateTimeInterface
     {
         return $this->issueDate;
     }

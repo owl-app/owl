@@ -21,7 +21,7 @@
             <tag name="owl.invoice.sequence_increment_strategy" type="yearly_based" label="owl.invoice.sequence.increment_yearly" />
         </service>
 
-        <service id="owl.strategy.invoice.sequence_increment.monthly_based" class="Owl\Component\Invoice\Sequention\Strategy\YearlyInvoiceSequenceStrategy">
+        <service id="owl.strategy.invoice.sequence_increment.monthly_based" class="Owl\Component\Invoice\Sequention\Strategy\MonthlyInvoiceSequenceStrategy">
             <argument type="service" id="owl.repository.invoice_sequence" />
             <argument type="service" id="owl.custom_factory.invoice_sequence" />
             <tag name="owl.invoice.sequence_increment_strategy" type="monthly_based" label="owl.invoice.sequence.increment_monthly" />

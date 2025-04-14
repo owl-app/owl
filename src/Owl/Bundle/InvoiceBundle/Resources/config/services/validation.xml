@@ -8,7 +8,14 @@
     <services>
         <service id="owl.validator.valid_unique_default_serie" class="Owl\Bundle\InvoiceBundle\Validator\UniqueDefaultSerieConstraintValidator">
             <argument type="service" id="owl.repository.invoice_serie" />
+
             <tag name="validator.constraint_validator" alias="owl_unique_default_serie_validator" />
+        </service>
+
+        <service id="owl.validator.valid_number_format_invoice" class="Owl\Bundle\InvoiceBundle\Validator\NumberFormatInvoiceConstraintValidator">
+            <argument type="service" id="translator" />
+
+            <tag name="validator.constraint_validator" alias="owl_number_format_invoice_validator" />
         </service>
     </services>
 </container>

@@ -4,6 +4,10 @@ owl:
             not_blank: Invoice number cannot be empty
             regex: Invoice number should be in the format number/month/yaer
             unique: Invoice number must be unique
+            format: Foramt should be like {{ format }}
+            text_number: number
+            text_month: month
+            text_year: year
         issue_date:
             invalid: Issue date is not valid
         transaction_date:
