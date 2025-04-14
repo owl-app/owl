@@ -30,6 +30,22 @@
             </div>
         </div>
     {% endfor %}
+    <div class="form-check d-flex align-items-center">
+        <input
+            data-next-counter=""
+            data-next-value=""
+            data-format-id=""
+            data-format=""
+            data-invoice-available-series-target="serieRadio"
+            class="form-check-input"
+            type="radio"
+            name="format"
+            id="format_disabled"
+        >
+        <label class="form-check-label d-flex align-items-center ms-2" for="format_disabled">
+            {{ 'owl.ui.turn_off_automatic_numbering_for_this_invoice'|trans }}
+        </label>
+    </div>
 {% else %}
     {{ messages.info('owl.ui.no_results_to_display') }}
 {% endif %}

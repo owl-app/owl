@@ -76,6 +76,7 @@ owl:
                     contractors: Contractors
 
     ui:
+        turn_off_automatic_numbering_for_this_invoice: Turn off automatic numbering for this invoice
         full_number: Full number
         confirm: Confirm
         preview: Preview
