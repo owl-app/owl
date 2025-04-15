@@ -44,6 +44,7 @@ sylius_twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
+                    type: '@=_context.resource.getType()'
                     template: '@OwlAdmin/invoice/body/sections/form.html.twig'
                 configuration:
                     render_rest: false

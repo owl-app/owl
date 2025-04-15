@@ -8,12 +8,13 @@
     <services>
         <service
             id="owl_admin.twig.component.invoice.form"
-            class="Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
+            class="Owl\Bundle\AdminBundle\Twig\Component\Invoice\FormComponent"
         >
             <argument type="service" id="owl.repository.invoice" />
             <argument type="service" id="form.factory" />
             <argument>%owl.model.invoice.class%</argument>
             <argument>Owl\Bundle\AdminBundle\Form\Type\InvoiceType</argument>
+            <argument type="service" id="owl.generator.invoice.invoice_number_generator" />
 
             <tag name="owl.live_component.admin" key="owl_admin:invoice:form" />
         </service>

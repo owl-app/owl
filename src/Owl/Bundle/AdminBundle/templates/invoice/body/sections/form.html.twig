@@ -10,6 +10,8 @@
 
 <div {% if attributes is defined %} {{ attributes }} data-form-target="live" {% endif %}>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id, 'data-form-target':'form'}}) }}
+
+    {{ resource.fullNumber }}
         {{ form_errors(form) }}
         {{ form_widget(form._token) }}
 
