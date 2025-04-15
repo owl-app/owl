@@ -66,7 +66,7 @@ export default class extends Controller {
         const event = new Event('change', { bubbles: true });
 
         sequenceNumberTarget.value = this.valueSequenceNumberTarget.value;
-        fullNumberTarget.value = this.valueFullNumberTarget.value;
+        fullNumberTarget.value = this.fullNumber;
         serieTarget.value = this.selectedForamt.id;
 
         fullNumberTarget.dispatchEvent(event);
