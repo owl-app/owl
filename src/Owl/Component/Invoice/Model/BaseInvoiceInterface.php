@@ -16,9 +16,9 @@ interface BaseInvoiceInterface extends ResourceInterface
 
     public function setSequenceNumber(?int $number): void;
 
-    public function getFullNumber(): string;
+    public function getFullNumber(): ?string;
 
-    public function setFullNumber(string $fullNumber): void;
+    public function setFullNumber(?string $fullNumber): void;
 
     public function getType(): ?string;
 

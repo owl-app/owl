@@ -60,18 +60,19 @@ export default class extends Controller {
     }
 
     confirm() {
-        if (!this.validation()) return;
+        if (!(this.validateSequenceNumber() || this.validateFullNumber())) return;
     
-        const { sequenceNumberTarget, fullNumberTarget, serieTarget, previewNumberTarget } = this.invoiceFormOutlet;
+        const { sequenceNumberTarget, fullNumberTarget, serieTarget, componentForm } = this.invoiceFormOutlet;
         const event = new Event('change', { bubbles: true });
 
         sequenceNumberTarget.value = this.valueSequenceNumberTarget.value;
-        fullNumberTarget.value = previewNumberTarget.innerHTML = this.fullNumber;
+        fullNumberTarget.value = this.valueFullNumberTarget.value;
         serieTarget.value = this.selectedForamt.id;
 
         fullNumberTarget.dispatchEvent(event);
         sequenceNumberTarget.dispatchEvent(event);
         serieTarget.dispatchEvent(event);
+        componentForm.set('fullNumberPreview', this.fullNumber);
 
         this.modalOutlet.close();
     }
@@ -126,12 +127,17 @@ export default class extends Controller {
         hide.classList.remove('d-block');
     }
 
-    validation() {
+    validateSequenceNumber() {
         let isValidSequenceNumber = this.valueSequenceNumberTarget.value.match(/^[0-9]+$/);
-        let isValidFullNumber = true;
 
         this.valueSequenceNumberTarget.classList[isValidSequenceNumber ? 'remove' : 'add']('is-invalid');
         this.valueSequenceNumberTarget.nextElementSibling.classList[isValidSequenceNumber ? 'add' : 'remove']('d-none');
+
+        return isValidSequenceNumber;
+    }
+
+    validateFullNumber() {
+        let isValidFullNumber = true;
 
         if (this.selectedForamt.id === '') {
             isValidFullNumber = this.valueFullNumberTarget.value !== '';
@@ -140,7 +146,7 @@ export default class extends Controller {
             this.valueFullNumberTarget.nextElementSibling.classList[isValidFullNumber ? 'add' : 'remove']('d-none');
         }
 
-        return isValidSequenceNumber && isValidFullNumber;
+        return isValidFullNumber;
     }
 
     resetValidation() {
@@ -160,7 +166,7 @@ export default class extends Controller {
     };
 
     handleChangeSequenceNumber = (event) => {
-        this.validation();
+        this.validateSequenceNumber();
 
         if (this.selectedForamt.id !== '') {
             this.fullNumber = this.previewNumberTextTarget.innerHTML = this.generateFullNumber(
@@ -170,7 +176,7 @@ export default class extends Controller {
     };
 
     handleChangeFullNumber = (event) => {
-        this.validation();
+        this.validateFullNumber();
 
         this.fullNumber = event.target.value;
     };

@@ -3,12 +3,14 @@ import { getComponent } from '@symfony/ux-live-component';
 
 export default class extends Controller {
 
+    componentForm = null;
+
     static targets = ['changeNumber', 'previewNumber', 'issueDate', 'serie', 'sequenceNumber', 'fullNumber'];
 
     static outlets = ['modal'];
 
     async initialize() {
-        this.component = await getComponent(this.element.querySelector('[data-live-name-value="owl_admin:invoice:form"]'));
+        this.componentForm = await getComponent(this.element.querySelector('[data-live-name-value="owl_admin:invoice:form"]'));
 
         this.issueDateTarget.addEventListener('change', this.handleChangeIssueDate);
     }
@@ -29,6 +31,6 @@ export default class extends Controller {
     handleChangeIssueDate = (event) => {
         const { value } = event.target;
 
-        this.component.action('dateIssueChanged', { arg1: value });
+        this.componentForm.action('dateIssueChanged', { oldDate: value });
     };
 }

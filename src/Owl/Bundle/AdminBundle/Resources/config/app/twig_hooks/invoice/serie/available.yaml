@@ -41,8 +41,8 @@ sylius_twig_hooks:
                 priority: 0
 
         'owl_admin.invoice_serie.modal.available.content.body':
-            list:
-                template: '@OwlAdmin/invoice/serie/available/list.html.twig'
+            form:
+                template: '@OwlAdmin/invoice/serie/available/form.html.twig'
                 priority: 0
 
         'owl_admin.invoice_serie.modal.available.content.actions':

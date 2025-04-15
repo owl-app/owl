@@ -58,12 +58,12 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
         $this->sequenceNumber = $sequenceNumber;
     }
 
-    public function getFullNumber(): string
+    public function getFullNumber(): ?string
     {
         return $this->fullNumber;
     }
 
-    public function setFullNumber(string $fullNumber): void
+    public function setFullNumber(?string $fullNumber): void
     {
         $this->fullNumber = $fullNumber;
     }

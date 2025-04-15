@@ -1,18 +1,10 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Sylius Sp. z o.o.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig\Component\Invoice;
 
+use ApiPlatform\GraphQl\Resolver\Stage\WriteStage;
 use Owl\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
@@ -26,40 +18,33 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
+use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 
 #[AsLiveComponent]
 class FormComponent
 {
-    public const ATTRIBUTE_REMOVED_EVENT = 'sylius_admin:product:form:attributed_deleted';
-
-    public const AUTOCOMPLETE_CLEAR_REQUESTED_EVENT = 'sylius_admin.product_attribute_autocomplete.clear_requested';
-
     use ComponentToolsTrait;
     use LiveCollectionTrait;
     use TemplatePropTrait;
-
     /** @use ResourceFormComponentTrait<ProductInterface> */
     use ResourceFormComponentTrait;
 
-    #[LiveProp(fieldName: 'type')]
+    #[LiveProp]
     public string $type;
 
-    #[LiveProp]
+    #[LiveProp(writable: true)]
     public string $fullNumberPreview;
 
     /**
      * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
-     * @param RepositoryInterface<InvoiceSerieInterface> $serieRepository
      */
     public function __construct(
         RepositoryInterface $invoiceRepository,
         FormFactoryInterface $formFactory,
         string $resourceClass,
         string $formClass,
-        private RepositoryInterface $serieRepository,
         private readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
     ) {
@@ -74,25 +59,24 @@ class FormComponent
     }
 
     #[LiveAction]
-    public function dateIssueChanged(): void
+    public function dateIssueChanged(#[LiveArg] string $oldDate): void
     {
-        $this->submitForm($this->isValidated);
-        $this->shouldAutoSubmitForm = false;
-        $serie = $this->serieRepository->find($this->formValues['serie']);
+        $this->submitForm(false);
 
-        if (empty($this->formValues['issueDate']) || empty($this->formValues['serie'])) {
-            return;
-        }
+        /** @var InvoiceInterface $invoice */
+        $invoice = $this->getForm()->getData();
+        /** @var InvoiceSerieInterface $serie */
+        $serie = $this->getForm()->getData()->getSerie();
 
-        $date = new \DateTime($this->formValues['issueDate']);
-
-        /** @var InvoiceSequenceStrategyInterface $incrementStrategy */
+        /** @var InvoiceSequenceStrategyInterface $strategy */
         $strategy = $this->registryInvoiceSequenceStrategy->get($serie->getSequenceIncrement());
-        $invoiceSequence = $strategy->getNextCounter($serie, $date);
+        $invoiceSequence = $strategy->getNextCounter($serie, $invoice->getIssueDate());
+        $nextCounter = $invoiceSequence->getNextCounter();
 
-        $fullNumber = $this->invoiceNumberGenerator->generate($serie, $invoiceSequence->getNextCounter(), $date);
-
-        $this->formValues['sequenceNumber'] = $invoiceSequence->getNextCounter();
+        $fullNumber = $this->invoiceNumberGenerator->generate($serie, $nextCounter, $invoice->getIssueDate());
+        
+        $this->formValues['sequenceNumber'] = $this->getFormView()
+            ->offsetGet('sequenceNumber')->vars['value'] = $nextCounter;
         $this->fullNumberPreview = $fullNumber;
     }
 }
