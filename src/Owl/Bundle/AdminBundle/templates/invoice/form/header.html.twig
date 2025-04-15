@@ -1,0 +1,18 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
+
+{% set resource = hookable_metadata.context.resource %}
+
+<div class="card-header">
+    <h3 class="card-title">
+        {{ 'owl.invoice.number'|trans }}:
+        <span data-invoice-form-target="previewNumber" class="ps-2">{{ hookable_metadata.context.fullNumberPreview }}</span>
+    </h3>
+    <a 
+        class="btn btn-primary ms-3"
+        title="{{ 'owl.ui.change'|trans }}"
+        data-action="click->invoice-form#openModalSeries"
+        data-invoice-form-url-param="{{ path('owl_admin_invoice_available_series', { type: resource.type }) }}"
+    >
+        {{ 'owl.ui.change'|trans }}
+    </a>
+</div>

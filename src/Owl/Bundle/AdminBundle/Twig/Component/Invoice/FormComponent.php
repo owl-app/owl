@@ -18,10 +18,14 @@ use Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
+use Owl\Component\Invoice\Model\InvoiceSerieInterface;
+use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
+use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
@@ -43,15 +47,21 @@ class FormComponent
     #[LiveProp(fieldName: 'type')]
     public string $type;
 
+    #[LiveProp]
+    public string $fullNumberPreview;
+
     /**
      * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
+     * @param RepositoryInterface<InvoiceSerieInterface> $serieRepository
      */
     public function __construct(
         RepositoryInterface $invoiceRepository,
         FormFactoryInterface $formFactory,
         string $resourceClass,
         string $formClass,
-        protected readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
+        private RepositoryInterface $serieRepository,
+        private readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
+        private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
     ) {
         $this->initialize($invoiceRepository, $formFactory, $resourceClass, $formClass);
     }
@@ -63,20 +73,26 @@ class FormComponent
         return $this->formFactory->create($this->formClass, $this->resource);
     }
 
-    #[PreReRender]
-    public function generateFullNumber(): void
+    #[LiveAction]
+    public function dateIssueChanged(): void
     {
-        /** @var  InvoiceInterface $invoice */
-        $invoice = $this->form->getData();
-
-        $this->formValues['fullNumber'] = $this->invoiceNumberGenerator->generate(
-            $invoice->getSerie(),
-            $invoice->getSequenceNumber(),
-            $invoice->getIssueDate(),
-        );
-
-        $this->resource->setFullNumber($this->formValues['fullNumber']);
-
         $this->submitForm($this->isValidated);
+        $this->shouldAutoSubmitForm = false;
+        $serie = $this->serieRepository->find($this->formValues['serie']);
+
+        if (empty($this->formValues['issueDate']) || empty($this->formValues['serie'])) {
+            return;
+        }
+
+        $date = new \DateTime($this->formValues['issueDate']);
+
+        /** @var InvoiceSequenceStrategyInterface $incrementStrategy */
+        $strategy = $this->registryInvoiceSequenceStrategy->get($serie->getSequenceIncrement());
+        $invoiceSequence = $strategy->getNextCounter($serie, $date);
+
+        $fullNumber = $this->invoiceNumberGenerator->generate($serie, $invoiceSequence->getNextCounter(), $date);
+
+        $this->formValues['sequenceNumber'] = $invoiceSequence->getNextCounter();
+        $this->fullNumberPreview = $fullNumber;
     }
 }
