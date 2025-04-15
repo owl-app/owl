@@ -20,7 +20,7 @@ use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\Test\FormInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PreReRender;
@@ -76,5 +76,7 @@ class FormComponent
         );
 
         $this->resource->setFullNumber($this->formValues['fullNumber']);
+
+        $this->submitForm($this->isValidated);
     }
 }
