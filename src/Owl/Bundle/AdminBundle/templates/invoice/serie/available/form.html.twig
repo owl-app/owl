@@ -87,7 +87,7 @@
     {% endif %}
 
     {% if showInputFullNumber %}
-        {{ form_row(form.fullNumber) }}
+        {{ form_row(form.fullNumber, { row_attr: {'class': 'mb-0'}}) }}
     {% endif %}
 </div>
 {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
