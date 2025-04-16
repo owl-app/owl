@@ -19,8 +19,11 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
+use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
+use Symfony\UX\TwigComponent\Attribute\PostMount;
+use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsLiveComponent]
 class FormComponent
@@ -58,6 +61,19 @@ class FormComponent
         return $this->formFactory->create($this->formClass, $this->resource);
     }
 
+    #[PostMount]
+    public function initializePreview(): void
+    {
+        /** @var InvoiceInterface $resource */
+        $resource = $this->resource;
+
+        $this->fullNumberPreview = $this->invoiceNumberGenerator->generate(
+            $resource->getSerie()?->getFormat(),
+            $resource->getSequenceNumber(),
+            $resource->getIssueDate()
+        );
+    }
+
     #[LiveAction]
     public function dateIssueChanged(#[LiveArg] string $oldDate): void
     {
@@ -66,17 +82,31 @@ class FormComponent
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
         /** @var InvoiceSerieInterface $serie */
-        $serie = $this->getForm()->getData()->getSerie();
+        $serie = $this->getForm()->getData()?->getSerie();
 
         /** @var InvoiceSequenceStrategyInterface $strategy */
         $strategy = $this->registryInvoiceSequenceStrategy->get($serie->getSequenceIncrement());
         $invoiceSequence = $strategy->getNextCounter($serie, $invoice->getIssueDate());
         $nextCounter = $invoiceSequence->getNextCounter();
 
-        $fullNumber = $this->invoiceNumberGenerator->generate($serie, $nextCounter, $invoice->getIssueDate());
+        $fullNumber = $this->invoiceNumberGenerator->generate($serie->getFormat(), $nextCounter, $invoice->getIssueDate());
         
         $this->formValues['sequenceNumber'] = $this->getFormView()
             ->offsetGet('sequenceNumber')->vars['value'] = $nextCounter;
         $this->fullNumberPreview = $fullNumber;
+    }
+
+    #[LiveListener(InvoiceNumberingComponent::OWL_ADMIN_NUMBER_WITH_SERIE_CHANGED)]
+    public function numberWithSerieChanged(
+        #[LiveArg] string $sequenceNumber,
+        #[LiveArg] string $serie,
+        #[LiveArg] ?string $fullNumber,
+        #[LiveArg] string $fullNumberPreview
+    ): void
+{
+        $this->formValues['sequenceNumber'] = $sequenceNumber;
+        $this->formValues['serie'] = $serie;
+        $this->formValues['fullNumber'] = $fullNumber;
+        $this->fullNumberPreview = $fullNumberPreview;
     }
 }

@@ -19,5 +19,18 @@
 
             <tag name="owl.live_component.admin" key="owl_admin:invoice:form" />
         </service>
+
+        <service
+            id="owl_admin.twig.component.invoice.numbering.form"
+            class="Owl\Bundle\AdminBundle\Twig\Component\Invoice\InvoiceNumberingComponent"
+        >
+        
+            <argument type="service" id="ux.live_component.live_responder" />
+            <argument type="service" id="form.factory" />
+            <argument>Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceNumberingType</argument>
+            <argument type="service" id="owl.generator.invoice.invoice_number_generator" />
+
+            <tag name="owl.live_component.admin" key="owl_admin:invoice:numbering:form" />
+        </service>
     </services>
 </container>

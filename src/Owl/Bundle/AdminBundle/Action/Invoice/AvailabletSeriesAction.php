@@ -38,11 +38,11 @@ final class AvailabletSeriesAction
             $strategy = $this->registryInvoiceSequenceStrategy->get($serie->getSequenceIncrement());
             $invoiceSequence = $strategy->getNextCounter($serie, $date);
 
-            $availablesSeries[] = [
+            $availablesSeries[$serie->getId()] = [
                 'id' => $serie->getId(),
                 'format' => $serie->getFormat(),
                 'nextCounter' => $invoiceSequence->getNextCounter(),
-                'nextValue' => $this->invoiceNumberGenerator->generate($serie, $invoiceSequence->getNextCounter(), $date),
+                'nextValue' => $this->invoiceNumberGenerator->generate($serie->getFormat(), $invoiceSequence->getNextCounter(), $date),
                 'sequenceIncrement' => $serie->getSequenceIncrement(),
             ];
         }

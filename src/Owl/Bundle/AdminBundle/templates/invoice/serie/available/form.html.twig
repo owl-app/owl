@@ -1,6 +1,6 @@
+{% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
 {% import '@OwlUi/macro/messages.html.twig' as messages %}
 
-{% set series = hookable_metadata.context.series %}
 {% set replacesForamt = 
     {
         '__NUMBER__': '<span class="badge bg-lime-lt text-dark ms-1 me-1 pt-2 pb-2">' ~ 'owl.ui.number'|trans ~ '</span>',
@@ -9,8 +9,17 @@
     }
 %}
 
+<div {{ attributes}}>
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id, 'data-invoice-available-series-target':'form'}}) }}
+
+
+
 {% if series|length > 0 %}
-    {% for serie in series %}
+    <div class="row">
+        {{ form_widget(form.serie) }}
+    </div>
+
+    {# {% for serie in series %}
         <div class="col-12 d-flex border-bottom mb-3">
             <div class="form-check d-flex align-items-center me-auto">
                 <input
@@ -56,26 +65,30 @@
         <div class="d-flex align-items-center text-danger lead">
             <small>{{ 'owl.ui.not_recommended'|trans }}</small>
         </div>
-    </div>
+    </div> #}
 {% else %}
     {{ messages.info('owl.ui.no_results_to_display') }}
 {% endif %}
 
-<div class="d-flex align-items-center">
-    <div class="field field-invoice-number me-5">
-        <label class="form-label required">{{ 'owl.ui.number'|trans }}</label>
-        <input type="number" required="required" data-test-address="" class="form-control number-invoice" data-invoice-available-series-target="valueSequenceNumber">
-        <div class="invalid-feedback d-none">{{ 'owl.common.not_blank'|trans(domain = 'validators') }}</div>
-    </div>
-    <div class="field field-peview d-flex align-items-center" data-invoice-available-series-target="previewNumberBox">
-        <div class="d-flex align-items-center">
-            <strong>{{ 'owl.ui.preview'|trans }}:</strong>
-            <span class="badge bg-lime-lt text-dark ms-2 me-1 pt-2 pb-2" data-invoice-available-series-target="previewNumberText"></span>
+
+
+<div class="d-flex align-items-center mt-3">
+    {{ form_row(form.number, { row_attr: {'class': 'me-3'}}) }}
+
+    {% if showPreview %}
+        <div class="field field-preview d-flex align-items-center" data-invoice-available-series-target="previewNumberBox">
+            <div class="d-flex align-items-center">
+                <strong>{{ 'owl.ui.preview'|trans }}:</strong>
+                <span class="badge bg-lime-lt text-dark ms-2 me-1 pt-2 pb-2" data-invoice-available-series-target="previewNumberText">
+                {{ fullNumberPreview }}
+                </span>
+            </div>
         </div>
-    </div>
-    <div class="field" style="width: 200px" data-invoice-available-series-target="fullNumberBox">
-        <label class="form-label required">{{ 'owl.ui.full_number'|trans }}</label>
-        <input type="text" required="required" data-test-address="" class="form-control" data-invoice-available-series-target="valueFullNumber">
-        <div class="invalid-feedback d-none">{{ 'owl.common.not_blank'|trans(domain = 'validators') }}</div>
-    </div>
+    {% endif %}
+
+    {% if showInputFullNumber %}
+        {{ form_row(form.fullNumber) }}
+    {% endif %}
+</div>
+{{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
 </div>

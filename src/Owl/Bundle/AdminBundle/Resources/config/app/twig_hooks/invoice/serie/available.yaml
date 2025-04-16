@@ -42,7 +42,12 @@ sylius_twig_hooks:
 
         'owl_admin.invoice_serie.modal.available.content.body':
             form:
-                template: '@OwlAdmin/invoice/serie/available/form.html.twig'
+                component: 'owl_admin:invoice:numbering:form'
+                props:
+                    series: '@=_context.series'
+                    template: '@OwlAdmin/invoice/serie/available/form.html.twig'
+                configuration:
+                    render_rest: false
                 priority: 0
 
         'owl_admin.invoice_serie.modal.available.content.actions':

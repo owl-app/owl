@@ -35,7 +35,6 @@ sylius_twig_hooks:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
                     type: '@=_context.resource.getType()'
-                    fullNumberPreview: '@=_context.resource.getFullNumber()'
                     template: '@OwlAdmin/invoice/form.html.twig'
                 configuration:
                     render_rest: false
