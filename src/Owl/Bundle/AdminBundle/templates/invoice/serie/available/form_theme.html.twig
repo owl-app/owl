@@ -1,0 +1,50 @@
+{% extends '@OwlAdmin/shared/form_theme.html.twig' %}
+
+{%- block _owl_invoice_numbering_serie_row -%}
+    {% for child in form %}
+        <div class="col-12 d-flex border-bottom mb-3">
+            {{ form_row(child) }}
+        </div>
+    {% endfor %}
+{%- endblock _owl_invoice_numbering_serie_row -%}
+
+{%- block _owl_invoice_numbering_serie_entry_row -%}
+    {% from '@OwlAdmin/shared/invoice/serie_format.html.twig' import label %}
+
+    {%- set label_attr_class = label_attr_class|default(label_attr.class|default('')) ~ ' form-check-label d-flex align-items-center ms-3' -%}
+    {%- set label_attr = label_attr|merge({class: label_attr_class|trim, 'for': id}) -%}
+    {%- set helper_id = 'serie_' ~ value %}
+
+    <div class="form-check form-check d-flex align-items-center me-auto mb-0 pb-3">
+        <input 
+            type="radio"
+            class="form-check-input"
+            {{ block('widget_attributes') }}
+            {% if value is defined %}value="{{ value }}"{% endif %}
+            {% if checked %} checked="checked"{% endif %}
+            {% with { attr: attr } %}{{ block('attributes') }}{% endwith %}
+        />
+        <label {% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}>
+            {% if value is empty %}
+                {{ label|trans }}
+            {% else %}
+                {{ label(label)|trans|raw }}
+            {% endif %}
+        </label>
+
+        {% if help_translation_parameters[helper_id].increment_type is defined %}
+            <small class="text-secondary">
+                <em>{{ help_translation_parameters[helper_id].increment_type|trans }}</em>
+            </small>
+        {% endif %}
+    </div>
+
+    {% if help_translation_parameters[helper_id].from is defined %}
+        {% set color = help_translation_parameters[helper_id].from.color|default('text-secondary') %}
+        {% set text = help_translation_parameters[helper_id].from.text|default('') %}
+        <div class="d-flex align-items-center {{ color }} lead pb-3">
+            <small>{{ text|trans }}</small>
+        </div>
+    {% endif %}
+
+{%- endblock _owl_invoice_numbering_serie_entry_row -%}

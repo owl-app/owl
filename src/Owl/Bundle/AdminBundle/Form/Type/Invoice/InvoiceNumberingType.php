@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Form\Type\Invoice;
 
-use Owl\Bundle\AdminBundle\Form\Type\ContractorAutocompleteType;
-use Owl\Component\Core\Model\Invoice\Buyer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,11 +21,17 @@ final class InvoiceNumberingType extends AbstractType
     {
         $builder
             ->add('serie', ChoiceType::class, [
-                'label' => 'Wybierz kolor',
+                'label' =>false,
                 'choices' =>  $this->getSeriesChoices($options['series']),
                 'expanded' => true,
                 'multiple' => false,
-                'required' => false
+                'choice_attr' => function (): array {
+                    return [
+                        'data-invoice-available-series-target' => 'serieRadio',
+                    ];
+                },
+                'help_translation_parameters' => $this->getHelpTranslations($options['series'])
+    
             ])
             ->add('number', TextType::class, [
                 'label' => 'owl.ui.number',
@@ -77,8 +80,32 @@ final class InvoiceNumberingType extends AbstractType
             $options[$serie['format']] = $serie['id'];
         }
 
-        $options['Turn off automatic numbering for this invoice'] = '';
+        $options['owl.ui.turn_off_automatic_numbering_for_this_invoice'] = '';
 
         return $options;
+    }
+
+    private function getHelpTranslations(array $series): array
+    {
+        $translations = [];
+
+        foreach ($series as $serie) {
+            $translations['serie_' . $serie['id']] = [
+                'increment_type' => 'owl.ui.invoice.increment.' . $serie['sequenceIncrement'],
+                'from' => [
+                    'text' => 'owl.ui.system',
+                    'color' => 'text-secondary'
+                ]
+            ];
+        }
+        $translations['serie_'] = [
+            'increment_type' => '',
+            'from' => [
+                'text' => 'owl.ui.not_recommended',
+                'color' => 'text-danger'
+            ]
+        ];
+
+        return $translations;
     }
 }

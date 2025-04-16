@@ -1,94 +1,26 @@
-{% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
-{% import '@OwlUi/macro/messages.html.twig' as messages %}
-
-{% set replacesForamt = 
-    {
-        '__NUMBER__': '<span class="badge bg-lime-lt text-dark ms-1 me-1 pt-2 pb-2">' ~ 'owl.ui.number'|trans ~ '</span>',
-        '__MM__': '<span class="badge bg-azure-lt text-dark ms-1 me-1 pt-2 pb-2">' ~ 'owl.ui.month'|trans ~ ' - MM </span>',
-        '__YYYY__': '<span class="badge bg-purple-lt text-dark ms-1 me-1 pt-2 pb-2">' ~ 'owl.ui.year'|trans ~ ' - YYYY </span>'
-    }
-%}
+{% form_theme form '@OwlAdmin/invoice/serie/available/form_theme.html.twig' %}
 
 <div {{ attributes}}>
-{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id, 'data-invoice-available-series-target':'form'}}) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id, 'data-invoice-available-series-target':'form'}}) }}
+        {{ form_row(form.serie) }}
 
+        <div class="d-flex align-items-center mt-3">
+            {{ form_row(form.number, { row_attr: {'class': 'field me-3'}}) }}
 
+            {% if showPreview %}
+                <div class="field field-preview d-flex align-items-center" data-invoice-available-series-target="previewNumberBox">
+                    <div class="d-flex align-items-center">
+                        <strong>{{ 'owl.ui.preview'|trans }}:</strong>
+                        <span class="badge bg-lime-lt text-dark ms-2 me-1 pt-2 pb-2" data-invoice-available-series-target="previewNumberText">
+                        {{ fullNumberPreview }}
+                        </span>
+                    </div>
+                </div>
+            {% endif %}
 
-{% if series|length > 0 %}
-    <div class="row">
-        {{ form_widget(form.serie) }}
-    </div>
-
-    {# {% for serie in series %}
-        <div class="col-12 d-flex border-bottom mb-3">
-            <div class="form-check d-flex align-items-center me-auto">
-                <input
-                    data-next-counter="{{ serie.nextCounter }}"
-                    data-next-value="{{ serie.nextValue }}"
-                    data-format-id="{{ serie.id }}"
-                    data-format="{{ serie.format }}"
-                    data-invoice-available-series-target="serieRadio"
-                    class="form-check-input"
-                    type="radio"
-                    name="format"
-                    id="format_{{ serie.id }}"
-                >
-                <label class="form-check-label d-flex align-items-center ms-2" for="format_{{ loop.index }}">
-                    {{ serie.format|replace(replacesForamt)|raw }}
-                </label>
-                <small class="text-secondary">
-                    <em>({{ ('owl.ui.invoice.increment.' ~ serie.sequenceIncrement)|trans }})</em>
-                </small>
-            </div>
-            <div class="d-flex align-items-center text-secondary lead">
-                <small>{{ 'owl.ui.system'|trans }}</small>
-            </div>
+            {% if showInputFullNumber %}
+                {{ form_row(form.fullNumber, { row_attr: {'class': 'field mb-0'}}) }}
+            {% endif %}
         </div>
-    {% endfor %}
-    <div class="col-12 d-flex border-bottom mb-3">
-        <div class="form-check d-flex align-items-center me-auto">
-            <input
-                data-next-counter=""
-                data-next-value=""
-                data-format-id=""
-                data-format=""
-                data-invoice-available-series-target="serieRadio"
-                class="form-check-input"
-                type="radio"
-                name="format"
-                id="format_disabled"
-            >
-            <label class="form-check-label d-flex align-items-center ms-2" for="format_disabled">
-                {{ 'owl.ui.turn_off_automatic_numbering_for_this_invoice'|trans }}
-            </label>
-        </div>
-        <div class="d-flex align-items-center text-danger lead">
-            <small>{{ 'owl.ui.not_recommended'|trans }}</small>
-        </div>
-    </div> #}
-{% else %}
-    {{ messages.info('owl.ui.no_results_to_display') }}
-{% endif %}
-
-
-
-<div class="d-flex align-items-center mt-3">
-    {{ form_row(form.number, { row_attr: {'class': 'me-3'}}) }}
-
-    {% if showPreview %}
-        <div class="field field-preview d-flex align-items-center" data-invoice-available-series-target="previewNumberBox">
-            <div class="d-flex align-items-center">
-                <strong>{{ 'owl.ui.preview'|trans }}:</strong>
-                <span class="badge bg-lime-lt text-dark ms-2 me-1 pt-2 pb-2" data-invoice-available-series-target="previewNumberText">
-                {{ fullNumberPreview }}
-                </span>
-            </div>
-        </div>
-    {% endif %}
-
-    {% if showInputFullNumber %}
-        {{ form_row(form.fullNumber, { row_attr: {'class': 'mb-0'}}) }}
-    {% endif %}
-</div>
-{{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
+    {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
 </div>

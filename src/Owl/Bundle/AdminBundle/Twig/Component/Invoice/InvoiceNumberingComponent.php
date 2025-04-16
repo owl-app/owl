@@ -4,16 +4,9 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig\Component\Invoice;
 
-use ApiPlatform\GraphQl\Resolver\Stage\WriteStage;
-use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceNumberingType;
-use Owl\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
-use Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
-use Owl\Component\Invoice\Model\InvoiceSerieInterface;
-use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -27,8 +20,6 @@ use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveResponder;
-use Symfony\UX\TwigComponent\Attribute\PostMount;
-use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsLiveComponent]
 class InvoiceNumberingComponent
@@ -46,9 +37,6 @@ class InvoiceNumberingComponent
 
     #[LiveProp(writable: true)]
     public string $issueDate = '';
-
-    #[LiveProp(writable: true)]
-    public string $selectedSerie = '';
 
     #[LiveProp(writable: true)]
     public string $fullNumberPreview = '';
@@ -79,7 +67,7 @@ class InvoiceNumberingComponent
 
     public function dehydrateSeries(array|null $series): string
     {
-        return json_encode($series);
+        return json_encode($series ?? []);
     }
 
     protected function instantiateForm(): FormInterface
@@ -112,11 +100,32 @@ class InvoiceNumberingComponent
 
         $formData = $this->getForm()->getData();
 
+        if (empty($formData['serie'])) {
+            $fullNumberPreview  = $fullNumber = $formData['fullNumber'];
+        } else {
+            $fullNumber = '';
+            $fullNumberPreview = $this->fullNumberPreview;
+        }
+
         $this->emit(self::OWL_ADMIN_NUMBER_WITH_SERIE_CHANGED, [
             'sequenceNumber' => $formData['number'],
             'serie' => $formData['serie'],
-            'fullNumber' => $formData['fullNumber'],
-            'fullNumberPreview' => $this->fullNumberPreview,
+            'fullNumber' => $fullNumber,
+            'fullNumberPreview' => $fullNumberPreview,
         ]);
+    }
+
+    #[LiveAction]
+    public function changeSerie(#[LiveArg] string $serieValue): void
+    {
+        $serie = $this->series[$serieValue] ?? null;
+
+        if (!empty($serie)) {
+            $this->formValues['serie'] = $serieValue;
+            $this->formValues['number'] = $serie['nextCounter'];
+            $this->fullNumberPreview = $serie['nextValue'];
+        } else {
+            $this->formValues['serie'] = '';
+        }
     }
 }

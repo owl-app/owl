@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig\Component\Invoice;
 
-use ApiPlatform\GraphQl\Resolver\Stage\WriteStage;
 use Owl\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
@@ -23,7 +22,6 @@ use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
-use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsLiveComponent]
 class FormComponent
@@ -84,15 +82,20 @@ class FormComponent
         /** @var InvoiceSerieInterface $serie */
         $serie = $this->getForm()->getData()?->getSerie();
 
+        if(null === $serie) {
+            return;
+        }
+
         /** @var InvoiceSequenceStrategyInterface $strategy */
         $strategy = $this->registryInvoiceSequenceStrategy->get($serie->getSequenceIncrement());
         $invoiceSequence = $strategy->getNextCounter($serie, $invoice->getIssueDate());
         $nextCounter = $invoiceSequence->getNextCounter();
-
         $fullNumber = $this->invoiceNumberGenerator->generate($serie->getFormat(), $nextCounter, $invoice->getIssueDate());
         
         $this->formValues['sequenceNumber'] = $this->getFormView()
-            ->offsetGet('sequenceNumber')->vars['value'] = $nextCounter;
+            ->offsetGet('sequenceNumber')
+            ->vars['value'] = $nextCounter
+        ;
         $this->fullNumberPreview = $fullNumber;
     }
 
@@ -103,7 +106,7 @@ class FormComponent
         #[LiveArg] ?string $fullNumber,
         #[LiveArg] string $fullNumberPreview
     ): void
-{
+    {
         $this->formValues['sequenceNumber'] = $sequenceNumber;
         $this->formValues['serie'] = $serie;
         $this->formValues['fullNumber'] = $fullNumber;
