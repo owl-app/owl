@@ -76,6 +76,7 @@ owl:
                     contractors: Contractors
 
     ui:
+        payment: Payment
         invoice:
             increment:
                 monthly_based: Monthly based increment

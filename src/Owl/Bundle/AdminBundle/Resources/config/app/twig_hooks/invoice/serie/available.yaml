@@ -9,7 +9,7 @@ sylius_twig_hooks:
                         controllers: {
                             invoice-available-series: {
                                 outlets: {
-                                    'invoice-form': '.owl-page-wrapper-invoice',
+                                    'invoice-form': '.owl-admin-invoice-form',
                                     'modal': '.owl-modal'
                                 }
                             },

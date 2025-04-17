@@ -1,0 +1,13 @@
+
+<div class="w-50 box">
+    <h3 class="text-primary border-bottom border-primary pb-1">{{ 'owl.ui.payment'|trans }}</h3>
+
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(hookable_metadata.context.form.duePaymentDate, sylius_test_form_attribute('duePaymentDate')|merge({ row_attr: { class: 'mb-2' }})) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(hookable_metadata.context.form.paymentMethod, sylius_test_form_attribute('paymentMethod')|merge({ row_attr: { class: 'mb-2' }})) }}
+        </div>
+    </div>
+</div>

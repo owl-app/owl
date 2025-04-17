@@ -1,77 +1,38 @@
-{% for error in hookable_metadata.context.form.sequenceNumber.vars.errors %}
-    <div class="text-red-600 text-sm">
-        {{ error.message }}
+<div class="w-50 box">
+    <h3 class="text-primary border-bottom border-primary pb-1">{{ 'owl.ui.general'|trans }}</h3>
+    {% for error in hookable_metadata.context.form.sequenceNumber.vars.errors %}
+        <div class="text-red-600 text-sm">
+            {{ error.message }}
 
-        {% set cause = error.cause %}
-        {% if cause is iterable %}
-            <pre>{{ dump(cause) }}</pre> {# albo użyj konkretnych danych #}
-        {% endif %}
-    </div>
-{% endfor %}
+            {% set cause = error.cause %}
+            {% if cause is iterable %}
+                <pre>{{ dump(cause) }}</pre>
+            {% endif %}
+        </div>
+    {% endfor %}
 
-<div class="row">
-    <div class="col-6">
-        {{
-            form_row(hookable_metadata.context.form.sequenceNumber, sylius_test_form_attribute('sequenceNumber')|merge(
-                {
-                    row_attr: { class: 'mb-2' },
-                    attr: {
-                        'data-invoice-form-target': 'sequenceNumber',
+    {{ form_row(hookable_metadata.context.form.buyer.contractor, sylius_test_form_attribute('buyer.contractor')|merge({ row_attr: { class: 'mb-2' }})) }}
+
+    <div class="row">
+        <div class="col-6">
+            {{
+                form_row(hookable_metadata.context.form.issueDate, sylius_test_form_attribute('issueDate')|merge(
+                    {
+                        row_attr: { class: 'mb-2' },
+                        attr: {
+                            'data-invoice-form-target': 'issueDate',
+                        }
                     }
-                }
-            ))
-        }}
-    </div>
-</div>
+                ))
+            }}
+        </div>
 
-<div class="row">
-    <div class="col-6">
-        {{
-            form_row(hookable_metadata.context.form.fullNumber, sylius_test_form_attribute('fullNumber')|merge(
-                {
-                    row_attr: { class: 'mb-2' },
-                    attr: {
-                        'data-invoice-form-target': 'fullNumber',
-                    }
-                }
-            ))
-        }}
+        <div class="col-6">
+            {{ form_row(hookable_metadata.context.form.transactionDate, sylius_test_form_attribute('transactionDate')|merge({row_attr: { class: 'mb-2' }})) }}
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-6">
-        {{ form_row(hookable_metadata.context.form.buyer.contractor, sylius_test_form_attribute('buyer.contractor')|merge({ row_attr: { class: 'mb-2' }})) }}
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-3">
-        {{
-            form_row(hookable_metadata.context.form.issueDate, sylius_test_form_attribute('issueDate')|merge(
-                {
-                    row_attr: { class: 'mb-2' },
-                    attr: {
-                        'data-invoice-form-target': 'issueDate',
-                    }
-                }
-            ))
-        }}
-    </div>
-    <div class="col-3">
-        {{ form_row(hookable_metadata.context.form.transactionDate, sylius_test_form_attribute('transactionDate')|merge({ row_attr: { class: 'mb-2' }})) }}
-    </div>
-    <div class="col-3">
-        {{ form_row(hookable_metadata.context.form.duePaymentDate, sylius_test_form_attribute('duePaymentDate')|merge({ row_attr: { class: 'mb-2' }})) }}
-    </div>
-    {{
-        form_row(hookable_metadata.context.form.serie, sylius_test_form_attribute('serie')|merge(
-            {
-                row_attr: { class: 'mb-2' },
-                attr: {
-                    'data-invoice-form-target': 'serie',
-                }
-            }
-        ))
-    }}
+    {{ form_row(hookable_metadata.context.form.fullNumber, sylius_test_form_attribute('fullNumber')|merge({ row_attr: { class: 'mb-2' } })) }}
+    {{ form_row(hookable_metadata.context.form.sequenceNumber, sylius_test_form_attribute('sequenceNumber')|merge({ row_attr: { class: 'mb-2' } })) }}
+    {{ form_row(hookable_metadata.context.form.serie, sylius_test_form_attribute('serie')|merge({ row_attr: { class: 'mb-2' } })) }}
 </div>

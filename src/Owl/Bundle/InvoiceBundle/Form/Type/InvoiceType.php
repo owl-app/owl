@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\InvoiceBundle\Form\Type;
 
+use Owl\Bundle\InvoiceBundle\Form\Type\Payment\InvoicePaymentMethodChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -43,6 +44,9 @@ final class InvoiceType extends AbstractResourceType
                 'label' => 'owl.invoice.due_payment_date',
                 'widget' => 'single_text',
                 'invalid_message' => 'owl.invoice.payment_date.invalid',
+            ])
+            ->add('paymentMethod', InvoicePaymentMethodChoiceType::class, [
+                'label' => 'owl.invoice.payment_method',
             ])
             ->add('serie', EntityType::class, [
                 'label' => 'owl.invoice.serie',

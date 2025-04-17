@@ -5,11 +5,31 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%owl.model.invoice_serie.class%"
+            sorting:
+                isDefault: desc
             fields:
                 format:
-                    type: string
+                    type: twig
                     label: owl.ui.format
                     sortable: ~
+                    options:
+                        template: "@OwlAdmin/invoice/serie/grid/format.html.twig"
+                invoiceType:
+                    type: string
+                    label: owl.ui.type
+                    sortable: ~
+                sequenceIncrement:
+                    type: twig
+                    label: owl.invoice.sequence_increment
+                    sortable: ~
+                    options:
+                        template: "@OwlAdmin/invoice/serie/grid/sequence_increment.html.twig"
+                isDefault:
+                    type: twig
+                    label: owl.invoice.is_default_serie
+                    sortable: ~
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/boolean.html.twig"
             filters:
                 format:
                     type: string

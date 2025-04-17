@@ -4,6 +4,7 @@ sylius_twig_hooks:
             content:
                 template: '@OwlAdmin/shared/crud/common/content.html.twig'
                 configuration:
+                    page_wrapper_class: 'owl-admin-invoice-form'
                     stimulus:
                         controllers: {
                             form: {},
@@ -52,4 +53,7 @@ sylius_twig_hooks:
         'owl_admin.invoice.create.content.body.form.sections':
             general:
                 template: '@OwlAdmin/invoice/form/sections/general.html.twig'
+                priority: 100
+            payment:
+                template: '@OwlAdmin/invoice/form/sections/payment.html.twig'
                 priority: 0

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Bundle\CoreBundle\EventListener;
+namespace Owl\Bundle\InvoiceBundle\EventListener;
 
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
 use Owl\Component\Invoice\Model\BaseInvoiceInterface;

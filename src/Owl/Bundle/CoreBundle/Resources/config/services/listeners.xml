@@ -71,7 +71,7 @@
             <tag name="kernel.event_listener" event="owl.invoice.pre_create" method="preCreate" />
         </service>
 
-        <service id="owl.listener.invoice.generate_number_invoice" class="Owl\Bundle\CoreBundle\EventListener\GenerateNumberInvoiceListener">
+        <service id="owl.listener.invoice.generate_number_invoice" class="Owl\Bundle\InvoiceBundle\EventListener\GenerateNumberInvoiceListener">
             <argument type="service" id="owl.generator.invoice.invoice_number_generator" />
 
             <tag name="kernel.event_listener" event="owl.invoice.pre_create" method="preCreate" />

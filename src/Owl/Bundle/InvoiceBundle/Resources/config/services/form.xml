@@ -40,5 +40,9 @@
             <argument>%owl.invoice.sequence_increment_strategies%</argument>
             <tag name="form.type" />
         </service>
+
+        <service id="owl.form.type.invoice_payment_method_choice" class="Owl\Bundle\InvoiceBundle\Form\Type\Payment\InvoicePaymentMethodChoiceType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

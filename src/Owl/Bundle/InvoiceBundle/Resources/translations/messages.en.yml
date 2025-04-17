@@ -15,3 +15,12 @@ owl:
             increment_monthly: Increment monthly
             increment_yearly: Increment yearly
         is_default_serie: Is default serie
+        payment_method: Payment method
+        payment:
+            methods:
+                wire_transfer: Wire transfer
+                cash: Cash
+                card: Card
+                credit: Credit
+                check: Check
+                other: Other

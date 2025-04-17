@@ -7,7 +7,7 @@ namespace Owl\Component\Invoice\Model;
 use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableTrait;
 
-abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
+abstract class BaseInvoice implements BaseInvoiceInterface, InvoicePaymentInterface, ResourceInterface
 {
     use TimestampableTrait;
 
@@ -31,6 +31,9 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
 
     /** @var \DateTimeInterface|null */
     protected $duePaymentDate;
+
+    /** @var string|null */
+    protected $paymentMethod;
 
     /** @var string|null */
     protected $paymentState;
@@ -101,6 +104,16 @@ abstract class BaseInvoice implements BaseInvoiceInterface, ResourceInterface
     public function getDuePaymentDate(): \DateTimeInterface
     {
         return $this->duePaymentDate;
+    }
+
+    public function getPaymentMethod(): ?string
+    {
+        return $this->paymentMethod;
+    }
+
+    public function setPaymentMethod(?string $method): void
+    {
+        $this->paymentMethod = $method;
     }
 
     public function setDuePaymentDate(?\DateTimeInterface $duePaymentDate): void

@@ -10,9 +10,10 @@
         <field name="sequenceNumber" column="sequence_number" type="integer" nullable="true" />
         <field name="fullNumber" column="full_number" />
         <field name="type" column="type" />
-        <field name="issueDate" column="issue_date" type="datetime" />
-        <field name="transactionDate" column="transaction_date" type="datetime" />
-        <field name="duePaymentDate" column="due_payment_date" type="datetime" />
+        <field name="issueDate" column="issue_date" type="date" />
+        <field name="transactionDate" column="transaction_date" type="date" />
+        <field name="duePaymentDate" column="due_payment_date" type="date" />
+        <field name="paymentMethod" column="payment_method" />
         <field name="paymentState" column="payment_state" />
 
         <many-to-one field="serie" target-entity="Owl\Component\Invoice\Model\InvoiceSerieInterface">

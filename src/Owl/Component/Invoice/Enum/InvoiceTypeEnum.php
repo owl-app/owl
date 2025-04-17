@@ -6,15 +6,15 @@ namespace Owl\Component\Invoice\Enum;
 
 enum InvoiceTypeEnum: string
 {
-    case sales = 'sales';
+    case SALES = 'sales';
 
-    case proforma = 'proforma';
+    case PROFORMA = 'proforma';
 
-    case correction = 'correction';
+    case CORRECTION = 'correction';
 
-    public const SALES = self::sales->value;
+    public const TYPE_SALES = self::SALES->value;
 
-    public const PROFORMA = self::proforma->value;
+    public const TYPE_PROFORMA = self::PROFORMA->value;
 
-    public const CORRECTION = self::correction->value;
+    public const TYPE_CORRECTION = self::CORRECTION->value;
 }

@@ -49,7 +49,7 @@ owl_admin_invoice_create:
             factory:
                 method: createWithDefaults
                 arguments:
-                    - !php/const Owl\Component\Invoice\Enum\InvoiceTypeEnum::SALES
+                    - !php/const Owl\Component\Invoice\Enum\InvoiceTypeEnum::TYPE_SALES
             vars:
                 serialization_groups: [AjaxShow]
                 form:
