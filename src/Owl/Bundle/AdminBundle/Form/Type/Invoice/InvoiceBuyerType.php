@@ -19,6 +19,11 @@ final class InvoiceBuyerType extends AbstractType
             ->add('contractor', ContractorAutocompleteType::class, [
                 'label' => 'owl.ui.contractor',
                 'required' => true,
+                'attr' => [
+                    'data-controller' => 'contractor-autocomplete',
+                    'data-action' => 'form:contractor:created@window->contractor-autocomplete#addOption',
+                    'class' => 'contractor-autocomplete'
+                ],
             ])
         ;
     }
@@ -32,6 +37,6 @@ final class InvoiceBuyerType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'owl_admin_buyer';
+        return 'owl_admin_invoice_buyer';
     }
 }

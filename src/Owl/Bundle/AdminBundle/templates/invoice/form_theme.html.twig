@@ -1,0 +1,26 @@
+{% extends '@OwlAdmin/shared/form_theme.html.twig' %}
+
+
+{% block _owl_admin_invoice_buyer_contractor_row %}
+    {% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
+
+    {{ form_label(form) }}
+    <div class="input-group mb-2">
+        {{ 
+            form_widget(form, sylius_test_form_attribute('contractor'))
+        }}
+        {{ 
+            buttons.modal(
+                path('owl_admin_contractor_create'),
+                '',
+                '',
+                '',
+                'flowbite:plus-outline',
+                'btn btn-outline-secondary',
+                options.disabled|default(false),
+                { size: 'default', 'with-redirect': 'false' }
+            )
+        }}
+        {{ form_errors(form) }}
+    </div>
+{% endblock %}

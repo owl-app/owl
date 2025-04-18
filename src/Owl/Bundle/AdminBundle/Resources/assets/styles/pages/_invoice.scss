@@ -2,6 +2,15 @@
     .card-body {
         .sections {
             gap: 3rem !important;
+
+            .input-group {
+                .ts-wrapper {
+                    &.contractor-autocomplete {
+                        border-top-left-radius: var(--tblr-border-radius) !important;
+                        border-bottom-left-radius: var(--tblr-border-radius) !important;
+                    }
+                }
+            }
         }
     }
 }

@@ -1,5 +1,3 @@
-{% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
-
 <div class="w-50 box">
     <h3 class="text-primary border-bottom border-primary pb-1">{{ 'owl.ui.general'|trans }}</h3>
     {% for error in hookable_metadata.context.form.sequenceNumber.vars.errors %}
@@ -13,29 +11,8 @@
         </div>
     {% endfor %}
 
-<div class="mb-2 mt-2 me-2">
     {{ 
-        buttons.modal(
-            path('owl_admin_contractor_create'),
-            'owl.ui.add_suggestion',
-            '',
-            '',
-            'flowbite:plus-outline',
-            'btn-primary',
-            options.disabled|default(false),
-            { size: 'lg', 'with-redirect': 'false' }
-        )
-    }}
-</div>
-    {{ 
-        form_row(hookable_metadata.context.form.buyer.contractor, sylius_test_form_attribute('buyer.contractor')|merge(
-            {
-                row_attr: { class: 'mb-2' },
-                attr: {
-                    'data-action': 'form:contractor:created@window->contractor-autocomplete#addOption',
-                }
-            }
-        ))
+        form_row(hookable_metadata.context.form.buyer.contractor, sylius_test_form_attribute('buyer.contractor'))
     }}
     <div class="row">
         <div class="col-6">
