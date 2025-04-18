@@ -10,10 +10,10 @@ use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType as BaseInvoiceType;
 use Owl\Component\Core\Model\Invoice\BuyerInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 final class InvoiceType extends AbstractType
 {
@@ -25,7 +25,7 @@ final class InvoiceType extends AbstractType
                 'label' => false,
                 'required' => true,
             ])
-            ->add('fullNumber', TextType::class, [
+            ->add('fullNumber', HiddenType::class, [
                 'required' => true,
             ])
             ->add('serie', InvoiceSerieHiddenType::class)

@@ -8,9 +8,11 @@ import { debounce } from '../../../utils/debounce';
 
 export default class extends Controller {
 
-    static values = { asyncEvents: Array };
+    static values = { asyncEvents: Array, syncEvents: Array };
 
     static targets = ['content', 'live', 'form', 'action', 'loading'];
+
+    static outlets = ['modal'];
 
     async initialize() {
         if (this.hasLiveTarget) {
@@ -96,6 +98,19 @@ export default class extends Controller {
 
         try {
             resource = JSON.parse(resource);
+
+            if (resource.flashes !== undefined) {
+                resource.flashes.map((flash) => {
+                    const detailEvent = {
+                        detail: {
+                            message: flash.message,
+                            type: flash.type
+                        }
+                    };
+
+                    window.dispatchEvent(new CustomEvent('owl_admin.toast.show', detailEvent));
+                });
+            }
         } catch (e) { /* empty */ }
 
         if (this.asyncEventsValue.length) {
@@ -104,7 +119,7 @@ export default class extends Controller {
             this.asyncEventsValue.map((event) => {
                 awaited.push(
                     new Promise((resolve) => {
-                        this.dispatch(event, { detail: { resolve, resource } });
+                        this.dispatch(event, { detail: { resolve, resource: resource.data ?? null } });
                     })
                 );
             });
@@ -112,10 +127,20 @@ export default class extends Controller {
             await Promise.all(awaited);
         }
 
+        if (this.syncEventsValue.length) {
+            this.syncEventsValue.map((event) => {
+                this.dispatch(event, { detail: { resource: resource.data ?? null } });
+            });
+        }
+
         this.dispatch('saved');
 
         debounce(async () => {
             this.hideLoading(disableAllButtons);
+
+            if (this.hasModalOutlet && !this.modalOutlet.withRedirect) {
+                return;
+            }
 
             if (response.headers.has('x-owl-location')) {
                 redirect(response.headers.get('x-owl-location'));

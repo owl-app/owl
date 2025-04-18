@@ -13,4 +13,12 @@ interface InvoicePaymentInterface
     public function getDuePaymentDate(): \DateTimeInterface;
 
     public function setDuePaymentDate(?\DateTimeInterface $duePymentDate): void;
+
+    public function getPaymentDate(): ?\DateTimeInterface;
+
+    public function setPaymentDate(?\DateTimeInterface $pymentDate): void;
+
+    public function isPaid(): bool;
+
+    public function setIsPaid(bool $isPaid): void;
 }

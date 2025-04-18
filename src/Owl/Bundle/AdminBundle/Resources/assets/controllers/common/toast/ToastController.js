@@ -10,7 +10,7 @@ export default class extends Controller {
         error: 'danger'
     };
 
-    initialize() {
+    connect() {
         window.addEventListener('owl_admin.toast.show', this.show);
     }
 

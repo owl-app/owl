@@ -7,11 +7,15 @@ import { BaseModal } from './BaseModal';
 
 export default class extends BaseModal {
 
+    withRedirect = true;
+
     static targets = ['dialog', 'content', 'error'];
 
-    open({ params: { url, size = 'lg', hasTinymce = false } }) {
+    open({ params: { url, size = 'lg', hasTinymce = false, withRedirect = true } }) {
         this.setSize(size);
         this.showLoading(size);
+
+        this.withRedirect = withRedirect;
 
         this.modal = new Modal(this.element, {
             backdrop: 'static',

@@ -32,10 +32,6 @@ interface BaseInvoiceInterface extends ResourceInterface
 
     public function setTransactionDate(?\DateTimeInterface $transactionDate): void;
 
-    public function getPaymentState(): string;
-
-    public function setPaymentState(string $paymentState): void;
-
     public function getSerie(): ?InvoiceSerieInterface;
 
     public function setSerie(?InvoiceSerieInterface $serie): void;

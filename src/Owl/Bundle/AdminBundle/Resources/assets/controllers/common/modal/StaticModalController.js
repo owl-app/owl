@@ -36,8 +36,27 @@ export default class extends BaseModal {
             if (response.ok) {
                 this.close();
 
-                debounce(() => {
+                debounce(async () => {
                     this.hideLoading();
+
+                    let resource = await response.text();
+
+                    try {
+                        resource = JSON.parse(resource);
+            
+                        if (resource.flashes !== undefined) {
+                            resource.flashes.map((flash) => {
+                                const detailEvent = {
+                                    detail: {
+                                        message: flash.message,
+                                        type: flash.type
+                                    }
+                                };
+            
+                                window.dispatchEvent(new CustomEvent('owl_admin.toast.show', detailEvent));
+                            });
+                        }
+                    } catch (e) { /* empty */ }
                 }, 100)();
 
                 debounce(async () => {

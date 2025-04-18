@@ -10,7 +10,7 @@ sylius_twig_hooks:
                             form: {},
                             invoice-form: {
                                 outlets: {
-                                    'modal': '.owl-modal' 
+                                    'modal': '.owl-modal'
                                 }
                             }
                         }

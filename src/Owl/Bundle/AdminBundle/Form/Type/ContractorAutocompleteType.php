@@ -26,6 +26,9 @@ final class ContractorAutocompleteType extends AbstractType
             'class' => $this->contractorClass,
             'choice_label' => 'companyName',
             'choice_value' => 'id',
+            'attr' => [
+                'data-controller' => 'contractor-autocomplete',
+            ],
         ]);
     }
 

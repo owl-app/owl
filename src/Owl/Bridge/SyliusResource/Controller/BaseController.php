@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @property AuthorizationCheckerInterface $authorizationChecker
@@ -372,7 +373,7 @@ class BaseController extends ResourceController
 
         /** @var RequestConfiguration $configuration */
         if ($configuration->isAjaxRequest()) {
-            return $this->createAjaxView($configuration, null, Response::HTTP_NO_CONTENT);
+            return $this->createAjaxView($configuration, null, Response::HTTP_OK);
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -408,9 +409,8 @@ class BaseController extends ResourceController
         if (null === $this->viewHandler) {
             throw new \LogicException('You can not use the "non-html" request if FriendsOfSymfony Rest Bundle is not available. Try running "composer require friendsofsymfony/rest-bundle".');
         }
-
         $view = new View();
-        $view->setData($data ?? null);
+        $view->setData(['data' => $data, 'flashes' => $this->getMessagesFlashBag($configuration)]);
         $view->setStatusCode($statusCode);
         $view->setFormat('json');
         $view->setHeaders($this->redirectHandler->getRedirectHeaders($configuration, $data));
@@ -460,5 +460,29 @@ class BaseController extends ResourceController
         }
 
         return $this->container->get('owl.resource_controller.parent_single_resource_provider')->get($configuration);
+    }
+
+    protected function getMessagesFlashBag(RequestConfiguration $configuration): array
+    {
+        /** @var TranslatorInterface $translator */
+        $translator = $this->container->get('translator');
+        $translatedFlashes = [];
+
+        foreach ($configuration->getRequest()->getSession()->getFlashBag()->all() as $type => $messages) {
+            foreach ($messages as $data) {
+                if (is_array($data) && isset($data['message'])) {
+                    $translated = $translator->trans($data['message'], $data['parameters'] ?? [], 'flashes');
+                } else {
+                    $translated = $translator->trans($data, [], 'flashes');
+                }
+
+                $translatedFlashes[] = [
+                    'type' => $type,
+                    'message' => $translated,
+                ];
+            }
+        }
+
+        return $translatedFlashes;
     }
 }

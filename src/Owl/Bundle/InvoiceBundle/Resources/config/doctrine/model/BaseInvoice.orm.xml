@@ -13,8 +13,9 @@
         <field name="issueDate" column="issue_date" type="date" />
         <field name="transactionDate" column="transaction_date" type="date" />
         <field name="duePaymentDate" column="due_payment_date" type="date" />
+        <field name="paymentDate" column="payment_date" type="date" nullable="true" />
         <field name="paymentMethod" column="payment_method" />
-        <field name="paymentState" column="payment_state" />
+        <field name="isPaid" column="is_paid" type="boolean" />
 
         <many-to-one field="serie" target-entity="Owl\Component\Invoice\Model\InvoiceSerieInterface">
             <cascade>

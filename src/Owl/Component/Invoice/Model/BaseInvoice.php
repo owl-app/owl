@@ -32,19 +32,17 @@ abstract class BaseInvoice implements BaseInvoiceInterface, InvoicePaymentInterf
     /** @var \DateTimeInterface|null */
     protected $duePaymentDate;
 
-    /** @var string|null */
+    /** @var \DateTimeInterface|null */
+    protected $paymentDate;
+
+    /** @var boolean|null */
     protected $paymentMethod;
 
-    /** @var string|null */
-    protected $paymentState;
+    /** @var boolean */
+    protected $isPaid = false;
 
     /** @var InvoiceSerieInterface */
     protected $serie;
-
-    public function __construct()
-    {
-        $this->paymentState = self::PAYMENT_STATE_PENDING;
-    }
 
     public function getId(): string|int|null
     {
@@ -106,6 +104,21 @@ abstract class BaseInvoice implements BaseInvoiceInterface, InvoicePaymentInterf
         return $this->duePaymentDate;
     }
 
+    public function setDuePaymentDate(?\DateTimeInterface $duePaymentDate): void
+    {
+        $this->duePaymentDate = $duePaymentDate;
+    }
+
+    public function getPaymentDate(): ?\DateTimeInterface
+    {
+        return $this->paymentDate;
+    }
+
+    public function setPaymentDate(?\DateTimeInterface $paymentDate): void
+    {
+        $this->paymentDate = $paymentDate;
+    }
+
     public function getPaymentMethod(): ?string
     {
         return $this->paymentMethod;
@@ -116,19 +129,14 @@ abstract class BaseInvoice implements BaseInvoiceInterface, InvoicePaymentInterf
         $this->paymentMethod = $method;
     }
 
-    public function setDuePaymentDate(?\DateTimeInterface $duePaymentDate): void
+    public function isPaid(): bool
     {
-        $this->duePaymentDate = $duePaymentDate;
+        return $this->isPaid;
     }
 
-    public function getPaymentState(): string
+    public function setIsPaid(bool $isPaid): void
     {
-        return $this->paymentState;
-    }
-
-    public function setPaymentState(string $paymentState): void
-    {
-        $this->paymentState = $paymentState;
+        $this->isPaid = $isPaid;
     }
 
     public function getSerie(): ?InvoiceSerieInterface

@@ -12,6 +12,8 @@ owl:
             invalid: Issue date is not valid
         transaction_date:
             invalid: Transaction date is not valid
+        due_payment_date:
+            invalid: Due payment date is not valid
         payment_date:
             invalid: Payment date is not valid
         number_format:

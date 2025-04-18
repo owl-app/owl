@@ -6,6 +6,7 @@ imports:
     - { resource: "@OwlSuggestionBundle/Resources/config/app/config.yml" }
     - { resource: "@OwlNotificationBundle/Resources/config/app/config.yml" }
     - { resource: "@OwlSettingBundle/Resources/config/app/config.yml" }
+    - { resource: "@OwlContractorBundle/Resources/config/app/config.yml" }
 
     - { resource: "@OwlCoreBundle/Resources/config/app/state_machine.yml" }
     - { resource: "@OwlCoreBundle/Resources/config/app/messenger.yaml" }

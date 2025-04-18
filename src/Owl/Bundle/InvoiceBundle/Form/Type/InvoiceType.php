@@ -7,6 +7,7 @@ namespace Owl\Bundle\InvoiceBundle\Form\Type;
 use Owl\Bundle\InvoiceBundle\Form\Type\Payment\InvoicePaymentMethodChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,10 +44,19 @@ final class InvoiceType extends AbstractResourceType
             ->add('duePaymentDate', DateType::class, [
                 'label' => 'owl.invoice.due_payment_date',
                 'widget' => 'single_text',
-                'invalid_message' => 'owl.invoice.payment_date.invalid',
+                'invalid_message' => 'owl.invoice.due_payment_date.invalid',
+            ])
+            ->add('paymentDate', DateType::class, [
+                'label' => 'owl.invoice.payment_date',
+                'widget' => 'single_text',
+                'invalid_message' => 'owl.invoice.payment_date.invalid'
             ])
             ->add('paymentMethod', InvoicePaymentMethodChoiceType::class, [
                 'label' => 'owl.invoice.payment_method',
+            ])
+            ->add('isPaid', CheckboxType::class, [
+                'label' => 'owl.invoice.invoice_paid',
+                'required' => false,
             ])
             ->add('serie', EntityType::class, [
                 'label' => 'owl.invoice.serie',

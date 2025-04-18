@@ -162,6 +162,7 @@ owl:
             list_contractors: List contractors
             create_contractor: New contractor
             update_contractor: Edit contractor
+            delete_contractor: Delete contractor
             bulk_delete_contractor: Bulk delete contractor
             availables_roles: Available roles in the system
             rbac_permission_availables: Permissions - accesses

@@ -20,6 +20,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
@@ -37,6 +38,9 @@ class FormComponent
 
     #[LiveProp(writable: true)]
     public string $fullNumberPreview;
+
+    #[LiveProp(writable: true)]
+    public bool $showPaymentDate = false;
 
     /**
      * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
@@ -70,6 +74,19 @@ class FormComponent
             $resource->getSequenceNumber(),
             $resource->getIssueDate()
         );
+    }
+
+    #[PreReRender(priority: -100)]
+    public function preReRender(): void
+    {
+        /** @var InvoiceInterface $invoice */
+        $invoice = $this->getForm()->getData();
+        
+        if ($invoice->isPaid()) {
+            $this->showPaymentDate = true;
+        } else {
+            $this->showPaymentDate = false;
+        }
     }
 
     #[LiveAction]

@@ -2,7 +2,7 @@ owl:
     invoice:
         issue_date: Issue date
         transaction_date: Transaction date
-        due_payment_date: Payment date
+        due_payment_date: Payment due date
         number: Invoice number
         type: Invoice type
         format_number: Format invoice number
@@ -24,3 +24,5 @@ owl:
                 credit: Credit
                 check: Check
                 other: Other
+        invoice_paid: Invoice paid
+        payment_date: Payment date

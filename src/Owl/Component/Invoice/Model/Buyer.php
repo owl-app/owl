@@ -12,10 +12,10 @@ class Buyer implements BuyerInterface, ResourceInterface
     protected int $id;
 
     /** @var string|null */
-    protected string $company;
+    protected ?string $company;
 
     /** @var string|null */
-    protected string $taxNumber;
+    protected ?string $taxNumber;
 
     /** @var string|null */
     protected string $street;

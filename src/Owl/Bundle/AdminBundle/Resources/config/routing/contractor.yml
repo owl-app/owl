@@ -13,6 +13,7 @@ owl_admin_contractor:
                 redirect:
                     optional_referer: owl_admin_contractor_index
             create:
+                serialization_groups: [AjaxShow]
                 form:
                     ajax: true
                 permission:
@@ -24,6 +25,12 @@ owl_admin_contractor:
                 permission:
                     group: contractor
                     description: owl.ui.permission.update_contractor
+            delete:
+                form:
+                    ajax: true
+                permission:
+                    group: contractor
+                    description: owl.ui.permission.delete_contractor
             bulkDelete:
                 redirect:
                     header: xhr

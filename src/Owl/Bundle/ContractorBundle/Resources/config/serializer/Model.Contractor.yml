@@ -6,4 +6,9 @@ Owl\Component\Contractor\Model\Contractor:
             expose: true
             type: integer
             xml_attribute: true
-            groups: [Default, Detailed]
+            groups: [AjaxShow]
+        companyName:
+            expose: true
+            type: string
+            xml_attribute: true
+            groups: [AjaxShow]

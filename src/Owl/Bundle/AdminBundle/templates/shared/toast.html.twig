@@ -11,8 +11,9 @@
         'error': ux_icon('tabler:exclamation-circle'),
     }
 %}
-
 <div
+    id="flashes-toast-container"
+    data-turbo-permanent
     class="toast-container flashes-toast-container position-fixed bottom-0 end-0 p-3"
     data-controller="toast"
     data-toast-headers-txt-value="{{ headers|json_encode }}"

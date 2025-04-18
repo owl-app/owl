@@ -1,5 +1,21 @@
 sylius_twig_hooks:
     hooks:
+        'owl_admin.contractor.modal.create':
+            content:
+                template: '@OwlAdmin/shared/crud/common/modal/content.html.twig'
+                configuration:
+                    stimulus:
+                        controllers: {
+                            form: {
+                                values: {
+                                    'sync-events': ['contractor:created']
+                                },
+                                outlets: {
+                                    'modal': '.owl-modal'
+                                }
+                            }
+                        }
+                priority: 0
         'owl_admin.contractor.modal.create.content.body':
             form:
                 component: 'owl_admin:contractor:form'
