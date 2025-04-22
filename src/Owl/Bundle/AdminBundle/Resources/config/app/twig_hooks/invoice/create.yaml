@@ -15,6 +15,7 @@ sylius_twig_hooks:
                             }
                         }
                 priority: 0
+
         'owl_admin.invoice.create.content':
             header:
                 template: '@OwlAdmin/shared/crud/common/content/header.html.twig'

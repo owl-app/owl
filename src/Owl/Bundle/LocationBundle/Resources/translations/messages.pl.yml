@@ -1,0 +1,12 @@
+owl:
+    form:
+        country:
+            add_province: Dodaj województwo
+            name: nazwa
+            provinces: Województwa
+            select: Wybierz
+            enabled: Dostępny
+        province:
+            name: Nazwa
+            abbreviation: Skrót
+            select: Wybierz

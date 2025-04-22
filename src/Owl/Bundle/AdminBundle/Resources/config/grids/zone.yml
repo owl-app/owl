@@ -1,0 +1,86 @@
+sylius_grid:
+    grids:
+        owl_admin_zone:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.zone.class%"
+            fields:
+                name:
+                    type: twig
+                    label: owl.ui.name
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/name.html.twig"
+                code:
+                    type: twig
+                    label: owl.ui.code
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/code.html.twig"
+                type:
+                    type: twig
+                    label: owl.ui.type
+                    options:
+                        template: "@OwlAdmin/zone/grid/field/type.html.twig"
+            filters:
+                name:
+                    type: string
+                    label: owl.ui.name
+                code:
+                    type: string
+                    label: owl.ui.code
+            actions:
+                main:
+                    create:
+                        type: modal_links
+                        label: owl.ui.create
+                        options:
+                            button: primary
+                            icon: flowbite:plus-outline
+                            header:
+                                icon: "tabler:cube"
+                                label: owl.ui.type
+                            links:
+                                country:
+                                    label: owl.ui.zone_consisting_of_countries
+                                    icon: "flowbite:plus-outline"
+                                    route: owl_admin_zone_create
+                                    parameters:
+                                        type: country
+                                    options:
+                                        modal:
+                                            size: 'xl'
+                                province:
+                                    label: owl.ui.zone_consisting_of_provinces
+                                    icon: "flowbite:plus-outline"
+                                    route: owl_admin_zone_create
+                                    parameters:
+                                        type: province
+                                    options:
+                                        modal:
+                                            size: 'xl'
+                                zone:
+                                    label: owl.ui.zone_consisting_of_other_zones
+                                    icon: "flowbite:plus-outline"
+                                    route: owl_admin_zone_create
+                                    parameters:
+                                        type: zone
+                                    options:
+                                        modal:
+                                            size: 'xl'
+                item:
+                    update:
+                        type: modal
+                        options:
+                            tooltip: owl.ui.edit
+                            icon: flowbite:pen-solid
+                            modal:
+                                size: 'xl'
+                            link:
+                                route: owl_admin_zone_update
+                                parameters:
+                                    id: resource.id
+                    delete:
+                        type: delete
+                bulk:
+                    delete:
+                        type: delete

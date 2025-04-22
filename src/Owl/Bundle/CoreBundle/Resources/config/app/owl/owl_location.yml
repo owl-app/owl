@@ -1,0 +1,12 @@
+owl_location:
+    zone_member:
+        validation_groups:
+            country:
+                - 'owl'
+                - 'owl_zone_member_country'
+            province:
+                - 'owl'
+                - 'owl_zone_member_province'
+            zone:
+                - 'owl'
+                - 'owl_zone_member_zone'

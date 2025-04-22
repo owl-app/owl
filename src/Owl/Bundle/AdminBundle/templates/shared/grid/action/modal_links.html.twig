@@ -1,0 +1,50 @@
+{% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
+
+{% set visible = options.visible is defined ? options.visible : true %}
+
+{% if visible %}
+    <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            {% if options.icon is defined %}
+                {{ ux_icon(options.icon) }}
+            {% endif %}
+            {{ action.label|trans }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            {% if options.header is defined %}
+                <li><h6 class="dropdown-header">{{ options.header.label|trans }}</h6></li>
+            {% endif %}
+            {% for link in options.links %}
+                {% set is_link_visible = link.visible is defined ? link.visible : true %}
+
+                {% if is_link_visible %}
+                    {% set route = link.url|default(link.route) %}
+                    {% set path = link.url is defined ? link.url : path(link.route, link.parameters|default([])) %}
+                    {% set optionsModal = link.options.modal|default({}) %}
+                    
+                    {% if is_granted(route) %}
+                        <li>
+                            <a 
+                                class="dropdown-item"
+                                data-controller="show-modal"
+                                data-show-modal-modal-outlet=".owl-modal"
+                                data-action="click->show-modal#open"
+                                data-show-modal-url-param="{{ path }}"
+                                {% if optionsModal is not empty %}
+                                    {% for key, value in optionsModal %}
+                                        data-show-modal-{{ key }}-param="{{ value }}"
+                                    {% endfor %}
+                                {% endif %}
+                                >
+                                {% if link.icon is defined %}
+                                    {{ ux_icon(link.icon, {'class': 'icon dropdown-item-icon'}) }}
+                                {% endif %}
+                                {{ link.label|trans }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

@@ -1,0 +1,52 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.invoice_tax_rate.modal.update.content.body':
+            form:
+                component: 'owl_admin:invoice_tax_rate:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'owl_admin.invoice_tax_rate.modal.update.content.body.form':
+            sections:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections.html.twig'
+                priority: 0
+
+        'owl_admin.invoice_tax_rate.modal.update.content.body.form.sections':
+            general:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections/general.html.twig'
+                priority: 100
+            configuration:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections/configuration.html.twig'
+                priority: 0
+
+        'owl_admin.invoice_tax_rate.modal.update.content.body.form.sections.general':
+            default:
+                enabled: false
+            code:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections/general/code.html.twig'
+                priority: 100
+            name:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections/general/name.html.twig'
+                priority: 0
+
+        'owl_admin.invoice_tax_rate.modal.update.content.body.form.sections.configuration':
+            amount:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections/configuration/amount.html.twig'
+                priority: 400
+            zones:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections/configuration/zones.html.twig'
+                priority: 300
+            province:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections/configuration/province.html.twig'
+                priority: 200
+            start_date:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections/configuration/start_date.html.twig'
+                priority: 100
+            end_date:
+                template: '@OwlAdmin/invoice/tax_rate/form/sections/configuration/end_date.html.twig'
+                priority: 0

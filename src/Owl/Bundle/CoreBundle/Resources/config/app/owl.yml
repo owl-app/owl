@@ -9,3 +9,4 @@ imports:
     - { resource: "@OwlCoreBundle/Resources/config/app/owl/owl_notification.yml" }
     - { resource: "@OwlCoreBundle/Resources/config/app/owl/owl_setting.yml" }
     - { resource: "@OwlCoreBundle/Resources/config/app/owl/owl_invoice.yml" }
+    - { resource: "@OwlCoreBundle/Resources/config/app/owl/owl_location.yml" }

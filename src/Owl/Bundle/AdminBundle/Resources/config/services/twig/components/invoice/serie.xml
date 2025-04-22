@@ -7,7 +7,7 @@
 >
     <services>
         <service
-            id="owl_admin.twig.component.admin_invoice_serie.form"
+            id="owl_admin.twig.component.invoice_serie.form"
             class="Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
             <argument type="service" id="owl.repository.invoice_serie" />
@@ -15,7 +15,7 @@
             <argument>%owl.model.invoice_serie.class%</argument>
             <argument>Owl\Bundle\InvoiceBundle\Form\Type\InvoiceSerieType</argument>
 
-            <tag name="owl.live_component.admin" key="owl_admin:admin_invoice_serie:form" />
+            <tag name="owl.live_component.admin" key="owl_admin:invoice_serie:form" />
         </service>
 
     </services>

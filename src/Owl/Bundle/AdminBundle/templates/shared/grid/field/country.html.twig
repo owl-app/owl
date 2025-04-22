@@ -1,0 +1,5 @@
+{% set countryCode = data.code is defined ? data.code : data %}
+
+{{ ux_icon('flagpack:' ~ countryCode|lower, {'class': 'flag flag-xs'}) }}
+
+<span class="ps-2 fw-medium">{{ countryCode|owl_country_name }}</span>

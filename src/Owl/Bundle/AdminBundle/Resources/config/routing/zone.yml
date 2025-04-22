@@ -1,0 +1,80 @@
+owl_admin_zone:
+    resource: |
+        alias: owl.zone
+        section: admin
+        templates: "@OwlAdmin\\shared\\crud\\modal"
+        except: ['show', 'index', 'create']
+        redirect: index
+        grid: owl_admin_zone
+        form:
+            type: Owl\Bundle\AdminBundle\Form\Type\ZoneType
+        permission: true
+        vars:
+            all:
+                redirect:
+                    optional_referer: owl_admin_zone_index
+            update:
+                form:
+                    ajax: true
+                permission:
+                    group: zone
+                    description: owl.ui.permission.update_zone
+            delete:
+                form:
+                    ajax: true
+                permission:
+                    group: zone
+                    description: owl.ui.permission.delete_zone
+            bulkDelete:
+                redirect:
+                    header: xhr
+                form:
+                    ajax: true
+                permission:
+                    group: zone
+                    description: owl.ui.permission.bulk_delete_zone
+    type: sylius.resource
+
+owl_admin_zone_index:
+    path: /zones/
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.zone::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_zone
+            template: "@OwlAdmin/shared/crud/index.html.twig"
+            vars:
+                referer: true
+                permission:
+                    group: zone
+                    description: owl.ui.permission.list_zones
+
+
+owl_admin_zone_create:
+    path: /zones/{type}/new
+    methods: [GET, POST]
+    defaults:
+        _controller: owl.controller.zone::createAction
+        _sylius:
+            section: admin
+            factory:
+                method: createTyped
+                arguments:
+                    type: $type
+            form:
+                type: Owl\Bundle\AdminBundle\Form\Type\ZoneType
+            template: "@OwlAdmin/shared/crud/modal/create.html.twig"
+            permission: true
+            vars:
+                form:
+                    ajax: true
+                permission:
+                    group: zone
+                    description: owl.ui.permission.create_zone
+                route:
+                    parameters:
+                        type: $type
+    requirements:
+        type: country|province|zone

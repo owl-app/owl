@@ -1,0 +1,59 @@
+{
+    "name": "owl/location",
+    "type": "library",
+    "description": "Location for PHP applications.",
+    "keywords": [
+        "country",
+        "province",
+        "zone",
+        "location"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sylius project",
+            "homepage": "https://sylius.com"
+        },
+        {
+            "name": "Paweł Kęska",
+            "email": "projekty@pawelkeska.eu"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "sylius/registry": "^1.6",
+        "sylius/resource": "^1.12",
+        "symfony/intl": "^6.4 || ^7.1"
+    },
+    "require-dev": {
+
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "^7.1"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Owl\\Component\\Location\\": ""
+        }
+    },
+    "autoload-dev": {
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

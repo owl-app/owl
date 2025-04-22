@@ -22,3 +22,22 @@ owl:
         serie:
             default: 
                 used: Only one serie can be default. Plase change serie with format {{ format }}
+    tax_rate:
+        country:
+            not_blank: Please select tax country
+        name:
+            not_blank: Please enter tax rate name
+            min_length: Tax rate name must be at least 1 character long.|Tax rate name must be at least {{ limit }} characters long
+            max_length: Tax rate name must not be longer than 1 character.|Tax rate name must not be longer than {{ limit }} characters
+        amount:
+            invalid: The tax rate amount is invalid
+            not_blank: Please enter tax rate amount
+        code:
+            max_length: The code must not be longer than {{ limit }} characters
+            not_blank: Please enter tax rate code
+            regex: Tax rate code can only be comprised of letters, numbers, dashes and underscores
+            unique: The tax rate with given code already exists
+        date:
+            greater_than_start_date: The tax rate should not end before it starts
+        zones:
+            min_length: You must select at least one zone

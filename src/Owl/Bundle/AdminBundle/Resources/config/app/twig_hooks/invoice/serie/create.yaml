@@ -2,7 +2,7 @@ sylius_twig_hooks:
     hooks:
         'owl_admin.invoice_serie.modal.create.content.body':
             form:
-                component: 'owl_admin:admin_invoice_serie:form'
+                component: 'owl_admin:invoice_serie:form'
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'

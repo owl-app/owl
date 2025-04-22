@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="owl.validator.unique_province_collection" class="Owl\Bundle\LocationBundle\Validator\Constraints\UniqueProvinceCollectionValidator">
+            <tag name="validator.constraint_validator" alias="owl_unique_province_collection_validator" />
+        </service>
+
+        <service id="owl.validator.zone_cannot_contain_itself" class="Owl\Bundle\LocationBundle\Validator\Constraints\ZoneCannotContainItselfValidator">
+            <tag name="validator.constraint_validator" alias="owl_zone_cannot_contain_itself_validator" />
+        </service>
+
+        <service id="owl.validator.zone_member_group" class="Owl\Bundle\LocationBundle\Validator\Constraints\ZoneMemberGroupValidator">
+            <argument>%owl.location.zone_member.validation_groups%</argument>
+            <tag name="validator.constraint_validator" alias="owl_zone_member_group" />
+        </service>
+    </services>
+</container>

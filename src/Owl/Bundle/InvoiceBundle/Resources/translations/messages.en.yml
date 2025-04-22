@@ -26,3 +26,9 @@ owl:
                 other: Other
         invoice_paid: Invoice paid
         payment_date: Payment date
+    tax_rate:
+        name: Name
+        amount: Amount
+        country: Country
+        end_date: End date
+        start_date: Start date

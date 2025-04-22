@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="owl.custom_factory.zone" class="Owl\Component\Location\Factory\ZoneFactory" decorates="owl.factory.zone" decoration-priority="256">
+            <argument type="service" id="owl.custom_factory.zone.inner" />
+            <argument type="service" id="owl.factory.zone_member" />
+        </service>
+        <service id="Owl\Component\Location\Factory\ZoneFactoryInterface" alias="owl.custom_factory.zone" />
+    </services>
+</container>
+
+

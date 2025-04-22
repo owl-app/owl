@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Owl\Component\Location
+        psr4_prefix: Owl\Component\Location
+        src_path: .

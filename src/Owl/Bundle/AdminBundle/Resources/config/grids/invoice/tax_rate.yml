@@ -1,0 +1,73 @@
+sylius_grid:
+    grids:
+        owl_admin_invoice_tax_rate:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%owl.model.invoice_tax_rate.class%"
+            sorting:
+                name: asc
+            fields:
+                name:
+                    type: twig
+                    label: owl.ui.name
+                    sortable: ~
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/name.html.twig"
+                code:
+                    type: twig
+                    label: owl.ui.code
+                    sortable: ~
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/code.html.twig"
+                amount:
+                    type: twig
+                    label: owl.ui.amount
+                    sortable: ~
+                    options:
+                        template: "@OwlUi/grid/field/percent.html.twig"
+            filters:
+                startDate:
+                    type: date
+                    label: owl.ui.start_date
+                    options:
+                        inclusive_to: true
+                endDate:
+                    type: date
+                    label: owl.ui.end_date
+                    options:
+                        inclusive_to: true
+                search:
+                    type: string
+                    label: owl.ui.search
+                    options:
+                        fields: [code, name]
+            actions:
+                main:
+                    create:
+                        type: modal
+                        label: owl.ui.create
+                        options:
+                            button: primary
+                            icon: flowbite:plus-outline
+                            modal:
+                                size: 'xl'
+                            link:
+                                route: owl_admin_invoice_tax_rate_create
+                item:
+                    update:
+                        type: modal
+                        options:
+                            tooltip: owl.ui.edit
+                            icon: flowbite:pen-solid
+                            modal:
+                                size: 'xl'
+                            link:
+                                route: owl_admin_invoice_tax_rate_update
+                                parameters:
+                                    id: resource.id
+                    delete:
+                        type: delete
+                bulk:
+                    delete:
+                        type: delete

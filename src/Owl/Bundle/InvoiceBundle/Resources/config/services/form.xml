@@ -12,6 +12,9 @@
         <parameter key="owl.form.type.invoice_serie.validation_groups" type="collection">
             <parameter>owl</parameter>
         </parameter>
+        <parameter key="owl.form.type.invoice_tax_rate.validation_groups" type="collection">
+            <parameter>owl</parameter>
+        </parameter>
     </parameters>
 
     <services>
@@ -42,6 +45,13 @@
         </service>
 
         <service id="owl.form.type.invoice_payment_method_choice" class="Owl\Bundle\InvoiceBundle\Form\Type\Payment\InvoicePaymentMethodChoiceType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.tax_rate" class="Owl\Bundle\InvoiceBundle\Form\Type\Taxation\TaxRateType">
+            <argument>%owl.model.invoice_tax_rate.class%</argument>
+            <argument>%owl.form.type.invoice_tax_rate.validation_groups%</argument>
+            <argument type="service" id="owl.form.subscriber.build_country" />
             <tag name="form.type" />
         </service>
     </services>

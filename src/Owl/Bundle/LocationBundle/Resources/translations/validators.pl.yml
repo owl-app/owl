@@ -1,0 +1,15 @@
+owl:
+    country:
+        code:
+            not_blank: Proszę podać kod ISO kraju.
+            regex: Kod kraju może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.
+            unique: Kod ISO kraju musi być unikalny.
+    province:
+        code:
+            min_length: Kod województwa musi mieć co najmniej 5 znaków|Kod województwa musi mieć co najmniej 5 znaków.
+            not_blank: Proszę podać kod województwa.
+            regex: Kod województwa powinien być w formacie XX-XX (np. US-FL).
+            unique: Kod województwa musi być unikalny.
+        name:
+            not_blank: Proszę podać nazwę województwa.
+            unique: Nazwa województwa musi być unikalna.

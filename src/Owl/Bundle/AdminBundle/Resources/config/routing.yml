@@ -49,8 +49,18 @@ owl_admin_invoice_serie:
     resource: "@OwlAdminBundle/Resources/config/routing/invoice/serie.yml"
     prefix: /invoices/
 
+owl_admin_invoice_tax_rate:
+    resource: "@OwlAdminBundle/Resources/config/routing/invoice/tax_rate.yml"
+    prefix: /invoices/
+
 owl_admin_contractor:
     resource: "@OwlAdminBundle/Resources/config/routing/contractor.yml"
+
+owl_admin_country:
+    resource: "@OwlAdminBundle/Resources/config/routing/country.yml"
+
+owl_admin_zone:
+    resource: "@OwlAdminBundle/Resources/config/routing/zone.yml"
 
 owl_admin_security:
     resource: "@OwlAdminBundle/Resources/config/routing/security.yml"

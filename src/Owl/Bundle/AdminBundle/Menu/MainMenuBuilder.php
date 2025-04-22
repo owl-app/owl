@@ -135,6 +135,9 @@ final class MainMenuBuilder
         $isGrantedUsers = $this->authorizationChecker->isGranted('owl_admin_admin_user_index');
         $isGrantedSettings = $this->authorizationChecker->isGranted('owl_admin_setting_index');
         $isGrantedInvoiceNumberFormat = $this->authorizationChecker->isGranted('owl_admin_invoice_serie_index');
+        $isGrantedInvoiceTaxRate = $this->authorizationChecker->isGranted('owl_admin_invoice_tax_rate_index');
+        $isGrantedInvoiceCountries = $this->authorizationChecker->isGranted('owl_admin_country_index');
+        $isGrantedInvoiceZones= $this->authorizationChecker->isGranted('owl_admin_zone_index');
 
         if ($isGrantedLocales || $isGrantedUsers || $isGrantedSettings || $isGrantedInvoiceNumberFormat) {
             $configuration = $menu
@@ -147,22 +150,43 @@ final class MainMenuBuilder
                 $configuration
                     ->addChild('admin_invoice_serie', [
                         'route' => 'owl_admin_invoice_serie_index',
-                        'extras' => [
-                            'routes' => [
-                                ['route' => 'owl_admin_invoice_serie_create'],
-                                ['route' => 'owl_admin_invoice_serie_update'],
-                            ]
-                        ]
                     ])
                     ->setLabel('owl.menu.admin.main.configuration.invoice_series')
-                    ->setLabelAttribute('icon', 'flowbite:document-text-outline');
+                ;
+            }
+
+            if ($isGrantedInvoiceTaxRate) {
+                $configuration
+                    ->addChild('admin_invoice_tax_rate', [
+                        'route' => 'owl_admin_invoice_tax_rate_index',
+                    ])
+                    ->setLabel('owl.menu.admin.main.configuration.invoice_tax_rates')
+                ;
+            }
+
+            if ($isGrantedInvoiceCountries) {
+                $configuration
+                    ->addChild('admin_countries', [
+                        'route' => 'owl_admin_country_index',
+                    ])
+                    ->setLabel('owl.menu.admin.main.configuration.countries')
+                ;
+            }
+
+            if ($isGrantedInvoiceZones) {
+                $configuration
+                    ->addChild('admin_zones', [
+                        'route' => 'owl_admin_zone_index',
+                    ])
+                    ->setLabel('owl.menu.admin.main.configuration.zones')
+                ;
             }
 
             if ($isGrantedLocales) {
                 $configuration
                     ->addChild('admin_locales', ['route' => 'owl_admin_locale_index'])
                     ->setLabel('owl.menu.admin.main.configuration.locales')
-                    ->setLabelAttribute('icon', 'flag');
+                ;
             }
 
             if ($isGrantedUsers) {
@@ -178,14 +202,14 @@ final class MainMenuBuilder
                         ]
                     ])
                     ->setLabel('owl.menu.admin.main.configuration.users')
-                    ->setLabelAttribute('icon', 'users');
+                ;
             }
 
             if ($isGrantedSettings) {
                 $configuration
                     ->addChild('admin_settings', ['route' => 'owl_admin_setting_index'])
                     ->setLabel('owl.menu.admin.main.configuration.settings')
-                    ->setLabelAttribute('icon', 'settings');
+                ;
             }
         }
     }

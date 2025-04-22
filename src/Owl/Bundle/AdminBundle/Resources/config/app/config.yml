@@ -35,6 +35,7 @@ sylius_grid:
             show: '@OwlAdmin/shared/grid/action/show.html.twig'
             update: '@OwlAdmin/shared/grid/action/update.html.twig'
             modal: "@OwlAdmin/shared/grid/action/modal.html.twig"
+            modal_links: "@OwlAdmin/shared/grid/action/modal_links.html.twig"
             custom: "@OwlUi/shared/grid/action//custom.html.twig"
             # Resource specific actions
             create_payment_method: "@OwlAdmin/payment_method/grid/action/create.html.twig"

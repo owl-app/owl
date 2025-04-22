@@ -1,0 +1,58 @@
+owl_admin_tax_rate:
+    resource: |
+        alias: owl.invoice_tax_rate
+        section: admin
+        templates: "@OwlAdmin\\shared\\crud\\modal"
+        except: ['index']
+        redirect: update
+        form:
+            type: Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceTaxRateType
+        permission: true
+        vars:
+            all:
+                redirect:
+                    optional_referer: owl_admin_invoice_tax_rate_index
+            create:
+                serialization_groups: [AjaxShow]
+                form:
+                    ajax: true
+                permission:
+                    group: invoice_tax_rate
+                    description: owl.ui.permission.create_invoice_tax_rate
+            update:
+                form:
+                    ajax: true
+                permission:
+                    group: invoice_tax_rate
+                    description: owl.ui.permission.update_invoice_tax_rate
+            delete:
+                form:
+                    ajax: true
+                permission:
+                    group: invoice_tax_rate
+                    description: owl.ui.permission.delete_invoice_tax_rate
+            bulkDelete:
+                redirect:
+                    header: xhr
+                form:
+                    ajax: true
+                permission:
+                    group: invoice_tax_rate
+                    description: owl.ui.permission.bulk_delete_invoice_tax_rate
+    type: sylius.resource
+
+owl_admin_invoice_tax_rate_index:
+    path: /tax-rates/
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.invoice_tax_rate::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_invoice_tax_rate
+            template: "@OwlAdmin/shared/crud/index.html.twig"
+            vars:
+                referer: true
+                permission:
+                    group: invoice_tax_rate
+                    description: owl.ui.permission.list_invoice_tax_rates

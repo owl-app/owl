@@ -1,0 +1,35 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.country.modal.update.content.body':
+            form:
+                component: 'owl_admin:country:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                configuration:
+                    method: 'PUT'
+                priority: 0
+
+        'owl_admin.country.modal.update.content.body.form':
+            sections:
+                template: '@OwlAdmin/country/form/sections.html.twig'
+                priority: 0
+
+        'owl_admin.country.modal.update.content.body.form.sections':
+            general:
+                template: '@OwlAdmin/country/form/sections/general.html.twig'
+                priority: 0
+
+        'owl_admin.country.modal.update.content.body.form.sections.general':
+            default:
+                enabled: false
+            code:
+                template: '@OwlAdmin/country/form/sections/general/code.html.twig'
+                priority: 200
+            enabled:
+                template: '@OwlAdmin/country/form/sections/general/enabled.html.twig'
+                priority: 100
+            provinces:
+                template: '@OwlAdmin/country/form/sections/general/provinces.html.twig'
+                priority: 0

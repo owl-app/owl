@@ -17,6 +17,5 @@
 
             <tag name="owl.live_component.admin" key="owl_admin:contractor:form" />
         </service>
-
     </services>
 </container>

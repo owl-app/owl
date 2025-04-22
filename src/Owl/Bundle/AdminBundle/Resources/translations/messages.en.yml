@@ -64,6 +64,9 @@ owl:
                     header: Configuration
                     locales: Locales
                     invoice_series: Invoice series
+                    invoice_tax_rates: Invoice tax rates
+                    countries: Countries
+                    zones: Zones
                 permission:
                     header: Permissions
                     available: Available
@@ -76,6 +79,21 @@ owl:
                     contractors: Contractors
 
     ui:
+        zone_consisting_of_countries: Zone consisting of countries
+        zone_consisting_of_other_zones: Zone consisting of other zones
+        zone_consisting_of_provinces: Zone consisting of provinces
+        create_zone: New zone
+        update_zone: Edit zone
+        members: Members
+        zones: Zones
+        amount: Amount
+        start_date: Start date
+        end_date: End date
+        create_invoice_tax_rate: New invoice tax rate
+        update_invoice_tax_rate: Edit invoice tax rate
+        invoice_tax_rates: Invoice tax rates
+        create_country: New country
+        update_country: Edit country
         payment: Payment
         invoice:
             increment:
@@ -153,6 +171,24 @@ owl:
         edit_your_personal_information: Edit your personal information
         show_notification: Details notification
         permission:
+            zone: Zones
+            list_zones: List zones
+            create_zone: New zone
+            update_zone: Edit zone
+            delete_zone: Delete zone
+            bulk_delete_zone: Bulk delete zone
+            country: Countries
+            list_countries: List countries
+            create_country: New country
+            update_country: Edit country
+            delete_country: Delete country
+            bulk_delete_country: Bulk delete country
+            invoice_tax_rate: Invoice - tax rate
+            list_invoice_tax_rates: List invoice tax rates
+            create_invoice_tax_rate: New invoice tax rate
+            update_invoice_tax_rate: Edit invoice tax rate
+            delete_invoice_tax_rate: Delete invoice tax rate
+            bulk_delete_invoice_tax_rate: Bulk delete invoice tax rate
             invoice: Invoices
             list_invoices: List invoices
             create_invoice: New invoice

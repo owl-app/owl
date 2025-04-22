@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Owl\Component\Location\Model\Province">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>name</value>
+                <value>country</value>
+            </option>
+            <option name="errorPath">name</option>
+            <option name="message">owl.province.name.unique</option>
+            <option name="groups">owl</option>
+        </constraint>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">owl.province.code.unique</option>
+            <option name="groups">owl</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">owl.province.code.not_blank</option>
+                <option name="groups">owl</option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="message">owl.province.code.regex</option>
+                <option name="pattern">/^[A-Z]{2}-[A-Z0-9]{1,}$/</option>
+                <option name="groups">owl</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">owl.province.code.max_length</option>
+                <option name="groups">owl</option>
+            </constraint>
+        </property>
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">owl.province.name.not_blank</option>
+                <option name="groups">owl</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="max">255</option>
+                <option name="minMessage">owl.province.name.min_length</option>
+                <option name="maxMessage">owl.province.name.max_length</option>
+                <option name="groups">owl</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

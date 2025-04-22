@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <mapped-superclass name="Owl\Component\Location\Model\Zone" table="owl_zone">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+          </id>
+
+        <field name="code" column="code" type="string" unique="true" />
+        <field name="name" column="name" type="string" />
+        <field name="type" column="type" type="string" length="8" />
+
+        <one-to-many field="members" target-entity="Owl\Component\Location\Model\ZoneMemberInterface" mapped-by="belongsTo" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+        </one-to-many>
+    </mapped-superclass>
+
+</doctrine-mapping>

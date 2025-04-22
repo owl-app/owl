@@ -33,5 +33,29 @@
             <tag name="ux.entity_autocomplete_field" />
         </service>
 
+        <service id="owl_admin.form.type.country" class="Owl\Bundle\AdminBundle\Form\Type\CountryType" >
+            <argument type="service" id="owl.repository.country" />
+            <tag name="form.type" />
+        </service>
+
+        <!-- <service id="owl_admin.form.extension.type.location_fields" class="Owl\Bundle\AdminBundle\Form\Extension\LocationFieldsExtension">
+            <argument type="service" id="owl.repository.country" />
+            <tag name="form.type_extension" />
+        </service> -->
+
+        <service id="owl_admin.form.type.invoice_tax_rate" class="Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceTaxRateType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl_admin.form.type.zone" class="Owl\Bundle\AdminBundle\Form\Type\ZoneType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl_admin.form.type.zone_autocomplete" class="Owl\Bundle\AdminBundle\Form\Type\ZoneAutocompleteType" >
+            <argument>%owl.model.zone.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
+        </service>
+
     </services>
 </container>

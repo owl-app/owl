@@ -1,0 +1,54 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.zone.modal.create.content.body':
+            form:
+                component: 'owl_admin:zone:form'
+                props:
+                    resource: '@=_context.resource'
+                    type: '@=_context.resource.getType()'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                priority: 0
+
+        'owl_admin.zone.modal.create.content.body.form':
+            sections:
+                template: '@OwlAdmin/zone/form/sections.html.twig'
+                priority: 0
+
+        'owl_admin.zone.modal.create.content.body.form.sections':
+            general:
+                template: '@OwlAdmin/zone/form/sections/general.html.twig'
+                priority: 100
+            members:
+                template: '@OwlAdmin/zone/form/sections/members.html.twig'
+                priority: 0
+
+        'owl_admin.zone.modal.create.content.body.form.sections.members':
+            member:
+                template: '@OwlAdmin/zone/form/sections/members/member.html.twig'
+                priority: 0
+
+        'owl_admin.zone.modal.create.content.body.form.sections.general':
+            default:
+                enabled: false
+            code:
+                template: '@OwlAdmin/zone/form/sections/general/code.html.twig'
+                priority: 200
+            type:
+                template: '@OwlAdmin/zone/form/sections/general/type.html.twig'
+                priority: 100
+            name:
+                template: '@OwlAdmin/zone/form/sections/general/name.html.twig'
+                priority: 0
+
+        'owl_admin.zone.modal.create.content.actions':
+            save:
+                template: '@OwlAdmin/shared/crud/common/modal/content/actions/create.html.twig'
+                configuration:
+                    method: 'POST'
+                    path:
+                        params: 
+                            type: '@=_context.resource.getType()'
+                    params:
+                        save_action: 'referer'
+                priority: 0

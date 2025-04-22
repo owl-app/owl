@@ -1,0 +1,30 @@
+owl:
+    form:
+        address:
+            province: Province
+            country: Country
+        country:
+            add_province: Add province
+            name: Name
+            provinces: Provinces
+            select: Select
+            enabled: Enabled
+        province:
+            name: Name
+            abbreviation: Abbreviation
+            select: Select
+        zone:
+            add_member: Add member
+            members: Members
+            name: Name
+            type: Type
+            types:
+                country: Country
+                province: Province
+                zone: Zone
+            scope: Scope
+            scopes:
+                all: All
+            select: Select
+        zone_member:
+            select: Select

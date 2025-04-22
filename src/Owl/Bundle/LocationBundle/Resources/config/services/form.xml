@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="owl.form.type.country.validation_groups" type="collection">
+            <parameter>owl</parameter>
+        </parameter>
+        <parameter key="owl.form.type.province.validation_groups" type="collection">
+            <parameter>owl</parameter>
+        </parameter>
+        <parameter key="owl.form.type.zone.validation_groups" type="collection">
+            <parameter>owl</parameter>
+        </parameter>
+        <parameter key="owl.form.type.zone_member.validation_groups" type="collection">
+            <parameter>owl</parameter>
+        </parameter>
+    </parameters>
+
+    <services>
+
+        <service id="owl.form.type.country" class="Owl\Bundle\LocationBundle\Form\Type\CountryType">
+            <argument>%owl.model.country.class%</argument>
+            <argument>%owl.form.type.country.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.country_choice" class="Owl\Bundle\LocationBundle\Form\Type\CountryChoiceType">
+            <argument type="service" id="owl.repository.country" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.country_code_choice" class="Owl\Bundle\LocationBundle\Form\Type\CountryCodeChoiceType">
+            <argument type="service" id="owl.repository.country" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.province" class="Owl\Bundle\LocationBundle\Form\Type\ProvinceType">
+            <argument>%owl.model.province.class%</argument>
+            <argument>%owl.form.type.province.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.province_choice" class="Owl\Bundle\LocationBundle\Form\Type\ProvinceChoiceType">
+            <argument type="service" id="owl.repository.province" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.province_code_choice" class="Owl\Bundle\LocationBundle\Form\Type\ProvinceCodeChoiceType">
+            <argument type="service" id="owl.repository.province" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.subscriber.build_country" class="Owl\Bundle\LocationBundle\Form\EventListener\BuildCountryFormSubscriber">
+            <argument type="service" id="owl.repository.country" />
+            <argument type="service" id="form.factory" />
+        </service>
+
+        <service id="owl.form.type.zone" class="Owl\Bundle\LocationBundle\Form\Type\ZoneType">
+            <argument>%owl.model.zone.class%</argument>
+            <argument>%owl.form.type.zone.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.zone_choice" class="Owl\Bundle\LocationBundle\Form\Type\ZoneChoiceType">
+            <argument type="service" id="owl.repository.zone" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.zone_code_choice" class="Owl\Bundle\LocationBundle\Form\Type\ZoneCodeChoiceType">
+            <argument type="service" id="owl.repository.zone" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.zone_member" class="Owl\Bundle\LocationBundle\Form\Type\ZoneMemberType">
+            <argument>%owl.model.zone_member.class%</argument>
+            <argument>%owl.form.type.zone_member.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+    </services>
+</container>

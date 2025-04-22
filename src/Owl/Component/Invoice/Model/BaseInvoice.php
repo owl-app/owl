@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model;
 
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableTrait;
 
-abstract class BaseInvoice implements BaseInvoiceInterface, InvoicePaymentInterface, ResourceInterface
+abstract class BaseInvoice implements BaseInvoiceInterface
 {
     use TimestampableTrait;
 

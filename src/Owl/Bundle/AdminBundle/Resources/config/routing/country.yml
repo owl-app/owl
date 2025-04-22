@@ -1,0 +1,59 @@
+owl_admin_country:
+    resource: |
+        alias: owl.country
+        section: admin
+        templates: "@OwlAdmin\\shared\\crud\\modal"
+        except: ['show', 'index']
+        redirect: index
+        grid: owl_admin_country
+        form:
+            type: Owl\Bundle\AdminBundle\Form\Type\CountryType
+        permission: true
+        vars:
+            all:
+                redirect:
+                    optional_referer: owl_admin_country_index
+            create:
+                serialization_groups: [AjaxShow]
+                form:
+                    ajax: true
+                permission:
+                    group: country
+                    description: owl.ui.permission.create_country
+            update:
+                form:
+                    ajax: true
+                permission:
+                    group: country
+                    description: owl.ui.permission.update_country
+            delete:
+                form:
+                    ajax: true
+                permission:
+                    group: country
+                    description: owl.ui.permission.delete_country
+            bulkDelete:
+                redirect:
+                    header: xhr
+                form:
+                    ajax: true
+                permission:
+                    group: country
+                    description: owl.ui.permission.bulk_delete_country
+    type: sylius.resource
+
+owl_admin_country_index:
+    path: /countries/
+    methods: [GET]
+    defaults:
+        _controller: owl.controller.country::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_country
+            template: "@OwlAdmin/shared/crud/index.html.twig"
+            vars:
+                referer: true
+                permission:
+                    group: country
+                    description: owl.ui.permission.list_countries

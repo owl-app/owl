@@ -6,7 +6,7 @@ namespace Owl\Component\Invoice\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface BaseInvoiceInterface extends ResourceInterface
+interface BaseInvoiceInterface extends ResourceInterface, InvoicePaymentInterface
 {
     public const PAYMENT_STATE_COMPLETED = 'completed';
 
