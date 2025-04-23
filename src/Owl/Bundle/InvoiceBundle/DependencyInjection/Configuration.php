@@ -12,10 +12,12 @@ use Owl\Component\Invoice\Model\Buyer;
 use Owl\Component\Invoice\Model\BuyerInterface;
 use Owl\Component\Invoice\Model\Invoice;
 use Owl\Component\Invoice\Model\InvoiceInterface;
-use Owl\Component\Invoice\Model\InvoiceSequence;
-use Owl\Component\Invoice\Model\InvoiceSequenceInterface;
+use Owl\Component\Invoice\Model\Sequence;
+use Owl\Component\Invoice\Model\SequenceInterface;
 use Owl\Component\Invoice\Model\InvoiceSerie;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
+use Owl\Component\Invoice\Model\LineItem;
+use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRate;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -108,8 +110,8 @@ final class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(InvoiceSequence::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(InvoiceSequenceInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(Sequence::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(SequenceInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(BaseController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
@@ -130,6 +132,23 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(TaxRateType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('invoice_line_item')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(LineItem::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(LineItemInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(BaseController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        // ->scalarNode('form')->defaultValue(TaxRateType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

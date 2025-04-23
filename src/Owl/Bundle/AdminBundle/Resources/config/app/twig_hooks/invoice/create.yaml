@@ -54,7 +54,10 @@ sylius_twig_hooks:
         'owl_admin.invoice.create.content.body.form.sections':
             general:
                 template: '@OwlAdmin/invoice/form/sections/general.html.twig'
-                priority: 100
+                priority: 200
             payment:
                 template: '@OwlAdmin/invoice/form/sections/payment.html.twig'
+                priority: 100
+            line_items:
+                template: '@OwlAdmin/invoice/form/sections/line_items.html.twig'
                 priority: 0

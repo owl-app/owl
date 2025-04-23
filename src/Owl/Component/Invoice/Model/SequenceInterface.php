@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model;
 
-interface InvoiceSequenceInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface SequenceInterface extends ResourceInterface
 {
     public function getNextCounter(): int;
 

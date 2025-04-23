@@ -7,6 +7,7 @@ namespace Owl\Bundle\AdminBundle\Form\Type;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceSerieHiddenType;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceBuyerType;
 use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType as BaseInvoiceType;
+use Owl\Bundle\InvoiceBundle\Form\Type\LineItemType;
 use Owl\Component\Core\Model\Invoice\BuyerInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Symfony\Component\Form\AbstractType;
@@ -14,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class InvoiceType extends AbstractType
 {
@@ -29,6 +31,15 @@ final class InvoiceType extends AbstractType
                 'required' => true,
             ])
             ->add('serie', InvoiceSerieHiddenType::class)
+            ->add('lineItems', LiveCollectionType::class, [
+                'entry_type' => LineItemType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'button_add_options' => [
+                    'label' => 'owl.ui.invoice.add_line_item',
+                ],
+            ])
         ;
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {

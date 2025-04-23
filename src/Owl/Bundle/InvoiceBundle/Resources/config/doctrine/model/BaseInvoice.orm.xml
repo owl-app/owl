@@ -24,6 +24,12 @@
             <join-column name="serie_id" />
         </many-to-one>
 
+        <one-to-many field="lineItems" target-entity="Owl\Component\Invoice\Model\LineItemInterface" mapped-by="invoice" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

@@ -1,0 +1,64 @@
+<table class="table card-table table-vcenter datatable col-12 box">
+    <thead>
+        <tr>
+            <th>
+                {{ 'owl.invoice.line_item.name'|trans }}
+            </th>
+            <th>
+                {{ 'owl.invoice.line_item.quantity'|trans }}
+            </th>
+            <th>
+                {{ 'owl.invoice.line_item.unit'|trans }}
+            </th>
+            <th>
+                {{ 'owl.invoice.line_item.net_price'|trans }}
+            </th>
+            <th>
+                {{ 'owl.invoice.line_item.subtotal'|trans }}
+            </th>
+            <th>
+                {{ 'owl.invoice.line_item.tax_rate'|trans }}
+            </th>
+            <th>
+                {{ 'owl.invoice.line_item.tax_rate_total'|trans }}
+            </th>
+            <th>
+                {{ 'owl.invoice.line_item.total'|trans }}
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody {{ sylius_test_html_attribute('line-items') }}>
+        {% for line_item_form in hookable_metadata.context.form.lineItems %}
+            <tr>
+                <td>
+                    {{ form_row(line_item_form.name, sylius_test_form_attribute('line-item-name')) }}
+                </td>
+                <td>
+                    {{ form_row(line_item_form.quantity, sylius_test_form_attribute('line-item-quantity')) }}
+                </td>
+                <td>
+                    {{ form_row(line_item_form.unit, sylius_test_form_attribute('line-item-unit')) }}
+                </td>
+                <td>
+                    {{ form_row(line_item_form.unitNetPrice, sylius_test_form_attribute('line-item-unit-net-price')) }}
+                </td>
+                <td>
+                    {{ form_row(line_item_form.subtotal, sylius_test_form_attribute('line-item-subtotal')) }}
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td class="col-auto" {{ sylius_test_html_attribute('delete-line-item') }}>
+                    {{ form_row(line_item_form.vars.button_delete, {attr: {class: 'btn btn-outline-danger'}}) }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ form_widget(hookable_metadata.context.form.lineItems.vars.button_add, sylius_test_form_attribute('add-line-item')) }}

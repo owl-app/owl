@@ -8,6 +8,7 @@ use Owl\Bundle\InvoiceBundle\Form\Type\Payment\InvoicePaymentMethodChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -63,6 +64,14 @@ final class InvoiceType extends AbstractResourceType
                 'label' => 'owl.invoice.serie',
                 'class' => $this->dataClassSerie,
                 'choice_label' => 'format',
+            ])
+            ->add('lineItems', CollectionType::class, [
+                'label' => 'sylius.ui.actions',
+                'entry_type' => LineItemType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'required' => false,
             ])
         ;
     }

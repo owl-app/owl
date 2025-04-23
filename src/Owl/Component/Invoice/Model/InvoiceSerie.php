@@ -30,12 +30,12 @@ class InvoiceSerie implements InvoiceSerieInterface
     /** @var boolean */
     protected $isDefault = false;
 
-    /** @var Collection<array-key, InvoiceSequenceInterface> */
+    /** @var Collection<array-key, SequenceInterface> */
     protected $sequences = [];
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, InvoiceSequenceInterface> $this->sequences */
+        /** @var ArrayCollection<array-key, SequenceInterface> $this->sequences */
         $this->sequences = new ArrayCollection();
     }
 

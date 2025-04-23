@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Resource\Model\TimestampableTrait;
 
 abstract class BaseInvoice implements BaseInvoiceInterface
@@ -42,6 +44,17 @@ abstract class BaseInvoice implements BaseInvoiceInterface
 
     /** @var InvoiceSerieInterface */
     protected $serie;
+
+    /** @var Collection<array-key, LineItemInterface> */
+    protected $lineItems;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+
+        /** @var ArrayCollection<array-key, LineItemInterface> $this->lineItems */
+        $this->lineItems = new ArrayCollection();
+    }
 
     public function getId(): string|int|null
     {
@@ -146,5 +159,34 @@ abstract class BaseInvoice implements BaseInvoiceInterface
     public function setSerie(?InvoiceSerieInterface $serie): void
     {
         $this->serie = $serie;
+    }
+
+    public function getLineItems(): Collection
+    {
+        return $this->lineItems;
+    }
+
+    public function hasLineItem(LineItemInterface $lineItem): bool
+    {
+        return $this->lineItems->contains($lineItem);
+    }
+
+    public function addLineItem(LineItemInterface $lineItem): void
+    {
+        if (!$this->hasLineItem($lineItem)) {
+            $this->lineItems->add($lineItem);
+        }
+    }
+
+    public function removeLineItem(LineItemInterface $lineItem): void
+    {
+        if ($this->hasLineItem($lineItem)) {
+            $this->lineItems->removeElement($lineItem);
+        }
+    }
+
+    public function clearLineItems(): void
+    {
+        $this->lineItems->clear();
     }
 }

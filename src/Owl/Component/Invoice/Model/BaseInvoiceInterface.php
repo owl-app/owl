@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface BaseInvoiceInterface extends ResourceInterface, InvoicePaymentInterface
@@ -35,4 +36,14 @@ interface BaseInvoiceInterface extends ResourceInterface, InvoicePaymentInterfac
     public function getSerie(): ?InvoiceSerieInterface;
 
     public function setSerie(?InvoiceSerieInterface $serie): void;
+
+    public function getLineItems(): Collection;
+
+    public function hasLineItem(LineItemInterface $lineItem): bool;
+
+    public function addLineItem(LineItemInterface $lineItem): void;
+
+    public function removeLineItem(LineItemInterface $lineItem): void;
+
+    public function clearLineItems(): void;
 }
