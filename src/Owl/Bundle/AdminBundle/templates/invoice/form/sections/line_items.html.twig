@@ -1,64 +1,102 @@
-<table class="table card-table table-vcenter datatable col-12 box">
+{% import '@OwlAdmin/shared/helper/money.html.twig' as money %}
+
+<table class="table table-line-items card-table table-vcenter datatable col-12 box mt-3">
     <thead>
         <tr>
-            <th>
+            <th style="width:30%">
                 {{ 'owl.invoice.line_item.name'|trans }}
             </th>
-            <th>
+            <th style="width: 100px">
                 {{ 'owl.invoice.line_item.quantity'|trans }}
             </th>
-            <th>
+            <th style="width: 120px">
                 {{ 'owl.invoice.line_item.unit'|trans }}
             </th>
             <th>
-                {{ 'owl.invoice.line_item.net_price'|trans }}
+                {{ 'owl.invoice.line_item.unit_price'|trans }}
             </th>
             <th>
-                {{ 'owl.invoice.line_item.subtotal'|trans }}
+                {{ 'owl.invoice.line_item.net_value'|trans }}
             </th>
             <th>
-                {{ 'owl.invoice.line_item.tax_rate'|trans }}
+                {{ 'owl.invoice.line_item.tax_rate.label'|trans }}
             </th>
             <th>
-                {{ 'owl.invoice.line_item.tax_rate_total'|trans }}
+                {{ 'owl.ui.invoice.line_item.tax_value'|trans }}
             </th>
             <th>
-                {{ 'owl.invoice.line_item.total'|trans }}
+                {{ 'owl.ui.invoice.line_item.gross_value'|trans }}
             </th>
             <th>
             </th>
         </tr>
     </thead>
     <tbody {{ sylius_test_html_attribute('line-items') }}>
-        {% for line_item_form in hookable_metadata.context.form.lineItems %}
+        {% for key, line_item_form in hookable_metadata.context.form.lineItems %}
+            {% set item = line_item_form.vars.data %}
             <tr>
                 <td>
-                    {{ form_row(line_item_form.name, sylius_test_form_attribute('line-item-name')) }}
+                    {{ form_widget(line_item_form.name, sylius_test_form_attribute('line-item-name')) }}
                 </td>
                 <td>
-                    {{ form_row(line_item_form.quantity, sylius_test_form_attribute('line-item-quantity')) }}
+                    {{
+                        form_widget(line_item_form.quantity, sylius_test_form_attribute('line-item-quantity')|merge(
+                            {
+                                row_attr: { class: 'mb-2' },
+                                attr: {
+                                    'data-action': 'keyup->invoice-form#quantityChanged',
+                                    'data-invoice-form-key-param': key,
+                                }
+                            }
+                        ))
+                    }}
                 </td>
                 <td>
-                    {{ form_row(line_item_form.unit, sylius_test_form_attribute('line-item-unit')) }}
+                    {{ form_widget(line_item_form.unit, sylius_test_form_attribute('line-item-unit')) }}
                 </td>
                 <td>
-                    {{ form_row(line_item_form.unitNetPrice, sylius_test_form_attribute('line-item-unit-net-price')) }}
+                    {{
+                        form_widget(line_item_form.unitPrice, sylius_test_form_attribute('line-item-unit-net-price')|merge(
+                            {
+                                row_attr: { class: 'mb-2' },
+                                attr: {
+                                    'data-action': 'keyup->invoice-form#unitPriceChanged',
+                                    'data-invoice-form-key-param': key,
+                                }
+                            }
+                        ))
+                    }}
                 </td>
                 <td>
-                    {{ form_row(line_item_form.subtotal, sylius_test_form_attribute('line-item-subtotal')) }}
+                    {{
+                        form_widget(line_item_form.subtotal, sylius_test_form_attribute('line-item-subtotal')|merge(
+                            {
+                                row_attr: { class: 'mb-2' },
+                                attr: {
+                                    'data-action': 'change->invoice-form#subtotalChanged',
+                                    'data-invoice-form-key-param': key,
+                                }
+                            }
+                        ))
+                    }}
                 </td>
                 <td>
+                    {{ form_widget(line_item_form.taxRate, sylius_test_form_attribute('line-item-tax-rate')) }}
                 </td>
                 <td>
+                    {{ money.format(item.taxTotal, 'PLN') }}
                 </td>
                 <td>
+                    {{ money.format(item.total, 'PLN') }}
                 </td>
                 <td class="col-auto" {{ sylius_test_html_attribute('delete-line-item') }}>
-                    {{ form_row(line_item_form.vars.button_delete, {attr: {class: 'btn btn-outline-danger'}}) }}
+                    {{ form_row(line_item_form.vars.button_delete) }}
                 </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
 
-{{ form_widget(hookable_metadata.context.form.lineItems.vars.button_add, sylius_test_form_attribute('add-line-item')) }}
+<div class="row ms-2">
+    {{ form_widget(hookable_metadata.context.form.lineItems.vars.button_add, sylius_test_form_attribute('add-line-item')) }}
+</div>

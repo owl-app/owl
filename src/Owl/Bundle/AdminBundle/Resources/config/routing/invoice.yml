@@ -25,6 +25,10 @@ owl_admin_invoice:
                 permission:
                     group: invoice
                     description: owl.ui.permission.update_invoice
+            delete:
+                permission:
+                    group: invoice
+                    description: owl.ui.permission.delete_invoice
             bulkDelete:
                 redirect:
                     header: xhr

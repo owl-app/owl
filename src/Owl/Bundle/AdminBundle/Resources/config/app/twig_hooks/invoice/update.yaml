@@ -1,6 +1,6 @@
 sylius_twig_hooks:
     hooks:
-        'owl_admin.invoice.create':
+        'owl_admin.invoice.update':
             content:
                 template: '@OwlAdmin/shared/crud/common/content.html.twig'
                 configuration:
@@ -16,7 +16,7 @@ sylius_twig_hooks:
                         }
                 priority: 0
 
-        'owl_admin.invoice.create.content':
+        'owl_admin.invoice.update.content':
             header:
                 template: '@OwlAdmin/shared/crud/common/content/header.html.twig'
                 configuration:
@@ -30,7 +30,7 @@ sylius_twig_hooks:
                         'data-form-target': 'content'
                 priority: 200
 
-        'owl_admin.invoice.create.content.body':
+        'owl_admin.invoice.update.content.body':
             form:
                 component: 'owl_admin:invoice:form'
                 props:
@@ -43,7 +43,7 @@ sylius_twig_hooks:
                     render_rest: false
                 priority: 0
 
-        'owl_admin.invoice.create.content.body.form':
+        'owl_admin.invoice.update.content.body.form':
             header:
                 template: '@OwlAdmin/invoice/form/header.html.twig'
                 priority: 100
@@ -52,7 +52,7 @@ sylius_twig_hooks:
                 priority: 0
 
 
-        'owl_admin.invoice.create.content.body.form.sections':
+        'owl_admin.invoice.update.content.body.form.sections':
             general:
                 template: '@OwlAdmin/invoice/form/sections/general.html.twig'
                 priority: 300

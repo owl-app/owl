@@ -1,5 +1,4 @@
 
-import { getComponent } from '@symfony/ux-live-component';
 import { Controller } from '@hotwired/stimulus';
 
 import { debounce } from '../../../utils/debounce';

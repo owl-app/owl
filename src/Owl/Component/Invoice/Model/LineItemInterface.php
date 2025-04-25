@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model;
 
+use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface LineItemInterface extends ResourceInterface
+interface LineItemInterface extends ResourceInterface, TotalizableInterface
 {
     public const UNIT_PIECE = 'piece';
 
@@ -24,23 +25,15 @@ interface LineItemInterface extends ResourceInterface
 
     public function setUnit(?string $unit): void;
 
-    public function getUnitNetPrice(): ?int;
+    public function getUnitPrice(): ?int;
 
-    public function setUnitNetPrice(?int $unitNetPrice): void;
-
-    public function getSubtotal(): ?int;
-
-    public function setSubtotal(?int $subtotal): void;
-
-    public function getTaxTotal(): ?int;
-
-    public function setTaxTotal(?int $taxTotal): void;
-
-    public function getTotal(): ?int;
-
-    public function setTotal(?int $total): void;
+    public function setUnitPrice(?int $unitPrice): void;
 
     public function getInvoice(): ?BaseInvoiceInterface;
 
     public function setInvoice(?BaseInvoiceInterface $invoice): void;
+
+    public function getTaxRate(): ?TaxRateInterface;
+
+    public function setTaxRate(?TaxRateInterface $taxRate): void;
 }

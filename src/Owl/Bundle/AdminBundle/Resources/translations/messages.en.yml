@@ -96,9 +96,16 @@ owl:
         update_country: Edit country
         payment: Payment
         invoice:
+            add_line_item: Add item
+            net_total: Net total
+            tax_total: Tax total
+            gross_total: Gross total
             increment:
                 monthly_based: Monthly based increment
                 yearly_based: Yearly based increment
+            line_item:
+                tax_value: Tax value
+                gross_value: Gross value
         yearly_based_invoice_number_increment: Yearly based invoice number increment
         monthly_based_invoice_number_increment: Monthly based invoice number increment
         not_recommended: Not recommended
@@ -122,6 +129,7 @@ owl:
         update_contractor: Edit contractor
         invoices: Invoices
         create_invoice: New invoice
+        update_invoice: Update invoice
         registration_information: Registration information
         reject_registration: Reject registration
         accept_registration: Accept registration 
@@ -193,6 +201,7 @@ owl:
             list_invoices: List invoices
             create_invoice: New invoice
             update_invoice: Edit invoice
+            delete_invoice: Delete invoice
             bulk_delete_invoice: Bulk delete invoice
             contractor: Contractors
             list_contractors: List contractors
@@ -261,6 +270,7 @@ owl:
             invoice_serie: Invoice - serie
             create_invoice_serie: New invoice serie
             update_invoice_serie: Edit invoice serie
+            delete_invoice_serie: Delete invoice serie
             bulk_delete_invoice_series: Bulk delete invoice series
             list_invoice_series: List invoice number series
             available_invoice_series: Available invoice series

@@ -4,10 +4,7 @@
     <mapped-superclass name="Owl\Component\Core\Model\Invoice\Buyer" table="owl_invoice_buyer">
 
         <many-to-one field="contractor" target-entity="Owl\Component\Contractor\Model\ContractorInterface">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-            <join-column name="contractor_id" />
+            <join-column name="contractor_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
     </mapped-superclass>

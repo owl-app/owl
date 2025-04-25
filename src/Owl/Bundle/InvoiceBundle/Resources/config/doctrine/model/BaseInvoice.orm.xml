@@ -16,12 +16,12 @@
         <field name="paymentDate" column="payment_date" type="date" nullable="true" />
         <field name="paymentMethod" column="payment_method" />
         <field name="isPaid" column="is_paid" type="boolean" />
+        <field name="subtotal" type="integer" />
+        <field name="taxTotal" column="tax_total" type="integer" />
+        <field name="total" type="integer" />
 
         <many-to-one field="serie" target-entity="Owl\Component\Invoice\Model\InvoiceSerieInterface">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-            <join-column name="serie_id" />
+            <join-column name="serie_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
         <one-to-many field="lineItems" target-entity="Owl\Component\Invoice\Model\LineItemInterface" mapped-by="invoice" orphan-removal="true">

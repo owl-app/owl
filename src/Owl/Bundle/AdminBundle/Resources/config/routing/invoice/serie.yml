@@ -23,6 +23,12 @@ owl_admin_invoice_serie:
                 permission:
                     group: invoice_serie
                     description: owl.ui.permission.update_invoice_serie
+            delete:
+                form:
+                    ajax: true
+                permission:
+                    group: invoice_serie
+                    description: owl.ui.permission.delete_invoice_serie
             bulkDelete:
                 redirect:
                     header: xhr

@@ -26,6 +26,18 @@ owl:
                 other: Other
         invoice_paid: Invoice paid
         payment_date: Payment date
+        line_item:
+            name: Name of product or service
+            quantity: Quantity
+            unit: Unit
+            unit_price: Unit price
+            net_value: Net value
+            tax_rate:
+                label: Tax rate
+                select: Select tax rate
+        unit:
+            hour: hrs
+            piece: pcs
     tax_rate:
         name: Name
         amount: Amount

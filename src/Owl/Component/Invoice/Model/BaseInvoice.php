@@ -48,6 +48,15 @@ abstract class BaseInvoice implements BaseInvoiceInterface
     /** @var Collection<array-key, LineItemInterface> */
     protected $lineItems;
 
+    /** @var int */
+    protected $subtotal = 0;
+
+    /** @var int */
+    protected $taxTotal = 0;
+
+    /** @var int */
+    protected $total = 0;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -173,20 +182,69 @@ abstract class BaseInvoice implements BaseInvoiceInterface
 
     public function addLineItem(LineItemInterface $lineItem): void
     {
-        if (!$this->hasLineItem($lineItem)) {
-            $this->lineItems->add($lineItem);
+        if ($this->hasLineItem($lineItem)) {
+            return;
         }
+
+        $this->lineItems->add($lineItem);
+        $lineItem->setInvoice($this);
+
+        $this->recalculateLineItemsTotals();
     }
 
     public function removeLineItem(LineItemInterface $lineItem): void
     {
         if ($this->hasLineItem($lineItem)) {
             $this->lineItems->removeElement($lineItem);
+
+            $this->recalculateLineItemsTotals();
         }
     }
 
     public function clearLineItems(): void
     {
         $this->lineItems->clear();
+
+        $this->recalculateLineItemsTotals();
+    }
+
+    public function getSubtotal(): int
+    {
+        return $this->subtotal;
+    }
+
+    public function getTaxTotal(): int
+    {
+        return $this->taxTotal;
+    }
+
+    public function getTotal(): int
+    {
+        return $this->total;
+    }
+
+    public function recalculateLineItemsTotals(): void
+    {
+        $this->subtotal = 0;
+        $this->taxTotal = 0;
+        $this->total = 0;
+        
+        foreach ($this->lineItems as $lineItem) {
+            $this->subtotal += $lineItem->getSubtotal();
+            $this->taxTotal += $lineItem->getTaxTotal();
+            $this->total += $lineItem->getTotal();
+        }
+
+        if ($this->subtotal < 0) {
+            $this->subtotal = 0;
+        }
+
+        if ($this->taxTotal < 0) {
+            $this->taxTotal = 0;
+        }
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
     }
 }

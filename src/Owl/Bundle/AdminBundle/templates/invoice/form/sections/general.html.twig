@@ -6,7 +6,7 @@
 
             {% set cause = error.cause %}
             {% if cause is iterable %}
-                <pre>{{ dump(cause) }}</pre>
+                {# <pre>{{ dump(cause) }}</pre> #}
             {% endif %}
         </div>
     {% endfor %}

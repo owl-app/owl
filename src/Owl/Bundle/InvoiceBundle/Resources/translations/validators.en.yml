@@ -22,6 +22,9 @@ owl:
         serie:
             default: 
                 used: Only one serie can be default. Plase change serie with format {{ format }}
+        line_item:
+            name:
+                not_blank: Please enter name product or service
     tax_rate:
         country:
             not_blank: Please select tax country

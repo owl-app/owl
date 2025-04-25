@@ -1,6 +1,5 @@
 {% extends '@OwlAdmin/shared/form_theme.html.twig' %}
 
-
 {% block _owl_admin_invoice_buyer_contractor_row %}
     {% import '@OwlAdmin/shared/helper/button.html.twig' as buttons %}
 
@@ -23,4 +22,10 @@
         }}
         {{ form_errors(form) }}
     </div>
+{% endblock %}
+
+{% block _owl_admin_invoice_lineItems_entry_delete_row %}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }} class="btn btn-outline-danger btn-icon">
+        {{ ux_icon(action.icon|default('flowbite:close-outline')) }}
+    </button>
 {% endblock %}

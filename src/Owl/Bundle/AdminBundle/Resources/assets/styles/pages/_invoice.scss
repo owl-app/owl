@@ -11,6 +11,16 @@
             }
         }
     }
+
+    .table-line-items {
+        tr {
+            th, td {
+                &:first-child {
+                    padding-left: 0.75rem;
+                }
+            }
+        }
+    }
 }
 
 .owl-modal-available-series {

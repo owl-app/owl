@@ -18,5 +18,9 @@
         <service id="owl_admin.form.type.invoice_numbering" class="Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceNumberingType">
             <tag name="form.type" />
         </service>
+
+        <service id="owl_admin.form.type.invoice_line_item" class="Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

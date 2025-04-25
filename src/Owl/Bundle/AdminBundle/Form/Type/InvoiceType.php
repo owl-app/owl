@@ -6,8 +6,8 @@ namespace Owl\Bundle\AdminBundle\Form\Type;
 
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceSerieHiddenType;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceBuyerType;
+use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
 use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType as BaseInvoiceType;
-use Owl\Bundle\InvoiceBundle\Form\Type\LineItemType;
 use Owl\Component\Core\Model\Invoice\BuyerInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Symfony\Component\Form\AbstractType;
@@ -38,7 +38,16 @@ final class InvoiceType extends AbstractType
                 'by_reference' => false,
                 'button_add_options' => [
                     'label' => 'owl.ui.invoice.add_line_item',
+                    'attr' => [
+                        'class' => 'btn btn-secondary w-auto ps-5 pe-5 mt-3',
+                    ],
                 ],
+                'button_delete_options' => [
+                    'label' => false,
+                    'row_attr' => [
+                        'class' => 'mb-0',
+                    ]
+                ]
             ])
         ;
 
