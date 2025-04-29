@@ -44,9 +44,6 @@ class FormComponent
     #[LiveProp(writable: true)]
     public bool $showPaymentDate = false;
 
-    #[LiveProp(writable: true)]
-    public string $calculateValuesFrom = 'net';
-
     /**
      * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
      */
@@ -65,9 +62,7 @@ class FormComponent
     {
         $this->resource->setType($this->type);
 
-        return $this->formFactory->create($this->formClass, $this->resource, [
-            'calculate_values_from' => $this->calculateValuesFrom,
-        ]);
+        return $this->formFactory->create($this->formClass, $this->resource);
     }
 
     #[PostMount]
@@ -87,16 +82,26 @@ class FormComponent
     public function defaultValuesLineItems(): void
     {
         foreach ($this->formValues['lineItems'] as $key => $lineItem) {
+            if ($this->formValues['calculateValuesFrom'] === 'net') {
+                if (!isset($lineItem['unitPrice'])) {
+                    $this->formValues['lineItems'][$key]['unitPrice'] = 0;
+                }
+    
+                if (!isset($lineItem['subtotal'])) {
+                    $this->formValues['lineItems'][$key]['subtotal'] = 0;
+                }
+            } else {
+                if (!isset($lineItem['unitPriceGross'])) {
+                    $this->formValues['lineItems'][$key]['unitPriceGross'] = 0;
+                }
+    
+                if (!isset($lineItem['total'])) {
+                    $this->formValues['lineItems'][$key]['total'] = 0;
+                }
+            }
+
             if (!isset($lineItem['quantity'])) {
                 $this->formValues['lineItems'][$key]['quantity'] = 1;
-            }
-
-            if (!isset($lineItem['unitPrice'])) {
-                $this->formValues['lineItems'][$key]['unitPrice'] = 0;
-            }
-
-            if (!isset($lineItem['subtotal'])) {
-                $this->formValues['lineItems'][$key]['subtotal'] = 0;
             }
 
             if (!isset($lineItem['unit'])) {
@@ -170,10 +175,8 @@ class FormComponent
     #[LiveAction]
     public function calculateValuesFromChanged(#[LiveArg] string $value): void
     {
-        $this->calculateValuesFrom = $value;
-
         foreach ($this->formValues['lineItems'] as $key => $lineItem) {
-            if ($this->calculateValuesFrom === 'net') {
+            if ($this->formValues['calculateValuesFrom'] === 'net') {
                 $this->formValues['lineItems'][$key]['unitPrice'] = $lineItem['unitPriceGross'];
                 $this->formValues['lineItems'][$key]['subtotal'] = $lineItem['total'];
 
@@ -205,8 +208,8 @@ class FormComponent
 
     private function tryCalculateBySum(string $key, ?string $sum = null, ?string $quantity = null): bool
     {
-        $sumName = $this->calculateValuesFrom === 'net' ? 'subtotal' : 'total';
-        $unitPriceName = $this->calculateValuesFrom === 'net' ? 'unitPrice' : 'unitPriceGross';
+        $sumName = $this->formValues['calculateValuesFrom'] === 'net' ? 'subtotal' : 'total';
+        $unitPriceName = $this->formValues['calculateValuesFrom'] === 'net' ? 'unitPrice' : 'unitPriceGross';
         $sum = (float) ($subtotal ?? $this->formValues['lineItems'][$key][$sumName]);
         $quantity = (float) ($quantity ?? $this->formValues['lineItems'][$key]['quantity']);
 
@@ -229,8 +232,8 @@ class FormComponent
 
     private function tryCalculateByUnitPrice(string $key, ?string $unitPrice = null, ?string $quantity = null): bool
     {
-        $unitPriceName = $this->calculateValuesFrom === 'net' ? 'unitPrice' : 'unitPriceGross';
-        $calculatedFieldName = $this->calculateValuesFrom === 'net' ? 'subtotal' : 'total';
+        $unitPriceName = $this->formValues['calculateValuesFrom'] === 'net' ? 'unitPrice' : 'unitPriceGross';
+        $calculatedFieldName = $this->formValues['calculateValuesFrom'] === 'net' ? 'subtotal' : 'total';
         $unitPrice = (float) ($unitPrice ?? $this->formValues['lineItems'][$key][$unitPriceName]);
         $quantity = (float) ($quantity ?? $this->formValues['lineItems'][$key]['quantity']);
 

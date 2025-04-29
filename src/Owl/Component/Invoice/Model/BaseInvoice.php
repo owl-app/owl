@@ -36,7 +36,7 @@ abstract class BaseInvoice implements BaseInvoiceInterface
     /** @var \DateTimeInterface|null */
     protected $paymentDate;
 
-    /** @var boolean|null */
+    /** @var string|null */
     protected $paymentMethod;
 
     /** @var boolean */
@@ -56,6 +56,9 @@ abstract class BaseInvoice implements BaseInvoiceInterface
 
     /** @var int */
     protected $total = 0;
+
+    /** @var string|null */
+    protected $calculateValuesFrom;
 
     public function __construct()
     {
@@ -158,6 +161,16 @@ abstract class BaseInvoice implements BaseInvoiceInterface
     public function setIsPaid(bool $isPaid): void
     {
         $this->isPaid = $isPaid;
+    }
+
+    public function getCalculateValuesFrom(): ?string
+    {
+        return $this->calculateValuesFrom;
+    }
+
+    public function setCalculateValuesFrom(?string $calculateValuesFrom): void
+    {
+        $this->calculateValuesFrom = $calculateValuesFrom;
     }
 
     public function getSerie(): ?InvoiceSerieInterface

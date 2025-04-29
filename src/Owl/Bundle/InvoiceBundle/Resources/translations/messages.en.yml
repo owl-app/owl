@@ -40,6 +40,9 @@ owl:
         unit:
             hour: hrs
             piece: pcs
+        calculate_values_from:
+            net: from net
+            gross: from gross
     tax_rate:
         name: Name
         amount: Amount

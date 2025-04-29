@@ -10,14 +10,15 @@ use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
 use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType as BaseInvoiceType;
 use Owl\Component\Core\Model\Invoice\BuyerInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
+use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
-use Symfonycasts\DynamicForms\DynamicFormBuilder;
 
 final class InvoiceType extends AbstractType
 {
@@ -54,6 +55,28 @@ final class InvoiceType extends AbstractType
                     ]
                 ]
             ])
+            ->add('calculateValuesFrom', ChoiceType::class, [
+                'label' => 'owl.ui.method_of_converting_amounts',
+                'mapped' => false,
+                'expanded' => true,
+                'multiple' => false,
+                'required' => false,
+                'placeholder' => false,
+                'data' => 'net',
+                'attr' => [
+                    'class' => 'd-flex justify-content-center gap-5',
+                ],
+                'label_attr' => [
+                    'class' => 'p-0',
+                ],
+                'choice_attr' => function () {
+                    return ['class' => 'mb-0', 'data-action' => 'change->invoice-form#calculateValuesFromChanged'];
+                },
+                'choices' => array_combine(
+                    array_map(fn($case) => 'owl.invoice.calculate_values_from.' . $case->value, CalculateValuesFromEnum::cases()),
+                    array_map(fn($case) => $case->value, CalculateValuesFromEnum::cases())
+                ),
+            ]);
         ;
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
@@ -65,6 +88,25 @@ final class InvoiceType extends AbstractType
             if ($buyer && $buyer->getContractor()) {
                 $buyer->importContractorData($buyer->getContractor());
             }
+        });
+
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            $form = $event->getForm();
+            $data = $event->getData();
+            $oldLineItems = $form->get('lineItems')->getConfig();
+
+            $form->add(
+                $oldLineItems->getName(),
+                $oldLineItems->getType()->getInnerType()::class,
+                array_replace(
+                    $oldLineItems->getOptions(), 
+                    [
+                        'entry_options' => [
+                            'calculate_values_from' => $data['calculateValuesFrom'],
+                        ]
+                    ]
+                )
+            );
         });
     }
 
