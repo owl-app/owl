@@ -20,6 +20,8 @@ use Owl\Component\Invoice\Model\LineItem;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRate;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
+use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshot;
+use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -149,6 +151,22 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         // ->scalarNode('form')->defaultValue(TaxRateType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('invoice_tax_rate_snapshot')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(TaxRateSnapshot::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(TaxRateSnapshotInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(BaseController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()
                             ->end()

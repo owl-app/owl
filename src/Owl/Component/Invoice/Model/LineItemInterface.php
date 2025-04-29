@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Model;
 
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
+use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface LineItemInterface extends ResourceInterface, TotalizableInterface
+interface LineItemInterface extends ResourceInterface, TotalizableInterface, TimestampableInterface
 {
     public const UNIT_PIECE = 'piece';
 
@@ -35,5 +37,15 @@ interface LineItemInterface extends ResourceInterface, TotalizableInterface
 
     public function getTaxRate(): ?TaxRateInterface;
 
+    public function getTaxRateAmount(): ?float;
+
+    public function isTaxRateNameDiffrent(): bool;
+
+    public function isTaxRateAmountDiffrent(): bool;
+
     public function setTaxRate(?TaxRateInterface $taxRate): void;
+
+    public function getTaxRateSnapshot(): ?TaxRateSnapshotInterface;
+
+    public function setTaxRateSnapshot(?TaxRateSnapshotInterface $taxRateSnapshot): void;
 }

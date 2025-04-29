@@ -15,7 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
+use Symfonycasts\DynamicForms\DynamicFormBuilder;
 
 final class InvoiceType extends AbstractType
 {
@@ -36,6 +38,9 @@ final class InvoiceType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'entry_options' => [
+                    'calculate_values_from' => $options['calculate_values_from'],
+                ],
                 'button_add_options' => [
                     'label' => 'owl.ui.invoice.add_line_item',
                     'attr' => [
@@ -61,6 +66,13 @@ final class InvoiceType extends AbstractType
                 $buyer->importContractorData($buyer->getContractor());
             }
         });
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'calculate_values_from' => 'net',
+        ]);
     }
 
     public function getParent(): string

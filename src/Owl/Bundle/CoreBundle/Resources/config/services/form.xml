@@ -91,7 +91,6 @@
             <argument type="service" id="owl.context.admin_user" />
             <argument type="service" id="owl.repository.admin_user" />
             <argument type="service" id="owl.resource_controller.orm.collection_provider" />
-            <argument type="service" id="form.factory" />
         </service>
 
         <service id="owl.form.extension.type.service" class="Owl\Bundle\CoreBundle\Form\Extension\MoneyTypeExtension">

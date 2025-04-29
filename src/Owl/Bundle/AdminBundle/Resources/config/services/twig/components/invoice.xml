@@ -16,7 +16,6 @@
             <argument>Owl\Bundle\AdminBundle\Form\Type\InvoiceType</argument>
             <argument type="service" id="owl.generator.invoice.invoice_number_generator" />
             <argument type="service" id="owl.registry.invoice_sequence_increment_strategy" />
-            <argument type="service" id="owl_admin.invoice.line_item_calculator" />
 
             <tag name="owl.live_component.admin" key="owl_admin:invoice:form" />
         </service>

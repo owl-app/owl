@@ -76,5 +76,14 @@
 
             <tag name="kernel.event_listener" event="owl.invoice.pre_create" method="preCreate" />
         </service>
+
+        <service id="owl.listener.invoice_snapshot_assign" class="Owl\Bundle\InvoiceBundle\EventListener\InvoiceSnapshotAssignListener">
+            <argument type="service" id="owl.repository.invoice_tax_rate_snapshot" />
+            <argument type="service" id="owl.custom_factory.invoice_tax_rate_snapshot" />
+            <argument type="service" id="owl.manager.invoice" />
+
+            <tag name="kernel.event_listener" event="owl.invoice.pre_create" method="assignSnapshot" />
+            <tag name="kernel.event_listener" event="owl.invoice.pre_update" method="assignSnapshot" />
+        </service>
     </services>
 </container>

@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model;
 
-use Owl\Component\Invoice\Calculator\MoneyCalculator;
+use Owl\Component\Invoice\Calculator\LineDataCalculator;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
-use Webmozart\Assert\Assert;
+use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
+use Sylius\Resource\Model\TimestampableTrait;
 
 class LineItem implements LineItemInterface
 {
+    use TimestampableTrait;
+
     /** @var mixed */
     protected $id;
 
@@ -25,6 +28,9 @@ class LineItem implements LineItemInterface
     /** @var int|null */
     protected $unitPrice = 0;
 
+    /** @var int|null */
+    protected $unitPriceGross = 0;
+
     /** @var int */
     protected $subtotal = 0;
 
@@ -39,6 +45,8 @@ class LineItem implements LineItemInterface
 
     /** @var TaxRateInterface|null */
     protected $taxRate;
+
+    protected ?TaxRateSnapshotInterface $taxRateSnapshot = null;
 
     public function getId(): string|int|null
     {
@@ -63,6 +71,8 @@ class LineItem implements LineItemInterface
     public function setQuantity(?float $quantity): void
     {
         $this->quantity = $quantity;
+
+        $this->recalculateTotals();
     }
 
     public function getUnit(): ?string
@@ -91,6 +101,26 @@ class LineItem implements LineItemInterface
         $this->unitPrice = $unitPrice;
 
         $this->recalculateTotals();
+    }
+
+    public function setUnitPriceGross(?int $unitPriceGross): void
+    {
+        $this->unitPriceGross = $unitPriceGross;
+
+        if (null === $unitPriceGross) {
+            return;
+        }
+
+        $taxRateAmount = $this->getTaxRateAmount() ?? 0;
+
+        $this->unitPrice = (int) round($unitPriceGross / (1 + $taxRateAmount));
+
+        $this->recalculateTotals();
+    }
+
+    public function getUnitPriceGross(): ?int
+    {
+        return $this->unitPriceGross;
     }
 
     public function getSubtotal(): int
@@ -123,14 +153,63 @@ class LineItem implements LineItemInterface
         return $this->taxRate;
     }
 
+    public function getTaxRateAmount(): ?float
+    {
+        if (null === $this->getTaxRateSnapshot()) {
+            return $this->taxRate?->getAmount();
+        }
+
+        if ($this->getTaxRateSnapshot()->getCode() === $this->getTaxRate()?->getCode()) {
+            return $this->getTaxRateSnapshot()?->getAmount();
+        }
+
+        return $this->getTaxRate()?->getAmount();
+    }
+
+    public function isTaxRateNameDiffrent(): bool
+    {
+        if (null === $this->getTaxRateSnapshot()) {
+            return false;
+        }
+
+        if ($this->getTaxRateSnapshot()->getName() === $this->getTaxRate()?->getName()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isTaxRateAmountDiffrent(): bool
+    {
+        if (null === $this->getTaxRateSnapshot()) {
+            return false;
+        }
+
+        $taxRateAmountSnapshot = $this->getTaxRateSnapshot()->getAmount();
+        $taxRateAmount = $this->getTaxRate()?->getAmount();
+
+        if ($this->getTaxRateSnapshot()->getAmount() !== $this->getTaxRate()?->getAmount()) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function setTaxRate(?TaxRateInterface $taxRate): void
     {
-        $this->taxTotal = 0;
         $this->taxRate = $taxRate;
 
-        if (null !== $this->taxRate && $this->subtotal > 0) {
-            $this->taxTotal = MoneyCalculator::calculateTaxFromMinor($this->subtotal, $this->taxRate->getAmount());
-        }
+        $this->recalculateTotals();
+    }
+
+    public function getTaxRateSnapshot(): ?TaxRateSnapshotInterface
+    {
+        return $this->taxRateSnapshot;
+    }
+
+    public function setTaxRateSnapshot(?TaxRateSnapshotInterface $taxRateSnapshot): void
+    {
+        $this->taxRateSnapshot = $taxRateSnapshot;
 
         $this->recalculateTotals();
     }
@@ -147,8 +226,16 @@ class LineItem implements LineItemInterface
     {
         $unitPrice = $this->unitPrice ?? 0;
         $quantity = $this->quantity ?? 0;
+        $taxRateAmount = $this->getTaxRateAmount() ?? 0;
 
-        $this->subtotal = MoneyCalculator::calculateSubtotalFromMinor($unitPrice, $quantity);
+        $this->subtotal = LineDataCalculator::calculateByUnitPriceFromMinor($unitPrice, $quantity);
+
+        if ($this->unitPriceGross > 0) {
+            $this->taxTotal = LineDataCalculator::calculateByUnitPriceFromMinor($this->unitPriceGross, $quantity) - $this->subtotal;
+        } else {
+            $this->taxTotal = LineDataCalculator::calculateTaxFromMinor($this->subtotal, $taxRateAmount);
+        }
+
         $this->total = $this->subtotal + $this->taxTotal;
 
         if ($this->total < 0) {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig\Component\Invoice;
 
-use Owl\Bundle\CoreBundle\Invoice\InvoiceLineItemCalculatorInterface;
 use Owl\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
+use Owl\Component\Invoice\Calculator\LineDataCalculator;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\LineItemInterface;
@@ -44,6 +44,9 @@ class FormComponent
     #[LiveProp(writable: true)]
     public bool $showPaymentDate = false;
 
+    #[LiveProp(writable: true)]
+    public string $calculateValuesFrom = 'net';
+
     /**
      * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
      */
@@ -54,7 +57,6 @@ class FormComponent
         string $formClass,
         private readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
-        private InvoiceLineItemCalculatorInterface $invoiceLineItemCalculator,
     ) {
         $this->initialize($invoiceRepository, $formFactory, $resourceClass, $formClass);
     }
@@ -63,7 +65,9 @@ class FormComponent
     {
         $this->resource->setType($this->type);
 
-        return $this->formFactory->create($this->formClass, $this->resource);
+        return $this->formFactory->create($this->formClass, $this->resource, [
+            'calculate_values_from' => $this->calculateValuesFrom,
+        ]);
     }
 
     #[PostMount]
@@ -148,7 +152,7 @@ class FormComponent
             return;
         }
 
-        $this->tryCalculateBySubtotal($key, null, $value);
+        $this->tryCalculateBySum($key, null, $value);
     }
 
     #[LiveAction]
@@ -158,9 +162,31 @@ class FormComponent
     }
 
     #[LiveAction]
-    public function subtotalChanged(#[LiveArg] string $key, #[LiveArg] string $value): void
+    public function sumChanged(#[LiveArg] string $key, #[LiveArg] string $value): void
     {
-        $this->tryCalculateBySubtotal($key, $value);
+        $this->tryCalculateBySum($key, $value);
+    }
+
+    #[LiveAction]
+    public function calculateValuesFromChanged(#[LiveArg] string $value): void
+    {
+        $this->calculateValuesFrom = $value;
+
+        foreach ($this->formValues['lineItems'] as $key => $lineItem) {
+            if ($this->calculateValuesFrom === 'net') {
+                $this->formValues['lineItems'][$key]['unitPrice'] = $lineItem['unitPriceGross'];
+                $this->formValues['lineItems'][$key]['subtotal'] = $lineItem['total'];
+
+                unset($this->formValues['lineItems'][$key]['unitPriceGross']);
+                unset($this->formValues['lineItems'][$key]['total']);
+            } else {
+                $this->formValues['lineItems'][$key]['unitPriceGross'] = $lineItem['unitPrice'];
+                $this->formValues['lineItems'][$key]['total'] = $lineItem['subtotal'];
+
+                unset($this->formValues['lineItems'][$key]['unitPrice']);
+                unset($this->formValues['lineItems'][$key]['subtotal']);
+            }
+        }
     }
 
     #[LiveListener(InvoiceNumberingComponent::OWL_ADMIN_NUMBER_WITH_SERIE_CHANGED)]
@@ -177,20 +203,22 @@ class FormComponent
         $this->fullNumberPreview = $fullNumberPreview;
     }
 
-    private function tryCalculateBySubtotal(string $key, ?string $subtotal = null, ?string $quantity = null): bool
+    private function tryCalculateBySum(string $key, ?string $sum = null, ?string $quantity = null): bool
     {
-        $subtotal = (float) ($subtotal ?? $this->formValues['lineItems'][$key]['subtotal']);
+        $sumName = $this->calculateValuesFrom === 'net' ? 'subtotal' : 'total';
+        $unitPriceName = $this->calculateValuesFrom === 'net' ? 'unitPrice' : 'unitPriceGross';
+        $sum = (float) ($subtotal ?? $this->formValues['lineItems'][$key][$sumName]);
         $quantity = (float) ($quantity ?? $this->formValues['lineItems'][$key]['quantity']);
 
-        $result = $this->invoiceLineItemCalculator->tryCalculateBySubtotal($subtotal, $quantity);
+        $result = LineDataCalculator::calculateBySumFromMajor($sum, $quantity);
 
         if ($result !== null) {
             list($unitPriceCalculated, $subtotalCalculated) = $result;
 
-            $this->formValues['lineItems'][$key]['unitPrice'] = $unitPriceCalculated;
+            $this->formValues['lineItems'][$key][$unitPriceName] = $unitPriceCalculated;
 
             if ($subtotalCalculated !== null) {
-                $this->formValues['lineItems'][$key]['subtotal'] = $subtotalCalculated;
+                $this->formValues['lineItems'][$key][$sumName] = $subtotalCalculated;
             }
 
             return true;
@@ -201,13 +229,15 @@ class FormComponent
 
     private function tryCalculateByUnitPrice(string $key, ?string $unitPrice = null, ?string $quantity = null): bool
     {
-        $unitPrice = (float) ($unitPrice ?? $this->formValues['lineItems'][$key]['unitPrice']);
+        $unitPriceName = $this->calculateValuesFrom === 'net' ? 'unitPrice' : 'unitPriceGross';
+        $calculatedFieldName = $this->calculateValuesFrom === 'net' ? 'subtotal' : 'total';
+        $unitPrice = (float) ($unitPrice ?? $this->formValues['lineItems'][$key][$unitPriceName]);
         $quantity = (float) ($quantity ?? $this->formValues['lineItems'][$key]['quantity']);
 
-        $subtotal = $this->invoiceLineItemCalculator->tryCalculateByUnitPrice($unitPrice, $quantity);
+        $calculatedPrice =  LineDataCalculator::calculatebyUnitPriceFromMajor($unitPrice, $quantity);
 
-        if ($subtotal !== null) {
-            $this->formValues['lineItems'][$key]['subtotal'] = $subtotal;
+        if ($calculatedPrice > 0) {
+            $this->formValues['lineItems'][$key][$calculatedFieldName] = $calculatedPrice;
 
             return true;
         }

@@ -40,6 +40,10 @@ export default class extends Controller {
         this.component.action('dateIssueChanged', { oldDate: value });
     };
 
+    calculateValuesFromChanged(event) {
+        this.component.action('calculateValuesFromChanged', { value: event.target.value });
+    }
+
     quantityChanged(event) {
         const { key } = event.params;
 
@@ -52,11 +56,9 @@ export default class extends Controller {
         this.debouncedLienItemChanged('unitPriceChanged', key, event.target.value);
     }
 
-    subtotalChanged(event) {
+    sumChanged(event) {
         const { key } = event.params;
 
-        this.component.action('subtotalChanged', { key, value: event.target.value });
+        this.component.action('sumChanged', { key, value: event.target.value });
     }
-
-
 }

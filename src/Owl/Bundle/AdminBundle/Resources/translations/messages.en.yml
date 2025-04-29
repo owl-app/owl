@@ -79,6 +79,9 @@ owl:
                     contractors: Contractors
 
     ui:
+        from_net: from net
+        from_gross: from gross
+        method_of_converting_amounts: Method of converting amounts
         zone_consisting_of_countries: Zone consisting of countries
         zone_consisting_of_other_zones: Zone consisting of other zones
         zone_consisting_of_provinces: Zone consisting of provinces
@@ -106,6 +109,8 @@ owl:
             line_item:
                 tax_value: Tax value
                 gross_value: Gross value
+                tax_rate_name_changed_overwrite: Tax rate name changed. Overwrite ?
+                tax_rate_amount_changed_overwrite: Tax rate amount changed. Overwrite ?
         yearly_based_invoice_number_increment: Yearly based invoice number increment
         monthly_based_invoice_number_increment: Monthly based invoice number increment
         not_recommended: Not recommended

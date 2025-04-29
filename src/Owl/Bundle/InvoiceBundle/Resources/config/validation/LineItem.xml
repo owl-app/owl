@@ -27,6 +27,13 @@
             </constraint>
         </property>
 
+        <property name="taxRate">
+            <constraint name="NotBlank">
+                <option name="message">owl.common.not_blank</option>
+                <option name="groups">owl</option>
+            </constraint>
+        </property>
+
         <property name="unitPrice">
             <constraint name="NotBlank">
                 <option name="message">owl.common.not_blank</option>

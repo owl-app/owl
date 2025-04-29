@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Model;
 
 use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\TimestampableTrait;
 
 class Buyer implements BuyerInterface, ResourceInterface
 {
+    use TimestampableTrait;
+
     /** @var mixed */
     protected int $id;
 

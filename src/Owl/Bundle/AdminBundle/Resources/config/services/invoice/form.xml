@@ -20,7 +20,12 @@
         </service>
 
         <service id="owl_admin.form.type.invoice_line_item" class="Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType">
+            <argument type="service" id="owl.form.subscriber.tax_rate_snapshot" />
             <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.subscriber.tax_rate_snapshot" class="Owl\Bundle\AdminBundle\Form\EventSubscriber\TaxRateSnapshotEventSubscriber">
+
         </service>
     </services>
 </container>

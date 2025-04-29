@@ -21,6 +21,15 @@
         >
             <argument type="service" id="owl.custom_factory.invoice_sequence.inner" />
         </service>
+
+        <service
+            id="owl.custom_factory.invoice_tax_rate_snapshot"
+            class="Owl\Component\Invoice\Factory\InvoiceTaxRateSnapshotFactory"
+            decorates="owl.factory.invoice_tax_rate_snapshot"
+            decoration-priority="256"
+        >
+            <argument type="service" id="owl.custom_factory.invoice_tax_rate_snapshot.inner" />
+        </service>
     </services>
 </container>
 

@@ -6,8 +6,9 @@ namespace Owl\Component\Invoice\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface BaseInvoiceInterface extends ResourceInterface, InvoicePaymentInterface, TotalizableInterface
+interface BaseInvoiceInterface extends ResourceInterface, InvoicePaymentInterface, TotalizableInterface, TimestampableInterface
 {
     public const PAYMENT_STATE_COMPLETED = 'completed';
 

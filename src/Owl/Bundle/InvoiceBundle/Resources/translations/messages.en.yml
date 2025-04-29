@@ -31,6 +31,8 @@ owl:
             quantity: Quantity
             unit: Unit
             unit_price: Unit price
+            unit_gross_price: Unit gross price
+            gross_value: Gross value
             net_value: Net value
             tax_rate:
                 label: Tax rate
