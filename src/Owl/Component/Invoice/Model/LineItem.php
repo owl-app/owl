@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Model;
 
 use Owl\Component\Invoice\Calculator\LineDataCalculator;
+use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
 use Sylius\Resource\Model\TimestampableTrait;
@@ -28,9 +29,6 @@ class LineItem implements LineItemInterface
     /** @var int|null */
     protected $unitPrice = 0;
 
-    /** @var int|null */
-    protected $unitPriceGross = 0;
-
     /** @var int */
     protected $subtotal = 0;
 
@@ -47,6 +45,9 @@ class LineItem implements LineItemInterface
     protected $taxRate;
 
     protected ?TaxRateSnapshotInterface $taxRateSnapshot = null;
+
+    /** @var string|null */
+    protected $calculateValuesFrom;
 
     public function getId(): string|int|null
     {
@@ -103,24 +104,24 @@ class LineItem implements LineItemInterface
         $this->recalculateTotals();
     }
 
-    public function setUnitPriceGross(?int $unitPriceGross): void
+    public function getCalculateValuesFrom(): ?string
     {
-        $this->unitPriceGross = $unitPriceGross;
+        return $this->calculateValuesFrom;
+    }
 
-        if (null === $unitPriceGross) {
-            return;
-        }
-
-        $taxRateAmount = $this->getTaxRateAmount() ?? 0;
-
-        $this->unitPrice = (int) round($unitPriceGross / (1 + $taxRateAmount));
+    public function setCalculateValuesFrom(?string $calculateValuesFrom): void
+    {
+        $this->calculateValuesFrom = $calculateValuesFrom;
 
         $this->recalculateTotals();
     }
 
-    public function getUnitPriceGross(): ?int
+    public function getTotalPrice(): int
     {
-        return $this->unitPriceGross;
+        $unitPrice = $this->unitPrice ?? 0;
+        $quantity = $this->quantity ?? 0;
+
+        return LineDataCalculator::calculateTotalPriceFromMinor($unitPrice, $quantity);
     }
 
     public function getSubtotal(): int
@@ -185,9 +186,6 @@ class LineItem implements LineItemInterface
             return false;
         }
 
-        $taxRateAmountSnapshot = $this->getTaxRateSnapshot()->getAmount();
-        $taxRateAmount = $this->getTaxRate()?->getAmount();
-
         if ($this->getTaxRateSnapshot()->getAmount() !== $this->getTaxRate()?->getAmount()) {
             return true;
         }
@@ -224,16 +222,24 @@ class LineItem implements LineItemInterface
 
     protected function recalculateTotals(): void
     {
-        $unitPrice = $this->unitPrice ?? 0;
-        $quantity = $this->quantity ?? 0;
+        $calculateValuesFrom = $this->calculateValuesFrom ?? $this->invoice?->getCalculateValuesFrom();
+
+        if (null === $calculateValuesFrom) {
+            return;
+        }
+
         $taxRateAmount = $this->getTaxRateAmount() ?? 0;
+        $totalPrice = $this->getTotalPrice() ?? 0;
 
-        $this->subtotal = LineDataCalculator::calculateByUnitPriceFromMinor($unitPrice, $quantity);
-
-        if ($this->unitPriceGross > 0) {
-            $this->taxTotal = LineDataCalculator::calculateByUnitPriceFromMinor($this->unitPriceGross, $quantity) - $this->subtotal;
-        } else {
-            $this->taxTotal = LineDataCalculator::calculateTaxFromMinor($this->subtotal, $taxRateAmount);
+        switch ($calculateValuesFrom) {
+            case CalculateValuesFromEnum::FROM_NET->value:
+                $this->subtotal = $totalPrice;
+                $this->taxTotal = LineDataCalculator::calculateTaxFromMinor($this->subtotal, $taxRateAmount);
+                break;
+            case CalculateValuesFromEnum::FROM_GROSS->value:
+                $this->subtotal = (int) round($totalPrice / (1 + $taxRateAmount));
+                $this->taxTotal = $totalPrice - $this->subtotal;
+                break;
         }
 
         $this->total = $this->subtotal + $this->taxTotal;
@@ -242,8 +248,6 @@ class LineItem implements LineItemInterface
             $this->total = 0;
         }
 
-        if (null !== $this->invoice) {
-            $this->invoice->recalculateLineItemsTotals();
-        }
+        $this->invoice->recalculateLineItemsTotals();
     }
 }

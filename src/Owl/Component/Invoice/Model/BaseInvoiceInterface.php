@@ -38,6 +38,10 @@ interface BaseInvoiceInterface extends ResourceInterface, InvoicePaymentInterfac
 
     public function setSerie(?InvoiceSerieInterface $serie): void;
 
+    public function getCalculateValuesFrom(): ?string;
+
+    public function setCalculateValuesFrom(?string $calculateValuesFrom): void;
+
     public function getLineItems(): Collection;
 
     public function hasLineItem(LineItemInterface $lineItem): bool;

@@ -17,7 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class InvoiceType extends AbstractType
@@ -39,9 +38,6 @@ final class InvoiceType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'entry_options' => [
-                    'calculate_values_from' => $options['calculate_values_from'],
-                ],
                 'button_add_options' => [
                     'label' => 'owl.ui.invoice.add_line_item',
                     'attr' => [
@@ -57,12 +53,10 @@ final class InvoiceType extends AbstractType
             ])
             ->add('calculateValuesFrom', ChoiceType::class, [
                 'label' => 'owl.ui.method_of_converting_amounts',
-                'mapped' => false,
                 'expanded' => true,
                 'multiple' => false,
                 'required' => false,
                 'placeholder' => false,
-                'data' => 'net',
                 'attr' => [
                     'class' => 'd-flex justify-content-center gap-5',
                 ],
@@ -70,7 +64,7 @@ final class InvoiceType extends AbstractType
                     'class' => 'p-0',
                 ],
                 'choice_attr' => function () {
-                    return ['class' => 'mb-0', 'data-action' => 'change->invoice-form#calculateValuesFromChanged'];
+                    return ['class' => 'mb-0'];
                 },
                 'choices' => array_combine(
                     array_map(fn($case) => 'owl.invoice.calculate_values_from.' . $case->value, CalculateValuesFromEnum::cases()),
@@ -89,32 +83,6 @@ final class InvoiceType extends AbstractType
                 $buyer->importContractorData($buyer->getContractor());
             }
         });
-
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
-            $form = $event->getForm();
-            $data = $event->getData();
-            $oldLineItems = $form->get('lineItems')->getConfig();
-
-            $form->add(
-                $oldLineItems->getName(),
-                $oldLineItems->getType()->getInnerType()::class,
-                array_replace(
-                    $oldLineItems->getOptions(), 
-                    [
-                        'entry_options' => [
-                            'calculate_values_from' => $data['calculateValuesFrom'],
-                        ]
-                    ]
-                )
-            );
-        });
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'calculate_values_from' => 'net',
-        ]);
     }
 
     public function getParent(): string

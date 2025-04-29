@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Form\EventSubscriber;
 
-use Owl\Bundle\InvoiceBundle\Form\Type\Taxation\TaxRateChoiceType;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -38,8 +37,10 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
             return;
         }
 
+        $snapshot = $lineItem->getTaxRateSnapshot();
+
         if ($lineItem->isTaxRateNameDiffrent()) {
-            $form->add('taxRateSnapshotNameOverwrite', CheckboxType::class, [
+            $form->add('snapshotNameOverwrite', CheckboxType::class, [
                 'label' => 'owl.ui.invoice.line_item.tax_rate_name_changed_overwrite',
                 'mapped' => false,
                 'required' => false,
@@ -53,9 +54,12 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
                 array_replace(
                     $oldTaxRate->getOptions(), 
                     [
-                        'choice_label' => function (TaxRateInterface $taxRate) use ($lineItem) {
-                            if ($taxRate->getCode() === $lineItem->getTaxRateSnapshot()->getCode() && $taxRate->getName() !== $lineItem->getTaxRateSnapshot()->getName()) {
-                                return $lineItem->getTaxRateSnapshot()->getName() . '-> ' .$taxRate->getName();
+                        'choice_label' => function (TaxRateInterface $taxRate) use ($snapshot) {
+                            if (
+                                $taxRate->getCode() === $snapshot->getCode() && 
+                                $taxRate->getName() !== $snapshot->getName()
+                            ) {
+                                return $snapshot->getName() . '-> ' .$taxRate->getName();
                             }
 
                             return $taxRate->getName();
@@ -66,7 +70,7 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
         }
 
         if ($lineItem->isTaxRateAmountDiffrent()) {
-            $form->add('taxRateSnapshotAmountOverwrite', CheckboxType::class, [
+            $form->add('snapshotAmountOverwrite', CheckboxType::class, [
                 'label' => 'owl.ui.invoice.line_item.tax_rate_amount_changed_overwrite',
                 'mapped' => false,
                 'required' => false,
@@ -82,27 +86,25 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
         $lineItem = $form->getData();
         $taxRate = $lineItem?->getTaxRate();
         $taxRateSnapshot = $lineItem?->getTaxRateSnapshot();
+        $isChanged = false;
 
-        if ($taxRate === null || $taxRateSnapshot === null) {
+        if ($taxRate === null || $taxRateSnapshot === null || $data['taxRate'] !== $taxRateSnapshot->getCode()) {
             return;
         }
 
-        if ($data['taxRate'] !== $taxRateSnapshot->getCode()) {
-            $taxRateSnapshot->setAmount($lineItem->getTaxRateSnapshot()->getAmount());
-            $taxRateSnapshot->setName($lineItem->getTaxRateSnapshot()->getName());
-
-            return;
-        }
-
-        if (isset($data['taxRateSnapshotNameOverwrite']) && (int) $data['taxRateSnapshotNameOverwrite'] === 1) {
+        if (isset($data['snapshotNameOverwrite']) && (int) $data['snapshotNameOverwrite'] === 1) {
+            $isChanged = true;
             $taxRateSnapshot->setName($lineItem->getTaxRate()->getName());
         }
 
-        if (isset($data['taxRateSnapshotAmountOverwrite']) && (int) $data['taxRateSnapshotAmountOverwrite'] === 1) {
+        if (isset($data['snapshotAmountOverwrite']) && (int) $data['snapshotAmountOverwrite'] === 1) {
+            $isChanged = true;
             $taxRateSnapshot->setAmount($lineItem->getTaxRate()->getAmount());
         }
 
-        $lineItem->setTaxRateSnapshot($taxRateSnapshot);
+        if ($isChanged) {
+            $lineItem->setTaxRateSnapshot($taxRateSnapshot);
+        }
     }
 
     public function submit(FormEvent $formEvent): void
@@ -118,11 +120,11 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
         }
 
         if ($taxRate->getCode() !== $taxRateSnapshot->getCode() && !$taxRateSnapshot->isNameChanged()) {
-            $form->remove('taxRateSnapshotNameOverwrite');
+            $form->remove('snapshotNameOverwrite');
         }
 
         if ($taxRate->getCode() !== $taxRateSnapshot->getCode() && !$taxRateSnapshot->isAmountChanged()) {
-            $form->remove('taxRateSnapshotAmountOverwrite');
+            $form->remove('snapshotAmountOverwrite');
         }
     }
 }

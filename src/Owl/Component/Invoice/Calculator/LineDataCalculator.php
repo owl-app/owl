@@ -34,18 +34,18 @@ class LineDataCalculator
      * Calculates total value from minor unit price.
      * Returns value in minor units (e.g. cents).
      */
-    public static function calculatebyUnitPriceFromMajor(float $unitPrice, float $quantity, bool $toMinor = false): int|float
+    public static function calculateTotalPriceFromMajor(float $unitPrice, float $quantity, bool $toMinor = false): int|float
     {
         $unitPriceMinor = self::toMinor($unitPrice);
 
-        return self::calculateByUnitPriceFromMinor($unitPriceMinor, $quantity, $toMinor);
+        return self::calculateTotalPriceFromMinor($unitPriceMinor, $quantity, $toMinor);
     }
 
     /**
      * Calculates total value from major unit price.
      * Returns value in minor units (e.g. cents).
      */
-    public static function calculateByUnitPriceFromMinor(int $unitPrice, float $quantity, bool $toMinor = true): int|float
+    public static function calculateTotalPriceFromMinor(int $unitPrice, float $quantity, bool $toMinor = true): int|float
     {
         if (!self::isNotEmpty([$unitPrice, $quantity])) {
             return 0;
@@ -93,16 +93,16 @@ class LineDataCalculator
      * Calculates unit price by subtotal from major.
      * Returns value in minor units (e.g. cents).
      */
-    public static function calculateBySumFromMajor(?float $subtotal, ?float $quantity, bool $toMinor = false): ?array
+    public static function calculateUnitPriceByTotalPriceFromMajor(?float $subtotal, ?float $quantity, bool $toMinor = false): ?array
     {
-        return self::calculateBySumFromMinor(self::toMinor($subtotal), $quantity, $toMinor);
+        return self::calculateUnitPriceByTotalPriceFromMinor(self::toMinor($subtotal), $quantity, $toMinor);
     }
 
     /**
      * Calculates unit price by subtotal from minor.
      * Returns value in minor units (e.g. cents).
      */
-    public static function calculateBySumFromMinor(?int $subtotal, ?float $quantity, bool $toMinor = true): ?array
+    public static function calculateUnitPriceByTotalPriceFromMinor(?int $subtotal, ?float $quantity, bool $toMinor = true): ?array
     {
         if (!self::isNotEmpty([$quantity, $subtotal])) {
             return null;
@@ -111,7 +111,7 @@ class LineDataCalculator
         $unitPrice = (int) round($subtotal / $quantity);
 
         if (!self::isDivisible($subtotal, $quantity)) {
-            $subtotal = self::calculateByUnitPriceFromMinor($unitPrice, $quantity);
+            $subtotal = self::calculateTotalPriceFromMinor($unitPrice, $quantity);
         }
 
         return [

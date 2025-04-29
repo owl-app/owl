@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Component\Core\Model\Invoice;
 
-use Owl\Component\Invoice\Model\Buyer as BaseBuyer;
+use Owl\Component\Invoice\Model\Buyer\Buyer as BaseBuyer;
 use Owl\Component\Contractor\Model\ContractorInterface;
 
 class Buyer extends  BaseBuyer implements BuyerInterface

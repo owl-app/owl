@@ -2,7 +2,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
-    <mapped-superclass name="Owl\Component\Invoice\Model\Buyer" table="owl_invoice_buyer">
+    <mapped-superclass name="Owl\Component\Invoice\Model\Buyer\Buyer" table="owl_invoice_buyer">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

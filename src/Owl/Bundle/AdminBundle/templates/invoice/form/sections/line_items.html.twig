@@ -82,65 +82,33 @@
                 <td>
                     {{ form_widget(line_item_form.unit, sylius_test_form_attribute('line-item-unit')) }}
                 </td>
-                {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'net' %}
-                    <td>
-                        {{
-                            form_widget(line_item_form.unitPrice, sylius_test_form_attribute('line-item-unit-net-price')|merge(
-                                {
-                                    row_attr: { class: 'mb-2' },
-                                    attr: {
-                                        'data-action': 'keyup->invoice-form#unitPriceChanged',
-                                        'data-invoice-form-key-param': key,
-                                        'data-model': 'norender|' ~ line_item_form.unitPrice.vars.full_name,
-                                    }
+                <td>
+                    {{
+                        form_widget(line_item_form.unitPrice, sylius_test_form_attribute('line-item-unit-net-price')|merge(
+                            {
+                                row_attr: { class: 'mb-2' },
+                                attr: {
+                                    'data-action': 'keyup->invoice-form#unitPriceChanged',
+                                    'data-invoice-form-key-param': key,
+                                    'data-model': 'norender|' ~ line_item_form.unitPrice.vars.full_name,
                                 }
-                            ))
-                        }}
-                    </td>
-                    <td>
-                        {{
-                            form_widget(line_item_form.subtotal, sylius_test_form_attribute('line-item-subtotal')|merge(
-                                {
-                                    row_attr: { class: 'mb-2' },
-                                    attr: {
-                                        'data-action': 'change->invoice-form#sumChanged',
-                                        'data-invoice-form-key-param': key,
-                                    }
+                            }
+                        ))
+                    }}
+                </td>
+                <td>
+                    {{
+                        form_widget(line_item_form.totalPrice, sylius_test_form_attribute('line-item-sum-price')|merge(
+                            {
+                                row_attr: { class: 'mb-2' },
+                                attr: {
+                                    'data-action': 'change->invoice-form#sumChanged',
+                                    'data-invoice-form-key-param': key,
                                 }
-                            ))
-                        }}
-                    </td>
-                {% endif %}
-
-                {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'gross' %}
-                    <td>
-                        {{
-                            form_widget(line_item_form.unitPriceGross, sylius_test_form_attribute('line-item-unit-net-price')|merge(
-                                {
-                                    row_attr: { class: 'mb-2' },
-                                    attr: {
-                                        'data-action': 'keyup->invoice-form#unitPriceChanged',
-                                        'data-invoice-form-key-param': key,
-                                    }
-                                }
-                            ))
-                        }}
-                    </td>
-                    <td>
-                        {{
-                            form_widget(line_item_form.total, sylius_test_form_attribute('line-item-subtotal')|merge(
-                                {
-                                    row_attr: { class: 'mb-2' },
-                                    attr: {
-                                        'data-action': 'change->invoice-form#sumChanged',
-                                        'data-invoice-form-key-param': key,
-                                    }
-                                }
-                            ))
-                        }}
-                    </td>
-                {% endif %}
-
+                            }
+                        ))
+                    }}
+                </td>
                 <td>
                     {{ form_widget(line_item_form.taxRate, sylius_test_form_attribute('line-item-tax-rate')) }}
                 </td>
@@ -166,14 +134,14 @@
                     {{ form_row(line_item_form.vars.button_delete) }}
                 </td>
             </tr>
-            {% if line_item_form.taxRateSnapshotNameOverwrite is defined or line_item_form.taxRateSnapshotAmountOverwrite is defined  %}
+            {% if line_item_form.snapshotNameOverwrite is defined or line_item_form.snapshotAmountOverwrite is defined  %}
                 <tr>
                     <td colspan="9" class="text-end">
-                        {% if line_item_form.taxRateSnapshotNameOverwrite is defined %}
+                        {% if line_item_form.snapshotNameOverwrite is defined %}
                             <div class="d-flex justify-content-end">
                                 {{ 
                                     form_widget(
-                                        line_item_form.taxRateSnapshotNameOverwrite,
+                                        line_item_form.snapshotNameOverwrite,
                                         sylius_test_form_attribute('line-item-tax-rate-snapshot-name-overwrite')|merge(
                                             {
                                                 label_attr: { style: 'min-width: 260px' }
@@ -182,11 +150,11 @@
                                 ) }}
                             </div>
                         {% endif %}
-                        {% if line_item_form.taxRateSnapshotAmountOverwrite is defined %}
+                        {% if line_item_form.snapshotAmountOverwrite is defined %}
                             <div class="d-flex justify-content-end">
                                 {{ 
                                     form_widget(
-                                        line_item_form.taxRateSnapshotAmountOverwrite,
+                                        line_item_form.snapshotAmountOverwrite,
                                         sylius_test_form_attribute('line-item-tax-rate-snapshot-amount-overwrite')|merge(
                                             {
                                                 label_attr: { style: 'min-width: 260px' }

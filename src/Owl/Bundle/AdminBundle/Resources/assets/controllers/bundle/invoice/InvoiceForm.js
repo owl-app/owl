@@ -40,10 +40,6 @@ export default class extends Controller {
         this.component.action('dateIssueChanged', { oldDate: value });
     };
 
-    calculateValuesFromChanged(event) {
-        this.component.action('calculateValuesFromChanged', { value: event.target.value });
-    }
-
     quantityChanged(event) {
         const { key } = event.params;
 

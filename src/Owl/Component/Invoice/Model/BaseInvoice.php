@@ -6,6 +6,7 @@ namespace Owl\Component\Invoice\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
 use Sylius\Resource\Model\TimestampableTrait;
 
 abstract class BaseInvoice implements BaseInvoiceInterface
@@ -58,7 +59,7 @@ abstract class BaseInvoice implements BaseInvoiceInterface
     protected $total = 0;
 
     /** @var string|null */
-    protected $calculateValuesFrom;
+    protected $calculateValuesFrom = CalculateValuesFromEnum::FROM_NET->value;
 
     public function __construct()
     {
@@ -171,6 +172,12 @@ abstract class BaseInvoice implements BaseInvoiceInterface
     public function setCalculateValuesFrom(?string $calculateValuesFrom): void
     {
         $this->calculateValuesFrom = $calculateValuesFrom;
+
+        foreach ($this->lineItems as $lineItem) {
+            if ($lineItem->getCalculateValuesFrom() !== $calculateValuesFrom) {
+                $lineItem->setCalculateValuesFrom($calculateValuesFrom);
+            }
+        }
     }
 
     public function getSerie(): ?InvoiceSerieInterface
@@ -201,8 +208,7 @@ abstract class BaseInvoice implements BaseInvoiceInterface
 
         $this->lineItems->add($lineItem);
         $lineItem->setInvoice($this);
-
-        $this->recalculateLineItemsTotals();
+        $lineItem->setCalculateValuesFrom($this->calculateValuesFrom);
     }
 
     public function removeLineItem(LineItemInterface $lineItem): void

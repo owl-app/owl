@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Component\Invoice\Model;
+namespace Owl\Component\Invoice\Model\Buyer;
 
 use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableTrait;
