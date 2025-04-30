@@ -137,7 +137,8 @@ final class MainMenuBuilder
         $isGrantedInvoiceNumberFormat = $this->authorizationChecker->isGranted('owl_admin_invoice_serie_index');
         $isGrantedInvoiceTaxRate = $this->authorizationChecker->isGranted('owl_admin_invoice_tax_rate_index');
         $isGrantedInvoiceCountries = $this->authorizationChecker->isGranted('owl_admin_country_index');
-        $isGrantedInvoiceZones= $this->authorizationChecker->isGranted('owl_admin_zone_index');
+        $isGrantedInvoiceZones = $this->authorizationChecker->isGranted('owl_admin_zone_index');
+        $isGrantedInvoiceCurrencies = $this->authorizationChecker->isGranted('owl_admin_currency_index');
 
         if ($isGrantedLocales || $isGrantedUsers || $isGrantedSettings || $isGrantedInvoiceNumberFormat) {
             $configuration = $menu
@@ -179,6 +180,15 @@ final class MainMenuBuilder
                         'route' => 'owl_admin_zone_index',
                     ])
                     ->setLabel('owl.menu.admin.main.configuration.zones')
+                ;
+            }
+
+            if ($isGrantedInvoiceCurrencies) {
+                $configuration
+                    ->addChild('admin_zones', [
+                        'route' => 'owl_admin_currency_index',
+                    ])
+                    ->setLabel('owl.menu.admin.main.configuration.currencies')
                 ;
             }
 

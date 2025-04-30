@@ -1,0 +1,37 @@
+sylius_grid:
+    grids:
+        owl_admin_currency:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.currency.class%"
+            sorting:
+                code: asc
+            fields:
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/code.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                name:
+                    type: string
+                    label: owl.ui.name
+            filters:
+                code:
+                    type: string
+                    label: owl.ui.code
+            actions:
+                main:
+                    create:
+                        type: modal
+                        label: owl.ui.create
+                        options:
+                            button: primary
+                            icon: flowbite:plus-outline
+                            modal:
+                                size: 'sm'
+                            link:
+                                route: sylius_admin_currency_create

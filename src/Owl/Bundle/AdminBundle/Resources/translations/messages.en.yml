@@ -43,6 +43,8 @@ owl:
                 password:
                     label: Password
                     confirmation: Confirm password
+        currency:
+            select: Select
 
     menu:
         admin:
@@ -67,6 +69,7 @@ owl:
                     invoice_tax_rates: Invoice tax rates
                     countries: Countries
                     zones: Zones
+                    currencies: Currencies
                 permission:
                     header: Permissions
                     available: Available
@@ -184,6 +187,12 @@ owl:
         edit_your_personal_information: Edit your personal information
         show_notification: Details notification
         permission:
+            currency: Currencies
+            list_currencies: List currencies
+            create_currency: New currency
+            update_currency: Edit currency
+            delete_currency: Delete currency
+            bulk_delete_currency: Bulk delete currency
             zone: Zones
             list_zones: List zones
             create_zone: New zone
@@ -279,3 +288,8 @@ owl:
             bulk_delete_invoice_series: Bulk delete invoice series
             list_invoice_series: List invoice number series
             available_invoice_series: Available invoice series
+
+sylius:
+    ui:
+        currencies: Currencies
+        create_currency: New currency

@@ -56,6 +56,7 @@
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
         "sylius-labs/polyfill-symfony-security": "^1.1",
+        "sylius/currency-bundle": "^2.0",
         "sylius/fixtures-bundle": "*",
         "sylius/grid": "^1.11",
         "sylius/grid-bundle": "^1.13",

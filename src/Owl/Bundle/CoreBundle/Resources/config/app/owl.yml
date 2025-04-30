@@ -10,3 +10,4 @@ imports:
     - { resource: "@OwlCoreBundle/Resources/config/app/owl/owl_setting.yml" }
     - { resource: "@OwlCoreBundle/Resources/config/app/owl/owl_invoice.yml" }
     - { resource: "@OwlCoreBundle/Resources/config/app/owl/owl_location.yml" }
+    - { resource: "@OwlCoreBundle/Resources/config/app/owl/owl_currency.yml" }

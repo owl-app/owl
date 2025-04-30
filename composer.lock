@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be19603853550afa3cddf1c5b5c0578d",
+    "content-hash": "b277ac51faf417e0d2960105170a5f0f",
     "packages": [
         {
             "name": "api-platform/core",
@@ -5487,6 +5487,167 @@
                 "source": "https://github.com/SyliusLabs/PolyfillSymfonySecurity/tree/v1.1.2"
             },
             "time": "2022-12-12T13:28:33+00:00"
+        },
+        {
+            "name": "sylius/currency",
+            "version": "v2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/Currency.git",
+                "reference": "e94fe928b55eb3f857ccd85a27f6336d6d6d88cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/Currency/zipball/e94fe928b55eb3f857ccd85a27f6336d6d6d88cc",
+                "reference": "e94fe928b55eb3f857ccd85a27f6336d6d6d88cc",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-stdlib": "^3.19",
+                "php": "^8.2",
+                "sylius/resource": "^1.12",
+                "symfony/intl": "^6.4 || ^7.1"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^7.5"
+            },
+            "type": "library",
+            "extra": {
+                "symfony": {
+                    "require": "^7.1"
+                },
+                "branch-alias": {
+                    "dev-main": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Component\\Currency\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "homepage": "https://pjedrzejewski.com"
+                },
+                {
+                    "name": "Sylius project",
+                    "homepage": "https://sylius.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/Sylius/contributors"
+                }
+            ],
+            "description": "Currency handling for PHP applications.",
+            "homepage": "https://sylius.com",
+            "keywords": [
+                "cash",
+                "currencies",
+                "currency",
+                "money"
+            ],
+            "support": {
+                "source": "https://github.com/Sylius/Currency/tree/v2.0.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sylius",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-10-23T10:16:36+00:00"
+        },
+        {
+            "name": "sylius/currency-bundle",
+            "version": "v2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusCurrencyBundle.git",
+                "reference": "d526acdc9acc601396f405b45578880bc44443a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusCurrencyBundle/zipball/d526acdc9acc601396f405b45578880bc44443a9",
+                "reference": "d526acdc9acc601396f405b45578880bc44443a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2",
+                "sylius/currency": "^2.0",
+                "sylius/resource-bundle": "^1.12",
+                "symfony/framework-bundle": "^6.4.1 || ^7.1",
+                "symfony/intl": "^6.4 || ^7.1"
+            },
+            "conflict": {
+                "doctrine/orm": ">= 3.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^2.13",
+                "doctrine/orm": "^2.18",
+                "matthiasnoback/symfony-dependency-injection-test": "^5.1",
+                "phpspec/phpspec": "^7.5",
+                "phpunit/phpunit": "^9.5",
+                "symfony/browser-kit": "^6.4 || ^7.1",
+                "symfony/dependency-injection": "^6.4.1 || ^7.1",
+                "symfony/form": "^6.4.1 || ^7.1",
+                "twig/twig": "^3.14"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "require": "^7.1"
+                },
+                "branch-alias": {
+                    "dev-main": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Bundle\\CurrencyBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "homepage": "https://pjedrzejewski.com"
+                },
+                {
+                    "name": "Sylius project",
+                    "homepage": "https://sylius.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/Sylius/contributors"
+                }
+            ],
+            "description": "Currencies processing for Symfony.",
+            "homepage": "https://sylius.com",
+            "keywords": [
+                "cash",
+                "currencies",
+                "currency",
+                "money"
+            ],
+            "support": {
+                "issues": "https://github.com/Sylius/SyliusCurrencyBundle/issues",
+                "source": "https://github.com/Sylius/SyliusCurrencyBundle/tree/v2.0.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sylius",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-31T11:29:07+00:00"
         },
         {
             "name": "sylius/fixtures-bundle",
@@ -17497,5 +17658,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

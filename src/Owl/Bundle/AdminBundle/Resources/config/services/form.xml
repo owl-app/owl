@@ -52,5 +52,10 @@
             <tag name="ux.entity_autocomplete_field" />
         </service>
 
+        <service id="owl_admin.form.type.currency" class="Owl\Bundle\AdminBundle\Form\Type\CurrencyType" >
+            <argument type="service" id="sylius.repository.currency" />
+            <tag name="form.type" />
+        </service>
+
     </services>
 </container>

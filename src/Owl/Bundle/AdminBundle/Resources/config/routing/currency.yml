@@ -1,0 +1,39 @@
+owl_admin_currency:
+    resource: |
+        alias: sylius.currency
+        section: admin
+        templates: "@OwlAdmin\\shared\\crud\\modal"
+        only: ['create']
+        redirect: index
+        grid: owl_admin_currency
+        form:
+            type: Owl\Bundle\AdminBundle\Form\Type\CurrencyType
+        permission: true
+        vars:
+            all:
+                redirect:
+                    optional_referer: owl_admin_currency_index
+            create:
+                serialization_groups: [AjaxShow]
+                form:
+                    ajax: true
+                permission:
+                    group: currency
+                    description: owl.ui.permission.create_currency
+    type: sylius.resource
+
+owl_admin_currency_index:
+    path: /currencies/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.currency::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_currency
+            template: "@OwlAdmin/shared/crud/index.html.twig"
+            vars:
+                referer: true
+                permission:
+                    group: currency
+                    description: owl.ui.permission.list_currencies

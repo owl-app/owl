@@ -1,0 +1,10 @@
+sylius_currency:
+    resources:
+        currency:
+            classes:
+                model: Owl\Component\Core\Model\Currency
+                controller: Owl\Bridge\SyliusResource\Controller\BaseController
+        exchange_rate:
+            classes:
+                model: Owl\Component\Core\Model\ExchangeRate
+                controller: Owl\Bridge\SyliusResource\Controller\BaseController

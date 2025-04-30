@@ -4,6 +4,10 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Owl\Component\Invoice\Model\Taxation\TaxRateSnapshot" table="owl_invoice_tax_rate_snapshot">
+        <unique-constraints>
+            <unique-constraint columns="code,name,amount"/>
+        </unique-constraints>
+
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
