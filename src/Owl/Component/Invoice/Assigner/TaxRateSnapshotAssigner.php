@@ -1,0 +1,75 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Owl\Component\Invoice\Assigner;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Webmozart\Assert\Assert;
+use Owl\Component\Invoice\Model\LineItemInterface;
+use Owl\Component\Invoice\Factory\InvoiceTaxRateSnapshotFactoryInterface;
+use Owl\Component\Invoice\Model\InvoiceInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+
+class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
+{
+    public function __construct(
+        private RepositoryInterface $taxRateSnapshotRepository,
+        private InvoiceTaxRateSnapshotFactoryInterface $invoiceTaxRateSnapshotFactory,
+        private EntityManagerInterface $entityManager,
+    ) {
+    }
+
+    public function assign(InvoiceInterface $invoice): void
+    {
+        /** @var InvoiceInterface $invoice */
+        Assert::isInstanceOf($invoice, InvoiceInterface::class);
+
+        foreach($invoice->getLineItems() as $lineItem) {
+            $this->assignSnapshotToLineItem($lineItem);
+        }
+    }
+
+    private function assignSnapshotToLineItem(LineItemInterface $lineItem): void
+    {
+        if ($lineItem->getTaxRate() === null) {
+            return;
+        }
+
+        $taxRateSnapshot = $lineItem->getTaxRateSnapshot();
+        $taxRate =  $lineItem->getTaxRate();
+        $dataSnapshot = [];
+
+        if ($lineItem->getId() === null || $taxRate->getCode() !== $lineItem->getTaxRateSnapshot()->getCode()) {
+            $dataSnapshot = [
+                'code' => $taxRate->getCode(),
+                'name' => $taxRate->getName(),
+                'amount' => $taxRate->getAmount(),
+            ];
+        } else if ($taxRateSnapshot->isNameChanged() || $taxRateSnapshot->isAmountChanged()) {
+            $dataSnapshot = [
+                'code' => $lineItem->getTaxRateSnapshot()->getCode(),
+                'name' => $lineItem->getTaxRateSnapshot()->getName(),
+                'amount' => $lineItem->getTaxRateSnapshot()->getAmount(),
+            ];
+        }
+
+        if (empty($dataSnapshot)) {
+            return;
+        }
+
+        $existingSnapshot = $this->taxRateSnapshotRepository->findOneBy($dataSnapshot);
+
+        if ($taxRateSnapshot) {
+            $this->entityManager->detach($taxRateSnapshot);
+        }
+
+        if ($existingSnapshot) {
+            $lineItem->setTaxRateSnapshot($existingSnapshot);
+        } else {
+            $snapshot = $this->invoiceTaxRateSnapshotFactory->create(...$dataSnapshot);
+
+            $lineItem->setTaxRateSnapshot($snapshot);
+        }
+    }
+}

@@ -115,19 +115,19 @@
     
                 {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'net' %}
                     <td>
-                        {{ money.format(item.taxTotal, 'PLN') }}
+                        {{ money.format(item.taxTotal, hookable_metadata.context.form.currency.vars.value) }}
                     </td>
                     <td>
-                        {{ money.format(item.total, 'PLN') }}
+                        {{ money.format(item.total, hookable_metadata.context.form.currency.vars.value) }}
                     </td>
                 {% endif %}
 
                 {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'gross' %}
                     <td>
-                        {{ money.format(item.taxTotal, 'PLN') }}
+                        {{ money.format(item.taxTotal, hookable_metadata.context.form.currency.vars.value) }}
                     </td>
                     <td>
-                        {{ money.format(item.subtotal, 'PLN') }}
+                        {{ money.format(item.subtotal, hookable_metadata.context.form.currency.vars.value) }}
                     </td>
                 {% endif %}
                 <td class="col-auto" {{ sylius_test_html_attribute('delete-line-item') }}>

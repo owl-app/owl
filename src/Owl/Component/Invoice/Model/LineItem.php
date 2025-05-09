@@ -38,7 +38,7 @@ class LineItem implements LineItemInterface
     /** @var int */
     protected $total = 0;
 
-    /** @var BaseInvoiceInterface|null */
+    /** @var InvoiceInterface|null */
     protected $invoice;
 
     /** @var TaxRateInterface|null */
@@ -139,12 +139,12 @@ class LineItem implements LineItemInterface
         return $this->total;
     }
 
-    public function getInvoice(): ?BaseInvoiceInterface
+    public function getInvoice(): ?InvoiceInterface
     {
         return $this->invoice;
     }
 
-    public function setInvoice(?BaseInvoiceInterface $invoice): void
+    public function setInvoice(?InvoiceInterface $invoice): void
     {
         $this->invoice = $invoice;
     }

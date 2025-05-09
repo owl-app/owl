@@ -3,11 +3,14 @@
     <h3 class="text-primary border-bottom border-primary pb-1">{{ 'owl.ui.payment'|trans }}</h3>
 
     <div class="row">
-        <div class="col-6 mt-4">
+        <div class="col-4">
+            {{ form_row(hookable_metadata.context.form.currency, sylius_test_form_attribute('isPaid')|merge({ row_attr: { class: 'mb-2' }})) }}
+        </div>
+        <div class="col-3 mt-5 ps-2">
             {{ form_row(hookable_metadata.context.form.isPaid, sylius_test_form_attribute('isPaid')|merge({ row_attr: { class: 'mb-4 mt-1' }})) }}
         </div>
         {% if hookable_metadata.context.showPaymentDate %}
-            <div class="col-6">
+            <div class="col-5">
                 {{ form_row(hookable_metadata.context.form.paymentDate, sylius_test_form_attribute('duePaymentDate')|merge({ row_attr: { class: 'mb-2' }})) }}
             </div>
         {% endif %}

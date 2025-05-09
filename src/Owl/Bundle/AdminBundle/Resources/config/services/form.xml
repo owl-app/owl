@@ -57,5 +57,10 @@
             <tag name="form.type" />
         </service>
 
+        <service id="owl_admin.form.type.currency" class="Owl\Bundle\AdminBundle\Form\Type\CurrencyChoiceType" >
+            <argument type="service" id="sylius.repository.currency" />
+            <tag name="form.type" />
+        </service>
+
     </services>
 </container>

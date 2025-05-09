@@ -45,6 +45,8 @@ owl:
                     confirmation: Confirm password
         currency:
             select: Select
+        invoice:
+            currency: Currency
 
     menu:
         admin:

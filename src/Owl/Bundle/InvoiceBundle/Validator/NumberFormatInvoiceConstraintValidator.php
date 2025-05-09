@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Owl\Bundle\InvoiceBundle\Validator;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Owl\Component\Invoice\Model\BaseInvoiceInterface;
+use Owl\Component\Invoice\Model\InvoiceInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -30,7 +30,7 @@ class NumberFormatInvoiceConstraintValidator extends ConstraintValidator
             }
         }
 
-        /** @var BaseInvoiceInterface|null $validatedSerie */
+        /** @var InvoiceInterface|null $validatedSerie */
         $validatedInvoice = $this->context->getObject();
 
         if (!$validatedInvoice->getSerie() && empty($value)) {

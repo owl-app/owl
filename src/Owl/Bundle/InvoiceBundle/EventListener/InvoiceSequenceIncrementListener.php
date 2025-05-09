@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Owl\Bundle\InvoiceBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Owl\Component\Invoice\Model\BaseInvoiceInterface;
+use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
@@ -23,8 +23,8 @@ final class InvoiceSequenceIncrementListener
     {
         $invoice = $event->getSubject();
 
-        /** @var BaseInvoiceInterface $invoice */
-        Assert::isInstanceOf($invoice, BaseInvoiceInterface::class);
+        /** @var InvoiceInterface $invoice */
+        Assert::isInstanceOf($invoice, InvoiceInterface::class);
 
         $serie = $invoice->getSerie();
 

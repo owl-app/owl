@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model\Buyer;
 
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableTrait;
 
-class Buyer implements BuyerInterface, ResourceInterface
+class Buyer implements BuyerInterface
 {
     use TimestampableTrait;
 
     /** @var mixed */
-    protected int $id;
+    protected ?int $id;
 
     /** @var string|null */
     protected ?string $company;
@@ -32,7 +31,12 @@ class Buyer implements BuyerInterface, ResourceInterface
     /** @var string|null */
     protected string $countryCode;
 
-    public function getId(): int
+    public function __construct()
+    {
+        $this->id = null;
+    }
+
+    public function getId(): ?int
     {
         return $this->id;
     }

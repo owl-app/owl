@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Model\Buyer;
 
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
-interface BuyerInterface extends TimestampableInterface
+interface BuyerInterface extends ResourceInterface, TimestampableInterface
 {
     public function getCompany(): ?string;
 

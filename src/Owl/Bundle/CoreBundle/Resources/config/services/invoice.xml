@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="owl.assigner.invoice.buyer_snapshot_by_contractor_assigner" class="Owl\Component\Core\Invoice\BuyerSnapshotByContractorAssigner" decorates="owl.assigner.invoice.buyer_snapshot_assigner" decoration-priority="256" public="false">
+            <argument type="service" id="owl.assigner.invoice.buyer_snapshot_by_contractor_assigner.inner" />
+            <argument type="service" id="owl.factory.invoice_buyer" />
+        </service>
+
+        <service
+            id="owl.custom_factory.invoice_buyer"
+            class="Owl\Component\Core\Factory\BuyerFactory"
+            decorates="owl.factory.invoice_buyer"
+            decoration-priority="256"
+        >
+            <argument type="service" id="owl.custom_factory.invoice_buyer.inner" />
+        </service>
+    </services>
+</container>

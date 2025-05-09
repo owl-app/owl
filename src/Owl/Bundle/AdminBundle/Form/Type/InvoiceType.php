@@ -5,18 +5,15 @@ declare(strict_types=1);
 namespace Owl\Bundle\AdminBundle\Form\Type;
 
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceSerieHiddenType;
-use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceBuyerType;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
 use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType as BaseInvoiceType;
-use Owl\Component\Core\Model\Invoice\BuyerInterface;
+use Owl\Component\Contractor\Model\ContractorInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class InvoiceType extends AbstractType
@@ -24,10 +21,25 @@ final class InvoiceType extends AbstractType
     /** @param array<string, mixed> $options */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var InvoiceInterface $invoice */
+        $invoice = $builder->getData();
+
         $builder
-            ->add('buyer', InvoiceBuyerType::class, [
-                'label' => false,
+            ->add('contractor', ContractorAutocompleteType::class, [
+                'label' => 'owl.ui.contractor',
                 'required' => true,
+                'choice_label' => function (ContractorInterface $choice, string $key, string $value) use ($invoice): string {
+                    if ($invoice->getId() !== null && $invoice->getBuyer()?->getCompany() !== $choice->getCompanyName()) {
+                        return $invoice->getBuyer()->getCompany() .' -> ' . $choice->getCompanyName();
+                    }
+
+                    return $choice->getCompanyName();
+                },
+                'attr' => [
+                    'data-controller' => 'contractor-autocomplete',
+                    'data-action' => 'form:contractor:created@window->contractor-autocomplete#addOption',
+                    'class' => 'contractor-autocomplete'
+                ],
             ])
             ->add('fullNumber', HiddenType::class, [
                 'required' => true,
@@ -51,6 +63,11 @@ final class InvoiceType extends AbstractType
                     ]
                 ]
             ])
+            ->add('currency', CurrencyChoiceType::class, [
+                'label' => 'owl.form.invoice.currency',
+                'required' => false,
+                'multiple' => false,
+            ])
             ->add('calculateValuesFrom', ChoiceType::class, [
                 'label' => 'owl.ui.method_of_converting_amounts',
                 'expanded' => true,
@@ -72,17 +89,6 @@ final class InvoiceType extends AbstractType
                 ),
             ]);
         ;
-
-        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-            /** @var InvoiceInterface $invoice */
-            $invoice = $event->getData();
-            /** @var BuyerInterface $buyer */
-            $buyer = $invoice->getBuyer();
-
-            if ($buyer && $buyer->getContractor()) {
-                $buyer->importContractorData($buyer->getContractor());
-            }
-        });
     }
 
     public function getParent(): string

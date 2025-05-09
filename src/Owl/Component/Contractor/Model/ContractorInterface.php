@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Owl\Component\Contractor\Model;
 
-interface ContractorInterface
+use Sylius\Resource\Model\ResourceInterface;
+
+interface ContractorInterface extends ResourceInterface
 {
     public function getCompanyName(): ?string;
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="owl.assigner.invoice.tax_rate_snapshot_assigner" class="Owl\Component\Invoice\Assigner\TaxRateSnapshotAssigner">
+            <argument type="service" id="owl.repository.invoice_tax_rate_snapshot" />
+            <argument type="service" id="owl.custom_factory.invoice_tax_rate_snapshot" />
+            <argument type="service" id="owl.manager.invoice" />
+        </service>
+
+        <service id="owl.assigner.invoice.buyer_snapshot_assigner" class="Owl\Component\Invoice\Assigner\BuyerSnapshotAssigner">
+            <argument type="service" id="owl.repository.invoice_buyer" />
+        </service>
+    </services>
+</container>

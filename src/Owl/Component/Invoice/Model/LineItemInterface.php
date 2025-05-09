@@ -35,9 +35,9 @@ interface LineItemInterface extends ResourceInterface, TotalizableInterface, Tim
 
     public function setCalculateValuesFrom(?string $calculateValuesFrom): void;
 
-    public function getInvoice(): ?BaseInvoiceInterface;
+    public function getInvoice(): ?InvoiceInterface;
 
-    public function setInvoice(?BaseInvoiceInterface $invoice): void;
+    public function setInvoice(?InvoiceInterface $invoice): void;
 
     public function getTaxRate(): ?TaxRateInterface;
 

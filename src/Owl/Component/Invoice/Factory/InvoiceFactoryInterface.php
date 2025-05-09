@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Factory;
 
-use Owl\Component\Invoice\Model\BaseInvoiceInterface;
+use Owl\Component\Invoice\Model\InvoiceInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 /**
@@ -14,5 +14,5 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 interface InvoiceFactoryInterface extends FactoryInterface
 {
-    public function createWithDefaults(?string $type): BaseInvoiceInterface;
+    public function createWithDefaults(?string $type): InvoiceInterface;
 }

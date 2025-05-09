@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Owl\Bundle\InvoiceBundle\EventListener;
 
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
-use Owl\Component\Invoice\Model\BaseInvoiceInterface;
+use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
@@ -21,8 +21,8 @@ final class GenerateNumberInvoiceListener
     {
         $invoice = $event->getSubject();
 
-        /** @var BaseInvoiceInterface $invoice */
-        Assert::isInstanceOf($invoice, BaseInvoiceInterface::class);
+        /** @var InvoiceInterface $invoice */
+        Assert::isInstanceOf($invoice, InvoiceInterface::class);
 
         /** @var InvoiceSerieInterface $serie */
         $serie = $invoice->getSerie();

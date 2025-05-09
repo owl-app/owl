@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Factory;
 
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
-use Owl\Component\Invoice\Model\BaseInvoiceInterface;
+use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Provider\InvoiceSerieProviderInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 /**
- * @template T of BaseInvoiceInterface
+ * @template T of InvoiceInterface
  *
  * @implements InvoiceFactoryInterface<T>
  */
@@ -27,13 +27,13 @@ final class InvoiceFactory implements InvoiceFactoryInterface
     ) {
     }
 
-    public function createNew(): BaseInvoiceInterface
+    public function createNew(): InvoiceInterface
     {
         return $this->decoratedFactory->createNew();
     }
 
     /** @inheritdoc */
-    public function createWithDefaults(?string $type): BaseInvoiceInterface
+    public function createWithDefaults(?string $type): InvoiceInterface
     {
         $now = new \DateTimeImmutable();
         $defaultSerie = $this->invoiceSerieProvider->getSerie($type);

@@ -4,20 +4,47 @@ declare(strict_types=1);
 
 namespace Owl\Component\Core\Model\Invoice;
 
-use Owl\Component\Invoice\Model\BaseInvoice;
+use Owl\Component\Contractor\Model\ContractorInterface;
+use Owl\Component\Invoice\Model\Invoice as BaseInvoice;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 class Invoice extends BaseInvoice implements InvoiceInterface
 {
-    /** @var BuyerInterface */
-    protected $buyer;
+    /** @var ContractorInterface */
+    protected $contractor;
 
-    public function getBuyer(): ?BuyerInterface
+    protected bool $isContractorChanged = false;
+
+    /** @var CurrencyInterface|null */
+    protected $currency;
+
+    public function getContractor(): ?ContractorInterface
     {
-        return $this->buyer;
+        return $this->contractor;
     }
 
-    public function setBuyer(?BuyerInterface $buyer): void
+    public function setContractor(?ContractorInterface $contractor): void
     {
-        $this->buyer = $buyer;
+        if (($this->contractor === null && $contractor !== null) || $this->contractor->getId() !== $contractor->getId()) {
+            $this->isContractorChanged = true;
+        }
+
+        $this->contractor = $contractor;
+    }
+
+    public function isContractorChanged(): bool
+    {
+
+        return $this->isContractorChanged;
+    }
+
+    public function getCurrency(): ?CurrencyInterface
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(?CurrencyInterface $currency): void
+    {
+        $this->currency = $currency;
     }
 }
