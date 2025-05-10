@@ -1,7 +1,8 @@
+
 owl:
-    contractor:
+    company:
         company_name: Company name
-        tax_number: Tax number
+        tax_number: NIP
         street: Street
         building_number: Building No.
         flat_number: Flat No.

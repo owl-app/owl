@@ -1,18 +1,18 @@
 sylius_grid:
     grids:
-        owl_admin_contractor:
+        owl_admin_company:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%owl.model.contractor.class%"
+                    class: "%owl.model.company.class%"
             fields:
-                companyName:
+                name:
                     type: string
-                    label: owl.contractor.company_name
+                    label: owl.ui.name
                     sortable: ~
                 taxNumber:
                     type: string
-                    label: owl.contractor.tax_number
+                    label: owl.company.tax_number
                     sortable: ~
                 address:
                     type: twig
@@ -29,9 +29,11 @@ sylius_grid:
                     label: owl.ui.email
                     sortable: ~
             filters:
-                companyName:
+                search:
                     type: string
-                    label: owl.contractor.company_name
+                    label: owl.ui.search
+                    options:
+                        fields: [name, nip, city, street, postCode, phone, email]
             actions:
                 main:
                     create:
@@ -43,7 +45,7 @@ sylius_grid:
                             modal:
                                 size: 'default'
                             link:
-                                route: owl_admin_contractor_create
+                                route: owl_admin_company_create
                 item:
                     update:
                         type: modal
@@ -53,7 +55,7 @@ sylius_grid:
                             modal:
                                 size: 'default'
                             link:
-                                route: owl_admin_contractor_update
+                                route: owl_admin_company_update
                                 parameters:
                                     id: resource.id
                     delete:

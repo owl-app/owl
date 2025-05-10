@@ -1,0 +1,40 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.company.modal.update.content.body':
+            form:
+                component: 'owl_admin:company:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'owl_admin.company.modal.update.content.body.form':
+            sections:
+                enabled: false
+            company_name:
+                template: '@OwlAdmin/company/form/company_name.html.twig'
+                priority: 700
+            tax_number:
+                template: '@OwlAdmin/company/form/tax_number.html.twig'
+                priority: 600
+            address:
+                template: '@OwlAdmin/company/form/address.html.twig'
+                priority: 500
+            post_code_city:
+                template: '@OwlAdmin/company/form/post_code_city.html.twig'
+                priority: 400
+            email:
+                template: '@OwlAdmin/company/form/email.html.twig'
+                priority: 300
+            additional_fields_header:
+                template: '@OwlAdmin/company/form/additional_fields_header.html.twig'
+                priority: 200
+            phone_contact_person:
+                template: '@OwlAdmin/company/form/phone_contact_person.html.twig'
+                priority: 100
+            description:
+                template: '@OwlAdmin/company/form/description.html.twig'
+                priority: 0

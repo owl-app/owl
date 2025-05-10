@@ -13,6 +13,7 @@
         </service>
 
         <service id="owl.assigner.invoice.buyer_snapshot_assigner" class="Owl\Component\Invoice\Assigner\BuyerSnapshotAssigner">
+            <argument type="service" id="owl.manager.invoice_buyer" />
             <argument type="service" id="owl.repository.invoice_buyer" />
         </service>
     </services>

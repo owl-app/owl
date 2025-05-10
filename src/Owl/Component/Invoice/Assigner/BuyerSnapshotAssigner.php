@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Assigner;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
 use Webmozart\Assert\Assert;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -11,6 +13,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class BuyerSnapshotAssigner implements SnapshotAssignerInterface
 {
     public function __construct(
+        private EntityManagerInterface $entityManager,
         private RepositoryInterface $buyerSnapshotRepository,
     ) {
     }
@@ -20,22 +23,40 @@ class BuyerSnapshotAssigner implements SnapshotAssignerInterface
         /** @var InvoiceInterface $invoice */
         Assert::isInstanceOf($invoice, InvoiceInterface::class);
 
-        if (!$invoice->isBuyerChanged() || $invoice->getBuyer() === null) {
+        $newBuyer = $invoice->getBuyer();
+        $uow = $this->entityManager->getUnitOfWork();
+        $oldBuyer = $uow->getOriginalEntityData($invoice)['buyer'] ?? null;
+
+        if (!$this->isBuyerChanged($newBuyer, $oldBuyer)) {
             return;
         }
 
-        $buyer = $invoice->getBuyer();
-
         $existingSnapshot = $this->buyerSnapshotRepository->findOneBy([
-            'company' => $buyer->getCompany(),
-            'taxNumber' => $buyer->getTaxNumber(),
-            'street' => $buyer->getStreet(),
-            'city' => $buyer->getCity(),
-            'postcode' => $buyer->getPostcode(),
+            'company' => $newBuyer->getCompany(),
+            'taxNumber' => $newBuyer->getTaxNumber(),
+            'street' => $newBuyer->getStreet(),
+            'city' => $newBuyer->getCity(),
+            'postcode' => $newBuyer->getPostcode(),
         ]);
 
         if ($existingSnapshot) {
             $invoice->setBuyer($existingSnapshot);
         }
+    }
+
+    private function isBuyerChanged(BuyerInterface $newBuyer, ?BuyerInterface $oldBuyer): bool
+    {
+        if (
+            ($newBuyer !== null && $oldBuyer === null) ||
+            $newBuyer->getCompany() !== $oldBuyer->getCompany() ||
+            $newBuyer->getTaxNumber() !== $oldBuyer->getTaxNumber() ||
+            $newBuyer->getStreet() !== $oldBuyer->getStreet() ||
+            $newBuyer->getCity() !== $oldBuyer->getCity() ||
+            $newBuyer->getPostcode() !== $oldBuyer->getPostcode()
+        ) {
+            return true;
+        }
+
+        return false;
     }
 }

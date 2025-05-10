@@ -1,0 +1,6 @@
+jms_serializer:
+    metadata:
+        directories:
+            owl-company:
+                namespace_prefix: "Owl\\Component\\Company"
+                path: "@OwlCompanyBundle/Resources/config/serializer"

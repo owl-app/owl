@@ -56,6 +56,9 @@ owl_admin_invoice_tax_rate:
 owl_admin_contractor:
     resource: "@OwlAdminBundle/Resources/config/routing/contractor.yml"
 
+owl_admin_company:
+    resource: "@OwlAdminBundle/Resources/config/routing/company.yml"
+
 owl_admin_country:
     resource: "@OwlAdminBundle/Resources/config/routing/country.yml"
 

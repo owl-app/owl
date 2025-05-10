@@ -91,8 +91,9 @@ final class MainMenuBuilder
     {
         $isGrantedInvoices = $this->authorizationChecker->isGranted('owl_admin_invoice_index');
         $isGrantedContractors = $this->authorizationChecker->isGranted('owl_admin_contractor_index');
+        $isGrantedCompanies = $this->authorizationChecker->isGranted('owl_admin_company_index');
 
-        if ($isGrantedInvoices || $isGrantedContractors) {
+        if ($isGrantedInvoices || $isGrantedContractors || $isGrantedCompanies) {
             $configuration = $menu
                 ->addChild('sale')
                 ->setLabel('owl.menu.admin.main.sale.header')
@@ -125,6 +126,20 @@ final class MainMenuBuilder
                         ]
                     ])
                     ->setLabel('owl.menu.admin.main.sale.contractors');
+            }
+
+            if ($isGrantedCompanies) {
+                $configuration
+                    ->addChild('admin_companies', [
+                        'route' => 'owl_admin_company_index',
+                        'extras' => [
+                            'routes' => [
+                                ['route' => 'owl_admin_company_create'],
+                                ['route' => 'owl_admin_company_update'],
+                            ]
+                        ]
+                    ])
+                    ->setLabel('owl.menu.admin.main.sale.companies');
             }
         }
     }

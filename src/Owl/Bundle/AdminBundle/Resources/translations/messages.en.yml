@@ -82,8 +82,13 @@ owl:
                     header: Sale
                     invoices: Invoices
                     contractors: Contractors
+                    companies: Companies
 
     ui:
+        additional_info: Additional information
+        companies: Companies
+        create_company: New company
+        update_company: Edit company
         from_net: from net
         from_gross: from gross
         method_of_converting_amounts: Method of converting amounts
@@ -189,6 +194,12 @@ owl:
         edit_your_personal_information: Edit your personal information
         show_notification: Details notification
         permission:
+            company: Company
+            list_companies: List companies
+            create_company: New company
+            update_company: Edit company
+            delete_company: Delete company
+            bulk_delete_company: Bulk delete company
             currency: Currencies
             list_currencies: List currencies
             create_currency: New currency

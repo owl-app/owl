@@ -1,0 +1,9 @@
+{{ data.street }}
+
+{% if data.buildingNumber is defined and data.buildingNumber is not empty %}
+    {{ data.buildingNumber }}
+{% endif %}
+
+{% if data.flatNumber is defined and data.flatNumber is not empty %}
+    /  {{ data.flatNumber }}
+{% endif %}

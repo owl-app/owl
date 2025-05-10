@@ -1,6 +1,6 @@
 owl:
-    contractor:
-        company_name: Company name
+    company:
+        name: Company name
         tax_number: Tax number
         street: Street
         building_number: Building No.
@@ -8,3 +8,5 @@ owl:
         city: City
         post_code: Post code
         email: Email
+        contact_person: Contact person
+        phone: Phone

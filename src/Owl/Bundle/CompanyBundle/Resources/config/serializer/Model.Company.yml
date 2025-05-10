@@ -1,0 +1,13 @@
+Owl\Component\Company\Model\Company:
+    exclusion_policy: ALL
+    xml_root_name: company
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [AjaxShow]
+        name:
+            expose: true
+            type: string
+            groups: [AjaxShow]
