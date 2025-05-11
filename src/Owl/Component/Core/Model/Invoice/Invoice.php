@@ -5,18 +5,38 @@ declare(strict_types=1);
 namespace Owl\Component\Core\Model\Invoice;
 
 use Owl\Component\Contractor\Model\ContractorInterface;
+use Owl\Component\Core\Model\CompanyInterface;
 use Owl\Component\Invoice\Model\Invoice as BaseInvoice;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
 class Invoice extends BaseInvoice implements InvoiceInterface
 {
+    /** @var CompanyInterface */
+    protected $company;
+
     /** @var ContractorInterface */
     protected $contractor;
+
+    protected bool $isCompanyChanged = false;
 
     protected bool $isContractorChanged = false;
 
     /** @var CurrencyInterface|null */
     protected $currency;
+
+    public function getCompany(): ?CompanyInterface
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?CompanyInterface $company): void
+    {
+        if (($this->company === null && $company !== null) || $this->company->getId() !== $company->getId()) {
+            $this->isCompanyChanged = true;
+        }
+
+        $this->company = $company;
+    }
 
     public function getContractor(): ?ContractorInterface
     {

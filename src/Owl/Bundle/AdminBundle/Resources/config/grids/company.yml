@@ -24,6 +24,15 @@ sylius_grid:
                     type: string
                     label: owl.ui.city
                     sortable: ~
+                countryCode:
+                    type: twig
+                    label: owl.ui.country
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/country.html.twig"
+                zone:
+                    type: string
+                    label: owl.ui.zone
+                    path: zone.name
                 email:
                     type: string
                     label: owl.ui.email
@@ -43,7 +52,7 @@ sylius_grid:
                             button: primary
                             icon: flowbite:plus-outline
                             modal:
-                                size: 'default'
+                                size: 'xl'
                             link:
                                 route: owl_admin_company_create
                 item:
@@ -53,7 +62,7 @@ sylius_grid:
                             tooltip: owl.ui.edit
                             icon: flowbite:pen-solid
                             modal:
-                                size: 'default'
+                                size: 'xl'
                             link:
                                 route: owl_admin_company_update
                                 parameters:

@@ -26,6 +26,11 @@
             <tag name="form.type" />
             <tag name="ux.entity_autocomplete_field" />
         </service>
+        <service id="owl_admin.form.type.company_autocomplete" class="Owl\Bundle\AdminBundle\Form\Type\CompanyAutocompleteType" >
+            <argument>%owl.model.company.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
+        </service>
 
         <service id="owl_admin.form.type.contractor_autocomplete" class="Owl\Bundle\AdminBundle\Form\Type\ContractorAutocompleteType" >
             <argument>%owl.model.contractor.class%</argument>
@@ -60,6 +65,12 @@
         <service id="owl_admin.form.type.currency" class="Owl\Bundle\AdminBundle\Form\Type\CurrencyChoiceType" >
             <argument type="service" id="sylius.repository.currency" />
             <tag name="form.type" />
+        </service>
+
+        <service id="owl_admin.form.extension.type.location" class="Owl\Bundle\AdminBundle\Form\Extension\LocationFieldsExtension">
+            <argument type="service" id="owl.form.subscriber.build_country" />
+            <argument type="service" id="owl.repository.zone" />
+            <tag name="form.type_extension" priority="100" />
         </service>
 
     </services>

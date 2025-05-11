@@ -11,9 +11,15 @@
         </div>
     {% endfor %}
 
-    {{ 
-        form_row(hookable_metadata.context.form.contractor, sylius_test_form_attribute('contractor'))
-    }}
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_row(hookable_metadata.context.form.company, sylius_test_form_attribute('company')) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(hookable_metadata.context.form.contractor, sylius_test_form_attribute('contractor')) }}
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-6">
             {{

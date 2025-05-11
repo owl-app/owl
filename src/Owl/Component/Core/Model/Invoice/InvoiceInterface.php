@@ -7,16 +7,21 @@ namespace Owl\Component\Core\Model\Invoice;
 use Owl\Component\Invoice\Model\InvoiceInterface as BaseInvoiceInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Owl\Component\Contractor\Model\ContractorInterface;
+use Owl\Component\Core\Model\CompanyInterface;
 
 interface InvoiceInterface extends BaseInvoiceInterface
 {
-    public function getCurrency(): ?CurrencyInterface;
+    public function getCompany(): ?CompanyInterface;
 
-    public function setCurrency(?CurrencyInterface $currency): void;
+    public function setCompany(?CompanyInterface $company): void;
 
     public function getContractor(): ?ContractorInterface;
 
     public function setContractor(?ContractorInterface $contractor): void;
 
     public function isContractorChanged(): bool;
+
+    public function getCurrency(): ?CurrencyInterface;
+
+    public function setCurrency(?CurrencyInterface $currency): void;
 }

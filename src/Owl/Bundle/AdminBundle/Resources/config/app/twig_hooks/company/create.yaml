@@ -29,18 +29,12 @@ sylius_twig_hooks:
                 enabled: false
             company_name:
                 template: '@OwlAdmin/company/form/company_name.html.twig'
-                priority: 700
-            tax_number:
-                template: '@OwlAdmin/company/form/tax_number.html.twig'
-                priority: 600
+                priority: 500
+            tax_number_email:
+                template: '@OwlAdmin/company/form/tax_number_email.html.twig'
+                priority: 400
             address:
                 template: '@OwlAdmin/company/form/address.html.twig'
-                priority: 500
-            post_code_city:
-                template: '@OwlAdmin/company/form/post_code_city.html.twig'
-                priority: 400
-            email:
-                template: '@OwlAdmin/company/form/email.html.twig'
                 priority: 300
             additional_fields_header:
                 template: '@OwlAdmin/company/form/additional_fields_header.html.twig'

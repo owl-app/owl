@@ -200,7 +200,7 @@ final class MainMenuBuilder
 
             if ($isGrantedInvoiceCurrencies) {
                 $configuration
-                    ->addChild('admin_zones', [
+                    ->addChild('admin_currencies', [
                         'route' => 'owl_admin_currency_index',
                     ])
                     ->setLabel('owl.menu.admin.main.configuration.currencies')

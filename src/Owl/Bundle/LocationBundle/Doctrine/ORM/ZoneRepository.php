@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\LocationBundle\Doctrine\ORM;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\QueryBuilder;
 use Owl\Component\Location\Model\CountryCodeAwareInterface;
 use Owl\Component\Location\Model\ProvinceCodeAwareInterface;
@@ -18,7 +19,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 {
     public function findOneByAddressAndType(ProvinceCodeAwareInterface&CountryCodeAwareInterface $location, string $type): ?ZoneInterface
     {
-        $queryBuilder = $this->createByAddressQueryBuilder($location);
+        $queryBuilder = $this->createByAddressQueryBuilder($location->getCountryCode(), $location->getProvinceCode());
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq('o.type', ':type'))
@@ -32,10 +33,24 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
     /** @return ZoneInterface[] */
     public function findByAddress(ProvinceCodeAwareInterface&CountryCodeAwareInterface $location): array
     {
-        return $this->createByAddressQueryBuilder($location)->getQuery()->getResult();
+        return $this
+            ->createByAddressQueryBuilder($location->getCountryCode(), $location->getProvinceCode())
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
-    public function createByAddressQueryBuilder(ProvinceCodeAwareInterface&CountryCodeAwareInterface $location): QueryBuilder
+    /** @return ZoneInterface[] */
+    public function findAllByCountryAndProvince(?string $countryCode, ?string $provinceCode): array
+    {
+        return $this
+            ->createByCountryAndProvince($countryCode, $provinceCode)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function createByCountryAndProvince(?string $countryCode, ?string $provinceCode): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->select('o', 'members')
@@ -44,24 +59,24 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
         $orConditions = [];
 
-        if ($location->getCountryCode() !== null) {
+        if ($countryCode !== null) {
             $orConditions[] = $queryBuilder->expr()->andX(
                 $queryBuilder->expr()->eq('o.type', ':country'),
                 $queryBuilder->expr()->eq('members.code', ':countryCode'),
             );
 
             $queryBuilder->setParameter('country', ZoneInterface::TYPE_COUNTRY);
-            $queryBuilder->setParameter('countryCode', $location->getCountryCode());
+            $queryBuilder->setParameter('countryCode', $countryCode);
         }
 
-        if ($location->getProvinceCode() !== null) {
+        if ($provinceCode !== null) {
             $orConditions[] = $queryBuilder->expr()->andX(
                 $queryBuilder->expr()->eq('o.type', ':province'),
                 $queryBuilder->expr()->eq('members.code', ':provinceCode'),
             );
 
             $queryBuilder->setParameter('province', ZoneInterface::TYPE_PROVINCE);
-            $queryBuilder->setParameter('provinceCode', $location->getProvinceCode());
+            $queryBuilder->setParameter('provinceCode', $provinceCode);
         }
 
         if ($orConditions !== []) {

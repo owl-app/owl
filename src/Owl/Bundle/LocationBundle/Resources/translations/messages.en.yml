@@ -3,6 +3,7 @@ owl:
         address:
             province: Province
             country: Country
+            zone: Zone
         country:
             add_province: Add province
             name: Name

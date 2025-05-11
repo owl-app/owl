@@ -8,6 +8,7 @@ use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceSerieHiddenType;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
 use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType as BaseInvoiceType;
 use Owl\Component\Contractor\Model\ContractorInterface;
+use Owl\Component\Core\Model\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
 use Symfony\Component\Form\AbstractType;
@@ -25,6 +26,22 @@ final class InvoiceType extends AbstractType
         $invoice = $builder->getData();
 
         $builder
+            ->add('company', CompanyAutocompleteType::class, [
+                'label' => 'owl.ui.company',
+                'required' => true,
+                'choice_label' => function (CompanyInterface $choice, string $key, string $value) use ($invoice): string {
+                    // if ($invoice->getId() !== null && $invoice->getBuyer()?->getCompany() !== $choice->getCompanyName()) {
+                    //     return $invoice->getBuyer()->getCompany() .' -> ' . $choice->getCompanyName();
+                    // }
+
+                    return $choice->getName();
+                },
+                'attr' => [
+                    'data-controller' => 'company-autocomplete',
+                    'data-action' => 'form:company:created@window->company-autocomplete#addOption',
+                    'class' => 'company-autocomplete'
+                ],
+            ])
             ->add('contractor', ContractorAutocompleteType::class, [
                 'label' => 'owl.ui.contractor',
                 'required' => true,

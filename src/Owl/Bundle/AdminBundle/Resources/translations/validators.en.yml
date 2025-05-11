@@ -2,3 +2,5 @@ owl:
     invoice:
         contractor:
             not_blank: Please select contractor
+        company:
+            not_blank: Please select company

@@ -1,3 +1,4 @@
+<h4 class="border-bottom pb-1 mt-3">{{ 'owl.ui.address'|trans }}</h4>
 <div class="row">
     <div class="col-6">
         {{ form_row(hookable_metadata.context.form.street, sylius_test_form_attribute('address')|merge({ row_attr: { class: 'mb-2' }})) }}
@@ -8,4 +9,31 @@
     <div class="col-3">
         {{ form_row(hookable_metadata.context.form.flatNumber, sylius_test_form_attribute('flatNumber')|merge({ row_attr: { class: 'mb-2' }})) }}
     </div>
+</div>
+
+<div class="row">
+
+
+</div>
+
+<div class="row">
+    <div class="col-2">
+        {{ form_row(hookable_metadata.context.form.postCode, sylius_test_form_attribute('address')|merge({ row_attr: { class: 'mb-2' }})) }}
+    </div>
+    <div class="col-2">
+        {{ form_row(hookable_metadata.context.form.city, sylius_test_form_attribute('buildingNumber')|merge({ row_attr: { class: 'mb-2' }})) }}
+    </div>
+    <div class="col-2">
+        {{ form_row(hookable_metadata.context.form.countryCode, sylius_test_form_attribute('country-code')|merge({ row_attr: { class: 'mb-2' }})) }}
+    </div>
+    {% if hookable_metadata.context.form.provinceCode is defined %}
+        <div class="col-3">
+            {{ form_row(hookable_metadata.context.form.provinceCode, sylius_test_form_attribute('province-code')|merge({ row_attr: { class: 'mb-2' }})) }}
+        </div>
+    {% endif %}
+    {% if hookable_metadata.context.form.zone is defined %}
+        <div class="col-3">
+            {{ form_row(hookable_metadata.context.form.zone, sylius_test_form_attribute('zone')|merge({ row_attr: { class: 'mb-2' }})) }}
+        </div>
+    {% endif %}
 </div>

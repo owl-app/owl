@@ -85,6 +85,8 @@ owl:
                     companies: Companies
 
     ui:
+        company: Company
+        zone: Zone
         additional_info: Additional information
         companies: Companies
         create_company: New company

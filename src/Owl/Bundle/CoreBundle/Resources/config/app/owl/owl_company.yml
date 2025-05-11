@@ -1,0 +1,5 @@
+owl_company:
+    resources:
+        company:
+            classes:
+                model: Owl\Component\Core\Model\Company

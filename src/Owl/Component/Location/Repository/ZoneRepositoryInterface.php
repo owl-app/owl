@@ -23,7 +23,10 @@ interface ZoneRepositoryInterface extends RepositoryInterface
     /** @return ZoneInterface[] */
     public function findByAddress(ProvinceCodeAwareInterface&CountryCodeAwareInterface $location): array;
 
-    public function createByAddressQueryBuilder(ProvinceCodeAwareInterface&CountryCodeAwareInterface $location): QueryBuilder;
+    /** @return ZoneInterface[] */
+    public function findAllByCountryAndProvince(?string $countryCode, ?string $provinceCode): array;
+
+    public function createByCountryAndProvince(?string $countryCode, ?string $provinceCode): QueryBuilder;
 
     /**
      * @param array<ZoneInterface> $members
