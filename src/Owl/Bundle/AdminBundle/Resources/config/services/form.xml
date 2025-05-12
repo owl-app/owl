@@ -73,5 +73,9 @@
             <tag name="form.type_extension" priority="100" />
         </service>
 
+        <service id="owl_admin.form.type.company" class="Owl\Bundle\AdminBundle\Form\Type\CompanyType" >
+            <tag name="form.type" />
+        </service>
+
     </services>
 </container>

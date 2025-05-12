@@ -27,8 +27,8 @@ sylius_twig_hooks:
         'owl_admin.company.modal.create.content.body.form':
             sections:
                 enabled: false
-            company_name:
-                template: '@OwlAdmin/company/form/company_name.html.twig'
+            company_name_currency:
+                template: '@OwlAdmin/company/form/company_name_currency.html.twig'
                 priority: 500
             tax_number_email:
                 template: '@OwlAdmin/company/form/tax_number_email.html.twig'

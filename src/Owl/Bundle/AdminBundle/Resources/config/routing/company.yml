@@ -8,6 +8,8 @@ owl_admin_contractor:
         redirect: index
         grid: owl_admin_company
         permission: true
+        form:
+            type: Owl\Bundle\AdminBundle\Form\Type\CompanyType
         vars:
             all:
                 redirect:

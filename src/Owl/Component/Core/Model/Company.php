@@ -5,6 +5,7 @@ namespace Owl\Component\Core\Model;
 
 use Owl\Component\Company\Model\Company as BaseCompany;
 use Owl\Component\Location\Model\ZoneInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 class Company extends BaseCompany implements CompanyInterface
 {
@@ -16,6 +17,9 @@ class Company extends BaseCompany implements CompanyInterface
 
     /** @var ZoneInterface|null */
     protected $zone;
+
+    /** @var CurrencyInterface|null */
+    protected $currency;
 
     public function getCountryCode(): ?string
     {
@@ -49,5 +53,15 @@ class Company extends BaseCompany implements CompanyInterface
     public function setZone(?ZoneInterface $zone): void
     {
         $this->zone = $zone;
+    }
+
+    public function getCurrency(): ?CurrencyInterface
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(?CurrencyInterface $currency): void
+    {
+        $this->currency = $currency;
     }
 }

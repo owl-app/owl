@@ -13,7 +13,7 @@
             <argument type="service" id="owl.repository.company" />
             <argument type="service" id="form.factory" />
             <argument>%owl.model.company.class%</argument>
-            <argument>Owl\Bundle\CompanyBundle\Form\Type\CompanyType</argument>
+            <argument>Owl\Bundle\AdminBundle\Form\Type\CompanyType</argument>
 
             <tag name="owl.live_component.admin" key="owl_admin:company:form" />
         </service>
