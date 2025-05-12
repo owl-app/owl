@@ -37,9 +37,11 @@ final class InvoiceType extends AbstractType
                     return $choice->getName();
                 },
                 'attr' => [
-                    'data-controller' => 'company-autocomplete',
-                    'data-action' => 'form:company:created@window->company-autocomplete#addOption',
-                    'class' => 'company-autocomplete'
+                    'data-controller' => 'invoice-addable-autocomplete',
+                    'data-action' => 'form:company:created@window->invoice-addable-autocomplete#addOption',
+                    'data-invoice-addable-autocomplete-text-by-value' => 'name',
+                    'data-invoice-addable-autocomplete-action-after-change-value' => 'companyChanged',
+                    'class' => 'addable-autocomplete'
                 ],
             ])
             ->add('contractor', ContractorAutocompleteType::class, [
@@ -53,9 +55,11 @@ final class InvoiceType extends AbstractType
                     return $choice->getCompanyName();
                 },
                 'attr' => [
-                    'data-controller' => 'contractor-autocomplete',
-                    'data-action' => 'form:contractor:created@window->contractor-autocomplete#addOption',
-                    'class' => 'contractor-autocomplete'
+                    'data-controller' => 'invoice-addable-autocomplete',
+                    'data-action' => 'form:contractor:created@window->invoice-addable-autocomplete#addOption',
+                    'data-invoice-addable-autocomplete-text-by-value' => 'companyName',
+                    'data-invoice-addable-autocomplete-action-after-change-value' => 'contractorChanged',
+                    'class' => 'addable-autocomplete'
                 ],
             ])
             ->add('fullNumber', HiddenType::class, [

@@ -3,10 +3,14 @@
         .sections {
             .input-group {
                 .ts-wrapper {
-                    &.contractor-autocomplete {
+                    &.addable-autocomplete {
                         border-top-left-radius: var(--tblr-border-radius) !important;
                         border-bottom-left-radius: var(--tblr-border-radius) !important;
                     }
+                }
+                .btn-outline-secondary {
+                    border-top-right-radius: var(--tblr-border-radius) !important;
+                    border-bottom-right-radius: var(--tblr-border-radius) !important;
                 }
             }
         }

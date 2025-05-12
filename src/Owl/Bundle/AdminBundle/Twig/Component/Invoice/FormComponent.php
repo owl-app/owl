@@ -7,6 +7,8 @@ namespace Owl\Bundle\AdminBundle\Twig\Component\Invoice;
 use Owl\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
+use Owl\Component\Contractor\Model\ContractorInterface;
+use Owl\Component\Core\Model\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Calculator\LineDataCalculator;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
@@ -46,12 +48,16 @@ class FormComponent
 
     /**
      * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
+     * @param RepositoryInterface<CompanyInterface> $companyRepository
+     * @param RepositoryInterface<ContractorInterface> $contractorRepository
      */
     public function __construct(
         RepositoryInterface $invoiceRepository,
         FormFactoryInterface $formFactory,
         string $resourceClass,
         string $formClass,
+        private RepositoryInterface $companyRepository,
+        private RepositoryInterface $contractorRepository,
         private readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
     ) {
@@ -114,9 +120,47 @@ class FormComponent
     }
 
     #[LiveAction]
+    public function companyChanged(#[LiveArg] string $id): void
+    {
+        try {
+            $this->submitForm(false);
+        } catch (\Throwable $e) {
+            // do nothing
+        }
+
+        /** @var InvoiceInterface $invoice */
+        $invoice = $this->getForm()->getData();
+
+        if ($company = $invoice->getCompany()) {
+
+            if ($company) {
+                $this->formValues['currency'] = $this->getFormView()
+                    ->offsetGet('currency')
+                    ->vars['value'] = $company->getCurrency()?->getCode();
+            }
+        }
+    }
+
+    #[LiveAction]
+    public function contractorChanged(#[LiveArg] string $id): void
+    {
+        if (!empty($id)) {
+            $contractor = $this->contractorRepository->find($id);
+
+            // if ($contractor) {
+            //     $this->formValues['currency'] = $contractor->getCurrency();
+            // }
+        }
+    }
+
+    #[LiveAction]
     public function dateIssueChanged(#[LiveArg] string $oldDate): void
     {
-        $this->submitForm(false);
+        try {
+            $this->submitForm(false);
+        } catch (\Throwable $e) {
+            // do nothing
+        }
 
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();

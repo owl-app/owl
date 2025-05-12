@@ -28,7 +28,7 @@ import ListNotificationController from './controllers/bundle/notification/ListNo
 // invoice
 import InvoiceForm from './controllers/bundle/invoice/InvoiceForm';
 import InvoiceAvailableSeries from './controllers/bundle/invoice/InvoiceAvailableSeries';
-import ContractorAutocomplete from './controllers/bundle/invoice/ContractorAutocomplete';
+import AddableAutocomplete from './controllers/bundle/invoice/AddableAutocomplete';
 
 export function startApp() {
     const appSymfonyStimulus = startStimulusApp(require.context(
@@ -53,7 +53,7 @@ export function startApp() {
     appSymfonyStimulus.register('list-notification', ListNotificationController);
     appSymfonyStimulus.register('invoice-form', InvoiceForm);
     appSymfonyStimulus.register('invoice-available-series', InvoiceAvailableSeries);
-    appSymfonyStimulus.register('contractor-autocomplete', ContractorAutocomplete);
+    appSymfonyStimulus.register('invoice-addable-autocomplete', AddableAutocomplete);
 
     appSymfonyStimulus.debug = process.env.NODE_ENV !== 'production';
     

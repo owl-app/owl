@@ -20,8 +20,6 @@
             <tag name="form.type" />
         </service>
 
-        <service id="owl.form.subscriber.tax_rate_snapshot" class="Owl\Bundle\AdminBundle\Form\EventSubscriber\TaxRateSnapshotSubscriber">
-
-        </service>
+        <service id="owl.form.subscriber.tax_rate_snapshot" class="Owl\Bundle\AdminBundle\Form\EventSubscriber\TaxRateSnapshotSubscriber" />
     </services>
 </container>
