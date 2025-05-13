@@ -1,5 +1,6 @@
 {% import '@OwlAdmin/shared/helper/money.html.twig' as money %}
 
+{% if hookable_metadata.context.form.lineItems is defined %}
 <div class="d-flex justify-content-end gap-5 mt-4">
     <div>
         {{ form_label(hookable_metadata.context.form.calculateValuesFrom) }}
@@ -173,3 +174,4 @@
 <div class="row ms-2">
     {{ form_widget(hookable_metadata.context.form.lineItems.vars.button_add, sylius_test_form_attribute('add-line-item')) }}
 </div>
+{% endif %}

@@ -4,3 +4,6 @@ owl_invoice:
             classes:
                 model: Owl\Component\Core\Model\Invoice\Invoice
                 interface: Owl\Component\Core\Model\Invoice\InvoiceInterface
+        invoice_tax_rate:
+            classes:
+                repository: Owl\Bundle\CoreBundle\Doctrine\ORM\InvoiceTaxRateRepository

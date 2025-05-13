@@ -4,23 +4,31 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Form\Type\Invoice;
 
+use Owl\Bundle\InvoiceBundle\Form\Type\Taxation\TaxRateChoiceType;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Owl\Bundle\InvoiceBundle\Form\Type\LineItemType as BaseLineItemType;
+use Owl\Component\Core\Model\CompanyInterface;
+use Owl\Component\Core\Repository\InvoiceTaxRateRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class LineItemType extends AbstractType
 {
     public function __construct(
         private EventSubscriberInterface $taxRateSnapshotEventSubscriber,
+        private InvoiceTaxRateRepositoryInterface $invoiceTaxRateRepository,
     ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var CompanyInterface $company */
+        $company = $options['company'];
+
         $builder
             ->add('unitPrice', MoneyType::class, [
                 'required' => false,
@@ -30,7 +38,12 @@ final class LineItemType extends AbstractType
                 'required' => false,
                 'label' => 'owl.invoice.line_item.total_price',
                 'mapped' => false,
-            ]);
+            ])
+            ->add('taxRate', TaxRateChoiceType::class, [
+                'choices' => $this->invoiceTaxRateRepository->findByZone($company->getZone()),
+                'label' => 'owl.invoice.line_item.tax_rate.label',
+            ])
+        ;
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
             if ($event->getForm()->has('totalPrice')) {
@@ -39,6 +52,13 @@ final class LineItemType extends AbstractType
         });
 
         $builder->addEventSubscriber($this->taxRateSnapshotEventSubscriber);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'company' => null,
+        ]);
     }
 
     public function getParent(): string

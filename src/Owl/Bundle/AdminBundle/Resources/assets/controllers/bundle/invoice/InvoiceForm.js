@@ -47,7 +47,7 @@ export default class extends Controller {
     };
 
     handleChangeCurrency = () => {
-        this.component.action('currencyChanged');
+        this.component.action('changeExchangeRateCurrency');
     };
 
     quantityChanged(event) {

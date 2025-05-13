@@ -1,1 +1,5 @@
-{{ data * 100 |number_format(2) }}%
+{% if data is not null %}
+    {{ data * 100 |number_format(2) }}%
+{% else %}
+    <span class="fst-italic text-secondary">{{ 'owl.ui.empty'|trans }}<span>
+{% endif %}

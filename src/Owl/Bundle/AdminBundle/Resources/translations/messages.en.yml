@@ -117,6 +117,7 @@ owl:
         update_country: Edit country
         payment: Payment
         invoice:
+            conversion_of_amounts: Conversion of %currencyFrom% to %currencyTo%
             add_line_item: Add item
             net_total: Net total
             tax_total: Tax total

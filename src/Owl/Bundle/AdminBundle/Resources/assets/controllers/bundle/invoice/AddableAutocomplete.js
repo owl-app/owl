@@ -10,7 +10,6 @@ export default class extends Controller {
     static values = {
         textBy: String,
         actionAfterChange: String
-
     };
 
     async initialize() {

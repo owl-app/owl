@@ -17,6 +17,7 @@
 
         <service id="owl_admin.form.type.invoice_line_item" class="Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType">
             <argument type="service" id="owl.form.subscriber.tax_rate_snapshot" />
+            <argument type="service" id="owl.repository.invoice_tax_rate" />
             <tag name="form.type" />
         </service>
 

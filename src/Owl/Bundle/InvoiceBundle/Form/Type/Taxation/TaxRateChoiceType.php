@@ -48,8 +48,6 @@ final class TaxRateChoiceType extends AbstractType
                     $countries = array_filter($countries, $options['choice_filter']);
                 }
 
-                usort($countries, static fn (TaxRateInterface $firstTaxRate, TaxRateInterface $secondTaxRate): int => $firstTaxRate->getName() <=> $secondTaxRate->getName());
-
                 return $countries;
             })
         ;

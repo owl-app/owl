@@ -16,16 +16,48 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
+use Symfonycasts\DynamicForms\DependentField;
+use Symfonycasts\DynamicForms\DynamicFormBuilder;
+
 
 final class InvoiceType extends AbstractType
 {
     /** @param array<string, mixed> $options */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $builder = new DynamicFormBuilder($builder);
+
         /** @var InvoiceInterface $invoice */
         $invoice = $builder->getData();
 
         $builder
+            ->addDependent('lineItems', 'company', function (DependentField $field, ?CompanyInterface $company = null) {
+                if (null === $company) {
+                    return;
+                }
+
+                $field->add(LiveCollectionType::class, [
+                    'entry_type' => LineItemType::class,
+                    'entry_options' => [
+                        'company' => $company
+                    ],
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'button_add_options' => [
+                        'label' => 'owl.ui.invoice.add_line_item',
+                        'attr' => [
+                            'class' => 'btn btn-secondary w-auto ps-5 pe-5 mt-3',
+                        ],
+                    ],
+                    'button_delete_options' => [
+                        'label' => false,
+                        'row_attr' => [
+                            'class' => 'mb-0',
+                        ]
+                    ],
+                ]);
+            })
             ->add('company', CompanyAutocompleteType::class, [
                 'label' => 'owl.ui.company',
                 'required' => true,
@@ -33,14 +65,14 @@ final class InvoiceType extends AbstractType
                     // if ($invoice->getId() !== null && $invoice->getBuyer()?->getCompany() !== $choice->getCompanyName()) {
                     //     return $invoice->getBuyer()->getCompany() .' -> ' . $choice->getCompanyName();
                     // }
-
+        
                     return $choice->getName();
                 },
                 'attr' => [
                     'data-controller' => 'invoice-addable-autocomplete',
                     'data-action' => 'form:company:created@window->invoice-addable-autocomplete#addOption',
                     'data-invoice-addable-autocomplete-text-by-value' => 'name',
-                    'data-invoice-addable-autocomplete-action-after-change-value' => 'companyChanged',
+                    'data-invoice-addable-autocomplete-action-after-change-value' => 'changeCompany',
                     'class' => 'addable-autocomplete'
                 ],
             ])
@@ -49,7 +81,7 @@ final class InvoiceType extends AbstractType
                 'required' => true,
                 'choice_label' => function (ContractorInterface $choice, string $key, string $value) use ($invoice): string {
                     if ($invoice->getId() !== null && $invoice->getBuyer()?->getCompany() !== $choice->getCompanyName()) {
-                        return $invoice->getBuyer()->getCompany() .' -> ' . $choice->getCompanyName();
+                        return $invoice->getBuyer()->getCompany() . ' -> ' . $choice->getCompanyName();
                     }
 
                     return $choice->getCompanyName();
@@ -58,7 +90,7 @@ final class InvoiceType extends AbstractType
                     'data-controller' => 'invoice-addable-autocomplete',
                     'data-action' => 'form:contractor:created@window->invoice-addable-autocomplete#addOption',
                     'data-invoice-addable-autocomplete-text-by-value' => 'companyName',
-                    'data-invoice-addable-autocomplete-action-after-change-value' => 'contractorChanged',
+                    'data-invoice-addable-autocomplete-action-after-change-value' => 'changeExchangeRateCurrency',
                     'class' => 'addable-autocomplete'
                 ],
             ])
@@ -66,24 +98,6 @@ final class InvoiceType extends AbstractType
                 'required' => true,
             ])
             ->add('serie', InvoiceSerieHiddenType::class)
-            ->add('lineItems', LiveCollectionType::class, [
-                'entry_type' => LineItemType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'button_add_options' => [
-                    'label' => 'owl.ui.invoice.add_line_item',
-                    'attr' => [
-                        'class' => 'btn btn-secondary w-auto ps-5 pe-5 mt-3',
-                    ],
-                ],
-                'button_delete_options' => [
-                    'label' => false,
-                    'row_attr' => [
-                        'class' => 'mb-0',
-                    ]
-                ]
-            ])
             ->add('currency', CurrencyChoiceType::class, [
                 'label' => 'owl.form.invoice.currency',
                 'required' => false,

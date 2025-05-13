@@ -66,7 +66,6 @@ final class InvoiceType extends AbstractResourceType
                 'choice_label' => 'format',
             ])
             ->add('lineItems', CollectionType::class, [
-                'label' => 'sylius.ui.actions',
                 'entry_type' => LineItemType::class,
                 'allow_add' => true,
                 'allow_delete' => true,

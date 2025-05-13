@@ -92,6 +92,10 @@ class FormComponent
     #[PreReRender(priority: 100)]
     public function defaultValuesLineItems(): void
     {
+        if (!isset($this->formValues['lineItems'])) {
+            return;
+        }
+
         foreach ($this->formValues['lineItems'] as $key => $lineItem) {
             if (!isset($lineItem['unitPrice'])) {
                 $this->formValues['lineItems'][$key]['unitPrice'] = 0;
@@ -125,7 +129,7 @@ class FormComponent
     }
 
     #[LiveAction]
-    public function companyChanged(): void
+    public function changeCompany(): void
     {
         try {
             $this->submitForm(false);
@@ -135,26 +139,22 @@ class FormComponent
 
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
-        $this->exchangeRateCurrency = '';
 
         if ($company = $invoice->getCompany()) {
 
             if ($company) {
+                $invoice->setCurrency($company->getCurrency());
                 $this->formValues['currency'] = $this->getFormView()
                     ->offsetGet('currency')
                     ->vars['value'] = $company->getCurrency()?->getCode();
             }
 
-            $contractor = $invoice->getContractor();
-
-            if ($contractor && $contractor->getCurrency()?->getCode() !== $company->getCurrency()?->getCode()) {
-                $this->exchangeRateCurrency = $contractor->getCurrency()?->getCode();
-            }
+            $this->setExchangeRateCurrency($invoice);
         }
     }
 
     #[LiveAction]
-    public function contractorChanged(): void
+    public function changeExchangeRateCurrency(): void
     {
         try {
             $this->submitForm(false);
@@ -165,22 +165,7 @@ class FormComponent
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
 
-        $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
-    }
-
-    #[LiveAction]
-    public function currencyChanged(): void
-    {
-        try {
-            $this->submitForm(false);
-        } catch (\Throwable $e) {
-            // do nothing
-        }
-
-        /** @var InvoiceInterface $invoice */
-        $invoice = $this->getForm()->getData();
-
-        $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
+        $this->setExchangeRateCurrency($invoice);
     }
 
     #[LiveAction]
@@ -286,5 +271,10 @@ class FormComponent
         }
 
         return false;
+    }
+
+    private function setExchangeRateCurrency(InvoiceInterface $invoice): void
+    {
+        $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
     }
 }
