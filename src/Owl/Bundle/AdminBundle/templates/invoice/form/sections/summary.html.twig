@@ -3,6 +3,17 @@
 {% set invoice = hookable_metadata.context.form.vars.data %}
 
 <div class="d-flex justify-content-end">
+    {% if hookable_metadata.context.exchangeRateCurrency is not empty and hookable_metadata.context.form.currency.vars.value is not empty %}
+    <div class="w-25 text-end">
+        {{ 'owl.ui.invoice.echnage_rate'|trans }}
+
+        {{ money.convertAndFormat(
+            invoice.total,
+            hookable_metadata.context.form.currency.vars.value,
+            hookable_metadata.context.exchangeRateCurrency
+        ) }}
+    </div>
+    {% endif %}
     <div class="card w-25 text-end">
         <div class="card-status-start bg-primary"></div>
         <div class="card-body">

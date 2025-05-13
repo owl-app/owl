@@ -34,8 +34,8 @@ export default class extends Controller {
     }
 
     _onPreConnect = (event) => {
-        event.detail.options.onChange = (value) => {
-            this.formInvoiceComponent.action(this.actionAfterChangeValue, { id: value });
+        event.detail.options.onChange = () => {
+            this.formInvoiceComponent.action(this.actionAfterChangeValue);
         };
     };
 

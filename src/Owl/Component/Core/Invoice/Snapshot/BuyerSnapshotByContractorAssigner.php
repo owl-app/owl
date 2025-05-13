@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Component\Core\Invoice;
+namespace Owl\Component\Core\Invoice\Snapshot;
 
 use Owl\Component\Core\Factory\BuyerFactoryInterface;
 use Owl\Component\Core\Model\Invoice\Invoice;

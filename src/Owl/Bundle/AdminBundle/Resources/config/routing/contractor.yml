@@ -7,6 +7,8 @@ owl_admin_contractor:
         except: ['show', 'index']
         redirect: index
         grid: owl_admin_contractor
+        form:
+            type: Owl\Bundle\AdminBundle\Form\Type\ContractorType
         permission: true
         vars:
             all:

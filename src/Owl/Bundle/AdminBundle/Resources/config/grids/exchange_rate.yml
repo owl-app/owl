@@ -1,0 +1,65 @@
+sylius_grid:
+    grids:
+        owl_admin_exchange_rate:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.exchange_rate.class%"
+            sorting:
+                id: desc
+            fields:
+                id:
+                    type: string
+                    enabled: false
+                    sortable: ~
+                sourceCurrency:
+                    type: string
+                    path: sourceCurrency.name
+                    label: owl.ui.source_currency
+                targetCurrency:
+                    type: string
+                    path: targetCurrency.name
+                    label: owl.ui.target_currency
+                ratio:
+                    type: string
+                    label: owl.ui.ratio
+                    sortable: ~
+            filters:
+                currency:
+                    type: entity
+                    label: owl.ui.currency
+                    options:
+                        fields: [sourceCurrency, targetCurrency]
+                    form_options:
+                        class: "%sylius.model.currency.class%"
+                        choice_label: name
+
+            actions:
+                main:
+                    create:
+                        type: modal
+                        label: owl.ui.create
+                        options:
+                            button: primary
+                            icon: flowbite:plus-outline
+                            modal:
+                                size: 'sm'
+                            link:
+                                route: sylius_admin_exchange_rate_create
+                item:
+                    update:
+                        type: modal
+                        options:
+                            tooltip: owl.ui.edit
+                            icon: flowbite:pen-solid
+                            modal:
+                                size: 'sm'
+                            link:
+                                route: sylius_admin_exchange_rate_update
+                                parameters:
+                                    id: resource.id
+                    delete:
+                        type: delete
+                bulk:
+                    delete:
+                        type: delete

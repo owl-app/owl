@@ -1,0 +1,5 @@
+owl_contractor:
+    resources:
+        contractor:
+            classes:
+                model: Owl\Component\Core\Model\Contractor

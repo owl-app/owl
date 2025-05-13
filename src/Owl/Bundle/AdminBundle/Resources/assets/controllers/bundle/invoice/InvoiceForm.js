@@ -9,7 +9,7 @@ export default class extends Controller {
 
     debouncedLienItemChanged = null;
 
-    static targets = ['form', 'issueDate', 'serie', 'sequenceNumber', 'fullNumber'];
+    static targets = ['form', 'issueDate', 'serie', 'sequenceNumber', 'fullNumber', 'currency'];
 
     static outlets = ['modal'];
 
@@ -19,6 +19,12 @@ export default class extends Controller {
         this.issueDateTarget.addEventListener('change', this.handleChangeIssueDate);
 
         this.debouncedLienItemChanged = debounce((action, key, value) => this.component.action(action, { key, value}), 500);
+
+        this.currencyTarget.addEventListener('change', this.handleChangeCurrency);
+    }
+
+    disconnect() {
+        this.currencyTarget.removeEventListener('change', this.handleChangeCurrency);
     }
 
     async openModalSeries({ params }) {
@@ -38,6 +44,10 @@ export default class extends Controller {
         const { value } = event.target;
 
         this.component.action('dateIssueChanged', { oldDate: value });
+    };
+
+    handleChangeCurrency = () => {
+        this.component.action('currencyChanged');
     };
 
     quantityChanged(event) {

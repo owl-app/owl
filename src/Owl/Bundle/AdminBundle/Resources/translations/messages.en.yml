@@ -35,6 +35,7 @@ owl:
 
     form:
         admin:
+            currency: Currency
             reset_password:
                 password:
                     label: New password
@@ -72,6 +73,7 @@ owl:
                     countries: Countries
                     zones: Zones
                     currencies: Currencies
+                    exchange_rates: Exchange rates
                 permission:
                     header: Permissions
                     available: Available
@@ -85,6 +87,10 @@ owl:
                     companies: Companies
 
     ui:
+        source_currency: Source currency
+        target_currency: Target currency
+        ratio: Ratio
+        currency: Currency
         company: Company
         zone: Zone
         additional_info: Additional information
@@ -196,6 +202,12 @@ owl:
         edit_your_personal_information: Edit your personal information
         show_notification: Details notification
         permission:
+            exchange_rate: Exchange rate
+            list_exchange_rates: List exchange rates
+            create_exchange_rate: New exchange rate
+            update_exchange_rate: Edit exchange rate
+            delete_exchange_rate: Delete exchange rate
+            bulk_delete_exchange_rate: Bulk delete exchange rate
             company: Company
             list_companies: List companies
             create_company: New company
@@ -306,5 +318,8 @@ owl:
 
 sylius:
     ui:
+        exchange_rates: Exchange rates
+        create_exchange_rate: New exchange rate
+        update_exchange_rate: Edit exchange rate
         currencies: Currencies
         create_currency: New currency

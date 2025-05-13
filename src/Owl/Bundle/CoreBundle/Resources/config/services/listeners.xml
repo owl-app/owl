@@ -11,6 +11,7 @@
 
         <service id="owl.listener.resource_ajax_validation" class="Owl\Bundle\CoreBundle\EventListener\ResourceAjaxValidationListener">
             <argument type="service" id="security.token_storage" />
+            <tag name="kernel.event_listener" event="sylius.ajax_validation" method="validate" priority="7" />
             <tag name="kernel.event_listener" event="owl.ajax_validation" method="validate" priority="7" />
             <tag name="kernel.event_listener" event="owl_setting.ajax_validation" method="validate" />
         </service>

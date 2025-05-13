@@ -62,7 +62,7 @@
             <tag name="form.type" />
         </service>
 
-        <service id="owl_admin.form.type.currency" class="Owl\Bundle\AdminBundle\Form\Type\CurrencyChoiceType" >
+        <service id="owl_admin.form.type.currency_choice" class="Owl\Bundle\AdminBundle\Form\Type\CurrencyChoiceType" >
             <argument type="service" id="sylius.repository.currency" />
             <tag name="form.type" />
         </service>
@@ -74,6 +74,14 @@
         </service>
 
         <service id="owl_admin.form.type.company" class="Owl\Bundle\AdminBundle\Form\Type\CompanyType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="owls_admin.form.type.exchange_rate" class="Owl\Bundle\AdminBundle\Form\Type\ExchangeRateType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl_admin.form.type.contractor" class="Owl\Bundle\AdminBundle\Form\Type\ContractorType" >
             <tag name="form.type" />
         </service>
 

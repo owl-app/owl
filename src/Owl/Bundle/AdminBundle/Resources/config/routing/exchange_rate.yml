@@ -1,0 +1,60 @@
+owl_admin_exchange_rate:
+    resource: |
+        alias: sylius.exchange_rate
+        section: admin
+        templates: "@OwlAdmin\\shared\\crud\\modal"
+        except: ['show', 'index']
+        redirect: update
+        grid: owl_admin_exchange_rate
+        form:
+            type: Owl\Bundle\AdminBundle\Form\Type\ExchangeRateType
+        permission: true
+        vars:
+            all:
+                redirect:
+                    optional_referer: owl_admin_exchange_rate_index
+            create:
+                serialization_groups: [AjaxShow]
+                form:
+                    ajax: true
+                permission:
+                    group: exchange_rate
+                    description: owl.ui.permission.create_exchange_rate
+            update:
+                serialization_groups: [AjaxShow]
+                form:
+                    ajax: true
+                permission:
+                    group: exchange_rate
+                    description: owl.ui.permission.update_exchange_rate
+            delete:
+                form:
+                    ajax: true
+                permission:
+                    group: exchange_rate
+                    description: owl.ui.permission.delete_exchange_rate
+            bulkDelete:
+                redirect:
+                    header: xhr
+                form:
+                    ajax: true
+                permission:
+                    group: exchange_rate
+                    description: owl.ui.permission.bulk_delete_exchange_rate
+    type: sylius.resource
+
+owl_admin_exchange_rate_index:
+    path: /exchange-rates/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.exchange_rate::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: owl_admin_exchange_rate
+            template: "@OwlAdmin/shared/crud/index.html.twig"
+            vars:
+                referer: true
+                permission:
+                    group: exchange_rate
+                    description: owl.ui.permission.list_exchange_rates

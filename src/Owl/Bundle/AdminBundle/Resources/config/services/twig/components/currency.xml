@@ -7,15 +7,15 @@
 >
     <services>
         <service
-            id="owl_admin.twig.component.contractor.form"
+            id="owl_admin.twig.component.currency.form"
             class="Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponent"
         >
-            <argument type="service" id="owl.repository.contractor" />
+            <argument type="service" id="sylius.repository.currency" />
             <argument type="service" id="form.factory" />
-            <argument>%owl.model.contractor.class%</argument>
-            <argument>Owl\Bundle\AdminBundle\Form\Type\ContractorType</argument>
+            <argument>%sylius.model.currency.class%</argument>
+            <argument>Owl\Bundle\AdminBundle\Form\Type\CurrencyType</argument>
 
-            <tag name="owl.live_component.admin" key="owl_admin:contractor:form" />
+            <tag name="owl.live_component.admin" key="owl_admin:currency:form" />
         </service>
     </services>
 </container>

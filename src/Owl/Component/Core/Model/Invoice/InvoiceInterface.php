@@ -6,7 +6,7 @@ namespace Owl\Component\Core\Model\Invoice;
 
 use Owl\Component\Invoice\Model\InvoiceInterface as BaseInvoiceInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Owl\Component\Contractor\Model\ContractorInterface;
+use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Core\Model\CompanyInterface;
 
 interface InvoiceInterface extends BaseInvoiceInterface

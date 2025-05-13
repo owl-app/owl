@@ -1,0 +1,12 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.currency.modal.create.content.body':
+            form:
+                component: 'owl_admin:currency:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/shared/crud/common/modal/content/body/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0

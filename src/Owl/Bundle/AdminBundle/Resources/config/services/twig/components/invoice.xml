@@ -14,6 +14,7 @@
             <argument type="service" id="form.factory" />
             <argument>%owl.model.invoice.class%</argument>
             <argument>Owl\Bundle\AdminBundle\Form\Type\InvoiceType</argument>
+            <argument type="service" id="owl.resolver.invoice.exchange_rate_currency_resolver" />
             <argument type="service" id="owl.repository.company" />
             <argument type="service" id="owl.repository.contractor" />
             <argument type="service" id="owl.generator.invoice.invoice_number_generator" />

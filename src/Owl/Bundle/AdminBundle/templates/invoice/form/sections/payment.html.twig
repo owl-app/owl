@@ -4,7 +4,14 @@
 
     <div class="row">
         <div class="col-4">
-            {{ form_row(hookable_metadata.context.form.currency, sylius_test_form_attribute('isPaid')|merge({ row_attr: { class: 'mb-2' }})) }}
+            {{ form_row(hookable_metadata.context.form.currency, sylius_test_form_attribute('isPaid')|merge(
+                    {
+                        row_attr: { class: 'mb-2' },
+                        attr: {
+                            'data-invoice-form-target': 'currency',
+                        }
+                    }
+            )) }}
         </div>
         <div class="col-3 mt-5 ps-2">
             {{ form_row(hookable_metadata.context.form.isPaid, sylius_test_form_attribute('isPaid')|merge({ row_attr: { class: 'mb-4 mt-1' }})) }}

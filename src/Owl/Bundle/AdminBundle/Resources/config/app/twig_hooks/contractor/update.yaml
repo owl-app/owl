@@ -16,16 +16,19 @@ sylius_twig_hooks:
                 enabled: false
             company_name:
                 template: '@OwlAdmin/contractor/form/company_name.html.twig'
-                priority: 400
+                priority: 500
             tax_number:
                 template: '@OwlAdmin/contractor/form/tax_number.html.twig'
-                priority: 300
+                priority: 400
             address:
                 template: '@OwlAdmin/contractor/form/address.html.twig'
-                priority: 200
+                priority: 300
             post_code_city:
                 template: '@OwlAdmin/contractor/form/post_code_city.html.twig'
-                priority: 100
+                priority: 200
             email:
                 template: '@OwlAdmin/contractor/form/email.html.twig'
+                priority: 100
+            currency:
+                template: '@OwlAdmin/contractor/form/currency.html.twig'
                 priority: 0

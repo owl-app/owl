@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="owl.assigner.invoice.buyer_snapshot_by_contractor_assigner" class="Owl\Component\Core\Invoice\BuyerSnapshotByContractorAssigner" decorates="owl.assigner.invoice.buyer_snapshot_assigner" decoration-priority="256" public="false">
+        <service id="owl.assigner.invoice.buyer_snapshot_by_contractor_assigner" class="Owl\Component\Core\Invoice\Snapshot\BuyerSnapshotByContractorAssigner" decorates="owl.assigner.invoice.buyer_snapshot_assigner" decoration-priority="256" public="false">
             <argument type="service" id="owl.assigner.invoice.buyer_snapshot_by_contractor_assigner.inner" />
             <argument type="service" id="owl.factory.invoice_buyer" />
         </service>
@@ -19,5 +19,10 @@
         >
             <argument type="service" id="owl.custom_factory.invoice_buyer.inner" />
         </service>
+
+        <service
+            id="owl.resolver.invoice.exchange_rate_currency_resolver"
+            class="Owl\Component\Core\Invoice\Currency\ExchangeRateCurrencyResolver"
+        />
     </services>
 </container>

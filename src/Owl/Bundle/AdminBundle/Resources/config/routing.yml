@@ -68,5 +68,8 @@ owl_admin_zone:
 owl_admin_currency:
     resource: "@OwlAdminBundle/Resources/config/routing/currency.yml"
 
+owl_admin_exchange_rate:
+    resource: "@OwlAdminBundle/Resources/config/routing/exchange_rate.yml"
+
 owl_admin_security:
     resource: "@OwlAdminBundle/Resources/config/routing/security.yml"

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Form\Type;
 
-use Owl\Bundle\CompanyBundle\Form\Type\CompanyType as BaseCompanyType;
+use Owl\Bundle\ContractorBundle\Form\Type\ContractorType as BaseContractorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class CompanyType extends AbstractType
+final class ContractorType extends AbstractType
 {
     /** @param array<string, mixed> $options */
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -24,11 +24,11 @@ final class CompanyType extends AbstractType
 
     public function getParent(): string
     {
-        return BaseCompanyType::class;
+        return BaseContractorType::class;
     }
 
     public function getBlockPrefix(): string
     {
-        return 'owl_admin_company';
+        return 'owl_admin_contractor';
     }
 }

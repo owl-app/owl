@@ -7,7 +7,8 @@ namespace Owl\Bundle\AdminBundle\Twig\Component\Invoice;
 use Owl\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
-use Owl\Component\Contractor\Model\ContractorInterface;
+use Owl\Component\Core\Invoice\Currency\ExchangeRateCurrencyResolverInterface;
+use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Core\Model\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Calculator\LineDataCalculator;
@@ -46,6 +47,9 @@ class FormComponent
     #[LiveProp(writable: true)]
     public bool $showPaymentDate = false;
 
+    #[LiveProp(writable: true)]
+    public string $exchangeRateCurrency = '';
+
     /**
      * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
      * @param RepositoryInterface<CompanyInterface> $companyRepository
@@ -56,6 +60,7 @@ class FormComponent
         FormFactoryInterface $formFactory,
         string $resourceClass,
         string $formClass,
+        private ExchangeRateCurrencyResolverInterface $exchangeRateCurrencyResolver,
         private RepositoryInterface $companyRepository,
         private RepositoryInterface $contractorRepository,
         private readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
@@ -120,7 +125,36 @@ class FormComponent
     }
 
     #[LiveAction]
-    public function companyChanged(#[LiveArg] string $id): void
+    public function companyChanged(): void
+    {
+        try {
+            $this->submitForm(false);
+        } catch (\Throwable $e) {
+            // do nothing
+        }
+
+        /** @var InvoiceInterface $invoice */
+        $invoice = $this->getForm()->getData();
+        $this->exchangeRateCurrency = '';
+
+        if ($company = $invoice->getCompany()) {
+
+            if ($company) {
+                $this->formValues['currency'] = $this->getFormView()
+                    ->offsetGet('currency')
+                    ->vars['value'] = $company->getCurrency()?->getCode();
+            }
+
+            $contractor = $invoice->getContractor();
+
+            if ($contractor && $contractor->getCurrency()?->getCode() !== $company->getCurrency()?->getCode()) {
+                $this->exchangeRateCurrency = $contractor->getCurrency()?->getCode();
+            }
+        }
+    }
+
+    #[LiveAction]
+    public function contractorChanged(): void
     {
         try {
             $this->submitForm(false);
@@ -131,26 +165,22 @@ class FormComponent
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
 
-        if ($company = $invoice->getCompany()) {
-
-            if ($company) {
-                $this->formValues['currency'] = $this->getFormView()
-                    ->offsetGet('currency')
-                    ->vars['value'] = $company->getCurrency()?->getCode();
-            }
-        }
+        $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
     }
 
     #[LiveAction]
-    public function contractorChanged(#[LiveArg] string $id): void
+    public function currencyChanged(): void
     {
-        if (!empty($id)) {
-            $contractor = $this->contractorRepository->find($id);
-
-            // if ($contractor) {
-            //     $this->formValues['currency'] = $contractor->getCurrency();
-            // }
+        try {
+            $this->submitForm(false);
+        } catch (\Throwable $e) {
+            // do nothing
         }
+
+        /** @var InvoiceInterface $invoice */
+        $invoice = $this->getForm()->getData();
+
+        $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
     }
 
     #[LiveAction]
