@@ -1,21 +1,67 @@
 {% import '@OwlAdmin/shared/helper/money.html.twig' as money %}
 
+{% if hookable_metadata.context.form.lineItems is defined %}
+
 {% set invoice = hookable_metadata.context.form.vars.data %}
 {% set selectedCurrency = hookable_metadata.context.form.currency.vars.value %}
 {% set exchangeRateCurrency = hookable_metadata.context.exchangeRateCurrency %}
 
 <div class="d-flex justify-content-end">
     {% if exchangeRateCurrency is not empty and selectedCurrency is not empty %}
-        <div class="card w-25 text-end me-2">
+        <div class="w-25 text-end me-5">
+            <div class="card mt-1">
+                <div class="card-status-start bg-blue"></div>
+                <div class="card-header justify-content-end">
+                    <h3 class="card-title">
+                        {{ 'owl.ui.invoice.conversion_of_amounts'|trans({'%currencyFrom%': selectedCurrency, '%currencyTo%': exchangeRateCurrency}) }}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="d-flex">
+                        <div class="w-50">
+                            <h4 class="mb-2">{{ 'owl.ui.invoice.net_total'|trans }}:</h4>
+                        </div>
+                        <div class="w-50 text-right">
+                            {{ money.convertAndFormat(invoice.subtotal, selectedCurrency, exchangeRateCurrency) }}
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="w-50">
+                            <h4 class="mb-2">{{ 'owl.ui.invoice.tax_total'|trans }}:</h4>
+                        </div>
+                        <div class="w-50 text-right">
+                            {{ money.convertAndFormat(invoice.taxTotal, selectedCurrency, exchangeRateCurrency) }}
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-end">
+                        <div class="w-50">
+                            <h2 class="mb-0">{{ 'owl.ui.invoice.gross_total'|trans }}:</h2>
+                        </div>
+                        <div class="w-50 text-right">
+                            <h2 class="mb-0">
+                                {{ money.convertAndFormat(invoice.total, selectedCurrency, exchangeRateCurrency) }}
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    {% endif %}
+    <div class=" w-25 text-end">
+        <div class="card mt-1">
             <div class="card-status-start bg-primary"></div>
+            <div class="card-header justify-content-end">
+                <h3 class="card-title">{{ 'owl.ui.invoice.summary'|trans }}</h3>
+            </div>
             <div class="card-body">
-                <p class="text-secondary">{{ 'owl.ui.invoice.conversion_of_amounts'|trans({'%currencyFrom%': selectedCurrency, '%currencyTo%': exchangeRateCurrency}) }}</p>
                 <div class="d-flex">
                     <div class="w-50">
                         <h4 class="mb-2">{{ 'owl.ui.invoice.net_total'|trans }}:</h4>
                     </div>
                     <div class="w-50 text-right">
-                        {{ money.convertAndFormat(invoice.subtotal, selectedCurrency, exchangeRateCurrency) }}
+                        {{ money.format(invoice.subtotal, selectedCurrency) }}
                     </div>
                 </div>
                 <div class="d-flex">
@@ -23,49 +69,23 @@
                         <h4 class="mb-2">{{ 'owl.ui.invoice.tax_total'|trans }}:</h4>
                     </div>
                     <div class="w-50 text-right">
-                        {{ money.convertAndFormat(invoice.taxTotal, selectedCurrency, exchangeRateCurrency) }}
+                        {{ money.format(invoice.taxTotal, selectedCurrency) }}
                     </div>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex align-items-end">
                     <div class="w-50">
-                        <h2>{{ 'owl.ui.invoice.gross_total'|trans }}:</h2>
+                        <h2 class="mb-0">{{ 'owl.ui.invoice.gross_total'|trans }}:</h2>
                     </div>
                     <div class="w-50 text-right">
-                        {{ money.convertAndFormat(invoice.total, selectedCurrency, exchangeRateCurrency) }}
+                        <h2 class="mb-0">
+                            {{ money.format(invoice.total, selectedCurrency) }}
+                        </h2>
                     </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-    <div class="card w-25 text-end">
-        <div class="card-status-start bg-primary"></div>
-        <div class="card-body">
-            <p class="text-secondary">&nbsp;</p>
-            <div class="d-flex">
-                <div class="w-50">
-                    <h4 class="mb-2">{{ 'owl.ui.invoice.net_total'|trans }}:</h4>
-                </div>
-                <div class="w-50 text-right">
-                    {{ money.format(invoice.subtotal, selectedCurrency) }}
-                </div>
-            </div>
-            <div class="d-flex">
-                <div class="w-50">
-                    <h4 class="mb-2">{{ 'owl.ui.invoice.tax_total'|trans }}:</h4>
-                </div>
-                <div class="w-50 text-right">
-                    {{ money.format(invoice.taxTotal, selectedCurrency) }}
-                </div>
-            </div>
-            <div class="d-flex">
-                <div class="w-50">
-                    <h2>{{ 'owl.ui.invoice.gross_total'|trans }}:</h2>
-                </div>
-                <div class="w-50 text-right">
-                    {{ money.format(invoice.total, selectedCurrency) }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+{% endif %}
 
