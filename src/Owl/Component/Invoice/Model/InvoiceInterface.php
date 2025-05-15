@@ -6,13 +6,15 @@ namespace Owl\Component\Invoice\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Owl\Component\Invoice\Model\Buyer\BuyerAwareInterface;
+use Owl\Component\Invoice\Model\Seller\SellerAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 interface InvoiceInterface extends 
     ResourceInterface,
-    InvoicePaymentInterface,
     BuyerAwareInterface,
+    SellerAwareInterface,
+    InvoicePaymentInterface,
     TotalizableInterface,
     TimestampableInterface
 {

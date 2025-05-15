@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
 use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
+use Owl\Component\Invoice\Model\Seller\SellerInterface;
 use Sylius\Resource\Model\TimestampableTrait;
 
 class Invoice implements InvoiceInterface
@@ -16,6 +17,10 @@ class Invoice implements InvoiceInterface
 
     /** @var mixed */
     protected $id;
+
+    protected ?SellerInterface $seller;
+
+    private bool $isSellerChanged = false;
 
     protected ?BuyerInterface $buyer;
 
@@ -78,6 +83,25 @@ class Invoice implements InvoiceInterface
     public function getId(): string|int|null
     {
         return $this->id;
+    }
+
+    public function getSeller(): ?SellerInterface
+    {
+        return $this->seller;
+    }
+
+    public function setSeller(SellerInterface $seller): void
+    {
+        if ($this->seller === null || $this->seller->getId() !== $seller->getId()) {
+            $this->isSellerChanged = true;
+        }
+
+        $this->seller = $seller;
+    }
+
+    public function isSellerChanged(): bool
+    {
+        return $this->isSellerChanged;
     }
 
     public function getBuyer(): ?BuyerInterface

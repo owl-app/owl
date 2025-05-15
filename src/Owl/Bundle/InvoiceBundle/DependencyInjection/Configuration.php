@@ -18,6 +18,8 @@ use Owl\Component\Invoice\Model\InvoiceSerie;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\LineItem;
 use Owl\Component\Invoice\Model\LineItemInterface;
+use Owl\Component\Invoice\Model\Seller\Seller;
+use Owl\Component\Invoice\Model\Seller\SellerInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRate;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshot;
@@ -67,6 +69,22 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('controller')->defaultValue(BaseController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(InvoiceType::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('invoice_seller')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Seller::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(SellerInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(BaseController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()
