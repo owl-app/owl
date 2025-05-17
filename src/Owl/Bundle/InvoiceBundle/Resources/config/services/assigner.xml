@@ -5,16 +5,44 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
+    <parameters>
+        <parameter key="owl.invoice_snapshot_assigner.interface">Owl\Component\Invoice\Assigner\SnapshotAssignerInterface</parameter>
+    </parameters>
+
     <services>
-        <service id="owl.assigner.invoice.tax_rate_snapshot_assigner" class="Owl\Component\Invoice\Assigner\TaxRateSnapshotAssigner">
-            <argument type="service" id="owl.repository.invoice_tax_rate_snapshot" />
-            <argument type="service" id="owl.custom_factory.invoice_tax_rate_snapshot" />
-            <argument type="service" id="owl.manager.invoice" />
+        <service id="owl.registry.invoice_snapshot_assigner" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
+            <argument>%owl.invoice_snapshot_assigner.interface%</argument>
+            <argument>Invoice snapshot assigner</argument>
+        </service>
+
+        <service id="owl.assigner.invoice.seller_snapshot_assigner" class="Owl\Component\Invoice\Assigner\SellerSnapshotAssigner">
+            <argument type="service" id="owl.manager.invoice_seller" />
+            <argument type="service" id="owl.repository.invoice_seller" />
+
+            <tag name="owl.invoice.snapshot_assigner" priority="128" />
         </service>
 
         <service id="owl.assigner.invoice.buyer_snapshot_assigner" class="Owl\Component\Invoice\Assigner\BuyerSnapshotAssigner">
             <argument type="service" id="owl.manager.invoice_buyer" />
             <argument type="service" id="owl.repository.invoice_buyer" />
+
+            <tag name="owl.invoice.snapshot_assigner" priority="96" />
         </service>
+
+        <service id="owl.assigner.invoice.exchange_rate_assigner" class="Owl\Component\Invoice\Assigner\ExchangeRateSnapshotAssigner">
+            <argument type="service" id="owl.resolver.invoice.exchange_rate_currency_resolver" />
+            <argument type="service" id="owl.repository.invoice_exchange_rate_snapshot" />
+
+            <tag name="owl.invoice.snapshot_assigner" priority="64" />
+        </service>
+
+        <service id="owl.assigner.invoice.tax_rate_snapshot_assigner" class="Owl\Component\Invoice\Assigner\TaxRateSnapshotAssigner">
+            <argument type="service" id="owl.repository.invoice_tax_rate_snapshot" />
+            <argument type="service" id="owl.custom_factory.invoice_tax_rate_snapshot" />
+            <argument type="service" id="owl.manager.invoice" />
+
+            <tag name="owl.invoice.snapshot_assigner" priority="32" />
+        </service>
+
     </services>
 </container>

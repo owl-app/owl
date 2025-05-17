@@ -7,7 +7,7 @@
 
     <mapped-superclass name="Owl\Component\Core\Model\Contractor" table="owl_contractor">
 
-        <many-to-one field="currency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface" fetch="EAGER">
+        <many-to-one field="currency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
             <join-column name="currency_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 

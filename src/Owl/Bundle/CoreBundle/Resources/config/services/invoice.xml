@@ -6,6 +6,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <service id="owl.assigner.invoice.seller_snapshot_by_company_assigner" class="Owl\Component\Core\Invoice\Snapshot\SellerSnapshotByCompanyAssigner" decorates="owl.assigner.invoice.seller_snapshot_assigner" decoration-priority="256" public="false">
+            <argument type="service" id="owl.assigner.invoice.seller_snapshot_by_company_assigner.inner" />
+            <argument type="service" id="owl.factory.invoice_seller" />
+        </service>
+
         <service id="owl.assigner.invoice.buyer_snapshot_by_contractor_assigner" class="Owl\Component\Core\Invoice\Snapshot\BuyerSnapshotByContractorAssigner" decorates="owl.assigner.invoice.buyer_snapshot_assigner" decoration-priority="256" public="false">
             <argument type="service" id="owl.assigner.invoice.buyer_snapshot_by_contractor_assigner.inner" />
             <argument type="service" id="owl.factory.invoice_buyer" />
@@ -18,6 +23,15 @@
             decoration-priority="256"
         >
             <argument type="service" id="owl.custom_factory.invoice_buyer.inner" />
+        </service>
+
+        <service
+            id="owl.custom_factory.invoice_seller"
+            class="Owl\Component\Core\Factory\SellerFactory"
+            decorates="owl.factory.invoice_seller"
+            decoration-priority="256"
+        >
+            <argument type="service" id="owl.custom_factory.invoice_seller.inner" />
         </service>
 
         <service

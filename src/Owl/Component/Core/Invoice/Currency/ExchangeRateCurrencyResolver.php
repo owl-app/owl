@@ -19,7 +19,7 @@ class ExchangeRateCurrencyResolver implements ExchangeRateCurrencyResolverInterf
             if ($company && $company->getCurrency()->getCode() !== $invoice?->getCurrency()?->getCode()) {
                 return $company->getCurrency();
             }
-    
+
             $contractor = $invoice->getContractor();
 
             if ($contractor && $contractor->getCurrency()->getCode() !== $invoice?->getCurrency()?->getCode()) {

@@ -21,8 +21,7 @@ class Invoice extends BaseInvoice implements InvoiceInterface
 
     protected bool $isContractorChanged = false;
 
-    /** @var CurrencyInterface|null */
-    protected $currency;
+    protected ?CurrencyInterface $currency = null;
 
     public function getCompany(): ?CompanyInterface
     {
@@ -31,11 +30,17 @@ class Invoice extends BaseInvoice implements InvoiceInterface
 
     public function setCompany(?CompanyInterface $company): void
     {
-        if (($this->company === null && $company !== null) || $this->company->getId() !== $company->getId()) {
+        if (($this->company === null && $company !== null) || ($company && $this->company->getId() !== $company->getId())) {
             $this->isCompanyChanged = true;
         }
 
         $this->company = $company;
+    }
+
+    public function isCompanyChanged(): bool
+    {
+
+        return $this->isCompanyChanged;
     }
 
     public function getContractor(): ?ContractorInterface
@@ -45,7 +50,7 @@ class Invoice extends BaseInvoice implements InvoiceInterface
 
     public function setContractor(?ContractorInterface $contractor): void
     {
-        if (($this->contractor === null && $contractor !== null) || $this->contractor->getId() !== $contractor->getId()) {
+        if (($this->contractor === null && $contractor !== null) || ($contractor && $this->contractor->getId() !== $contractor->getId())) {
             $this->isContractorChanged = true;
         }
 

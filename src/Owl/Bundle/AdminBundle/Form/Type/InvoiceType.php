@@ -11,6 +11,7 @@ use Owl\Component\Contractor\Model\ContractorInterface;
 use Owl\Component\Core\Model\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -22,9 +23,16 @@ use Symfonycasts\DynamicForms\DynamicFormBuilder;
 
 final class InvoiceType extends AbstractType
 {
+    public function __construct(
+        private EventSubscriberInterface $exchangeRateSnapshotEventSubscriber,
+    ) {
+    }
+
     /** @param array<string, mixed> $options */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $builder->remove('lineItems');
+
         $builder = new DynamicFormBuilder($builder);
 
         /** @var InvoiceInterface $invoice */
@@ -62,9 +70,9 @@ final class InvoiceType extends AbstractType
                 'label' => 'owl.ui.company',
                 'required' => true,
                 'choice_label' => function (CompanyInterface $choice, string $key, string $value) use ($invoice): string {
-                    // if ($invoice->getId() !== null && $invoice->getBuyer()?->getCompany() !== $choice->getCompanyName()) {
-                    //     return $invoice->getBuyer()->getCompany() .' -> ' . $choice->getCompanyName();
-                    // }
+                    if ($invoice->getId() !== null && $invoice->getSeller()?->getCompany() !== $choice->getName()) {
+                        return $invoice->getBuyer()->getCompany() .' -> ' . $choice->getName();
+                    }
         
                     return $choice->getName();
                 },
@@ -124,6 +132,8 @@ final class InvoiceType extends AbstractType
                 ),
             ]);
         ;
+
+        $builder->addEventSubscriber($this->exchangeRateSnapshotEventSubscriber);
     }
 
     public function getParent(): string

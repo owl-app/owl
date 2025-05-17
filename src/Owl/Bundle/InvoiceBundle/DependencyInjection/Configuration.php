@@ -10,6 +10,8 @@ use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType;
 use Owl\Bundle\InvoiceBundle\Form\Type\Taxation\TaxRateType;
 use Owl\Component\Invoice\Model\Buyer\Buyer;
 use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
+use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshot;
+use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
 use Owl\Component\Invoice\Model\Invoice;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Model\Sequence;
@@ -133,6 +135,21 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Sequence::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(SequenceInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(BaseController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('invoice_exchange_rate_snapshot')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(ExchangeRateSnapshot::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ExchangeRateSnapshotInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()

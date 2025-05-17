@@ -13,11 +13,6 @@ use Symfony\Component\Form\FormEvents;
 
 final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
 {
-    public function __construct(
-
-    ) {
-    }
-
     public static function getSubscribedEvents(): array
     {
         return [
@@ -88,7 +83,7 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
         $taxRateSnapshot = $lineItem?->getTaxRateSnapshot();
         $isChanged = false;
 
-        if ($taxRate === null || $taxRateSnapshot === null || $data['taxRate'] !== $taxRateSnapshot->getCode()) {
+        if ($taxRate === null || $taxRateSnapshot === null || (isset($data['taxRate']) && $data['taxRate'] !== $taxRateSnapshot->getCode())) {
             return;
         }
 

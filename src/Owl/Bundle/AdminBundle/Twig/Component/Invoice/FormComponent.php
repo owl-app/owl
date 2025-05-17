@@ -11,11 +11,14 @@ use Owl\Component\Core\Invoice\Currency\ExchangeRateCurrencyResolverInterface;
 use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Core\Model\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
+use Owl\Component\Core\Resolver\ExchangeRateResolverInterface;
 use Owl\Component\Invoice\Calculator\LineDataCalculator;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -48,7 +51,7 @@ class FormComponent
     public bool $showPaymentDate = false;
 
     #[LiveProp(writable: true)]
-    public string $exchangeRateCurrency = '';
+    public ?string $exchangeRateCurrency = '';
 
     /**
      * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
@@ -65,6 +68,7 @@ class FormComponent
         private RepositoryInterface $contractorRepository,
         private readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
+        private ExchangeRateResolverInterface $exchangeRateResolver,
     ) {
         $this->initialize($invoiceRepository, $formFactory, $resourceClass, $formClass);
     }
@@ -275,6 +279,17 @@ class FormComponent
 
     private function setExchangeRateCurrency(InvoiceInterface $invoice): void
     {
-        $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
+        if ($selectedCurrencyCode = $this->formValues['currency'] ?? null) {
+            $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
+    
+            if ($selectedCurrencyCode && $this->exchangeRateCurrency && $this->getFormView()->offsetExists('exchangeRateSnapshot')) {
+                $ratio = $this->exchangeRateResolver->getRatio($selectedCurrencyCode, $this->exchangeRateCurrency);
+    
+                $this->formValues['exchangeRateSnapshot']['ratio'] = $this->getFormView()
+                    ->offsetGet('exchangeRateSnapshot')
+                    ->offsetGet('ratio')
+                    ->vars['value'] = $ratio;
+            }
+        }
     }
 }

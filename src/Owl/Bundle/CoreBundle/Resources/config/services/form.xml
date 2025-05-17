@@ -159,9 +159,5 @@
             <tag name="form.type" />
         </service>
 
-        <service id="owl.form.extension.type.invoice" class="Owl\Bundle\CoreBundle\Form\Extension\InvoiceTypeExtension">
-            <tag name="form.type_extension" priority="100" />
-        </service>
-
     </services>
 </container>

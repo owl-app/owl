@@ -10,6 +10,8 @@
     }}
 </div>
 
+{% set calculateValuesFrom = hookable_metadata.context.form.calculateValuesFrom.vars.value %}
+
 <table class="table table-line-items card-table table-vcenter datatable col-12 box">
     <thead>
         <tr>
@@ -22,7 +24,7 @@
             <th style="width: 120px">
                 {{ 'owl.invoice.line_item.unit'|trans }}
             </th>
-            {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'net' %}
+            {% if calculateValuesFrom == 'net' %}
                 <th style="width: 200px">
                     {{ 'owl.invoice.line_item.unit_price'|trans }}
                 </th>
@@ -30,7 +32,7 @@
                     {{ 'owl.invoice.line_item.net_value'|trans }}
                 </th>
             {% endif %}
-            {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'gross' %}
+            {% if calculateValuesFrom == 'gross' %}
                 <th style="width: 200px">
                     {{ 'owl.invoice.line_item.unit_gross_price'|trans }}
                 </th>
@@ -44,12 +46,12 @@
             <th>
                 {{ 'owl.ui.invoice.line_item.tax_value'|trans }}
             </th>
-            {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'net' %}
+            {% if calculateValuesFrom == 'net' %}
                 <th>
                     {{ 'owl.invoice.line_item.gross_value'|trans }}
                 </th>
             {% endif %}
-            {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'gross' %}
+            {% if calculateValuesFrom == 'gross' %}
                 <th>
                     {{ 'owl.invoice.line_item.net_value'|trans }}
                 </th>
@@ -114,7 +116,7 @@
                     {{ form_widget(line_item_form.taxRate, sylius_test_form_attribute('line-item-tax-rate')) }}
                 </td>
     
-                {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'net' %}
+                {% if calculateValuesFrom == 'net' %}
                     <td>
                         {{ money.format(item.taxTotal, hookable_metadata.context.form.currency.vars.value) }}
                     </td>
@@ -123,7 +125,7 @@
                     </td>
                 {% endif %}
 
-                {% if hookable_metadata.context.form.calculateValuesFrom.vars.value == 'gross' %}
+                {% if calculateValuesFrom == 'gross' %}
                     <td>
                         {{ money.format(item.taxTotal, hookable_metadata.context.form.currency.vars.value) }}
                     </td>

@@ -40,7 +40,7 @@ final class LineItemType extends AbstractType
                 'mapped' => false,
             ])
             ->add('taxRate', TaxRateChoiceType::class, [
-                'choices' => $this->invoiceTaxRateRepository->findByZone($company->getZone()),
+                'choices' => $company?->getZone() ? $this->invoiceTaxRateRepository->findByZone($company?->getZone()) : [],
                 'label' => 'owl.invoice.line_item.tax_rate.label',
             ])
         ;

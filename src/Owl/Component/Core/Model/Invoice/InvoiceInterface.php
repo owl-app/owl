@@ -15,6 +15,8 @@ interface InvoiceInterface extends BaseInvoiceInterface
 
     public function setCompany(?CompanyInterface $company): void;
 
+    public function isCompanyChanged(): bool;
+
     public function getContractor(): ?ContractorInterface;
 
     public function setContractor(?ContractorInterface $contractor): void;

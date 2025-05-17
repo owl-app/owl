@@ -6,8 +6,10 @@ namespace Owl\Component\Invoice\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Owl\Component\Invoice\Converter\CurrencyConverter;
 use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
 use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
+use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
 use Owl\Component\Invoice\Model\Seller\SellerInterface;
 use Sylius\Resource\Model\TimestampableTrait;
 
@@ -56,6 +58,8 @@ class Invoice implements InvoiceInterface
     /** @var InvoiceSerieInterface */
     protected $serie;
 
+    protected ?ExchangeRateSnapshotInterface $exchangeRateSnapshot = null;
+
     /** @var Collection<array-key, LineItemInterface> */
     protected $lineItems;
 
@@ -75,6 +79,8 @@ class Invoice implements InvoiceInterface
     {
         $this->createdAt = new \DateTime();
         $this->buyer = null;
+        $this->seller = null;
+        $this->exchangeRateSnapshot = null;
 
         /** @var ArrayCollection<array-key, LineItemInterface> $this->lineItems */
         $this->lineItems = new ArrayCollection();
@@ -239,6 +245,25 @@ class Invoice implements InvoiceInterface
         $this->serie = $serie;
     }
 
+    public function getExchangeRateSnapshot(): ?ExchangeRateSnapshotInterface
+    {
+        return $this->exchangeRateSnapshot;
+    }
+
+    public function setExchangeRateSnapshot(?ExchangeRateSnapshotInterface $exchangeRateSnapshot): void
+    {
+        $this->exchangeRateSnapshot = $exchangeRateSnapshot;
+    }
+
+    public function resolveExchangeRateRatio(): ?float
+    {
+        if ($this->exchangeRateSnapshot === null) {
+            return 0;
+        }
+
+        return $this->exchangeRateSnapshot->getRatio();
+    }
+
     public function getLineItems(): Collection
     {
         return $this->lineItems;
@@ -289,6 +314,21 @@ class Invoice implements InvoiceInterface
     public function getTotal(): int
     {
         return $this->total;
+    }
+
+    public function getSubtotalConverted(): float
+    {
+        return CurrencyConverter::defaultRound($this->subtotal * $this->resolveExchangeRateRatio());
+    }
+
+    public function getTaxTotalConverted(): float
+    {
+        return CurrencyConverter::defaultRound($this->taxTotal * $this->resolveExchangeRateRatio());
+    }
+
+    public function getTotalConverted(): float
+    {
+        return CurrencyConverter::defaultRound($this->total * $this->resolveExchangeRateRatio());
     }
 
     public function recalculateLineItemsTotals(): void

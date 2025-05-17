@@ -6,7 +6,6 @@ namespace Owl\Component\Invoice\Assigner;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
-use Webmozart\Assert\Assert;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -20,9 +19,6 @@ class BuyerSnapshotAssigner implements SnapshotAssignerInterface
 
     public function assign(InvoiceInterface $invoice): void
     {
-        /** @var InvoiceInterface $invoice */
-        Assert::isInstanceOf($invoice, InvoiceInterface::class);
-
         $newBuyer = $invoice->getBuyer();
         $uow = $this->entityManager->getUnitOfWork();
         $oldBuyer = $uow->getOriginalEntityData($invoice)['buyer'] ?? null;

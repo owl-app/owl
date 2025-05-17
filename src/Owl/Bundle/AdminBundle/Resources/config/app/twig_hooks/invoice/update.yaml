@@ -38,6 +38,7 @@ sylius_twig_hooks:
                     form: '@=_context.form'
                     type: '@=_context.resource.getType()'
                     showPaymentDate: '@=_context.resource.isPaid()'
+                    exchangeRateCurrency: '@=_context.resource.getExchangeRateSnapshot()?.getCode()'
                     template: '@OwlAdmin/invoice/form.html.twig'
                 configuration:
                     render_rest: false

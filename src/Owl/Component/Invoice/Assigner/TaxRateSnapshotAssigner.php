@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Assigner;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Webmozart\Assert\Assert;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Factory\InvoiceTaxRateSnapshotFactoryInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
@@ -22,9 +21,6 @@ class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
 
     public function assign(InvoiceInterface $invoice): void
     {
-        /** @var InvoiceInterface $invoice */
-        Assert::isInstanceOf($invoice, InvoiceInterface::class);
-
         foreach($invoice->getLineItems() as $lineItem) {
             $this->assignSnapshotToLineItem($lineItem);
         }

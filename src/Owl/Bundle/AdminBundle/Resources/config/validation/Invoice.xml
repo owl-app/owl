@@ -14,5 +14,18 @@
                 <option name="groups">owl</option>
             </constraint>
         </property>
+        <property name="currency">
+            <constraint name="NotNull">
+                <option name="message">owl.common.not_blank</option>
+                <option name="groups">owl</option>
+            </constraint>
+        </property>
+        <property name="paymentMethod">
+            <constraint name="NotNull">
+                <option name="message">owl.invoice.company.not_blank</option>
+                <option name="groups">owl</option>
+            </constraint>
+        </property>
+        
     </class>
 </constraint-mapping>

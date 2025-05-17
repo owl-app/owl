@@ -4,24 +4,10 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Calculator;
 
+use Owl\Component\Invoice\Converter\CurrencyConverter;
+
 class LineDataCalculator
 {
-    /**
-     * Converts main currency units (e.g. EUR) to minor units (e.g. cents).
-     */
-    public static function toMinor(float $amount): int
-    {
-        return (int) round($amount * 100);
-    }
-
-    /**
-     * Converts minor currency units (e.g. cents) to major units (e.g. EUR).
-     */
-    public static function toMajor(int $amount): float
-    {
-        return round($amount / 100, 2);
-    }
-
     /**
      * Converts tax rate to minor units (e.g. 20 ➝ 0.2).
      */
@@ -36,7 +22,7 @@ class LineDataCalculator
      */
     public static function calculateTotalPriceFromMajor(float $unitPrice, float $quantity, bool $toMinor = false): int|float
     {
-        $unitPriceMinor = self::toMinor($unitPrice);
+        $unitPriceMinor = CurrencyConverter::toMinor($unitPrice);
 
         return self::calculateTotalPriceFromMinor($unitPriceMinor, $quantity, $toMinor);
     }
@@ -57,7 +43,7 @@ class LineDataCalculator
             return $subtotal;
         }
 
-        return self::toMajor($subtotal);
+        return CurrencyConverter::toMajor($subtotal);
     }
 
     /**
@@ -66,7 +52,7 @@ class LineDataCalculator
      */
     public static function calculateTaxFromMajor(float $subtotal, ?float $taxRate, bool $toMinor = false): int|float
     {
-        return self::calculateTaxFromMinor(self::toMinor($subtotal), $taxRate, $toMinor);
+        return self::calculateTaxFromMinor(CurrencyConverter::toMinor($subtotal), $taxRate, $toMinor);
     }
 
     /**
@@ -86,7 +72,7 @@ class LineDataCalculator
             return $tax;
         }
 
-        return self::toMajor($tax);
+        return CurrencyConverter::toMajor($tax);
     }
 
     /**
@@ -95,7 +81,7 @@ class LineDataCalculator
      */
     public static function calculateUnitPriceByTotalPriceFromMajor(?float $subtotal, ?float $quantity, bool $toMinor = false): ?array
     {
-        return self::calculateUnitPriceByTotalPriceFromMinor(self::toMinor($subtotal), $quantity, $toMinor);
+        return self::calculateUnitPriceByTotalPriceFromMinor(CurrencyConverter::toMinor($subtotal), $quantity, $toMinor);
     }
 
     /**
@@ -115,17 +101,9 @@ class LineDataCalculator
         }
 
         return [
-            $toMinor ? $unitPrice : self::toMajor($unitPrice),
-            $toMinor ? $subtotal : self::toMajor($subtotal)
+            $toMinor ? $unitPrice : CurrencyConverter::toMajor($unitPrice),
+            $toMinor ? $subtotal : CurrencyConverter::toMajor($subtotal)
         ];
-    }
-
-    /**
-     * Formats amount in minor units as a major unit string, e.g. 343 ➝ "3.43"
-     */
-    public static function formatMajor(int $amount, string $decimalSeparator = '.', string $thousandsSeparator = ''): string
-    {
-        return number_format($amount / 100, 2, $decimalSeparator, $thousandsSeparator);
     }
 
     private static function isDivisible(int $value, float $quantity): bool

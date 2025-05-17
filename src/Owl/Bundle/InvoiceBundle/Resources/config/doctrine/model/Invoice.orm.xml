@@ -39,6 +39,13 @@
             <join-column name="serie_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
+        <many-to-one field="exchangeRateSnapshot" target-entity="Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-column name="exchange_rate_snapshot_id" nullable="true" />
+        </many-to-one>
+
         <one-to-many field="lineItems" target-entity="Owl\Component\Invoice\Model\LineItemInterface" mapped-by="invoice" orphan-removal="true">
             <cascade>
                 <cascade-all/>

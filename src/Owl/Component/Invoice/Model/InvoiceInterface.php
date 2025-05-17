@@ -6,6 +6,7 @@ namespace Owl\Component\Invoice\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Owl\Component\Invoice\Model\Buyer\BuyerAwareInterface;
+use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
 use Owl\Component\Invoice\Model\Seller\SellerAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -48,6 +49,10 @@ interface InvoiceInterface extends
 
     public function setSerie(?InvoiceSerieInterface $serie): void;
 
+    public function getExchangeRateSnapshot(): ?ExchangeRateSnapshotInterface;
+
+    public function setExchangeRateSnapshot(?ExchangeRateSnapshotInterface $exchangeRateSnapshot): void;
+
     public function getCalculateValuesFrom(): ?string;
 
     public function setCalculateValuesFrom(?string $calculateValuesFrom): void;
@@ -62,7 +67,11 @@ interface InvoiceInterface extends
 
     public function clearLineItems(): void;
 
-    public function getTotal(): int;
+    public function getSubtotalConverted(): float;
+
+    public function getTaxTotalConverted(): float;
+
+    public function getTotalConverted(): float;
 
     public function recalculateLineItemsTotals(): void;
 }

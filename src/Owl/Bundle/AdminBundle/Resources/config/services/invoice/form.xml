@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="owl.form.type.invoice_exchange_rate_snapshot.validation_groups" type="collection">
+            <parameter>owl</parameter>
+        </parameter>
+    </parameters>
+    
     <services>
         <service id="owl_admin.form.type.invoice" class="Owl\Bundle\AdminBundle\Form\Type\InvoiceType">
+            <argument type="service" id="owl.form.subscriber.exchange_rate_snapshot" />
             <tag name="form.type" />
         </service>
 
@@ -15,12 +22,22 @@
             <tag name="form.type" />
         </service>
 
+        <service id="owl_admin.form.type.invoice_exchange_rate_snapshot" class="Owl\Bundle\AdminBundle\Form\Type\Invoice\ExchangeRateSnapshot">
+            <argument>%owl.model.invoice_exchange_rate_snapshot.class%</argument>
+            <argument>%owl.form.type.invoice_exchange_rate_snapshot.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
         <service id="owl_admin.form.type.invoice_line_item" class="Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType">
             <argument type="service" id="owl.form.subscriber.tax_rate_snapshot" />
             <argument type="service" id="owl.repository.invoice_tax_rate" />
             <tag name="form.type" />
         </service>
 
-        <service id="owl.form.subscriber.tax_rate_snapshot" class="Owl\Bundle\AdminBundle\Form\EventSubscriber\TaxRateSnapshotSubscriber" />
+        <service id="owl.form.subscriber.tax_rate_snapshot" class="Owl\Bundle\AdminBundle\Form\EventSubscriber\TaxRateSnapshotSubscriber"/>
+
+        <service id="owl.form.subscriber.exchange_rate_snapshot" class="Owl\Bundle\AdminBundle\Form\EventSubscriber\ExchangeRateSnapshotSubscriber">
+            <argument type="service" id="owl.resolver.invoice.exchange_rate_currency_resolver" />
+        </service>
     </services>
 </container>

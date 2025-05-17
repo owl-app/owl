@@ -25,7 +25,7 @@ class TaxRateSnapshot implements TaxRateSnapshotInterface
     /** @var float|null */
     protected $amount = 0.0;
 
-    private bool $isNameChaged = false;
+    private bool $isNameChanged = false;
 
     private bool $isAmountChanged = false;
 
@@ -52,7 +52,7 @@ class TaxRateSnapshot implements TaxRateSnapshotInterface
     public function setName(?string $name): void
     {
         if ($this->name !== $name) {
-            $this->isNameChaged = true;
+            $this->isNameChanged = true;
         }
 
         $this->name = $name;
@@ -60,7 +60,7 @@ class TaxRateSnapshot implements TaxRateSnapshotInterface
 
     public function isNameChanged(): bool
     {
-        return $this->isNameChaged;
+        return $this->isNameChanged;
     }
 
     public function getAmount(): ?float

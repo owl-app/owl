@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Owl\Bundle\AdminBundle\Form\Type;
+namespace Owl\Bundle\AdminBundle\Form\Type\Invoice;
 
-use Sylius\Bundle\CurrencyBundle\Form\Type\ExchangeRateType as BaseExchangeRateType;
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ExchangeRateType extends AbstractType
+final class ExchangeRateSnapshot extends AbstractResourceType
 {
+    /** @param array<string, mixed> $options */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -24,13 +25,15 @@ final class ExchangeRateType extends AbstractType
         ;
     }
 
-    public function getBlockPrefix(): string
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        return 'owl_admin_exchange_rate';
+        parent::configureOptions($resolver);
+
+        $resolver->setDefault('rounding_mode', \NumberFormatter::ROUND_HALFEVEN);
     }
 
-    public function getParent(): string
+    public function getBlockPrefix(): string
     {
-        return BaseExchangeRateType::class;
+        return 'owl_admin_invoice_exchange_rate_snapshot';
     }
 }

@@ -6,13 +6,14 @@ namespace Owl\Bundle\InvoiceBundle\EventListener;
 
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Assigner\SnapshotAssignerInterface;
+use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
 final class InvoiceSnapshotAssignListener
 {
     public function __construct(
-        private SnapshotAssignerInterface $taxRateSnapshotAssigner,
-        private SnapshotAssignerInterface $buyerSnapshotAssigner,
+        private PrioritizedServiceRegistryInterface $registrySnapshotAssigner,
     ) {
     }
 
@@ -24,7 +25,11 @@ final class InvoiceSnapshotAssignListener
         /** @var InvoiceInterface $invoice */
         $invoice = $event->getSubject();
 
-        $this->taxRateSnapshotAssigner->assign($invoice);
-        $this->buyerSnapshotAssigner->assign($invoice);
+        Assert::isInstanceOf($invoice, InvoiceInterface::class);
+
+        /** @var SnapshotAssignerInterface $snapshotAssigner */
+        foreach($this->registrySnapshotAssigner->all() as $snapshotAssigner) {
+            $snapshotAssigner->assign($invoice);
+        }
     }
 }
