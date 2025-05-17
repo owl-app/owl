@@ -21,7 +21,7 @@ class LineItem implements LineItemInterface
     protected $name;
 
     /** @var float|null */
-    protected ?float $quantity;
+    protected $quantity;
 
     /** @var string|null */
     protected $unit;
@@ -66,7 +66,14 @@ class LineItem implements LineItemInterface
 
     public function getQuantity(): ?float
     {
-        return $this->quantity ? (float) $this->quantity : null;
+        /**
+         * It looks like Doctrine is hydrating decimal field as string, force casting to float.
+         *
+         * @var float|string|null $quantity
+         */
+        $quantity = $this->quantity;
+
+        return is_string($quantity) ? (float) $quantity : $quantity;
     }
 
     public function setQuantity(?float $quantity): void
@@ -83,12 +90,6 @@ class LineItem implements LineItemInterface
 
     public function setUnit(?string $unit): void
     {
-        // Assert::oneOf(
-        //     $unit,
-        //     [self::UNIT_PIECE, self::UNIT_HOUR],
-        //     sprintf('Wrong variant selection method "%s" given.', $unit),
-        // );
-
         $this->unit = $unit;
     }
 
@@ -119,7 +120,7 @@ class LineItem implements LineItemInterface
     public function getTotalPrice(): int
     {
         $unitPrice = $this->unitPrice ?? 0;
-        $quantity = $this->quantity ?? 0;
+        $quantity = $this->getQuantity() ?? 0;
 
         return LineDataCalculator::calculateTotalPriceFromMinor($unitPrice, $quantity);
     }

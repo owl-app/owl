@@ -25,6 +25,7 @@ final class InvoiceType extends AbstractType
 {
     public function __construct(
         private EventSubscriberInterface $exchangeRateSnapshotEventSubscriber,
+        private EventSubscriberInterface $lineItemsSubscriber,
     ) {
     }
 
@@ -39,33 +40,6 @@ final class InvoiceType extends AbstractType
         $invoice = $builder->getData();
 
         $builder
-            ->addDependent('lineItems', 'company', function (DependentField $field, ?CompanyInterface $company = null) {
-                if (null === $company) {
-                    return;
-                }
-
-                $field->add(LiveCollectionType::class, [
-                    'entry_type' => LineItemType::class,
-                    'entry_options' => [
-                        'company' => $company
-                    ],
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'by_reference' => false,
-                    'button_add_options' => [
-                        'label' => 'owl.ui.invoice.add_line_item',
-                        'attr' => [
-                            'class' => 'btn btn-secondary w-auto ps-5 pe-5 mt-3',
-                        ],
-                    ],
-                    'button_delete_options' => [
-                        'label' => false,
-                        'row_attr' => [
-                            'class' => 'mb-0',
-                        ]
-                    ],
-                ]);
-            })
             ->add('company', CompanyAutocompleteType::class, [
                 'label' => 'owl.ui.company',
                 'required' => true,
@@ -134,6 +108,7 @@ final class InvoiceType extends AbstractType
         ;
 
         $builder->addEventSubscriber($this->exchangeRateSnapshotEventSubscriber);
+        $builder->addEventSubscriber($this->lineItemsSubscriber);
     }
 
     public function getParent(): string

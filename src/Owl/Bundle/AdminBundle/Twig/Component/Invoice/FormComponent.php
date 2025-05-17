@@ -14,11 +14,10 @@ use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Core\Resolver\ExchangeRateResolverInterface;
 use Owl\Component\Invoice\Calculator\LineDataCalculator;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
+use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshot;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
-use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -135,6 +134,16 @@ class FormComponent
     #[LiveAction]
     public function changeCompany(): void
     {
+        if ($this->formValues['company'] === null) {
+            return;
+        }
+
+        $company = $this->companyRepository->find($this->formValues['company']);
+
+        if ($company) {
+            $this->formValues['currency'] = $company->getCurrency()->getCode();
+        }
+
         try {
             $this->submitForm(false);
         } catch (\Throwable $e) {
@@ -144,17 +153,7 @@ class FormComponent
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
 
-        if ($company = $invoice->getCompany()) {
-
-            if ($company) {
-                $invoice->setCurrency($company->getCurrency());
-                $this->formValues['currency'] = $this->getFormView()
-                    ->offsetGet('currency')
-                    ->vars['value'] = $company->getCurrency()?->getCode();
-            }
-
-            $this->setExchangeRateCurrency($invoice);
-        }
+        $this->setExchangeRate($invoice);
     }
 
     #[LiveAction]
@@ -169,7 +168,7 @@ class FormComponent
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
 
-        $this->setExchangeRateCurrency($invoice);
+        $this->setExchangeRate($invoice);
     }
 
     #[LiveAction]
@@ -277,14 +276,22 @@ class FormComponent
         return false;
     }
 
-    private function setExchangeRateCurrency(InvoiceInterface $invoice): void
+    private function setExchangeRate(InvoiceInterface $invoice): void
     {
         if ($selectedCurrencyCode = $this->formValues['currency'] ?? null) {
             $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
     
             if ($selectedCurrencyCode && $this->exchangeRateCurrency && $this->getFormView()->offsetExists('exchangeRateSnapshot')) {
                 $ratio = $this->exchangeRateResolver->getRatio($selectedCurrencyCode, $this->exchangeRateCurrency);
-    
+                
+                if ($invoice->getExchangeRateSnapshot()) {
+                    $invoice->getExchangeRateSnapshot()->setRatio($ratio);
+                } else {
+                    $exchangeRateSnapshot = new ExchangeRateSnapshot();
+                    $exchangeRateSnapshot->setRatio($ratio);
+                    $invoice->setExchangeRateSnapshot($exchangeRateSnapshot);
+                }
+
                 $this->formValues['exchangeRateSnapshot']['ratio'] = $this->getFormView()
                     ->offsetGet('exchangeRateSnapshot')
                     ->offsetGet('ratio')

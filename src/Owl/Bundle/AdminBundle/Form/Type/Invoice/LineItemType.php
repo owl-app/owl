@@ -28,16 +28,19 @@ final class LineItemType extends AbstractType
     {
         /** @var CompanyInterface $company */
         $company = $options['company'];
+        $currency = $options['currency'];
 
         $builder
             ->add('unitPrice', MoneyType::class, [
                 'required' => false,
                 'label' => 'owl.invoice.line_item.unit_price',
+                'currency' => $currency,
             ])
             ->add('totalPrice', MoneyType::class, [
                 'required' => false,
                 'label' => 'owl.invoice.line_item.total_price',
                 'mapped' => false,
+                'currency' => $currency,
             ])
             ->add('taxRate', TaxRateChoiceType::class, [
                 'choices' => $company?->getZone() ? $this->invoiceTaxRateRepository->findByZone($company?->getZone()) : [],
@@ -58,6 +61,7 @@ final class LineItemType extends AbstractType
     {
         $resolver->setDefaults([
             'company' => null,
+            'currency' => null,
         ]);
     }
 

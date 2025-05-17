@@ -10,6 +10,7 @@
     <services>
         <service id="owl_admin.form.type.invoice" class="Owl\Bundle\AdminBundle\Form\Type\InvoiceType">
             <argument type="service" id="owl.form.subscriber.exchange_rate_snapshot" />
+            <argument type="service" id="owl.form.subscriber.currency_line_items" />
             <tag name="form.type" />
         </service>
 
@@ -38,6 +39,12 @@
 
         <service id="owl.form.subscriber.exchange_rate_snapshot" class="Owl\Bundle\AdminBundle\Form\EventSubscriber\ExchangeRateSnapshotSubscriber">
             <argument type="service" id="owl.resolver.invoice.exchange_rate_currency_resolver" />
+            <argument type="service" id="owl.resolver.exchange_rate_resolver" />
+        </service>
+
+        <service id="owl.form.subscriber.currency_line_items" class="Owl\Bundle\AdminBundle\Form\EventSubscriber\LineItemsSubscriber">
+            <argument type="service" id="owl.repository.company" />
+            <argument type="service" id="sylius.repository.currency" />
         </service>
     </services>
 </container>

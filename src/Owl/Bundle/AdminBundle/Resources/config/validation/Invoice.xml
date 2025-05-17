@@ -27,5 +27,8 @@
             </constraint>
         </property>
         
+        <property name="exchangeRateSnapshot">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>
