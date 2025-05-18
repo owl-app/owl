@@ -1,0 +1,5 @@
+{% import '@OwlAdmin/shared/helper/money.html.twig' as money %}
+
+{% if options.vars.field is defined %}
+    {{ money.format(attribute(data, options.vars.field), data.currency.code) }}
+{% endif %}

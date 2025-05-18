@@ -23,6 +23,15 @@ sylius_grid:
                     label: owl.ui.contractor
                     path: buyer.company
                     sortable: buyer.company
+                total:
+                    type: twig
+                    label: owl.ui.invoice.gross_total
+                    path: .
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/money.html.twig"
+                        vars:
+                            td_class: "text-end"
+                            field: total
             filters:
                 fullNumber:
                     type: string
