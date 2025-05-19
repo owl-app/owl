@@ -1,0 +1,8 @@
+{% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
+
+<div class="sylius-filters__date" {{ attributes }}>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id, 'data-form-target': 'form'}}) }}
+        {{ form_row(form.period.from, { attr: {'class': 'input-group'}, 'label': 'owl.ui.date_filter' }) }}
+        {{ form_row(form.period.to, { attr: {'class': 'input-group'} }) }}
+    {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
+</div>

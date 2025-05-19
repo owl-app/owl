@@ -1,0 +1,11 @@
+sylius_twig_hooks:
+    hooks:
+        'owl_admin.invoice.index.content.grid':
+            custom_filters:
+                component: 'owl_admin:invoice:grid_filters:form'
+                props:
+                    form: '@=_context.form'
+                    template: '@OwlAdmin/invoice/index/custom_filters.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 300

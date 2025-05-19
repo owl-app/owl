@@ -36,5 +36,14 @@
 
             <tag name="owl.live_component.admin" key="owl_admin:invoice:numbering:form" />
         </service>
+
+        <service
+            id="owl_admin.twig.component.invoice.grid_filters.form"
+            class="Owl\Bundle\AdminBundle\Twig\Component\Invoice\GridFiltersComponent"
+        >
+            <argument type="service" id="form.factory" />
+
+            <tag name="owl.live_component.admin" key="owl_admin:invoice:grid_filters:form" />
+        </service>
     </services>
 </container>

@@ -18,11 +18,26 @@ sylius_grid:
                     sortable: ~
                     options:
                         format: d-m-Y
+                company:
+                    type: string
+                    label: owl.ui.company
+                    path: company.name
+                    sortable: company.name
                 contractor:
                     type: string
                     label: owl.ui.contractor
                     path: buyer.company
                     sortable: buyer.company
+                subtotal:
+                    type: twig
+                    label: owl.ui.invoice.net_total
+                    path: .
+                    options:
+                        template: "@OwlAdmin/shared/grid/field/money.html.twig"
+                        vars:
+                            th_class: "text-end"
+                            td_class: "text-end"
+                            field: subtotal
                 total:
                     type: twig
                     label: owl.ui.invoice.gross_total
@@ -30,12 +45,17 @@ sylius_grid:
                     options:
                         template: "@OwlAdmin/shared/grid/field/money.html.twig"
                         vars:
+                            th_class: "text-end"
                             td_class: "text-end"
                             field: total
             filters:
                 fullNumber:
                     type: string
                     label: owl.ui.number
+                period:
+                    type: period
+                    options:
+                        top: true
             actions:
                 main:
                     create:
