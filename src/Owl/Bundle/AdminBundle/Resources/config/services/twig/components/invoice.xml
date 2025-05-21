@@ -39,7 +39,7 @@
 
         <service
             id="owl_admin.twig.component.invoice.grid_filters.form"
-            class="Owl\Bundle\AdminBundle\Twig\Component\Invoice\GridFiltersComponent"
+            class="Owl\Bundle\AdminBundle\Twig\Component\Invoice\InvoiceGridFilterComponent"
         >
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.grid.provider" />

@@ -2,48 +2,48 @@
 
 declare(strict_types=1);
 
-namespace Owl\Bundle\AdminBundle\Twig\Component\Invoice;
+namespace Owl\Bundle\AdminBundle\Twig\Component\Shared\Grid;
 
-use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
-use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Sylius\Bundle\GridBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Component\Grid\Provider\GridProviderInterface;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
-use Symfony\UX\LiveComponent\Attribute\LiveArg;
-use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\Attribute\PreReRender;
-use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
-use Symfony\UX\TwigComponent\Attribute\PostMount;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsLiveComponent]
-class GridFiltersComponent
+trait GridFilterComponentTrait
 {
-    use TemplatePropTrait;
     use ComponentWithFormTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    /**
-     * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
-     */
-    public function __construct(
-        private FormFactoryInterface $formFactory,
-        private GridProviderInterface $gridProvider,
-        private FormTypeRegistryInterface $formTypeRegistry,
-        private RequestStack $requestStack,
-        private string $grid
+    protected FormFactoryInterface $formFactory;
+
+    protected GridProviderInterface $gridProvider;
+
+    protected FormTypeRegistryInterface $formTypeRegistry;
+
+    protected RequestStack $requestStack;
+
+    protected string $grid;
+
+    protected function initialize(
+        FormFactoryInterface $formFactory,
+        GridProviderInterface $gridProvider,
+        FormTypeRegistryInterface $formTypeRegistry,
+        RequestStack $requestStack,
+        string $grid
     ) {
+        $this->formFactory = $formFactory;
+        $this->gridProvider = $gridProvider;
+        $this->formTypeRegistry = $formTypeRegistry;
+        $this->requestStack = $requestStack;
+        $this->grid = $grid;
     }
 
     protected function instantiateForm(): FormInterface

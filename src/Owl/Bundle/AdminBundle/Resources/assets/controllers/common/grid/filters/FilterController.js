@@ -22,4 +22,10 @@ export default class extends Controller {
             history: true
         });
     }
+
+    async updateNext(event) {
+        this.component = await getComponent(this.element);
+
+        await this.component.action('updateNext');
+    }
 }

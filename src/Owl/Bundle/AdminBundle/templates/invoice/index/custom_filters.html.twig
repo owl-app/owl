@@ -1,6 +1,9 @@
 {% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
 
 <div class="owl-custom-filters" {{ attributes.defaults(stimulus_controller('grid-filter')) }}>
+    <button class="btn btn-primary" data-action="click->grid-filter#updateNext" data-grid-filter-toggle>
+        {{ 'owl.ui.next'|trans }}
+    </button>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
         <div class="row">
             <div class="col-2">
