@@ -1,32 +1,12 @@
 {% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
 
 <div class="owl-custom-filters" {{ attributes.defaults(stimulus_controller('grid-filter')) }}>
-    <button class="btn btn-primary" data-action="click->grid-filter#updateNext" data-grid-filter-toggle>
-        {{ 'owl.ui.next'|trans }}
-    </button>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        <div class="row">
-            <div class="col-2">
-                {{ form_row(form.issueDate.type) }}
-            </div>
-            {% if form.issueDate.month is defined %}
-                <div class="col-2">
-                    {{ form_row(form.issueDate.month) }}
-                </div>
-            {% endif %}
-            {% if form.issueDate.year is defined %}
-                <div class="col-2">
-                    {{ form_row(form.issueDate.year) }}
-                </div>
-            {% endif %}
-            <div class="col-2">
-                {{ form_row(form.company) }}
-            </div>
+        {% hook 'form' with { form } %}
             <div class="col-2">
                 <button class="btn btn-primary" data-action="click->grid-filter#change" data-grid-filter-field-param="issueDate">
                     {{ 'owl.ui.confirm'|trans }}
                 </button>
             </div>
-        </div>
     {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
 </div>

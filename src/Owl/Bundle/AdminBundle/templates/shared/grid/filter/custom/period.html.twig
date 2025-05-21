@@ -1,0 +1,33 @@
+{% set field = hookable_metadata.configuration.field %}
+{% set form = attribute(hookable_metadata.context.form, field) %}
+{% if form.type.vars.value == 'year' or form.type.vars.value == 'month' %}
+    <div class="flex">
+        <div class="btn p-2">
+            {{ ux_icon('tabler:arrow-left', {class: 'icon mx-0'}) }}
+        </div>
+        <div class="btn p-2">
+            {{ ux_icon('tabler:arrow-right', {class: 'icon mx-0'}) }}
+        </div>
+    </div>
+{% endif %}
+
+<div class="row">
+    <div class="col-2">
+        {{ form_row(form.type) }}
+    </div>
+    {% if form.month is defined %}
+        <div class="col-2">
+            {{ form_row(form.month) }}
+        </div>
+    {% endif %}
+    {% if form.year is defined %}
+        <div class="col-2">
+            {{ form_row(form.year) }}
+        </div>
+    {% endif %}
+    <div class="col-2">
+        <button class="btn btn-primary" data-action="click->grid-filter#change" data-grid-filter-field-param="issueDate">
+            {{ 'owl.ui.confirm'|trans }}
+        </button>
+    </div>
+</div>

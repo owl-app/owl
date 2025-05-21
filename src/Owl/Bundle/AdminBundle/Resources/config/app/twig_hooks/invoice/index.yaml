@@ -9,3 +9,10 @@ sylius_twig_hooks:
                 configuration:
                     render_rest: true
                 priority: 300
+
+        'owl_admin.invoice.index.content.grid.form':
+            period:
+                template: '@OwlAdmin/shared/grid/filter/custom/period.html.twig'
+                configuration:
+                    field: issueDate
+                priority: 100
