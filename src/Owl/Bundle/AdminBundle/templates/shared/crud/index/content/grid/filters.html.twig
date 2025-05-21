@@ -1,22 +1,42 @@
 {% from "@OwlAdmin/shared/helper/accordion.html.twig" import accordion %}
 {% import "@OwlAdmin/shared/helper/button.html.twig" as button %}
+{% import "@OwlAdmin/shared/helper/filters.html.twig" as filters %}
 
 {% set resources = hookable_metadata.context.resources %}
-
+{% set custom_filters = {} %}
+{% set all_criteria =  app.request.query.all('criteria') %}
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.all('_route_params')) %}
-{% set are_criteria_set = app.request.query.has('criteria') %}
+{% set are_criteria_set = false %}
+
+{% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled and filter.options.custom is defined and filter.options.custom == true)|sylius_sort_by('position') %}
+    {% if all_criteria[filter.name] is defined %}
+        {% set custom_filters = custom_filters|merge({(filter.name) : all_criteria[filter.name]}) %}
+    {% endif %}
+{% endfor %}
+
+
+
+{% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled and (filter.options.custom is not defined or filter.options.custom == false))|sylius_sort_by('position') %}
+    {% if all_criteria[filter.name] is defined %}
+        {% set are_criteria_set = true %}
+    {% endif %}
+{% endfor %}
+
+
 
 {% if resources.definition.enabledFilters is not empty %}
     <div class="position-relative z-1 bg-white mb-5">
         {% set content %}
             <div class="mb-3">
-                <form method="get" action="{{ path }}" novalidate {{ sylius_test_html_attribute('filters-form') }}>
+                <form method="get" novalidate {{ sylius_test_html_attribute('filters-form') }}>
                     <div class="sylius-filters">
-                        {% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled and (filter.options.top is not defined or filter.options.top == false))|sylius_sort_by('position') %}
+                        {% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled and (filter.options.custom is not defined or filter.options.custom == false))|sylius_sort_by('position') %}
                             <div class="sylius-filters__item">
                                 {{ sylius_grid_render_filter(resources, filter) }}
                             </div>
                         {% endfor %}
+
+                        {{ filters.render_hidden_custom_filters_inputs('criteria', custom_filters) }}
                     </div>
                     <div>
                         {{ button.primary({ text: 'owl.ui.filter'|trans, icon: 'tabler:adjustments', type: 'submit', attr: sylius_test_html_attribute('filter') }) }}

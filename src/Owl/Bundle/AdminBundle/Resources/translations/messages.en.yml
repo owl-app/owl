@@ -33,6 +33,14 @@ owl:
             subject: New suggestion in the system
             desc: New suggestion in the system
 
+    grid:
+        filter:
+            period:
+                type_all: All
+                type_month: Month
+                type_quarter: Quarter
+                type_year: Year
+
     form:
         admin:
             currency: Currency

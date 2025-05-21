@@ -52,10 +52,26 @@ sylius_grid:
                 fullNumber:
                     type: string
                     label: owl.ui.number
-                period:
+                issueDate:
                     type: period
                     options:
-                        top: true
+                        custom: true
+                company:
+                    type: ux_autocomplete
+                    label: owl.ui.company
+                    form_options:
+                        multiple: false
+                        extra_options:
+                            class: '%owl.model.company.class%'
+                            choice_label: name
+                        attr:
+                            'data-controller': 'grid-filter-autocomplete'
+                            'data-grid-filter-autocomplete-form-live-name-value': 'owl_admin:invoice:grid_filters:form'
+                            'data-grid-filter-autocomplete-field-value': 'company'
+                            'data-model': 'norender|criteria[company]'
+                    options:
+                        fields: [company.id]
+                        custom: true
             actions:
                 main:
                     create:

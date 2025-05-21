@@ -4,7 +4,13 @@
     <services>
         <defaults public="true" />
 
+        <service id="owl.form.type.grid.period_filter" class="Owl\Bundle\CoreBundle\Form\Type\Grid\Filter\PeriodFilterType">
+            <argument type="service" id="owl.context.admin_user" />
+            <tag name="form.type" />
+        </service>
+
         <service id="owl.grid_filter.period" class="Owl\Component\Core\Grid\Filter\PeriodFilter">
+            
             <tag name="sylius.grid_filter" type="period" form-type="Owl\Bundle\CoreBundle\Form\Type\Grid\Filter\PeriodFilterType" />
         </service>
     </services>

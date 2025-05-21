@@ -7,5 +7,5 @@ sylius_twig_hooks:
                     form: '@=_context.form'
                     template: '@OwlAdmin/invoice/index/custom_filters.html.twig'
                 configuration:
-                    render_rest: false
+                    render_rest: true
                 priority: 300

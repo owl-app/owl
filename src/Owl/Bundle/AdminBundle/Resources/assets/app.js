@@ -16,6 +16,9 @@ import UploaderController from './controllers/common/uploader/UploaderController
 // grid
 import GridController from './controllers/common/grid/GridController';
 import GridBulkController from './controllers/common/grid/BulkController';
+// filters
+import FilterController from './controllers/common/grid/filters/FilterController';
+import AutocompleteFilterController from './controllers/common/grid/filters/AutocompleteFilterController';
 // permission
 import PermissionController from './controllers/common/permission/PermissionController';
 
@@ -29,6 +32,7 @@ import ListNotificationController from './controllers/bundle/notification/ListNo
 import InvoiceForm from './controllers/bundle/invoice/InvoiceForm';
 import InvoiceAvailableSeries from './controllers/bundle/invoice/InvoiceAvailableSeries';
 import AddableAutocomplete from './controllers/bundle/invoice/AddableAutocomplete';
+
 
 export function startApp() {
     const appSymfonyStimulus = startStimulusApp(require.context(
@@ -47,6 +51,9 @@ export function startApp() {
     appSymfonyStimulus.register('grid-bulk', GridBulkController);
     appSymfonyStimulus.register('toast', ToastController);
     appSymfonyStimulus.register('permission', PermissionController);
+    appSymfonyStimulus.register('grid-filter', FilterController);
+    appSymfonyStimulus.register('grid-filter-autocomplete', AutocompleteFilterController);
+    
     // bundle
     appSymfonyStimulus.register('user-permission', UserPermissionController);
     appSymfonyStimulus.register('details-notification', DetailsNotificationController);
