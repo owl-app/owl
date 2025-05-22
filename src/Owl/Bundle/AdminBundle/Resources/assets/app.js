@@ -19,6 +19,7 @@ import GridBulkController from './controllers/common/grid/BulkController';
 // filters
 import FilterController from './controllers/common/grid/filters/FilterController';
 import AutocompleteFilterController from './controllers/common/grid/filters/AutocompleteFilterController';
+import PeriodFilterController from './controllers/common/grid/filters/PeriodFilterController';
 // permission
 import PermissionController from './controllers/common/permission/PermissionController';
 
@@ -53,6 +54,7 @@ export function startApp() {
     appSymfonyStimulus.register('permission', PermissionController);
     appSymfonyStimulus.register('grid-filter', FilterController);
     appSymfonyStimulus.register('grid-filter-autocomplete', AutocompleteFilterController);
+    appSymfonyStimulus.register('grid-filter-period', PeriodFilterController);
     
     // bundle
     appSymfonyStimulus.register('user-permission', UserPermissionController);

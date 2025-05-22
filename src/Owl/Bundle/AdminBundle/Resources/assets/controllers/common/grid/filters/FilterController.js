@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import { getComponent } from '@symfony/ux-live-component';
-import updateSingleQueryParam from '../../../../utils/url';
+import { updateURLSearchParam, updateSingleQueryParam } from '../../../../utils/url';
 
 export default class extends Controller {
 
@@ -10,12 +10,24 @@ export default class extends Controller {
         this.component = await getComponent(this.element);
     }
 
-    async change(event) {
+    async updateAll(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        await this.component.action('updateAll');
+
+        Turbo.visit(updateURLSearchParam('criteria', this.component.valueStore.get('criteria')), {
+            action: 'replace',
+            history: true
+        });
+    }
+
+    async updateFilter(event) {
         event.preventDefault();
         event.stopPropagation();
         const field = event.params.field;
 
-        await this.component.action('update', { field: field });
+        await this.component.action('updateFilter', { field });
 
         Turbo.visit(updateSingleQueryParam(field, this.component.valueStore.get('criteria')[field], 'criteria'), {
             action: 'replace',

@@ -5,7 +5,6 @@
         <defaults public="true" />
 
         <service id="owl.form.type.grid.period_filter" class="Owl\Bundle\CoreBundle\Form\Type\Grid\Filter\PeriodFilterType">
-            <argument type="service" id="owl.context.admin_user" />
             <tag name="form.type" />
         </service>
 

@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig\Component\Shared\Grid;
 
-use Symfony\UX\LiveComponent\Attribute\LiveAction;
-use Symfony\UX\LiveComponent\ComponentWithFormTrait;
+use Owl\Component\Core\Enum\Grid\Filter\PeriodTypeEnum;
+use Symfony\UX\LiveComponent\Attribute\PreReRender;
 
 trait PeriodGridFilterComponentTrait
 {
-    use ComponentWithFormTrait;
+    use FilterDataComponentTrait;
 
-    #[LiveAction]
-    public function updateNext(): void
+    #[PreReRender(priority: 100)]
+    public function preRender(): void
     {
-        $this->formValues['issueDate'] = array_merge(
-            $this->formValues['issueDate'] ?? [],
-            [
-                'month' => 11
-            ],
-        );
+        if (isset($this->availableFilters['period'])) {
+            foreach($this->availableFilters['period'] as $field) {
+                if (!isset($this->activeCriteria[$field]) || $this->activeCriteria[$field]['type'] === PeriodTypeEnum::TYPE_ALL->value) {
+                    continue;
+                }
+
+                $this->formValues[$field] = array_replace($this->activeCriteria[$field] ?? [], $this->formValues[$field] ?? []);
+            }
+        }
     }
 }

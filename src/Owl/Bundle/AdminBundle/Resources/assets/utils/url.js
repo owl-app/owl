@@ -1,4 +1,4 @@
-function updateSingleQueryParam(rootKey, nestedObjectOrValue, $prefix) {
+export function updateSingleQueryParam(rootKey, nestedObjectOrValue, $prefix) {
     const url = new URL(window.location.href);
     const searchParams = new URLSearchParams(url.search);
 
@@ -43,4 +43,28 @@ function updateSingleQueryParam(rootKey, nestedObjectOrValue, $prefix) {
     return url;
 }
 
-export default updateSingleQueryParam;
+export function updateURLSearchParam(paramName, nestedObjectOrValue) {
+    const url = new URL(window.location.href);
+    const searchParams = url.searchParams;
+
+    function setParams(obj, prefix) {
+        for (const key in obj) {
+            if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
+
+            const value = obj[key];
+            const fullKey = prefix ? `${prefix}[${key}]` : key;
+
+            if (typeof value === 'object' && value !== null) {
+                setParams(value, fullKey);
+            } else {
+                searchParams.set(fullKey, value);
+            }
+        }
+    }
+
+    setParams(nestedObjectOrValue, paramName);
+
+    const newUrl = `${url.pathname}?${searchParams.toString()}${url.hash}`;
+
+    return newUrl;
+}

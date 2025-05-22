@@ -14,15 +14,11 @@
     {% endif %}
 {% endfor %}
 
-
-
 {% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled and (filter.options.custom is not defined or filter.options.custom == false))|sylius_sort_by('position') %}
     {% if all_criteria[filter.name] is defined %}
         {% set are_criteria_set = true %}
     {% endif %}
 {% endfor %}
-
-
 
 {% if resources.definition.enabledFilters is not empty %}
     <div class="position-relative z-1 bg-white mb-5">

@@ -12,15 +12,15 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
-use Symfony\UX\LiveComponent\ComponentWithFormTrait;
+use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 trait GridFilterComponentTrait
 {
-    use ComponentWithFormTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
+    use FilterDataComponentTrait;
 
     protected FormFactoryInterface $formFactory;
 
@@ -44,6 +44,7 @@ trait GridFilterComponentTrait
         $this->formTypeRegistry = $formTypeRegistry;
         $this->requestStack = $requestStack;
         $this->grid = $grid;
+        $this->availableFilters = $this->getAvailableFilters();
     }
 
     protected function instantiateForm(): FormInterface
@@ -70,9 +71,24 @@ trait GridFilterComponentTrait
     }
 
     #[LiveAction]
-    public function update(): void
+    public function updateAll(): void
     {
         $this->submitForm();
+
+        $this->activeCriteria = array_replace($this->activeCriteria, $this->formValues);
+    }
+
+    #[LiveAction]
+    public function updateFilter(#[LiveArg] $field): void
+    {
+        $this->formValues = array_merge(
+            array_filter($this->activeCriteria, fn($value) => in_array($value, $this->availableFilters)),
+            [$field => $this->formValues[$field] ?? []]
+        );
+
+        $this->submitForm();
+
+        $this->activeCriteria = array_replace($this->activeCriteria, $this->formValues);
     }
 
     #[PreMount]
@@ -100,11 +116,34 @@ trait GridFilterComponentTrait
             }
         }
 
+        $this->activeCriteria = array_replace_recursive($criteria, $this->formValues);
         $this->submitForm(false);
     }
 
     private function isCustomFilter(array $options): bool
     {
         return isset($options['custom']) && $options['custom'] === true;
+    }
+
+    private function getAvailableFilters(): array
+    {
+        $availableFilters = [];
+        $gridDefinition = $this->gridProvider->get($this->grid);
+
+        foreach ($gridDefinition->getFilters() as $filter) {
+            $options = $filter->getOptions();
+
+            if (!$this->isCustomFilter($options)) {
+                continue;
+            }
+
+            if (isset($availableFilters[$filter->getType()])) {
+                array_push($this->availableFilters[$filter->getType()], $filter->getName());
+            } else {
+                $availableFilters[$filter->getType()] = [$filter->getName()];
+            }
+        }
+
+        return $availableFilters;
     }
 }

@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import { getComponent } from '@symfony/ux-live-component';
-import updateSingleQueryParam from '../../../../utils/url';
+import { updateSingleQueryParam } from '../../../../utils/url';
 
 export default class extends Controller {
     tomSelect = null;

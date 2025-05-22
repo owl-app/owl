@@ -159,5 +159,18 @@
             <tag name="form.type" />
         </service>
 
+        <service id="owl.form.type.month" class="Owl\Bundle\CoreBundle\Form\Type\Date\MonthType">
+            <argument type="service" id="owl.translation.month" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.year" class="Owl\Bundle\CoreBundle\Form\Type\Date\YearType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="owl.form.type.quarter" class="Owl\Bundle\CoreBundle\Form\Type\Date\QuarterType">
+            <tag name="form.type" />
+        </service>
+
     </services>
 </container>

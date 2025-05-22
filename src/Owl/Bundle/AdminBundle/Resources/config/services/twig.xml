@@ -8,4 +8,13 @@
     <imports>
         <import resource="twig/**/*.xml" />
     </imports>
+
+    <services>
+        <service id="owl_admin.twig.extension.period_grid_filter" class="Owl\Bundle\AdminBundle\Twig\Grid\PeriodGridFilterExtension">
+            <argument type="service" id="router" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="owl.translation.month" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
 </container>

@@ -25,6 +25,10 @@ final class MergeRecursiveExtension extends AbstractExtension
                 'owl_merge_recursive',
                 fn (array $firstArray, array $secondArray): array => array_merge_recursive($firstArray, $secondArray),
             ),
+            new TwigFilter(
+                'owl_replace_recursive',
+                fn (array $firstArray, array $secondArray): array => array_replace_recursive($firstArray, $secondArray),
+            ),
         ];
     }
 }

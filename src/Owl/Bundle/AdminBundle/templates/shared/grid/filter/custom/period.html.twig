@@ -1,33 +1,64 @@
 {% set field = hookable_metadata.configuration.field %}
+{% set route = hookable_metadata.configuration.route %}
+{% set activeCriteria = hookable_metadata.context.activeCriteria %}
 {% set form = attribute(hookable_metadata.context.form, field) %}
-{% if form.type.vars.value == 'year' or form.type.vars.value == 'month' %}
-    <div class="flex">
-        <div class="btn p-2">
-            {{ ux_icon('tabler:arrow-left', {class: 'icon mx-0'}) }}
-        </div>
-        <div class="btn p-2">
-            {{ ux_icon('tabler:arrow-right', {class: 'icon mx-0'}) }}
-        </div>
-    </div>
-{% endif %}
+{% set navigation = owl_period_grid_filter_generate_link_navigation(field, route, activeCriteria) %}
 
-<div class="row">
-    <div class="col-2">
-        {{ form_row(form.type) }}
+<div 
+    class="col-4 d-flex filter-period ps-1 gap-2"
+    {{ stimulus_controller('grid-filter-period') }}
+>
+    <div class="btn btn-primary p-2" data-action="click->grid-filter-period#togglePopup" data-grid-filter-period-target="button">
+        {{ ux_icon('tabler:calendar', {class: 'icon mx-0'}) }}
     </div>
-    {% if form.month is defined %}
-        <div class="col-2">
-            {{ form_row(form.month) }}
-        </div>
+
+    {% if navigation.prev is defined %}
+        <a class="btn p-2 {{ navigation.prev.is_disabled ? 'disabled' : '' }}" href="{{ navigation.prev.path }}">
+            {{ ux_icon('tabler:arrow-left', {class: 'icon mx-0'}) }}
+        </a>
     {% endif %}
-    {% if form.year is defined %}
-        <div class="col-2">
-            {{ form_row(form.year) }}
-        </div>
+
+    {% if navigation.next is defined %}
+        <a class="btn p-2 {{ navigation.next.is_disabled ? 'disabled' : '' }}" href="{{ navigation.next.path }}" >
+            {{ ux_icon('tabler:arrow-right', {class: 'icon mx-0'}) }}
+        </a>
     {% endif %}
-    <div class="col-2">
-        <button class="btn btn-primary" data-action="click->grid-filter#change" data-grid-filter-field-param="issueDate">
-            {{ 'owl.ui.confirm'|trans }}
-        </button>
+
+    <div class="ms-2 d-flex align-items-center">
+        <h2 class="text-secondary mb-0">
+            {{ 'owl.ui.invoice.accounting_period'|trans }}: 
+            <span class="text-dark">{{ owl_period_grid_filter_accounting_period_text(field, activeCriteria) }}</span>
+        </h2>
+    </div>
+
+    <div class="card popup ms-1 d-none" data-grid-filter-period-target="filter">
+        <div class="card-body d-flex">
+            <div class="me-2">
+                {{ form_row(form.type, { label: false, row_attr: { class: 'mb-0' }}) }}
+            </div>
+    
+            {% if form.month is defined %}
+                <div class="me-2">
+                    {{ form_row(form.month, { label: false, row_attr: { class: 'mb-0' }}) }}
+                </div>
+            {% endif %}
+    
+            {% if form.quarter is defined %}
+                <div class="me-2">
+                    {{ form_row(form.quarter, { label: false, row_attr: { class: 'mb-0' }}) }}
+                </div>
+            {% endif %}
+
+            {% if form.year is defined %}
+                <div class="me-2">
+                    {{ form_row(form.year, { label: false, row_attr: { class: 'mb-0' }  })}}
+                </div>
+            {% endif %}
+
+            <button class="btn btn-primary" data-action="click->grid-filter#updateFilter" data-grid-filter-field-param="issueDate">
+                {{ 'owl.ui.confirm'|trans }}
+            </button>
+        </div>
     </div>
 </div>
+

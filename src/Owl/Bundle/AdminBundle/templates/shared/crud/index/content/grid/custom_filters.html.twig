@@ -1,0 +1,12 @@
+{% form_theme form '@OwlAdmin/shared/form_theme.html.twig' %}
+
+<div class="owl-custom-filters card mb-2" {{ attributes.defaults(stimulus_controller('grid-filter')) }}>
+    <div class="card-status-start bg-primary"></div>
+    <div class="card-body">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            <div class="d-flex row">
+                {% hook 'form' with { form, activeCriteria } %}
+            </div>
+        {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
+    </div>
+</div>

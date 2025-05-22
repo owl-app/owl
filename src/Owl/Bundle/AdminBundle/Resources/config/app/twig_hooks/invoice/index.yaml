@@ -5,7 +5,7 @@ sylius_twig_hooks:
                 component: 'owl_admin:invoice:grid_filters:form'
                 props:
                     form: '@=_context.form'
-                    template: '@OwlAdmin/invoice/index/custom_filters.html.twig'
+                    template: '@OwlAdmin/shared/crud/index/content/grid/custom_filters.html.twig'
                 configuration:
                     render_rest: true
                 priority: 300
@@ -15,4 +15,10 @@ sylius_twig_hooks:
                 template: '@OwlAdmin/shared/grid/filter/custom/period.html.twig'
                 configuration:
                     field: issueDate
+                    route: owl_admin_invoice_index
                 priority: 100
+            company:
+                template: '@OwlAdmin/shared/grid/filter/custom/autocomplete.html.twig'
+                configuration:
+                    field: company
+                priority: 0
