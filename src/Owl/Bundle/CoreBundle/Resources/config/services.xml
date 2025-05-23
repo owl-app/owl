@@ -71,5 +71,11 @@
             <argument type="string">%owl.admin_user.token.password_reset.ttl%</argument>
         </service>
 
+        <service id="owl.manager.user_preference" class="Owl\Component\Core\Manager\UserPreferenceManager">
+            <argument type="service" id="owl.context.admin_user" />
+            <argument type="service" id="owl.manager.admin_user" />
+        </service>
+        <service id="Owl\Component\Core\Manager\UserPreferenceManagerInterface" alias="owl.manager.user_preference" />
+
     </services>
 </container>

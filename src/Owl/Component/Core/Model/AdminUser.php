@@ -43,6 +43,9 @@ class AdminUser extends User implements AdminUserInterface
     /** @var AdminUserRegistrationDataInterface|null */
     protected $registration;
 
+    /** @var mixed[] */
+    protected $preferences = [];
+
     public function __construct()
     {
         parent::__construct();
@@ -203,5 +206,15 @@ class AdminUser extends User implements AdminUserInterface
     public function hasRegistration(): bool
     {
         return null !== $this->registration;
+    }
+
+    public function getPreferences(): ?array
+    {
+        return $this->preferences;
+    }
+
+    public function setPreferences(array $preferences): void
+    {
+        $this->preferences = $preferences;
     }
 }

@@ -9,8 +9,12 @@
         </service>
 
         <service id="owl.grid_filter.period" class="Owl\Component\Core\Grid\Filter\PeriodFilter">
-            
             <tag name="sylius.grid_filter" type="period" form-type="Owl\Bundle\CoreBundle\Form\Type\Grid\Filter\PeriodFilterType" />
+        </service>
+
+        <service id="owl.grid.filters_criteria_resolver" class="Owl\Component\Core\Grid\Filtering\FiltersCriteriaResolver" decorates="sylius.grid.filters_criteria_resolver" decoration-priority="256" public="false">
+            <argument type="service" id="owl.grid.filters_criteria_resolver.inner" />
+            <argument type="service" id="owl.manager.user_preference" />
         </service>
     </services>
 </container>

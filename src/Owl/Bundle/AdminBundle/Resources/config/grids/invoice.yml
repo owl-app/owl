@@ -56,6 +56,7 @@ sylius_grid:
                     type: period
                     options:
                         custom: true
+                        saved: true
                 company:
                     type: ux_autocomplete
                     label: owl.ui.company
@@ -72,6 +73,7 @@ sylius_grid:
                     options:
                         fields: [company.id]
                         custom: true
+                        saved: true
             actions:
                 main:
                     create:

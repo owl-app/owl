@@ -23,7 +23,9 @@ export default class extends Controller {
     }
 
     _onPreConnect = (event) => {
-        event.detail.options.onChange = (value) => {
+        event.detail.options.onChange = async (value) => {
+            await this.component.action('updateFilter', { field: this.fieldValue });
+
             Turbo.visit(updateSingleQueryParam(this.fieldValue, value, 'criteria'), {
                 action: 'replace',
                 history: true

@@ -12,6 +12,7 @@
         <field name="phone" column="phone" type="string" nullable="true" />
         <field name="note" column="note" type="text" nullable="true" />
         <field name="localeCode" column="locale_code" type="string" length="12" />
+        <field name="preferences" column="preferences" type="json" nullable="true" />
 
         <many-to-one field="role" target-entity="Owl\Component\Rbac\Model\RoleInterface">
             <join-column name="role_id" referenced-column-name="name" nullable="true" />

@@ -56,4 +56,8 @@ interface AdminUserInterface extends
     public function setRegistration(?AdminUserRegistrationDataInterface $registration): void;
 
     public function hasRegistration(): bool;
+
+    public function getPreferences(): ?array;
+
+    public function setPreferences(array $preferences): void;
 }

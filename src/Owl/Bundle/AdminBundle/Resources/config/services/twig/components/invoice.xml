@@ -45,6 +45,7 @@
             <argument type="service" id="sylius.grid.provider" />
             <argument type="service" id="sylius.form_registry.grid_filter" />
             <argument type="service" id="request_stack" />
+            <argument type="service" id="owl.manager.user_preference" />
             <argument>owl_admin_invoice</argument>
 
             <tag name="owl.live_component.admin" key="owl_admin:invoice:grid_filters:form" />

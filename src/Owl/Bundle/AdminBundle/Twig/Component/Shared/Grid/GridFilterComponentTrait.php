@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig\Component\Shared\Grid;
 
+use Owl\Component\Core\Manager\UserPreferenceManagerInterface;
 use Sylius\Bundle\GridBundle\Form\Registry\FormTypeRegistryInterface;
+use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Provider\GridProviderInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -30,6 +32,8 @@ trait GridFilterComponentTrait
 
     protected RequestStack $requestStack;
 
+    protected UserPreferenceManagerInterface $userPreferenceManager;
+
     protected string $grid;
 
     protected function initialize(
@@ -37,12 +41,14 @@ trait GridFilterComponentTrait
         GridProviderInterface $gridProvider,
         FormTypeRegistryInterface $formTypeRegistry,
         RequestStack $requestStack,
+        UserPreferenceManagerInterface $userPreferenceManager,
         string $grid
     ) {
         $this->formFactory = $formFactory;
         $this->gridProvider = $gridProvider;
         $this->formTypeRegistry = $formTypeRegistry;
         $this->requestStack = $requestStack;
+        $this->userPreferenceManager = $userPreferenceManager;
         $this->grid = $grid;
         $this->availableFilters = $this->getAvailableFilters();
     }
@@ -89,6 +95,8 @@ trait GridFilterComponentTrait
         $this->submitForm();
 
         $this->activeCriteria = array_replace($this->activeCriteria, $this->formValues);
+
+        $this->saveUserPreference($field);
     }
 
     #[PreMount]
@@ -99,20 +107,21 @@ trait GridFilterComponentTrait
 
         $criteria = $request->query->all('criteria') ?: [];
 
-        if ($criteria) {
-            $gridDefinition = $this->gridProvider->get($this->grid);
+        $gridDefinition = $this->gridProvider->get($this->grid);
 
-            foreach ($gridDefinition->getFilters() as $filter) {
-                $value = $criteria[$filter->getName()] ?? null;
-                $options = $filter->getOptions();
+        foreach ($gridDefinition->getFilters() as $filter) {
+            $value = $criteria[$filter->getName()] ?? null;
+            $options = $filter->getOptions();
 
-                if (!$this->isCustomFilter($options)) {
-                    continue;
-                }
+            if (!$this->isCustomFilter($options)) {
+                continue;
+            }
 
-                if (!empty($value)) {
-                    $this->formValues[$filter->getName()] = $value;
-                }
+            if (!empty($value)) {
+                $this->formValues[$filter->getName()] = $value;
+            } else {
+                $filterKey = $this->getFilterKey($gridDefinition, $filter->getName());
+                $this->formValues[$filter->getName()] = $this->userPreferenceManager->get($filterKey);
             }
         }
 
@@ -145,5 +154,24 @@ trait GridFilterComponentTrait
         }
 
         return $availableFilters;
+    }
+
+    private function saveUserPreference(string $field): void
+    {
+        $gridDefinition = $this->gridProvider->get($this->grid);
+        $filter = $gridDefinition->getFilter($field);
+
+        if (!$filter->getOptions()['saved'] ?? false) {
+            return;
+        }
+
+        if (isset($this->formValues[$field])) {
+            $this->userPreferenceManager->update($this->getFilterKey($gridDefinition, $field), $this->formValues[$field]);
+        }
+    }
+
+    private function getFilterKey(Grid $gridDefinition, string $name): ?string
+    {
+        return 'filters.' . $gridDefinition->getCode() . '.' .$name;
     }
 }
