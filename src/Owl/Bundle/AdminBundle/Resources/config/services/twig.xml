@@ -16,5 +16,12 @@
             <argument type="service" id="owl.translation.month" />
             <tag name="twig.extension" />
         </service>
+
+        <service id="owl_admin.twig.extension.invoices_summary" class="Owl\Bundle\AdminBundle\Twig\InvoicesSummaryExtension">
+            <argument type="service" id="owl.repository.company" />
+            <argument type="service" id="owl.manager.user_preference" />
+            <argument type="service" id="request_stack" />
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>

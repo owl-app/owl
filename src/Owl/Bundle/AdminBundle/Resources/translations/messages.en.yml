@@ -99,6 +99,7 @@ owl:
                     companies: Companies
 
     ui:
+        select_company: Select company
         source_currency: Source currency
         target_currency: Target currency
         ratio: Ratio
@@ -129,6 +130,9 @@ owl:
         update_country: Edit country
         payment: Payment
         invoice:
+            paid: Paid
+            unpaid: Unpaid
+            payment_status: Payment status
             accounting_period: Accounting period
             accounting_period_all: All
             exchange_rate: Exchange rate

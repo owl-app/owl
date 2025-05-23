@@ -10,6 +10,11 @@ sylius_twig_hooks:
                     render_rest: true
                 priority: 300
 
+        'owl_admin.invoice.index.content.grid.data_table_after':
+            summary:
+                template: '@OwlAdmin/invoice/index/content/grid/summary.html.twig'
+                priority: 0
+
         'owl_admin.invoice.index.content.grid.form':
             period:
                 template: '@OwlAdmin/shared/grid/filter/custom/period.html.twig'

@@ -1,6 +1,6 @@
 {% set field = hookable_metadata.configuration.field %}
 {% set form = attribute(hookable_metadata.context.form, field) %}
 
-<div class="col-2">
+<div class="col-3">
     {{ form_row(form, { label: false, row_attr: { class: 'mb-0' }}) }}
 </div>

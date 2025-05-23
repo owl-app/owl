@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%owl.model.invoice.class%"
             sorting:
-                fullNumber: desc
+                issueDate: desc
             fields:
                 fullNumber:
                     type: string
@@ -48,10 +48,15 @@ sylius_grid:
                             th_class: "text-end"
                             td_class: "text-end"
                             field: total
+                is_paid:
+                    type: twig
+                    label: owl.ui.invoice.payment_status
+                    options:
+                        template: "@OwlAdmin/invoice/grid/field/paid.html.twig"
             filters:
                 fullNumber:
                     type: string
-                    label: owl.ui.number
+                    label: owl.ui.full_number
                 issueDate:
                     type: period
                     options:
@@ -62,6 +67,7 @@ sylius_grid:
                     label: owl.ui.company
                     form_options:
                         multiple: false
+                        placeholder: owl.ui.select_company
                         extra_options:
                             class: '%owl.model.company.class%'
                             choice_label: name

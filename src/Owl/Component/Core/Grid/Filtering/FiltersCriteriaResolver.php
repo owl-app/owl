@@ -6,7 +6,6 @@ namespace Owl\Component\Core\Grid\Filtering;
 
 use Owl\Component\Core\Manager\UserPreferenceManagerInterface;
 use Sylius\Component\Grid\Filtering\FiltersCriteriaResolverInterface;
-use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 
@@ -33,12 +32,7 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
         return array_merge($criteriaUserPreferences, $criteria);
     }
 
-    /**
-     * @param Filter[] $filters
-     *
-     * @return Filter[]
-     */
-    private function hasUserPreferences(Grid $grid,): bool
+    private function hasUserPreferences(Grid $grid): bool
     {
         return null !== $this->userPreferenceManager->has('filters.' . $grid->getCode());
     }

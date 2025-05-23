@@ -51,6 +51,9 @@
                 </tbody>
             </table>
         </div>
+
+        {% hook 'data_table_after' %}
+
         <div class="card-footer d-flex align-items-center gap-2 flex-wrap">
             <div class="text-muted">
                 {{ pagination.results_count(data) }}

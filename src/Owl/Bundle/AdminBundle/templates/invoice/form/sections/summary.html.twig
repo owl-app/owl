@@ -4,10 +4,13 @@
 
 {% set invoice = hookable_metadata.context.form.vars.data %}
 {% set selectedCurrency = hookable_metadata.context.form.currency.vars.value %}
-{% set exchangeRateCurrency = hookable_metadata.context.exchangeRateCurrency %}
+
+{% if hookable_metadata.context.exchangeRateCurrency is defined %}
+    {% set exchangeRateCurrency = hookable_metadata.context.exchangeRateCurrency %}
+{% endif %}
 
 <div class="d-flex justify-content-end">
-    {% if exchangeRateCurrency is not empty and selectedCurrency is not empty %}
+    {% if exchangeRateCurrency is defined and selectedCurrency is not empty %}
         {% set ratio = hookable_metadata.context.form.exchangeRateSnapshot.ratio.vars.value %}
         <div class="w-25 text-end me-5">
             <div class="card mt-1">

@@ -16,13 +16,13 @@ enum PeriodQuarterEnum: string
 
     case TYPE_Q4 = '4';
 
-    public function getPeriodRange(): array
+    public static function getPeriodRange(int|string $quarter): array
     {
-        return match ($this) {
-            self::TYPE_Q1 => ['start' => '01-01', 'end' => '03-31'],
-            self::TYPE_Q2 => ['start' => '04-01', 'end' => '06-30'],
-            self::TYPE_Q3 => ['start' => '07-01', 'end' => '09-30'],
-            self::TYPE_Q4 => ['start' => '10-01', 'end' => '12-31'],
+        return match ($quarter) {
+            self::TYPE_Q1->value => ['start' => '01-01', 'end' => '03-31'],
+            self::TYPE_Q2->value => ['start' => '04-01', 'end' => '06-30'],
+            self::TYPE_Q3->value => ['start' => '07-01', 'end' => '09-30'],
+            self::TYPE_Q4->value => ['start' => '10-01', 'end' => '12-31'],
         };
     }
 

@@ -1,0 +1,5 @@
+{% if data %}
+    <span class="badge bg-green text-green-fg">{{ 'owl.ui.invoice.paid'|trans }}</span>
+{% else %}
+    <span class="badge bg-red text-red-fg">{{ 'owl.ui.invoice.unpaid'|trans }}</span>
+{% endif %}
