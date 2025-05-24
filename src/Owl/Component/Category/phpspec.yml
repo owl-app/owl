@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Owl\Component\Category
-        psr4_prefix: Owl\Component\Category
-        src_path: .

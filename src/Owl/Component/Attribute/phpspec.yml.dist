@@ -1,7 +1,0 @@
-suites:
-    main:
-        namespace: Owl\Component\Attribute
-        psr4_prefix: Owl\Component\Attribute
-        src_path: .
-
-runner.maintainers.errors.level: 14335 # E_ALL & ~E_USER_DEPRECATED ^ E_STRICT

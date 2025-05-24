@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Owl\Bundle\AdminBundle
-        psr4_prefix: Owl\Bundle\AdminBundle
-        src_path: .
