@@ -40,8 +40,4 @@ google-chrome-stable --enable-automation --disable-background-networking --no-de
 
 DEV:
 
-php -dxdebug.remote_enable=1 -dxdebug.remote_autostart=On -dxdebug.client_port=9000 bin/console fos:elastica:search query="{'*':'*'}"
-
-php bin/console fos:elastica:populate --pager-persister=async
-
 sudo supervisorctl start messenger-consume:*
