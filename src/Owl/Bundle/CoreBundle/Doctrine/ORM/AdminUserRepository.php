@@ -19,16 +19,6 @@ use Owl\Component\Core\Repository\AdminUserRepositoryInterface;
  */
 class AdminUserRepository extends UserRepository implements AdminUserRepositoryInterface
 {
-    public function listElasticsearch($entityAlias): QueryBuilder
-    {
-        return $this->createQueryBuilder($entityAlias)
-            ->addSelect('role')
-            ->leftJoin($entityAlias . '.role', 'role')
-            ->leftJoin('role.setting', 'setting')
-            ->leftJoin($entityAlias . '.registration', 'registration')
-        ;
-    }
-
     public function findByRoleUser(): QueryBuilder
     {
         return $this->createQueryBuilder('o')

@@ -10,8 +10,7 @@
 {% endif %}
 
 <div class="d-flex justify-content-end">
-    {% if exchangeRateCurrency is defined and selectedCurrency is not empty %}
-        {% set ratio = hookable_metadata.context.form.exchangeRateSnapshot.ratio.vars.value %}
+    {% if exchangeRateCurrency is defined and exchangeRateCurrency is not empty and selectedCurrency is not empty %}
         <div class="w-25 text-end me-5">
             <div class="card mt-1">
                 <div class="card-status-start bg-blue"></div>

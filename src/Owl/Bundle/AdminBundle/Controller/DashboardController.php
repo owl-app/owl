@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Controller;
 
-use Elastic\Elasticsearch\Client;
 use Owl\Component\Setting\Storage\SettingStorageInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;

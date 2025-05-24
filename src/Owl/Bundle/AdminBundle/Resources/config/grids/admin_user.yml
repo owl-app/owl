@@ -5,9 +5,6 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%owl.model.admin_user.class%"
-                    elasticsearch:
-                        enabled: false
-                        finder: user
             sorting:
                 createdAt: desc
             fields:
