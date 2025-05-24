@@ -16,7 +16,6 @@ parameters:
 
     excludePaths:
         # Test dependencies
-        - '**/spec/**.php'
         - '**/Bundle/*/test/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
