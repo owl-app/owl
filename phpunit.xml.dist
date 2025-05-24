@@ -8,7 +8,7 @@
 >
     <testsuites>
         <testsuite name="Owl Test Suite">
-            <directory>tests</directory>
+            <directory>src/Owl/Component/*/Tests</directory>
         </testsuite>
     </testsuites>
 

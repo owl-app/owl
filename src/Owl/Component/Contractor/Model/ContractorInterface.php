@@ -16,7 +16,7 @@ interface ContractorInterface extends ResourceInterface
 
     public function setTaxNumber(?string $taxNumber): void;
 
-    public function getStreet(): string;
+    public function getStreet(): ?string;
 
     public function setStreet(string $street): void;
 
@@ -28,11 +28,11 @@ interface ContractorInterface extends ResourceInterface
 
     public function setFlatNumber(?string $flatNumber): void;
 
-    public function getCity(): string;
+    public function getCity(): ?string;
 
     public function setCity(string $city): void;
 
-    public function getPostCode(): string;
+    public function getPostCode(): ?string;
 
     public function setPostCode(string $postcode): void;
 

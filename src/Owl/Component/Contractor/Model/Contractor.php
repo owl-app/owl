@@ -41,6 +41,11 @@ class Contractor implements ContractorInterface
     /** @var string|null */
     protected $countryCode;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId(): int|string|null
     {
         return $this->id;
@@ -66,7 +71,7 @@ class Contractor implements ContractorInterface
         $this->taxNumber = $taxNumber;
     }
 
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -96,7 +101,7 @@ class Contractor implements ContractorInterface
         $this->flatNumber = $flatNumber;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -106,7 +111,7 @@ class Contractor implements ContractorInterface
         $this->city = $city;
     }
 
-    public function getPostCode(): string
+    public function getPostCode(): ?string
     {
         return $this->postCode;
     }
