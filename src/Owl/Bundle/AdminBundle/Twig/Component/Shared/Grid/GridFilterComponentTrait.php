@@ -87,8 +87,10 @@ trait GridFilterComponentTrait
     #[LiveAction]
     public function updateFilter(#[LiveArg] $field): void
     {
+        $flatAvailableFilters = array_merge(...array_values($this->availableFilters));
+
         $this->formValues = array_merge(
-            array_filter($this->activeCriteria, fn($value) => in_array($value, $this->availableFilters)),
+            array_filter($this->activeCriteria, fn($value, $key) => in_array($key, $flatAvailableFilters), ARRAY_FILTER_USE_BOTH),
             [$field => $this->formValues[$field] ?? []]
         );
 
