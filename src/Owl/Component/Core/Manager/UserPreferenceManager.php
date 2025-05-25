@@ -31,7 +31,6 @@ final class UserPreferenceManager implements UserPreferenceManagerInterface
 
     public function get(string $key): mixed
     {
-        $test = $this->getNestedValue($this->getUserPreferences(), $key);
         return $this->getNestedValue($this->getUserPreferences(), $key) ?? null;
     }
 

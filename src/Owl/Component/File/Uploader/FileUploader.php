@@ -9,6 +9,7 @@ use Owl\Component\File\Generator\FilePathGeneratorInterface;
 use Owl\Component\File\Generator\UploadedFilePathGenerator;
 use Owl\Component\File\Model\FileInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Owl\Component\Core\Filesystem\Exception\FileNotFoundException;
 use Webmozart\Assert\Assert;
 
 class FileUploader implements FileUploaderInterface
@@ -57,11 +58,13 @@ class FileUploader implements FileUploaderInterface
 
     public function remove(string $path): bool
     {
-        if ($this->filesystem->has($path)) {
-            return $this->filesystem->delete($path);
+        try {
+            $this->filesystem->delete($path);
+        } catch (FileNotFoundException) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     private function has(string $path): bool
