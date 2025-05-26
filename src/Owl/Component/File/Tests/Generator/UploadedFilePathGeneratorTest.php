@@ -42,7 +42,7 @@ final class UploadedFilePathGeneratorTest extends TestCase
         );
     }
 
-    public function testDirFromaCamelCaseHandlesVariousCases(): void
+    public function testDirFromCamelCaseHandlesVariousCases(): void
     {
         $generator = new \ReflectionClass(UploadedFilePathGenerator::class);
         $method = $generator->getMethod('dirFromaCamelCase');

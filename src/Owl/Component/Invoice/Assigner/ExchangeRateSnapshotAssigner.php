@@ -20,17 +20,18 @@ class ExchangeRateSnapshotAssigner implements SnapshotAssignerInterface
     {
         $currency = $this->exchangeRateCurrencyResolver->resolve($invoice);
         $exchangeRateSnapshot = $invoice->getExchangeRateSnapshot();
+        $currencyCode = $currency?->getCode() ?? null;
 
-        if ($exchangeRateSnapshot && ($currency?->getCode() !== $exchangeRateSnapshot->getCode() || $exchangeRateSnapshot->isRatioChanged())) {
+        if ($exchangeRateSnapshot && $currencyCode && ($currencyCode !== $exchangeRateSnapshot->getCode() || $exchangeRateSnapshot->isRatioChanged())) {
             $existingSnapshot = $this->exchangeRateSnapshotRepository->findOneBy([
-                'code' => $currency?->getCode(),
-                'ratio' => $exchangeRateSnapshot->getRatio(),
+                'code' => $currencyCode,
+                'ratio' => $exchangeRateSnapshot?->getRatio(),
             ]);
 
             if ($existingSnapshot) {
                 $invoice->setExchangeRateSnapshot($existingSnapshot);
             } else {
-                $exchangeRateSnapshot->setCode($currency->getCode());
+                $exchangeRateSnapshot->setCode($currencyCode);
             }
         }
     }

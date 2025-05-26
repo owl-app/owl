@@ -92,6 +92,8 @@ final class FileUploaderTest extends TestCase
         $this->pathGenerator->method('generate')->willReturn('new/path');
         $this->filesystem->method('has')->willReturn(false);
 
+        $this->filesystem->expects($this->never())->method('delete');
+
         $this->filesystem->expects($this->once())->method('write')->with(
             'new/path',
             $this->isString()
