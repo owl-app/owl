@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Resource\Model\ResourceInterface;
 
-interface InvoiceSerieInterface extends ResourceInterface
+interface InvoiceSerieInterface extends ResourceInterface, TimestampableInterface
 {
     public function getNextCounter(): int;
 

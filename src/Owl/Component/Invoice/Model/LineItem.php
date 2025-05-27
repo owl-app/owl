@@ -49,6 +49,11 @@ class LineItem implements LineItemInterface
     /** @var string|null */
     protected $calculateValuesFrom;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId(): string|int|null
     {
         return $this->id;

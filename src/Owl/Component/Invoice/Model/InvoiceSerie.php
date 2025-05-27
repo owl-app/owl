@@ -37,6 +37,7 @@ class InvoiceSerie implements InvoiceSerieInterface
     {
         /** @var ArrayCollection<array-key, SequenceInterface> $this->sequences */
         $this->sequences = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): string|int|null

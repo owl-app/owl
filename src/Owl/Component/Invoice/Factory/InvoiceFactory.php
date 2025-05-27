@@ -33,7 +33,7 @@ final class InvoiceFactory implements InvoiceFactoryInterface
     }
 
     /** @inheritdoc */
-    public function createWithDefaults(?string $type): InvoiceInterface
+    public function createWithDefaults(string $type): InvoiceInterface
     {
         $now = new \DateTimeImmutable();
         $defaultSerie = $this->invoiceSerieProvider->getSerie($type);

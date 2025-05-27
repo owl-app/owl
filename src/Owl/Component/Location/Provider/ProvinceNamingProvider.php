@@ -1,19 +1,10 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Sylius Sp. z o.o.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Owl\Component\Location\Provider;
 
-use Owl\Component\Location\Model\AddressInterface;
+use Owl\Component\Location\Model\ProvinceCodeAwareInterface;
 use Owl\Component\Location\Model\ProvinceInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -25,12 +16,8 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
     {
     }
 
-    public function getName(AddressInterface $address): string
+    public function getName(ProvinceCodeAwareInterface $address): string
     {
-        if (null !== $address->getProvinceName()) {
-            return $address->getProvinceName();
-        }
-
         if (null === $address->getProvinceCode()) {
             return '';
         }
@@ -42,12 +29,8 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
         return $province->getName();
     }
 
-    public function getAbbreviation(AddressInterface $address): string
+    public function getAbbreviation(ProvinceCodeAwareInterface $address): string
     {
-        if (null !== $address->getProvinceName()) {
-            return $address->getProvinceName();
-        }
-
         if (null === $address->getProvinceCode()) {
             return '';
         }

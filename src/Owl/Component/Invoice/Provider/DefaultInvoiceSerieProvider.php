@@ -21,7 +21,7 @@ class DefaultInvoiceSerieProvider implements InvoiceSerieProviderInterface
             return $default;
         }
 
-        $first = $this->serieRepository->findBy([], ['id' => 'ASC'], 1);
+        $first = $this->serieRepository->findBy(['invoiceType' => $type], ['id' => 'ASC'], 1);
 
         if (count($first) === 0) {
             throw new \RuntimeException('No invoice serie found');

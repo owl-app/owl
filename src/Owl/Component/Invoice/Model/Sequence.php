@@ -27,6 +27,11 @@ class Sequence implements SequenceInterface
     /** @var InvoiceSerieInterface */
     protected $serie;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId(): string|int|null
     {
         return $this->id;

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model\Taxation;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Owl\Component\Location\Model\ZoneInterface;
 use Sylius\Resource\Model\TimestampableTrait;
 
 class TaxRateSnapshot implements TaxRateSnapshotInterface
@@ -28,6 +25,11 @@ class TaxRateSnapshot implements TaxRateSnapshotInterface
     private bool $isNameChanged = false;
 
     private bool $isAmountChanged = false;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId()
     {

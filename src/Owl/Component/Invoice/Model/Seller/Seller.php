@@ -14,26 +14,27 @@ class Seller implements SellerInterface
     protected ?int $id;
 
     /** @var string|null */
-    protected ?string $company;
+    protected ?string $company = null;
 
     /** @var string|null */
-    protected ?string $taxNumber;
+    protected ?string $taxNumber = null;
 
     /** @var string|null */
-    protected string $street;
+    protected string $street = '';
 
     /** @var string|null */
-    protected string $city;
+    protected string $city = '';
 
     /** @var string|null */
-    protected string $postcode;
+    protected string $postcode = '';
 
     /** @var string|null */
-    protected string $countryCode;
+    protected ?string $countryCode = null;
 
     public function __construct()
     {
         $this->id = null;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

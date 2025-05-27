@@ -21,6 +21,11 @@ class ExchangeRateSnapshot implements ExchangeRateSnapshotInterface
 
     protected bool $isRatioChanged = false;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
     public function getId()
     {
         return $this->id;

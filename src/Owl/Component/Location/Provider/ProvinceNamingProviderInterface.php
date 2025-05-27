@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Owl\Component\Location\Provider;
 
 use Owl\Component\Location\Model\AddressInterface;
+use Owl\Component\Location\Model\ProvinceCodeAwareInterface;
 
 interface ProvinceNamingProviderInterface
 {
-    public function getName(AddressInterface $address): string;
+    public function getName(ProvinceCodeAwareInterface $address): string;
 
-    public function getAbbreviation(AddressInterface $address): string;
+    public function getAbbreviation(ProvinceCodeAwareInterface $address): string;
 }

@@ -14,26 +14,27 @@ class Buyer implements BuyerInterface
     protected ?int $id;
 
     /** @var string|null */
-    protected ?string $company;
+    protected $company;
 
     /** @var string|null */
-    protected ?string $taxNumber;
+    protected $taxNumber;
 
     /** @var string|null */
-    protected string $street;
+    protected $street;
 
     /** @var string|null */
-    protected string $city;
+    protected $city;
 
     /** @var string|null */
-    protected string $postcode;
+    protected $postcode;
 
     /** @var string|null */
-    protected string $countryCode;
+    protected $countryCode;
 
     public function __construct()
     {
         $this->id = null;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
