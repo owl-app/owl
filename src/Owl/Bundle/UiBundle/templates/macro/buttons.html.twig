@@ -1,5 +1,5 @@
 {% macro default(url, message, id, icon, class) %}
-    <a class="btn {% if class is not empty %}{{ class }}{% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}" {{ sylius_test_html_attribute('button', id|default(message)) }}>
+    <a class="btn {% if class is not empty %}{{ class }}{% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}" {{ owl_test_html_attribute('button', id|default(message)) }}>
         {% if icon is not empty %}
             {{ ux_icon(icon, { class: 'icon icon-sm flex-shrink-0' }) }}
         {% endif %}
@@ -10,7 +10,7 @@
 {% endmacro %}
 
 {% macro submit(message, id, icon, class, disabled = false) %}
-    <button type="submit" class="btn {% if class is not empty %}{{ class }}{% endif %}" {% if id is not null %}id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }} {% if disabled %}disabled="disabled"{% endif %}>
+    <button type="submit" class="btn {% if class is not empty %}{{ class }}{% endif %}" {% if id is not null %}id="{{ id }}"{% endif %} {{ owl_test_html_attribute('button', id|default(message)) }} {% if disabled %}disabled="disabled"{% endif %}>
         {% if icon is not empty %}
             {{ ux_icon(icon, { class: 'icon icon-sm' }) }}
         {% endif %}
@@ -21,7 +21,7 @@
 {% endmacro %}
 
 {% macro transparent(url, message, id, icon, class) %}
-    <a href="{{ url }}" class="link-reset{% if class is not empty %} {{ class }}{% endif %}"{% if id is not null %} id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }}>
+    <a href="{{ url }}" class="link-reset{% if class is not empty %} {{ class }}{% endif %}"{% if id is not null %} id="{{ id }}"{% endif %} {{ owl_test_html_attribute('button', id|default(message)) }}>
         {% if icon is not empty %}
             {{ ux_icon(icon, { class: 'icon icon-sm' }) }}
         {% endif %}
@@ -46,7 +46,7 @@
 {% macro delete(url, message, labeled = true, resourceId = null) %}
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-sm btn-icon btn-outline-danger w-full" type="submit" data-requires-confirmation {{ sylius_test_html_attribute('button', 'delete') }}>
+        <button class="btn btn-sm btn-icon btn-outline-danger w-full" type="submit" data-requires-confirmation {{ owl_test_html_attribute('button', 'delete') }}>
             {{ ux_icon('tabler:trash', {'class': 'icon icon-xs'})}} {{ ((message is empty and labeled) ? 'owl.ui.delete' : message)|trans }}
         </button>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
@@ -56,7 +56,7 @@
 {% macro modal(url, message = '', id, icon, class, disabled = false) %}
     <button 
         class="btn btn-icon {% if class is not empty %}{{ class }}{% endif %}" 
-        {% if id is not null %}id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }} 
+        {% if id is not null %}id="{{ id }}"{% endif %} {{ owl_test_html_attribute('button', id|default(message)) }} 
         {% if disabled %}disabled="disabled"{% endif %}
         data-bs-toggle="tooltip"
         data-bs-title="{{ message|trans }}"

@@ -39,7 +39,7 @@
                 <hr class="dropdown-divider">
             {% else %}
                 {% set extra_class = item.class ? ' ' ~ item.class %}
-                <a class="dropdown-item{{ item.class ? extra_class }}" href="{{ item.url }}" {{ sylius_test_html_attribute('user-dropdown-item', item.title|trans({}, null, 'en_US')) }} {% for attr, value in item.attributes %}{{ attr }}="{{ value }}" {% endfor %}>
+                <a class="dropdown-item{{ item.class ? extra_class }}" href="{{ item.url }}" {{ owl_test_html_attribute('user-dropdown-item', item.title|trans({}, null, 'en_US')) }} {% for attr, value in item.attributes %}{{ attr }}="{{ value }}" {% endfor %}>
                     {{ item.icon ? ux_icon(item.icon, {'class': 'icon dropdown-item-icon ' ~ extra_class }) }}
                     {{ item.title|trans }}
                 </a>

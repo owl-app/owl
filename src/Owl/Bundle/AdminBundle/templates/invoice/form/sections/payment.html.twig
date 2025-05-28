@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-4">
-            {{ form_row(hookable_metadata.context.form.currency, sylius_test_form_attribute('currency')|merge(
+            {{ form_row(hookable_metadata.context.form.currency, owl_test_form_attribute('currency')|merge(
                     {
                         row_attr: { class: 'mb-2' },
                         attr: {
@@ -14,21 +14,21 @@
             )) }}
         </div>
         <div class="col-3 mt-5 ps-2">
-            {{ form_row(hookable_metadata.context.form.isPaid, sylius_test_form_attribute('isPaid')|merge({ row_attr: { class: 'mb-4 mt-1' }})) }}
+            {{ form_row(hookable_metadata.context.form.isPaid, owl_test_form_attribute('isPaid')|merge({ row_attr: { class: 'mb-4 mt-1' }})) }}
         </div>
         {% if hookable_metadata.context.showPaymentDate %}
             <div class="col-5">
-                {{ form_row(hookable_metadata.context.form.paymentDate, sylius_test_form_attribute('duePaymentDate')|merge({ row_attr: { class: 'mb-2' }})) }}
+                {{ form_row(hookable_metadata.context.form.paymentDate, owl_test_form_attribute('duePaymentDate')|merge({ row_attr: { class: 'mb-2' }})) }}
             </div>
         {% endif %}
     </div>
 
     <div class="row">
         <div class="col-6">
-            {{ form_row(hookable_metadata.context.form.duePaymentDate, sylius_test_form_attribute('duePaymentDate')|merge({ row_attr: { class: 'mb-2' }})) }}
+            {{ form_row(hookable_metadata.context.form.duePaymentDate, owl_test_form_attribute('duePaymentDate')|merge({ row_attr: { class: 'mb-2' }})) }}
         </div>
         <div class="col-6">
-            {{ form_row(hookable_metadata.context.form.paymentMethod, sylius_test_form_attribute('paymentMethod')|merge({ row_attr: { class: 'mb-2' }})) }}
+            {{ form_row(hookable_metadata.context.form.paymentMethod, owl_test_form_attribute('paymentMethod')|merge({ row_attr: { class: 'mb-2' }})) }}
         </div>
     </div>
 </div>

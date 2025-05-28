@@ -1,7 +1,7 @@
 {% import '@OwlAdmin/shared/helper/button.html.twig' as button %}
 
 {{ button.default(
-    sylius_test_form_attribute('update-changes-button')|merge({
+    owl_test_form_attribute('update-changes-button')|merge({
         text: hookable_metadata.configuration.button.text|default('owl.ui.save')|trans,
         class: hookable_metadata.configuration.button.class|default('btn-primary'),
         attr: {

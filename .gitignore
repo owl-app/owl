@@ -9,6 +9,11 @@
 /tools/*
 !/tools/.gitkeep
 
+# tests e2e
+/test-results
+/e2e/.env
+/e2e/storageState.json
+
 # Package managers
 .pnp.*
 .yarn/*

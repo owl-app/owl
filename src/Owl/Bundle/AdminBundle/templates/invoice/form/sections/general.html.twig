@@ -13,17 +13,17 @@
 
     <div class="row">
         <div class="col-lg-6">
-            {{ form_row(hookable_metadata.context.form.company, sylius_test_form_attribute('company')) }}
+            {{ form_row(hookable_metadata.context.form.company, owl_test_form_attribute('company')) }}
         </div>
         <div class="col-lg-6">
-            {{ form_row(hookable_metadata.context.form.contractor, sylius_test_form_attribute('contractor')) }}
+            {{ form_row(hookable_metadata.context.form.contractor, owl_test_form_attribute('contractor')) }}
         </div>
     </div>
 
     <div class="row">
         <div class="col-6">
             {{
-                form_row(hookable_metadata.context.form.issueDate, sylius_test_form_attribute('issueDate')|merge(
+                form_row(hookable_metadata.context.form.issueDate, owl_test_form_attribute('issue-date')|owl_replace_recursive(
                     {
                         row_attr: { class: 'mb-2' },
                         attr: {
@@ -35,11 +35,11 @@
         </div>
 
         <div class="col-6">
-            {{ form_row(hookable_metadata.context.form.transactionDate, sylius_test_form_attribute('transactionDate')|merge({row_attr: { class: 'mb-2' }})) }}
+            {{ form_row(hookable_metadata.context.form.transactionDate, owl_test_form_attribute('transaction-date')|merge({row_attr: { class: 'mb-2' }})) }}
         </div>
     </div>
 
-    {{ form_row(hookable_metadata.context.form.fullNumber, sylius_test_form_attribute('fullNumber')|merge({ row_attr: { class: 'mb-2' } })) }}
-    {{ form_row(hookable_metadata.context.form.sequenceNumber, sylius_test_form_attribute('sequenceNumber')|merge({ row_attr: { class: 'mb-2' } })) }}
-    {{ form_row(hookable_metadata.context.form.serie, sylius_test_form_attribute('serie')|merge({ row_attr: { class: 'mb-2' } })) }}
+    {{ form_row(hookable_metadata.context.form.fullNumber, owl_test_form_attribute('fullNumber')|merge({ row_attr: { class: 'mb-2' } })) }}
+    {{ form_row(hookable_metadata.context.form.sequenceNumber, owl_test_form_attribute('sequenceNumber')|merge({ row_attr: { class: 'mb-2' } })) }}
+    {{ form_row(hookable_metadata.context.form.serie, owl_test_form_attribute('serie')|merge({ row_attr: { class: 'mb-2' } })) }}
 </div>

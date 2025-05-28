@@ -24,7 +24,7 @@
 {% macro row(grid, definition, row) %}
     {% import '@OwlAdmin/shared/helper/dropdown.html.twig' as dropdown %}
 
-    <tr class="item" {{ sylius_test_html_attribute('row') }} {{ sylius_test_html_attribute('resource-id', row.id) }}>
+    <tr class="item" {{ owl_test_html_attribute('row') }} {{ owl_test_html_attribute('resource-id', row.id) }}>
         {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
             <td class="text-center"><input data-grid-bulk-target="checkbox" class="form-check-input" type="checkbox" value="{{ row.id }}" /></td>
         {% endif %}
@@ -34,7 +34,7 @@
             </td>
         {% endfor %}
         {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
-            <td{% if field.options.vars.td_class is defined %} class="{{ field.options.vars.td_class }}"{% endif %} {{ sylius_test_html_attribute('actions') }}>
+            <td{% if field.options.vars.td_class is defined %} class="{{ field.options.vars.td_class }}"{% endif %} {{ owl_test_html_attribute('actions') }}>
                 <div class="d-flex gap-1 justify-content-end">
                     {% for action in definition.getEnabledActions('item')|sylius_sort_by('position') %}
                         {{ sylius_grid_render_action(grid, action, row) }}

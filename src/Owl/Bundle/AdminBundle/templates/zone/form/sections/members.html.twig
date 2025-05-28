@@ -8,12 +8,12 @@
         <div class="row">
             {{ form_errors(hookable_metadata.context.form.members) }}
 
-            <div {{ sylius_test_html_attribute('members') }} >
+            <div {{ owl_test_html_attribute('members') }} >
                 {% for member_form in hookable_metadata.context.form.members %}
                     {% hook 'members' with { member_form } %}
                 {% endfor %}
 
-                {{ form_row(hookable_metadata.context.form.members.vars.button_add, sylius_test_form_attribute('add-member')) }}
+                {{ form_row(hookable_metadata.context.form.members.vars.button_add, owl_test_form_attribute('add-member')) }}
             </div>
         </div>
     </div>

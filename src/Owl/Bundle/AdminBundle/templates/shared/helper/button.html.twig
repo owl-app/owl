@@ -97,7 +97,7 @@
         class="btn 
         {% if message is empty %}btn-icon{% endif %}
         {% if class is not empty %}{{ class }}{% endif %}" 
-        {% if id is not null %}id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }} 
+        {% if id is not null %}id="{{ id }}"{% endif %} {{ owl_test_html_attribute('button', id|default(message)) }} 
         {% if disabled %}disabled="disabled"{% endif %}
         data-bs-toggle="tooltip"
         title="{{ tooltip|trans }}"
@@ -123,7 +123,7 @@
 {% macro modalDelete(options = {}) %}
     <button 
         class="btn btn-icon btn-danger"
-        {{ sylius_test_html_attribute('button', id|default('delete-modal')) }} 
+        {{ owl_test_html_attribute('button', id|default('delete-modal')) }} 
         data-bs-toggle="tooltip"
         title="{{ 'owl.ui.delete'|trans }}"
         data-controller="show-modal"
@@ -142,7 +142,7 @@
 {% macro modalBulkDelete(options = {}) %}
     <button 
         class="btn btn-ghost-danger"
-        {{ sylius_test_html_attribute('button', id|default('delete-modal')) }} 
+        {{ owl_test_html_attribute('button', id|default('delete-modal')) }} 
         data-grid-bulk-target="action"
         data-action="click->grid-bulk#confirmAction"
         disabled

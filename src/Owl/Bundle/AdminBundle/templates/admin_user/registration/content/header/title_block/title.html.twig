@@ -7,7 +7,7 @@
 
 {% set icon = hookable_metadata.configuration.icon|default(null) %}
 {% set subheader = hookable_metadata.configuration.subheader|default(null) %}
-{% set test_attribute = hookable_metadata.configuration.owl_test_html_attribute is defined ? sylius_test_html_attribute(hookable_metadata.configuration.owl_test_html_attribute) : null %}
+{% set test_attribute = hookable_metadata.configuration.owl_test_html_attribute is defined ? owl_test_html_attribute(hookable_metadata.configuration.owl_test_html_attribute) : null %}
 {% set status = hookable_metadata.context.resource.registration.status|default(null) %}
 
 {% if status == 'new' %}
