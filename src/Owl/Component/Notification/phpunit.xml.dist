@@ -9,7 +9,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="OwlLocaleComponent Test Suite">
+        <testsuite name="OwlNotificationComponent Test Suite">
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>

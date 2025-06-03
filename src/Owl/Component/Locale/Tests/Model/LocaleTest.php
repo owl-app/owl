@@ -1,13 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
-namespace Tests\Owl\Component\Locale\Tests\Model;
+namespace Tests\Owl\Component\Locale\Model;
 
-use Owl\Component\Locale\Model\Locale;
 use PHPUnit\Framework\TestCase;
+use Owl\Component\Locale\Model\Locale;
+use Owl\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
-class LocaleTest extends TestCase
+final class LocaleTest extends TestCase
 {
     private Locale $locale;
 
@@ -16,31 +27,59 @@ class LocaleTest extends TestCase
         $this->locale = new Locale();
     }
 
-    public function testLocaleInitialization(): void
+    public function testImplementsLocaleInterface(): void
     {
-        $this->assertNull($this->locale->getCode());
-        $this->assertNotNull($this->locale->getCreatedAt());
-        $this->assertNull($this->locale->getUpdatedAt());
+        self::assertInstanceOf(LocaleInterface::class, $this->locale);
     }
 
-    public function testGetterAndSetter(): void
+    public function testTimestampable(): void
+    {
+        self::assertInstanceOf(TimestampableInterface::class, $this->locale);
+    }
+
+    public function testDoesNotHaveIdByDefault(): void
+    {
+        self::assertNull($this->locale->getId());
+    }
+
+    public function testHasNoCodeByDefault(): void
+    {
+        self::assertNull($this->locale->getCode());
+    }
+
+    public function testCodeIsMutable(): void
     {
         $this->locale->setCode('en_US');
-        $this->assertEquals('en_US', $this->locale->getCode());
+        self::assertSame('en_US', $this->locale->getCode());
     }
 
-    public function testGetName(): void
+    public function testHasAName(): void
     {
+        $this->locale->setCode('en_US');
+        self::assertSame('English (United States)', $this->locale->getName());
+        self::assertSame('inglés (Estados Unidos)', $this->locale->getName('es'));
+
         $this->locale->setCode('en');
-        $this->assertEquals('English', $this->locale->getName());
-        
-        $this->locale->setCode('pl');
-        $this->assertEquals('polski', $this->locale->getName('pl'));
+        self::assertSame('English', $this->locale->getName());
+        self::assertSame('inglés', $this->locale->getName('es'));
     }
 
-    public function testToString(): void
+    public function testReturnsNameWhenConvertedToString(): void
     {
+        $this->locale->setCode('en_US');
+        self::assertSame('English (United States)', $this->locale->__toString());
+
         $this->locale->setCode('en');
-        $this->assertEquals('English', (string) $this->locale);
+        self::assertSame('English', $this->locale->__toString());
+    }
+
+    public function testHasCreatedAtByDefault(): void
+    {
+        self::assertInstanceOf(\DateTime::class, $this->locale->getCreatedAt());
+    }
+
+    public function testDoesNotHaveUpdatedAtByDefault(): void
+    {
+        self::assertNull($this->locale->getUpdatedAt());
     }
 } 
