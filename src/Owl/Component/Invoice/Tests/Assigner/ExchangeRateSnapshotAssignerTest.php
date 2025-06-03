@@ -17,12 +17,15 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
 {
     private ExchangeRateSnapshotAssigner $exchangeRateSnapshotAssigner;
 
-    private ExchangeRateCurrencyResolverInterface|MockObject $exchangeRateCurrencyResolver;
+    private InvoiceInterface&MockObject $invoice;
 
-    private RepositoryInterface|MockObject $exchangeRateSnapshotRepository;
+    private ExchangeRateCurrencyResolverInterface&MockObject $exchangeRateCurrencyResolver;
+
+    private RepositoryInterface&MockObject $exchangeRateSnapshotRepository;
 
     protected function setUp(): void
     {
+        $this->invoice = $this->createMock(InvoiceInterface::class);
         $this->exchangeRateCurrencyResolver = $this->createMock(ExchangeRateCurrencyResolverInterface::class);
         $this->exchangeRateSnapshotRepository = $this->createMock(RepositoryInterface::class);
 
@@ -34,27 +37,25 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
 
     public function testAssignDoesNothingWhenNoExchangeRateSnapshot(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $currency = $this->createMock(CurrencyInterface::class);
 
         $this->exchangeRateCurrencyResolver->expects($this->once())
             ->method('resolve')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn($currency);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getExchangeRateSnapshot')
             ->willReturn(null);
 
-        $invoice->expects($this->never())->method('setExchangeRateSnapshot');
+        $this->invoice->expects($this->never())->method('setExchangeRateSnapshot');
         $this->exchangeRateSnapshotRepository->expects($this->never())->method('findOneBy');
 
-        $this->exchangeRateSnapshotAssigner->assign($invoice);
+        $this->exchangeRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignDoesNothingWhenCurrencyCodeMatchesAndRatioNotChanged(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $currency = $this->createMock(CurrencyInterface::class);
         $exchangeRateSnapshot = $this->createMock(ExchangeRateSnapshotInterface::class);
 
@@ -72,22 +73,21 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
 
         $this->exchangeRateCurrencyResolver->expects($this->once())
             ->method('resolve')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn($currency);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getExchangeRateSnapshot')
             ->willReturn($exchangeRateSnapshot);
 
-        $invoice->expects($this->never())->method('setExchangeRateSnapshot');
+        $this->invoice->expects($this->never())->method('setExchangeRateSnapshot');
         $this->exchangeRateSnapshotRepository->expects($this->never())->method('findOneBy');
 
-        $this->exchangeRateSnapshotAssigner->assign($invoice);
+        $this->exchangeRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignUpdatesExchangeRateSnapshotWhenCurrencyCodeDiffers(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $currency = $this->createMock(CurrencyInterface::class);
         $exchangeRateSnapshot = $this->createMock(ExchangeRateSnapshotInterface::class);
         $existingSnapshot = $this->createMock(ExchangeRateSnapshotInterface::class);
@@ -109,10 +109,10 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
 
         $this->exchangeRateCurrencyResolver->expects($this->once())
             ->method('resolve')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn($currency);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getExchangeRateSnapshot')
             ->willReturn($exchangeRateSnapshot);
 
@@ -124,16 +124,15 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
             ])
             ->willReturn($existingSnapshot);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('setExchangeRateSnapshot')
             ->with($existingSnapshot);
 
-        $this->exchangeRateSnapshotAssigner->assign($invoice);
+        $this->exchangeRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignUpdatesExchangeRateSnapshotWhenRatioChanged(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $currency = $this->createMock(CurrencyInterface::class);
         $exchangeRateSnapshot = $this->createMock(ExchangeRateSnapshotInterface::class);
 
@@ -155,10 +154,10 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
 
         $this->exchangeRateCurrencyResolver->expects($this->once())
             ->method('resolve')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn($currency);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getExchangeRateSnapshot')
             ->willReturn($exchangeRateSnapshot);
 
@@ -174,15 +173,14 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
             ->method('setCode')
             ->with('USD');
 
-        $invoice->expects($this->never())
+        $this->invoice->expects($this->never())
             ->method('setExchangeRateSnapshot');
 
-        $this->exchangeRateSnapshotAssigner->assign($invoice);
+        $this->exchangeRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignSetsCodeWhenNoExistingSnapshotFound(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $currency = $this->createMock(CurrencyInterface::class);
         $exchangeRateSnapshot = $this->createMock(ExchangeRateSnapshotInterface::class);
     
@@ -203,10 +201,10 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
     
         $this->exchangeRateCurrencyResolver->expects($this->once())
             ->method('resolve')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn($currency);
     
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getExchangeRateSnapshot')
             ->willReturn($exchangeRateSnapshot);
 
@@ -222,15 +220,14 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
             ->method('setCode')
             ->with('EUR');
 
-        $invoice->expects($this->never())
+        $this->invoice->expects($this->never())
             ->method('setExchangeRateSnapshot');
     
-        $this->exchangeRateSnapshotAssigner->assign($invoice);
+        $this->exchangeRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignHandlesNullCurrency(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $exchangeRateSnapshot = $this->createMock(ExchangeRateSnapshotInterface::class);
 
         $exchangeRateSnapshot->expects($this->never())
@@ -244,10 +241,10 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
 
         $this->exchangeRateCurrencyResolver->expects($this->once())
             ->method('resolve')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn(null);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getExchangeRateSnapshot')
             ->willReturn($exchangeRateSnapshot);
 
@@ -257,9 +254,9 @@ class ExchangeRateSnapshotAssignerTest extends TestCase
         $exchangeRateSnapshot->expects($this->never())
             ->method('setCode');
 
-        $invoice->expects($this->never())
+        $this->invoice->expects($this->never())
             ->method('setExchangeRateSnapshot');
 
-        $this->exchangeRateSnapshotAssigner->assign($invoice);
+        $this->exchangeRateSnapshotAssigner->assign($this->invoice);
     }
 }

@@ -20,14 +20,17 @@ class TaxRateSnapshotAssignerTest extends TestCase
 {
     private TaxRateSnapshotAssigner $taxRateSnapshotAssigner;
 
-    private RepositoryInterface|MockObject $taxRateSnapshotRepository;
+    private InvoiceInterface&MockObject $invoice;
 
-    private InvoiceTaxRateSnapshotFactoryInterface|MockObject $invoiceTaxRateSnapshotFactory;
+    private RepositoryInterface&MockObject $taxRateSnapshotRepository;
 
-    private EntityManagerInterface|MockObject $entityManager;
+    private InvoiceTaxRateSnapshotFactoryInterface&MockObject $invoiceTaxRateSnapshotFactory;
+
+    private EntityManagerInterface&MockObject $entityManager;
 
     protected function setUp(): void
     {
+        $this->invoice = $this->createMock(InvoiceInterface::class);
         $this->taxRateSnapshotRepository = $this->createMock(RepositoryInterface::class);
         $this->invoiceTaxRateSnapshotFactory = $this->createMock(InvoiceTaxRateSnapshotFactoryInterface::class);
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
@@ -41,11 +44,10 @@ class TaxRateSnapshotAssignerTest extends TestCase
 
     public function testAssignSkipsLineItemsWithoutTaxRate(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $lineItem = $this->createMock(LineItemInterface::class);
         $lineItems = new ArrayCollection([$lineItem]);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getLineItems')
             ->willReturn($lineItems);
 
@@ -55,19 +57,18 @@ class TaxRateSnapshotAssignerTest extends TestCase
 
         $lineItem->expects($this->never())->method('getTaxRateSnapshot');
 
-        $this->taxRateSnapshotAssigner->assign($invoice);
+        $this->taxRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignCreatesSnapshotForNewLineItem(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $lineItem = $this->createMock(LineItemInterface::class);
         $taxRate = $this->createMock(TaxRateInterface::class);
         $taxRateSnapshot = $this->createMock(TaxRateSnapshotInterface::class);
         $newSnapshot = $this->createMock(TaxRateSnapshotInterface::class);
         $lineItems = new ArrayCollection([$lineItem]);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getLineItems')
             ->willReturn($lineItems);
 
@@ -103,19 +104,18 @@ class TaxRateSnapshotAssignerTest extends TestCase
             ->method('setTaxRateSnapshot')
             ->with($newSnapshot);
 
-        $this->taxRateSnapshotAssigner->assign($invoice);
+        $this->taxRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignUsesExistingSnapshotWhenFound(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $lineItem = $this->createMock(LineItemInterface::class);
         $taxRate = $this->createMock(TaxRateInterface::class);
         $taxRateSnapshot = $this->createMock(TaxRateSnapshotInterface::class);
         $existingSnapshot = $this->createMock(TaxRateSnapshotInterface::class);
         $lineItems = new ArrayCollection([$lineItem]);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getLineItems')
             ->willReturn($lineItems);
 
@@ -148,19 +148,18 @@ class TaxRateSnapshotAssignerTest extends TestCase
             ->method('setTaxRateSnapshot')
             ->with($existingSnapshot);
 
-        $this->taxRateSnapshotAssigner->assign($invoice);
+        $this->taxRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignHandlesChangedTaxRateCode(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $lineItem = $this->createMock(LineItemInterface::class);
         $taxRate = $this->createMock(TaxRateInterface::class);
         $taxRateSnapshot = $this->createMock(TaxRateSnapshotInterface::class);
         $newSnapshot = $this->createMock(TaxRateSnapshotInterface::class);
         $lineItems = new ArrayCollection([$lineItem]);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getLineItems')
             ->willReturn($lineItems);
 
@@ -198,19 +197,18 @@ class TaxRateSnapshotAssignerTest extends TestCase
             ->method('setTaxRateSnapshot')
             ->with($newSnapshot);
 
-        $this->taxRateSnapshotAssigner->assign($invoice);
+        $this->taxRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignHandlesChangedNameOrAmount(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $lineItem = $this->createMock(LineItemInterface::class);
         $taxRate = $this->createMock(TaxRateInterface::class);
         $taxRateSnapshot = $this->createMock(TaxRateSnapshotInterface::class);
         $newSnapshot = $this->createMock(TaxRateSnapshotInterface::class);
         $lineItems = new ArrayCollection([$lineItem]);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getLineItems')
             ->willReturn($lineItems);
 
@@ -252,18 +250,17 @@ class TaxRateSnapshotAssignerTest extends TestCase
             ->method('setTaxRateSnapshot')
             ->with($newSnapshot);
 
-        $this->taxRateSnapshotAssigner->assign($invoice);
+        $this->taxRateSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignDoesNothingWhenNoChanges(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $lineItem = $this->createMock(LineItemInterface::class);
         $taxRate = $this->createMock(TaxRateInterface::class);
         $taxRateSnapshot = $this->createMock(TaxRateSnapshotInterface::class);
         $lineItems = new ArrayCollection([$lineItem]);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getLineItems')
             ->willReturn($lineItems);
 
@@ -282,6 +279,6 @@ class TaxRateSnapshotAssignerTest extends TestCase
         $this->invoiceTaxRateSnapshotFactory->expects($this->never())->method('create');
         $lineItem->expects($this->never())->method('setTaxRateSnapshot');
 
-        $this->taxRateSnapshotAssigner->assign($invoice);
+        $this->taxRateSnapshotAssigner->assign($this->invoice);
     }
 }

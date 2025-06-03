@@ -23,7 +23,7 @@ class BuyerSnapshotAssigner implements SnapshotAssignerInterface
         $uow = $this->entityManager->getUnitOfWork();
         $oldBuyer = $uow->getOriginalEntityData($invoice)['buyer'] ?? null;
 
-        if (!$this->isBuyerChanged($newBuyer, $oldBuyer)) {
+        if (!$newBuyer || !$this->isBuyerChanged($newBuyer, $oldBuyer)) {
             return;
         }
 

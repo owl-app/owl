@@ -17,14 +17,17 @@ class SellerSnapshotAssignerTest extends TestCase
 {
     private SellerSnapshotAssigner $sellerSnapshotAssigner;
 
-    private EntityManagerInterface|MockObject $entityManager;
+    private InvoiceInterface&MockObject $invoice;
 
-    private RepositoryInterface|MockObject $sellerSnapshotRepository;
+    private EntityManagerInterface&MockObject $entityManager;
 
-    private UnitOfWork|MockObject $unitOfWork;
+    private RepositoryInterface&MockObject $sellerSnapshotRepository;
+
+    private UnitOfWork&MockObject $unitOfWork;
 
     protected function setUp(): void
     {
+        $this->invoice = $this->createMock(InvoiceInterface::class);
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
         $this->sellerSnapshotRepository = $this->createMock(RepositoryInterface::class);
         $this->unitOfWork = $this->createMock(UnitOfWork::class);
@@ -39,27 +42,25 @@ class SellerSnapshotAssignerTest extends TestCase
 
     public function testAssignDoesNothingWhenSellerHasNotChanged(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $seller = $this->createMock(SellerInterface::class);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getSeller')
             ->willReturn($seller);
 
         $this->unitOfWork->expects($this->once())
             ->method('getOriginalEntityData')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn(['seller' => $seller]);
 
         $this->sellerSnapshotRepository->expects($this->never())->method('findOneBy');
-        $invoice->expects($this->never())->method('setSeller');
+        $this->invoice->expects($this->never())->method('setSeller');
 
-        $this->sellerSnapshotAssigner->assign($invoice);
+        $this->sellerSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignUpdatesSellerWhenSellerHasChangedAndExistingSnapshotFound(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $newSeller = $this->createMock(SellerInterface::class);
         $oldSeller = $this->createMock(SellerInterface::class);
         $existingSnapshot = $this->createMock(SellerInterface::class);
@@ -71,13 +72,13 @@ class SellerSnapshotAssignerTest extends TestCase
         $newSeller->method('getCity')->willReturn('New York');
         $newSeller->method('getPostcode')->willReturn('10001');
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getSeller')
             ->willReturn($newSeller);
 
         $this->unitOfWork->expects($this->once())
             ->method('getOriginalEntityData')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn(['seller' => $oldSeller]);
 
         $this->sellerSnapshotRepository->expects($this->once())
@@ -91,16 +92,15 @@ class SellerSnapshotAssignerTest extends TestCase
             ])
             ->willReturn($existingSnapshot);
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('setSeller')
             ->with($existingSnapshot);
 
-        $this->sellerSnapshotAssigner->assign($invoice);
+        $this->sellerSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignDoesNotUpdateSellerWhenNoExistingSnapshotFound(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $newSeller = $this->createMock(SellerInterface::class);
         $oldSeller = $this->createMock(SellerInterface::class);
 
@@ -111,28 +111,27 @@ class SellerSnapshotAssignerTest extends TestCase
         $newSeller->method('getCity')->willReturn('New York');
         $newSeller->method('getPostcode')->willReturn('10001');
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getSeller')
             ->willReturn($newSeller);
 
         $this->unitOfWork->expects($this->once())
             ->method('getOriginalEntityData')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn(['seller' => $oldSeller]);
 
         $this->sellerSnapshotRepository->expects($this->once())
             ->method('findOneBy')
             ->willReturn(null);
 
-        $invoice->expects($this->never())
+        $this->invoice->expects($this->never())
             ->method('setSeller');
 
-        $this->sellerSnapshotAssigner->assign($invoice);
+        $this->sellerSnapshotAssigner->assign($this->invoice);
     }
 
     public function testAssignDetectsChangesInSellerAttributes(): void
     {
-        $invoice = $this->createMock(InvoiceInterface::class);
         $newSeller = $this->createMock(SellerInterface::class);
         $oldSeller = $this->createMock(SellerInterface::class);
 
@@ -147,18 +146,18 @@ class SellerSnapshotAssignerTest extends TestCase
         $newSeller->method('getPostcode')->willReturn('10001');
         $oldSeller->method('getPostcode')->willReturn('10001');
 
-        $invoice->expects($this->once())
+        $this->invoice->expects($this->once())
             ->method('getSeller')
             ->willReturn($newSeller);
 
         $this->unitOfWork->expects($this->once())
             ->method('getOriginalEntityData')
-            ->with($invoice)
+            ->with($this->invoice)
             ->willReturn(['seller' => $oldSeller]);
 
         $this->sellerSnapshotRepository->expects($this->once())
             ->method('findOneBy');
 
-        $this->sellerSnapshotAssigner->assign($invoice);
+        $this->sellerSnapshotAssigner->assign($this->invoice);
     }
 }
