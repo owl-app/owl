@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Component\Location\Tests\Checker;
+namespace Tests\Owl\Component\Location\Tests\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;

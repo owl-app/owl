@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Component\Locale\Tests\Converter;
+namespace Tests\Owl\Component\Locale\Tests\Converter;
 
 use Owl\Component\Locale\Converter\LocaleConverter;
 use PHPUnit\Framework\TestCase;

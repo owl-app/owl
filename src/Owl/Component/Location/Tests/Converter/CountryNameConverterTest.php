@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Component\Location\Tests\Converter;
+namespace Tests\Owl\Component\Location\Tests\Converter;
 
 use PHPUnit\Framework\TestCase;
 use Owl\Component\Location\Converter\CountryNameConverter;

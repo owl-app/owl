@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Component\Locale\Tests\Provider;
+namespace Tests\Owl\Component\Locale\Tests\Provider;
 
 use Owl\Component\Locale\Model\LocaleInterface;
 use Owl\Component\Locale\Provider\LocaleProvider;

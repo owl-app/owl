@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Component\Locale\Tests\Model;
+namespace Tests\Owl\Component\Locale\Tests\Model;
 
 use Owl\Component\Locale\Model\Locale;
 use PHPUnit\Framework\TestCase;

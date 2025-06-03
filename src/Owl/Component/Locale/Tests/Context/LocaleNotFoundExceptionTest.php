@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Owl\Component\Locale\Tests\Context;
+namespace Tests\Owl\Component\Locale\Tests\Context;
 
 use PHPUnit\Framework\TestCase;
 use Owl\Component\Locale\Context\LocaleNotFoundException;
