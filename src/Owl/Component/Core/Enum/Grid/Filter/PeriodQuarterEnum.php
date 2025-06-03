@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Owl\Component\Core\Enum\Grid\Filter;
 
 use DateTime;
+use UnhandledMatchError;
 
 enum PeriodQuarterEnum: string
 {
@@ -18,11 +19,16 @@ enum PeriodQuarterEnum: string
 
     public static function getPeriodRange(int|string $quarter): array
     {
+        if (is_int($quarter)) {
+            $quarter = (string) $quarter;
+        }
+
         return match ($quarter) {
             self::TYPE_Q1->value => ['start' => '01-01', 'end' => '03-31'],
             self::TYPE_Q2->value => ['start' => '04-01', 'end' => '06-30'],
             self::TYPE_Q3->value => ['start' => '07-01', 'end' => '09-30'],
             self::TYPE_Q4->value => ['start' => '10-01', 'end' => '12-31'],
+            default => throw new UnhandledMatchError("Invalid quarter: $quarter"),
         };
     }
 

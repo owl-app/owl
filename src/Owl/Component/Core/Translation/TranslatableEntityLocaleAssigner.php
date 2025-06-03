@@ -15,7 +15,7 @@ namespace Owl\Component\Core\Translation;
 
 use Owl\Component\Locale\Context\LocaleContextInterface;
 use Owl\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
 
