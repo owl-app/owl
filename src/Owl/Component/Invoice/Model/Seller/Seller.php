@@ -17,14 +17,11 @@ class Seller implements SellerInterface
 
     protected ?string $taxNumber = null;
 
-    /** @var string|null */
-    protected string $street = '';
+    protected ?string $street = null;
 
-    /** @var string|null */
-    protected string $city = '';
+    protected ?string $city = null;
 
-    /** @var string|null */
-    protected string $postcode = '';
+    protected ?string $postcode = null;
 
     protected ?string $countryCode = null;
 
@@ -64,7 +61,7 @@ class Seller implements SellerInterface
         return $this->street;
     }
 
-    public function setStreet(string $street): void
+    public function setStreet(?string $street): void
     {
         $this->street = $street;
     }
@@ -74,7 +71,7 @@ class Seller implements SellerInterface
         return $this->city;
     }
 
-    public function setCity(string $city): void
+    public function setCity(?string $city): void
     {
         $this->city = $city;
     }
@@ -84,7 +81,7 @@ class Seller implements SellerInterface
         return $this->postcode;
     }
 
-    public function setPostcode(string $postcode): void
+    public function setPostcode(?string $postcode): void
     {
         $this->postcode = $postcode;
     }

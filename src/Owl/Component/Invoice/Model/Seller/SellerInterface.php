@@ -19,15 +19,15 @@ interface SellerInterface extends ResourceInterface, TimestampableInterface
 
     public function getStreet(): string;
 
-    public function setStreet(string $street): void;
+    public function setStreet(?string $street): void;
 
     public function getCity(): string;
 
-    public function setCity(string $city): void;
+    public function setCity(?string $city): void;
 
     public function getPostcode(): string;
 
-    public function setPostcode(string $postcode): void;
+    public function setPostcode(?string $postcode): void;
 
     public function getCountryCode(): string;
 

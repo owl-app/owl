@@ -36,7 +36,7 @@ final class UserPreferenceManager implements UserPreferenceManagerInterface
 
     public function has(string $key): bool
     {
-        return isset($this->getNestedValue($this->getUserPreferences(), $key)[$key]);
+        return !empty($this->getNestedValue($this->getUserPreferences(), $key));
     }
 
     private function getUserPreferences(): ?array

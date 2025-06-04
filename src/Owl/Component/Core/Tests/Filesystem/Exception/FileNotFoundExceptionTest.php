@@ -2,34 +2,33 @@
 
 declare(strict_types=1);
 
-namespace Tests\Owl\Component\Core\Exception;
+namespace Tests\Owl\Component\Core\Filesystem\Exception;
 
 use Exception;
-use Owl\Component\Core\Exception\HandleException;
+use Owl\Component\Core\Filesystem\Exception\FileNotFoundException;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
-final class HandleExceptionTest extends TestCase
+final class FileNotFoundExceptionTest extends TestCase
 {
-    private HandleException $exception;
+    private FileNotFoundException $exception;
 
     private Exception $previousException;
 
     protected function setUp(): void
     {
         $this->previousException = new Exception('Previous');
-        $this->exception = new HandleException(HandleException::class, 'request does not have locale code', $this->previousException);
+        $this->exception = new FileNotFoundException('file_test_path', $this->previousException);
     }
 
     public function testIsRuntimeException(): void
     {
-        $this->assertInstanceOf(RuntimeException::class, $this->exception);
+        $this->assertInstanceOf(Exception::class, $this->exception);
     }
 
     public function testMessageFormatting(): void
     {
         $this->assertSame(
-            sprintf('%s was unable to handle this request. request does not have locale code', HandleException::class),
+            sprintf('File "%s" could not be found.', 'file_test_path'),
             $this->exception->getMessage(),
         );
     }

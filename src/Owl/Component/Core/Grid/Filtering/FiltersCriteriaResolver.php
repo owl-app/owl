@@ -20,7 +20,7 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
     public function hasCriteria(Grid $grid, Parameters $parameters): bool
     {
         return $this->decoratedFiltersCriteriaResolver->hasCriteria($grid, $parameters) ||
-            !empty($this->hasUserPreferences($grid))
+            $this->hasUserPreferences($grid)
         ;
     }
 
@@ -34,6 +34,6 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
 
     private function hasUserPreferences(Grid $grid): bool
     {
-        return null !== $this->userPreferenceManager->has('filters.' . $grid->getCode());
+        return $this->userPreferenceManager->has('filters.' . $grid->getCode());
     }
 }

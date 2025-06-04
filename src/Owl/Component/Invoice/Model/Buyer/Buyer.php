@@ -13,23 +13,17 @@ class Buyer implements BuyerInterface
     /** @var mixed */
     protected ?int $id;
 
-    /** @var string|null */
-    protected $company;
+    protected ?string $company = null;
 
-    /** @var string|null */
-    protected $taxNumber;
+    protected ?string $taxNumber = null;
 
-    /** @var string|null */
-    protected $street;
+    protected ?string $street = null;
 
-    /** @var string|null */
-    protected $city;
+    protected ?string $city = null;
 
-    /** @var string|null */
-    protected $postcode;
+    protected ?string $postcode = null;
 
-    /** @var string|null */
-    protected $countryCode;
+    protected ?string $countryCode = null;
 
     public function __construct()
     {
@@ -62,32 +56,32 @@ class Buyer implements BuyerInterface
         $this->taxNumber = $taxNumber;
     }
 
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
 
-    public function setStreet(string $street): void
+    public function setStreet(?string $street): void
     {
         $this->street = $street;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
-    public function setCity(string $city): void
+    public function setCity(?string $city): void
     {
         $this->city = $city;
     }
 
-    public function getPostcode(): string
+    public function getPostcode(): ?string
     {
         return $this->postcode;
     }
 
-    public function setPostcode(string $postcode): void
+    public function setPostcode(?string $postcode): void
     {
         $this->postcode = $postcode;
     }
