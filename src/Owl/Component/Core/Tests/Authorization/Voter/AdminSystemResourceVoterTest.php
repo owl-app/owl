@@ -8,10 +8,12 @@ use Owl\Component\Core\Authorization\Voter\AdminSystemResourceVoter;
 use Owl\Component\Core\Context\AdminUserContextInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
-class AdminSystemResourceVoterTest extends TestCase
+final class AdminSystemResourceVoterTest extends TestCase
 {
     private AdminSystemResourceVoter $voter;
 
@@ -19,54 +21,39 @@ class AdminSystemResourceVoterTest extends TestCase
 
     private TokenInterface&MockObject $token;
 
+    private ResourceInterface&MockObject $resourceSubject;
+
     protected function setUp(): void
     {
         $this->adminUserContext = $this->createMock(AdminUserContextInterface::class);
         $this->token = $this->createMock(TokenInterface::class);
+        $this->resourceSubject = $this->createMock(ResourceInterface::class);
 
         $this->voter = new AdminSystemResourceVoter($this->adminUserContext);
     }
 
-    public function testSupportsWithResourceAndAdminSystem(): void
+    public function testItGrantsAccessIfUserIsAdminAndSubjectIsResource(): void
     {
-        $subject = $this->createMock(ResourceInterface::class);
         $this->adminUserContext->method('isAdminSystem')->willReturn(true);
+        $result = $this->voter->vote($this->token, $this->resourceSubject, ['ANY_ATTRIBUTE']);
 
-        $reflection = new \ReflectionMethod($this->voter, 'supports');
-        $result = $reflection->invoke($this->voter, 'some_attribute', $subject);
-
-        $this->assertTrue($result);
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
 
-    public function testSupportsWithNonResource(): void
+    public function testItAbstainsIfUserIsNotAdmin(): void
     {
-        $subject = new \stdClass();
-        $this->adminUserContext->method('isAdminSystem')->willReturn(true);
-
-        $reflection = new \ReflectionMethod($this->voter, 'supports');
-        $result = $reflection->invoke($this->voter, 'some_attribute', $subject);
-
-        $this->assertFalse($result);
-    }
-
-    public function testSupportsWithResourceButNotAdminSystem(): void
-    {
-        $subject = $this->createMock(ResourceInterface::class);
         $this->adminUserContext->method('isAdminSystem')->willReturn(false);
+        $result = $this->voter->vote($this->token, $this->resourceSubject, ['ANY_ATTRIBUTE']);
 
-        $reflection = new \ReflectionMethod($this->voter, 'supports');
-        $result = $reflection->invoke($this->voter, 'some_attribute', $subject);
-
-        $this->assertFalse($result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 
-    public function testVoteOnAttributeAlwaysReturnsTrue(): void
+    public function testItAbstainsIfSubjectIsNotAResource(): void
     {
-        $subject = $this->createMock(ResourceInterface::class);
+        $subject = new stdClass();
 
-        $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
-        $result = $reflection->invoke($this->voter, 'some_attribute', $subject, $this->token);
+        $result = $this->voter->vote($this->token, $subject, ['ANY_ATTRIBUTE']);
 
-        $this->assertTrue($result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 }

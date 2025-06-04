@@ -10,9 +10,11 @@ use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Model\Authorization\OwnerableUserInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
-class OwnerUserVoterTest extends TestCase
+final class OwnerUserVoterTest extends TestCase
 {
     private OwnerUserVoter $voter;
 
@@ -20,82 +22,83 @@ class OwnerUserVoterTest extends TestCase
 
     private TokenInterface&MockObject $token;
 
+    private AdminUserInterface&MockObject $currentUser;
+
+    private AdminUserInterface&MockObject $otherUser;
+
+    private OwnerableUserInterface&MockObject $ownerableSubject;
+
     protected function setUp(): void
     {
         $this->adminUserContext = $this->createMock(AdminUserContextInterface::class);
         $this->token = $this->createMock(TokenInterface::class);
+        $this->currentUser = $this->createMock(AdminUserInterface::class);
+        $this->otherUser = $this->createMock(AdminUserInterface::class);
+        $this->ownerableSubject = $this->createMock(OwnerableUserInterface::class);
 
         $this->voter = new OwnerUserVoter($this->adminUserContext);
     }
 
-    public function testSupportsWithOwnerableUserAndAdminUser(): void
+    public function testItGrantsAccessWhenUserIsOwner(): void
     {
-        $subject = $this->createMock(OwnerableUserInterface::class);
-        $this->adminUserContext->method('isUser')->willReturn(true);
+        $this->adminUserContext
+            ->method('isUser')
+            ->willReturn(true);
 
-        $reflection = new \ReflectionMethod($this->voter, 'supports');
-        $result = $reflection->invoke($this->voter, 'some_attribute', $subject);
+        $this->adminUserContext
+            ->method('getUser')
+            ->willReturn($this->currentUser);
 
-        $this->assertTrue($result);
+        $this->currentUser
+            ->method('getId')
+            ->willReturn(1);
+
+        $this->ownerableSubject
+            ->method('getUser')
+            ->willReturn($this->currentUser);
+
+        $result = $this->voter->vote($this->token, $this->ownerableSubject, ['EDIT']);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
 
-    public function testSupportsWithNonOwnerableUser(): void
+    public function testItDeniesAccessWhenUserIsNotOwner(): void
     {
-        $subject = $this->createMock(AdminUserInterface::class);
-        $this->adminUserContext->method('isUser')->willReturn(true);
+        $this->adminUserContext
+            ->method('isUser')
+            ->willReturn(true);
 
-        $reflection = new \ReflectionMethod($this->voter, 'supports');
-        $result = $reflection->invoke($this->voter, 'some_attribute', $subject);
+        $this->adminUserContext
+            ->method('getUser')
+            ->willReturn($this->currentUser);
 
-        $this->assertFalse($result);
+        $this->currentUser
+            ->method('getId')
+            ->willReturn(1);
+
+        $this->otherUser
+            ->method('getId')
+            ->willReturn(2);
+
+        $this->ownerableSubject
+            ->method('getUser')
+            ->willReturn($this->otherUser);
+
+        $result = $this->voter->vote($this->token, $this->ownerableSubject, ['EDIT']);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
     }
 
-    public function testSupportsWithOwnerableUserButNotAdminUser(): void
+    public function testItAbstainsIfSubjectIsNotOwnerableOrUserIsNotStandardUser(): void
     {
-        $subject = $this->createMock(OwnerableUserInterface::class);
-        $this->adminUserContext->method('isUser')->willReturn(false);
+        $this->adminUserContext
+            ->method('isUser')
+            ->willReturn(false);
 
-        $reflection = new \ReflectionMethod($this->voter, 'supports');
-        $result = $reflection->invoke($this->voter, 'some_attribute', $subject);
+        $subject = new stdClass();
 
-        $this->assertFalse($result);
-    }
+        $result = $this->voter->vote($this->token, $subject, ['EDIT']);
 
-    public function testVoteOnAttributeWithSameUser(): void
-    {
-        $adminUser = $this->createMock(AdminUserInterface::class);
-        $adminUser->method('getId')->willReturn(42);
-
-        $ownerUser = $this->createMock(AdminUserInterface::class);
-        $ownerUser->method('getId')->willReturn(42);
-
-        $subject = $this->createMock(OwnerableUserInterface::class);
-        $subject->method('getUser')->willReturn($ownerUser);
-
-        $this->adminUserContext->method('getUser')->willReturn($adminUser);
-
-        $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
-        $result = $reflection->invoke($this->voter, 'some_attribute', $subject, $this->token);
-
-        $this->assertTrue($result);
-    }
-
-    public function testVoteOnAttributeWithDifferentUser(): void
-    {
-        $adminUser = $this->createMock(AdminUserInterface::class);
-        $adminUser->method('getId')->willReturn(42);
-
-        $ownerUser = $this->createMock(AdminUserInterface::class);
-        $ownerUser->method('getId')->willReturn(24);
-
-        $subject = $this->createMock(OwnerableUserInterface::class);
-        $subject->method('getUser')->willReturn($ownerUser);
-
-        $this->adminUserContext->method('getUser')->willReturn($adminUser);
-
-        $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
-        $result = $reflection->invoke($this->voter, 'some_attribute', $subject, $this->token);
-
-        $this->assertFalse($result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 }

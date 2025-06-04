@@ -13,99 +13,94 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
-class RbacVoterTest extends TestCase
+final class RbacVoterTest extends TestCase
 {
     private RbacVoter $voter;
+
+    private RouteCollection $routeCollection;
 
     private RouterInterface&MockObject $router;
 
     private AdminUserContextInterface&MockObject $adminUserContext;
 
-    private RouteCollection&MockObject $routeCollection;
-
     private TokenInterface&MockObject $token;
+
+    private AdminUserInterface&MockObject $user;
 
     protected function setUp(): void
     {
         $this->router = $this->createMock(RouterInterface::class);
         $this->adminUserContext = $this->createMock(AdminUserContextInterface::class);
-        $this->routeCollection = $this->createMock(RouteCollection::class);
         $this->token = $this->createMock(TokenInterface::class);
-
-        $this->router->method('getRouteCollection')->willReturn($this->routeCollection);
+        $this->user = $this->createMock(AdminUserInterface::class);
 
         $this->voter = new RbacVoter($this->router, $this->adminUserContext);
+        $this->routeCollection = new RouteCollection();
     }
 
-    public function testSupportsWithValidRoute(): void
+    public function testItGrantsAccessWhenRouteExistsAndUserHasPermission(): void
     {
-        $route = 'app_admin_dashboard';
-        $this->routeCollection->method('get')->with($route)->willReturn(new Route('/admin/dashboard'));
+        $this->routeCollection->add('admin_user_index', new Route('/admin/users'));
 
-        $reflection = new \ReflectionMethod($this->voter, 'supports');
-        $result = $reflection->invoke($this->voter, $route, null);
+        $this->router
+            ->method('getRouteCollection')
+            ->willReturn($this->routeCollection);
 
-        $this->assertTrue($result);
+        $this->user
+            ->method('getPermissions')
+            ->willReturn(['admin_user_index']);
+
+        $this->adminUserContext
+            ->method('getUser')
+            ->willReturn($this->user);
+
+        $result = $this->voter->vote($this->token, null, ['admin_user_index']);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
 
-    public function testSupportsWithInvalidRoute(): void
+    public function testItDeniesAccessWhenUserDoesNotHavePermission(): void
     {
-        $route = 'non_existent_route';
-        $this->routeCollection->method('get')->with($route)->willReturn(null);
+        $this->routeCollection->add('admin_user_index', new Route('/admin/users'));
 
-        $reflection = new \ReflectionMethod($this->voter, 'supports');
-        $result = $reflection->invoke($this->voter, $route, null);
+        $this->router
+            ->method('getRouteCollection')
+            ->willReturn($this->routeCollection);
 
-        $this->assertFalse($result);
+        $this->user
+            ->method('getPermissions')
+            ->willReturn(['other_permission']);
+
+        $this->adminUserContext
+            ->method('getUser')
+            ->willReturn($this->user);
+
+        $result = $this->voter->vote($this->token, null, ['admin_user_index']);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
     }
 
-    public function testSupportsWithEmptyRoute(): void
+    public function testItAbstainsWhenRouteDoesNotExist(): void
     {
-        $route = '';
+        $this->router
+            ->method('getRouteCollection')
+            ->willReturn($this->routeCollection);
 
-        $reflection = new \ReflectionMethod($this->voter, 'supports');
-        $result = $reflection->invoke($this->voter, $route, null);
+        $result = $this->voter->vote($this->token, null, ['non_existing_route']);
 
-        $this->assertFalse($result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 
-    public function testVoteOnAttributeWithPermission(): void
+    public function testItAbstainsWhenAttributeIsEmpty(): void
     {
-        $route = 'app_admin_dashboard';
-        $user = $this->createMock(AdminUserInterface::class);
-        $user->method('getPermissions')->willReturn(['app_admin_dashboard', 'app_admin_users']);
+        $this->router
+            ->method('getRouteCollection')
+            ->willReturn($this->routeCollection);
 
-        $this->adminUserContext->method('getUser')->willReturn($user);
+        $result = $this->voter->vote($this->token, null, ['']);
 
-        $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
-        $result = $reflection->invoke($this->voter, $route, null, $this->token);
-
-        $this->assertTrue($result);
-    }
-
-    public function testVoteOnAttributeWithoutPermission(): void
-    {
-        $route = 'app_admin_settings';
-        $user = $this->createMock(AdminUserInterface::class);
-        $user->method('getPermissions')->willReturn(['app_admin_dashboard', 'app_admin_users']);
-
-        $this->adminUserContext->method('getUser')->willReturn($user);
-
-        $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
-        $result = $reflection->invoke($this->voter, $route, null, $this->token);
-
-        $this->assertFalse($result);
-    }
-
-    public function testVoteOnAttributeWithNoUser(): void
-    {
-        $route = 'app_admin_dashboard';
-        $this->adminUserContext->method('getUser')->willReturn(null);
-
-        $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
-        $result = $reflection->invoke($this->voter, $route, null, $this->token);
-
-        $this->assertFalse($result);
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $result);
     }
 }
