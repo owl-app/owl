@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Core\Exception;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Core\Exception\HandleException;
+use PHPUnit\Framework\TestCase;
 
 final class HandleExceptionTest extends TestCase
 {
