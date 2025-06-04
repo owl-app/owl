@@ -2,7 +2,7 @@
 {% set route = hookable_metadata.configuration.route %}
 {% set activeCriteria = hookable_metadata.context.activeCriteria %}
 {% set form = attribute(hookable_metadata.context.form, field) %}
-{% set navigation = owl_period_grid_filter_generate_link_navigation(field, route, activeCriteria) %}
+{% set navigation_data = owl_period_grid_filter_generate_data_navigation(field, activeCriteria) %}
 
 <div 
     class="col-4 d-flex filter-period ps-1 gap-2"
@@ -12,14 +12,26 @@
         {{ ux_icon('tabler:calendar', {class: 'icon mx-0'}) }}
     </div>
 
-    {% if navigation.prev is defined %}
-        <a class="btn p-2 {{ navigation.prev.is_disabled ? 'disabled' : '' }}" href="{{ navigation.prev.path }}">
+    {% if navigation_data.prev is defined %}
+        <a
+            class="btn p-2 {{ navigation_data.prev.is_disabled ? 'disabled' : '' }}"
+            href="#"
+            data-action="click->grid-filter-period#navigate"
+            data-grid-filter-period-field-param="{{ field }}"
+            data-grid-filter-period-value-param="{{ navigation_data.prev.query|json_encode }}"
+        >
             {{ ux_icon('tabler:arrow-left', {class: 'icon mx-0'}) }}
         </a>
     {% endif %}
 
-    {% if navigation.next is defined %}
-        <a class="btn p-2 {{ navigation.next.is_disabled ? 'disabled' : '' }}" href="{{ navigation.next.path }}" >
+    {% if navigation_data.next is defined %}
+        <a
+            class="btn p-2 {{ navigation_data.next.is_disabled ? 'disabled' : '' }}"
+            href="#"
+            data-action="click->grid-filter-period#navigate"
+            data-grid-filter-period-field-param="{{ field }}"
+            data-grid-filter-period-value-param="{{ navigation_data.next.query|json_encode }}"
+        >
             {{ ux_icon('tabler:arrow-right', {class: 'icon mx-0'}) }}
         </a>
     {% endif %}

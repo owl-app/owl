@@ -18,6 +18,14 @@ export default class extends Controller {
         document.removeEventListener('click', this.clickOuterPopup);
     }
 
+    navigate(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        const { field, value } = event.params;
+    
+        window.dispatchEvent(new CustomEvent('filter:changed', { detail: { field, value } }));
+    }
+
     togglePopup() {
         if (this.isShow) {
             this.filterTarget.classList.remove('d-flex');

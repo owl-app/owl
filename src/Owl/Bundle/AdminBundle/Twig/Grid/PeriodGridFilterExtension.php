@@ -25,40 +25,42 @@ final class PeriodGridFilterExtension extends AbstractExtension
         return [
             new TwigFunction('owl_period_grid_filter_generate_link_navigation', [$this, 'generateLinkNavigation']),
             new TwigFunction('owl_period_grid_filter_accounting_period_text', [$this, 'getAccountingPeriodText']),
+            new TwigFunction('owl_period_grid_filter_generate_data_navigation', [$this, 'generateDataNavigation']),
         ];
     }
 
     public function generateLinkNavigation(string $field, string $route, array $activeCriteria): array
     {
-        $activeFieldCriteria = $activeCriteria[$field] ?? null;
+        [$activeFieldCriteria, $navigation] = $this->getNavigationData($field, $activeCriteria);
 
-        if (!$activeFieldCriteria || !isset($activeFieldCriteria['type'])) {
+        if (!$activeFieldCriteria || empty($navigation)) {
             return [];
         }
 
-        $navigation = [];
+        return [
+            'next' => [
+                'path' => $this->generateUrl($route, $field, $activeCriteria, $activeFieldCriteria['type'], $navigation['next']),
+                'is_disabled' => $navigation['next']['is_disabled'],
+            ],
+            'prev' => [
+                'path' => $this->generateUrl($route, $field, $activeCriteria, $activeFieldCriteria['type'], $navigation['prev']),
+                'is_disabled' => $navigation['prev']['is_disabled'],
+            ],
+        ];
+    }
 
-        $navigation = match ($activeFieldCriteria['type']) {
-            PeriodTypeEnum::TYPE_MONTH->value => $this->generateMonthNavigation($activeFieldCriteria),
-            PeriodTypeEnum::TYPE_QUARTER->value => $this->generateQuarterNavigation($activeFieldCriteria),
-            PeriodTypeEnum::TYPE_YEAR->value => $this->generateYearhNavigation($activeFieldCriteria),
-            PeriodTypeEnum::TYPE_ALL->value => []
-        };
+    public function generateDataNavigation(string $field, array $activeCriteria): array
+    {
+        [$activeFieldCriteria, $navigation] = $this->getNavigationData($field, $activeCriteria);
 
-        if ($navigation) {
-            return [
-                'next' => [
-                    'path' => $this->generateUrl($route, $field, $activeCriteria, $activeFieldCriteria['type'], $navigation['next']),
-                    'is_disabled' => $navigation['next']['is_disabled'],
-                ],
-                'prev' => [
-                    'path' => $this->generateUrl($route, $field, $activeCriteria, $activeFieldCriteria['type'], $navigation['prev']),
-                    'is_disabled' => $navigation['prev']['is_disabled'],
-                ],
-            ];
+        if (!$activeFieldCriteria || empty($navigation)) {
+            return [];
         }
 
-        return [];
+        $navigation['next']['query']['type'] = $activeFieldCriteria['type'] ?? null;
+        $navigation['prev']['query']['type'] = $activeFieldCriteria['type'] ?? null;
+
+        return $navigation;
     }
 
     public function getAccountingPeriodText(string $field, array $activeCriteria): string
@@ -71,6 +73,23 @@ final class PeriodGridFilterExtension extends AbstractExtension
             PeriodTypeEnum::TYPE_YEAR->value => $activeFieldCriteria['year'],
             default => $this->translator->trans('owl.ui.invoice.accounting_period_all')
         };
+    }
+
+    private function getNavigationData(string $field, array $activeCriteria): array
+    {
+        $activeFieldCriteria = $activeCriteria[$field] ?? null;
+        $navigation = [];
+
+        if ($activeFieldCriteria && isset($activeFieldCriteria['type'])) {
+            $navigation = match ($activeFieldCriteria['type']) {
+                PeriodTypeEnum::TYPE_MONTH->value => $this->generateMonthNavigation($activeFieldCriteria),
+                PeriodTypeEnum::TYPE_QUARTER->value => $this->generateQuarterNavigation($activeFieldCriteria),
+                PeriodTypeEnum::TYPE_YEAR->value => $this->generateYearhNavigation($activeFieldCriteria),
+                default => [],
+            };
+        }
+
+        return [$activeFieldCriteria, $navigation];
     }
 
     private function generateMonthNavigation(array $criteria): array
