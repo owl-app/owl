@@ -26,15 +26,10 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
     /**
      * @param Connection $connection Doctrine database connection instance.
      * @param string $tableName A name of the table for storing RBAC items.
-     *
      * @param non-empty-string $tableName
-     *
      * @param string $childrenTableName A name of the table for storing relations between RBAC items.
-     *
      * @param non-empty-string $childrenTableName
-     *
      * @param string $namesSeparator Separator used for joining item names.
-     *
      * @param non-empty-string $namesSeparator
      */
     public function __construct(
@@ -45,6 +40,9 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
     ) {
     }
 
+    /**
+     * @return RawItem[] An array of parent items.
+     */
     public function getParentRows(string $name): array
     {
         $queryBuilder = $this->connection->createQueryBuilder();
@@ -54,12 +52,14 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
                 $queryBuilder->expr()->neq('item.name', $queryBuilder->createNamedParameter($name)),
             );
 
-        /** @var RawItem[] */
         return $this
             ->getRowsStatement($name, baseOuterQueryBuilder: $baseOuterQueryBuilder)
             ->fetchAllAssociative();
     }
 
+    /**
+     * @return Hierarchy An array of items with their children.
+     */
     public function getHierarchy(string $name): array
     {
         $queryBuilder = $this->connection->createQueryBuilder();
@@ -102,7 +102,6 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
         )
         $outerQuery";
 
-        /** @var Hierarchy */
         return $this->connection->executeQuery(
             $sql,
             array_merge($outerQuery->getParameters(), $cteSelectItemQuery->getParameters()),
@@ -110,16 +109,21 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
         )->fetchAllAssociative();
     }
 
+    /**
+     * @return RawItem[] An array of child items.
+     */
     public function getChildrenRows(string|array $names): array
     {
         $baseOuterQueryBuilder = $this->getChildrenBaseOuterQuery($names);
 
-        /** @var RawItem[] */
         return $this
             ->getRowsStatement($names, baseOuterQueryBuilder: $baseOuterQueryBuilder, areParents: false)
             ->fetchAllAssociative();
     }
 
+    /**
+     * @return RawItem[] An array of child items that are permissions.
+     */
     public function getChildPermissionRows(string|array $names): array
     {
         $baseOuterQueryBuilder = $this->getChildrenBaseOuterQuery($names);
@@ -131,12 +135,14 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
                 ),
             );
 
-        /** @var RawItem[] */
         return $this
             ->getRowsStatement($names, baseOuterQueryBuilder: $baseOuterQueryBuilder, areParents: false)
             ->fetchAllAssociative();
     }
 
+    /**
+     * @return RawItem[] An array of child items that are roles.
+     */
     public function getChildRoleRows(string|array $names): array
     {
         $baseOuterQueryBuilder = $this->getChildrenBaseOuterQuery($names);
@@ -148,7 +154,6 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
                 ),
             );
 
-        /** @var RawItem[] */
         return $this
             ->getRowsStatement($names, baseOuterQueryBuilder: $baseOuterQueryBuilder, areParents: false)
             ->fetchAllAssociative();
@@ -280,9 +285,9 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
         if (is_string($names)) {
             return $baseOuterQuery->where(
                 $queryBuilder->expr()->neq(
-                'item.name',
-                $queryBuilder->createNamedParameter($names, \PDO::PARAM_STR),
-            ),
+                    'item.name',
+                    $queryBuilder->createNamedParameter($names, \PDO::PARAM_STR),
+                ),
             );
         }
 

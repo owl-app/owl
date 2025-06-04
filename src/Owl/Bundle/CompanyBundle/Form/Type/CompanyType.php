@@ -16,19 +16,19 @@ final class CompanyType extends AbstractResourceType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'owl.company.name',
-                'required' => true
+                'required' => true,
             ])
             ->add('taxNumber', TextType::class, [
                 'label' => 'owl.company.tax_number',
-                'required' => true
+                'required' => true,
             ])
             ->add('city', TextType::class, [
                 'label' => 'owl.company.city',
-                'required' => true
+                'required' => true,
             ])
             ->add('street', TextType::class, [
                 'label' => 'owl.company.street',
-                'required' => true
+                'required' => true,
             ])
             ->add('buildingNumber', TextType::class, [
                 'label' => 'owl.company.building_number',
@@ -39,28 +39,28 @@ final class CompanyType extends AbstractResourceType
             ])
             ->add('postCode', TextType::class, [
                 'label' => 'owl.company.post_code',
-                'required' => true
+                'required' => true,
             ])
             ->add('phone', TextType::class, [
                 'label' => 'owl.company.phone',
-                'required' => false
+                'required' => false,
             ])
             ->add('email', TextType::class, [
                 'label' => 'owl.company.email',
-                'required' => true
+                'required' => true,
             ])
             ->add('contactPerson', TextType::class, [
                 'label' => 'owl.company.contact_person',
-                'required' => false
+                'required' => false,
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'owl.ui.description',
                 'attr' => [
                     'style' => 'min-height: 6rem;',
                 ],
-                'required' => false
+                'required' => false,
             ])
-            ;
+        ;
     }
 
     public function getBlockPrefix(): string

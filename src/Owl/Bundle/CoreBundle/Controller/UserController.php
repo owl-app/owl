@@ -50,7 +50,7 @@ class UserController extends BaseUserController
     public function assignAction(
         Request $request,
         ManagerInterface $rbacManager,
-        DirectPermissionUserProviderInterface $directPermissionUserProvider
+        DirectPermissionUserProviderInterface $directPermissionUserProvider,
     ): Response {
         return $this->changePermission('assign', $request, $rbacManager, $directPermissionUserProvider);
     }
@@ -58,19 +58,16 @@ class UserController extends BaseUserController
     public function revokeAction(
         Request $request,
         ManagerInterface $rbacManager,
-        DirectPermissionUserProviderInterface $directPermissionUserProvider
+        DirectPermissionUserProviderInterface $directPermissionUserProvider,
     ): Response {
         return $this->changePermission('revoke', $request, $rbacManager, $directPermissionUserProvider);
     }
 
-    /**
-     * @return Response|null
-     */
     private function changePermission(
         string $action,
         Request $request,
         ManagerInterface $rbacManager,
-        DirectPermissionUserProviderInterface $directPermissionUserProvider
+        DirectPermissionUserProviderInterface $directPermissionUserProvider,
     ): ?Response {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $formOptions = array_merge(

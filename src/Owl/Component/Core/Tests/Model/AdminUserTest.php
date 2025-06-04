@@ -71,4 +71,4 @@ final class AdminUserTest extends TestCase
         $this->adminUser->setPreferences($preferences);
         self::assertSame($preferences, $this->adminUser->getPreferences());
     }
-} 
+}

@@ -34,4 +34,4 @@ final class SuggestionTest extends TestCase
         $this->suggestion->setStatus('new');
         self::assertSame('new', $this->suggestion->getStatus());
     }
-} 
+}

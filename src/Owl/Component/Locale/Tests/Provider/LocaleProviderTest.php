@@ -12,7 +12,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class LocaleProviderTest extends TestCase
 {
     private RepositoryInterface $localeRepository;
+
     private LocaleProvider $provider;
+
     private string $defaultLocaleCode = 'en_US';
 
     protected function setUp(): void
@@ -44,4 +46,4 @@ class LocaleProviderTest extends TestCase
     {
         $this->assertEquals($this->defaultLocaleCode, $this->provider->getDefaultLocaleCode());
     }
-} 
+}

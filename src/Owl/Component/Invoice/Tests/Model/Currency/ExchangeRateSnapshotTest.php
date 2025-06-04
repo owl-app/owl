@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Invoice\Model\Currency;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshot;
 use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
+use PHPUnit\Framework\TestCase;
 
 class ExchangeRateSnapshotTest extends TestCase
 {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Locale\Tests\Context;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 use Owl\Component\Locale\Context\LocaleNotFoundException;
 use Owl\Component\Locale\Context\ProviderBasedLocaleContext;
 use Owl\Component\Locale\Provider\LocaleProviderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 class ProviderBasedLocaleContextTest extends TestCase
 {
@@ -50,4 +50,4 @@ class ProviderBasedLocaleContextTest extends TestCase
 
         $this->localeContext->getLocaleCode();
     }
-} 
+}

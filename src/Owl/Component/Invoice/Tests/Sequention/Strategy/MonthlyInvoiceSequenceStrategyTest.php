@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Invoice\Sequention\Strategy;
 
 use DateTimeImmutable;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Owl\Component\Invoice\Factory\InvoiceSequenceFactoryInterface;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
 use Owl\Component\Invoice\Sequention\Strategy\MonthlyInvoiceSequenceStrategy;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class MonthlyInvoiceSequenceStrategyTest extends TestCase
 {
@@ -31,7 +31,7 @@ class MonthlyInvoiceSequenceStrategyTest extends TestCase
 
         $this->strategy = new MonthlyInvoiceSequenceStrategy(
             $this->sequenceRepository,
-            $this->invoiceSequenceFactory
+            $this->invoiceSequenceFactory,
         );
     }
 

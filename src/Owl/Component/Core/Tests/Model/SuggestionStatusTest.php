@@ -30,4 +30,4 @@ final class SuggestionStatusTest extends TestCase
         self::assertArrayHasKey('realized', $labels);
         self::assertArrayHasKey('cancelled', $labels);
     }
-} 
+}

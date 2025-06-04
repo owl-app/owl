@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Invoice\Factory;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Resource\Exception\UnsupportedMethodException;
-use Sylius\Resource\Factory\FactoryInterface;
 use Owl\Component\Invoice\Factory\InvoiceSequenceFactory;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Resource\Exception\UnsupportedMethodException;
+use Sylius\Resource\Factory\FactoryInterface;
 
 class InvoiceSequenceFactoryTest extends TestCase
 {
@@ -31,7 +31,7 @@ class InvoiceSequenceFactoryTest extends TestCase
     {
         $this->expectException(UnsupportedMethodException::class);
         $this->expectExceptionMessage('createNew');
-        
+
         $this->factory->createNew();
     }
 
@@ -49,21 +49,21 @@ class InvoiceSequenceFactoryTest extends TestCase
         $this->sequence->expects(self::once())
             ->method('setSerie')
             ->with($serie);
-        
+
         $this->sequence->expects(self::once())
             ->method('setYear')
             ->with($year);
-        
+
         $this->sequence->expects(self::once())
             ->method('setMonth')
             ->with($month);
-        
+
         $this->sequence->expects(self::once())
             ->method('setNextCounter')
             ->with($nextCounter);
 
         $result = $this->factory->create($serie, $year, $month, $nextCounter);
-        
+
         self::assertSame($this->sequence, $result);
     }
 
@@ -80,21 +80,21 @@ class InvoiceSequenceFactoryTest extends TestCase
         $this->sequence->expects(self::once())
             ->method('setSerie')
             ->with($serie);
-        
+
         $this->sequence->expects(self::once())
             ->method('setYear')
             ->with($year);
-        
+
         $this->sequence->expects(self::once())
             ->method('setMonth')
             ->with(null);
-        
+
         $this->sequence->expects(self::once())
             ->method('setNextCounter')
             ->with($nextCounter);
 
         $result = $this->factory->create($serie, $year);
-        
+
         self::assertSame($this->sequence, $result);
     }
 
@@ -111,21 +111,21 @@ class InvoiceSequenceFactoryTest extends TestCase
         $this->sequence->expects(self::once())
             ->method('setSerie')
             ->with($serie);
-        
+
         $this->sequence->expects(self::once())
             ->method('setYear')
             ->with($year);
-        
+
         $this->sequence->expects(self::once())
             ->method('setMonth')
             ->with($month);
-        
+
         $this->sequence->expects(self::once())
             ->method('setNextCounter')
             ->with(1);
 
         $result = $this->factory->create($serie, $year, $month);
-        
+
         self::assertSame($this->sequence, $result);
     }
 }

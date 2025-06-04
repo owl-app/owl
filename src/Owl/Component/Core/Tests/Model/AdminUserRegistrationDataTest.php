@@ -87,4 +87,4 @@ final class AdminUserRegistrationDataTest extends TestCase
         $this->data->setReasonRejection('Incomplete data');
         self::assertSame('Incomplete data', $this->data->getReasonRejection());
     }
-} 
+}

@@ -241,10 +241,12 @@ class LineItem implements LineItemInterface
             case CalculateValuesFromEnum::FROM_NET->value:
                 $this->subtotal = $totalPrice;
                 $this->taxTotal = LineDataCalculator::calculateTaxFromMinor($this->subtotal, $taxRateAmount);
+
                 break;
             case CalculateValuesFromEnum::FROM_GROSS->value:
                 $this->subtotal = (int) round($totalPrice / (1 + $taxRateAmount));
                 $this->taxTotal = $totalPrice - $this->subtotal;
+
                 break;
         }
 

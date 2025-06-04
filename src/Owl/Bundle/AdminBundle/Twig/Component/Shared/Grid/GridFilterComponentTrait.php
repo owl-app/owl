@@ -42,7 +42,7 @@ trait GridFilterComponentTrait
         FormTypeRegistryInterface $formTypeRegistry,
         RequestStack $requestStack,
         UserPreferenceManagerInterface $userPreferenceManager,
-        string $grid
+        string $grid,
     ) {
         $this->formFactory = $formFactory;
         $this->gridProvider = $gridProvider;
@@ -90,8 +90,8 @@ trait GridFilterComponentTrait
         $flatAvailableFilters = array_merge(...array_values($this->availableFilters));
 
         $this->formValues = array_merge(
-            array_filter($this->activeCriteria, fn($value, $key) => in_array($key, $flatAvailableFilters), ARRAY_FILTER_USE_BOTH),
-            [$field => $this->formValues[$field] ?? []]
+            array_filter($this->activeCriteria, fn ($value, $key) => in_array($key, $flatAvailableFilters), \ARRAY_FILTER_USE_BOTH),
+            [$field => $this->formValues[$field] ?? []],
         );
 
         $this->submitForm();
@@ -174,6 +174,6 @@ trait GridFilterComponentTrait
 
     private function getFilterKey(Grid $gridDefinition, string $name): ?string
     {
-        return 'filters.' . $gridDefinition->getCode() . '.' .$name;
+        return 'filters.' . $gridDefinition->getCode() . '.' . $name;
     }
 }

@@ -14,7 +14,7 @@ final class DirectPermissionUserProvider implements DirectPermissionUserProvider
     public function __construct(
         private ManagerInterface $rbacManager,
         private ItemsStorageInterface $rbacItemStorage,
-        private AssignmentsStorageInterface $rbacAssignmentsStorage
+        private AssignmentsStorageInterface $rbacAssignmentsStorage,
     ) {
     }
 

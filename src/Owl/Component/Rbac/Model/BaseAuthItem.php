@@ -47,9 +47,6 @@ abstract class BaseAuthItem implements AuthItemInterface
 
     abstract public function getType(): string;
 
-    /**
-     * @return string
-     */
     public function getGroupPermission(): ?string
     {
         return $this->groupPermission;

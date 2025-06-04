@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Owl\Bundle\LocationBundle\Form\Type;
 
 use Owl\Bundle\LocationBundle\Form\EventListener\BuildZoneFormSubscriber;
+use Owl\Component\Location\Model\ZoneInterface;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Owl\Component\Location\Model\ZoneInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,10 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ZoneType extends AbstractResourceType
 {
-    /**
-     * @param string[] $validationGroups
-     */
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

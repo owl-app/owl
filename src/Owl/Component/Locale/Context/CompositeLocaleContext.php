@@ -17,9 +17,7 @@ use Laminas\Stdlib\PriorityQueue;
 
 final class CompositeLocaleContext implements LocaleContextInterface
 {
-    /**
-     * @var PriorityQueue<LocaleContextInterface>
-     */
+    /** @var PriorityQueue<LocaleContextInterface> */
     private PriorityQueue $localeContexts;
 
     public function __construct()

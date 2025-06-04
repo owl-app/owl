@@ -47,20 +47,20 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
                 $oldTaxRate->getName(),
                 $oldTaxRate->getType()->getInnerType()::class,
                 array_replace(
-                    $oldTaxRate->getOptions(), 
+                    $oldTaxRate->getOptions(),
                     [
                         'choice_label' => function (TaxRateInterface $taxRate) use ($snapshot) {
                             if (
-                                $taxRate->getCode() === $snapshot->getCode() && 
+                                $taxRate->getCode() === $snapshot->getCode() &&
                                 $taxRate->getName() !== $snapshot->getName()
                             ) {
-                                return $snapshot->getName() . '-> ' .$taxRate->getName();
+                                return $snapshot->getName() . '-> ' . $taxRate->getName();
                             }
 
                             return $taxRate->getName();
-                        }
-                    ]
-                )
+                        },
+                    ],
+                ),
             );
         }
 

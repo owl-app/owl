@@ -55,7 +55,7 @@ final class LazyOption
     }
 
     /**
-     * @return \Closure(Options):(null|object)
+     * @return \Closure(Options):(object|null)
      */
     public static function randomOneOrNull(
         RepositoryInterface $repository,
@@ -84,7 +84,6 @@ final class LazyOption
     {
         return /**
          * @return (\Sylius\Component\Resource\Model\ResourceInterface|mixed)[]
-         *
          * @return list{0?: \Sylius\Component\Resource\Model\ResourceInterface|mixed,...}
          */
         function (Options $options) use ($repository, $amount, $criteria): array {
@@ -114,7 +113,6 @@ final class LazyOption
     {
         return /**
          * @return \Sylius\Component\Resource\Model\ResourceInterface[]
-         *
          * @return array<\Sylius\Component\Resource\Model\ResourceInterface>
          */
         function (Options $options) use ($repository): array {
@@ -123,14 +121,13 @@ final class LazyOption
     }
 
     /**
-     * @return \Closure(Options, array|null):(list{0?: null|object,...}|null)
+     * @return \Closure(Options, array|null):(list{0?: object|null,...}|null)
      */
     public static function findBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
         return /**
          * @return (object|null)[]|null
-         *
-         * @return list{0?: null|object,...}|null
+         * @return list{0?: object|null,...}|null
          */
         function (Options $options, ?array $previousValues) use ($repository, $field, $criteria): array|null {
             if (null === $previousValues || [] === $previousValues) {
@@ -151,7 +148,7 @@ final class LazyOption
     }
 
     /**
-     * @return \Closure(Options, mixed):(null|object)
+     * @return \Closure(Options, mixed):(object|null)
      */
     public static function findOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
@@ -172,7 +169,7 @@ final class LazyOption
     }
 
     /**
-     * @return \Closure(Options, mixed):(null|object)
+     * @return \Closure(Options, mixed):(object|null)
      */
     public static function getOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {

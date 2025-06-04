@@ -41,4 +41,4 @@ class LocaleConverterTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->converter->convertCodeToName('xx');
     }
-} 
+}

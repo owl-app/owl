@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Owl\Component\Core\Enum\Grid\Filter;
 
 use DateTime;
-use UnhandledMatchError;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
+use UnhandledMatchError;
 
 class PeriodQuarterEnumTest extends TestCase
 {
@@ -30,7 +30,6 @@ class PeriodQuarterEnumTest extends TestCase
             [4,   ['start' => '10-01', 'end' => '12-31']],
         ];
     }
-
 
     #[DataProvider('invalidQuarterProvider')]
     public function testGetPeriodRangeThrowsOnInvalidInput($input): void

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Location\Tests\Factory;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Resource\Factory\FactoryInterface;
 use Owl\Component\Location\Factory\ZoneFactory;
 use Owl\Component\Location\Model\Zone;
 use Owl\Component\Location\Model\ZoneMember;
 use Owl\Component\Location\Model\ZoneMemberInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class ZoneFactoryTest extends TestCase
 {
@@ -96,4 +96,4 @@ final class ZoneFactoryTest extends TestCase
         self::assertCount(3, $zoneWithMembers->getMembers());
         self::assertContainsOnlyInstancesOf(ZoneMemberInterface::class, $zoneWithMembers->getMembers());
     }
-} 
+}

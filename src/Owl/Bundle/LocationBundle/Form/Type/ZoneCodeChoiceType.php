@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\LocationBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Owl\Component\Location\Model\ZoneInterface;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

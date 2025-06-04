@@ -62,7 +62,7 @@ class Company implements CompanyInterface
         return $this->id;
     }
 
-    public function getName():? string
+    public function getName(): ? string
     {
         return $this->name;
     }
@@ -72,7 +72,7 @@ class Company implements CompanyInterface
         $this->name = $name;
     }
 
-    public function getTaxNumber():? string
+    public function getTaxNumber(): ? string
     {
         return $this->taxNumber;
     }
@@ -82,7 +82,7 @@ class Company implements CompanyInterface
         $this->taxNumber = $taxNumber;
     }
 
-    public function getCity():? string
+    public function getCity(): ? string
     {
         return $this->city;
     }
@@ -92,7 +92,7 @@ class Company implements CompanyInterface
         $this->city = $city;
     }
 
-    public function getStreet():? string
+    public function getStreet(): ? string
     {
         return $this->street;
     }
@@ -122,7 +122,7 @@ class Company implements CompanyInterface
         $this->flatNumber = $flatNumber;
     }
 
-    public function getPostCode():? string
+    public function getPostCode(): ? string
     {
         return $this->postCode;
     }
@@ -131,8 +131,8 @@ class Company implements CompanyInterface
     {
         $this->postCode = $postCode;
     }
-    
-    public function getPhone():? string
+
+    public function getPhone(): ? string
     {
         return $this->phone;
     }
@@ -142,7 +142,7 @@ class Company implements CompanyInterface
         $this->phone = $phone;
     }
 
-    public function getEmail():? string
+    public function getEmail(): ? string
     {
         return $this->email;
     }
@@ -152,7 +152,7 @@ class Company implements CompanyInterface
         $this->email = $email;
     }
 
-    public function getContactPerson():? string
+    public function getContactPerson(): ? string
     {
         return $this->contactPerson;
     }
@@ -162,7 +162,7 @@ class Company implements CompanyInterface
         $this->contactPerson = $contactPerson;
     }
 
-    public function getDescription():? string
+    public function getDescription(): ? string
     {
         return $this->description;
     }

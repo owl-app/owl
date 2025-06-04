@@ -21,7 +21,7 @@ class BuyerSnapshotByContractorAssigner implements SnapshotAssignerInterface
     {
         if ($invoice->isContractorChanged()) {
             $invoice->setBuyer(
-                $this->buyerFactory->createFromContractor($invoice->getContractor())
+                $this->buyerFactory->createFromContractor($invoice->getContractor()),
             );
 
             $this->decoratedBuyerSnapshotRepository->assign($invoice);

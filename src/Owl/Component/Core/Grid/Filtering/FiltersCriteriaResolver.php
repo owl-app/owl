@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Owl\Component\Core\Grid\Filtering;
 
 use Owl\Component\Core\Manager\UserPreferenceManagerInterface;
-use Sylius\Component\Grid\Filtering\FiltersCriteriaResolverInterface;
 use Sylius\Component\Grid\Definition\Grid;
+use Sylius\Component\Grid\Filtering\FiltersCriteriaResolverInterface;
 use Sylius\Component\Grid\Parameters;
 
 final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
@@ -19,8 +19,8 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
 
     public function hasCriteria(Grid $grid, Parameters $parameters): bool
     {
-        return $this->decoratedFiltersCriteriaResolver->hasCriteria($grid, $parameters)
-            || !empty($this->hasUserPreferences($grid))
+        return $this->decoratedFiltersCriteriaResolver->hasCriteria($grid, $parameters) ||
+            !empty($this->hasUserPreferences($grid))
         ;
     }
 

@@ -15,7 +15,7 @@ final class OwlContractorBundle extends AbstractResourceBundle
     public function getSupportedDrivers(): array
     {
         return [
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
     }
 

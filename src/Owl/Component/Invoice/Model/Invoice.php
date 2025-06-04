@@ -52,7 +52,7 @@ class Invoice implements InvoiceInterface
     /** @var string|null */
     protected $paymentMethod;
 
-    /** @var boolean */
+    /** @var bool */
     protected $isPaid = false;
 
     /** @var InvoiceSerieInterface */
@@ -336,7 +336,7 @@ class Invoice implements InvoiceInterface
         $this->subtotal = 0;
         $this->taxTotal = 0;
         $this->total = 0;
-        
+
         foreach ($this->lineItems as $lineItem) {
             $this->subtotal += $lineItem->getSubtotal();
             $this->taxTotal += $lineItem->getTaxTotal();

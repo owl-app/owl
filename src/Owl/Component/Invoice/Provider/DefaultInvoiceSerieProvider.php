@@ -11,11 +11,12 @@ class DefaultInvoiceSerieProvider implements InvoiceSerieProviderInterface
 {
     public function __construct(
         private readonly RepositoryInterface $serieRepository,
-    ) {}
+    ) {
+    }
 
     public function getSerie(string $type): InvoiceSerieInterface
     {
-        $default =  $this->serieRepository->findOneBy(['isDefault' => true, 'invoiceType' => $type]);
+        $default = $this->serieRepository->findOneBy(['isDefault' => true, 'invoiceType' => $type]);
 
         if ($default) {
             return $default;

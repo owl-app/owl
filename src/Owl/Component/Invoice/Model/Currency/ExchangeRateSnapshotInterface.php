@@ -8,7 +8,7 @@ use Sylius\Resource\Model\CodeAwareInterface;
 use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableInterface;
 
-interface ExchangeRateSnapshotInterface extends 
+interface ExchangeRateSnapshotInterface extends
     CodeAwareInterface,
     ResourceInterface,
     TimestampableInterface

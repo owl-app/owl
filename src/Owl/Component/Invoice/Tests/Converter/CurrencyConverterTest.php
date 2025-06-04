@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Invoice\Converter;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Invoice\Converter\CurrencyConverter;
+use PHPUnit\Framework\TestCase;
 
 class CurrencyConverterTest extends TestCase
 {

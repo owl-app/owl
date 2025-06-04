@@ -96,7 +96,6 @@ final class RedirectHandler implements RedirectHandlerInterface
 
     /**
      * @return string[]
-     *
      * @return array{'X-OWL-LOCATION': string}
      */
     public function getRedirectHeaders(SyliusRequestConfiguration $configuration, ?ResourceInterface $resource): array

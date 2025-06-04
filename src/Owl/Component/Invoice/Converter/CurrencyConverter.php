@@ -10,7 +10,6 @@ class CurrencyConverter
      * Rounds the amount to the specified precision.
      *
      * @param float $amount The amount to round.
-     * @param int $precision The number of decimal places to round to.
      *
      * @return float The rounded amount.
      */

@@ -24,7 +24,7 @@ final class MonthTranslator implements MonthTranslatorInterface
             \IntlDateFormatter::NONE,
             null,
             null,
-            'LLLL'
+            'LLLL',
         );
 
         return $formatter->format(mktime(0, 0, 0, $month, 1));

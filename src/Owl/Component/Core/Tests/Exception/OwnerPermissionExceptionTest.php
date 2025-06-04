@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Core\Exception;
 
 use Exception;
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Core\Exception\OwnerPermissionException;
+use PHPUnit\Framework\TestCase;
 
 final class OwnerPermissionExceptionTest extends TestCase
 {
@@ -27,7 +27,7 @@ final class OwnerPermissionExceptionTest extends TestCase
 
     public function testMessageFormatting(): void
     {
-        $this->assertSame('error',$this->exception->getMessage());
+        $this->assertSame('error', $this->exception->getMessage());
     }
 
     public function testPreviousExceptionIsSet(): void

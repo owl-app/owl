@@ -8,8 +8,8 @@ use Owl\Bundle\UiBundle\Twig\Component\LiveCollectionTrait;
 use Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Owl\Component\Core\Invoice\Currency\ExchangeRateCurrencyResolverInterface;
-use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Core\Model\CompanyInterface;
+use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Core\Resolver\ExchangeRateResolverInterface;
 use Owl\Component\Invoice\Calculator\LineDataCalculator;
@@ -37,6 +37,7 @@ class FormComponent
     use ComponentToolsTrait;
     use LiveCollectionTrait;
     use TemplatePropTrait;
+
     /** @use ResourceFormComponentTrait<ProductInterface> */
     use ResourceFormComponentTrait;
 
@@ -88,7 +89,7 @@ class FormComponent
         $this->fullNumberPreview = $this->invoiceNumberGenerator->generate(
             $resource->getSerie()?->getFormat(),
             $resource->getSequenceNumber(),
-            $resource->getIssueDate()
+            $resource->getIssueDate(),
         );
     }
 
@@ -123,7 +124,7 @@ class FormComponent
     {
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
-        
+
         if ($invoice->isPaid()) {
             $this->showPaymentDate = true;
         } else {
@@ -185,7 +186,7 @@ class FormComponent
         /** @var InvoiceSerieInterface $serie */
         $serie = $invoice?->getSerie();
 
-        if(null === $serie) {
+        if (null === $serie) {
             return;
         }
 
@@ -194,7 +195,7 @@ class FormComponent
         $invoiceSequence = $strategy->getNextCounter($serie, $invoice->getIssueDate());
         $nextCounter = $invoiceSequence->getNextCounter();
         $fullNumber = $this->invoiceNumberGenerator->generate($serie->getFormat(), $nextCounter, $invoice->getIssueDate());
-        
+
         $this->formValues['sequenceNumber'] = $this->getFormView()
             ->offsetGet('sequenceNumber')
             ->vars['value'] = $nextCounter
@@ -226,12 +227,15 @@ class FormComponent
 
     #[LiveListener(InvoiceNumberingComponent::OWL_ADMIN_NUMBER_WITH_SERIE_CHANGED)]
     public function numberWithSerieChanged(
-        #[LiveArg] string $sequenceNumber,
-        #[LiveArg] string $serie,
-        #[LiveArg] ?string $fullNumber,
-        #[LiveArg] string $fullNumberPreview
-    ): void
-    {
+        #[LiveArg]
+        string $sequenceNumber,
+        #[LiveArg]
+        string $serie,
+        #[LiveArg]
+        ?string $fullNumber,
+        #[LiveArg]
+        string $fullNumberPreview,
+    ): void {
         $this->formValues['sequenceNumber'] = $sequenceNumber;
         $this->formValues['serie'] = $serie;
         $this->formValues['fullNumber'] = $fullNumber;
@@ -246,7 +250,7 @@ class FormComponent
         $result = LineDataCalculator::calculateUnitPriceByTotalPriceFromMajor($totalPrice, $quantity);
 
         if ($result !== null) {
-            list($unitPriceCalculated, $totalPriceCalculated) = $result;
+            [$unitPriceCalculated, $totalPriceCalculated] = $result;
 
             $this->formValues['lineItems'][$key]['unitPrice'] = $unitPriceCalculated;
 
@@ -265,7 +269,7 @@ class FormComponent
         $unitPrice = (float) ($unitPrice ?? $this->formValues['lineItems'][$key]['unitPrice']);
         $quantity = (float) ($quantity ?? $this->formValues['lineItems'][$key]['quantity']);
 
-        $totalPricePrice =  LineDataCalculator::calculateTotalPriceFromMajor($unitPrice, $quantity);
+        $totalPricePrice = LineDataCalculator::calculateTotalPriceFromMajor($unitPrice, $quantity);
 
         if ($totalPricePrice > 0) {
             $this->formValues['lineItems'][$key]['totalPrice'] = $totalPricePrice;
@@ -280,10 +284,10 @@ class FormComponent
     {
         if ($selectedCurrencyCode = $this->formValues['currency'] ?? null) {
             $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
-    
+
             if ($selectedCurrencyCode && $this->exchangeRateCurrency && $this->getFormView()->offsetExists('exchangeRateSnapshot')) {
                 $ratio = $this->exchangeRateResolver->getRatio($selectedCurrencyCode, $this->exchangeRateCurrency);
-                
+
                 if ($invoice->getExchangeRateSnapshot()) {
                     $invoice->getExchangeRateSnapshot()->setRatio($ratio);
                 } else {

@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Form\EventSubscriber;
 
-use Owl\Bundle\AdminBundle\Form\Type\Invoice\ExchangeRateSnapshot;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
 use Owl\Component\Company\Model\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
+use Sylius\Component\Currency\Repository\CurrencyRepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
-use Sylius\Component\Currency\Repository\CurrencyRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class LineItemsSubscriber implements EventSubscriberInterface
@@ -80,9 +79,8 @@ final class LineItemsSubscriber implements EventSubscriberInterface
                 'label' => false,
                 'row_attr' => [
                     'class' => 'mb-0',
-                ]
+                ],
             ],
         ]);
     }
-
 }

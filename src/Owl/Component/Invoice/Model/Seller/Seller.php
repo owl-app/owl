@@ -13,10 +13,8 @@ class Seller implements SellerInterface
     /** @var mixed */
     protected ?int $id;
 
-    /** @var string|null */
     protected ?string $company = null;
 
-    /** @var string|null */
     protected ?string $taxNumber = null;
 
     /** @var string|null */
@@ -28,7 +26,6 @@ class Seller implements SellerInterface
     /** @var string|null */
     protected string $postcode = '';
 
-    /** @var string|null */
     protected ?string $countryCode = null;
 
     public function __construct()

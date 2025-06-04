@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Core\Authorization\Voter;
 
-use PHPUnit\Framework\TestCase;
+use Owl\Component\Core\Authorization\Voter\RbacVoter;
+use Owl\Component\Core\Context\AdminUserContextInterface;
+use Owl\Component\Core\Model\AdminUserInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Owl\Component\Core\Authorization\Voter\RbacVoter;
-use Owl\Component\Core\Context\AdminUserContextInterface;
-use Owl\Component\Core\Model\AdminUserInterface;
 
 class RbacVoterTest extends TestCase
 {
@@ -63,7 +63,7 @@ class RbacVoterTest extends TestCase
     public function testSupportsWithEmptyRoute(): void
     {
         $route = '';
-        
+
         $reflection = new \ReflectionMethod($this->voter, 'supports');
         $result = $reflection->invoke($this->voter, $route, null);
 
@@ -75,37 +75,37 @@ class RbacVoterTest extends TestCase
         $route = 'app_admin_dashboard';
         $user = $this->createMock(AdminUserInterface::class);
         $user->method('getPermissions')->willReturn(['app_admin_dashboard', 'app_admin_users']);
-        
+
         $this->adminUserContext->method('getUser')->willReturn($user);
-        
+
         $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
         $result = $reflection->invoke($this->voter, $route, null, $this->token);
-        
+
         $this->assertTrue($result);
     }
-    
+
     public function testVoteOnAttributeWithoutPermission(): void
     {
         $route = 'app_admin_settings';
         $user = $this->createMock(AdminUserInterface::class);
         $user->method('getPermissions')->willReturn(['app_admin_dashboard', 'app_admin_users']);
-        
+
         $this->adminUserContext->method('getUser')->willReturn($user);
-        
+
         $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
         $result = $reflection->invoke($this->voter, $route, null, $this->token);
-        
+
         $this->assertFalse($result);
     }
-    
+
     public function testVoteOnAttributeWithNoUser(): void
     {
         $route = 'app_admin_dashboard';
         $this->adminUserContext->method('getUser')->willReturn(null);
-        
+
         $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
         $result = $reflection->invoke($this->voter, $route, null, $this->token);
-        
+
         $this->assertFalse($result);
     }
 }

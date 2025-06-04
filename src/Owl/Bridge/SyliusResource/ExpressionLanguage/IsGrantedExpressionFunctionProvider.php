@@ -17,7 +17,6 @@ final class IsGrantedExpressionFunctionProvider implements ExpressionFunctionPro
 
     /**
      * @return ExpressionFunction[]
-     *
      * @return list{ExpressionFunction}
      */
     public function getFunctions(): array

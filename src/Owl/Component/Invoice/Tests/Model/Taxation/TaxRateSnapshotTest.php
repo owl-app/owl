@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Invoice\Model\Taxation;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshot;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
+use PHPUnit\Framework\TestCase;
 
 class TaxRateSnapshotTest extends TestCase
 {
@@ -73,7 +73,7 @@ class TaxRateSnapshotTest extends TestCase
         $property = $reflection->getProperty('isNameChanged');
         $property->setAccessible(true);
         $property->setValue($this->taxRateSnapshot, false);
-        
+
         // Set the same name again
         $this->taxRateSnapshot->setName('VAT 23%');
         self::assertFalse($this->taxRateSnapshot->isNameChanged());
@@ -110,7 +110,7 @@ class TaxRateSnapshotTest extends TestCase
         $property = $reflection->getProperty('isAmountChanged');
         $property->setAccessible(true);
         $property->setValue($this->taxRateSnapshot, false);
-        
+
         // Set the same amount again
         $this->taxRateSnapshot->setAmount(0.23);
         self::assertFalse($this->taxRateSnapshot->isAmountChanged());

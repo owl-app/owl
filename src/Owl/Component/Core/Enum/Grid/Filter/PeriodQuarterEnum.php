@@ -10,11 +10,8 @@ use UnhandledMatchError;
 enum PeriodQuarterEnum: string
 {
     case TYPE_Q1 = '1';
-
     case TYPE_Q2 = '2';
-
     case TYPE_Q3 = '3';
-
     case TYPE_Q4 = '4';
 
     public static function getPeriodRange(int|string $quarter): array

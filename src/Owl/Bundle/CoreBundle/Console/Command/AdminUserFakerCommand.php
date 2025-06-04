@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Owl\Bundle\CoreBundle\Console\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
 use Owl\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class AdminUserFakerCommand extends ContainerAwareCommand
 {
@@ -30,12 +30,12 @@ class AdminUserFakerCommand extends ContainerAwareCommand
     {
         $this
             ->setDescription(
-                'Create fake admin users with random data.'
+                'Create fake admin users with random data.',
             )
             ->setDefinition(
                 new InputDefinition([
                     new InputOption('count', null, InputOption::VALUE_REQUIRED),
-                ])
+                ]),
             );
     }
 
@@ -50,8 +50,7 @@ class AdminUserFakerCommand extends ContainerAwareCommand
         $connection->getConfiguration()->setMiddlewares([]);
         $connection->beginTransaction();
 
-        for($i = 1; $i <= $count; ++$i)
-        {
+        for ($i = 1; $i <= $count; ++$i) {
             $firstName = $faker->firstName();
             $lastName = $faker->lastName();
             shuffle($roles);
@@ -63,7 +62,7 @@ class AdminUserFakerCommand extends ContainerAwareCommand
                 'last_name' => $lastName,
                 'phone' => $faker->phoneNumber(),
                 'email' => $faker->email(),
-                'enabled' => rand(0,1),
+                'enabled' => rand(0, 1),
                 'locked' => 0,
                 'password_hash' => '',
                 'hasher_name' => $this->hasher,

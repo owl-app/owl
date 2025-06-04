@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Category\Model;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Category\Model\Category;
 use Owl\Component\Category\Model\CategoryInterface;
+use PHPUnit\Framework\TestCase;
 
 class CategoryTest extends TestCase
 {

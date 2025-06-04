@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Location\Tests\Converter;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Location\Converter\CountryNameConverter;
 use Owl\Component\Location\Converter\CountryNameConverterInterface;
+use PHPUnit\Framework\TestCase;
 
 final class CountryNameConverterTest extends TestCase
 {
@@ -58,4 +58,4 @@ final class CountryNameConverterTest extends TestCase
 
         $this->converter->convertToCode('Invalid Country', 'pl');
     }
-} 
+}

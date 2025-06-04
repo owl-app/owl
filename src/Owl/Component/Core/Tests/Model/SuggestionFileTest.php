@@ -15,4 +15,4 @@ final class SuggestionFileTest extends TestCase
         $suggestionFile = new SuggestionFile();
         self::assertInstanceOf(File::class, $suggestionFile);
     }
-} 
+}

@@ -33,9 +33,7 @@ final class InvoiceTaxRateSnapshotFactory implements InvoiceTaxRateSnapshotFacto
         string $code,
         string $name,
         float $amount,
-        
-    ): TaxRateSnapshotInterface
-    {
+    ): TaxRateSnapshotInterface {
         $snapshot = $this->decoratedFactory->createNew();
         $snapshot->setCode($code);
         $snapshot->setName($name);

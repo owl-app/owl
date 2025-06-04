@@ -15,7 +15,7 @@ trait PeriodGridFilterComponentTrait
     public function preRender(): void
     {
         if (isset($this->availableFilters['period'])) {
-            foreach($this->availableFilters['period'] as $field) {
+            foreach ($this->availableFilters['period'] as $field) {
                 if (!isset($this->activeCriteria[$field]) || $this->activeCriteria[$field]['type'] === PeriodTypeEnum::TYPE_ALL->value) {
                     continue;
                 }

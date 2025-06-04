@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Owl\Bundle\AdminBundle\Twig\Component\Invoice;
 
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
-use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -46,11 +44,7 @@ class InvoiceNumberingComponent
 
     #[LiveProp(writable: true)]
     public bool $showInputFullNumber = false;
-    
 
-    /**
-     * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
-     */
     public function __construct(
         LiveResponder $liveReponser,
         private FormFactoryInterface $formFactory,
@@ -101,7 +95,7 @@ class InvoiceNumberingComponent
         $formData = $this->getForm()->getData();
 
         if (empty($formData['serie'])) {
-            $fullNumberPreview  = $fullNumber = $formData['fullNumber'];
+            $fullNumberPreview = $fullNumber = $formData['fullNumber'];
         } else {
             $fullNumber = '';
             $fullNumberPreview = $this->fullNumberPreview;

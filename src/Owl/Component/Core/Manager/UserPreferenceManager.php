@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Component\Core\Manager;
 
-use Owl\Component\Core\Context\AdminUserContextInterface;
 use Doctrine\Persistence\ObjectManager;
+use Owl\Component\Core\Context\AdminUserContextInterface;
 
 final class UserPreferenceManager implements UserPreferenceManagerInterface
 {
@@ -50,44 +50,46 @@ final class UserPreferenceManager implements UserPreferenceManagerInterface
         return $user->getPreferences();
     }
 
-    private function setNestedValue(?array &$array, string $keyPath, mixed $value): void {
+    private function setNestedValue(?array &$array, string $keyPath, mixed $value): void
+    {
         if (!is_array($array)) {
             $array = [];
         }
 
         $keys = explode('.', $keyPath);
         $current = &$array;
-    
+
         foreach ($keys as $key) {
             if (!isset($current[$key]) || !is_array($current[$key])) {
                 $current[$key] = [];
             }
             $current = &$current[$key];
         }
-    
+
         $current = $value;
     }
 
-    private function getNestedValue(?array $array, string $keyPath, mixed $default = null): mixed {
+    private function getNestedValue(?array $array, string $keyPath, mixed $default = null): mixed
+    {
         if (!is_array($array)) {
             return $default;
         }
-    
+
         $keys = explode('.', $keyPath);
         $current = $array;
-    
+
         foreach ($keys as $key) {
             if (!array_key_exists($key, $current)) {
                 return $default;
             }
-    
+
             $current = $current[$key];
 
             if (!is_array($current) && $key !== end($keys)) {
                 return $default;
             }
         }
-    
+
         return $current;
     }
 }

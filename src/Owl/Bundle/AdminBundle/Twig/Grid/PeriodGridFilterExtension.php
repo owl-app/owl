@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig\Grid;
@@ -55,7 +54,7 @@ final class PeriodGridFilterExtension extends AbstractExtension
                 'prev' => [
                     'path' => $this->generateUrl($route, $field, $activeCriteria, $activeFieldCriteria['type'], $navigation['prev']),
                     'is_disabled' => $navigation['prev']['is_disabled'],
-                ]
+                ],
             ];
         }
 
@@ -88,20 +87,20 @@ final class PeriodGridFilterExtension extends AbstractExtension
             'prev' => [
                 'query' => [],
                 'is_disabled' => false,
-            ]
+            ],
         ];
 
         if ($criteria['month'] == 12) {
             $nextMonth = 1;
-            $nextYear++;
-            $prevMonth--;
+            ++$nextYear;
+            --$prevMonth;
         } elseif ($criteria['month'] == 1) {
-            $nextMonth++;
+            ++$nextMonth;
             $prevMonth = 12;
-            $prevYear--;
+            --$prevYear;
         } else {
-            $nextMonth++;
-            $prevMonth--;
+            ++$nextMonth;
+            --$prevMonth;
         }
 
         if ($criteria['year'] == $maxNextYear && $nextMonth == 1) {
@@ -149,20 +148,20 @@ final class PeriodGridFilterExtension extends AbstractExtension
             'prev' => [
                 'query' => [],
                 'is_disabled' => false,
-            ]
+            ],
         ];
 
         if ($criteria['quarter'] == 4) {
             $nextQuarter = 1;
-            $nextYear++;
-            $prevQuarter--;
+            ++$nextYear;
+            --$prevQuarter;
         } elseif ($criteria['quarter'] == 1) {
-            $nextQuarter++;
+            ++$nextQuarter;
             $prevQuarter = 4;
-            $prevYear--;
+            --$prevYear;
         } else {
-            $nextQuarter++;
-            $prevQuarter--;
+            ++$nextQuarter;
+            --$prevQuarter;
         }
 
         if ($criteria['year'] == $maxNextYear && $nextQuarter == 1) {
@@ -209,7 +208,7 @@ final class PeriodGridFilterExtension extends AbstractExtension
             'prev' => [
                 'query' => [],
                 'is_disabled' => false,
-            ]
+            ],
         ];
 
         if ($nextYear == $maxNextYear) {

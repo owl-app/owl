@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\InvoiceBundle\Validator;
 
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
 class NumberFormatInvoiceConstraintValidator extends ConstraintValidator

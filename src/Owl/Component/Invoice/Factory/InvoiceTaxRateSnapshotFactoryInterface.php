@@ -18,6 +18,5 @@ interface InvoiceTaxRateSnapshotFactoryInterface extends FactoryInterface
         string $code,
         string $name,
         float $amount,
-        
     ): TaxRateSnapshotInterface;
 }

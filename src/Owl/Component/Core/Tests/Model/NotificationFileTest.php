@@ -15,4 +15,4 @@ final class NotificationFileTest extends TestCase
         $notificationFile = new NotificationFile();
         self::assertInstanceOf(File::class, $notificationFile);
     }
-} 
+}

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Sequention\Strategy;
 
-use Owl\Component\Invoice\Model\SequenceInterface;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
+use Owl\Component\Invoice\Model\SequenceInterface;
 
 class YearlyInvoiceSequenceStrategy extends DateBasedInvoiceSequenceStrategy
 {
@@ -15,7 +15,7 @@ class YearlyInvoiceSequenceStrategy extends DateBasedInvoiceSequenceStrategy
 
         $sequence = $this->sequenceRepository->findOneBy([
             'year' => $year,
-            'serie' => $invoiceSerie
+            'serie' => $invoiceSerie,
         ]);
 
         if (!$sequence) {

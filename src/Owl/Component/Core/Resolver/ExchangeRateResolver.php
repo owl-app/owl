@@ -8,7 +8,7 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
 final class ExchangeRateResolver implements ExchangeRateResolverInterface
 {
-    public function __construct(private ExchangeRateRepositoryInterface $exchangeRateRepository,)
+    public function __construct(private ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
     }
 

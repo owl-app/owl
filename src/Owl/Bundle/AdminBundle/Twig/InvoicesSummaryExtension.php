@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig;
 
-use Pagerfanta\Pagerfanta;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Owl\Component\Core\Manager\UserPreferenceManagerInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
+use Pagerfanta\Pagerfanta;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 final class InvoicesSummaryExtension extends AbstractExtension
 {
@@ -43,7 +43,7 @@ final class InvoicesSummaryExtension extends AbstractExtension
             'subtotal' => 0,
             'tax' => 0,
             'total' => 0,
-            'currency' => $company->getCurrency()->getCode()
+            'currency' => $company->getCurrency()->getCode(),
         ];
 
         /** @var InvoiceInterface $invoice */
@@ -51,7 +51,7 @@ final class InvoicesSummaryExtension extends AbstractExtension
             $companyCurrencyCode = $company->getCurrency()->getCode();
 
             if (
-                $companyCurrencyCode !== $invoice->getCurrency()->getCode() && 
+                $companyCurrencyCode !== $invoice->getCurrency()->getCode() &&
                 $companyCurrencyCode === $invoice->getExchangeRateSnapshot()->getCode()
             ) {
                 $sum['subtotal'] += $invoice->getSubtotalConverted();

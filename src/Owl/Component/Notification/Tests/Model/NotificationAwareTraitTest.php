@@ -50,4 +50,4 @@ final class NotificationAwareTraitTest extends TestCase
 class NotificationAwareObject
 {
     use NotificationAwareTrait;
-} 
+}

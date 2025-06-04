@@ -33,10 +33,10 @@ final class FileFactoryTest extends TestCase
         $this->factory = $this->createMock(FactoryInterface::class);
         $this->subject = $this->createStubForIntersectionOfInterfaces([FileableInterface::class, ResourceInterface::class]);
         $this->file = $this->createMock(FileInterface::class);
-    
+
         $this->fileFactory = new FileFactory($this->factory);
         $this->fileFactory->setResourceParents([
-            'parentName' => $this->subject
+            'parentName' => $this->subject,
         ]);
     }
 

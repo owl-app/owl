@@ -22,7 +22,7 @@ final class LocationFieldsExtension extends AbstractTypeExtension
     public function __construct(
         private BuildCountryFormSubscriber $buildCountryFormSubscriber,
         private ZoneRepositoryInterface $zoneRepository,
-    ){
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -39,7 +39,7 @@ final class LocationFieldsExtension extends AbstractTypeExtension
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) {
-                /** @var ProvinceCodeAwareInterface&CountryCodeAwareInterface|null $data */
+                /** @var (ProvinceCodeAwareInterface&CountryCodeAwareInterface)|null $data */
                 $data = $event->getData();
 
                 if (null === $data) {
@@ -55,7 +55,7 @@ final class LocationFieldsExtension extends AbstractTypeExtension
 
                 $this->createZoneChoiceForm($countryCode, $provinceCode, $event->getForm());
             },
-            -100
+            -100,
         );
 
         $builder->addEventListener(
@@ -69,13 +69,13 @@ final class LocationFieldsExtension extends AbstractTypeExtension
 
                 $this->createZoneChoiceForm($data['countryCode'], $data['provinceCode'] ?? null, $event->getForm());
             },
-            -100
+            -100,
         );
 
         $builder->addEventListener(
             FormEvents::SUBMIT,
             function (FormEvent $formEvent) {
-                /** @var ProvinceCodeAwareInterface&CountryCodeAwareInterface|null $data */
+                /** @var (ProvinceCodeAwareInterface&CountryCodeAwareInterface)|null $data */
                 $data = $formEvent->getData();
                 $form = $formEvent->getForm();
 
@@ -87,7 +87,7 @@ final class LocationFieldsExtension extends AbstractTypeExtension
     public static function getExtendedTypes(): iterable
     {
         return [
-            CompanyType::class
+            CompanyType::class,
         ];
     }
 
@@ -95,6 +95,7 @@ final class LocationFieldsExtension extends AbstractTypeExtension
     {
         if ($form->has('provinceCode') && empty($provinceCode)) {
             $form->remove('zone');
+
             return;
         }
 

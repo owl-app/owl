@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Location\Tests\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Owl\Component\Location\Checker\CountryProvincesDeletionChecker;
 use Owl\Component\Location\Model\CountryInterface;
 use Owl\Component\Location\Model\Province;
 use Owl\Component\Location\Model\ZoneMemberInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class CountryProvincesDeletionCheckerTest extends TestCase
 {
@@ -105,4 +105,4 @@ final class CountryProvincesDeletionCheckerTest extends TestCase
 
         self::assertTrue($this->checker->isDeletable($country));
     }
-} 
+}

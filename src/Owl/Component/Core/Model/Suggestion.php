@@ -16,14 +16,10 @@ class Suggestion extends BaseSuggestion implements SuggestionInterface
     /** @var \Owl\Component\Core\Model\AdminUserInterface|null */
     protected $user;
 
-    /**
-     * @var Collection<array-key, FileInterface>
-     */
+    /** @var Collection<array-key, FileInterface> */
     protected $files;
 
-    /**
-     * @var Collection<array-key, StatusInterface>
-     */
+    /** @var Collection<array-key, StatusInterface> */
     protected $statuses;
 
     public function __construct()

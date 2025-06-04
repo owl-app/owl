@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Owl\Bundle\AdminBundle\Form\Type;
 
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceSerieHiddenType;
-use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
 use Owl\Bundle\InvoiceBundle\Form\Type\InvoiceType as BaseInvoiceType;
 use Owl\Component\Contractor\Model\ContractorInterface;
 use Owl\Component\Core\Model\CompanyInterface;
@@ -16,10 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
-use Symfonycasts\DynamicForms\DependentField;
 use Symfonycasts\DynamicForms\DynamicFormBuilder;
-
 
 final class InvoiceType extends AbstractType
 {
@@ -45,9 +41,9 @@ final class InvoiceType extends AbstractType
                 'required' => true,
                 'choice_label' => function (CompanyInterface $choice, string $key, string $value) use ($invoice): string {
                     if ($invoice->getId() !== null && $invoice->getSeller()?->getCompany() !== $choice->getName()) {
-                        return $invoice->getBuyer()->getCompany() .' -> ' . $choice->getName();
+                        return $invoice->getBuyer()->getCompany() . ' -> ' . $choice->getName();
                     }
-        
+
                     return $choice->getName();
                 },
                 'attr' => [
@@ -55,7 +51,7 @@ final class InvoiceType extends AbstractType
                     'data-action' => 'form:company:created@window->invoice-addable-autocomplete#addOption',
                     'data-invoice-addable-autocomplete-text-by-value' => 'name',
                     'data-invoice-addable-autocomplete-action-after-change-value' => 'changeCompany',
-                    'class' => 'addable-autocomplete'
+                    'class' => 'addable-autocomplete',
                 ],
             ])
             ->add('contractor', ContractorAutocompleteType::class, [
@@ -73,7 +69,7 @@ final class InvoiceType extends AbstractType
                     'data-action' => 'form:contractor:created@window->invoice-addable-autocomplete#addOption',
                     'data-invoice-addable-autocomplete-text-by-value' => 'companyName',
                     'data-invoice-addable-autocomplete-action-after-change-value' => 'changeExchangeRateCurrency',
-                    'class' => 'addable-autocomplete'
+                    'class' => 'addable-autocomplete',
                 ],
             ])
             ->add('fullNumber', HiddenType::class, [
@@ -101,11 +97,10 @@ final class InvoiceType extends AbstractType
                     return ['class' => 'mb-0'];
                 },
                 'choices' => array_combine(
-                    array_map(fn($case) => 'owl.invoice.calculate_values_from.' . $case->value, CalculateValuesFromEnum::cases()),
-                    array_map(fn($case) => $case->value, CalculateValuesFromEnum::cases())
+                    array_map(fn ($case) => 'owl.invoice.calculate_values_from.' . $case->value, CalculateValuesFromEnum::cases()),
+                    array_map(fn ($case) => $case->value, CalculateValuesFromEnum::cases()),
                 ),
             ]);
-        ;
 
         $builder->addEventSubscriber($this->exchangeRateSnapshotEventSubscriber);
         $builder->addEventSubscriber($this->lineItemsSubscriber);

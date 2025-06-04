@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Location\Tests\Provider;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Owl\Component\Location\Model\Province;
 use Owl\Component\Location\Model\ProvinceCodeAwareInterface;
 use Owl\Component\Location\Provider\ProvinceNamingProvider;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class ProvinceNamingProviderTest extends TestCase
 {
@@ -114,4 +114,4 @@ final class ProvinceNamingProviderTest extends TestCase
 
         self::assertSame('Mazowieckie', $this->provider->getAbbreviation($address));
     }
-} 
+}

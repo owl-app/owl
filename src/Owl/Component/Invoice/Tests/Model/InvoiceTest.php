@@ -5,15 +5,11 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Model;
 
 use Doctrine\Common\Collections\Collection;
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
 use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
 use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
-use Owl\Component\Invoice\Model\Invoice;
-use Owl\Component\Invoice\Model\InvoiceInterface;
-use Owl\Component\Invoice\Model\InvoiceSerieInterface;
-use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\Seller\SellerInterface;
+use PHPUnit\Framework\TestCase;
 
 class InvoiceTest extends TestCase
 {
@@ -255,7 +251,6 @@ class InvoiceTest extends TestCase
 
         $this->invoice->setCalculateValuesFrom(CalculateValuesFromEnum::FROM_GROSS->value);
         $this->invoice->addLineItem($lineItem);
-
 
         self::assertSame(CalculateValuesFromEnum::FROM_GROSS->value, $this->invoice->getCalculateValuesFrom());
     }

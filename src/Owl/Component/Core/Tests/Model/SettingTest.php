@@ -27,4 +27,4 @@ final class SettingTest extends TestCase
         $this->setting->setDescriptionDashboard('Dashboard description');
         self::assertSame('Dashboard description', $this->setting->getDescriptionDashboard());
     }
-} 
+}

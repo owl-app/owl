@@ -35,9 +35,7 @@ class AdminUser extends User implements AdminUserInterface
     /** @var RoleInterface */
     protected $role;
 
-    /**
-     * @var Collection<array-key, NotificationAcceptedInterface>
-     */
+    /** @var Collection<array-key, NotificationAcceptedInterface> */
     protected $acceptedNotifications;
 
     /** @var AdminUserRegistrationDataInterface|null */
@@ -56,9 +54,6 @@ class AdminUser extends User implements AdminUserInterface
         $this->localeCode = 'en';
     }
 
-    /**
-     * @return string
-     */
     public function getName(): ?string
     {
         return $this->displayName;
@@ -74,9 +69,6 @@ class AdminUser extends User implements AdminUserInterface
         $this->displayName = $displayName;
     }
 
-    /**
-     * @return string
-     */
     public function getFirstName(): ?string
     {
         return $this->firstName;
@@ -87,9 +79,6 @@ class AdminUser extends User implements AdminUserInterface
         $this->firstName = $firstName;
     }
 
-    /**
-     * @return string
-     */
     public function getLastName(): ?string
     {
         return $this->lastName;
@@ -100,9 +89,6 @@ class AdminUser extends User implements AdminUserInterface
         $this->lastName = $lastName;
     }
 
-    /**
-     * @return string
-     */
     public function getPhone(): ?string
     {
         return $this->phone;
@@ -113,9 +99,6 @@ class AdminUser extends User implements AdminUserInterface
         $this->phone = $phone;
     }
 
-    /**
-     * @return string
-     */
     public function getNote(): ?string
     {
         return $this->note;
@@ -126,9 +109,6 @@ class AdminUser extends User implements AdminUserInterface
         $this->note = $note;
     }
 
-    /**
-     * @return string
-     */
     public function getLocaleCode(): ?string
     {
         return $this->localeCode;
@@ -149,9 +129,6 @@ class AdminUser extends User implements AdminUserInterface
         return $this->permissions;
     }
 
-    /**
-     * @return RoleInterface
-     */
     public function getRole(): ?RoleInterface
     {
         return $this->role;

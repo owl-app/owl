@@ -11,7 +11,6 @@ final class OrderMenuSubscriber implements EventSubscriberInterface
 {
     /**
      * @return string[]
-     *
      * @return array{'owl.admin.menu.order': 'setOrder'}
      */
     public static function getSubscribedEvents()

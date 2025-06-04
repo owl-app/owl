@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Notification\Model;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Notification\Model\Notification;
 use Owl\Component\Notification\Model\NotificationInterface;
+use PHPUnit\Framework\TestCase;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 final class NotificationTest extends TestCase
@@ -103,4 +103,4 @@ final class NotificationTest extends TestCase
     {
         self::assertNull($this->notification->getUpdatedAt());
     }
-} 
+}

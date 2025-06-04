@@ -42,4 +42,4 @@ final class InvoiceTest extends TestCase
         $this->invoice->setCurrency($currency);
         self::assertSame($currency, $this->invoice->getCurrency());
     }
-} 
+}

@@ -7,9 +7,7 @@ namespace Owl\Component\Invoice\Enum;
 enum InvoiceTypeEnum: string
 {
     case SALES = 'sales';
-
     case PROFORMA = 'proforma';
-
     case CORRECTION = 'correction';
 
     public const TYPE_SALES = self::SALES->value;

@@ -22,7 +22,6 @@ final class RequiredProvinceCodeValidator extends ConstraintValidator
     public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var RequiredProvinceCode $constraint */
-
         Assert::isInstanceOf($constraint, RequiredProvinceCode::class);
 
         $propertyPath = $this->context->getPropertyPath();
@@ -33,7 +32,7 @@ final class RequiredProvinceCodeValidator extends ConstraintValidator
             }
         }
 
-        /** @var ProvinceCodeAwareInterface&CountryCodeAwareInterface|null $validatedSerie */
+        /** @var (ProvinceCodeAwareInterface&CountryCodeAwareInterface)|null $validatedSerie */
         $validated = $this->context->getObject();
 
         Assert::isInstanceOf($validated, ProvinceCodeAwareInterface::class);

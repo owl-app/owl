@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Component\Core\Model\Invoice;
 
-use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Core\Model\CompanyInterface;
+use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Invoice\Model\Invoice as BaseInvoice;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
@@ -39,7 +39,6 @@ class Invoice extends BaseInvoice implements InvoiceInterface
 
     public function isCompanyChanged(): bool
     {
-
         return $this->isCompanyChanged;
     }
 
@@ -59,7 +58,6 @@ class Invoice extends BaseInvoice implements InvoiceInterface
 
     public function isContractorChanged(): bool
     {
-
         return $this->isContractorChanged;
     }
 

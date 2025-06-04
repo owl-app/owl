@@ -7,8 +7,8 @@ namespace Owl\Component\Core\Grid\Filter;
 use Owl\Component\Core\Enum\Grid\Filter\PeriodQuarterEnum;
 use Owl\Component\Core\Enum\Grid\Filter\PeriodTypeEnum;
 use Sylius\Component\Grid\Data\DataSourceInterface;
-use Sylius\Component\Grid\Filtering\FilterInterface;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
+use Sylius\Component\Grid\Filtering\FilterInterface;
 
 /** @experimental */
 final class PeriodFilter implements FilterInterface
@@ -49,15 +49,18 @@ final class PeriodFilter implements FilterInterface
                 $startDate = new \DateTime($value['year'] . '-' . $value['month'] . '-01');
                 $start = $startDate->format('Y-m-d');
                 $end = $startDate->modify('last day of this month')->format('Y-m-d');
+
                 break;
             case PeriodTypeEnum::TYPE_QUARTER->value:
                 $range = PeriodQuarterEnum::getPeriodRange($value['quarter']);
                 $start = $value['year'] . '-' . $range['start'];
                 $end = $value['year'] . '-' . $range['end'];
+
                 break;
             case PeriodTypeEnum::TYPE_YEAR->value:
                 $start = $value['year'] . '-01-01';
                 $end = $value['year'] . '-12-31';
+
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('Could not get an expression for type "%s"!', $type));

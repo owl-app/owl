@@ -12,7 +12,9 @@ use Webmozart\Assert\Assert;
 
 class UniqueDefaultSerieConstraintValidator extends ConstraintValidator
 {
-    public function __construct(private RepositoryInterface $invoiceSequenceRepository) {}
+    public function __construct(private RepositoryInterface $invoiceSequenceRepository)
+    {
+    }
 
     public function validate(mixed $value, Constraint $constraint): void
     {

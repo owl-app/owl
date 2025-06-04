@@ -20,4 +20,4 @@ final class CurrencyTest extends TestCase
     {
         self::assertInstanceOf(Currency::class, $this->currency);
     }
-} 
+}

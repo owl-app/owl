@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Core\Exception;
 
 use Exception;
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Core\Exception\InvalidDocumentConfigurationException;
+use PHPUnit\Framework\TestCase;
 
 final class InvalidDocumentConfigurationExceptionTest extends TestCase
 {
@@ -27,11 +27,11 @@ final class InvalidDocumentConfigurationExceptionTest extends TestCase
 
     public function testMessageFormatting(): void
     {
-        $this->assertSame('error',$this->exception->getMessage());
+        $this->assertSame('error', $this->exception->getMessage());
     }
 
     public function testPreviousExceptionIsSet(): void
     {
         $this->assertSame($this->previousException, $this->exception->getPrevious());
     }
-} 
+}

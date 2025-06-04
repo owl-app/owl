@@ -19,15 +19,10 @@ class ItemTreeTraversalFactory
      *
      * @param Connection $connection Yii Database connection instance.
      * @param string $tableName A name of the table for storing RBAC items.
-     *
      * @param non-empty-string $tableName
-     *
      * @param string $childrenTableName A name of the table for storing relations between RBAC items.
-     *
      * @param non-empty-string $childrenTableName
-     *
      * @param string $namesSeparator Separator used for joining item names.
-     *
      * @param non-empty-string $namesSeparator
      *
      * @throws RuntimeException When a database was configured with an unknown driver, either because it is not

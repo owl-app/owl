@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Location\Tests\Model;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Location\Model\Zone;
 use Owl\Component\Location\Model\ZoneMember;
 use Owl\Component\Location\Model\ZoneMemberInterface;
+use PHPUnit\Framework\TestCase;
 
 final class ZoneMemberTest extends TestCase
 {
@@ -53,4 +53,4 @@ final class ZoneMemberTest extends TestCase
         $this->zoneMember->setBelongsTo($zone);
         self::assertSame($zone, $this->zoneMember->getBelongsTo());
     }
-} 
+}

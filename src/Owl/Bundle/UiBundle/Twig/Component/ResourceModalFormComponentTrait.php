@@ -20,13 +20,11 @@ use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
-use Symfony\UX\TwigComponent\Attribute\PostMount;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 /** @template T of ResourceInterface */
@@ -86,10 +84,10 @@ trait ResourceModalFormComponentTrait
     }
 
     #[PreMount]
-    public function initializeResourceById(?array $props = []) 
+    public function initializeResourceById(?array $props = [])
     {
         if (!isset($props['resource'])) {
-            $this->resource  = isset($props['id']) ? $this->repository->find($props['id']) : $this->createResource();
+            $this->resource = isset($props['id']) ? $this->repository->find($props['id']) : $this->createResource();
         }
     }
 

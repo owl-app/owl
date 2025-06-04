@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Locale\Tests\Context;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 use Owl\Component\Locale\Context\CompositeLocaleContext;
 use Owl\Component\Locale\Context\LocaleContextInterface;
 use Owl\Component\Locale\Context\LocaleNotFoundException;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 class CompositeLocaleContextTest extends TestCase
 {
@@ -76,4 +76,4 @@ class CompositeLocaleContextTest extends TestCase
 
         $this->assertEquals('fr_FR', $this->compositeLocaleContext->getLocaleCode());
     }
-} 
+}

@@ -6,8 +6,8 @@ namespace Owl\Bundle\ContractorBundle\DependencyInjection;
 
 use Owl\Bridge\SyliusResource\Controller\BaseController;
 use Owl\Bundle\ContractorBundle\Form\Type\ContractorType;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Owl\Component\Contractor\Model\Contractor;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

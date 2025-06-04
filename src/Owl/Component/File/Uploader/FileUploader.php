@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Owl\Component\File\Uploader;
 
 use Gaufrette\Filesystem;
+use Owl\Component\Core\Filesystem\Exception\FileNotFoundException;
 use Owl\Component\File\Generator\FilePathGeneratorInterface;
 use Owl\Component\File\Generator\UploadedFilePathGenerator;
 use Owl\Component\File\Model\FileInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Owl\Component\Core\Filesystem\Exception\FileNotFoundException;
 use Webmozart\Assert\Assert;
 
 class FileUploader implements FileUploaderInterface

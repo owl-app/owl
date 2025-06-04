@@ -28,7 +28,7 @@ final class InvoiceSnapshotAssignListener
         Assert::isInstanceOf($invoice, InvoiceInterface::class);
 
         /** @var SnapshotAssignerInterface $snapshotAssigner */
-        foreach($this->registrySnapshotAssigner->all() as $snapshotAssigner) {
+        foreach ($this->registrySnapshotAssigner->all() as $snapshotAssigner) {
             $snapshotAssigner->assign($invoice);
         }
     }

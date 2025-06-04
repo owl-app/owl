@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Invoice\Model;
 
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Invoice\Enum\CalculateValuesFromEnum;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Model\LineItem;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 class LineItemTest extends TestCase
 {
     private LineItem $lineItem;
+
     private InvoiceInterface&MockObject $invoice;
 
     protected function setUp(): void

@@ -58,9 +58,6 @@ class Notification implements NotificationInterface
         $this->description = $description;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
     public function getDateIssue(): ?\DateTimeInterface
     {
         return $this->dateIssue;
@@ -71,9 +68,6 @@ class Notification implements NotificationInterface
         $this->dateIssue = $dateIssue;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
     public function getCurrentFrom(): ?\DateTimeInterface
     {
         return $this->currentFrom;
@@ -84,9 +78,6 @@ class Notification implements NotificationInterface
         $this->currentFrom = $currentFrom;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
     public function getCurrentTo(): ?\DateTimeInterface
     {
         return $this->currentTo;

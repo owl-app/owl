@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Invoice\Sequention\Strategy;
 
 use DateTimeImmutable;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Owl\Component\Invoice\Factory\InvoiceSequenceFactoryInterface;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
 use Owl\Component\Invoice\Sequention\Strategy\YearlyInvoiceSequenceStrategy;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class YearlyInvoiceSequenceStrategyTest extends TestCase
 {
@@ -33,7 +33,7 @@ class YearlyInvoiceSequenceStrategyTest extends TestCase
 
         $this->strategy = new YearlyInvoiceSequenceStrategy(
             $this->sequenceRepository,
-            $this->invoiceSequenceFactory
+            $this->invoiceSequenceFactory,
         );
     }
 
@@ -48,7 +48,7 @@ class YearlyInvoiceSequenceStrategyTest extends TestCase
             ->method('findOneBy')
             ->with([
                 'year' => $year,
-                'serie' => $this->invoiceSerie
+                'serie' => $this->invoiceSerie,
             ])
             ->willReturn(null);
 
@@ -72,7 +72,7 @@ class YearlyInvoiceSequenceStrategyTest extends TestCase
             ->method('findOneBy')
             ->with([
                 'year' => $year,
-                'serie' => $this->invoiceSerie
+                'serie' => $this->invoiceSerie,
             ])
             ->willReturn($existingSequence);
 

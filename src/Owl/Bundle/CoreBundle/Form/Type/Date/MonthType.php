@@ -38,7 +38,7 @@ final class MonthType extends AbstractType
     {
         $months = [];
 
-        for ($i = 1; $i <= 12; $i++) {
+        for ($i = 1; $i <= 12; ++$i) {
             $monthName = $this->monthTranslator->translate($i);
             $months[ucfirst($monthName)] = $i;
         }

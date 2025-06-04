@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Core\Model;
 
-use PHPUnit\Framework\TestCase;
-use Owl\Component\User\Model\UserInterface;
 use Owl\Component\Core\Model\NotificationAccepted;
 use Owl\Component\Core\Model\NotificationAcceptedInterface;
+use Owl\Component\User\Model\UserInterface;
+use PHPUnit\Framework\TestCase;
 
 final class NotificationAcceptedTest extends TestCase
 {
@@ -43,4 +43,4 @@ final class NotificationAcceptedTest extends TestCase
         $this->notificationAccepted->setAcceptedAt($date);
         self::assertSame($date, $this->notificationAccepted->getAcceptedAt());
     }
-} 
+}

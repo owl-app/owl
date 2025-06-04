@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Company\Model;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Company\Model\Company;
 use Owl\Component\Company\Model\CompanyInterface;
+use PHPUnit\Framework\TestCase;
 
 class CompanyTest extends TestCase
 {
@@ -184,6 +184,6 @@ class CompanyTest extends TestCase
     public function testToStringReturnsName(): void
     {
         $this->company->setName('Acme');
-        self::assertSame('Acme', (string)$this->company);
+        self::assertSame('Acme', (string) $this->company);
     }
 }

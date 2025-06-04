@@ -11,7 +11,7 @@ use Owl\Component\Invoice\Model\Seller\SellerAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface InvoiceInterface extends 
+interface InvoiceInterface extends
     ResourceInterface,
     BuyerAwareInterface,
     SellerAwareInterface,

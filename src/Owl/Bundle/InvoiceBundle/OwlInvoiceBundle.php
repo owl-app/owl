@@ -18,7 +18,7 @@ final class OwlInvoiceBundle extends AbstractResourceBundle
     public function getSupportedDrivers(): array
     {
         return [
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
     }
 

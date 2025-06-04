@@ -79,8 +79,8 @@ final class MainMenuBuilder
                             ['route' => 'owl_admin_notification_update'],
                             ['route' => 'owl_admin_notification_show'],
                             ['route' => 'owl_admin_notification_show_accepted_index'],
-                        ]
-                    ]
+                        ],
+                    ],
                 ])
                 ->setLabel('owl.menu.admin.main.notification.header')
                 ->setLabelAttribute('icon', 'flowbite:bullhorn-outline');
@@ -108,8 +108,8 @@ final class MainMenuBuilder
                             'routes' => [
                                 ['route' => 'owl_admin_invoice_create'],
                                 ['route' => 'owl_admin_invoice_update'],
-                            ]
-                        ]
+                            ],
+                        ],
                     ])
                     ->setLabel('owl.menu.admin.main.sale.invoices');
             }
@@ -122,8 +122,8 @@ final class MainMenuBuilder
                             'routes' => [
                                 ['route' => 'owl_admin_contractor_create'],
                                 ['route' => 'owl_admin_contractor_update'],
-                            ]
-                        ]
+                            ],
+                        ],
                     ])
                     ->setLabel('owl.menu.admin.main.sale.contractors');
             }
@@ -136,8 +136,8 @@ final class MainMenuBuilder
                             'routes' => [
                                 ['route' => 'owl_admin_company_create'],
                                 ['route' => 'owl_admin_company_update'],
-                            ]
-                        ]
+                            ],
+                        ],
                     ])
                     ->setLabel('owl.menu.admin.main.sale.companies');
             }
@@ -233,8 +233,8 @@ final class MainMenuBuilder
                                 ['route' => 'owl_admin_admin_user_create'],
                                 ['route' => 'owl_admin_admin_user_update'],
                                 ['route' => 'owl_admin_admin_user_permissions'],
-                            ]
-                        ]
+                            ],
+                        ],
                     ])
                     ->setLabel('owl.menu.admin.main.configuration.users')
                 ;
@@ -267,9 +267,9 @@ final class MainMenuBuilder
                         'route' => 'owl_admin_rbac_role_index',
                         'extras' => [
                             'routes' => [
-                                ['route' => 'owl_admin_rbac_role_permissions']
-                            ]
-                        ]
+                                ['route' => 'owl_admin_rbac_role_permissions'],
+                            ],
+                        ],
                     ])
                     ->setLabel('owl.menu.admin.main.permission.roles')
                     ->setLabelAttribute('icon', 'user secret')

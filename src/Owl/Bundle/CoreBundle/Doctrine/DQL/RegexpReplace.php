@@ -6,14 +6,16 @@ namespace Owl\Bundle\CoreBundle\Doctrine\DQL;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
-use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\Parser;
+use Doctrine\ORM\Query\SqlWalker;
 
 final class RegexpReplace extends FunctionNode
 {
-    public $field = null;
-    public $pattern = null;
-    public $replacement = null;
+    public $field;
+
+    public $pattern;
+
+    public $replacement;
 
     public function getSql(SqlWalker $sqlWalker)
     {
@@ -21,7 +23,7 @@ final class RegexpReplace extends FunctionNode
             'REGEXP_REPLACE(%s, %s, %s)',
             $this->field->dispatch($sqlWalker),
             $this->pattern->dispatch($sqlWalker),
-            $this->replacement->dispatch($sqlWalker)
+            $this->replacement->dispatch($sqlWalker),
         );
     }
 

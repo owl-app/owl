@@ -33,7 +33,6 @@ interface ItemTreeTraversalInterface
      * @param string $name Item name.
      *
      * @return array Flat list of all parents.
-     *
      * @return RawItem[]
      */
     public function getParentRows(string $name): array;
@@ -52,11 +51,9 @@ interface ItemTreeTraversalInterface
      * Get all children rows for an item by the given name.
      *
      * @param string|string[] $names Item name / names.
-     *
      * @param string|non-empty-array<array-key, string> $names
      *
      * @return array Flat list of all children.
-     *
      * @return RawItem[]
      */
     public function getChildrenRows(string|array $names): array;
@@ -65,11 +62,9 @@ interface ItemTreeTraversalInterface
      * Get all child permission rows for an item by the given name.
      *
      * @param string|string[] $names Item name / names.
-     *
      * @param string|non-empty-array<array-key, string> $names
      *
      * @return array Flat list of all child permissions.
-     *
      * @return RawItem[]
      */
     public function getChildPermissionRows(string|array $names): array;
@@ -78,11 +73,9 @@ interface ItemTreeTraversalInterface
      * Get all child role rows for an item by the given name.
      *
      * @param string|string[] $names Item name / names.
-     *
      * @param string|non-empty-array<array-key, string> $names
      *
      * @return array Flat list of all child roles.
-     *
      * @return RawItem[]
      */
     public function getChildRoleRows(string|array $names): array;

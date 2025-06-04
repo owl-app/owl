@@ -34,4 +34,4 @@ final class NotificationTest extends TestCase
         $this->notification->setAssignedGroup('ALL');
         self::assertSame('ALL', $this->notification->getAssignedGroup());
     }
-} 
+}

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Core\Authorization\Voter;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Owl\Component\Core\Authorization\Voter\AdminSystemResourceVoter;
 use Owl\Component\Core\Context\AdminUserContextInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class AdminSystemResourceVoterTest extends TestCase
 {
@@ -63,10 +63,10 @@ class AdminSystemResourceVoterTest extends TestCase
     public function testVoteOnAttributeAlwaysReturnsTrue(): void
     {
         $subject = $this->createMock(ResourceInterface::class);
-        
+
         $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
         $result = $reflection->invoke($this->voter, 'some_attribute', $subject, $this->token);
-        
+
         $this->assertTrue($result);
     }
 }

@@ -73,7 +73,6 @@ abstract class UserType extends AbstractResourceType
                 'data_class' => $this->dataClass,
                 'validation_groups' => /**
                  * @return string[]
-                 *
                  * @return array<string>
                  */
                 function (FormInterface $form): array {

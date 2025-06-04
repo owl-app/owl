@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Location\Tests\Model;
 
 use Doctrine\Common\Collections\Collection;
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Location\Model\Zone;
 use Owl\Component\Location\Model\ZoneInterface;
 use Owl\Component\Location\Model\ZoneMember;
+use PHPUnit\Framework\TestCase;
 
 final class ZoneTest extends TestCase
 {
@@ -74,7 +74,7 @@ final class ZoneTest extends TestCase
         $member->setCode('PL');
 
         $this->zone->addMember($member);
-        
+
         self::assertTrue($this->zone->hasMember($member));
         self::assertCount(1, $this->zone->getMembers());
         self::assertSame($this->zone, $member->getBelongsTo());
@@ -84,10 +84,10 @@ final class ZoneTest extends TestCase
     {
         $member = new ZoneMember();
         $member->setCode('PL');
-        
+
         $this->zone->addMember($member);
         $this->zone->removeMember($member);
-        
+
         self::assertFalse($this->zone->hasMember($member));
         self::assertCount(0, $this->zone->getMembers());
         self::assertNull($member->getBelongsTo());
@@ -98,4 +98,4 @@ final class ZoneTest extends TestCase
         $this->zone->setName('European Union');
         self::assertSame('European Union', (string) $this->zone);
     }
-} 
+}

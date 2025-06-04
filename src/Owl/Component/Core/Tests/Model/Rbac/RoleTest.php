@@ -33,4 +33,4 @@ final class RoleTest extends TestCase
     {
         self::assertSame('role', $this->role->getType());
     }
-} 
+}

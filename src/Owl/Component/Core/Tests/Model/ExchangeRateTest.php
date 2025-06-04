@@ -20,4 +20,4 @@ final class ExchangeRateTest extends TestCase
     {
         self::assertInstanceOf(ExchangeRate::class, $this->exchangeRate);
     }
-} 
+}

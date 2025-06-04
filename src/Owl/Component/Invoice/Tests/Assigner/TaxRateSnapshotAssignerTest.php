@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Invoice\Assigner;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Owl\Component\Invoice\Assigner\TaxRateSnapshotAssigner;
 use Owl\Component\Invoice\Factory\InvoiceTaxRateSnapshotFactoryInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class TaxRateSnapshotAssignerTest extends TestCase
 {
@@ -38,7 +38,7 @@ class TaxRateSnapshotAssignerTest extends TestCase
         $this->taxRateSnapshotAssigner = new TaxRateSnapshotAssigner(
             $this->taxRateSnapshotRepository,
             $this->invoiceTaxRateSnapshotFactory,
-            $this->entityManager
+            $this->entityManager,
         );
     }
 

@@ -24,7 +24,6 @@ use Owl\Bundle\UserBundle\Provider\UsernameOrEmailProvider;
 use Owl\Bundle\UserBundle\Provider\UsernameProvider;
 use Owl\Bundle\UserBundle\Reloader\UserReloader;
 use Owl\Component\User\Security\Checker\TokenUniquenessChecker;
-use Owl\Component\User\Security\Generator\UniquePinGenerator;
 use Owl\Component\User\Security\Generator\UniqueTokenGenerator;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;

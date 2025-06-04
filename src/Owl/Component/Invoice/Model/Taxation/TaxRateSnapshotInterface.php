@@ -8,7 +8,7 @@ use Sylius\Resource\Model\CodeAwareInterface;
 use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableInterface;
 
-interface TaxRateSnapshotInterface extends 
+interface TaxRateSnapshotInterface extends
     CodeAwareInterface,
     ResourceInterface,
     TimestampableInterface

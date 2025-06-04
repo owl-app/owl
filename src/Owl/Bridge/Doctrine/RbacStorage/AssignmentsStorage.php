@@ -25,7 +25,6 @@ final class AssignmentsStorage implements AssignmentsStorageInterface
     /**
      * @param Connection $connection Doctrine Database connection instance.
      * @param string $tableName A name of the table for storing RBAC assignments.
-     *
      * @param non-empty-string $tableName
      */
     public function __construct(

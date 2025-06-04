@@ -396,9 +396,6 @@ class UserController extends BaseController
         return null;
     }
 
-    /**
-     * @param string|null $default
-     */
     private function getSyliusAttribute(Request $request, string $attribute, string|null $default = null)
     {
         $attributes = $request->attributes->get('_sylius');

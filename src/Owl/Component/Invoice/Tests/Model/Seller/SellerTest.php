@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Tests\Model\Seller;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Invoice\Model\Seller\Seller;
 use Owl\Component\Invoice\Model\Seller\SellerInterface;
+use PHPUnit\Framework\TestCase;
 
 class SellerTest extends TestCase
 {
@@ -106,7 +106,7 @@ class SellerTest extends TestCase
             $this->seller->getStreet(),
             $this->seller->getPostcode(),
             $this->seller->getCity(),
-            $this->seller->getCountryCode()
+            $this->seller->getCountryCode(),
         );
 
         self::assertSame('123 Main St, 00-001 Warsaw, PL', $fullAddress);

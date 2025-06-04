@@ -22,9 +22,7 @@ class ExchangeRateMetadataSubscriber implements EventSubscriber
 
         if ($metadata->getName() === ExchangeRate::class) {
             if ($metadata->hasField('ratio')) {
-                unset($metadata->fieldMappings['ratio']);
-                unset($metadata->fieldNames['ratio']);
-                unset($metadata->columnNames['ratio']);
+                unset($metadata->fieldMappings['ratio'], $metadata->fieldNames['ratio'], $metadata->columnNames['ratio']);
             }
 
             $metadata->mapField([

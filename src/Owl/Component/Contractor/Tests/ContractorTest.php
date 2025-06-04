@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Contractor\Model;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Contractor\Model\Contractor;
 use Owl\Component\Contractor\Model\ContractorInterface;
+use PHPUnit\Framework\TestCase;
 
 class ContractorTest extends TestCase
 {

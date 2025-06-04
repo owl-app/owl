@@ -17,4 +17,4 @@ trait NotificationAwareTrait
     {
         $this->notification = $notification;
     }
-} 
+}

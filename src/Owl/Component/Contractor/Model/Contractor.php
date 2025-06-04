@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Owl\Component\Contractor\Model;
 
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Resource\Model\TimestampableTrait;
 
 class Contractor implements ContractorInterface

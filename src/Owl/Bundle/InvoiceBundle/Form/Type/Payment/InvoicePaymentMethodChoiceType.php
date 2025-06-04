@@ -16,8 +16,8 @@ final class InvoicePaymentMethodChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => array_combine(
-                    array_map(fn($case) => 'owl.invoice.payment.methods.' . $case->value, InvoicePaymentMethodEnum::cases()),
-                    array_map(fn($case) => $case->value, InvoicePaymentMethodEnum::cases())
+                    array_map(fn ($case) => 'owl.invoice.payment.methods.' . $case->value, InvoicePaymentMethodEnum::cases()),
+                    array_map(fn ($case) => $case->value, InvoicePaymentMethodEnum::cases()),
                 ),
             ])
         ;

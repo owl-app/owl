@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Location\Tests\Model;
 
 use Doctrine\Common\Collections\Collection;
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Location\Model\Country;
 use Owl\Component\Location\Model\CountryInterface;
 use Owl\Component\Location\Model\Province;
+use PHPUnit\Framework\TestCase;
 
 final class CountryTest extends TestCase
 {
@@ -108,4 +108,4 @@ final class CountryTest extends TestCase
         $this->country->setCode('PL');
         self::assertSame('Poland', (string) $this->country);
     }
-} 
+}

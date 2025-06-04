@@ -54,9 +54,6 @@ class Locale implements LocaleInterface
         $this->code = $code;
     }
 
-    /**
-     * @return string
-     */
     public function getName(?string $locale = null): ?string
     {
         return Locales::getName($this->getCode(), $locale);

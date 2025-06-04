@@ -21,8 +21,8 @@ final class PeriodFilterType extends AbstractType
         $builder
             ->add('type', ChoiceType::class, [
                 'choices' => array_combine(
-                    array_map(fn($case) => 'owl.grid.filter.period.type_' . $case->value, PeriodTypeEnum::cases()),
-                    array_map(fn($case) => $case->value, PeriodTypeEnum::cases())
+                    array_map(fn ($case) => 'owl.grid.filter.period.type_' . $case->value, PeriodTypeEnum::cases()),
+                    array_map(fn ($case) => $case->value, PeriodTypeEnum::cases()),
                 ),
             ])
         ;

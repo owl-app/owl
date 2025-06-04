@@ -61,7 +61,7 @@ class LineDataCalculator
      */
     public static function calculateTaxFromMinor(int $subtotal, ?float $taxRate, bool $toMinor = true): int|float
     {
-        if (is_null($taxRate)) {
+        if (null === $taxRate) {
             return 0;
         }
 
@@ -102,7 +102,7 @@ class LineDataCalculator
 
         return [
             $toMinor ? $unitPrice : CurrencyConverter::toMajor($unitPrice),
-            $toMinor ? $subtotal : CurrencyConverter::toMajor($subtotal)
+            $toMinor ? $subtotal : CurrencyConverter::toMajor($subtotal),
         ];
     }
 
@@ -116,10 +116,11 @@ class LineDataCalculator
     private static function isNotEmpty(array $array): bool
     {
         foreach ($array as $value) {
-            if (empty($value) || is_null($value)) {
+            if (empty($value) || null === $value) {
                 return false;
             }
         }
+
         return true;
     }
 }

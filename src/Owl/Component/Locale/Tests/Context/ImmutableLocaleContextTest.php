@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Locale\Tests\Context;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Locale\Context\ImmutableLocaleContext;
+use PHPUnit\Framework\TestCase;
 
 class ImmutableLocaleContextTest extends TestCase
 {
@@ -21,4 +21,4 @@ class ImmutableLocaleContextTest extends TestCase
         $this->assertEquals('en_US', $localeContext->getLocaleCode());
         $this->assertEquals('en_US', $localeContext->getLocaleCode());
     }
-} 
+}

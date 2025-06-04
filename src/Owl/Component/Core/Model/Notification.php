@@ -15,17 +15,13 @@ class Notification extends BaseNotification implements NotificationInterface
     /** @var BaseUserInterface */
     protected $user;
 
-    /**
-     * @var Collection<array-key, FileInterface>
-     */
+    /** @var Collection<array-key, FileInterface> */
     protected $files;
 
     /** @var string */
     protected $assignedGroup;
 
-    /**
-     * @var Collection<array-key, NotificationAcceptedInterface>
-     */
+    /** @var Collection<array-key, NotificationAcceptedInterface> */
     protected $acceptedNotifications;
 
     public function __construct()
@@ -54,9 +50,6 @@ class Notification extends BaseNotification implements NotificationInterface
         $this->files->removeElement($file);
     }
 
-    /**
-     * @return BaseUserInterface
-     */
     public function getUser(): ?BaseUserInterface
     {
         return $this->user;

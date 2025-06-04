@@ -40,4 +40,4 @@ final class RoleSettingTest extends TestCase
         $this->roleSetting->setRole($role);
         self::assertSame($role, $this->roleSetting->getRole());
     }
-} 
+}

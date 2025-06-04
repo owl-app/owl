@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Core\Authorization\Voter;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Owl\Component\Core\Authorization\Voter\OwnerUserVoter;
 use Owl\Component\Core\Context\AdminUserContextInterface;
-use Owl\Component\Core\Model\Authorization\OwnerableUserInterface;
 use Owl\Component\Core\Model\AdminUserInterface;
+use Owl\Component\Core\Model\Authorization\OwnerableUserInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class OwnerUserVoterTest extends TestCase
 {
     private OwnerUserVoter $voter;
+
     private AdminUserContextInterface&MockObject $adminUserContext;
+
     private TokenInterface&MockObject $token;
 
     protected function setUp(): void
@@ -63,37 +65,37 @@ class OwnerUserVoterTest extends TestCase
     {
         $adminUser = $this->createMock(AdminUserInterface::class);
         $adminUser->method('getId')->willReturn(42);
-        
+
         $ownerUser = $this->createMock(AdminUserInterface::class);
         $ownerUser->method('getId')->willReturn(42);
-        
+
         $subject = $this->createMock(OwnerableUserInterface::class);
         $subject->method('getUser')->willReturn($ownerUser);
-        
+
         $this->adminUserContext->method('getUser')->willReturn($adminUser);
-        
+
         $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
         $result = $reflection->invoke($this->voter, 'some_attribute', $subject, $this->token);
-        
+
         $this->assertTrue($result);
     }
-    
+
     public function testVoteOnAttributeWithDifferentUser(): void
     {
         $adminUser = $this->createMock(AdminUserInterface::class);
         $adminUser->method('getId')->willReturn(42);
-        
+
         $ownerUser = $this->createMock(AdminUserInterface::class);
         $ownerUser->method('getId')->willReturn(24);
-        
+
         $subject = $this->createMock(OwnerableUserInterface::class);
         $subject->method('getUser')->willReturn($ownerUser);
-        
+
         $this->adminUserContext->method('getUser')->willReturn($adminUser);
-        
+
         $reflection = new \ReflectionMethod($this->voter, 'voteOnAttribute');
         $result = $reflection->invoke($this->voter, 'some_attribute', $subject, $this->token);
-        
+
         $this->assertFalse($result);
     }
 }

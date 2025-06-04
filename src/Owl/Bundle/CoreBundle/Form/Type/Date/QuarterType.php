@@ -16,8 +16,8 @@ final class QuarterType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => array_combine(
-                array_map(fn($case) => 'owl.grid.filter.period.quarter_type_q' . $case->value, PeriodQuarterEnum::cases()),
-                array_map(fn($case) => $case->value, PeriodQuarterEnum::cases())
+                array_map(fn ($case) => 'owl.grid.filter.period.quarter_type_q' . $case->value, PeriodQuarterEnum::cases()),
+                array_map(fn ($case) => $case->value, PeriodQuarterEnum::cases()),
             ),
             'empty_data' => PeriodQuarterEnum::fromDate(new DateTime())->value,
         ]);

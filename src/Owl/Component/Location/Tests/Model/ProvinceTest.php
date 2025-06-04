@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Location\Tests\Model;
 
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Location\Model\CountryInterface;
 use Owl\Component\Location\Model\Province;
 use Owl\Component\Location\Model\ProvinceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 final class ProvinceTest extends TestCase
 {
@@ -69,4 +69,4 @@ final class ProvinceTest extends TestCase
         $this->province->setName('Mazowieckie');
         self::assertSame('Mazowieckie', (string) $this->province);
     }
-} 
+}

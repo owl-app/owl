@@ -21,8 +21,8 @@ final class InvoiceNumberingType extends AbstractType
     {
         $builder
             ->add('serie', ChoiceType::class, [
-                'label' =>false,
-                'choices' =>  $this->getSeriesChoices($options['series']),
+                'label' => false,
+                'choices' => $this->getSeriesChoices($options['series']),
                 'expanded' => true,
                 'multiple' => false,
                 'choice_attr' => function (): array {
@@ -30,8 +30,7 @@ final class InvoiceNumberingType extends AbstractType
                         'data-invoice-available-series-target' => 'serieRadio',
                     ];
                 },
-                'help_translation_parameters' => $this->getHelpTranslations($options['series'])
-    
+                'help_translation_parameters' => $this->getHelpTranslations($options['series']),
             ])
             ->add('number', TextType::class, [
                 'label' => 'owl.ui.number',
@@ -63,7 +62,7 @@ final class InvoiceNumberingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'series' => []
+            'series' => [],
         ]);
     }
 
@@ -76,7 +75,7 @@ final class InvoiceNumberingType extends AbstractType
     {
         $options = [];
 
-        foreach($series as $serie) {
+        foreach ($series as $serie) {
             $options[$serie['format']] = $serie['id'];
         }
 
@@ -94,16 +93,16 @@ final class InvoiceNumberingType extends AbstractType
                 'increment_type' => 'owl.ui.invoice.increment.' . $serie['sequenceIncrement'],
                 'from' => [
                     'text' => 'owl.ui.system',
-                    'color' => 'text-secondary'
-                ]
+                    'color' => 'text-secondary',
+                ],
             ];
         }
         $translations['serie_'] = [
             'increment_type' => '',
             'from' => [
                 'text' => 'owl.ui.not_recommended',
-                'color' => 'text-danger'
-            ]
+                'color' => 'text-danger',
+            ],
         ];
 
         return $translations;

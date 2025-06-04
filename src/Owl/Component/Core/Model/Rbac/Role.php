@@ -11,7 +11,6 @@ class Role extends BaseRole implements RoleInterface
     /** @var RoleSettingInterface */
     protected $setting;
 
-
     public function __toString(): string
     {
         return (string) $this->getSetting()?->getDisplayName();
@@ -30,9 +29,6 @@ class Role extends BaseRole implements RoleInterface
         return $this->getName();
     }
 
-    /**
-     * @return RoleSettingInterface
-     */
     public function getSetting(): ?RoleSettingInterface
     {
         return $this->setting;

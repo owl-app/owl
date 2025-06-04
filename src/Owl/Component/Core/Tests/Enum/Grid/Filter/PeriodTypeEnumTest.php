@@ -16,4 +16,4 @@ final class PeriodTypeEnumTest extends TestCase
         self::assertSame('quarter', PeriodTypeEnum::TYPE_QUARTER->value);
         self::assertSame('year', PeriodTypeEnum::TYPE_YEAR->value);
     }
-} 
+}

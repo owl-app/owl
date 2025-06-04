@@ -14,7 +14,6 @@ class InvoiceGridFilterComponent
 {
     use TemplatePropTrait;
     use PeriodGridFilterComponentTrait;
-
     use GridFilterComponentTrait {
         initialize as public __construct;
     }

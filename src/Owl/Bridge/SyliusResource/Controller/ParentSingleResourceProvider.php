@@ -22,7 +22,6 @@ final class ParentSingleResourceProvider implements ParentSingleResourceProvider
 
     /**
      * @return \Sylius\Component\Resource\Model\ResourceInterface[]
-     *
      * @return array<string, \Sylius\Component\Resource\Model\ResourceInterface>
      */
     public function get(RequestConfiguration $requestConfiguration): array

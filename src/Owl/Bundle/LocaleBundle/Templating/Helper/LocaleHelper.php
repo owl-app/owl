@@ -36,9 +36,6 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
         $this->localeContext = $localeContext;
     }
 
-    /**
-     * @return string
-     */
     public function convertCodeToName(string $code, ?string $localeCode = null): ?string
     {
         try {

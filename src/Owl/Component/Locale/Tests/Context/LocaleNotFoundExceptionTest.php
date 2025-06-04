@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Locale\Tests\Context;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Locale\Context\LocaleNotFoundException;
+use PHPUnit\Framework\TestCase;
 
 class LocaleNotFoundExceptionTest extends TestCase
 {
@@ -32,7 +32,7 @@ class LocaleNotFoundExceptionTest extends TestCase
         $exception = LocaleNotFoundException::notAvailable('fr_FR', ['en_US', 'de_DE']);
         $this->assertEquals(
             'Locale "fr_FR" is not available! The available ones are: "en_US", "de_DE".',
-            $exception->getMessage()
+            $exception->getMessage(),
         );
     }
 
@@ -42,4 +42,4 @@ class LocaleNotFoundExceptionTest extends TestCase
         $exception = new LocaleNotFoundException(null, $previousException);
         $this->assertSame($previousException, $exception->getPrevious());
     }
-} 
+}

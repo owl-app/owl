@@ -21,7 +21,7 @@ class SellerSnapshotByCompanyAssigner implements SnapshotAssignerInterface
     {
         if ($invoice->isCompanyChanged()) {
             $invoice->setSeller(
-                $this->sellerFactory->createFromCompany($invoice->getCompany())
+                $this->sellerFactory->createFromCompany($invoice->getCompany()),
             );
 
             $this->decoratedBuyerSnapshotRepository->assign($invoice);

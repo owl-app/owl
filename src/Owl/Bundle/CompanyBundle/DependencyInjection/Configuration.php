@@ -7,7 +7,6 @@ namespace Owl\Bundle\CompanyBundle\DependencyInjection;
 use Owl\Bridge\SyliusResource\Controller\BaseController;
 use Owl\Bundle\CompanyBundle\Form\Type\CompanyType;
 use Owl\Component\Company\Model\Company;
-use Owl\Component\Company\Model\CompanyInterface;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;

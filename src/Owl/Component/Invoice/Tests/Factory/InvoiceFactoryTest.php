@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Invoice\Factory;
 
 use DateTimeImmutable;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Resource\Factory\FactoryInterface;
 use Owl\Component\Invoice\Factory\InvoiceFactory;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
@@ -16,6 +12,10 @@ use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
 use Owl\Component\Invoice\Provider\InvoiceSerieProviderInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 class InvoiceFactoryTest extends TestCase
 {
@@ -54,7 +54,7 @@ class InvoiceFactoryTest extends TestCase
             $this->decoratedFactory,
             $this->registryInvoiceSequenceStrategy,
             $this->invoiceNumberGenerator,
-            $this->invoiceSerieProvider
+            $this->invoiceSerieProvider,
         );
     }
 

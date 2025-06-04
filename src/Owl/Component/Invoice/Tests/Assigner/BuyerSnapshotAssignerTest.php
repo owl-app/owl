@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Invoice\Assigner;
 
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\UnitOfWork;
 use Owl\Component\Invoice\Assigner\BuyerSnapshotAssigner;
 use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class BuyerSnapshotAssignerTest extends TestCase
@@ -37,7 +37,7 @@ class BuyerSnapshotAssignerTest extends TestCase
 
         $this->buyerSnapshotAssigner = new BuyerSnapshotAssigner(
             $this->entityManager,
-            $this->buyerSnapshotRepository
+            $this->buyerSnapshotRepository,
         );
     }
 

@@ -33,7 +33,7 @@ final class YearType extends AbstractType
         $currentYear = (int) date('Y');
         $years = [];
 
-        for ($i = $currentYear - 5; $i <= $currentYear + 1; $i++) {
+        for ($i = $currentYear - 5; $i <= $currentYear + 1; ++$i) {
             $years[$i] = $i;
         }
 

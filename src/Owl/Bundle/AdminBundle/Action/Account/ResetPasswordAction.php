@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Action\Account;
 
-use Owl\Bundle\CoreBundle\Command\Admin\Account\ResetPassword;
 use Owl\Bundle\AdminBundle\Form\Model\PasswordReset;
 use Owl\Bundle\AdminBundle\Form\Type\ResetPasswordType;
+use Owl\Bundle\CoreBundle\Command\Admin\Account\ResetPassword;
 use Owl\Bundle\CoreBundle\Extractor\FormErrorExtractor;
 use Owl\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Owl\Component\Core\Factory\Http\RedirectResponseFactoryInterface;

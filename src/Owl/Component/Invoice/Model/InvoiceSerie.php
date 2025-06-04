@@ -27,7 +27,7 @@ class InvoiceSerie implements InvoiceSerieInterface
     /** @var string|null */
     protected $sequenceIncrement;
 
-    /** @var boolean */
+    /** @var bool */
     protected $isDefault = false;
 
     /** @var Collection<array-key, SequenceInterface> */

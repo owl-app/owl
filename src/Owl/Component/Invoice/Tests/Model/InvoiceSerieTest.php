@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Model;
 
-use PHPUnit\Framework\TestCase;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Owl\Component\Invoice\Model\InvoiceSerie;
-use Owl\Component\Invoice\Model\InvoiceSerieInterface;
+use PHPUnit\Framework\TestCase;
 
 class InvoiceSerieTest extends TestCase
 {

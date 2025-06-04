@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\CoreBundle\Mailer;
 
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Owl\Component\User\Model\UserInterface;
+use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class ResetPasswordEmailManager implements ResetPasswordEmailManagerInterface
 {

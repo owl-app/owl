@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace Tests\Owl\Component\Invoice\Provider;
 
 use Owl\Component\Invoice\Enum\InvoiceTypeEnum;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Provider\DefaultInvoiceSerieProvider;
 use Owl\Component\Invoice\Provider\InvoiceSerieProviderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class DefaultInvoiceSerieProviderTest extends TestCase
 {
     private RepositoryInterface&MockObject $serieRepository;
+
     private InvoiceSerieProviderInterface $provider;
 
     protected function setUp(): void

@@ -7,8 +7,8 @@ namespace Owl\Component\Location\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Owl\Component\Location\Model\CountryCodeAwareInterface;
 use Owl\Component\Location\Model\ProvinceCodeAwareInterface;
-use Owl\Component\Location\Model\ZoneInterface as ModelZoneInterface;
 use Owl\Component\Location\Model\ZoneInterface;
+use Owl\Component\Location\Model\ZoneInterface as ModelZoneInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**

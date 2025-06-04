@@ -31,10 +31,12 @@ final class GenerateNumberInvoiceListener
             return;
         }
 
-        $invoice->setFullNumber($this->invoiceNumberGenerator->generate(
-            $serie->getFormat(),
-            $invoice->getSequenceNumber(),
-            $invoice->getIssueDate())
+        $invoice->setFullNumber(
+            $this->invoiceNumberGenerator->generate(
+                $serie->getFormat(),
+                $invoice->getSequenceNumber(),
+                $invoice->getIssueDate(),
+            ),
         );
     }
 }

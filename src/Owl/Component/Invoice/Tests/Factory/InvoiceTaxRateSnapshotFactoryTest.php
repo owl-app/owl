@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Invoice\Factory;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Resource\Exception\UnsupportedMethodException;
-use Sylius\Resource\Factory\FactoryInterface;
 use Owl\Component\Invoice\Factory\InvoiceTaxRateSnapshotFactory;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Resource\Exception\UnsupportedMethodException;
+use Sylius\Resource\Factory\FactoryInterface;
 
 class InvoiceTaxRateSnapshotFactoryTest extends TestCase
 {
@@ -30,7 +30,7 @@ class InvoiceTaxRateSnapshotFactoryTest extends TestCase
     {
         $this->expectException(UnsupportedMethodException::class);
         $this->expectExceptionMessage('createNew');
-        
+
         $this->factory->createNew();
     }
 
@@ -47,17 +47,17 @@ class InvoiceTaxRateSnapshotFactoryTest extends TestCase
         $this->snapshot->expects(self::once())
             ->method('setCode')
             ->with($code);
-        
+
         $this->snapshot->expects(self::once())
             ->method('setName')
             ->with($name);
-        
+
         $this->snapshot->expects(self::once())
             ->method('setAmount')
             ->with($amount);
 
         $result = $this->factory->create($code, $name, $amount);
-        
+
         self::assertSame($this->snapshot, $result);
     }
 }

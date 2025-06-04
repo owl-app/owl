@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Invoice\Model;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\Sequence;
 use Owl\Component\Invoice\Model\SequenceInterface;
+use PHPUnit\Framework\TestCase;
 
 class SequenceTest extends TestCase
 {

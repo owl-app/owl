@@ -47,4 +47,4 @@ final class CompanyTest extends TestCase
         $this->company->setCurrency($currency);
         self::assertSame($currency, $this->company->getCurrency());
     }
-} 
+}

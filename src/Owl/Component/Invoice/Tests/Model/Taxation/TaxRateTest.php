@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Invoice\Model\Taxation;
 
-use PHPUnit\Framework\TestCase;
 use Doctrine\Common\Collections\Collection;
 use Owl\Component\Invoice\Model\Taxation\TaxRate;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Owl\Component\Location\Model\ZoneInterface;
+use PHPUnit\Framework\TestCase;
 
 class TaxRateTest extends TestCase
 {

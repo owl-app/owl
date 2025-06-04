@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Owl\Component\Location\Provider;
 
-use Owl\Component\Location\Model\AddressInterface;
 use Owl\Component\Location\Model\ProvinceCodeAwareInterface;
 
 interface ProvinceNamingProviderInterface

@@ -28,4 +28,4 @@ final class ContractorTest extends TestCase
         $this->contractor->setCurrency($currency);
         self::assertSame($currency, $this->contractor->getCurrency());
     }
-} 
+}

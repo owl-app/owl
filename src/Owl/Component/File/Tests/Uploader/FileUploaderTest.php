@@ -16,7 +16,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 final class FileUploaderTest extends TestCase
 {
     private Filesystem&MockObject $filesystem;
+
     private FilePathGeneratorInterface&MockObject $pathGenerator;
+
     private FileUploader $uploader;
 
     protected function setUp(): void
@@ -64,7 +66,7 @@ final class FileUploaderTest extends TestCase
 
         $this->filesystem->expects($this->once())->method('write')->with(
             'safe/path',
-            $this->isString()
+            $this->isString(),
         );
 
         $this->uploader->upload($file);
@@ -96,7 +98,7 @@ final class FileUploaderTest extends TestCase
 
         $this->filesystem->expects($this->once())->method('write')->with(
             'new/path',
-            $this->isString()
+            $this->isString(),
         );
 
         $this->uploader->upload($file);
@@ -129,19 +131,20 @@ final class FileUploaderTest extends TestCase
         $this->filesystem->expects($this->exactly(2))
             ->method('has')
             ->willReturnCallback(function ($path) use (&$calls) {
-                $calls++;
+                ++$calls;
                 if ($calls === 1 && $path === 'collision/path') {
                     return true;
                 }
                 if ($calls === 2 && $path === 'ok/path') {
                     return false;
                 }
+
                 return false;
             });
 
         $this->filesystem->expects($this->once())->method('write')->with(
             'ok/path',
-            $this->isString()
+            $this->isString(),
         );
 
         $this->uploader->upload($file);

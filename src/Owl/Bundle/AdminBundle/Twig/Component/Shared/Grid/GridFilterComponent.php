@@ -11,7 +11,6 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 class GridFilterComponent
 {
     use TemplatePropTrait;
-
     use GridFilterComponentTrait {
         initialize as public __construct;
     }

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Locale\Model;
 
-use PHPUnit\Framework\TestCase;
 use Owl\Component\Locale\Model\Locale;
 use Owl\Component\Locale\Model\LocaleInterface;
+use PHPUnit\Framework\TestCase;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 final class LocaleTest extends TestCase
@@ -82,4 +82,4 @@ final class LocaleTest extends TestCase
     {
         self::assertNull($this->locale->getUpdatedAt());
     }
-} 
+}

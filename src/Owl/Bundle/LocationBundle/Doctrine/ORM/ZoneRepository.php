@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\LocationBundle\Doctrine\ORM;
 
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\QueryBuilder;
 use Owl\Component\Location\Model\CountryCodeAwareInterface;
 use Owl\Component\Location\Model\ProvinceCodeAwareInterface;
