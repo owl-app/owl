@@ -140,7 +140,8 @@
         "owl/status-bundle": "self.version",
         "owl/suggestion-bundle": "self.version",
         "owl/ui-bundle": "self.version",
-        "owl/user-bundle": "self.version"
+        "owl/user-bundle": "self.version",
+        "owl/status": "self.version"
     }, 
     "require-dev": {
         "behat/behat": "^3.11",
@@ -222,7 +223,6 @@
         },
         "exclude-from-classmap": [
             "src/Owl/*/*/Tests/",
-            "src/Owl/Component/Core/Test/Tests/",
             "src/Owl/*/*/test/"
         ],
         "classmap": [

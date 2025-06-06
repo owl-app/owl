@@ -21,7 +21,7 @@ final class DateFilter implements FilterInterface
 
         $field = (string) $this->getOption($options, 'field', $name);
 
-        $from = $data['from'];
+        $from = $data['from'] ?? null;
         if ($from) {
             $inclusive = (bool) $this->getOption($options, 'inclusive_from', self::DEFAULT_INCLUSIVE_FROM);
             if (true === $inclusive) {
@@ -31,7 +31,7 @@ final class DateFilter implements FilterInterface
             }
         }
 
-        $to = $data['to'];
+        $to = $data['to'] ?? null;
         if ($to) {
             $inclusive = (bool) $this->getOption($options, 'inclusive_to', self::DEFAULT_INCLUSIVE_TO);
             if (true === $inclusive) {

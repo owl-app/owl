@@ -13,7 +13,7 @@ abstract class BaseAuthItem implements AuthItemInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $name;
 
     /** @var string */
@@ -35,7 +35,7 @@ abstract class BaseAuthItem implements AuthItemInterface
         return $this->name;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }

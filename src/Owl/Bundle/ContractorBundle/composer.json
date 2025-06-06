@@ -17,7 +17,7 @@
         "php": "^7.4 || ^8.0",
         "owl/locale": "^1.0",
         "sylius/resource-bundle": "^1.7",
-        "symfony/framework-bundle": "^4.4 || ^5.2",
+        "symfony/framework-bundle": "^4.4 || ^5.2"
     },
     "conflict": {
         "twig/twig": "^1.0"

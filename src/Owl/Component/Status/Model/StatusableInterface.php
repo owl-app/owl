@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Owl\Component\Status\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Resource\Model\ResourceInterface;
 
-interface StatusableInterface
+interface StatusableInterface extends ResourceInterface
 {
     public function getStatus(): string;
 

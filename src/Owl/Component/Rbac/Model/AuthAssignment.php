@@ -13,7 +13,7 @@ class AuthAssignment implements AuthAssignmentInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $itemName;
 
     /** @var string */
@@ -24,7 +24,7 @@ class AuthAssignment implements AuthAssignmentInterface
         $this->createdAt = new \DateTime();
     }
 
-    public function getItemName(): string
+    public function getItemName(): ?string
     {
         return $this->itemName;
     }

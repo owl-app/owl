@@ -14,10 +14,11 @@
         }
     ],
     "require": {
-        "php": "^7.3",
-        "sylius/resource": "^1.7"
+        "php": "^8.2",
+        "sylius/resource": "^1.13"
     },
     "require-dev": {
+        "phpunit/phpunit": "^12.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -29,6 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Tests\\Owl\\Component\\Status\\": "Tests/"
         }
     },
     "repositories": [

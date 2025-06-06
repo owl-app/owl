@@ -8,7 +8,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface AuthItemInterface extends ResourceInterface
 {
-    public function getName(): string;
+    public function getName(): ?string;
 
     public function setName(string $name): void;
 
