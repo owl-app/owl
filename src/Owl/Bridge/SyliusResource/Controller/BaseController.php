@@ -31,6 +31,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 /**
  * @property AuthorizationCheckerInterface $authorizationChecker
@@ -82,6 +84,7 @@ class BaseController extends ResourceController
 
     public function showAction(Request $request): Response
     {
+        /** @var RequestConfiguration $configuration */
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $resource = $this->findOr404($configuration);
@@ -106,6 +109,7 @@ class BaseController extends ResourceController
 
     public function indexAction(Request $request): Response
     {
+        /** @var RequestConfiguration $configuration */
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
@@ -135,6 +139,7 @@ class BaseController extends ResourceController
 
     public function createAction(Request $request): Response
     {
+        /** @var RequestConfiguration $configuration */
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $resourceParents = $this->findParents($configuration);
@@ -145,7 +150,6 @@ class BaseController extends ResourceController
         $form = $this->resourceFormFactory->create($configuration, $newResource);
         $form->handleRequest($request);
 
-        /** @var RequestConfiguration $configuration */
         if ($configuration->isAjaxRequest() && $form->isSubmitted() && !$form->isValid()) {
             try {
                 return $this->eventAjaxValidation($configuration, $form);
@@ -186,7 +190,6 @@ class BaseController extends ResourceController
 
             $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
-            /** @var RequestConfiguration $configuration */
             if ($configuration->isAjaxRequest()) {
                 return $this->createAjaxView($configuration, $newResource, Response::HTTP_OK);
             }
@@ -225,6 +228,7 @@ class BaseController extends ResourceController
 
     public function updateAction(Request $request): Response
     {
+        /** @var RequestConfiguration $configuration */
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $resource = $this->findOr404($configuration);
@@ -404,7 +408,7 @@ class BaseController extends ResourceController
         throw new InvalidResponseException('Event must be stopped');
     }
 
-    protected function createAjaxView(RequestConfiguration $configuration, \Sylius\Component\Resource\Model\ResourceInterface|null $data = null, int $statusCode = null): Response
+    protected function createAjaxView(RequestConfiguration $configuration, ?ResourceInterface $data = null, ?int $statusCode = null): Response
     {
         if (null === $this->viewHandler) {
             throw new \LogicException('You can not use the "non-html" request if FriendsOfSymfony Rest Bundle is not available. Try running "composer require friendsofsymfony/rest-bundle".');
@@ -419,7 +423,7 @@ class BaseController extends ResourceController
     }
 
     /**
-     * @return array<int<0, max>|string, mixed>
+     * @return array<string, mixed>
      */
     protected function getErrorMessages(FormInterface $form): array
     {
@@ -439,7 +443,7 @@ class BaseController extends ResourceController
         return $errors;
     }
 
-    protected function isGrantedOr403(SyliusRequestConfiguration $configuration, string $permission, \Sylius\Component\Resource\Model\ResourceInterface|null $resource = null): void
+    protected function isGrantedOr403(SyliusRequestConfiguration $configuration, string $permission, ?ResourceInterface $resource = null): void
     {
         if (!$configuration->hasPermission()) {
             return;
@@ -450,6 +454,9 @@ class BaseController extends ResourceController
         }
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function findParents(RequestConfiguration $configuration): array
     {
         if (!$this->container->has('owl.resource_controller.parent_single_resource_provider')) {
@@ -462,13 +469,20 @@ class BaseController extends ResourceController
         return $this->container->get('owl.resource_controller.parent_single_resource_provider')->get($configuration);
     }
 
+    /**
+     * @return array<array<string, mixed>>
+     */
     protected function getMessagesFlashBag(RequestConfiguration $configuration): array
     {
         /** @var TranslatorInterface $translator */
         $translator = $this->container->get('translator');
         $translatedFlashes = [];
 
-        foreach ($configuration->getRequest()->getSession()->getFlashBag()->all() as $type => $messages) {
+        $session = $configuration->getRequest()->getSession();
+        /** @var FlashBagInterface $flashBag */
+        $flashBag = $session->getBag('flashes');
+
+        foreach ($flashBag->all() as $type => $messages) {
             foreach ($messages as $data) {
                 if (is_array($data) && isset($data['message'])) {
                     $translated = $translator->trans($data['message'], $data['parameters'] ?? [], 'flashes');

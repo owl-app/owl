@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Owl\Bridge\SyliusResource\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration as SyliusRequestConfiguration;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +23,7 @@ final class RedirectHandler implements RedirectHandlerInterface
     }
 
     /**
-     * @param RequestConfiguration $configuration
+     * @param SyliusRequestConfiguration $configuration
      */
     public function redirectToResource(SyliusRequestConfiguration $configuration, ResourceInterface $resource): Response
     {
@@ -49,7 +49,7 @@ final class RedirectHandler implements RedirectHandlerInterface
     }
 
     /**
-     * @param RequestConfiguration $configuration
+     * @param SyliusRequestConfiguration $configuration
      */
     public function redirectToIndex(SyliusRequestConfiguration $configuration, ?ResourceInterface $resource = null): Response
     {
@@ -61,7 +61,8 @@ final class RedirectHandler implements RedirectHandlerInterface
     }
 
     /**
-     * @param RequestConfiguration $configuration
+     * @param SyliusRequestConfiguration $configuration
+     * @param array<string, mixed> $parameters
      */
     public function redirectToRoute(SyliusRequestConfiguration $configuration, string $route, array $parameters = []): Response
     {
@@ -73,7 +74,7 @@ final class RedirectHandler implements RedirectHandlerInterface
     }
 
     /**
-     * @param RequestConfiguration $configuration
+     * @param SyliusRequestConfiguration $configuration
      */
     public function redirect(SyliusRequestConfiguration $configuration, string $url, int $status = 302): Response
     {
@@ -87,7 +88,7 @@ final class RedirectHandler implements RedirectHandlerInterface
     }
 
     /**
-     * @param RequestConfiguration $configuration
+     * @param SyliusRequestConfiguration $configuration
      */
     public function redirectToReferer(SyliusRequestConfiguration $configuration): Response
     {
@@ -95,7 +96,6 @@ final class RedirectHandler implements RedirectHandlerInterface
     }
 
     /**
-     * @return string[]
      * @return array{'X-OWL-LOCATION': string}
      */
     public function getRedirectHeaders(SyliusRequestConfiguration $configuration, ?ResourceInterface $resource): array

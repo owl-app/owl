@@ -9,5 +9,5 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration as SyliusReques
 
 interface AuthorizationCheckerInterface extends SyliusAuthorizationCheckerInterface
 {
-    public function isGranted(SyliusRequestConfiguration $configuration, $permission = null): bool;
+    public function isGranted(SyliusRequestConfiguration $configuration, mixed $permission = null): bool;
 }
