@@ -7,9 +7,10 @@ namespace Owl\Bridge\SyliusResource\Controller;
 use LogicException;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\ItemProviderInterface;
 use Sylius\Component\Registry\ServiceRegistry;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\Registry;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sylius\Resource\Model\ResourceInterface;
 
 final class ParentSingleResourceProvider implements ParentSingleResourceProviderInterface
 {
@@ -21,8 +22,7 @@ final class ParentSingleResourceProvider implements ParentSingleResourceProvider
     }
 
     /**
-     * @return \Sylius\Component\Resource\Model\ResourceInterface[]
-     * @return array<string, \Sylius\Component\Resource\Model\ResourceInterface>
+     * @return array<string, ResourceInterface>
      */
     public function get(RequestConfiguration $requestConfiguration): array
     {
@@ -56,6 +56,10 @@ final class ParentSingleResourceProvider implements ParentSingleResourceProvider
         return $resourceParents;
     }
 
+    /**
+     * @param array<string, mixed> $resourceParent
+     * @throws \LogicException
+     */
     private function getMetadata(array $resourceParent): MetadataInterface
     {
         if (!isset($resourceParent['resource'])) {
@@ -65,7 +69,11 @@ final class ParentSingleResourceProvider implements ParentSingleResourceProvider
         return $this->resourceRegistry->get($resourceParent['resource']);
     }
 
-    private function getRepositoryParam(array $resourceParent, string $param)
+    /**
+     * @param array<string, mixed> $resourceParent
+     * @throws \LogicException
+     */
+    private function getRepositoryParam(array $resourceParent, string $param): mixed
     {
         if (!isset($resourceParent['repository'][$param])) {
             throw new LogicException(sprintf('Not set %s repository to parent resource', $param));

@@ -439,7 +439,7 @@ final class ItemsStorage implements ItemsStorageInterface
     /**
      * Gets all child permissions for a given permission or role name(s).
      *
-     * @param string|array $names A single permission or role name, or an array of names.
+     * @param string|array<string> $names A single permission or role name, or an array of names.
      *
      * @return array<string, Permission> An associative array of child permissions indexed by their names.
      */
@@ -457,7 +457,7 @@ final class ItemsStorage implements ItemsStorageInterface
     /**
      * Gets all child roles for a given role or permission name(s).
      *
-     * @param string|array $names A single role or permission name, or an array of names.
+     * @param string|array<string> $names A single role or permission name, or an array of names.
      *
      * @return array<string, Role> An associative array of child roles indexed by their names.
      */

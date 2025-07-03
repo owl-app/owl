@@ -19,6 +19,11 @@ class RequestConfiguration extends SyliusRequestConfiguration
         return false;
     }
 
+    /**
+     * Returns the serialization groups for AJAX requests.
+     *
+     * @return string[] The serialization groups to use for AJAX responses.
+     */
     public function getAjaxSerializationGroups(): array
     {
         $vars = $this->getVars();
@@ -82,7 +87,7 @@ class RequestConfiguration extends SyliusRequestConfiguration
         return (bool) $redirect['header'];
     }
 
-    public function getParents()
+    public function getParents(): mixed
     {
         $parameters = $this->getParameters();
 

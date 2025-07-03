@@ -6,8 +6,8 @@ namespace Owl\Bridge\SyliusResource\Controller;
 
 use Owl\Bridge\SyliusResource\Factory\Resource\ParentableFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 final class NewResourceFactory implements NewResourceFactoryInterface
 {

@@ -7,7 +7,7 @@ namespace Owl\Bridge\SyliusResource\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface as SyliusEventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration as SyliusRequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface as SymfonyEventDispatcherInterface;
 
@@ -75,7 +75,6 @@ final class EventDispatcher implements EventDispatcherInterface
         SyliusRequestConfiguration $requestConfiguration,
         FormInterface $form,
     ): ResourceControllerEvent {
-        $eventName = $eventName;
         $addtionalName = $requestConfiguration->getAjaxValidationEventName();
         $metadata = $requestConfiguration->getMetadata();
         $event = new ResourceControllerEvent($form);

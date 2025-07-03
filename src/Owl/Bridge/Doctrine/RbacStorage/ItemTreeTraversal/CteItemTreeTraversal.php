@@ -58,7 +58,7 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
     }
 
     /**
-     * @return Hierarchy An array of items with their children.
+     * @return non-empty-array<int, array{type: 'permission'|'role', name: string, description: string|null, rule_name: string|null, created_at: int|string, updated_at: int|string, children: string|null}>
      */
     public function getHierarchy(string $name): array
     {
@@ -102,11 +102,14 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
         )
         $outerQuery";
 
-        return $this->connection->executeQuery(
+        /** @var non-empty-array<int, array{type: 'permission'|'role', name: string, description: string|null, rule_name: string|null, created_at: int|string, updated_at: int|string, children: string|null}> $result */
+        $result = $this->connection->executeQuery(
             $sql,
             array_merge($outerQuery->getParameters(), $cteSelectItemQuery->getParameters()),
             array_merge($outerQuery->getParameterTypes(), $cteSelectItemQuery->getParameterTypes()),
         )->fetchAllAssociative();
+
+        return $result;
     }
 
     /**
@@ -200,6 +203,9 @@ abstract class CteItemTreeTraversal implements ItemTreeTraversalInterface
             'item_child_recursive.child))';
     }
 
+    /**
+     * @param string|array<int, string> $names
+     */
     private function getRowsStatement(
         string|array $names,
         QueryBuilder $baseOuterQueryBuilder,
