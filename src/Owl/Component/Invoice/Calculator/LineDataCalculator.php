@@ -78,7 +78,7 @@ class LineDataCalculator
     /**
      * Calculates unit price by subtotal from major.
      * Returns value in minor units (e.g. cents).
-     *
+     * 
      * @return array<int|float, int|float>|null
      */
     public static function calculateUnitPriceByTotalPriceFromMajor(?float $subtotal, ?float $quantity, bool $toMinor = false): ?array
@@ -89,7 +89,7 @@ class LineDataCalculator
     /**
      * Calculates unit price by subtotal from minor.
      * Returns value in minor units (e.g. cents).
-     *
+     * 
      * @return array<int|float, int|float>|null
      */
     public static function calculateUnitPriceByTotalPriceFromMinor(?int $subtotal, ?float $quantity, bool $toMinor = true): ?array
@@ -114,13 +114,16 @@ class LineDataCalculator
     {
         $result = $value / $quantity;
 
-        return $result === (int) $result;
+        return floor($result) == $result;
     }
 
+    /**
+     * @param array<mixed> $array
+     */
     private static function isNotEmpty(array $array): bool
     {
         foreach ($array as $value) {
-            if (empty($value) || $value === null) {
+            if (empty($value)) {
                 return false;
             }
         }

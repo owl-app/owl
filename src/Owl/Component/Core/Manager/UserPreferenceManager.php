@@ -6,6 +6,7 @@ namespace Owl\Component\Core\Manager;
 
 use Doctrine\Persistence\ObjectManager;
 use Owl\Component\Core\Context\AdminUserContextInterface;
+use Owl\Component\Core\Model\AdminUserInterface;
 
 final class UserPreferenceManager implements UserPreferenceManagerInterface
 {
@@ -15,6 +16,7 @@ final class UserPreferenceManager implements UserPreferenceManagerInterface
 
     public function update(string $key, mixed $value): void
     {
+        /** @var AdminUserInterface|null $user */
         $user = $this->adminUserContext->getUser();
 
         if (null === $user) {
@@ -39,8 +41,12 @@ final class UserPreferenceManager implements UserPreferenceManagerInterface
         return !empty($this->getNestedValue($this->getUserPreferences(), $key));
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     private function getUserPreferences(): ?array
     {
+        /** @var AdminUserInterface|null $user */
         $user = $this->adminUserContext->getUser();
 
         if (null === $user) {

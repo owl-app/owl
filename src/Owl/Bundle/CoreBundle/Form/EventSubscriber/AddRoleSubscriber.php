@@ -15,7 +15,7 @@ use Webmozart\Assert\Assert;
 final class AddRoleSubscriber implements EventSubscriberInterface
 {
     /**
-     * @return array{'form.submit': 'submit'}
+     * @return array<string, string>
      */
     public static function getSubscribedEvents(): array
     {
@@ -26,11 +26,12 @@ final class AddRoleSubscriber implements EventSubscriberInterface
 
     public function submit(FormEvent $event): void
     {
-        /** @var AdminUserInterface&RoleAwareInterface $data */
+        /** @var AdminUserInterface|RoleAwareInterface|null $data */
         $data = $event->getData();
         $form = $event->getForm();
 
         Assert::isInstanceOf($data, RoleAwareInterface::class);
+        Assert::isInstanceOf($data, AdminUserInterface::class);
 
         $roles = $data->getRoles();
         $roleRbac = $data->getRole();

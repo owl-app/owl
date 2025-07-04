@@ -16,6 +16,9 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 final class SellerFactory implements SellerFactoryInterface
 {
+    /**
+     * @param FactoryInterface<T> $decoratedFactory
+     */
     public function __construct(
         private FactoryInterface $decoratedFactory,
     ) {

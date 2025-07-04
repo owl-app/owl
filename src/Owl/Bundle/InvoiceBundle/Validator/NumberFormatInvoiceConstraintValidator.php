@@ -33,7 +33,7 @@ class NumberFormatInvoiceConstraintValidator extends ConstraintValidator
         /** @var InvoiceInterface|null $validatedInvoice */
         $validatedInvoice = $this->context->getObject();
 
-        if (!$validatedInvoice || !$validatedInvoice->getSerie() && empty($value)) {
+        if (!$validatedInvoice || (null === $validatedInvoice->getSerie() && empty($value))) {
             $this->context->buildViolation($constraint->message)
                 ->addViolation()
             ;

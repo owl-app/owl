@@ -21,6 +21,9 @@ final class BundleLoadedCheckerExtension extends AbstractExtension
     /** @var array<string, mixed> */
     private $listOfBundles;
 
+    /**
+     * @param array<string, mixed> $listOfBundles
+     */
     public function __construct(array $listOfBundles)
     {
         $this->listOfBundles = $listOfBundles;

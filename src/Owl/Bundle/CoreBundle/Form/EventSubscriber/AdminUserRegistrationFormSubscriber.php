@@ -33,6 +33,7 @@ final class AdminUserRegistrationFormSubscriber implements EventSubscriberInterf
      */
     public function preSubmit(FormEvent $event): void
     {
+        /** @var array<string, mixed> $rawData */
         $rawData = $event->getData();
         $form = $event->getForm();
         $data = $form->getData();
@@ -48,14 +49,18 @@ final class AdminUserRegistrationFormSubscriber implements EventSubscriberInterf
         $form->setData($data);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     private function copyDataToRegistration(array $data): AdminUserRegistrationDataInterface
     {
+        /** @var AdminUserRegistrationDataInterface $registration */
         $registration = new $this->classAdminUserRegistrationData();
 
-        $registration->setFirstName($data['firstName']);
-        $registration->setLastName($data['lastName']);
-        $registration->setPhone($data['phone']);
-        $registration->setEmail($data['email']);
+        $registration->setFirstName((string) $data['firstName']);
+        $registration->setLastName((string) $data['lastName']);
+        $registration->setPhone((string) $data['phone']);
+        $registration->setEmail((string) $data['email']);
 
         return $registration;
     }

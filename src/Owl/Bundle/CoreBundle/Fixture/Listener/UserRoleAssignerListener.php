@@ -20,6 +20,9 @@ final class UserRoleAssignerListener extends AbstractListener implements AfterFi
     ) {
     }
 
+    /**
+     * @param array<mixed> $options
+     */
     public function afterFixture(FixtureEvent $fixtureEvent, array $options = []): void
     {
         if (!$fixtureEvent->fixture() instanceof AdminUserFixture) {

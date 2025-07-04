@@ -9,6 +9,9 @@ namespace Owl\Bundle\TinymceBundle\Helper;
  */
 class LocaleHelper
 {
+    /**
+     * @var array<string, string>
+     */
     private static array $locales = [
         'bn' => 'bn_BD',
         'bg' => 'bg_BG',
@@ -24,9 +27,6 @@ class LocaleHelper
         'pl' => 'pl_PL',
     ];
 
-    /**
-     * @param string $locale
-     */
     public static function getLanguage(string $locale): string
     {
         return self::$locales[$locale] ?? $locale;

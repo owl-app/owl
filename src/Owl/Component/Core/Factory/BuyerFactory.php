@@ -16,6 +16,9 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 final class BuyerFactory implements BuyerFactoryInterface
 {
+    /**
+     * @param FactoryInterface<BuyerInterface> $decoratedFactory
+     */
     public function __construct(
         private FactoryInterface $decoratedFactory,
     ) {
@@ -32,6 +35,7 @@ final class BuyerFactory implements BuyerFactoryInterface
     /** @inheritdoc */
     public function createFromContractor(ContractorInterface $contractor): BuyerInterface
     {
+        /** @var BuyerInterface $buyer */
         $buyer = $this->decoratedFactory->createNew();
         $buyer->setCompany($contractor->getCompanyName());
         $buyer->setTaxNumber($contractor->getTaxNumber());

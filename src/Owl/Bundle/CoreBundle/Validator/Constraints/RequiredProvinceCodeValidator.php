@@ -14,6 +14,9 @@ use Webmozart\Assert\Assert;
 
 final class RequiredProvinceCodeValidator extends ConstraintValidator
 {
+    /**
+     * @param CountryRepositoryInterface<CountryInterface> $countryRepository
+     */
     public function __construct(
         private CountryRepositoryInterface $countryRepository,
     ) {

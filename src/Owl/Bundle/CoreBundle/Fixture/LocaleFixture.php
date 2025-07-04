@@ -21,15 +21,16 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class LocaleFixture extends AbstractFixture
 {
-    /**
-     * @param string $baseLocaleCode
-     */
     public function __construct(private FactoryInterface $localeFactory, private ObjectManager $localeManager, private string $baseLocaleCode)
     {
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function load(array $options): void
     {
+        /** @var array<string> $localesCodes */
         $localesCodes = $options['locales'];
 
         if ($options['load_default_locale']) {

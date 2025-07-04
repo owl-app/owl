@@ -37,6 +37,7 @@ class RbacPermissionFixture implements FixtureInterface
         $resourceReferences = [];
         $i = 0;
 
+        /** @var array<string, mixed> $route */
         foreach ($routes as $name => $route) {
             $route['name'] = $name;
             $resource = $this->exampleFactory->create($route);
@@ -66,11 +67,14 @@ class RbacPermissionFixture implements FixtureInterface
         return $treeBuilder;
     }
 
+    /**
+     * @param array<string, object> $resourceReferences
+     */
     private function addReferences(array $resourceReferences): void
     {
         if ($resourceReferences) {
             foreach ($resourceReferences as $name => $resource) {
-                $this->referenceRepository->addReference($name, $resource);
+                $this->referenceRepository?->addReference($name, $resource);
             }
         }
     }

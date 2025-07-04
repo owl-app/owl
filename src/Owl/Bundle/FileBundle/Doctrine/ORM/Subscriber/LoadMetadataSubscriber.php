@@ -19,11 +19,11 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
-    /** @var array<string, array> */
+    /** @var array<string, array<string, mixed>> */
     private $subjects;
 
     /**
-     * @param array<string, array> $subjects
+     * @param array<string, array<string, mixed>> $subjects
      */
     public function __construct(array $subjects)
     {
@@ -48,7 +48,9 @@ final class LoadMetadataSubscriber implements EventSubscriber
 
         foreach ($this->subjects as $subject => $class) {
             if ($class['file']['classes']['model'] === $metadata->getName()) {
+                /** @var string $fileableEntity */
                 $fileableEntity = $class['subject'];
+                /** @var string $uploaderEntity */
                 $uploaderEntity = $class['uploader']['classes']['model'];
                 $fileableEntityMetadata = $metadataFactory->getMetadataFor($fileableEntity);
                 $uploaderEntityMetadata = $metadataFactory->getMetadataFor($uploaderEntity);
@@ -58,6 +60,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
             }
 
             if ($class['subject'] === $metadata->getName()) {
+                /** @var string $reviewEntity */
                 $reviewEntity = $class['file']['classes']['model'];
 
                 $metadata->mapOneToMany($this->createReviewsMapping($reviewEntity));
@@ -66,7 +69,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     }
 
     /**
-     * @return array{fieldName: 'fileSubject', targetEntity: string, inversedBy: 'files', joinColumns: list{array{name: string, referencedColumnName: string, nullable: false, onDelete: 'CASCADE'}}}
+     * @return array{fieldName: 'fileSubject', targetEntity: string, inversedBy: 'files', joinColumns: list<array{name: string, referencedColumnName: string, nullable: false, onDelete: 'CASCADE'}>}
      */
     private function createSubjectMapping(
         string $fileableEntity,
@@ -87,7 +90,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     }
 
     /**
-     * @return array{fieldName: 'author', targetEntity: string, joinColumns: list{array{name: 'author_id', referencedColumnName: string, nullable: false, onDelete: 'CASCADE'}}, cascade: list{'persist'}}
+     * @return array{fieldName: 'author', targetEntity: string, joinColumns: list<array{name: 'author_id', referencedColumnName: string, nullable: false, onDelete: 'CASCADE'}>, cascade: list<'persist'>}
      */
     private function createUploaderMapping(string $uploaderEntity, ClassMetadata $uploaderEntityMetadata): array
     {
@@ -105,7 +108,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     }
 
     /**
-     * @return array{fieldName: 'files', targetEntity: string, mappedBy: 'fileSubject', orderBy: array{createdAt: 'DESC'}, cascade: list{'all'}}
+     * @return array{fieldName: 'files', targetEntity: string, mappedBy: 'fileSubject', orderBy: array{createdAt: 'DESC'}, cascade: list<'all'>}
      */
     private function createReviewsMapping(string $fileEntity): array
     {

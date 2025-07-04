@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormInterface;
 final class FormErrorExtractor
 {
     /**
-     * @return array<string|int, string|array<string|int, string|array>>
+     * @return array<string|int, string|array<string|int, string|array<string|int, string>>>
      */
     public static function extractErrors(FormInterface $form): array
     {

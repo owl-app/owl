@@ -31,6 +31,9 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
         ;
     }
 
+    /**
+     * @param array<array-key, mixed> $ids
+     */
     public function findById(array $ids): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');

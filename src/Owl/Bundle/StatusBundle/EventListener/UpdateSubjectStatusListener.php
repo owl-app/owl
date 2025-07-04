@@ -19,11 +19,17 @@ final class UpdateSubjectStatusListener
         $this->statusSubjectManager = $statusSubjectManager;
     }
 
+    /**
+     * @param LifecycleEventArgs<ObjectManager> $args
+     */
     public function postPersist(LifecycleEventArgs $args): void
     {
         $this->saveStatus($args);
     }
 
+    /**
+     * @param LifecycleEventArgs<ObjectManager> $args
+     */
     public function saveStatus(LifecycleEventArgs $args): void
     {
         /** @var StatusInterface $subject */

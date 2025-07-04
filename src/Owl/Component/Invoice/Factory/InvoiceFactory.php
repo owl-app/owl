@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Factory;
 
-use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Provider\InvoiceSerieProviderInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
@@ -20,7 +19,6 @@ final class InvoiceFactory implements InvoiceFactoryInterface
     public function __construct(
         private FactoryInterface $decoratedFactory,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
-        private InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
         private InvoiceSerieProviderInterface $invoiceSerieProvider,
     ) {
     }

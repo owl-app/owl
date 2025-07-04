@@ -10,9 +10,13 @@ use Owl\Bridge\SyliusResource\Doctrine\Orm\CollectionProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Owl\Bundle\CoreBundle\Entity\User;
 
 final class UserChoiceType extends AbstractType
 {
+    /**
+     * @param EntityRepository<User> $userRepository
+     */
     public function __construct(
         private EntityRepository $userRepository,
         private CollectionProviderInterface $collectionProvider,

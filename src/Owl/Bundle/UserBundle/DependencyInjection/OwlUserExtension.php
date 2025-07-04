@@ -74,6 +74,9 @@ final class OwlUserExtension extends AbstractResourceExtension
         return $resolvedResources;
     }
 
+    /**
+     * @param array<string, array<string, array<string, mixed>>> $resources
+     */
     private function createParameters(array $resources, ContainerBuilder $container): void
     {
         foreach ($resources as $userType => $config) {
@@ -81,6 +84,9 @@ final class OwlUserExtension extends AbstractResourceExtension
         }
     }
 
+    /**
+     * @param array<string, array<string, array<string, mixed>>> $resources
+     */
     private function createServices(array $resources, ContainerBuilder $container): void
     {
         foreach ($resources as $userType => $config) {
@@ -94,6 +100,9 @@ final class OwlUserExtension extends AbstractResourceExtension
         }
     }
 
+    /**
+     * @param array<string, array<string, array<string, mixed>>> $resources
+     */
     private function loadHashersAwareServices(?string $globalHasher, array $resources, ContainerBuilder $container): void
     {
         foreach ($resources as $userType => $config) {
@@ -110,6 +119,9 @@ final class OwlUserExtension extends AbstractResourceExtension
         }
     }
 
+    /**
+     * @param array<string, mixed> $config
+     */
     private function createTokenGenerators(string $userType, array $config, ContainerBuilder $container): void
     {
         $this->createUniquenessCheckers($userType, $config, $container);
@@ -139,6 +151,9 @@ final class OwlUserExtension extends AbstractResourceExtension
         )->setPublic(true);
     }
 
+    /**
+     * @param array<int, mixed> $arguments
+     */
     private function createTokenGeneratorDefinition(string $generatorClass, array $arguments): Definition
     {
         $generatorDefinition = new Definition($generatorClass);
@@ -147,6 +162,9 @@ final class OwlUserExtension extends AbstractResourceExtension
         return $generatorDefinition;
     }
 
+    /**
+     * @param array<string, mixed> $config
+     */
     private function createUniquenessCheckers(string $userType, array $config, ContainerBuilder $container): void
     {
         $repositoryServiceId = sprintf('owl.repository.%s_user', $userType);
@@ -262,6 +280,9 @@ final class OwlUserExtension extends AbstractResourceExtension
         $container->setDefinition($factoryServiceId, $factoryDefinition);
     }
 
+    /**
+     * @param array<string, mixed> $resourceConfig
+     */
     private function registerUpdateUserHasherListener(ContainerBuilder $container, string $userType, string $hasher, array $resourceConfig): void
     {
         $updateUserHasherListenerDefinition = new Definition(UpdateUserHasherListener::class, [
@@ -279,6 +300,9 @@ final class OwlUserExtension extends AbstractResourceExtension
         );
     }
 
+    /**
+     * @param array<string, mixed> $config
+     */
     private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container): void
     {
         $container->setParameter(sprintf('owl.%s_user.token.password_reset.ttl', $userType), $config['resetting']['token']['ttl']);

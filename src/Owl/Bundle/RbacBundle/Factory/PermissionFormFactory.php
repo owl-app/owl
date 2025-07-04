@@ -26,7 +26,7 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
     }
 
     /**
-     * @return array<list<array{mixed,...}>>
+     * @return array<string, list<FormView>>
      */
     public function createByRoutes(RequestConfiguration $requestConfiguration): array
     {
@@ -35,8 +35,10 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
         $existPermissions = $this->permissionRepository->findAllNames();
 
         foreach ($routes as $name => $route) {
-            $formsPermission[$route['group']][] = $this->createForm(
-                $this->permissionFactory->createWithData($name, $route['group'], $route['description']),
+            /** @var string $group */
+            $group = $route['group'];
+            $formsPermission[$group][] = $this->createForm(
+                $this->permissionFactory->createWithData($name, $group, $route['description']),
                 $requestConfiguration,
                 in_array($name, $existPermissions),
             );
@@ -48,7 +50,7 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
     /**
      * @param array<string> $assignedPermissions
      * @param array<string> $disabledPermissions
-     * @return array<list<array{mixed,...}>>
+     * @return array<string, list<FormView>>
      */
     public function createByExists(RequestConfiguration $requestConfiguration, array $assignedPermissions, array $disabledPermissions = [], bool $withRoles = false): array
     {
@@ -69,6 +71,7 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
         }
 
         foreach ($existPermissions as $permission) {
+            /** @var AuthItemInterface $permission */
             $formsPermission[$permission->getGroupPermission()][] = $this->createForm(
                 $permission,
                 $requestConfiguration,
@@ -80,6 +83,9 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
         return $formsPermission;
     }
 
+    /**
+     * @param array<string, mixed> $customFormOptions
+     */
     private function createForm(AuthItemInterface $permission, RequestConfiguration $requestConfiguration, bool $exist, array $customFormOptions = []): FormView
     {
         $formOptions = array_merge($requestConfiguration->getFormOptions(), $customFormOptions, [

@@ -41,6 +41,7 @@ enum PeriodQuarterEnum: string
             $month >= 4 && $month <= 6 => self::TYPE_Q2,
             $month >= 7 && $month <= 9 => self::TYPE_Q3,
             $month >= 10 && $month <= 12 => self::TYPE_Q4,
+            default => throw new \LogicException('Month must be between 1 and 12.'),
         };
     }
 }

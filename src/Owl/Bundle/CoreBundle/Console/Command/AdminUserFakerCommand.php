@@ -45,6 +45,7 @@ class AdminUserFakerCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var array<array-key, ResourceInterface> $roles */
         $roles = $this->roleRepository->findAll();
         $count = (int) $input->getOption('count');
         $faker = Factory::create();

@@ -31,9 +31,14 @@ class PasswordUpdaterListener
 
     public function genericEventUpdater(GenericEvent $event): void
     {
-        $this->updatePassword($event->getSubject());
+        /** @var UserInterface $subject */
+        $subject = $event->getSubject();
+        $this->updatePassword($subject);
     }
 
+    /**
+     * @param LifecycleEventArgs<EntityManagerInterface> $event
+     */
     public function prePersist(LifecycleEventArgs $event): void
     {
         $user = $event->getObject();
@@ -45,6 +50,9 @@ class PasswordUpdaterListener
         $this->updatePassword($user);
     }
 
+    /**
+     * @param LifecycleEventArgs<EntityManagerInterface> $event
+     */
     public function preUpdate(LifecycleEventArgs $event): void
     {
         $user = $event->getObject();

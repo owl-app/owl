@@ -68,12 +68,12 @@ class FormComponent
         string $formClass,
         private ExchangeRateCurrencyResolverInterface $exchangeRateCurrencyResolver,
         private RepositoryInterface $companyRepository,
-        RepositoryInterface $contractorRepository,
+        RepositoryInterface $contractorRepository, // This parameter is unused, but kept as per rules.
         private readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
         private ExchangeRateResolverInterface $exchangeRateResolver,
     ) {
-        /** @var RepositoryInterface<ResourceInterface> $invoiceRepository */
+        /** @var RepositoryInterface<T> $invoiceRepository */
         $this->initialize($invoiceRepository, $formFactory, $resourceClass, $formClass);
     }
 

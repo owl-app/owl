@@ -50,9 +50,15 @@ final class RoleChoiceType extends AbstractType
     private function getOptions(): array
     {
         if (!$this->adminUserContext->isAdminSystem()) {
-            return $this->roleRepository->findWithoutAdminSystem();
+            /** @var RoleInterface[] $roles */
+            $roles = $this->roleRepository->findWithoutAdminSystem();
+
+            return $roles;
         }
 
-        return $this->roleRepository->findAll();
+        /** @var RoleInterface[] $roles */
+        $roles = $this->roleRepository->findAll();
+
+        return $roles;
     }
 }

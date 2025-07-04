@@ -21,6 +21,7 @@ class ExchangeRateSnapshotAssigner implements SnapshotAssignerInterface
 
     public function assign(InvoiceInterface $invoice): void
     {
+        /** @var CoreInvoiceInterface $invoice */
         $currency = $this->exchangeRateCurrencyResolver->resolve($invoice);
         /** @var ExchangeRateSnapshotInterface|null $exchangeRateSnapshot */
         $exchangeRateSnapshot = $invoice->getExchangeRateSnapshot();

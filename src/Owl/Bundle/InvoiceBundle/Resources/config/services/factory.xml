@@ -9,7 +9,6 @@
         <service id="owl.custom_factory.invoice" class="Owl\Component\Invoice\Factory\InvoiceFactory" decorates="owl.factory.invoice" decoration-priority="256">
             <argument type="service" id=".inner" />
             <argument type="service" id="owl.registry.invoice_sequence_increment_strategy" />
-            <argument type="service" id="owl.generator.invoice.invoice_number_generator" />
             <argument type="service" id="owl.provider.invoice.default_serie" />
         </service>
 

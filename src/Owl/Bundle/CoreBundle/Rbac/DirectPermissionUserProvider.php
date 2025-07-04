@@ -29,9 +29,12 @@ final class DirectPermissionUserProvider implements DirectPermissionUserProvider
         $assignments = $this->rbacAssignmentsStorage->getByUserId($userId);
         $assignmentNames = array_keys($assignments);
 
+        /** @var (PermissionInterface|RoleInterface)[] $items */
+        $items = $this->rbacItemStorage->getByNames($assignmentNames);
+
         return array_merge(
             $this->rbacManager->getDefaultRoles(),
-            $this->rbacItemStorage->getByNames($assignmentNames),
+            array_values($items),
         );
     }
 }

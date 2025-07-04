@@ -15,7 +15,10 @@ final class DateFilter implements FilterInterface
 
     public const DEFAULT_INCLUSIVE_TO = false;
 
-    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function apply(DataSourceInterface $dataSource, string $name, mixed $data, array $options): void
     {
         $expressionBuilder = $dataSource->getExpressionBuilder();
 
@@ -43,6 +46,7 @@ final class DateFilter implements FilterInterface
     }
 
     /**
+     * @param array<string, mixed> $options
      * @param mixed $default
      *
      * @return mixed

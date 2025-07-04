@@ -43,8 +43,12 @@ abstract class AbstractResourceFixture implements FixtureInterface
         ;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     final public function load(array $options): void
     {
+        /** @var array{random: int, prototype: array<mixed>, custom: array<string, array<string, mixed>>} $options */
         $options = $this->optionsResolver->resolve($options);
         $references = $this->prepareReferences($options);
         $resourceReferences = [];
@@ -55,7 +59,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
 
             $this->objectManager->persist($resource);
 
-            if (in_array($name, $references)) {
+            if (in_array($name, $references, true)) {
                 $resourceReferences[$name] = $resource;
             }
 
@@ -106,7 +110,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
     }
 
     /**
-     * @param array<string, mixed> $options
+     * @param array{random: int, prototype: array<mixed>, custom: array<string, array<string, mixed>>} $options
      * @return list<string>
      */
     private function prepareReferences(array &$options): array
@@ -114,7 +118,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
         $references = [];
 
         foreach ($options['custom'] as $name => $resourceOptions) {
-            if ($resourceOptions['reference']) {
+            if (isset($resourceOptions['reference']) && $resourceOptions['reference']) {
                 $references[] = $name;
             }
 

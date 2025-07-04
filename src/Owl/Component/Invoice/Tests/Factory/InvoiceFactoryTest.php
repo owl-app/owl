@@ -6,7 +6,6 @@ namespace Tests\Owl\Component\Invoice\Factory;
 
 use DateTimeImmutable;
 use Owl\Component\Invoice\Factory\InvoiceFactory;
-use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
@@ -23,8 +22,6 @@ class InvoiceFactoryTest extends TestCase
     private MockObject $decoratedFactory;
 
     private ServiceRegistryInterface&MockObject $registryInvoiceSequenceStrategy;
-
-    private InvoiceNumberGeneratorInterface&MockObject $invoiceNumberGenerator;
 
     private InvoiceSerieProviderInterface&MockObject $invoiceSerieProvider;
 
@@ -43,7 +40,6 @@ class InvoiceFactoryTest extends TestCase
     {
         $this->decoratedFactory = $this->createMock(FactoryInterface::class);
         $this->registryInvoiceSequenceStrategy = $this->createMock(ServiceRegistryInterface::class);
-        $this->invoiceNumberGenerator = $this->createMock(InvoiceNumberGeneratorInterface::class);
         $this->invoiceSerieProvider = $this->createMock(InvoiceSerieProviderInterface::class);
         $this->sequenceStrategy = $this->createMock(InvoiceSequenceStrategyInterface::class);
         $this->invoice = $this->createMock(InvoiceInterface::class);
@@ -53,7 +49,6 @@ class InvoiceFactoryTest extends TestCase
         $this->invoiceFactory = new InvoiceFactory(
             $this->decoratedFactory,
             $this->registryInvoiceSequenceStrategy,
-            $this->invoiceNumberGenerator,
             $this->invoiceSerieProvider,
         );
     }

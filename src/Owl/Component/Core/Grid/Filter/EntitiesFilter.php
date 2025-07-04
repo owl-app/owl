@@ -21,6 +21,9 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  */
 final class EntitiesFilter implements FilterInterface
 {
+    /**
+     * @param array<string, mixed> $options
+     */
     public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
     {
         if (empty($data)) {

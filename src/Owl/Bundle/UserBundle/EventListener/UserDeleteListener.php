@@ -65,7 +65,7 @@ final class UserDeleteListener
         }
 
         $loggedUser = $token->getUser();
-        if (!$loggedUser instanceof CoreUserInterface) {
+        if (!$loggedUser instanceof UserInterface) { // Changed to Owl\Component\User\Model\UserInterface
             return false;
         }
 

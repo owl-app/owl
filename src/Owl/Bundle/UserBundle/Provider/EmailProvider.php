@@ -18,11 +18,14 @@ use Owl\Component\User\Model\UserInterface as OwlUserInterface;
 
 class EmailProvider extends AbstractUserProvider
 {
-    /**
-     * @return UserInterface|null
-     */
     protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
-        return $this->userRepository->findOneByEmail($uniqueIdentifier);
+        $user = $this->userRepository->findOneByEmail($uniqueIdentifier);
+
+        if ($user instanceof UserInterface) {
+            return $user;
+        }
+
+        return null;
     }
 }

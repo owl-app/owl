@@ -14,7 +14,13 @@ declare(strict_types=1);
 namespace Owl\Bundle\UserBundle\Provider;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface as BaseUserProviderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 interface UserProviderInterface extends BaseUserProviderInterface
 {
+    /**
+     * @template TUser of UserInterface
+     *
+     * @extends BaseUserProviderInterface<TUser>
+     */
 }

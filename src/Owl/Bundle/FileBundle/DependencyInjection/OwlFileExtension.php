@@ -27,8 +27,8 @@ final class OwlFileExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param array<string, array<string, array>> $resources
-     * @return array<string, array>
+     * @param array<string, array<string, array<string, mixed>>> $resources
+     * @return array<string, array<string, mixed>>
      */
     private function resolveResources(array $resources, ContainerBuilder $container): array
     {
@@ -48,6 +48,9 @@ final class OwlFileExtension extends AbstractResourceExtension
         return $resolvedResources;
     }
 
+    /**
+     * @param array<string> $fileSubjects
+     */
     private function createFilesListeners(array $fileSubjects, ContainerBuilder $container): void
     {
         foreach ($fileSubjects as $fileSubject) {

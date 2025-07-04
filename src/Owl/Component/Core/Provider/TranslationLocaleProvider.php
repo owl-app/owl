@@ -20,12 +20,15 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
-    /** @var RepositoryInterface */
+    /** @var RepositoryInterface<LocaleInterface> */
     private $localeRepository;
 
     /** @var string */
     private $defaultLocaleCode;
 
+    /**
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(RepositoryInterface $localeRepository, string $defaultLocaleCode)
     {
         $this->localeRepository = $localeRepository;
@@ -34,6 +37,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
 
     public function getDefinedLocalesCodes(): array
     {
+        /** @var array<LocaleInterface> $locales */
         $locales = $this->localeRepository->findAll();
 
         return array_map(

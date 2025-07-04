@@ -37,7 +37,7 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @return array{'security.interactive_login': 'onSecurityInteractiveLogin', 'sylius.user.security.implicit_login': 'onImplicitLogin'}
+     * @return array<string, string>
      */
     public static function getSubscribedEvents(): array
     {
@@ -57,7 +57,7 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         $this->updateUserLastLogin($event->getUser());
     }
 
-    private function updateUserLastLogin(CoreUserInterface|null $user): void
+    private function updateUserLastLogin(CoreUserInterface $user = null): void
     {
         if (!$user instanceof $this->userClass) {
             return;

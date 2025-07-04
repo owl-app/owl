@@ -39,11 +39,14 @@ use Webmozart\Assert\Assert;
 final class LazyOption
 {
     /**
+     * @param array<string, mixed> $criteria
+     *
      * @return \Closure(Options):object
      */
     public static function randomOne(RepositoryInterface $repository, array $criteria = []): \Closure
     {
         return function (Options $options) use ($repository, $criteria): object {
+            /** @var array<array-key, object>|Collection<array-key, object> $objects */
             $objects = $repository->findBy($criteria);
 
             if ($objects instanceof Collection) {
@@ -57,6 +60,8 @@ final class LazyOption
     }
 
     /**
+     * @param array<string, mixed> $criteria
+     *
      * @return \Closure(Options):(object|null)
      */
     public static function randomOneOrNull(
@@ -69,6 +74,7 @@ final class LazyOption
                 return null;
             }
 
+            /** @var array<array-key, object>|Collection<array-key, object> $objects */
             $objects = $repository->findBy($criteria);
 
             if ($objects instanceof Collection) {
@@ -80,17 +86,21 @@ final class LazyOption
     }
 
     /**
-     * @return \Closure(Options):list{0?: \Sylius\Component\Resource\Model\ResourceInterface|mixed,...}
+     * @param array<string, mixed> $criteria
+     *
+     * @return \Closure(Options):list<ResourceInterface>
      */
     public static function randomOnes(RepositoryInterface $repository, int $amount, array $criteria = []): \Closure
     {
         return function (Options $options) use ($repository, $amount, $criteria): array {
+            /** @var array<array-key, ResourceInterface>|Collection<array-key, ResourceInterface> $objects */
             $objects = $repository->findBy($criteria);
 
             if ($objects instanceof Collection) {
                 $objects = $objects->toArray();
             }
 
+            /** @var list<ResourceInterface> $selectedObjects */
             $selectedObjects = [];
             for (; $amount > 0 && count($objects) > 0; --$amount) {
                 $randomKey = array_rand($objects);
@@ -105,17 +115,22 @@ final class LazyOption
     }
 
     /**
-     * @return \Closure(Options):array<\Sylius\Component\Resource\Model\ResourceInterface>
+     * @return \Closure(Options):array<ResourceInterface>
      */
     public static function all(RepositoryInterface $repository): \Closure
     {
         return function (Options $options) use ($repository): array {
-            return $repository->findAll();
+            /** @var array<ResourceInterface> $result */
+            $result = $repository->findAll();
+
+            return $result;
         };
     }
 
     /**
-     * @return \Closure(Options, array|null):(list{0?: object|null,...}|null)
+     * @param array<string, mixed> $criteria
+     *
+     * @return \Closure(Options, array<array-key, mixed>|null):array<array-key, object|null>|null
      */
     public static function findBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
@@ -124,6 +139,7 @@ final class LazyOption
                 return $previousValues;
             }
 
+            /** @var array<array-key, object|null> $resources */
             $resources = [];
             foreach ($previousValues as $previousValue) {
                 if (is_object($previousValue)) {
@@ -138,6 +154,8 @@ final class LazyOption
     }
 
     /**
+     * @param array<string, mixed> $criteria
+     *
      * @return \Closure(Options, mixed):(object|null)
      */
     public static function findOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
@@ -156,6 +174,8 @@ final class LazyOption
     }
 
     /**
+     * @param array<string, mixed> $criteria
+     *
      * @return \Closure(Options, mixed):(object|null)
      */
     public static function getOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
@@ -177,7 +197,7 @@ final class LazyOption
                         'The %s resource for field %s with value %s was not found',
                         $repository->getClassName(),
                         $field,
-                        $previousValue,
+                        (string) $previousValue,
                     ),
                 );
             }

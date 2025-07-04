@@ -9,16 +9,23 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 abstract class StatusType extends AbstractResourceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var ResourceInterface|null $resource */
         $resource = $builder->getData();
+
+        $choices = [];
+        if ($resource instanceof \Owl\Component\Status\Model\StatusableInterface) {
+            $choices = array_flip($resource->getStatusesLabels());
+        }
 
         $builder
             ->add('status', ChoiceType::class, [
-                'choices' => array_flip($resource->getStatusesLabels()),
+                'choices' => $choices,
                 'label' => 'owl.form.common.status',
                 'multiple' => false,
             ])
@@ -38,7 +45,7 @@ abstract class StatusType extends AbstractResourceType
     }
 
     /**
-     * @return array<int<1, max>, int<1, max>>
+     * @return array<int, int>
      */
     private function createRatingList(int $maxRate): array
     {

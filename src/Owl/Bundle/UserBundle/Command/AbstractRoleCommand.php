@@ -87,16 +87,20 @@ abstract class AbstractRoleCommand extends Command
             $roles = $helper->ask($input, $output, $question);
 
             if (!empty($roles)) {
-                $input->setArgument('roles', explode(' ', $roles));
+                $input->setArgument('roles', explode(' ', (string) $roles));
             }
         }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var string $email */
         $email = $input->getArgument('email');
+        /** @var array<array-key, string> $securityRoles */
         $securityRoles = $input->getArgument('roles');
+        /** @var bool $superAdmin */
         $superAdmin = $input->getOption('super-admin');
+        /** @var string $userType */
         $userType = $input->getOption('user-type');
 
         if ($superAdmin) {
@@ -137,6 +141,7 @@ abstract class AbstractRoleCommand extends Command
     {
         $class = $this->getUserModelClass($userType);
 
+        /** @var UserRepositoryInterface $userRepository */
         $userRepository = $this->getEntityManager($userType)->getRepository($class);
         Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
 

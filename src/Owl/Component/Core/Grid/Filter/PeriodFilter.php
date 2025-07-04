@@ -13,6 +13,10 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
 /** @experimental */
 final class PeriodFilter implements FilterInterface
 {
+    /**
+     * @param array<string, mixed> $data
+     * @param array<string, mixed> $options
+     */
     public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = []): void
     {
         if (empty($data)) {
@@ -27,12 +31,17 @@ final class PeriodFilter implements FilterInterface
             return;
         }
 
-        $expressions = $this->getExpression($expressionBuilder, $type, $field, $data);
+        /** @var array<string, mixed> $data */
+        $expressions = $this->getExpression($expressionBuilder, (string) $type, (string) $field, $data);
 
         $dataSource->restrict($expressionBuilder->andX(...$expressions));
     }
 
     /**
+     * @param array<string, mixed> $value
+     *
+     * @return array<int, mixed>
+     *
      * @throws \InvalidArgumentException
      */
     private function getExpression(
@@ -46,18 +55,27 @@ final class PeriodFilter implements FilterInterface
 
         switch ($type) {
             case PeriodTypeEnum::TYPE_MONTH->value:
+                if (!isset($value['year']) || !isset($value['month'])) {
+                    throw new \InvalidArgumentException('Missing "year" or "month" in value for TYPE_MONTH.');
+                }
                 $startDate = new \DateTime($value['year'] . '-' . $value['month'] . '-01');
                 $start = $startDate->format('Y-m-d');
                 $end = $startDate->modify('last day of this month')->format('Y-m-d');
 
                 break;
             case PeriodTypeEnum::TYPE_QUARTER->value:
-                $range = PeriodQuarterEnum::getPeriodRange($value['quarter']);
+                if (!isset($value['year']) || !isset($value['quarter'])) {
+                    throw new \InvalidArgumentException('Missing "year" or "quarter" in value for TYPE_QUARTER.');
+                }
+                $range = PeriodQuarterEnum::getPeriodRange((string) $value['quarter']);
                 $start = $value['year'] . '-' . $range['start'];
                 $end = $value['year'] . '-' . $range['end'];
 
                 break;
             case PeriodTypeEnum::TYPE_YEAR->value:
+                if (!isset($value['year'])) {
+                    throw new \InvalidArgumentException('Missing "year" in value for TYPE_YEAR.');
+                }
                 $start = $value['year'] . '-01-01';
                 $end = $value['year'] . '-12-31';
 

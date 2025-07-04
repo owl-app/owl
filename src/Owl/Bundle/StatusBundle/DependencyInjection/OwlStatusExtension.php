@@ -36,8 +36,8 @@ final class OwlStatusExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param array<string, array<string, array>> $resources
-     * @return array<string, array>
+     * @param array<string, array<string, array<string, mixed>>> $resources
+     * @return array<string, array<string, mixed>>
      */
     private function resolveResources(array $resources, ContainerBuilder $container): array
     {
@@ -57,6 +57,9 @@ final class OwlStatusExtension extends AbstractResourceExtension
         return $resolvedResources;
     }
 
+    /**
+     * @param array<string> $statusSubjects
+     */
     private function createStatusesListeners(array $statusSubjects, ContainerBuilder $container): void
     {
         foreach ($statusSubjects as $statusSubject) {

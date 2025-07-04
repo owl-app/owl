@@ -20,6 +20,9 @@ use Symfony\Component\Form\FormInterface;
  */
 final class BuildCountryFormSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @param ObjectRepository<CountryInterface> $countryRepository
+     */
     public function __construct(private ObjectRepository $countryRepository, private FormFactoryInterface $formFactory)
     {
     }
@@ -34,7 +37,7 @@ final class BuildCountryFormSubscriber implements EventSubscriberInterface
 
     public function preSetData(FormEvent $event): void
     {
-        /** @var CountryCodeAwareInterface&ProvinceCodeAwareInterface|null $resource */
+        /** @var (CountryCodeAwareInterface&ProvinceCodeAwareInterface)|null $resource */
         $resource = $event->getData();
 
         if (null === $resource) {
@@ -60,7 +63,7 @@ final class BuildCountryFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $this->addFieldProvinceCode($event, $data['countryCode']);
+        $this->addFieldProvinceCode($event, (string) $data['countryCode']);
     }
 
     private function addFieldProvinceCode(FormEvent $event, string $countryCode): void

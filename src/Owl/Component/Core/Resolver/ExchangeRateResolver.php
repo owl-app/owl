@@ -9,12 +9,16 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
 final class ExchangeRateResolver implements ExchangeRateResolverInterface
 {
+    /**
+     * @param ExchangeRateRepositoryInterface<ExchangeRateInterface> $exchangeRateRepository
+     */
     public function __construct(private ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
     }
 
     public function getRatio(string $currencyCode, string $exchangeRateCurrency): float
     {
+        /** @var ExchangeRateInterface|null $exchangeRate */
         $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($currencyCode, $exchangeRateCurrency);
 
         if ($exchangeRate instanceof ExchangeRateInterface) {

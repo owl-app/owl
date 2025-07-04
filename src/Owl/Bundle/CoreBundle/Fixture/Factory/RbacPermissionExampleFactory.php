@@ -16,13 +16,19 @@ class RbacPermissionExampleFactory implements ExampleFactoryInterface
 
     /**
      * @param array{
-     *     name: string,
-     *     group: string,
-     *     description: string
+     *     name?: string,
+     *     group?: string,
+     *     description?: string
      * } $options
      */
     public function create(array $options = []): PermissionInterface
     {
+        $options = array_merge([
+            'name' => null,
+            'group' => null,
+            'description' => null,
+        ], $options);
+
         /** @var PermissionInterface $rbacPermission */
         $rbacPermission = $this->rbacPermissionFactory->createNew();
         $rbacPermission->setName($options['name']);

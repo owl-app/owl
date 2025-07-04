@@ -23,9 +23,12 @@ final class SuffixableGridProvider implements GridProviderInterface
 
     private SuffixGridProviderInterface $suffixGridProvider;
 
-    /** @var array<string, array> */
+    /** @var array<string, array<mixed>> */
     private array $gridConfigurations;
 
+    /**
+     * @param array<string, array<mixed>> $gridConfigurations
+     */
     public function __construct(
         GridProviderInterface $decoratedGridProvider,
         SuffixGridProviderInterface $suffixGridProvider,

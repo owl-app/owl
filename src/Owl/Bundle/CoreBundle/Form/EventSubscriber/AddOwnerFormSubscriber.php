@@ -10,12 +10,16 @@ use Owl\Bridge\SyliusResource\Doctrine\Orm\CollectionProviderInterface;
 use Owl\Bundle\CoreBundle\Form\Type\UserChoiceType;
 use Owl\Component\Core\Context\AdminUserContextInterface;
 use Owl\Component\Core\Model\Authorization\OwnerableUserInterface;
+use Owl\Component\Core\Model\User\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 final class AddOwnerFormSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @param EntityRepository<UserInterface> $userRepository
+     */
     public function __construct(
         private AdminUserContextInterface $adminUserContext,
         private EntityRepository $userRepository,

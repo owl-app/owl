@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Owl\Component\Invoice\Factory\InvoiceTaxRateSnapshotFactoryInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Model\LineItemInterface;
+use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
@@ -36,17 +37,17 @@ class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
         $taxRate = $lineItem->getTaxRate();
         $dataSnapshot = [];
 
-        if ($lineItem->getId() === null || $taxRate->getCode() !== $lineItem->getTaxRateSnapshot()->getCode()) {
+        if ($lineItem->getId() === null || ($taxRateSnapshot !== null && $taxRate->getCode() !== $taxRateSnapshot->getCode())) {
             $dataSnapshot = [
                 'code' => $taxRate->getCode(),
                 'name' => $taxRate->getName(),
                 'amount' => $taxRate->getAmount(),
             ];
-        } elseif ($taxRateSnapshot->isNameChanged() || $taxRateSnapshot->isAmountChanged()) {
+        } elseif ($taxRateSnapshot !== null && ($taxRateSnapshot->isNameChanged() || $taxRateSnapshot->isAmountChanged())) {
             $dataSnapshot = [
-                'code' => $lineItem->getTaxRateSnapshot()->getCode(),
-                'name' => $lineItem->getTaxRateSnapshot()->getName(),
-                'amount' => $lineItem->getTaxRateSnapshot()->getAmount(),
+                'code' => $taxRateSnapshot->getCode(),
+                'name' => $taxRateSnapshot->getName(),
+                'amount' => $taxRateSnapshot->getAmount(),
             ];
         }
 
@@ -54,6 +55,7 @@ class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
             return;
         }
 
+        /** @var TaxRateSnapshotInterface|null $existingSnapshot */
         $existingSnapshot = $this->taxRateSnapshotRepository->findOneBy($dataSnapshot);
 
         if ($taxRateSnapshot) {
@@ -63,7 +65,8 @@ class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
         if ($existingSnapshot) {
             $lineItem->setTaxRateSnapshot($existingSnapshot);
         } else {
-            $snapshot = $this->invoiceTaxRateSnapshotFactory->create(...$dataSnapshot);
+            /** @var TaxRateSnapshotInterface $snapshot */
+            $snapshot = $this->invoiceTaxRateSnapshotFactory->create(...array_values($dataSnapshot));
 
             $lineItem->setTaxRateSnapshot($snapshot);
         }
