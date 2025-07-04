@@ -34,12 +34,13 @@ final class AddRoleSubscriber implements EventSubscriberInterface
         Assert::isInstanceOf($data, AdminUserInterface::class);
 
         if ($data instanceof RoleAwareInterface) {
-            $roles = $data->getRoles();
+            /** @var RoleAwareInterface $data */
+            $roles = method_exists($data, 'getRoles') ? $data->getRoles() : [];
             $roleRbac = $data->getRole();
 
             Assert::isInstanceOf($roleRbac, RoleInterface::class);
 
-            if ($roles) {
+            if (!empty($roles)) {
                 foreach ($roles as $role) {
                     $data->removeRole($role);
                 }

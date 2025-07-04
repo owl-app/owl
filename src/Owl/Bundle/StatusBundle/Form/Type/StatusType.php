@@ -21,7 +21,11 @@ abstract class StatusType extends AbstractResourceType
 
         $choices = [];
         if ($resource instanceof StatusableInterface) {
-            $choices = array_flip($resource->getStatusesLabels());
+            if (method_exists($resource, 'getStatusLabels')) {
+                /** @var array<string, string> $labels */
+                $labels = $resource->getStatusLabels();
+                $choices = array_flip($labels);
+            }
         }
 
         $builder
@@ -43,18 +47,5 @@ abstract class StatusType extends AbstractResourceType
         $resolver->setDefaults([
             'rating_steps' => 5,
         ]);
-    }
-
-    /**
-     * @return array<int, int>
-     */
-    private function createRatingList(int $maxRate): array
-    {
-        $ratings = [];
-        for ($i = 1; $i <= $maxRate; ++$i) {
-            $ratings[$i] = $i;
-        }
-
-        return $ratings;
     }
 }

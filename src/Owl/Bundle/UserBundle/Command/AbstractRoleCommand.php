@@ -15,6 +15,8 @@ namespace Owl\Bundle\UserBundle\Command;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
+use Owl\Component\User\Model\UserInterface;
+use Owl\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,8 +24,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Webmozart\Assert\Assert;
-use Owl\Component\User\Model\UserInterface;
-use Owl\Component\User\Repository\UserRepositoryInterface;
 
 abstract class AbstractRoleCommand extends Command
 {
@@ -38,7 +38,6 @@ abstract class AbstractRoleCommand extends Command
 
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
-        // User types configured in the Bundle
         $availableUserTypes = $this->getAvailableUserTypes();
         if (empty($availableUserTypes)) {
             throw new \Exception(sprintf('At least one user type should implement %s', UserInterface::class));
@@ -47,7 +46,6 @@ abstract class AbstractRoleCommand extends Command
         $helper = $this->getHelper('question');
         Assert::isInstanceOf($helper, QuestionHelper::class);
         if (!$input->getOption('user-type')) {
-            // Do not ask if there's only 1 user type configured
             if (count($availableUserTypes) === 1) {
                 $input->setOption('user-type', $availableUserTypes[0]);
             } else {
@@ -134,14 +132,17 @@ abstract class AbstractRoleCommand extends Command
     {
         $class = $this->getUserModelClass($userType);
 
-        return $this->managerRegistry->getManagerForClass($class);
+        $manager = $this->managerRegistry->getManagerForClass($class);
+        Assert::isInstanceOf($manager, ObjectManager::class);
+
+        return $manager;
     }
 
     protected function getUserRepository(string $userType): UserRepositoryInterface
     {
         $class = $this->getUserModelClass($userType);
 
-        /** @var UserRepositoryInterface $userRepository */
+        /** @var UserRepositoryInterface|null $userRepository */
         $userRepository = $this->getEntityManager($userType)->getRepository($class);
         Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
 
@@ -151,8 +152,15 @@ abstract class AbstractRoleCommand extends Command
     /** @return  array<string> */
     protected function getAvailableUserTypes(): array
     {
-        // Keep only users types which implement \Sylius\Component\User\Model\UserInterface
-        $userTypes = array_filter($this->usersConfig, fn (array $userTypeConfig): bool => isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true));
+        $userTypes = array_filter(
+            $this->usersConfig,
+            /**
+             * @param array<string, mixed> $userTypeConfig
+             */
+            fn (array $userTypeConfig): bool =>
+                isset($userTypeConfig['user']['classes']['model'])
+                && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true)
+        );
 
         return array_keys($userTypes);
     }
@@ -162,13 +170,19 @@ abstract class AbstractRoleCommand extends Command
      */
     protected function getUserModelClass(string $userType): string
     {
-        if (empty($this->usersConfig[$userType]['user']['classes']['model'])) {
+        if (
+            !isset($this->usersConfig[$userType]['user']['classes']['model'])
+            || empty($this->usersConfig[$userType]['user']['classes']['model'])
+            || !is_string($this->usersConfig[$userType]['user']['classes']['model'])
+        ) {
             throw new \InvalidArgumentException(sprintf('User type %s misconfigured.', $userType));
         }
 
         return $this->usersConfig[$userType]['user']['classes']['model'];
     }
 
-    /** @param array<array-key, string> $securityRoles */
+    /**
+     * @param array<array-key, string> $securityRoles
+     */
     abstract protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void;
 }

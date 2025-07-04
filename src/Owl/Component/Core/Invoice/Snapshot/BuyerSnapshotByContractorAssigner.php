@@ -10,8 +10,15 @@ use Owl\Component\Invoice\Assigner\SnapshotAssignerInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Core\Model\ContractorInterface;
 
+/**
+ * @template T of \Owl\Component\Core\Model\BuyerInterface
+ */
 class BuyerSnapshotByContractorAssigner implements SnapshotAssignerInterface
 {
+    /**
+     * @param SnapshotAssignerInterface $decoratedBuyerSnapshotRepository
+     * @param BuyerFactoryInterface<T> $buyerFactory
+     */
     public function __construct(
         private SnapshotAssignerInterface $decoratedBuyerSnapshotRepository,
         private BuyerFactoryInterface $buyerFactory,

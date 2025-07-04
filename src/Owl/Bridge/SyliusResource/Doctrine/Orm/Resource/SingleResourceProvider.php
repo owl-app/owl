@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Owl\Bridge\SyliusResource\Doctrine\Orm\Resource;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\ItemProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface as SyliusRepositoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 final class SingleResourceProvider implements SingleResourceProviderInterface
 {
@@ -21,10 +21,12 @@ final class SingleResourceProvider implements SingleResourceProviderInterface
     }
 
     /**
-     * @param EntityRepository<ResourceInterface>|RepositoryInterface<ResourceInterface>|SyliusRepositoryInterface<ResourceInterface> $repository
+     * @param EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository
      */
-    public function get(RequestConfiguration $requestConfiguration, EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository): ?ResourceInterface
-    {
+    public function get(
+        RequestConfiguration $requestConfiguration,
+        EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository
+    ): ?ResourceInterface {
         $method = $requestConfiguration->getRepositoryMethod();
 
         if (null !== $method) {
@@ -44,13 +46,13 @@ final class SingleResourceProvider implements SingleResourceProviderInterface
         $criteria = [];
         $request = $requestConfiguration->getRequest();
 
-        if ($request->attributes->has('id')) {
+        if ($request instanceof Request && $request->attributes->has('id')) {
             $criteria = ['identifier' => $request->attributes->get('id')];
 
             return $this->itemProvider->get($repository, $criteria);
         }
 
-        if ($request->attributes->has('slug')) {
+        if ($request instanceof Request && $request->attributes->has('slug')) {
             $criteria = ['slug' => $request->attributes->get('slug')];
         }
 

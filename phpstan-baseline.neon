@@ -1,27 +1,32 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^PHPDoc tag @param for parameter \\$repository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Sylius\\\\Component\\\\Resource\\\\Model\\\\ResourceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
+			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Controller\\\\ResourcesResolver\\:\\:getResources\\(\\) has parameter \\$repository with generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Owl/Bridge/SyliusResource/Controller/ResourcesResolver.php
 
 		-
-			message: "#^Unable to resolve the template type T in call to method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\QueryBuilderApplicator\\:\\:getClassMetadata\\(\\)$#"
-			count: 2
-			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/QueryBuilderApplicator.php
+			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Controller\\\\ResourcesResolver\\:\\:getResources\\(\\) has parameter \\$repository with generic interface Sylius\\\\Resource\\\\Doctrine\\\\Persistence\\\\RepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Owl/Bridge/SyliusResource/Controller/ResourcesResolver.php
 
 		-
-			message: "#^PHPDoc tag @param for parameter \\$repository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Sylius\\\\Component\\\\Resource\\\\Model\\\\ResourceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
+			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\Resource\\\\SingleResourceProvider\\:\\:get\\(\\) has parameter \\$repository with generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/Resource/SingleResourceProvider.php
 
 		-
-			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Console\\\\Command\\\\AdminUserFakerCommand\\:\\:\\$hasher is never read, only written\\.$#"
+			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\Resource\\\\SingleResourceProvider\\:\\:get\\(\\) has parameter \\$repository with generic interface Sylius\\\\Resource\\\\Doctrine\\\\Persistence\\\\RepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/Resource/SingleResourceProvider.php
+
+		-
+			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Console\\\\Command\\\\AdminUserFakerCommand\\:\\:\\$_hasher is never read, only written\\.$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Console/Command/AdminUserFakerCommand.php
 
 		-
-			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Console\\\\Command\\\\AdminUserFakerCommand\\:\\:\\$userFactory is never read, only written\\.$#"
+			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Console\\\\Command\\\\AdminUserFakerCommand\\:\\:\\$_userFactory is never read, only written\\.$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Console/Command/AdminUserFakerCommand.php
 
@@ -41,77 +46,42 @@ parameters:
 			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
 
 		-
-			message: "#^Undefined variable\\: \\$criteria$#"
-			count: 2
-			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
-
-		-
-			message: "#^Undefined variable\\: \\$field$#"
-			count: 3
-			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
-
-		-
-			message: "#^Undefined variable\\: \\$repository$#"
-			count: 3
-			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\RbacPermissionFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Fixture/RbacPermissionFixture.php
-
-		-
-			message: "#^Parameter \\#1 \\$repository of method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\CollectionProviderInterface\\:\\:get\\(\\) expects Doctrine\\\\ORM\\\\EntityRepository\\<object\\>, Doctrine\\\\ORM\\\\EntityRepository\\<Owl\\\\Component\\\\Core\\\\Model\\\\User\\\\UserInterface\\> given\\.$#"
+			message: "#^Class Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\EventSubscriber\\\\AddOwnerFormSubscriber has @extends tag, but does not extend any class\\.$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Form/EventSubscriber/AddOwnerFormSubscriber.php
 
 		-
-			message: "#^Parameter \\$userRepository of method Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\EventSubscriber\\\\AddOwnerFormSubscriber\\:\\:__construct\\(\\) has invalid type Owl\\\\Component\\\\Core\\\\Model\\\\User\\\\UserInterface\\.$#"
+			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\EventSubscriber\\\\AddOwnerFormSubscriber\\:\\:__construct\\(\\) has parameter \\$userRepository with generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Form/EventSubscriber/AddOwnerFormSubscriber.php
 
 		-
-			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\EventSubscriber\\\\AddOwnerFormSubscriber\\:\\:\\$userRepository has unknown class Owl\\\\Component\\\\Core\\\\Model\\\\User\\\\UserInterface as its type\\.$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Form/EventSubscriber/AddOwnerFormSubscriber.php
-
-		-
-			message: "#^Call to an undefined method Owl\\\\Component\\\\Core\\\\Model\\\\AdminUserInterface\\:\\:getRoles\\(\\)\\.$#"
+			message: "#^Call to an undefined method Owl\\\\Component\\\\Core\\\\Model\\\\RoleAwareInterface\\:\\:addRole\\(\\)\\.$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Form/EventSubscriber/AddRoleSubscriber.php
 
 		-
-			message: "#^Parameter \\#1 \\$repository of method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\CollectionProviderInterface\\:\\:get\\(\\) expects Doctrine\\\\ORM\\\\EntityRepository\\<object\\>, Doctrine\\\\ORM\\\\EntityRepository\\<Owl\\\\Bundle\\\\CoreBundle\\\\Entity\\\\User\\> given\\.$#"
+			message: "#^Call to an undefined method Owl\\\\Component\\\\Core\\\\Model\\\\RoleAwareInterface\\:\\:removeRole\\(\\)\\.$#"
+			count: 1
+			path: src/Owl/Bundle/CoreBundle/Form/EventSubscriber/AddRoleSubscriber.php
+
+		-
+			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\UserChoiceType\\:\\:__construct\\(\\) has parameter \\$userRepository with generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Form/Type/UserChoiceType.php
 
 		-
-			message: "#^Parameter \\$userRepository of method Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\UserChoiceType\\:\\:__construct\\(\\) has invalid type Owl\\\\Bundle\\\\CoreBundle\\\\Entity\\\\User\\.$#"
+			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\UserChoiceType\\:\\:\\$userRepository with generic class Doctrine\\\\ORM\\\\EntityRepository does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Form/Type/UserChoiceType.php
 
 		-
-			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\UserChoiceType\\:\\:\\$userRepository has unknown class Owl\\\\Bundle\\\\CoreBundle\\\\Entity\\\\User as its type\\.$#"
+			message: "#^The @extends tag of class Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\UserChoiceType describes Doctrine\\\\ORM\\\\EntityRepository but the class extends Symfony\\\\Component\\\\Form\\\\AbstractType\\.$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Form/Type/UserChoiceType.php
 
 		-
-			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Rbac\\\\DirectPermissionUserProvider\\:\\:getPermission\\(\\) has invalid return type Yiisoft\\\\Rbac\\\\PermissionInterface\\.$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Rbac/DirectPermissionUserProvider.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Rbac\\\\DirectPermissionUserProvider\\:\\:getPermission\\(\\) has invalid return type Yiisoft\\\\Rbac\\\\RoleInterface\\.$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Rbac/DirectPermissionUserProvider.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$items contains unknown class Yiisoft\\\\Rbac\\\\PermissionInterface\\.$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Rbac/DirectPermissionUserProvider.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$items contains unknown class Yiisoft\\\\Rbac\\\\RoleInterface\\.$#"
+			message: "#^Return type \\(array\\<int, Yiisoft\\\\Rbac\\\\Permission\\|Yiisoft\\\\Rbac\\\\Role\\>\\) of method Owl\\\\Bundle\\\\CoreBundle\\\\Rbac\\\\DirectPermissionUserProvider\\:\\:getPermission\\(\\) should be compatible with return type \\(array\\<string, mixed\\>\\) of method Owl\\\\Bundle\\\\CoreBundle\\\\Rbac\\\\DirectPermissionUserProviderInterface\\:\\:getPermission\\(\\)$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Rbac/DirectPermissionUserProvider.php
 
@@ -121,39 +91,9 @@ parameters:
 			path: src/Owl/Bundle/InvoiceBundle/Validator/NumberFormatInvoiceConstraintValidator.php
 
 		-
-			message: "#^Call to an undefined method Owl\\\\Component\\\\Status\\\\Model\\\\StatusableInterface\\:\\:getStatusesLabels\\(\\)\\.$#"
-			count: 1
-			path: src/Owl/Bundle/StatusBundle/Form/Type/StatusType.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\StatusBundle\\\\Form\\\\Type\\\\StatusType\\:\\:createRatingList\\(\\) is unused\\.$#"
-			count: 1
-			path: src/Owl/Bundle/StatusBundle/Form/Type/StatusType.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\UiBundle\\\\Twig\\\\RedirectPathExtension\\:\\:hasAdditionalParameters\\(\\) has parameter \\$routeInfo with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bundle/UiBundle/Twig/RedirectPathExtension.php
-
-		-
 			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getRepository\\(\\)$#"
 			count: 1
 			path: src/Owl/Bundle/UserBundle/Command/AbstractRoleCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$user of method Owl\\\\Bundle\\\\UserBundle\\\\EventListener\\\\UserLastLoginSubscriber\\:\\:updateUserLastLogin\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null, Owl\\\\Component\\\\User\\\\Model\\\\UserInterface given\\.$#"
-			count: 1
-			path: src/Owl/Bundle/UserBundle/EventListener/UserLastLoginSubscriber.php
-
-		-
-			message: "#^Interface Owl\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface extends generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#"
-			count: 1
-			path: src/Owl/Bundle/UserBundle/Provider/UserProviderInterface.php
-
-		-
-			message: "#^Template type TUser of method Owl\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface\\:\\:loadUserByIdentifier\\(\\) is not referenced in a parameter\\.$#"
-			count: 1
-			path: src/Owl/Bundle/UserBundle/Provider/UserProviderInterface.php
 
 		-
 			message: "#^Comparison operation \"\\<\\=\" between 10\\|11\\|12 and 12 is always true\\.$#"
@@ -181,24 +121,34 @@ parameters:
 			path: src/Owl/Component/Core/Enum/Grid/Filter/PeriodQuarterEnum.php
 
 		-
-			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/Owl/Component/Core/Enum/Grid/Filter/PeriodQuarterEnum.php
 
 		-
-			message: "#^Result of && is always true\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Enum/Grid/Filter/PeriodQuarterEnum.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Core\\\\Invoice\\\\Snapshot\\\\BuyerSnapshotByContractorAssigner\\:\\:__construct\\(\\) has parameter \\$buyerFactory with generic interface Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactoryInterface but does not specify its types\\: T$#"
+			message: "#^PHPDoc tag @template T for class Owl\\\\Component\\\\Core\\\\Invoice\\\\Snapshot\\\\BuyerSnapshotByContractorAssigner has invalid bound type Owl\\\\Component\\\\Core\\\\Model\\\\BuyerInterface\\.$#"
 			count: 1
 			path: src/Owl/Component/Core/Invoice/Snapshot/BuyerSnapshotByContractorAssigner.php
 
 		-
-			message: "#^Method Owl\\\\Component\\\\Core\\\\Invoice\\\\Snapshot\\\\SellerSnapshotByCompanyAssigner\\:\\:__construct\\(\\) has parameter \\$sellerFactory with generic interface Owl\\\\Component\\\\Core\\\\Factory\\\\SellerFactoryInterface but does not specify its types\\: T$#"
+			message: "#^Parameter \\$buyerFactory of method Owl\\\\Component\\\\Core\\\\Invoice\\\\Snapshot\\\\BuyerSnapshotByContractorAssigner\\:\\:__construct\\(\\) has invalid type Owl\\\\Component\\\\Core\\\\Model\\\\BuyerInterface\\.$#"
 			count: 1
-			path: src/Owl/Component/Core/Invoice/Snapshot/SellerSnapshotByCompanyAssigner.php
+			path: src/Owl/Component/Core/Invoice/Snapshot/BuyerSnapshotByContractorAssigner.php
+
+		-
+			message: "#^Property Owl\\\\Component\\\\Core\\\\Invoice\\\\Snapshot\\\\BuyerSnapshotByContractorAssigner\\:\\:\\$buyerFactory has unknown class Owl\\\\Component\\\\Core\\\\Model\\\\BuyerInterface as its type\\.$#"
+			count: 1
+			path: src/Owl/Component/Core/Invoice/Snapshot/BuyerSnapshotByContractorAssigner.php
+
+		-
+			message: "#^Type Owl\\\\Component\\\\Core\\\\Model\\\\BuyerInterface in generic type Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactoryInterface\\<Owl\\\\Component\\\\Core\\\\Model\\\\BuyerInterface\\> in PHPDoc tag @param for parameter \\$buyerFactory is not subtype of template type T of Owl\\\\Component\\\\Invoice\\\\Model\\\\Buyer\\\\BuyerInterface of interface Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactoryInterface\\.$#"
+			count: 1
+			path: src/Owl/Component/Core/Invoice/Snapshot/BuyerSnapshotByContractorAssigner.php
+
+		-
+			message: "#^Type Owl\\\\Component\\\\Core\\\\Model\\\\BuyerInterface in generic type Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactoryInterface\\<Owl\\\\Component\\\\Core\\\\Model\\\\BuyerInterface\\> in PHPDoc type for property Owl\\\\Component\\\\Core\\\\Invoice\\\\Snapshot\\\\BuyerSnapshotByContractorAssigner\\:\\:\\$buyerFactory is not subtype of template type T of Owl\\\\Component\\\\Invoice\\\\Model\\\\Buyer\\\\BuyerInterface of interface Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactoryInterface\\.$#"
+			count: 1
+			path: src/Owl/Component/Core/Invoice/Snapshot/BuyerSnapshotByContractorAssigner.php
 
 		-
 			message: "#^PHPDoc tag @var for variable \\$company contains unknown class Owl\\\\Component\\\\Core\\\\Model\\\\Company\\\\CompanyInterface\\.$#"
@@ -206,22 +156,37 @@ parameters:
 			path: src/Owl/Component/Core/Invoice/Snapshot/SellerSnapshotByCompanyAssigner.php
 
 		-
-			message: "#^Parameter \\#1 \\$contractor of method Owl\\\\Component\\\\Core\\\\Factory\\\\SellerFactoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\Seller\\\\SellerInterface\\>\\:\\:createFromCompany\\(\\) expects Owl\\\\Component\\\\Core\\\\Model\\\\CompanyInterface, Owl\\\\Component\\\\Core\\\\Model\\\\Company\\\\CompanyInterface given\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Invoice/Snapshot/SellerSnapshotByCompanyAssigner.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Assigner\\\\TaxRateSnapshotAssigner\\:\\:__construct\\(\\) has parameter \\$invoiceTaxRateSnapshotFactory with generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceTaxRateSnapshotFactoryInterface but does not specify its types\\: T$#"
+			message: "#^PHPDoc tag @param for parameter \\$taxRateSnapshotRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\Taxation\\\\TaxRateSnapshotInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
 			count: 1
 			path: src/Owl/Component/Invoice/Assigner/TaxRateSnapshotAssigner.php
 
 		-
-			message: "#^Type Owl\\\\Component\\\\Invoice\\\\Model\\\\InvoiceInterface in generic type Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\InvoiceInterface\\> in PHPDoc tag @implements is not subtype of template type T of Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactoryInterface of interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactoryInterface\\.$#"
+			message: "#^PHPDoc type for property Owl\\\\Component\\\\Invoice\\\\Assigner\\\\TaxRateSnapshotAssigner\\:\\:\\$taxRateSnapshotRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\Taxation\\\\TaxRateSnapshotInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Assigner/TaxRateSnapshotAssigner.php
+
+		-
+			message: "#^Class Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactory implements generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Owl/Component/Invoice/Factory/InvoiceFactory.php
 
 		-
-			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\DateBasedInvoiceSequenceStrategy\\:\\:__construct\\(\\) has parameter \\$invoiceSequenceFactory with generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceSequenceFactoryInterface but does not specify its types\\: T$#"
+			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactory\\:\\:__construct\\(\\) has parameter \\$decoratedFactory with generic interface Sylius\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Factory/InvoiceFactory.php
+
+		-
+			message: "#^PHPDoc tag @implements has invalid value \\(InvoiceFactoryInterface\\)\\: Unexpected token \"\\\\n \", expected '\\<' at offset 42$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Factory/InvoiceFactory.php
+
+		-
+			message: "#^PHPDoc tag @param for parameter \\$sequenceRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Sequention/Strategy/DateBasedInvoiceSequenceStrategy.php
+
+		-
+			message: "#^PHPDoc type for property Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\DateBasedInvoiceSequenceStrategy\\:\\:\\$sequenceRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
 			count: 1
 			path: src/Owl/Component/Invoice/Sequention/Strategy/DateBasedInvoiceSequenceStrategy.php
 

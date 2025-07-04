@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Owl\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\CollectionProviderInterface;
 use Owl\Bundle\CoreBundle\Form\Type\UserChoiceType;
 use Owl\Component\Core\Context\AdminUserContextInterface;
@@ -15,16 +14,22 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
+/**
+ * @template-extends EntityRepository<object>
+ */
 final class AddOwnerFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * @param EntityRepository<UserInterface> $userRepository
+     * @var EntityRepository<object>
      */
+    private EntityRepository $userRepository;
+
     public function __construct(
         private AdminUserContextInterface $adminUserContext,
-        private EntityRepository $userRepository,
+        EntityRepository $userRepository,
         private CollectionProviderInterface $collectionProvider,
     ) {
+        $this->userRepository = $userRepository;
     }
 
     public static function getSubscribedEvents(): array

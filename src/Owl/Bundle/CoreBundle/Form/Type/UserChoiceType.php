@@ -11,15 +11,28 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Owl\Bundle\CoreBundle\Entity\User;
 
+/**
+ * @template-extends EntityRepository<User>
+ */
 final class UserChoiceType extends AbstractType
 {
     /**
-     * @param EntityRepository<User> $userRepository
+     * @var EntityRepository
+     */
+    private EntityRepository $userRepository;
+
+    private CollectionProviderInterface $collectionProvider;
+
+    /**
+     * @param EntityRepository $userRepository
+     * @param CollectionProviderInterface $collectionProvider
      */
     public function __construct(
-        private EntityRepository $userRepository,
-        private CollectionProviderInterface $collectionProvider,
+        EntityRepository $userRepository,
+        CollectionProviderInterface $collectionProvider,
     ) {
+        $this->userRepository = $userRepository;
+        $this->collectionProvider = $collectionProvider;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

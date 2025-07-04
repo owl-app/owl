@@ -11,8 +11,15 @@ use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of TaxRateSnapshotInterface
+ */
 class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
 {
+    /**
+     * @param RepositoryInterface<T> $taxRateSnapshotRepository
+     * @param InvoiceTaxRateSnapshotFactoryInterface<T> $invoiceTaxRateSnapshotFactory
+     */
     public function __construct(
         private RepositoryInterface $taxRateSnapshotRepository,
         private InvoiceTaxRateSnapshotFactoryInterface $invoiceTaxRateSnapshotFactory,

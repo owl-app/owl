@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Component\Invoice\Factory;
 
+use DateTimeImmutable;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Provider\InvoiceSerieProviderInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
@@ -11,11 +12,15 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 /**
- * @implements InvoiceFactoryInterface<InvoiceInterface>
+ * @implements InvoiceFactoryInterface
  */
 final class InvoiceFactory implements InvoiceFactoryInterface
 {
-    /** @param FactoryInterface<InvoiceInterface> $decoratedFactory */
+    /**
+     * @param FactoryInterface $decoratedFactory
+     * @param ServiceRegistryInterface $registryInvoiceSequenceStrategy
+     * @param InvoiceSerieProviderInterface $invoiceSerieProvider
+     */
     public function __construct(
         private FactoryInterface $decoratedFactory,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
@@ -28,10 +33,9 @@ final class InvoiceFactory implements InvoiceFactoryInterface
         return $this->decoratedFactory->createNew();
     }
 
-    /** @inheritdoc */
     public function createWithDefaults(string $type): InvoiceInterface
     {
-        $now = new \DateTimeImmutable();
+        $now = new DateTimeImmutable();
         $defaultSerie = $this->invoiceSerieProvider->getSerie($type);
         /** @var InvoiceSequenceStrategyInterface $strategy */
         $strategy = $this->registryInvoiceSequenceStrategy->get($defaultSerie->getSequenceIncrement());

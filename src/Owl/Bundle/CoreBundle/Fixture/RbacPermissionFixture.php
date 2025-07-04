@@ -31,6 +31,9 @@ class RbacPermissionFixture implements FixtureInterface
         return 'rbac_permission';
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     final public function load(array $options = []): void
     {
         $routes = $this->routesPermissionProvider->getPermissions();

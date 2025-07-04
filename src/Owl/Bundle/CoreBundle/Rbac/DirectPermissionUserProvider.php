@@ -8,8 +8,8 @@ use Stringable;
 use Yiisoft\Rbac\AssignmentsStorageInterface;
 use Yiisoft\Rbac\ItemsStorageInterface;
 use Yiisoft\Rbac\ManagerInterface;
-use Yiisoft\Rbac\PermissionInterface;
-use Yiisoft\Rbac\RoleInterface;
+use Yiisoft\Rbac\Permission;
+use Yiisoft\Rbac\Role;
 
 final class DirectPermissionUserProvider implements DirectPermissionUserProviderInterface
 {
@@ -21,7 +21,7 @@ final class DirectPermissionUserProvider implements DirectPermissionUserProvider
     }
 
     /**
-     * @return (PermissionInterface|RoleInterface)[]
+     * @return array<int, Permission|Role>
      */
     public function getPermission(int|Stringable|string $userId): array
     {
@@ -29,7 +29,7 @@ final class DirectPermissionUserProvider implements DirectPermissionUserProvider
         $assignments = $this->rbacAssignmentsStorage->getByUserId($userId);
         $assignmentNames = array_keys($assignments);
 
-        /** @var (PermissionInterface|RoleInterface)[] $items */
+        /** @var array<string, Permission|Role> $items */
         $items = $this->rbacItemStorage->getByNames($assignmentNames);
 
         return array_merge(

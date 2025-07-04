@@ -21,11 +21,17 @@ class AdminUserFakerCommand extends ContainerAwareCommand
 {
     protected static $defaultName = 'owl:admin-user-faker';
 
+    /**
+     * @param EntityManagerInterface $adminUserManager
+     * @param RepositoryInterface $roleRepository
+     * @param ExampleFactoryInterface $_userFactory
+     * @param UserPasswordHasherInterface $_hasher
+     */
     public function __construct(
         private EntityManagerInterface $adminUserManager,
         private RepositoryInterface $roleRepository,
-        private ExampleFactoryInterface $userFactory,
-        private UserPasswordHasherInterface $hasher,
+        private ExampleFactoryInterface $_userFactory,
+        private UserPasswordHasherInterface $_hasher,
     ) {
         parent::__construct();
     }

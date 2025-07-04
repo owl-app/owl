@@ -6,6 +6,7 @@ namespace Owl\Component\Core\Enum\Grid\Filter;
 
 use DateTime;
 use UnhandledMatchError;
+use LogicException;
 
 enum PeriodQuarterEnum: string
 {
@@ -15,6 +16,7 @@ enum PeriodQuarterEnum: string
     case TYPE_Q4 = '4';
 
     /**
+     * @param int|string $quarter
      * @return array<string, string>
      */
     public static function getPeriodRange(int|string $quarter): array
@@ -36,12 +38,19 @@ enum PeriodQuarterEnum: string
     {
         $month = (int) $date->format('n');
 
-        return match (true) {
-            $month >= 1 && $month <= 3 => self::TYPE_Q1,
-            $month >= 4 && $month <= 6 => self::TYPE_Q2,
-            $month >= 7 && $month <= 9 => self::TYPE_Q3,
-            $month >= 10 && $month <= 12 => self::TYPE_Q4,
-            default => throw new \LogicException('Month must be between 1 and 12.'),
-        };
+        if ($month >= 1 && $month <= 3) {
+            return self::TYPE_Q1;
+        }
+        if ($month >= 4 && $month <= 6) {
+            return self::TYPE_Q2;
+        }
+        if ($month >= 7 && $month <= 9) {
+            return self::TYPE_Q3;
+        }
+        if ($month >= 10 && $month <= 12) {
+            return self::TYPE_Q4;
+        }
+
+        throw new LogicException('Month must be between 1 and 12.');
     }
 }

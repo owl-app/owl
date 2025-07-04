@@ -21,14 +21,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\Security\Core\User\UserInterface as CoreUserInterface;
+use UnexpectedValueException;
+use DateTime;
 
 final class UserLastLoginSubscriber implements EventSubscriberInterface
 {
-    /** @var ObjectManager */
-    private $userManager;
+    private ObjectManager $userManager;
 
-    /** @var string */
-    private $userClass;
+    private string $userClass;
 
     public function __construct(ObjectManager $userManager, string $userClass)
     {
@@ -49,25 +49,31 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
 
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
-        $this->updateUserLastLogin($event->getAuthenticationToken()->getUser());
+        $user = $event->getAuthenticationToken()->getUser();
+        if ($user instanceof CoreUserInterface) {
+            $this->updateUserLastLogin($user);
+        }
     }
 
     public function onImplicitLogin(UserEvent $event): void
     {
-        $this->updateUserLastLogin($event->getUser());
+        $user = $event->getUser();
+        if ($user instanceof CoreUserInterface) {
+            $this->updateUserLastLogin($user);
+        }
     }
 
-    private function updateUserLastLogin(?CoreUserInterface $user): void
+    private function updateUserLastLogin(CoreUserInterface $user): void
     {
-        if ($user === null || !$user instanceof $this->userClass) {
+        if (!$user instanceof $this->userClass) {
             return;
         }
 
         if (!$user instanceof ComponentUserInterface) {
-            throw new \UnexpectedValueException('In order to use this subscriber, your class has to implement UserInterface');
+            throw new UnexpectedValueException('In order to use this subscriber, your class has to implement UserInterface');
         }
 
-        $user->setLastLogin(new \DateTime());
+        $user->setLastLogin(new DateTime());
         $this->userManager->persist($user);
         $this->userManager->flush();
     }

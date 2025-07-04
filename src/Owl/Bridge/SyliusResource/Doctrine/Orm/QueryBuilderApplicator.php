@@ -10,8 +10,14 @@ use Doctrine\ORM\QueryBuilder;
 
 final class QueryBuilderApplicator implements QueryBuilderApplicatorInterface
 {
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param class-string $resourceClass
+     * @param array<string, mixed> $criteria
+     */
     public function applyFilters(QueryBuilder $queryBuilder, string $resourceClass, array $criteria): void
     {
+        /** @var ClassMetadata<object> $metadata */
         $metadata = $this->getClassMetadata($queryBuilder, $resourceClass);
 
         foreach ($criteria as $property => $value) {
@@ -35,8 +41,14 @@ final class QueryBuilderApplicator implements QueryBuilderApplicatorInterface
         }
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param class-string $resourceClass
+     * @param array<string, string> $sorting
+     */
     public function applySort(QueryBuilder $queryBuilder, string $resourceClass, array $sorting): void
     {
+        /** @var ClassMetadata<object> $metadata */
         $metadata = $this->getClassMetadata($queryBuilder, $resourceClass);
 
         foreach ($sorting as $property => $order) {
@@ -51,13 +63,15 @@ final class QueryBuilderApplicator implements QueryBuilderApplicatorInterface
     }
 
     /**
-     * @template T of object
-     * @param class-string<T> $resourceClass
-     * @return ClassMetadata<T>
+     * @param QueryBuilder $queryBuilder
+     * @param class-string $resourceClass
+     * @return ClassMetadata<object>
      */
     private function getClassMetadata(QueryBuilder $queryBuilder, string $resourceClass): ClassMetadata
     {
-        return $queryBuilder->getEntityManager()->getClassMetadata($resourceClass);
+        /** @var ClassMetadata<object> $metadata */
+        $metadata = $queryBuilder->getEntityManager()->getClassMetadata($resourceClass);
+        return $metadata;
     }
 
     private function getPropertyName(string $name): string

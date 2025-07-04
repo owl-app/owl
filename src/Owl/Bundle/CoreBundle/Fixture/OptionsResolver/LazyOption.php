@@ -160,7 +160,7 @@ final class LazyOption
      */
     public static function findOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return function (Options $options, $previousValue): ?object {
+        return function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
             if (null === $previousValue || [] === $previousValue) {
                 return null;
             }
@@ -180,7 +180,7 @@ final class LazyOption
      */
     public static function getOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return function (Options $options, $previousValue): ?object {
+        return function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
             if (null === $previousValue || [] === $previousValue) {
                 return null;
             }

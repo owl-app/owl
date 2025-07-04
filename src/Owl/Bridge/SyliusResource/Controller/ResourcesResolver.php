@@ -20,11 +20,13 @@ final class ResourcesResolver implements ResourcesResolverInterface
     }
 
     /**
-     * @param EntityRepository<ResourceInterface>|RepositoryInterface<ResourceInterface>|SyliusRepositoryInterface<ResourceInterface> $repository
+     * @param EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository
      * @return iterable<ResourceInterface>
      */
-    public function getResources(RequestConfiguration $requestConfiguration, EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository): iterable
-    {
+    public function getResources(
+        RequestConfiguration $requestConfiguration,
+        EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository
+    ): iterable {
         $method = $requestConfiguration->getRepositoryMethod();
 
         if (null !== $method) {
@@ -51,6 +53,12 @@ final class ResourcesResolver implements ResourcesResolverInterface
             $sorting = $requestConfiguration->getSorting();
         }
 
-        return $this->collectionProvider->get($repository, $criteria, [], $sorting, $requestConfiguration->isPaginated());
+        return $this->collectionProvider->get(
+            $repository,
+            $criteria,
+            [],
+            $sorting,
+            $requestConfiguration->isPaginated()
+        );
     }
 }
