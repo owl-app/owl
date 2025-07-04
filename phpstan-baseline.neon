@@ -1,0 +1,67 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Controller\\\\ResourcesResolver\\:\\:getResources\\(\\) has parameter \\$repository with generic interface Sylius\\\\Resource\\\\Doctrine\\\\Persistence\\\\RepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Owl/Bridge/SyliusResource/Controller/ResourcesResolver.php
+
+		-
+			message: "#^Class Sylius\\\\Component\\\\Resource\\\\Exception\\\\UnexpectedTypeException constructor invoked with 1 parameter, 2 required\\.$#"
+			count: 1
+			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
+
+		-
+			message: "#^PHPDoc tag @return with type \\(Closure\\)\\|null is not subtype of native type Closure\\.$#"
+			count: 1
+			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
+
+		-
+			message: "#^Call to an undefined method Owl\\\\Component\\\\Core\\\\Model\\\\AdminUserInterface\\:\\:getRoles\\(\\)\\.$#"
+			count: 1
+			path: src/Owl/Bundle/CoreBundle/Form/EventSubscriber/AddRoleSubscriber.php
+
+		-
+			message: "#^PHPDoc tag @var has invalid value \\(AdminUserInterface&RoleAwareInterface\\|null \\$data\\)\\: Unexpected token \"\\|\", expected TOKEN_OTHER at offset 46$#"
+			count: 1
+			path: src/Owl/Bundle/CoreBundle/Form/EventSubscriber/AddRoleSubscriber.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getRepository\\(\\)$#"
+			count: 1
+			path: src/Owl/Bundle/UserBundle/Command/AbstractRoleCommand.php
+
+		-
+			message: "#^PHPDoc tag @param for parameter \\$taxRateSnapshotRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\Taxation\\\\TaxRateSnapshotInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Assigner/TaxRateSnapshotAssigner.php
+
+		-
+			message: "#^PHPDoc type for property Owl\\\\Component\\\\Invoice\\\\Assigner\\\\TaxRateSnapshotAssigner\\:\\:\\$taxRateSnapshotRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\Taxation\\\\TaxRateSnapshotInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Assigner/TaxRateSnapshotAssigner.php
+
+		-
+			message: "#^Class Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactory implements generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Factory/InvoiceFactory.php
+
+		-
+			message: "#^PHPDoc tag @param for parameter \\$sequenceRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Sequention/Strategy/DateBasedInvoiceSequenceStrategy.php
+
+		-
+			message: "#^PHPDoc type for property Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\DateBasedInvoiceSequenceStrategy\\:\\:\\$sequenceRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Sequention/Strategy/DateBasedInvoiceSequenceStrategy.php
+
+		-
+			message: "#^Class Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\MonthlyInvoiceSequenceStrategy extends generic class Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\DateBasedInvoiceSequenceStrategy but does not specify its types\\: T$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Sequention/Strategy/MonthlyInvoiceSequenceStrategy.php
+
+		-
+			message: "#^Class Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\YearlyInvoiceSequenceStrategy extends generic class Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\DateBasedInvoiceSequenceStrategy but does not specify its types\\: T$#"
+			count: 1
+			path: src/Owl/Component/Invoice/Sequention/Strategy/YearlyInvoiceSequenceStrategy.php
+

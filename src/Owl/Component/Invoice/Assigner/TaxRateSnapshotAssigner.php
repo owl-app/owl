@@ -13,6 +13,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
 {
+    /**
+     * @param RepositoryInterface<TaxRateSnapshotInterface> $taxRateSnapshotRepository
+     * @param InvoiceTaxRateSnapshotFactoryInterface<TaxRateSnapshotInterface> $invoiceTaxRateSnapshotFactory
+     */
     public function __construct(
         private RepositoryInterface $taxRateSnapshotRepository,
         private InvoiceTaxRateSnapshotFactoryInterface $invoiceTaxRateSnapshotFactory,
@@ -61,7 +65,7 @@ class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
             $this->entityManager->detach($taxRateSnapshot);
         }
 
-        if ($existingSnapshot !== null) {
+        if ($existingSnapshot !== null && $existingSnapshot instanceof TaxRateSnapshotInterface) {
             $lineItem->setTaxRateSnapshot($existingSnapshot);
         } else {
             $snapshot = $this->invoiceTaxRateSnapshotFactory->create(...array_values($dataSnapshot));

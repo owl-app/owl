@@ -17,10 +17,13 @@ use Symfony\Component\Form\FormEvents;
 final class AddOwnerFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var EntityRepository<UserInterface>
+     * @var EntityRepository<object>
      */
     private EntityRepository $userRepository;
 
+    /**
+     * @param EntityRepository<object> $userRepository
+     */
     public function __construct(
         private AdminUserContextInterface $adminUserContext,
         EntityRepository $userRepository,

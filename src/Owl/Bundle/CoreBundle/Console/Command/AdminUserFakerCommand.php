@@ -6,7 +6,6 @@ namespace Owl\Bundle\CoreBundle\Console\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
-use Owl\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
@@ -14,7 +13,6 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Faker\Factory;
 
 class AdminUserFakerCommand extends ContainerAwareCommand
@@ -24,8 +22,6 @@ class AdminUserFakerCommand extends ContainerAwareCommand
     public function __construct(
         private EntityManagerInterface $adminUserManager,
         private RepositoryInterface $roleRepository,
-        private ExampleFactoryInterface $userFactory,
-        private UserPasswordHasherInterface $hasher,
     ) {
         parent::__construct();
     }

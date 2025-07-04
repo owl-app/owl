@@ -15,6 +15,7 @@ namespace Owl\Bundle\UserBundle\Command;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
 use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
@@ -142,11 +143,10 @@ abstract class AbstractRoleCommand extends Command
     {
         $class = $this->getUserModelClass($userType);
 
-        /** @var UserRepositoryInterface $userRepository */
-        $userRepository = $this->getEntityManager($userType)->getRepository($class);
-        Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
+        $repository = $this->getEntityManager($userType)->getRepository($class);
+        Assert::isInstanceOf($repository, UserRepositoryInterface::class);
 
-        return $userRepository;
+        return $repository;
     }
 
     /** @return array<string> */
