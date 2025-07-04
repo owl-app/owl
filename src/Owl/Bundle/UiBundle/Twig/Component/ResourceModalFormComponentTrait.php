@@ -78,13 +78,16 @@ trait ResourceModalFormComponentTrait
     }
 
     /** @param T|null $resource */
-    public function dehydrateResource(ResourceInterface|null $resource): mixed
+    public function dehydrateResource(?ResourceInterface $resource): mixed
     {
         return $resource?->getId();
     }
 
+    /**
+     * @param array<string, mixed> $props
+     */
     #[PreMount]
-    public function initializeResourceById(?array $props = [])
+    public function initializeResourceById(?array $props = []): void
     {
         if (!isset($props['resource'])) {
             $this->resource = isset($props['id']) ? $this->repository->find($props['id']) : $this->createResource();
@@ -103,7 +106,7 @@ trait ResourceModalFormComponentTrait
     }
 
     #[LiveListener('saved')]
-    public function incrementProductCount(EntityManagerInterface $entityManager, Request $request)
+    public function incrementProductCount(EntityManagerInterface $entityManager, Request $request): void
     {
         $this->submitForm();
 

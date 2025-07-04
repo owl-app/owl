@@ -85,13 +85,13 @@ trait GridFilterComponentTrait
     }
 
     #[LiveAction]
-    public function updateFilter(#[LiveArg] $field, #[LiveArg] $value = null): void
+    public function updateFilter(#[LiveArg] string $field, #[LiveArg] mixed $value = null): void
     {
         $flatAvailableFilters = array_merge(...array_values($this->availableFilters));
 
         $this->formValues = array_merge(
             array_filter($this->activeCriteria, fn ($value, $key) => in_array($key, $flatAvailableFilters), \ARRAY_FILTER_USE_BOTH),
-            [$field => $value ?? $this->formValues[$field] ?? []],
+            [$field => $value ?? ($this->formValues[$field] ?? null)],
         );
 
         $this->submitForm();
@@ -131,11 +131,17 @@ trait GridFilterComponentTrait
         $this->submitForm(false);
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     private function isCustomFilter(array $options): bool
     {
         return isset($options['custom']) && $options['custom'] === true;
     }
 
+    /**
+     * @return array<string, array<string>>
+     */
     private function getAvailableFilters(): array
     {
         $availableFilters = [];
@@ -149,7 +155,7 @@ trait GridFilterComponentTrait
             }
 
             if (isset($availableFilters[$filter->getType()])) {
-                array_push($this->availableFilters[$filter->getType()], $filter->getName());
+                array_push($availableFilters[$filter->getType()], $filter->getName());
             } else {
                 $availableFilters[$filter->getType()] = [$filter->getName()];
             }
@@ -163,7 +169,7 @@ trait GridFilterComponentTrait
         $gridDefinition = $this->gridProvider->get($this->grid);
         $filter = $gridDefinition->getFilter($field);
 
-        if (!$filter->getOptions()['saved'] ?? false) {
+        if (!($filter->getOptions()['saved'] ?? false)) {
             return;
         }
 
@@ -172,7 +178,7 @@ trait GridFilterComponentTrait
         }
     }
 
-    private function getFilterKey(Grid $gridDefinition, string $name): ?string
+    private function getFilterKey(Grid $gridDefinition, string $name): string
     {
         return 'filters.' . $gridDefinition->getCode() . '.' . $name;
     }
