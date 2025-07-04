@@ -10,6 +10,7 @@ use Owl\Bundle\LocationBundle\Form\Type\CountryCodeChoiceType;
 use Owl\Bundle\LocationBundle\Form\Type\ZoneChoiceType;
 use Owl\Component\Location\Model\CountryCodeAwareInterface;
 use Owl\Component\Location\Model\ProvinceCodeAwareInterface;
+use Owl\Component\Location\Model\ZoneInterface;
 use Owl\Component\Location\Repository\ZoneRepositoryInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +20,9 @@ use Symfony\Component\Form\FormInterface;
 
 final class LocationFieldsExtension extends AbstractTypeExtension
 {
+    /**
+     * @param ZoneRepositoryInterface<ZoneInterface> $zoneRepository
+     */
     public function __construct(
         private BuildCountryFormSubscriber $buildCountryFormSubscriber,
         private ZoneRepositoryInterface $zoneRepository,

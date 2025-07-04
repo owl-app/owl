@@ -12,6 +12,9 @@ class OrderMenuEvent extends MenuBuilderEvent
 {
     public const EVENT_NAME = 'owl.admin.menu.order';
 
+    /**
+     * @param array<mixed> $order
+     */
     public function __construct(FactoryInterface $factory, ItemInterface $menu, private array $order)
     {
         parent::__construct($factory, $menu);

@@ -15,14 +15,13 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface as SyliusRepository
 final class ResourcesResolver implements ResourcesResolverInterface
 {
     public function __construct(
-        private ResourcesResolverInterface $decoratedResolver,
         private CollectionProviderInterface $collectionProvider,
     ) {
     }
 
     /**
-     * @param EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository
-     * @return iterable
+     * @param EntityRepository<object>|RepositoryInterface|SyliusRepositoryInterface<object> $repository
+     * @return iterable<object>
      */
     public function getResources(RequestConfiguration $requestConfiguration, $repository): iterable
     {

@@ -22,6 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ResetPasswordType extends AbstractType
 {
+    /**
+     * @param array<string> $validationGroups
+     */
     public function __construct(private array $validationGroups = [])
     {
     }

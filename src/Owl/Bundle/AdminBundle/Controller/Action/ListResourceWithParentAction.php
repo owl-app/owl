@@ -19,13 +19,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ListResourceWithParentAction extends AbstractResourceAction
 {
+    /**
+     * @param EntityRepository<ResourceInterface> $repositoryParent
+     */
     public function __construct(
         private string $parentName,
         private EntityRepository $repositoryParent,
         private ResourcesCollectionProviderInterface $resourcesCollectionProvider,
         private ItemProviderInterface $itemProvider,
         private RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        private ViewHandlerInterface $viewHandler,
     ) {
     }
 

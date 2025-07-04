@@ -19,7 +19,6 @@ final class LineItemsSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private RepositoryInterface $companyRepository,
-        private CurrencyRepositoryInterface $currencyRepository,
     ) {
     }
 
@@ -34,10 +33,9 @@ final class LineItemsSubscriber implements EventSubscriberInterface
     public function postSetData(FormEvent $event): void
     {
         $form = $event->getForm();
-        /** @var InvoiceInterface $invoice */
         $invoice = $event->getData();
 
-        if ($invoice === null || $invoice->getCurrency() === null) {
+        if (!$invoice instanceof InvoiceInterface || $invoice->getCurrency() === null) {
             return;
         }
 

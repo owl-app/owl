@@ -51,7 +51,9 @@ final class QueryBuilderApplicator implements QueryBuilderApplicatorInterface
     }
 
     /**
-     * @return ClassMetadata<object>
+     * @template T of object
+     * @param class-string<T> $resourceClass
+     * @return ClassMetadata<T>
      */
     private function getClassMetadata(QueryBuilder $queryBuilder, string $resourceClass): ClassMetadata
     {

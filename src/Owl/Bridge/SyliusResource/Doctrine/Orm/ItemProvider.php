@@ -19,6 +19,11 @@ final class ItemProvider implements ItemProviderInterface
     ) {
     }
 
+    /**
+     * @param EntityRepository<object> $repository
+     * @param array<string, mixed>|null $criteria
+     * @param array<string, mixed>|null $repositoryOptions
+     */
     public function get(EntityRepository $repository, ?array $criteria = [], ?array $repositoryOptions = []): ?ResourceInterface
     {
         $method = $this->getMethod($repositoryOptions);
@@ -34,6 +39,9 @@ final class ItemProvider implements ItemProviderInterface
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
+    /**
+     * @param array<string, mixed>|null $repositoryOptions
+     */
     private function getMethod(?array $repositoryOptions = []): ?string
     {
         if (isset($repositoryOptions['method'])) {
@@ -48,8 +56,9 @@ final class ItemProvider implements ItemProviderInterface
     }
 
     /**
+     * @param EntityRepository<object> $repository
      * @param array<string, mixed> $arguments
-     * @param array<string, mixed> $criteria
+     * @param array<string, mixed>|null $criteria
      * @return array<string, mixed>|null
      */
     private function getCriteria(EntityRepository $repository, ?string $method, array $arguments, ?array $criteria): ?array
@@ -70,6 +79,7 @@ final class ItemProvider implements ItemProviderInterface
     }
 
     /**
+     * @param EntityRepository<object> $repository
      * @param array<string, mixed> $arguments
      */
     private function getQueryBuilder(EntityRepository $repository, ?string $method, array $arguments): QueryBuilder
@@ -81,6 +91,9 @@ final class ItemProvider implements ItemProviderInterface
         return $repository->createQueryBuilder('o');
     }
 
+    /**
+     * @param EntityRepository<object> $repository
+     */
     private function getIdentifierFieldName(EntityRepository $repository): string
     {
         $entityManager = $repository->createQueryBuilder('o')->getEntityManager();

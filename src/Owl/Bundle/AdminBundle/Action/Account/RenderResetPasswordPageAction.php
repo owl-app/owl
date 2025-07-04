@@ -61,7 +61,7 @@ final readonly class RenderResetPasswordPageAction
         );
     }
 
-    private function handleExpiredPasswordRequest(Request $request): RedirectResponse
+    private function handleExpiredPasswordRequest(Request $request): Response
     {
         FlashBagProvider
             ::getFlashBag($this->requestStack)

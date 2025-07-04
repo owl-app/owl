@@ -5,7 +5,6 @@
         <defaults public="true" />
 
         <service id="owl.resource_controller.resources_resolver" class="Owl\Bridge\SyliusResource\Controller\ResourcesResolver" public="false" decorates="sylius.resource_controller.resources_resolver" decoration-priority="512">
-            <argument type="service" id="owl.resource_controller.resources_resolver.inner" />
             <argument type="service" id="owl.resource_controller.orm.collection_provider" />
         </service>
 

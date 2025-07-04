@@ -90,6 +90,7 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     }
 
     /**
+     * @param array<string, mixed> $vars
      * @return array{url?: mixed, route?: mixed|string|null, parameters?: array<never, never>}
      */
     private function getRefereUrl(Request $request, SyliusRequestConfiguration $configuration, array $vars, string $action): array
