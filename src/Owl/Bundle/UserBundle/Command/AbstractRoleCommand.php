@@ -142,14 +142,14 @@ abstract class AbstractRoleCommand extends Command
     {
         $class = $this->getUserModelClass($userType);
 
-        /** @var UserRepositoryInterface|null $userRepository */
+        /** @var UserRepositoryInterface $userRepository */
         $userRepository = $this->getEntityManager($userType)->getRepository($class);
         Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
 
         return $userRepository;
     }
 
-    /** @return  array<string> */
+    /** @return array<string> */
     protected function getAvailableUserTypes(): array
     {
         $userTypes = array_filter(

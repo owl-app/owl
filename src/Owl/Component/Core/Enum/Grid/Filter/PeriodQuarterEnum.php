@@ -38,19 +38,16 @@ enum PeriodQuarterEnum: string
     {
         $month = (int) $date->format('n');
 
-        if ($month >= 1 && $month <= 3) {
+        if ($month <= 3) {
             return self::TYPE_Q1;
         }
-        if ($month >= 4 && $month <= 6) {
+        if ($month <= 6) {
             return self::TYPE_Q2;
         }
-        if ($month >= 7 && $month <= 9) {
+        if ($month <= 9) {
             return self::TYPE_Q3;
         }
-        if ($month >= 10 && $month <= 12) {
-            return self::TYPE_Q4;
-        }
 
-        throw new LogicException('Month must be between 1 and 12.');
+        return self::TYPE_Q4;
     }
 }

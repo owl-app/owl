@@ -11,15 +11,8 @@ use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @template T of TaxRateSnapshotInterface
- */
 class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
 {
-    /**
-     * @param RepositoryInterface<T> $taxRateSnapshotRepository
-     * @param InvoiceTaxRateSnapshotFactoryInterface<T> $invoiceTaxRateSnapshotFactory
-     */
     public function __construct(
         private RepositoryInterface $taxRateSnapshotRepository,
         private InvoiceTaxRateSnapshotFactoryInterface $invoiceTaxRateSnapshotFactory,
@@ -62,7 +55,6 @@ class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
             return;
         }
 
-        /** @var TaxRateSnapshotInterface|null $existingSnapshot */
         $existingSnapshot = $this->taxRateSnapshotRepository->findOneBy($dataSnapshot);
 
         if ($taxRateSnapshot !== null) {
@@ -72,9 +64,7 @@ class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
         if ($existingSnapshot !== null) {
             $lineItem->setTaxRateSnapshot($existingSnapshot);
         } else {
-            /** @var TaxRateSnapshotInterface $snapshot */
             $snapshot = $this->invoiceTaxRateSnapshotFactory->create(...array_values($dataSnapshot));
-
             $lineItem->setTaxRateSnapshot($snapshot);
         }
     }

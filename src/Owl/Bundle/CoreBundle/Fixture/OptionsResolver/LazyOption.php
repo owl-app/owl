@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Exception\ResourceNotFoundException;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -192,7 +192,7 @@ final class LazyOption
             $resource = $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
 
             if (null === $resource) {
-                throw new ResourceNotFoundException(
+                throw new UnexpectedTypeException(
                     sprintf(
                         'The %s resource for field %s with value %s was not found',
                         $repository->getClassName(),

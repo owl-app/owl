@@ -9,9 +9,10 @@ use Owl\Component\Core\Model\Invoice\Invoice;
 use Owl\Component\Invoice\Assigner\SnapshotAssignerInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Core\Model\ContractorInterface;
+use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
 
 /**
- * @template T of \Owl\Component\Core\Model\BuyerInterface
+ * @template T of BuyerInterface
  */
 class BuyerSnapshotByContractorAssigner implements SnapshotAssignerInterface
 {

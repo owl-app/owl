@@ -9,15 +9,8 @@ use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @template T of SequenceInterface
- */
 abstract class DateBasedInvoiceSequenceStrategy implements InvoiceSequenceStrategyInterface
 {
-    /**
-     * @param RepositoryInterface<T> $sequenceRepository
-     * @param InvoiceSequenceFactoryInterface<T> $invoiceSequenceFactory
-     */
     public function __construct(
         protected readonly RepositoryInterface $sequenceRepository,
         protected readonly InvoiceSequenceFactoryInterface $invoiceSequenceFactory,

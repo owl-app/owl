@@ -20,9 +20,6 @@ final class DirectPermissionUserProvider implements DirectPermissionUserProvider
     ) {
     }
 
-    /**
-     * @return array<int, Permission|Role>
-     */
     public function getPermission(int|Stringable|string $userId): array
     {
         $userId = (string) $userId;

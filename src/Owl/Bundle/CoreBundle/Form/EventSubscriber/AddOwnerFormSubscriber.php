@@ -14,13 +14,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @template-extends EntityRepository<object>
- */
 final class AddOwnerFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var EntityRepository<object>
+     * @var EntityRepository<UserInterface>
      */
     private EntityRepository $userRepository;
 

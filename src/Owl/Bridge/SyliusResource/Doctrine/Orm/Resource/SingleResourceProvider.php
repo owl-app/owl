@@ -13,6 +13,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface as SyliusRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @template T of ResourceInterface
+ * @template TEntityClass of object
+ */
 final class SingleResourceProvider implements SingleResourceProviderInterface
 {
     public function __construct(
@@ -21,7 +25,7 @@ final class SingleResourceProvider implements SingleResourceProviderInterface
     }
 
     /**
-     * @param EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository
+     * @param EntityRepository<TEntityClass>|RepositoryInterface<T>|SyliusRepositoryInterface<T> $repository
      */
     public function get(
         RequestConfiguration $requestConfiguration,

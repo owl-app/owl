@@ -11,12 +11,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Owl\Bundle\InvoiceBundle\Validator\NumberFormatInvoiceConstraint;
 
 class NumberFormatInvoiceConstraintValidator extends ConstraintValidator
 {
-    /**
-     * @var TranslatorInterface
-     */
     private TranslatorInterface $translator;
 
     public function __construct(
@@ -25,10 +23,6 @@ class NumberFormatInvoiceConstraintValidator extends ConstraintValidator
         $this->translator = $translator;
     }
 
-    /**
-     * @param mixed $value
-     * @param Constraint $constraint
-     */
     public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var NumberFormatInvoiceConstraint $constraint */
@@ -50,9 +44,8 @@ class NumberFormatInvoiceConstraintValidator extends ConstraintValidator
         /** @var InvoiceInterface|null $validatedInvoice */
         $validatedInvoice = $context->getObject();
         if (!$validatedInvoice instanceof InvoiceInterface || (null === $validatedInvoice->getSerie() && empty($value))) {
-            $context->buildViolation($constraint->message)
-                ->addViolation()
-            ;
+            $context->buildViolation($this->translator->trans($constraint->message))
+                ->addViolation();
         }
     }
 }
