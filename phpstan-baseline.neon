@@ -231,41 +231,6 @@ parameters:
 			path: src/Owl/Bundle/AdminBundle/Twig/InvoicesSummaryExtension.php
 
 		-
-			message: "#^Method Owl\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\ApiResourceConfigurationMerger\\:\\:isDisabled\\(\\) has parameter \\$key with no type specified\\.$#"
-			count: 1
-			path: src/Owl/Bundle/ApiBundle/ApiPlatform/ApiResourceConfigurationMerger.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\ApiResourceConfigurationMerger\\:\\:isDisabled\\(\\) has parameter \\$values with no type specified\\.$#"
-			count: 1
-			path: src/Owl/Bundle/ApiBundle/ApiPlatform/ApiResourceConfigurationMerger.php
-
-		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: src/Owl/Bundle/ApiBundle/ApiPlatform/ApiResourceConfigurationMerger.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\ApiResourceConfigurationMergerInterface\\:\\:mergeConfigs\\(\\) has parameter \\$configs with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bundle/ApiBundle/ApiPlatform/ApiResourceConfigurationMergerInterface.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\ApiResourceConfigurationMergerInterface\\:\\:mergeConfigs\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bundle/ApiBundle/ApiPlatform/ApiResourceConfigurationMergerInterface.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\ResourceMetadataPropertyValueResolverInteface\\:\\:resolve\\(\\) has parameter \\$childResourceMetadata with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bundle/ApiBundle/ApiPlatform/ResourceMetadataPropertyValueResolverInteface.php
-
-		-
-			message: "#^Parameter \\$parentResourceMetadata of method Owl\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\ResourceMetadataPropertyValueResolverInteface\\:\\:resolve\\(\\) has invalid type ApiPlatform\\\\Metadata\\\\Resource\\\\ResourceMetadata\\.$#"
-			count: 1
-			path: src/Owl/Bundle/ApiBundle/ApiPlatform/ResourceMetadataPropertyValueResolverInteface.php
-
-		-
 			message: "#^Class Owl\\\\Bundle\\\\ApiBundle\\\\DataTransformer\\\\CommandAwareInputDataTransformer not found\\.$#"
 			count: 1
 			path: src/Owl/Bundle/ApiBundle/DependencyInjection/Compiler/CommandDataTransformerPass.php
@@ -1184,4 +1149,9 @@ parameters:
 			message: "#^Property Tests\\\\Owl\\\\Component\\\\Status\\\\Factory\\\\StatusFactoryTest\\:\\:\\$statusFactory with generic class Owl\\\\Component\\\\Status\\\\Factory\\\\StatusFactory does not specify its types\\: T$#"
 			count: 1
 			path: src/Owl/Component/Status/Tests/Factory/StatusFactoryTest.php
+
+		-
+			message: "#^Call to an undefined method Owl\\\\Component\\\\User\\\\Model\\\\UserInterface\\:\\:getLocaleCode\\(\\)\\.$#"
+			count: 1
+			path: src/Owl/Bundle/CoreBundle/CommandHandler/Admin/Account/RequestResetPasswordEmailHandler.php
 

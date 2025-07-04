@@ -25,7 +25,6 @@ final readonly class LoggedInAdminUserProvider implements LoggedInAdminUserProvi
 {
     private const SECURITY_SESSION_KEY = '_security_admin';
 
-    /** @param UserRepositoryInterface<AdminUserInterface> $adminUserRepository */
     public function __construct(
         private Security $security,
         private TokenStorageInterface $tokenStorage,

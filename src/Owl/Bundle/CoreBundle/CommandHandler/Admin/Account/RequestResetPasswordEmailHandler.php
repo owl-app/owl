@@ -26,7 +26,6 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 #[AsMessageHandler]
 final class RequestResetPasswordEmailHandler
 {
-    /** @param UserRepositoryInterface<AdminUserInterface> $userRepository */
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private GeneratorInterface $generator,
@@ -37,7 +36,6 @@ final class RequestResetPasswordEmailHandler
 
     public function __invoke(RequestResetPasswordEmail $requestResetPasswordEmail): void
     {
-        /** @var AdminUserInterface|null $adminUser */
         $adminUser = $this->userRepository->findOneByEmail($requestResetPasswordEmail->email);
         if (null === $adminUser) {
             return;

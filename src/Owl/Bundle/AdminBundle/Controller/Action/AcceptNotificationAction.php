@@ -52,7 +52,7 @@ final class AcceptNotificationAction extends AbstractResourceAction
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    protected function findOr404(Request $request): ResourceInterface
+    protected function findOr404(Request $request): NotificationInterface
     {
         $notification = $this->repository->findNotAccepted(
             (int) $request->attributes->get('id'),

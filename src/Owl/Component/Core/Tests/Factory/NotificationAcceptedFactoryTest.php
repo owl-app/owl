@@ -7,7 +7,7 @@ namespace Tests\Owl\Component\Core\Factory;
 use Owl\Component\Core\Factory\NotificationAcceptedFactory;
 use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Model\NotificationAcceptedInterface;
-use Owl\Component\Notification\Model\NotificationInterface;
+use Owl\Component\Core\Model\NotificationInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Resource\Factory\FactoryInterface;

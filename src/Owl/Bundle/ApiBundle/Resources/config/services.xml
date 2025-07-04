@@ -91,23 +91,6 @@
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service> -->
 
-        <service id="Owl\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />
-
-        <service id="Owl\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver">
-            <argument type="service" id="Owl\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />
-        </service>
-
-        <service
-            id="api_platform.metadata.property.metadata_factory.yaml"
-            class="Owl\Bundle\ApiBundle\ApiPlatform\Factory\MergingExtractorResourceMetadataFactory"
-            decorates="api_platform.metadata.resource.metadata_factory"
-            decoration-priority="40"
-        >
-            <argument type="service" id="api_platform.metadata.extractor.yaml" />
-            <argument type="service" id="api_platform.metadata.property.metadata_factory.yaml.inner" />
-            <argument type="service" id="Owl\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" />
-        </service>
-
         <!-- <service id="Owl\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" class="Owl\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker">
             <argument type="service" id="sylius.promotion_eligibility_checker" />
             <argument type="service" id="sylius.promotion_coupon_eligibility_checker" />
