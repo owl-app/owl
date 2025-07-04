@@ -4,9 +4,18 @@ declare(strict_types=1);
 
 namespace Owl\Component\Notification\Model;
 
+/**
+ * @template User of NotificationInterface
+ */
 interface NotificationAwareInterface
 {
-    public function getNotification(): ?NotificationInterface;
+    /**
+     * @return User|null
+     */
+    public function getNotification();
 
-    public function setNotification(?NotificationInterface $notification): void;
+    /**
+     * @param User|null $notification
+     */
+    public function setNotification($notification): void;
 }

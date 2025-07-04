@@ -10,8 +10,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of SuggestionInterface
- *
- * @implements SuggestionFactoryInterface<T>
  */
 final class SuggestionFactory implements SuggestionFactoryInterface
 {

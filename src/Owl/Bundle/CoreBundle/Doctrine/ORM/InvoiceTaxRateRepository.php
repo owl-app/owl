@@ -9,11 +9,6 @@ use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Owl\Component\Location\Model\ZoneInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-/**
- * @template T of TaxRateInterface
- *
- * @implements InvoiceTaxRateRepositoryInterface<T>
- */
 class InvoiceTaxRateRepository extends EntityRepository implements InvoiceTaxRateRepositoryInterface
 {
     /**

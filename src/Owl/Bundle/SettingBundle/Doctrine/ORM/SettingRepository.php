@@ -10,8 +10,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * @template T of SettingInterface
- *
- * @implements SettingRepositoryInterface<T>
  */
 class SettingRepository extends EntityRepository implements SettingRepositoryInterface
 {

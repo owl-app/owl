@@ -9,11 +9,10 @@ use Doctrine\Common\Collections\Collection;
 use Owl\Component\File\Model\FileInterface;
 use Owl\Component\Status\Model\StatusInterface;
 use Owl\Component\Suggestion\Model\Suggestion as BaseSuggestion;
-use Owl\Component\User\Model\UserInterface as BaseUserInterface;
 
 class Suggestion extends BaseSuggestion implements SuggestionInterface
 {
-    /** @var BaseUserInterface|null */
+    /** @var AdminUserInterface|null */
     protected $user;
 
     /** @var Collection<array-key, FileInterface> */
@@ -37,12 +36,12 @@ class Suggestion extends BaseSuggestion implements SuggestionInterface
         return $this->title;
     }
 
-    public function getUser(): ?BaseUserInterface
+    public function getUser()
     {
         return $this->user;
     }
 
-    public function setUser(?BaseUserInterface $user): void
+    public function setUser($user): void
     {
         $this->user = $user;
     }

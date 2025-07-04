@@ -9,6 +9,9 @@ use Owl\Component\Status\Model\StatusableInterface;
 use Owl\Component\Suggestion\Model\SuggestionInterface as BaseSuggestionInterface;
 use Owl\Component\User\Model\UserAwareInterface;
 
+/**
+ * @extends UserAwareInterface<AdminUserInterface>
+ */
 interface SuggestionInterface extends
     BaseSuggestionInterface,
     UserAwareInterface,

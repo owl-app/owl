@@ -9,11 +9,6 @@ use Owl\Component\Core\Model\RoleAwareInterface;
 use Owl\Component\Core\Repository\RoleRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-/**
- * @template T of RoleInterface
- *
- * @implements RoleRepositoryInterface<T>
- */
 class RoleRepository extends EntityRepository implements RoleRepositoryInterface
 {
     /**

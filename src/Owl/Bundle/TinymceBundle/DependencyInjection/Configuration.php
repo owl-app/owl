@@ -25,63 +25,65 @@ class Configuration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
 
-        return $rootNode
-                ->children()
-                    // Include jQuery (true) library or not (false)
-                    ->booleanNode('include_jquery')->defaultFalse()->end()
-                    ->booleanNode('turbo_enabled')->defaultFalse()->end()
-                    // Use jQuery (true) or standalone (false) build of the TinyMCE
-                    ->booleanNode('tinymce_jquery')->defaultFalse()->end()
-                    // Set init to true to use callback on the event init
-                    ->booleanNode('use_callback_tinymce_init')->defaultFalse()->end()
-                    // Selector
-                    ->arrayNode('selector')
-                        ->prototype('scalar')->end()
-                        ->beforeNormalization()
-                            ->ifString()
-                            ->then(function (string $value) { return [$value]; })
-                        ->end()
+        $rootNode
+            ->children()
+                // Include jQuery (true) library or not (false)
+                ->booleanNode('include_jquery')->defaultFalse()->end()
+                ->booleanNode('turbo_enabled')->defaultFalse()->end()
+                // Use jQuery (true) or standalone (false) build of the TinyMCE
+                ->booleanNode('tinymce_jquery')->defaultFalse()->end()
+                // Set init to true to use callback on the event init
+                ->booleanNode('use_callback_tinymce_init')->defaultFalse()->end()
+                // Selector
+                ->arrayNode('selector')
+                    ->prototype('scalar')->end()
+                    ->beforeNormalization()
+                        ->ifString()
+                        ->then(function (string $value) { return [$value]; })
                     ->end()
-                    // base url for content
-                    ->scalarNode('base_url')->end()
-                    // asset packageName
-                    ->scalarNode('asset_package_name')->end()
-                    // Default language for all instances of the editor
-                    ->scalarNode('language')->defaultNull()->end()
-                    ->arrayNode('theme')
+                ->end()
+                // base url for content
+                ->scalarNode('base_url')->end()
+                // asset packageName
+                ->scalarNode('asset_package_name')->end()
+                // Default language for all instances of the editor
+                ->scalarNode('language')->defaultNull()->end()
+                ->arrayNode('theme')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
                         ->useAttributeAsKey('name')
-                        ->prototype('array')
-                            ->useAttributeAsKey('name')
-                            ->prototype('variable')->end()
-                        ->end()
-                        // Add default theme if it doesn't set
-                        ->defaultValue($defaults)
+                        ->prototype('variable')->end()
                     ->end()
-                    // Configure custom TinyMCE buttons
-                    ->arrayNode('tinymce_buttons')
-                        ->useAttributeAsKey('name')
-                        ->prototype('array')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('text')->defaultNull()->end()
-                                ->scalarNode('title')->defaultNull()->end()
-                                ->scalarNode('image')->defaultNull()->end()
-                                ->scalarNode('icon')->defaultNull()->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                    // Configure external TinyMCE plugins
-                    ->arrayNode('external_plugins')
-                        ->useAttributeAsKey('name')
-                        ->prototype('array')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('url')->isRequired()->end()
-                            ->end()
+                    // Add default theme if it doesn't set
+                    ->defaultValue($defaults)
+                ->end()
+                // Configure custom TinyMCE buttons
+                ->arrayNode('tinymce_buttons')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('text')->defaultNull()->end()
+                            ->scalarNode('title')->defaultNull()->end()
+                            ->scalarNode('image')->defaultNull()->end()
+                            ->scalarNode('icon')->defaultNull()->end()
                         ->end()
                     ->end()
                 ->end()
-            ->end();
+                // Configure external TinyMCE plugins
+                ->arrayNode('external_plugins')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('url')->isRequired()->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ->end();
+
+        return $treeBuilder;
     }
 
     /**

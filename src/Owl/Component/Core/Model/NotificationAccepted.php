@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Owl\Component\Core\Model;
 
 use Owl\Component\Notification\Model\NotificationInterface as BaseNotificationInterface;
-use Owl\Component\User\Model\UserInterface as BaseUserInterface;
 use Owl\Component\Core\Model\AdminUserInterface;
 
 class NotificationAccepted implements NotificationAcceptedInterface
@@ -32,28 +31,22 @@ class NotificationAccepted implements NotificationAcceptedInterface
         return $this->id;
     }
 
-    /**
-     * @return AdminUserInterface|null
-     */
-    public function getUser(): ?BaseUserInterface
+    public function getUser()
     {
         return $this->user;
     }
 
-    public function setUser(?BaseUserInterface $user): void
+    public function setUser($user): void
     {
         $this->user = $user;
     }
 
-    /**
-     * @return NotificationInterface
-     */
-    public function getNotification(): ?BaseNotificationInterface
+    public function getNotification()
     {
         return $this->notification;
     }
 
-    public function setNotification(?BaseNotificationInterface $notification): void
+    public function setNotification($notification): void
     {
         $this->notification = $notification;
     }

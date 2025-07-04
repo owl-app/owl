@@ -11,11 +11,6 @@ use Owl\Component\Core\Model\NotificationInterface;
 use Owl\Component\Core\Repository\NotificationRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-/**
- * @template T of NotificationInterface
- *
- * @implements NotificationRepositoryInterface<T>
- */
 class NotificationRepository extends EntityRepository implements NotificationRepositoryInterface
 {
     private function createAssignedQueryBuilder(AdminUserInterface $user, string $groupAssigned): QueryBuilder

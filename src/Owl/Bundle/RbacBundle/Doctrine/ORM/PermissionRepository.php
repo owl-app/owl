@@ -5,17 +5,14 @@ declare(strict_types=1);
 namespace Owl\Bundle\RbacBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Owl\Component\Rbac\Model\PermissionInterface;
 use Owl\Component\Rbac\Repository\PermissionRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-/**
- * @template T of PermissionInterface
- *
- * @implements PermissionRepositoryInterface<T>
- */
 class PermissionRepository extends EntityRepository implements PermissionRepositoryInterface
 {
+    /**
+     * @return string[] List of permission names
+     */
     public function findAllNames(): array
     {
         return $this->createQueryBuilder('o')

@@ -13,20 +13,29 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\Command;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
-use Owl\Component\User\Model\UserInterface;
-use Owl\Component\User\Repository\UserRepositoryInterface;
-use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Webmozart\Assert\Assert;
+use Owl\Component\User\Model\UserInterface;
+use Owl\Component\User\Repository\UserRepositoryInterface;
 
-abstract class AbstractRoleCommand extends ContainerAwareCommand
+abstract class AbstractRoleCommand extends Command
 {
+    /** @param array<string, mixed> $usersConfig */
+    public function __construct(
+        private ManagerRegistry $managerRegistry,
+        private array $usersConfig,
+        ?string $name = null,
+    ) {
+        parent::__construct($name);
+    }
+
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
         // User types configured in the Bundle
@@ -49,9 +58,11 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
             }
         }
 
-        if (!$input->getArgument('email')) {
+        $email = $input->getArgument('email');
+
+        if ($email === null) {
             $question = new Question('Please enter an email:');
-            $question->setValidator(function (?string $email): string {
+            $question->setValidator(function (?string $email) {
                 if (!filter_var($email, \FILTER_VALIDATE_EMAIL)) {
                     throw new \RuntimeException('The email you entered is invalid.');
                 }
@@ -62,10 +73,12 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
             $input->setArgument('email', $email);
         }
 
-        if (!$input->getArgument('roles')) {
+        $roles = $input->getArgument('roles');
+
+        if ($roles === null) {
             $question = new Question('Please enter user\'s roles (separated by space):');
-            $question->setValidator(function (?string $roles): string {
-                if (strlen($roles) < 1) {
+            $question->setValidator(function (?string $roles) {
+                if ('' === $roles) {
                     throw new \RuntimeException('The value cannot be blank.');
                 }
 
@@ -79,9 +92,6 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         }
     }
 
-    /**
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $email = $input->getArgument('email');
@@ -98,7 +108,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
         $this->executeRoleCommand($input, $output, $user, $securityRoles);
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     /**
@@ -120,30 +130,24 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     {
         $class = $this->getUserModelClass($userType);
 
-        return $this->getContainer()->get('doctrine')->getManagerForClass($class);
+        return $this->managerRegistry->getManagerForClass($class);
     }
 
-    /**
-     * @return UserRepositoryInterface<UserInterface>
-     */
     protected function getUserRepository(string $userType): UserRepositoryInterface
     {
         $class = $this->getUserModelClass($userType);
 
-        return $this->getEntityManager($userType)->getRepository($class);
+        $userRepository = $this->getEntityManager($userType)->getRepository($class);
+        Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
+
+        return $userRepository;
     }
 
-    /**
-     * @return list<array-key>
-     */
+    /** @return  array<string> */
     protected function getAvailableUserTypes(): array
     {
-        $config = $this->getContainer()->getParameter('sylius.user.users');
-
-        // Keep only users types which implement \Owl\Component\User\Model\UserInterface
-        $userTypes = array_filter($config, function (array $userTypeConfig): bool {
-            return isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true);
-        });
+        // Keep only users types which implement \Sylius\Component\User\Model\UserInterface
+        $userTypes = array_filter($this->usersConfig, fn (array $userTypeConfig): bool => isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true));
 
         return array_keys($userTypes);
     }
@@ -153,13 +157,13 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
      */
     protected function getUserModelClass(string $userType): string
     {
-        $config = (array) $this->getContainer()->getParameter('sylius.user.users');
-        if (empty($config[$userType]['user']['classes']['model'])) {
+        if (empty($this->usersConfig[$userType]['user']['classes']['model'])) {
             throw new \InvalidArgumentException(sprintf('User type %s misconfigured.', $userType));
         }
 
-        return $config[$userType]['user']['classes']['model'];
+        return $this->usersConfig[$userType]['user']['classes']['model'];
     }
 
+    /** @param array<array-key, string> $securityRoles */
     abstract protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void;
 }

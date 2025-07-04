@@ -221,9 +221,9 @@ class UserController extends BaseController
         }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $isValid) {
+            /** @var  UserRepositoryInterface $userRepository */
             $userRepository = $this->repository;
 
-            /** @var UserRepositoryInterface<UserInterface> $userRepository */
             Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
 
             $user = $userRepository->findOneByEmail($passwordReset->getEmail());

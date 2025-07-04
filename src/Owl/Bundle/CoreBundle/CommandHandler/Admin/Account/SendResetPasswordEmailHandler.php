@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
 final class SendResetPasswordEmailHandler
 {
     /**
-     * @param UserRepositoryInterface<AdminUserInterface> $userRepository
+     * @param UserRepositoryInterface $userRepository
      */
     public function __construct(
         private UserRepositoryInterface $userRepository,

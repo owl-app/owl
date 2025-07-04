@@ -18,11 +18,6 @@ use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-/**
- * @template T of UserInterface
- *
- * @implements UserRepositoryInterface<T>
- */
 class UserRepository extends EntityRepository implements UserRepositoryInterface
 {
     public function findOneByEmail(string $email): ?UserInterface

@@ -7,12 +7,12 @@ namespace Owl\Component\User\Model;
 interface PermissionUserInterface
 {
     /**
-     * @param array<string, bool> $permissions
+     * @param array<int, string>|array<string, mixed> $permissions
      */
     public function setPermissions(array $permissions): void;
 
     /**
-     * @return array<string, bool>
+     * @return array<int, string>|array<string, mixed>
      */
     public function getPermissions(): array;
 }

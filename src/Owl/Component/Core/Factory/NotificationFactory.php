@@ -8,11 +8,6 @@ use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Model\NotificationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @template T of NotificationInterface
- *
- * @implements NotificationFactoryInterface<T>
- */
 final class NotificationFactory implements NotificationFactoryInterface
 {
     private FactoryInterface $defaultFactory;

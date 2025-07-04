@@ -6,14 +6,9 @@ namespace Owl\Component\Core\Factory;
 
 use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Model\NotificationAcceptedInterface;
-use Owl\Component\Notification\Model\NotificationInterface;
+use Owl\Component\Core\Model\NotificationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @template T of NotificationAcceptedInterface
- *
- * @implements NotificationAcceptedFactoryInterface<T>
- */
 final class NotificationAcceptedFactory implements NotificationAcceptedFactoryInterface
 {
     public function __construct(private FactoryInterface $defaultFactory)

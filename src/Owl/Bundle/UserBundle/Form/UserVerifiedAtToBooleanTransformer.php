@@ -15,14 +15,17 @@ namespace Owl\Bundle\UserBundle\Form;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
+/**
+ * @implements DataTransformerInterface<mixed, mixed>
+ */
 final class UserVerifiedAtToBooleanTransformer implements DataTransformerInterface
 {
-    public function transform($value)
+    public function transform($value): mixed
     {
         return (bool) $value;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform($value): mixed
     {
         return $value ? new \DateTime() : null;
     }

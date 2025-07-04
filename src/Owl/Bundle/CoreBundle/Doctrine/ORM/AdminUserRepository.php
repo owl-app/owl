@@ -10,13 +10,6 @@ use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Model\RoleAwareInterface;
 use Owl\Component\Core\Repository\AdminUserRepositoryInterface;
 
-/**
- * @template T of AdminUserInterface
- *
- * @extends UserRepository<T>
- *
- * @implements AdminUserRepositoryInterface<T>
- */
 class AdminUserRepository extends UserRepository implements AdminUserRepositoryInterface
 {
     public function findByRoleUser(): QueryBuilder

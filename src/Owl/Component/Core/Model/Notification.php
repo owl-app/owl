@@ -12,7 +12,7 @@ use Owl\Component\User\Model\UserInterface as BaseUserInterface;
 
 class Notification extends BaseNotification implements NotificationInterface
 {
-    /** @var BaseUserInterface */
+    /** @var AdminUserInterface */
     protected $user;
 
     /** @var Collection<array-key, FileInterface> */
@@ -50,12 +50,12 @@ class Notification extends BaseNotification implements NotificationInterface
         $this->files->removeElement($file);
     }
 
-    public function getUser(): ?BaseUserInterface
+    public function getUser()
     {
         return $this->user;
     }
 
-    public function setUser(?BaseUserInterface $user): void
+    public function setUser($user): void
     {
         $this->user = $user;
     }

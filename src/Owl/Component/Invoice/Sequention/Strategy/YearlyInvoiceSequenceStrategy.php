@@ -14,13 +14,13 @@ class YearlyInvoiceSequenceStrategy extends DateBasedInvoiceSequenceStrategy
     {
         $year = (int) $date->format('Y');
 
+        /** @var SequenceInterface|null $sequence */
         $sequence = $this->sequenceRepository->findOneBy([
             'year' => $year,
             'serie' => $invoiceSerie,
         ]);
 
         if (!$sequence) {
-            /** @var SequenceInterface */
             $sequence = $this->invoiceSequenceFactory->create($invoiceSerie, $year);
         }
 

@@ -11,7 +11,7 @@ class Seller implements SellerInterface
     use TimestampableTrait;
 
     /** @var mixed */
-    protected ?int $id;
+    protected $id;
 
     protected ?string $company = null;
 
@@ -31,7 +31,7 @@ class Seller implements SellerInterface
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function getId(): ?int
+    public function getId(): mixed
     {
         return $this->id;
     }

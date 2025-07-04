@@ -14,8 +14,8 @@ interface PermissionFormFactoryInterface
     public function createByRoutes(RequestConfiguration $requestConfiguration): array;
 
     /**
-     * @param array<string, mixed> $assignedPermissions
-     * @param array<string, mixed> $disabledPermissions
+     * @param array<string, mixed>|array<int, string> $assignedPermissions
+     * @param array<string, mixed>|array<int, string> $disabledPermissions
      * @return array<string, mixed>
      */
     public function createByExists(RequestConfiguration $requestConfiguration, array $assignedPermissions, array $disabledPermissions = [], bool $withRoles = false): array;

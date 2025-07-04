@@ -8,6 +8,9 @@ use Owl\Component\File\Model\FileableInterface;
 use Owl\Component\Notification\Model\NotificationInterface as BaseNotificationInterface;
 use Owl\Component\User\Model\UserAwareInterface;
 
+/**
+ * @extends UserAwareInterface<AdminUserInterface>
+ */
 interface NotificationInterface extends
     BaseNotificationInterface,
     UserAwareInterface,

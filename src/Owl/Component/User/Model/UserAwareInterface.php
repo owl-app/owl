@@ -13,9 +13,18 @@ declare(strict_types=1);
 
 namespace Owl\Component\User\Model;
 
+/**
+ * @template User of UserInterface
+ */
 interface UserAwareInterface
 {
-    public function getUser(): ?UserInterface;
+    /**
+     * @return User|null
+     */
+    public function getUser();
 
-    public function setUser(?UserInterface $user): void;
+    /**
+     * @param User|null $user
+     */
+    public function setUser($user): void;
 }
