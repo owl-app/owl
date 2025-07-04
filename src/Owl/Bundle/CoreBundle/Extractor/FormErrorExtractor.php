@@ -9,6 +9,9 @@ use Symfony\Component\Form\FormInterface;
 
 final class FormErrorExtractor
 {
+    /**
+     * @return array<string|int, string|array<string|int, string|array>>
+     */
     public static function extractErrors(FormInterface $form): array
     {
         $errors = [];

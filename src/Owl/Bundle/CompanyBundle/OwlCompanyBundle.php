@@ -9,6 +9,9 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 final class OwlCompanyBundle extends AbstractResourceBundle
 {
+    /**
+     * @return array<string>
+     */
     public function getSupportedDrivers(): array
     {
         return [

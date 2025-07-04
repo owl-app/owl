@@ -20,3 +20,38 @@ parameters:
 			count: 1
 			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/Resource/SingleResourceProvider.php
 
+		-
+			message: "#^Constructor of class Owl\\\\Bundle\\\\AdminBundle\\\\Twig\\\\Component\\\\Invoice\\\\FormComponent has an unused parameter \\$contractorRepository\\.$#"
+			count: 1
+			path: src/Owl/Bundle/AdminBundle/Twig/Component/Invoice/FormComponent.php
+
+		-
+			message: "#^Parameter \\#1 \\$repository of method Owl\\\\Bundle\\\\AdminBundle\\\\Twig\\\\Component\\\\Invoice\\\\FormComponent\\<T of Owl\\\\Component\\\\Core\\\\Model\\\\Invoice\\\\InvoiceInterface\\>\\:\\:initialize\\(\\) expects Sylius\\\\Resource\\\\Doctrine\\\\Persistence\\\\RepositoryInterface\\<T of Owl\\\\Component\\\\Core\\\\Model\\\\Invoice\\\\InvoiceInterface\\>, Sylius\\\\Resource\\\\Doctrine\\\\Persistence\\\\RepositoryInterface\\<Sylius\\\\Resource\\\\Model\\\\ResourceInterface\\> given\\.$#"
+			count: 1
+			path: src/Owl/Bundle/AdminBundle/Twig/Component/Invoice/FormComponent.php
+
+		-
+			message: "#^Call to method find\\(\\) on an unknown class Owl\\\\Component\\\\Core\\\\Repository\\\\CompanyRepositoryInterface\\.$#"
+			count: 1
+			path: src/Owl/Bundle/AdminBundle/Twig/InvoicesSummaryExtension.php
+
+		-
+			message: "#^Parameter \\$companyRepository of method Owl\\\\Bundle\\\\AdminBundle\\\\Twig\\\\InvoicesSummaryExtension\\:\\:__construct\\(\\) has invalid type Owl\\\\Component\\\\Core\\\\Repository\\\\CompanyRepositoryInterface\\.$#"
+			count: 1
+			path: src/Owl/Bundle/AdminBundle/Twig/InvoicesSummaryExtension.php
+
+		-
+			message: "#^Property Owl\\\\Bundle\\\\AdminBundle\\\\Twig\\\\InvoicesSummaryExtension\\:\\:\\$companyRepository has unknown class Owl\\\\Component\\\\Core\\\\Repository\\\\CompanyRepositoryInterface as its type\\.$#"
+			count: 1
+			path: src/Owl/Bundle/AdminBundle/Twig/InvoicesSummaryExtension.php
+
+		-
+			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Console\\\\Command\\\\AdminUserFakerCommand\\:\\:\\$hasher is never read, only written\\.$#"
+			count: 1
+			path: src/Owl/Bundle/CoreBundle/Console/Command/AdminUserFakerCommand.php
+
+		-
+			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Console\\\\Command\\\\AdminUserFakerCommand\\:\\:\\$userFactory is never read, only written\\.$#"
+			count: 1
+			path: src/Owl/Bundle/CoreBundle/Console/Command/AdminUserFakerCommand.php
+

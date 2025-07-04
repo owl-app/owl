@@ -17,6 +17,9 @@ final class UserRoleUpdateListener
     {
     }
 
+    /**
+     * @param LifecycleEventArgs<EntityManagerInterface> $event
+     */
     public function postPersist(AdminUserInterface $adminUser, LifecycleEventArgs $event): void
     {
         if ($adminUser->getRole()) {
@@ -24,6 +27,9 @@ final class UserRoleUpdateListener
         }
     }
 
+    /**
+     * @param LifecycleEventArgs<EntityManagerInterface> $event
+     */
     public function postUpdate(AdminUserInterface $adminUser, LifecycleEventArgs $event): void
     {
         $entityManager = $event->getObjectManager();

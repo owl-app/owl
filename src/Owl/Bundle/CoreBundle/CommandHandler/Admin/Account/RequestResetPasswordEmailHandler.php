@@ -41,6 +41,8 @@ final class RequestResetPasswordEmailHandler
             return;
         }
 
+        assert($adminUser instanceof AdminUserInterface);
+
         $adminUser->setPasswordResetToken($this->generator->generate());
         $adminUser->setPasswordRequestedAt($this->clock->now());
 

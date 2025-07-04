@@ -7,7 +7,6 @@ namespace Owl\Bundle\AdminBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Owl\Component\Notification\Model\NotificationInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class NotificationShowMenuBuilder
 {
@@ -16,15 +15,10 @@ final class NotificationShowMenuBuilder
     /** @var FactoryInterface */
     private $factory;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
-
     public function __construct(
         FactoryInterface $factory,
-        EventDispatcherInterface $eventDispatcher,
     ) {
         $this->factory = $factory;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

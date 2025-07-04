@@ -84,7 +84,12 @@ final readonly class LoggedInAdminUserProvider implements LoggedInAdminUserProvi
             return null;
         }
 
-        return $this->adminUserRepository->find($user->getId());
+        $foundUser = $this->adminUserRepository->find($user->getId());
+        if (!$foundUser instanceof AdminUserInterface) {
+            return null;
+        }
+
+        return $foundUser;
     }
 
     private function getSerializedTokenFromSession(): ?string

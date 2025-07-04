@@ -10,6 +10,9 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class SuggestionRepository extends EntityRepository implements SuggestionRepositoryInterface
 {
+    /**
+     * @param array<int|string> $ids
+     */
     public function findByIdWithOwner(array $ids, ?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('o');

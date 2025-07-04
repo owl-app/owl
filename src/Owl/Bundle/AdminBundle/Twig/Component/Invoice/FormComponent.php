@@ -20,6 +20,7 @@ use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -31,12 +32,16 @@ use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
+/**
+ * @template T of InvoiceInterface
+ */
 #[AsLiveComponent]
 class FormComponent
 {
     use ComponentToolsTrait;
     use LiveCollectionTrait;
     use TemplatePropTrait;
+    /** @use ResourceFormComponentTrait<T> */
     use ResourceFormComponentTrait;
 
     #[LiveProp]
@@ -63,11 +68,12 @@ class FormComponent
         string $formClass,
         private ExchangeRateCurrencyResolverInterface $exchangeRateCurrencyResolver,
         private RepositoryInterface $companyRepository,
-        private RepositoryInterface $contractorRepository,
+        RepositoryInterface $contractorRepository,
         private readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
         private ExchangeRateResolverInterface $exchangeRateResolver,
     ) {
+        /** @var RepositoryInterface<ResourceInterface> $invoiceRepository */
         $this->initialize($invoiceRepository, $formFactory, $resourceClass, $formClass);
     }
 
@@ -183,10 +189,10 @@ class FormComponent
 
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
-        /** @var InvoiceSerieInterface $serie */
+        /** @var InvoiceSerieInterface|null $serie */
         $serie = $invoice->getSerie();
 
-        if (null === $serie) {
+        if ($serie === null) {
             return;
         }
 
@@ -284,7 +290,7 @@ class FormComponent
         if ($selectedCurrencyCode = $this->formValues['currency'] ?? null) {
             $this->exchangeRateCurrency = $this->exchangeRateCurrencyResolver->resolve($invoice)?->getCode() ?? '';
 
-            if ($selectedCurrencyCode && $this->exchangeRateCurrency && $this->getFormView()->offsetExists('exchangeRateSnapshot')) {
+            if ($this->exchangeRateCurrency && $this->getFormView()->offsetExists('exchangeRateSnapshot')) {
                 $ratio = $this->exchangeRateResolver->getRatio($selectedCurrencyCode, $this->exchangeRateCurrency);
 
                 if ($invoice->getExchangeRateSnapshot()) {

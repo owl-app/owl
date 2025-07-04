@@ -111,6 +111,9 @@ final class OwlCoreExtension extends AbstractResourceExtension implements Prepen
         $loader->load('services/integrations/hwi_oauth.xml');
     }
 
+    /**
+     * @param array<string, mixed> $config
+     */
     private function prependSyliusResourceBundle(ContainerBuilder $container, array $config): void
     {
         $container->prependExtensionConfig('sylius_resource', [

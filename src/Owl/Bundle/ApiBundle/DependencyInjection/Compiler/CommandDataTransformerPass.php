@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\ApiBundle\DependencyInjection\Compiler;
 
-use Owl\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -14,7 +13,7 @@ final class CommandDataTransformerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        $commandDataTransformersChainDefinition = new Definition(CommandAwareInputDataTransformer::class);
+        $commandDataTransformersChainDefinition = new Definition('Owl\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer');
 
         $taggedServices = $container->findTaggedServiceIds('sylius.api.command_data_transformer');
 

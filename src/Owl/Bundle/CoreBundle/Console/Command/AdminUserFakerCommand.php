@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\CoreBundle\Console\Command;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Connection;
 use Owl\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Faker\Factory;
 
 class AdminUserFakerCommand extends ContainerAwareCommand
@@ -25,7 +25,7 @@ class AdminUserFakerCommand extends ContainerAwareCommand
         private EntityManagerInterface $adminUserManager,
         private RepositoryInterface $roleRepository,
         private ExampleFactoryInterface $userFactory,
-        private UserPasswordEncoderInterface $hasher,
+        private UserPasswordHasherInterface $hasher,
     ) {
         parent::__construct();
     }
@@ -46,7 +46,7 @@ class AdminUserFakerCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $roles = $this->roleRepository->findAll();
-        $count = $input->getOption('count');
+        $count = (int) $input->getOption('count');
         $faker = Factory::create();
         $batchSize = 500;
 
@@ -71,7 +71,7 @@ class AdminUserFakerCommand extends ContainerAwareCommand
                 'enabled' => rand(0, 1),
                 'locked' => 0,
                 'password_hash' => '',
-                'hasher_name' => $this->hasher->getEncoder(null)->getName(),
+                'hasher_name' => 'default',
                 'note' => $faker->sentence(),
                 'role_id' => $role->getId(),
                 'roles' => serialize([$role->getId()]),

@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig;
 
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Owl\Component\Core\Manager\UserPreferenceManagerInterface;
-use Owl\Component\Core\Model\Company\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Pagerfanta\Pagerfanta;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class InvoicesSummaryExtension extends AbstractExtension
 {
+    /**
+     * @param RepositoryInterface<InvoiceInterface> $companyRepository
+     */
     public function __construct(
         private RepositoryInterface $companyRepository,
         private UserPreferenceManagerInterface $userPreferenceManager,
@@ -42,7 +44,6 @@ final class InvoicesSummaryExtension extends AbstractExtension
             return [];
         }
 
-        /** @var CompanyInterface|null $company */
         $company = $this->companyRepository->find($company);
 
         if (null === $company) {
