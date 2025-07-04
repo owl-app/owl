@@ -14,8 +14,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  * @template T of StatusInterface
  *
  * @extends ParentableFactory<T>
- *
- * @implements StatusFactoryInterface<T>
  */
 final class StatusFactory extends ParentableFactory implements StatusFactoryInterface
 {

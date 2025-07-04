@@ -10,8 +10,7 @@ class Buyer implements BuyerInterface
 {
     use TimestampableTrait;
 
-    /** @var mixed */
-    protected ?int $id;
+    protected mixed $id;
 
     protected ?string $company = null;
 
@@ -31,7 +30,7 @@ class Buyer implements BuyerInterface
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function getId(): ?int
+    public function getId(): mixed
     {
         return $this->id;
     }

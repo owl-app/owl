@@ -14,8 +14,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  * @template T of FileInterface
  *
  * @extends ParentableFactory<T>
- *
- * @implements FileFactoryInterface<T>
  */
 final class FileFactory extends ParentableFactory implements FileFactoryInterface
 {

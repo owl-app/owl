@@ -28,9 +28,6 @@ use Twig\Environment;
 
 final readonly class RenderResetPasswordPageAction
 {
-    /**
-     * @param UserRepositoryInterface<UserInterface> $userRepository
-     */
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private FormFactoryInterface $formFactory,

@@ -52,6 +52,6 @@ final class ResourcesResolver implements ResourcesResolverInterface
             $sorting = $requestConfiguration->getSorting();
         }
 
-        return $this->collectionProvider->get($repository, $criteria, null, $sorting, $requestConfiguration->isPaginated());
+        return $this->collectionProvider->get($repository, $criteria, [], $sorting, $requestConfiguration->isPaginated());
     }
 }

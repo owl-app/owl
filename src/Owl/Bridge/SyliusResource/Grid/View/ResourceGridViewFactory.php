@@ -6,14 +6,13 @@ namespace Owl\Bridge\SyliusResource\Grid\View;
 
 use Owl\Bridge\SyliusResource\Doctrine\Orm\CollectionProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactoryInterface;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
-use Sylius\Component\Resource\Metadata\MetadataInterface as SyliusMetadataInterface;
-use Sylius\Resource\Metadata\MetadataInterface as ResourceMetadataInterface;
 
 final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
 {
@@ -29,17 +28,10 @@ final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
         $this->parametersParser = $parametersParser;
     }
 
-    /**
-     * @param Grid $grid
-     * @param Parameters $parameters
-     * @param SyliusMetadataInterface|ResourceMetadataInterface $metadata
-     * @param RequestConfiguration $requestConfiguration
-     * @return ResourceGridView
-     */
     public function create(
         Grid $grid,
         Parameters $parameters,
-        SyliusMetadataInterface $metadata,
+        MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
     ): ResourceGridView {
         $driverConfiguration = $grid->getDriverConfiguration();
