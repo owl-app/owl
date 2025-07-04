@@ -18,11 +18,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class LocaleProvider implements LocaleProviderInterface
 {
-    /** @var RepositoryInterface<LocaleInterface> */
-    private $localeRepository;
+    private RepositoryInterface $localeRepository;
 
-    /** @var string */
-    private $defaultLocaleCode;
+    private string $defaultLocaleCode;
 
     public function __construct(RepositoryInterface $localeRepository, string $defaultLocaleCode)
     {
@@ -35,7 +33,8 @@ final class LocaleProvider implements LocaleProviderInterface
         $locales = $this->localeRepository->findAll();
 
         return array_map(
-            function (LocaleInterface $locale): string {
+            function ($locale): string {
+                /** @var LocaleInterface $locale */
                 return (string) $locale->getCode();
             },
             $locales,

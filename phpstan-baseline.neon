@@ -26,21 +26,6 @@ parameters:
 			path: src/Owl/Bridge/SyliusResource/Controller/ResourcesResolver.php
 
 		-
-			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\ItemProvider\\:\\:get\\(\\) has parameter \\$criteria with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/ItemProvider.php
-
-		-
-			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\ItemProvider\\:\\:get\\(\\) has parameter \\$repository with generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
-			count: 1
-			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/ItemProvider.php
-
-		-
-			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\ItemProvider\\:\\:get\\(\\) has parameter \\$repositoryOptions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/ItemProvider.php
-
-		-
 			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\ItemProvider\\:\\:getCriteria\\(\\) has parameter \\$repository with generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/ItemProvider.php
@@ -61,16 +46,6 @@ parameters:
 			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/ItemProvider.php
 
 		-
-			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\QueryBuilderApplicator\\:\\:applyFilters\\(\\) has parameter \\$criteria with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/QueryBuilderApplicator.php
-
-		-
-			message: "#^Method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\QueryBuilderApplicator\\:\\:applySort\\(\\) has parameter \\$sorting with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/QueryBuilderApplicator.php
-
-		-
 			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\ORM\\\\EntityManagerInterface\\:\\:getClassMetadata\\(\\)$#"
 			count: 1
 			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/QueryBuilderApplicator.php
@@ -86,29 +61,9 @@ parameters:
 			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/Resource/SingleResourceProvider.php
 
 		-
-			message: "#^Parameter \\#2 \\$criteria of method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\ItemProviderInterface\\:\\:get\\(\\) expects array\\<string, mixed\\>, null given\\.$#"
-			count: 1
-			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/Resource/SingleResourceProvider.php
-
-		-
-			message: "#^PHPDoc tag @param for parameter \\$metadata with type Sylius\\\\Resource\\\\Metadata\\\\MetadataInterface is not subtype of native type Sylius\\\\Component\\\\Resource\\\\Metadata\\\\MetadataInterface\\.$#"
-			count: 1
-			path: src/Owl/Bridge/SyliusResource/Grid/View/ResourceGridViewFactory.php
-
-		-
 			message: "#^Method Owl\\\\Bundle\\\\AdminBundle\\\\Action\\\\Account\\\\RenderResetPasswordPageAction\\:\\:handleExpiredPasswordRequest\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\RedirectResponse but returns Symfony\\\\Component\\\\HttpFoundation\\\\Response\\.$#"
 			count: 1
 			path: src/Owl/Bundle/AdminBundle/Action/Account/RenderResetPasswordPageAction.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\AdminBundle\\\\Controller\\\\Action\\\\AcceptNotificationAction\\:\\:__construct\\(\\) has parameter \\$notificationAcceptedFactory with generic interface Owl\\\\Component\\\\Core\\\\Factory\\\\NotificationAcceptedFactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/AdminBundle/Controller/Action/AcceptNotificationAction.php
-
-		-
-			message: "#^Parameter \\#1 \\$notification of method Owl\\\\Component\\\\Core\\\\Factory\\\\NotificationAcceptedFactoryInterface\\<Owl\\\\Component\\\\Core\\\\Model\\\\NotificationAcceptedInterface\\>\\:\\:createAction\\(\\) expects Owl\\\\Component\\\\Core\\\\Model\\\\NotificationInterface, Sylius\\\\Component\\\\Resource\\\\Model\\\\ResourceInterface given\\.$#"
-			count: 1
-			path: src/Owl/Bundle/AdminBundle/Controller/Action/AcceptNotificationAction.php
 
 		-
 			message: "#^Method Owl\\\\Bundle\\\\AdminBundle\\\\Controller\\\\Action\\\\ListResourceWithParentAction\\:\\:__construct\\(\\) has parameter \\$repositoryParent with generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
@@ -151,11 +106,6 @@ parameters:
 			path: src/Owl/Bundle/AdminBundle/Form/Extension/LocationFieldsExtension.php
 
 		-
-			message: "#^Method Owl\\\\Bundle\\\\AdminBundle\\\\Form\\\\Type\\\\Invoice\\\\LineItemType\\:\\:__construct\\(\\) has parameter \\$invoiceTaxRateRepository with generic interface Owl\\\\Component\\\\Core\\\\Repository\\\\InvoiceTaxRateRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/AdminBundle/Form/Type/Invoice/LineItemType.php
-
-		-
 			message: "#^Method Owl\\\\Bundle\\\\AdminBundle\\\\Form\\\\Type\\\\RequestPasswordResetType\\:\\:__construct\\(\\) has parameter \\$validationGroups with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Owl/Bundle/AdminBundle/Form/Type/RequestPasswordResetType.php
@@ -179,11 +129,6 @@ parameters:
 			message: "#^Property Owl\\\\Bundle\\\\AdminBundle\\\\Menu\\\\NotificationShowMenuBuilder\\:\\:\\$eventDispatcher is never read, only written\\.$#"
 			count: 1
 			path: src/Owl/Bundle/AdminBundle/Menu/NotificationShowMenuBuilder.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\AdminBundle\\\\Notification\\\\NotificationProvider\\:\\:__construct\\(\\) has parameter \\$notificationRepository with generic interface Owl\\\\Component\\\\Core\\\\Repository\\\\NotificationRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/AdminBundle/Notification/NotificationProvider.php
 
 		-
 			message: "#^Method Owl\\\\Bundle\\\\AdminBundle\\\\Provider\\\\LoggedInAdminUserProvider\\:\\:getUserFromSession\\(\\) should return Owl\\\\Component\\\\Core\\\\Model\\\\AdminUserInterface\\|null but returns Sylius\\\\Resource\\\\Model\\\\ResourceInterface\\|null\\.$#"
@@ -249,6 +194,11 @@ parameters:
 			message: "#^Method Owl\\\\Bundle\\\\CompanyBundle\\\\OwlCompanyBundle\\:\\:getSupportedDrivers\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Owl/Bundle/CompanyBundle/OwlCompanyBundle.php
+
+		-
+			message: "#^Call to an undefined method Owl\\\\Component\\\\User\\\\Model\\\\UserInterface\\:\\:getLocaleCode\\(\\)\\.$#"
+			count: 1
+			path: src/Owl/Bundle/CoreBundle/CommandHandler/Admin/Account/RequestResetPasswordEmailHandler.php
 
 		-
 			message: "#^Call to method beginTransaction\\(\\) on an unknown class Doctrine\\\\ORM\\\\Connection\\.$#"
@@ -336,19 +286,9 @@ parameters:
 			path: src/Owl/Bundle/CoreBundle/Fixture/AbstractResourceFixture.php
 
 		-
-			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Factory\\\\AdminUserExampleFactory\\:\\:create\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Fixture/Factory/AdminUserExampleFactory.php
-
-		-
 			message: "#^Default value of the parameter \\#1 \\$options \\(array\\{\\}\\) of method Owl\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Factory\\\\RbacPermissionExampleFactory\\:\\:create\\(\\) is incompatible with type array\\{name\\: string, group\\: string, description\\: string\\}\\.$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Fixture/Factory/RbacPermissionExampleFactory.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Listener\\\\UserRoleAssignerListener\\:\\:__construct\\(\\) has parameter \\$adminUserRepository with generic interface Owl\\\\Component\\\\Core\\\\Repository\\\\AdminUserRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Fixture/Listener/UserRoleAssignerListener.php
 
 		-
 			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Listener\\\\UserRoleAssignerListener\\:\\:afterFixture\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
@@ -441,24 +381,9 @@ parameters:
 			path: src/Owl/Bundle/CoreBundle/Form/EventSubscriber/AdminUserRegistrationFormSubscriber.php
 
 		-
-			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\GroupNotificationChoiceType\\:\\:__construct\\(\\) has parameter \\$roleRepository with generic interface Owl\\\\Component\\\\Core\\\\Repository\\\\RoleRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Form/Type/GroupNotificationChoiceType.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\RoleChoiceType\\:\\:__construct\\(\\) has parameter \\$roleRepository with generic interface Owl\\\\Component\\\\Core\\\\Repository\\\\RoleRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Form/Type/RoleChoiceType.php
-
-		-
 			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\RoleChoiceType\\:\\:getOptions\\(\\) should return array\\<Owl\\\\Component\\\\Core\\\\Model\\\\Rbac\\\\RoleInterface\\> but returns array\\<int, Sylius\\\\Resource\\\\Model\\\\ResourceInterface\\>\\.$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Form/Type/RoleChoiceType.php
-
-		-
-			message: "#^Deprecated in PHP 8\\.0\\: Required parameter \\$addOwnerFormSubscriber follows optional parameter \\$validationGroups\\.$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Form/Type/User/AdminUserType.php
 
 		-
 			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\UserChoiceType\\:\\:__construct\\(\\) has parameter \\$userRepository with generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
@@ -489,11 +414,6 @@ parameters:
 			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Rbac\\\\DirectPermissionUserProvider\\:\\:getPermission\\(\\) should return array\\<Yiisoft\\\\Rbac\\\\PermissionInterface\\|Yiisoft\\\\Rbac\\\\RoleInterface\\> but returns array\\<string, Yiisoft\\\\Rbac\\\\Permission\\|Yiisoft\\\\Rbac\\\\Role\\>\\.$#"
 			count: 1
 			path: src/Owl/Bundle/CoreBundle/Rbac/DirectPermissionUserProvider.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Security\\\\UserPasswordResetter\\:\\:__construct\\(\\) has parameter \\$userRepository with generic interface Owl\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/Security/UserPasswordResetter.php
 
 		-
 			message: "#^Method Owl\\\\Bundle\\\\CoreBundle\\\\Twig\\\\BundleLoadedCheckerExtension\\:\\:__construct\\(\\) has parameter \\$listOfBundles with no value type specified in iterable type array\\.$#"
@@ -561,16 +481,6 @@ parameters:
 			path: src/Owl/Bundle/RbacBundle/Factory/PermissionFormFactory.php
 
 		-
-			message: "#^Method Owl\\\\Bundle\\\\RbacBundle\\\\Factory\\\\PermissionFormFactory\\:\\:__construct\\(\\) has parameter \\$permissionFactory with generic interface Owl\\\\Component\\\\Rbac\\\\Factory\\\\PermissionFactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/RbacBundle/Factory/PermissionFormFactory.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\RbacBundle\\\\Factory\\\\PermissionFormFactory\\:\\:__construct\\(\\) has parameter \\$permissionRepository with generic interface Owl\\\\Component\\\\Rbac\\\\Repository\\\\PermissionRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/RbacBundle/Factory/PermissionFormFactory.php
-
-		-
 			message: "#^Method Owl\\\\Bundle\\\\RbacBundle\\\\Factory\\\\PermissionFormFactory\\:\\:createByExists\\(\\) should return array\\<array\\<int, array\\{mixed\\}\\>\\> but returns array\\<non\\-empty\\-array\\<int\\<0, max\\>, Symfony\\\\Component\\\\Form\\\\FormView\\>\\>\\.$#"
 			count: 1
 			path: src/Owl/Bundle/RbacBundle/Factory/PermissionFormFactory.php
@@ -621,11 +531,6 @@ parameters:
 			path: src/Owl/Bundle/StatusBundle/Form/Type/StatusType.php
 
 		-
-			message: "#^Method Owl\\\\Bundle\\\\TinymceBundle\\\\DependencyInjection\\\\Configuration\\:\\:getConfigTreeBuilder\\(\\) should return Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\TreeBuilder but returns Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\.$#"
-			count: 1
-			path: src/Owl/Bundle/TinymceBundle/DependencyInjection/Configuration.php
-
-		-
 			message: "#^Property Owl\\\\Bundle\\\\TinymceBundle\\\\Helper\\\\LocaleHelper\\:\\:\\$locales type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Owl/Bundle/TinymceBundle/Helper/LocaleHelper.php
@@ -636,19 +541,9 @@ parameters:
 			path: src/Owl/Bundle/UiBundle/Twig/RedirectPathExtension.php
 
 		-
-			message: "#^Method Owl\\\\Bundle\\\\UserBundle\\\\Command\\\\AbstractRoleCommand\\:\\:executeRoleCommand\\(\\) has parameter \\$securityRoles with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bundle/UserBundle/Command/AbstractRoleCommand.php
-
-		-
 			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getRepository\\(\\)$#"
 			count: 1
 			path: src/Owl/Bundle/UserBundle/Command/AbstractRoleCommand.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\UserBundle\\\\Command\\\\DemoteUserCommand\\:\\:executeRoleCommand\\(\\) has parameter \\$securityRoles with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Bundle/UserBundle/Command/DemoteUserCommand.php
 
 		-
 			message: "#^Method Owl\\\\Bundle\\\\UserBundle\\\\DependencyInjection\\\\OwlUserExtension\\:\\:createParameters\\(\\) has parameter \\$resources with no value type specified in iterable type array\\.$#"
@@ -716,27 +611,12 @@ parameters:
 			path: src/Owl/Bundle/UserBundle/EventListener/UserLastLoginSubscriber.php
 
 		-
-			message: "#^Class Owl\\\\Bundle\\\\UserBundle\\\\Provider\\\\AbstractUserProvider implements generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#"
-			count: 1
-			path: src/Owl/Bundle/UserBundle/Provider/AbstractUserProvider.php
-
-		-
-			message: "#^Method Owl\\\\Bundle\\\\UserBundle\\\\Provider\\\\AbstractUserProvider\\:\\:__construct\\(\\) has parameter \\$userRepository with generic interface Owl\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Bundle/UserBundle/Provider/AbstractUserProvider.php
-
-		-
 			message: "#^Method Owl\\\\Bundle\\\\UserBundle\\\\Provider\\\\EmailProvider\\:\\:findUser\\(\\) should return Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null but returns Owl\\\\Component\\\\User\\\\Model\\\\UserInterface\\|null\\.$#"
 			count: 1
 			path: src/Owl/Bundle/UserBundle/Provider/EmailProvider.php
 
 		-
 			message: "#^Interface Owl\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface extends generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#"
-			count: 1
-			path: src/Owl/Bundle/UserBundle/Provider/UserProviderInterface.php
-
-		-
-			message: "#^PHPDoc tag @param references unknown parameter\\: \\$username$#"
 			count: 1
 			path: src/Owl/Bundle/UserBundle/Provider/UserProviderInterface.php
 
@@ -781,11 +661,6 @@ parameters:
 			path: src/Owl/Component/Core/Factory/SellerFactory.php
 
 		-
-			message: "#^Method Owl\\\\Component\\\\Core\\\\Grid\\\\Filter\\\\DateFilter\\:\\:apply\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Grid/Filter/DateFilter.php
-
-		-
 			message: "#^Method Owl\\\\Component\\\\Core\\\\Grid\\\\Filter\\\\DateFilter\\:\\:apply\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Owl/Component/Core/Grid/Filter/DateFilter.php
@@ -816,11 +691,6 @@ parameters:
 			path: src/Owl/Component/Core/Grid/Filter/PeriodFilter.php
 
 		-
-			message: "#^Class Owl\\\\Component\\\\Core\\\\Model\\\\Contractor\\\\ContractorInterface not found\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Invoice/Snapshot/BuyerSnapshotByContractorAssigner.php
-
-		-
 			message: "#^Method Owl\\\\Component\\\\Core\\\\Invoice\\\\Snapshot\\\\BuyerSnapshotByContractorAssigner\\:\\:__construct\\(\\) has parameter \\$buyerFactory with generic interface Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Owl/Component/Core/Invoice/Snapshot/BuyerSnapshotByContractorAssigner.php
@@ -836,21 +706,6 @@ parameters:
 			path: src/Owl/Component/Core/Manager/UserPreferenceManager.php
 
 		-
-			message: "#^Method Owl\\\\Component\\\\Core\\\\Model\\\\AdminUser\\:\\:getPermissions\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Model/AdminUser.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Core\\\\Model\\\\AdminUser\\:\\:setPermissions\\(\\) has parameter \\$permissions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Model/AdminUser.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Core\\\\Model\\\\AdminUser\\:\\:setPreferences\\(\\) has parameter \\$preferences with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Model/AdminUser.php
-
-		-
 			message: "#^Parameter \\#1 \\$callback of function array_map expects \\(callable\\(Sylius\\\\Resource\\\\Model\\\\ResourceInterface\\)\\: mixed\\)\\|null, Closure\\(Owl\\\\Component\\\\Locale\\\\Model\\\\LocaleInterface\\)\\: string given\\.$#"
 			count: 1
 			path: src/Owl/Component/Core/Provider/TranslationLocaleProvider.php
@@ -861,107 +716,12 @@ parameters:
 			path: src/Owl/Component/Core/Resolver/ExchangeRateResolver.php
 
 		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Authorization\\\\Voter\\\\AdminSystemResourceVoterTest\\:\\:\\$voter with generic class Owl\\\\Component\\\\Core\\\\Authorization\\\\Voter\\\\AdminSystemResourceVoter does not specify its types\\: TAttribute, TSubject$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Authorization/Voter/AdminSystemResourceVoterTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Authorization\\\\Voter\\\\OwnerUserVoterTest\\:\\:\\$voter with generic class Owl\\\\Component\\\\Core\\\\Authorization\\\\Voter\\\\OwnerUserVoter does not specify its types\\: TAttribute, TSubject$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Authorization/Voter/OwnerUserVoterTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Authorization\\\\Voter\\\\RbacVoterTest\\:\\:\\$voter with generic class Owl\\\\Component\\\\Core\\\\Authorization\\\\Voter\\\\RbacVoter does not specify its types\\: TAttribute, TSubject$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Authorization/Voter/RbacVoterTest.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Core\\\\Enum\\\\Grid\\\\Filter\\\\PeriodQuarterEnumTest\\:\\:fromDateProvider\\(\\) should return array\\<array\\<string, Owl\\\\Component\\\\Core\\\\Enum\\\\Grid\\\\Filter\\\\PeriodQuarterEnum\\>\\> but returns array\\<int, array\\<int, Owl\\\\Component\\\\Core\\\\Enum\\\\Grid\\\\Filter\\\\PeriodQuarterEnum\\|string\\>\\>\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Enum/Grid/Filter/PeriodQuarterEnumTest.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Core\\\\Enum\\\\Grid\\\\Filter\\\\PeriodQuarterEnumTest\\:\\:testGetPeriodRangeWithStringAndInt\\(\\) has parameter \\$expected with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Enum/Grid/Filter/PeriodQuarterEnumTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactoryTest\\:\\:\\$buyerFactory with generic class Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Factory/BuyerFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactoryTest\\:\\:\\$decoratedFactory with generic interface Sylius\\\\Resource\\\\Factory\\\\FactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Factory/BuyerFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Factory\\\\NotificationAcceptedFactoryTest\\:\\:\\$notificationAcceptedFactory with generic class Owl\\\\Component\\\\Core\\\\Factory\\\\NotificationAcceptedFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Factory/NotificationAcceptedFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Factory\\\\NotificationFactoryTest\\:\\:\\$notificationFactory with generic class Owl\\\\Component\\\\Core\\\\Factory\\\\NotificationFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Factory/NotificationFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Factory\\\\SellerFactoryTest\\:\\:\\$decoratedFactory with generic interface Sylius\\\\Resource\\\\Factory\\\\FactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Factory/SellerFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Factory\\\\SellerFactoryTest\\:\\:\\$sellerFactory with generic class Owl\\\\Component\\\\Core\\\\Factory\\\\SellerFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Factory/SellerFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Factory\\\\SuggestionFactoryTest\\:\\:\\$suggestionFactory with generic class Owl\\\\Component\\\\Core\\\\Factory\\\\SuggestionFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Factory/SuggestionFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Invoice\\\\Snapshot\\\\BuyerSnapshotByContractorAssignerTest\\:\\:\\$buyerFactory with generic interface Owl\\\\Component\\\\Core\\\\Factory\\\\BuyerFactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Invoice/Snapshot/BuyerSnapshotByContractorAssignerTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Invoice\\\\Snapshot\\\\SellerSnapshotByCompanyAssignerTest\\:\\:\\$sellerFactory with generic interface Owl\\\\Component\\\\Core\\\\Factory\\\\SellerFactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Invoice/Snapshot/SellerSnapshotByCompanyAssignerTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Core\\\\Resolver\\\\ExchangeRateResolverTest\\:\\:\\$exchangeRateRepository with generic interface Sylius\\\\Component\\\\Currency\\\\Repository\\\\ExchangeRateRepositoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Core/Tests/Resolver/ExchangeRateResolverTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$resources of method Owl\\\\Bridge\\\\SyliusResource\\\\Factory\\\\Resource\\\\ParentableFactory\\<Owl\\\\Component\\\\File\\\\Model\\\\FileInterface\\>\\:\\:setResourceParents\\(\\) expects array\\<string, Sylius\\\\Resource\\\\Model\\\\ResourceInterface\\>, array\\<string, PHPUnit\\\\Framework\\\\MockObject\\\\Stub\\> given\\.$#"
-			count: 1
-			path: src/Owl/Component/File/Tests/Factory/FileFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\File\\\\Factory\\\\FileFactoryTest\\:\\:\\$fileFactory with generic class Owl\\\\Component\\\\File\\\\Factory\\\\FileFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/File/Tests/Factory/FileFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\File\\\\Factory\\\\FileFactoryTest\\:\\:\\$subject \\(Owl\\\\Component\\\\File\\\\Model\\\\FileableInterface&PHPUnit\\\\Framework\\\\MockObject\\\\Stub&Sylius\\\\Component\\\\Resource\\\\Model\\\\ResourceInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\Stub\\.$#"
-			count: 1
-			path: src/Owl/Component/File/Tests/Factory/FileFactoryTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$invoice of method Owl\\\\Component\\\\Core\\\\Invoice\\\\Currency\\\\ExchangeRateCurrencyResolverInterface\\:\\:resolve\\(\\) expects Owl\\\\Component\\\\Core\\\\Model\\\\Invoice\\\\InvoiceInterface, Owl\\\\Component\\\\Invoice\\\\Model\\\\InvoiceInterface given\\.$#"
 			count: 1
 			path: src/Owl/Component/Invoice/Assigner/ExchangeRateSnapshotAssigner.php
 
 		-
 			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Assigner\\\\TaxRateSnapshotAssigner\\:\\:__construct\\(\\) has parameter \\$invoiceTaxRateSnapshotFactory with generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceTaxRateSnapshotFactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Assigner/TaxRateSnapshotAssigner.php
-
-		-
-			message: "#^Method Sylius\\\\Resource\\\\Factory\\\\FactoryInterface\\<object\\>\\:\\:createNew\\(\\) invoked with 1 parameter, 0 required\\.$#"
 			count: 1
 			path: src/Owl/Component/Invoice/Assigner/TaxRateSnapshotAssigner.php
 
@@ -986,11 +746,6 @@ parameters:
 			path: src/Owl/Component/Invoice/Calculator/LineDataCalculator.php
 
 		-
-			message: "#^Parameter \\#1 \\$number of method Owl\\\\Component\\\\Invoice\\\\Model\\\\InvoiceInterface\\:\\:setSequenceNumber\\(\\) expects int\\|null, Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface given\\.$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Factory/InvoiceFactory.php
-
-		-
 			message: "#^Property Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactory\\:\\:\\$invoiceNumberGenerator is never read, only written\\.$#"
 			count: 1
 			path: src/Owl/Component/Invoice/Factory/InvoiceFactory.php
@@ -1001,157 +756,12 @@ parameters:
 			path: src/Owl/Component/Invoice/Factory/InvoiceFactory.php
 
 		-
-			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceSequenceFactory\\:\\:__construct\\(\\) has parameter \\$decoratedFactory with generic interface Sylius\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Factory/InvoiceSequenceFactory.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceTaxRateSnapshotFactory\\:\\:__construct\\(\\) has parameter \\$decoratedFactory with generic interface Sylius\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Factory/InvoiceTaxRateSnapshotFactory.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\DateBasedInvoiceSequenceStrategy\\:\\:__construct\\(\\) has parameter \\$invoiceSequenceFactory with generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceSequenceFactoryInterface but does not specify its types\\: T$#"
+			message: "#^PHPDoc tag @param for parameter \\$sequenceRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
 			count: 1
 			path: src/Owl/Component/Invoice/Sequention/Strategy/DateBasedInvoiceSequenceStrategy.php
 
 		-
-			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\MonthlyInvoiceSequenceStrategy\\:\\:getNextCounter\\(\\) should return Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface but returns Sylius\\\\Resource\\\\Model\\\\ResourceInterface\\.$#"
+			message: "#^PHPDoc type for property Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\DateBasedInvoiceSequenceStrategy\\:\\:\\$sequenceRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
 			count: 1
-			path: src/Owl/Component/Invoice/Sequention/Strategy/MonthlyInvoiceSequenceStrategy.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\YearlyInvoiceSequenceStrategy\\:\\:getNextCounter\\(\\) should return Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface but returns Sylius\\\\Resource\\\\Model\\\\ResourceInterface\\.$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Sequention/Strategy/YearlyInvoiceSequenceStrategy.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Invoice\\\\Assigner\\\\TaxRateSnapshotAssignerTest\\:\\:\\$invoiceTaxRateSnapshotFactory with generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceTaxRateSnapshotFactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Tests/Assigner/TaxRateSnapshotAssignerTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceSequenceFactoryTest\\:\\:\\$decoratedFactory with generic interface Sylius\\\\Resource\\\\Factory\\\\FactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Tests/Factory/InvoiceSequenceFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceSequenceFactoryTest\\:\\:\\$factory with generic class Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceSequenceFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Tests/Factory/InvoiceSequenceFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceTaxRateSnapshotFactoryTest\\:\\:\\$decoratedFactory \\(Owl\\\\Component\\\\Invoice\\\\Model\\\\Taxation\\\\TaxRateSnapshotInterface&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Sylius\\\\Resource\\\\Factory\\\\FactoryInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Sylius\\\\Resource\\\\Factory\\\\FactoryInterface\\.$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Tests/Factory/InvoiceTaxRateSnapshotFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceTaxRateSnapshotFactoryTest\\:\\:\\$decoratedFactory with generic interface Sylius\\\\Resource\\\\Factory\\\\FactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Tests/Factory/InvoiceTaxRateSnapshotFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceTaxRateSnapshotFactoryTest\\:\\:\\$factory with generic class Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceTaxRateSnapshotFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Tests/Factory/InvoiceTaxRateSnapshotFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\MonthlyInvoiceSequenceStrategyTest\\:\\:\\$invoiceSequenceFactory with generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceSequenceFactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Tests/Sequention/Strategy/MonthlyInvoiceSequenceStrategyTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\YearlyInvoiceSequenceStrategyTest\\:\\:\\$invoiceSequenceFactory with generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceSequenceFactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Tests/Sequention/Strategy/YearlyInvoiceSequenceStrategyTest.php
-
-		-
-			message: "#^Caught class Owl\\\\Component\\\\Locale\\\\Exception\\\\LocaleNotFoundException not found\\.$#"
-			count: 1
-			path: src/Owl/Component/Locale/Context/CompositeLocaleContext.php
-
-		-
-			message: "#^Instantiated class Owl\\\\Component\\\\Locale\\\\Exception\\\\LocaleNotFoundException not found\\.$#"
-			count: 1
-			path: src/Owl/Component/Locale/Context/CompositeLocaleContext.php
-
-		-
-			message: "#^Throwing object of an unknown class Owl\\\\Component\\\\Locale\\\\Exception\\\\LocaleNotFoundException\\.$#"
-			count: 1
-			path: src/Owl/Component/Locale/Context/CompositeLocaleContext.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Locale\\\\Context\\\\LocaleNotFoundException\\:\\:notAvailable\\(\\) has parameter \\$availableLocalesCodes with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Locale/Context/LocaleNotFoundException.php
-
-		-
-			message: "#^PHPDoc tag @var for property Owl\\\\Component\\\\Locale\\\\Provider\\\\LocaleProvider\\:\\:\\$localeRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Locale\\\\Model\\\\LocaleInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
-			count: 1
-			path: src/Owl/Component/Locale/Provider/LocaleProvider.php
-
-		-
-			message: "#^Parameter \\#1 \\$callback of function array_map expects \\(callable\\(Sylius\\\\Resource\\\\Model\\\\ResourceInterface\\)\\: mixed\\)\\|null, Closure\\(Owl\\\\Component\\\\Locale\\\\Model\\\\LocaleInterface\\)\\: string given\\.$#"
-			count: 1
-			path: src/Owl/Component/Locale/Provider/LocaleProvider.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Location\\\\Tests\\\\Factory\\\\ZoneFactoryTest\\:\\:\\$factory with generic class Owl\\\\Component\\\\Location\\\\Factory\\\\ZoneFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Location/Tests/Factory/ZoneFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Rbac\\\\Tests\\\\Factory\\\\PermissionFactoryTest\\:\\:\\$permissionFactory with generic class Owl\\\\Component\\\\Rbac\\\\Factory\\\\PermissionFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Rbac/Tests/Factory/PermissionFactoryTest.php
-
-		-
-			message: "#^Offset 'description' does not exist on array\\{group\\: mixed\\}\\.$#"
-			count: 3
-			path: src/Owl/Component/Rbac/Tests/Provider/RoutesPermissionProviderTest.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Setting\\\\Storage\\\\DoctrineSettingStorage\\:\\:getBySectionAndKeys\\(\\) has parameter \\$keys with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Setting/Storage/DoctrineSettingStorage.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Setting\\\\Storage\\\\DoctrineSettingStorage\\:\\:getBySectionAndKeys\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Setting/Storage/DoctrineSettingStorage.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Setting\\\\Storage\\\\DoctrineSettingStorage\\:\\:loadBySection\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Setting/Storage/DoctrineSettingStorage.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Setting\\\\Storage\\\\DoctrineSettingStorage\\:\\:saveValues\\(\\) has parameter \\$existingSettings with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Setting/Storage/DoctrineSettingStorage.php
-
-		-
-			message: "#^Method Owl\\\\Component\\\\Setting\\\\Storage\\\\DoctrineSettingStorage\\:\\:saveValues\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Owl/Component/Setting/Storage/DoctrineSettingStorage.php
-
-		-
-			message: "#^Class Owl\\\\Bridge\\\\SyliusResource\\\\Exception\\\\ParentResourceNotFound not found\\.$#"
-			count: 1
-			path: src/Owl/Component/Status/Tests/Factory/StatusFactoryTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$exception of method PHPUnit\\\\Framework\\\\TestCase\\:\\:expectException\\(\\) expects class\\-string\\<Throwable\\>, string given\\.$#"
-			count: 1
-			path: src/Owl/Component/Status/Tests/Factory/StatusFactoryTest.php
-
-		-
-			message: "#^Property Tests\\\\Owl\\\\Component\\\\Status\\\\Factory\\\\StatusFactoryTest\\:\\:\\$statusFactory with generic class Owl\\\\Component\\\\Status\\\\Factory\\\\StatusFactory does not specify its types\\: T$#"
-			count: 1
-			path: src/Owl/Component/Status/Tests/Factory/StatusFactoryTest.php
-
-		-
-			message: "#^Call to an undefined method Owl\\\\Component\\\\User\\\\Model\\\\UserInterface\\:\\:getLocaleCode\\(\\)\\.$#"
-			count: 1
-			path: src/Owl/Bundle/CoreBundle/CommandHandler/Admin/Account/RequestResetPasswordEmailHandler.php
+			path: src/Owl/Component/Invoice/Sequention/Strategy/DateBasedInvoiceSequenceStrategy.php
 

@@ -15,6 +15,9 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 final class InvoiceTaxRateSnapshotFactory implements InvoiceTaxRateSnapshotFactoryInterface
 {
+    /**
+     * @param FactoryInterface<T> $decoratedFactory
+     */
     public function __construct(
         private FactoryInterface $decoratedFactory,
     ) {

@@ -6,8 +6,10 @@ namespace Owl\Component\Invoice\Sequention\Strategy;
 
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
-use Sylius\Resource\Model\ResourceInterface;
 
+/**
+ * @extends DateBasedInvoiceSequenceStrategy<SequenceInterface>
+ */
 class YearlyInvoiceSequenceStrategy extends DateBasedInvoiceSequenceStrategy
 {
     public function getNextCounter(InvoiceSerieInterface $invoiceSerie, \DateTimeInterface $date): SequenceInterface

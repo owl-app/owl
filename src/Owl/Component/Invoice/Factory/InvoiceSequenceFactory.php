@@ -16,6 +16,9 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 final class InvoiceSequenceFactory implements InvoiceSequenceFactoryInterface
 {
+    /**
+     * @param FactoryInterface<SequenceInterface> $decoratedFactory
+     */
     public function __construct(
         private FactoryInterface $decoratedFactory,
     ) {

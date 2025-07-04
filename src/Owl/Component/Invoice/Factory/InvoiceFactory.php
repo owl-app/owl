@@ -12,13 +12,11 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 /**
- * @template T of InvoiceInterface
- *
- * @implements InvoiceFactoryInterface<T>
+ * @implements InvoiceFactoryInterface<InvoiceInterface>
  */
 final class InvoiceFactory implements InvoiceFactoryInterface
 {
-    /** @param FactoryInterface<T> $decoratedFactory */
+    /** @param FactoryInterface<InvoiceInterface> $decoratedFactory */
     public function __construct(
         private FactoryInterface $decoratedFactory,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
