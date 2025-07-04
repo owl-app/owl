@@ -11,6 +11,11 @@ use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of InvoiceInterface
+ *
+ * @implements InvoiceFactoryInterface<T>
+ */
 final class InvoiceFactory implements InvoiceFactoryInterface
 {
     /**

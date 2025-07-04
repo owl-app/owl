@@ -14,7 +14,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
 {
     /**
-     * @param RepositoryInterface<TaxRateSnapshotInterface> $taxRateSnapshotRepository
      * @param InvoiceTaxRateSnapshotFactoryInterface<TaxRateSnapshotInterface> $invoiceTaxRateSnapshotFactory
      */
     public function __construct(

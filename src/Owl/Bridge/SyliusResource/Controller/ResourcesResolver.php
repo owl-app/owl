@@ -21,7 +21,7 @@ final class ResourcesResolver implements ResourcesResolverInterface
 
     /**
      * @template TEntityClass of object
-     * @param EntityRepository<TEntityClass>|RepositoryInterface|SyliusRepositoryInterface $repository
+     * @param EntityRepository<TEntityClass>|RepositoryInterface|SyliusRepositoryInterface<ResourceInterface> $repository
      * @return iterable<ResourceInterface>
      */
     public function getResources(

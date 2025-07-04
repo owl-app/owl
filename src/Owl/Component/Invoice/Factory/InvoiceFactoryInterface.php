@@ -8,7 +8,7 @@ use Owl\Component\Invoice\Model\InvoiceInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
 /**
- * @template T of InvoiceFactoryInterface
+ * @template T of InvoiceInterface
  *
  * @extends FactoryInterface<T>
  */

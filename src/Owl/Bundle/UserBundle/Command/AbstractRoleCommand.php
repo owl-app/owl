@@ -143,6 +143,10 @@ abstract class AbstractRoleCommand extends Command
     {
         $class = $this->getUserModelClass($userType);
 
+        /**
+         * @phpstan-var class-string<UserInterface> $class
+         * @var UserRepositoryInterface $repository
+         */
         $repository = $this->getEntityManager($userType)->getRepository($class);
         Assert::isInstanceOf($repository, UserRepositoryInterface::class);
 

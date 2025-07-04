@@ -10,6 +10,7 @@ use Owl\Component\Core\Model\RoleAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
 final class AddRoleSubscriber implements EventSubscriberInterface
@@ -26,7 +27,7 @@ final class AddRoleSubscriber implements EventSubscriberInterface
 
     public function submit(FormEvent $event): void
     {
-        /** @var AdminUserInterface&RoleAwareInterface|null $data */
+        /** @var (AdminUserInterface&RoleAwareInterface&UserInterface)|null $data */
         $data = $event->getData();
         $form = $event->getForm();
 

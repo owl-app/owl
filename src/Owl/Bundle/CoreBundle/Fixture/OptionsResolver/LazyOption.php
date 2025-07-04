@@ -129,8 +129,6 @@ final class LazyOption
 
     /**
      * @param array<string, mixed> $criteria
-     *
-     * @return \Closure(Options, array<array-key, mixed>|null):array<array-key, object|null>|null
      */
     public static function findBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
@@ -192,7 +190,7 @@ final class LazyOption
             $resource = $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
 
             if (null === $resource) {
-                throw new UnexpectedTypeException(
+                throw new ResourceNotFoundException(
                     sprintf(
                         'The %s resource for field %s with value %s was not found',
                         $repository->getClassName(),
