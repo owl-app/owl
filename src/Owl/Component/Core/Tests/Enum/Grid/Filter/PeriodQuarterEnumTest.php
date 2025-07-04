@@ -12,14 +12,11 @@ use UnhandledMatchError;
 class PeriodQuarterEnumTest extends TestCase
 {
     #[DataProvider('validQuarterProvider')]
-    public function testGetPeriodRangeWithStringAndInt(int|string $input, array $expected): void
+    public function testGetPeriodRangeWithStringAndInt($input, array $expected): void
     {
         $this->assertSame($expected, PeriodQuarterEnum::getPeriodRange($input));
     }
 
-    /**
-     * @return array<array<int|string, array<string, string>>>
-     */
     public static function validQuarterProvider(): array
     {
         return [
@@ -35,15 +32,12 @@ class PeriodQuarterEnumTest extends TestCase
     }
 
     #[DataProvider('invalidQuarterProvider')]
-    public function testGetPeriodRangeThrowsOnInvalidInput(int|string $input): void
+    public function testGetPeriodRangeThrowsOnInvalidInput($input): void
     {
         $this->expectException(UnhandledMatchError::class);
         PeriodQuarterEnum::getPeriodRange($input);
     }
 
-    /**
-     * @return array<array<int|string>>
-     */
     public static function invalidQuarterProvider(): array
     {
         return [
@@ -62,9 +56,6 @@ class PeriodQuarterEnumTest extends TestCase
         $this->assertSame($expected, PeriodQuarterEnum::fromDate(new DateTime($date)));
     }
 
-    /**
-     * @return array<array<string, PeriodQuarterEnum>>
-     */
     public static function fromDateProvider(): array
     {
         return [

@@ -57,8 +57,8 @@ class RoutesPermissionProviderTest extends TestCase
 
     public function testGetPermissionsWithRoutesWithPermissionGroup(): void
     {
-        $route1 = new Route('/test1', [], [], ['_sylius' => ['vars' => ['permission' => ['group' => 'admin']]]]);
-        $route2 = new Route('/test2', [], [], ['_sylius' => ['vars' => ['permission' => ['group' => 'user']]]]);
+        $route1 = new Route('/test1', ['_sylius' => ['vars' => ['permission' => ['group' => 'admin']]]]);
+        $route2 = new Route('/test2', ['_sylius' => ['vars' => ['permission' => ['group' => 'user']]]]);
 
         $this->routeCollection->add('test_route1', $route1);
         $this->routeCollection->add('test_route2', $route2);
@@ -80,7 +80,16 @@ class RoutesPermissionProviderTest extends TestCase
 
     public function testGetPermissionsWithCustomDescription(): void
     {
-        $route = new Route('/test', [], [], ['_sylius' => ['vars' => ['permission' => ['group' => 'admin', 'description' => 'custom.description']]]]);
+        $route = new Route('/test', [
+            '_sylius' => [
+                'vars' => [
+                    'permission' => [
+                        'group' => 'admin',
+                        'description' => 'custom.description',
+                    ],
+                ],
+            ],
+        ]);
 
         $this->routeCollection->add('test_route', $route);
 
@@ -99,9 +108,9 @@ class RoutesPermissionProviderTest extends TestCase
     public function testGetPermissionsMixedRoutes(): void
     {
         $route1 = new Route('/test1');
-        $route2 = new Route('/test2', [], [], ['_sylius' => ['vars' => ['permission' => ['group' => 'user']]]]);
-        $route3 = new Route('/test3', [], [], ['_sylius' => ['vars' => []]]);
-        $route4 = new Route('/test4', [], [], ['_sylius' => ['vars' => ['permission' => ['group' => 'admin']]]]);
+        $route2 = new Route('/test2', ['_sylius' => ['vars' => ['permission' => ['group' => 'user']]]]);
+        $route3 = new Route('/test3', ['_sylius' => ['vars' => []]]);
+        $route4 = new Route('/test4', ['_sylius' => ['vars' => ['permission' => ['group' => 'admin']]]]);
 
         $this->routeCollection->add('test_route1', $route1);
         $this->routeCollection->add('test_route2', $route2);

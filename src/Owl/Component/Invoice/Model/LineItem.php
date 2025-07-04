@@ -163,14 +163,14 @@ class LineItem implements LineItemInterface
     public function getTaxRateAmount(): ?float
     {
         if (null === $this->getTaxRateSnapshot()) {
-            return $this->taxRate->getAmount();
+            return $this->taxRate?->getAmount();
         }
 
-        if ($this->getTaxRateSnapshot()->getCode() === $this->taxRate->getCode()) {
+        if ($this->getTaxRateSnapshot()->getCode() === $this->taxRate?->getCode()) {
             return $this->getTaxRateSnapshot()->getAmount();
         }
 
-        return $this->taxRate->getAmount();
+        return $this->taxRate?->getAmount();
     }
 
     public function isTaxRateNameDiffrent(): bool

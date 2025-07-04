@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Component\Status\Factory;
 
-use Owl\Bridge\SyliusResource\Exception\ParentResourceNotFound;
+use Owl\Bridge\SyliusResource\Exception\ParetResourceNotFound;
 use Owl\Bridge\SyliusResource\Factory\Resource\ParentableFactory;
 use Owl\Component\Status\Factory\StatusFactory;
 use Owl\Component\Status\Factory\StatusFactoryInterface;
@@ -94,7 +94,7 @@ final class StatusFactoryTest extends TestCase
 
     public function testCreateForParentThrowsExceptionWhenParentNotFound(): void
     {
-        $this->expectException(ParentResourceNotFound::class);
+        $this->expectException(ParetResourceNotFound::class);
         $this->expectExceptionMessage('Resource non_existing_parent not found');
 
         $this->statusFactory->createForParent('non_existing_parent');

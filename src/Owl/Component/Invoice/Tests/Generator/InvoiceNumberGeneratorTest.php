@@ -24,9 +24,6 @@ class InvoiceNumberGeneratorTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    /**
-     * @return iterable<array{string, int, \DateTimeInterface, string}>
-     */
     public static function formatProvider(): iterable
     {
         $date1 = new \DateTimeImmutable('2023-05-15');

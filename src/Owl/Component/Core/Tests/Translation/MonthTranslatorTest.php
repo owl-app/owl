@@ -112,9 +112,6 @@ class MonthTranslatorTest extends TestCase
         $this->assertEquals($expectedMonths[$monthNumber], $translatedMonth);
     }
 
-    /**
-     * @return array<string, array<int|string>>
-     */
     public static function monthDataProvider(): array
     {
         return [

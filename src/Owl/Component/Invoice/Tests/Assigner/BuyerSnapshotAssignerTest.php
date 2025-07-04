@@ -258,9 +258,6 @@ class BuyerSnapshotAssignerTest extends TestCase
         $this->buyerSnapshotAssigner->assign($this->invoice);
     }
 
-    /**
-     * @return array<string, array{0: string, 1: string, 2: string}>
-     */
     public static function buyerChangeFieldsProvider(): array
     {
         return [

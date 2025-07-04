@@ -11,12 +11,9 @@ use PHPUnit\Framework\TestCase;
 use Sylius\Resource\Exception\UnsupportedMethodException;
 use Sylius\Resource\Factory\FactoryInterface;
 
-/**
- * @phpstan-type T TaxRateSnapshotInterface
- */
 class InvoiceTaxRateSnapshotFactoryTest extends TestCase
 {
-    private FactoryInterface&TaxRateSnapshotInterface&MockObject $decoratedFactory;
+    private FactoryInterface&MockObject $decoratedFactory;
 
     private InvoiceTaxRateSnapshotFactory $factory;
 
