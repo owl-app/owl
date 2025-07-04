@@ -11,5 +11,10 @@ interface ItemProviderInterface
 {
     public const TYPE = 'item';
 
-    public function get(EntityRepository $repository, ?array $criteria = [], ?array $repositoryOptions = []): ?ResourceInterface;
+    /**
+     * @param EntityRepository<ResourceInterface> $repository
+     * @param array<string, mixed> $criteria
+     * @param array<string, mixed> $repositoryOptions
+     */
+    public function get(EntityRepository $repository, ?array $criteria = [], array $repositoryOptions = []): ?ResourceInterface;
 }

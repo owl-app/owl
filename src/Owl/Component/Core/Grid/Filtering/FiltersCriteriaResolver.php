@@ -24,6 +24,9 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
         ;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getCriteria(Grid $grid, Parameters $parameters): array
     {
         $criteria = $this->decoratedFiltersCriteriaResolver->getCriteria($grid, $parameters);

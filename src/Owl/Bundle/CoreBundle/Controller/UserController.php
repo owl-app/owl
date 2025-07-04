@@ -68,7 +68,7 @@ class UserController extends BaseUserController
         Request $request,
         ManagerInterface $rbacManager,
         DirectPermissionUserProviderInterface $directPermissionUserProvider,
-    ): ?Response {
+    ): Response {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $formOptions = array_merge(
             $configuration->getFormOptions(),

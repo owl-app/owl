@@ -6,6 +6,7 @@ namespace Owl\Component\Core\Invoice\Snapshot;
 
 use Owl\Component\Core\Factory\BuyerFactoryInterface;
 use Owl\Component\Core\Model\Invoice\Invoice;
+use Owl\Component\Core\Model\Contractor\ContractorInterface;
 use Owl\Component\Invoice\Assigner\SnapshotAssignerInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 
@@ -19,12 +20,15 @@ class BuyerSnapshotByContractorAssigner implements SnapshotAssignerInterface
 
     public function assign(InvoiceInterface|Invoice $invoice): void
     {
-        if ($invoice->isContractorChanged()) {
-            $invoice->setBuyer(
-                $this->buyerFactory->createFromContractor($invoice->getContractor()),
-            );
+        if ($invoice instanceof Invoice && $invoice->isContractorChanged()) {
+            $contractor = $invoice->getContractor();
+            if ($contractor instanceof ContractorInterface) {
+                $invoice->setBuyer(
+                    $this->buyerFactory->createFromContractor($contractor),
+                );
 
-            $this->decoratedBuyerSnapshotRepository->assign($invoice);
+                $this->decoratedBuyerSnapshotRepository->assign($invoice);
+            }
         }
     }
 }

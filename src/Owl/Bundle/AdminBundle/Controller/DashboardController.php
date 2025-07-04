@@ -17,7 +17,7 @@ final class DashboardController
      */
     public function __construct(
         private SettingStorageInterface $settingStorage,
-        private object $templatingEngine,
+        private Environment $templatingEngine,
         private RouterInterface $router,
     ) {
     }

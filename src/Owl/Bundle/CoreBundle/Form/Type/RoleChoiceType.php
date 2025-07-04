@@ -15,15 +15,13 @@ final class RoleChoiceType extends AbstractType
 {
     public function __construct(private RoleRepositoryInterface $roleRepository, private AdminUserContextInterface $adminUserContext)
     {
-        $this->roleRepository = $roleRepository;
-        $this->adminUserContext = $adminUserContext;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'choices' => $this->getOptions(),
-            'choice_label' => fn (RoleInterface $role): string => $role->getSetting()?->getDisplayName(),
+            'choice_label' => fn (RoleInterface $role): string => $role->getSetting()?->getDisplayName() ?? '',
             'choice_value' => 'id',
             'label' => false,
             'placeholder' => false,
@@ -31,7 +29,7 @@ final class RoleChoiceType extends AbstractType
     }
 
     /**
-     * @return ChoiceType::class
+     * @return string
      */
     public function getParent(): string
     {
@@ -39,13 +37,16 @@ final class RoleChoiceType extends AbstractType
     }
 
     /**
-     * @return 'owl_role_choice'
+     * @return string
      */
     public function getBlockPrefix(): string
     {
         return 'owl_role_choice';
     }
 
+    /**
+     * @return RoleInterface[]
+     */
     private function getOptions(): array
     {
         if (!$this->adminUserContext->isAdminSystem()) {

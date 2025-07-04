@@ -18,10 +18,11 @@ class DefaultInvoiceSerieProvider implements InvoiceSerieProviderInterface
     {
         $default = $this->serieRepository->findOneBy(['isDefault' => true, 'invoiceType' => $type]);
 
-        if ($default) {
+        if ($default instanceof InvoiceSerieInterface) {
             return $default;
         }
 
+        /** @var InvoiceSerieInterface[] $first */
         $first = $this->serieRepository->findBy(['invoiceType' => $type], ['id' => 'ASC'], 1);
 
         if (count($first) === 0) {

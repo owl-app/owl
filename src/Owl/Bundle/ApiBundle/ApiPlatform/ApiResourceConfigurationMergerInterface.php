@@ -15,5 +15,10 @@ namespace Owl\Bundle\ApiBundle\ApiPlatform;
 
 interface ApiResourceConfigurationMergerInterface
 {
-    public function mergeConfigs(...$configs): array;
+    /**
+     * @param array[] $configs
+     *
+     * @return array[]
+     */
+    public function mergeConfigs(array ...$configs): array;
 }

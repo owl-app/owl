@@ -10,10 +10,11 @@ use Owl\Component\File\Model\FileInterface;
 use Owl\Component\Status\Model\StatusInterface;
 use Owl\Component\Suggestion\Model\Suggestion as BaseSuggestion;
 use Owl\Component\User\Model\UserInterface as BaseUserInterface;
+use Owl\Component\Core\Model\AdminUserInterface;
 
 class Suggestion extends BaseSuggestion implements SuggestionInterface
 {
-    /** @var \Owl\Component\Core\Model\AdminUserInterface|null */
+    /** @var AdminUserInterface|null */
     protected $user;
 
     /** @var Collection<array-key, FileInterface> */
@@ -28,6 +29,8 @@ class Suggestion extends BaseSuggestion implements SuggestionInterface
 
         /** @var ArrayCollection<array-key, FileInterface> $this->files */
         $this->files = new ArrayCollection();
+        /** @var ArrayCollection<array-key, StatusInterface> $this->statuses */
+        $this->statuses = new ArrayCollection();
     }
 
     public function getName(): ?string
@@ -38,7 +41,7 @@ class Suggestion extends BaseSuggestion implements SuggestionInterface
     /**
      * @return AdminUserInterface|null
      */
-    public function getUser(): ?BaseUserInterface
+    public function getUser(): ?AdminUserInterface
     {
         return $this->user;
     }

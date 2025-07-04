@@ -17,7 +17,7 @@ class TinymceExtension extends Extension
     /**
      * Loads the TinymceExtension configuration.
      *
-     * @param array            $configs   An array of configuration values
+     * @param array<mixed>     $configs   An array of configuration values
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
     public function load(array $configs, ContainerBuilder $container): void
@@ -54,7 +54,7 @@ class TinymceExtension extends Extension
      *
      * This alias is also the mandatory prefix to use when using YAML.
      *
-     * @return 'tinymce'
+     * @return string
      */
     public function getAlias(): string
     {

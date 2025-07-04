@@ -12,7 +12,8 @@ use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactoryInterface;
 use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Metadata\MetadataInterface as SyliusMetadataInterface;
+use Sylius\Resource\Metadata\MetadataInterface as ResourceMetadataInterface;
 
 final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
 {
@@ -28,10 +29,17 @@ final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
         $this->parametersParser = $parametersParser;
     }
 
+    /**
+     * @param Grid $grid
+     * @param Parameters $parameters
+     * @param SyliusMetadataInterface|ResourceMetadataInterface $metadata
+     * @param RequestConfiguration $requestConfiguration
+     * @return ResourceGridView
+     */
     public function create(
         Grid $grid,
         Parameters $parameters,
-        MetadataInterface $metadata,
+        SyliusMetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
     ): ResourceGridView {
         $driverConfiguration = $grid->getDriverConfiguration();

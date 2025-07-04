@@ -33,7 +33,7 @@ final class InvoiceSequenceFactory implements InvoiceSequenceFactoryInterface
     public function create(
         InvoiceSerieInterface $serie,
         int $year,
-        int|null $month = null,
+        ?int $month = null,
         int $nextCounter = 1,
     ): SequenceInterface {
         $sequence = $this->decoratedFactory->createNew();

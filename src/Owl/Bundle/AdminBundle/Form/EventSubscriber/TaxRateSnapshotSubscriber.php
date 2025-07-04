@@ -25,7 +25,7 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
     public function postSetData(FormEvent $event): void
     {
         $form = $event->getForm();
-        /** @var LineItemInterface $lineItem */
+        /** @var LineItemInterface|null $lineItem */
         $lineItem = $event->getData();
 
         if ($lineItem === null) {
@@ -49,7 +49,7 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
                 array_replace(
                     $oldTaxRate->getOptions(),
                     [
-                        'choice_label' => function (TaxRateInterface $taxRate) use ($snapshot) {
+                        'choice_label' => function (TaxRateInterface $taxRate) use ($snapshot): string {
                             if (
                                 $taxRate->getCode() === $snapshot->getCode() &&
                                 $taxRate->getName() !== $snapshot->getName()
@@ -77,7 +77,7 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
     {
         $data = $formEvent->getData();
         $form = $formEvent->getForm();
-        /** @var LineItemInterface $lineItem */
+        /** @var LineItemInterface|null $lineItem */
         $lineItem = $form->getData();
         $taxRate = $lineItem?->getTaxRate();
         $taxRateSnapshot = $lineItem?->getTaxRateSnapshot();
@@ -105,7 +105,7 @@ final class TaxRateSnapshotSubscriber implements EventSubscriberInterface
     public function submit(FormEvent $formEvent): void
     {
         $form = $formEvent->getForm();
-        /** @var LineItemInterface $lineItem */
+        /** @var LineItemInterface|null $lineItem */
         $lineItem = $form->getData();
         $taxRate = $lineItem?->getTaxRate();
         $taxRateSnapshot = $lineItem?->getTaxRateSnapshot();

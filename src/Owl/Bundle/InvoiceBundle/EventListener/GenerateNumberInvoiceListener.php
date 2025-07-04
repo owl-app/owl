@@ -24,10 +24,10 @@ final class GenerateNumberInvoiceListener
         /** @var InvoiceInterface $invoice */
         Assert::isInstanceOf($invoice, InvoiceInterface::class);
 
-        /** @var InvoiceSerieInterface $serie */
+        /** @var InvoiceSerieInterface|null $serie */
         $serie = $invoice->getSerie();
 
-        if (empty($serie)) {
+        if (null === $serie) {
             return;
         }
 

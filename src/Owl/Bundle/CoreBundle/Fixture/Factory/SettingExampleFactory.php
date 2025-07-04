@@ -37,6 +37,9 @@ class SettingExampleFactory extends AbstractExampleFactory
         ;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function create(array $options = []): SettingInterface
     {
         $options = $this->optionsResolver->resolve($options);

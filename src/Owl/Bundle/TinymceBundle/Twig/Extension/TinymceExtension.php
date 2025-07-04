@@ -77,9 +77,9 @@ class TinymceExtension extends AbstractExtension
     /**
      * TinyMce initializations
      *
-     * @param array $options
+     * @param array<string, mixed> $options
      */
-    public function tinymceInit($options = []): string
+    public function tinymceInit(array $options = []): string
     {
         $config = $this->getParameter('tinymce.config');
         $config = array_merge_recursive($config, $options);

@@ -15,21 +15,19 @@ namespace Owl\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\FormBuilderInterface as FormFormBuilderInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 final class AbstractAjaxType extends AbstractResourceType
 {
     /**
      * @inheritdoc
      */
-    public function buildForm(FormFormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
     }
 
     /**
      * @inheritdoc
-     *
-     * @return FormType::class
      */
     public function getExtendedType(): string
     {

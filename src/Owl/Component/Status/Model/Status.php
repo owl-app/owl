@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Owl\Component\Status\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
+use Owl\Component\Status\Model\OwnerInterface;
+use Owl\Component\Status\Model\StatusableInterface;
 
 abstract class Status implements StatusInterface
 {
@@ -78,5 +80,8 @@ abstract class Status implements StatusInterface
         $this->statusSubject = $statusSubject;
     }
 
+    /**
+     * @return array<string, string>
+     */
     abstract public function getStatusesLabels(): array;
 }

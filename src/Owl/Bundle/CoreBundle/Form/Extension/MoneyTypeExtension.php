@@ -24,7 +24,7 @@ final class MoneyTypeExtension extends AbstractTypeExtension
     }
 
     /**
-     * @return list{MoneyType::class}
+     * @return array<class-string<MoneyType>>
      */
     public static function getExtendedTypes(): array
     {

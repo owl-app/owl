@@ -26,7 +26,7 @@ final class AddRoleSubscriber implements EventSubscriberInterface
 
     public function submit(FormEvent $event): void
     {
-        /** @var AdminUserInterface $data */
+        /** @var AdminUserInterface&RoleAwareInterface $data */
         $data = $event->getData();
         $form = $event->getForm();
 

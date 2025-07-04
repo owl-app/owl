@@ -27,10 +27,11 @@ final class AvailabletSeriesAction
     {
         /** @var InvoiceSerieInterface[] $series */
         $series = $this->serieRepository->findBy(['invoiceType' => $type]);
-        $date = new \DateTime((string) $request->query->get('date', ''));
+        $dateString = $request->query->get('date', '');
+        $date = $dateString ? new \DateTime($dateString) : null;
         $availablesSeries = [];
 
-        if (!$date) {
+        if (null === $date) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, 'Date is required');
         }
 

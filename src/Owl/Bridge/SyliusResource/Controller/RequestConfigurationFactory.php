@@ -7,7 +7,7 @@ namespace Owl\Bridge\SyliusResource\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration as SyliusRequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -21,15 +21,15 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     private $router;
 
     /**
-     * @var string
      * @var class-string<RequestConfiguration>
      */
-    private $configurationClass;
+    private string $configurationClass;
 
     /**
+     * @param RequestConfigurationFactoryInterface $decorated
      * @param class-string<RequestConfiguration> $configurationClass
      */
-    public function __construct($decorated, RouterInterface $router, string $configurationClass)
+    public function __construct(RequestConfigurationFactoryInterface $decorated, RouterInterface $router, string $configurationClass)
     {
         $this->decorated = $decorated;
         $this->router = $router;
@@ -76,7 +76,7 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
             if (isset($referer['url'])) {
                 $url = $referer['url'];
             } else {
-                $url = $this->router->generate($referer['route'] ?? null, $referer['parameters'] ?? null);
+                $url = $this->router->generate($referer['route'] ?? null, $referer['parameters'] ?? []);
             }
         } catch (RouteNotFoundException $e) {
             $url = $request->getRequestUri();
@@ -90,7 +90,6 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     }
 
     /**
-     * @return (array|mixed|string|null)[]
      * @return array{url?: mixed, route?: mixed|string|null, parameters?: array<never, never>}
      */
     private function getRefereUrl(Request $request, SyliusRequestConfiguration $configuration, array $vars, string $action): array

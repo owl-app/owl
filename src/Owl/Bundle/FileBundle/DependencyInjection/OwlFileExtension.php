@@ -27,6 +27,7 @@ final class OwlFileExtension extends AbstractResourceExtension
     }
 
     /**
+     * @param array<string, array<string, array>> $resources
      * @return array<string, array>
      */
     private function resolveResources(array $resources, ContainerBuilder $container): array
@@ -67,8 +68,6 @@ final class OwlFileExtension extends AbstractResourceExtension
                     'lazy' => true,
                 ])
             ;
-
-            $fileChangeListener->setPublic(true);
 
             $container->setDefinition(sprintf('owl.listener.%s_upload_file', $fileSubject), $fileChangeListener);
         }

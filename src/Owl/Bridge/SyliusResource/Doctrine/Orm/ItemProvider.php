@@ -6,6 +6,8 @@ namespace Owl\Bridge\SyliusResource\Doctrine\Orm;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bridge\SyliusResource\Doctrine\Common\Applicator\ResourceFilterApplicatorInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -45,7 +47,12 @@ final class ItemProvider implements ItemProviderInterface
         return null;
     }
 
-    private function getCriteria(EntityRepository $repository, ?string $method, array $arguments, ?array $criteria): ? array
+    /**
+     * @param array<string, mixed> $arguments
+     * @param array<string, mixed> $criteria
+     * @return array<string, mixed>|null
+     */
+    private function getCriteria(EntityRepository $repository, ?string $method, array $arguments, ?array $criteria): ?array
     {
         if (null !== $method && ($method === 'findOneBy' || (!method_exists($repository, $method) && str_starts_with($method, 'findOneBy')))) {
             $identifier = $this->getIdentifierFieldName($repository);
@@ -62,6 +69,9 @@ final class ItemProvider implements ItemProviderInterface
         return $criteria;
     }
 
+    /**
+     * @param array<string, mixed> $arguments
+     */
     private function getQueryBuilder(EntityRepository $repository, ?string $method, array $arguments): QueryBuilder
     {
         if (null !== $method && $method !== 'findOneBy') {

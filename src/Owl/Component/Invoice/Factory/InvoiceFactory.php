@@ -37,7 +37,7 @@ final class InvoiceFactory implements InvoiceFactoryInterface
     {
         $now = new \DateTimeImmutable();
         $defaultSerie = $this->invoiceSerieProvider->getSerie($type);
-        /** @var InvoiceSequenceStrategyInterface $incrementStrategy */
+        /** @var InvoiceSequenceStrategyInterface $strategy */
         $strategy = $this->registryInvoiceSequenceStrategy->get($defaultSerie->getSequenceIncrement());
         $invoiceSequence = $strategy->getNextCounter($defaultSerie, $now);
 

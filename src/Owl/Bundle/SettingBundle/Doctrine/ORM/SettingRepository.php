@@ -15,6 +15,9 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class SettingRepository extends EntityRepository implements SettingRepositoryInterface
 {
+    /**
+     * @return array<T>
+     */
     public function finAllBySection(string $section): array
     {
         return $this->createQueryBuilder('o')
@@ -25,6 +28,10 @@ class SettingRepository extends EntityRepository implements SettingRepositoryInt
         ;
     }
 
+    /**
+     * @param array<string> $keys
+     * @return array<T>
+     */
     public function finAllBySectionAndKeys(string $section, array $keys): array
     {
         return $this->createQueryBuilder('o')

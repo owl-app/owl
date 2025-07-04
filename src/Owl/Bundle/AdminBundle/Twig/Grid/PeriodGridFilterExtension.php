@@ -29,6 +29,10 @@ final class PeriodGridFilterExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param array<string, mixed> $activeCriteria
+     * @return array<string, array<string, mixed>>
+     */
     public function generateLinkNavigation(string $field, string $route, array $activeCriteria): array
     {
         [$activeFieldCriteria, $navigation] = $this->getNavigationData($field, $activeCriteria);
@@ -49,6 +53,10 @@ final class PeriodGridFilterExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param array<string, mixed> $activeCriteria
+     * @return array<string, array<string, mixed>>
+     */
     public function generateDataNavigation(string $field, array $activeCriteria): array
     {
         [$activeFieldCriteria, $navigation] = $this->getNavigationData($field, $activeCriteria);
@@ -63,6 +71,9 @@ final class PeriodGridFilterExtension extends AbstractExtension
         return $navigation;
     }
 
+    /**
+     * @param array<string, mixed> $activeCriteria
+     */
     public function getAccountingPeriodText(string $field, array $activeCriteria): string
     {
         $activeFieldCriteria = $activeCriteria[$field] ?? null;
@@ -75,6 +86,10 @@ final class PeriodGridFilterExtension extends AbstractExtension
         };
     }
 
+    /**
+     * @param array<string, mixed> $activeCriteria
+     * @return array{0: array<string, mixed>|null, 1: array<string, array<string, mixed>>}
+     */
     private function getNavigationData(string $field, array $activeCriteria): array
     {
         $activeFieldCriteria = $activeCriteria[$field] ?? null;
@@ -84,7 +99,7 @@ final class PeriodGridFilterExtension extends AbstractExtension
             $navigation = match ($activeFieldCriteria['type']) {
                 PeriodTypeEnum::TYPE_MONTH->value => $this->generateMonthNavigation($activeFieldCriteria),
                 PeriodTypeEnum::TYPE_QUARTER->value => $this->generateQuarterNavigation($activeFieldCriteria),
-                PeriodTypeEnum::TYPE_YEAR->value => $this->generateYearhNavigation($activeFieldCriteria),
+                PeriodTypeEnum::TYPE_YEAR->value => $this->generateYearNavigation($activeFieldCriteria),
                 default => [],
             };
         }
@@ -92,6 +107,10 @@ final class PeriodGridFilterExtension extends AbstractExtension
         return [$activeFieldCriteria, $navigation];
     }
 
+    /**
+     * @param array<string, mixed> $criteria
+     * @return array<string, array<string, mixed>>
+     */
     private function generateMonthNavigation(array $criteria): array
     {
         $nextMonth = $prevMonth = $criteria['month'];
@@ -153,6 +172,10 @@ final class PeriodGridFilterExtension extends AbstractExtension
         return $navigation;
     }
 
+    /**
+     * @param array<string, mixed> $criteria
+     * @return array<string, array<string, mixed>>
+     */
     private function generateQuarterNavigation(array $criteria): array
     {
         $nextQuarter = $prevQuarter = $criteria['quarter'];
@@ -214,7 +237,11 @@ final class PeriodGridFilterExtension extends AbstractExtension
         return $navigation;
     }
 
-    private function generateYearhNavigation(array $criteria): array
+    /**
+     * @param array<string, mixed> $criteria
+     * @return array<string, array<string, mixed>>
+     */
+    private function generateYearNavigation(array $criteria): array
     {
         $nextYear = $prevYear = $criteria['year'];
         $maxNextYear = (int) date('Y', strtotime('+1 year'));
@@ -259,6 +286,10 @@ final class PeriodGridFilterExtension extends AbstractExtension
         return $navigation;
     }
 
+    /**
+     * @param array<string, mixed> $activeCriteria
+     * @param array<string, mixed> $navigation
+     */
     private function generateUrl(string $route, string $field, array $activeCriteria, string $type, array $navigation): string
     {
         if ($navigation['is_disabled']) {
@@ -272,6 +303,9 @@ final class PeriodGridFilterExtension extends AbstractExtension
         ]);
     }
 
+    /**
+     * @param array<string, mixed> $activeFieldCriteria
+     */
     private function getNameMonth(array $activeFieldCriteria): string
     {
         $monthName = $this->monthTranslator->translate($activeFieldCriteria['month']);
@@ -279,6 +313,9 @@ final class PeriodGridFilterExtension extends AbstractExtension
         return $monthName . ' ' . $activeFieldCriteria['year'];
     }
 
+    /**
+     * @param array<string, mixed> $activeFieldCriteria
+     */
     private function getNameQuarter(array $activeFieldCriteria): string
     {
         $quarterName = $this->translator->trans('owl.grid.filter.period.quarter_type_q' . $activeFieldCriteria['quarter']);

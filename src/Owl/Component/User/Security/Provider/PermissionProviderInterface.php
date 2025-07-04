@@ -6,5 +6,8 @@ namespace Owl\Component\User\Security\Provider;
 
 interface PermissionProviderInterface
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function getPermissionsByUserId(int $userId): array;
 }

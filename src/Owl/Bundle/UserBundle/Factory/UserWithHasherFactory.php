@@ -17,9 +17,6 @@ use Owl\Component\User\Model\UserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @implements FactoryInterface<UserInterface>
- */
 final class UserWithHasherFactory implements FactoryInterface
 {
     /** @var FactoryInterface */

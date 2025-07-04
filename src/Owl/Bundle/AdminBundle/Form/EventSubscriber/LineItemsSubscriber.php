@@ -55,7 +55,9 @@ final class LineItemsSubscriber implements EventSubscriberInterface
 
         $company = $this->companyRepository->find($invoice['company']);
 
-        $this->createLineItemsForm($form, $invoice['currency'], $company);
+        if ($company instanceof CompanyInterface) {
+            $this->createLineItemsForm($form, $invoice['currency'], $company);
+        }
     }
 
     public function createLineItemsForm(FormInterface $form, string $currencyCode, CompanyInterface $company): void

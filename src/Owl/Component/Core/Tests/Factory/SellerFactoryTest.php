@@ -16,11 +16,14 @@ final class SellerFactoryTest extends TestCase
 {
     private SellerFactory $sellerFactory;
 
-    private FactoryInterface&MockObject $decoratedFactory;
+    /** @var FactoryInterface&MockObject */
+    private FactoryInterface $decoratedFactory;
 
-    private SellerInterface&MockObject $seller;
+    /** @var SellerInterface&MockObject */
+    private SellerInterface $seller;
 
-    private CompanyInterface&MockObject $company;
+    /** @var CompanyInterface&MockObject */
+    private CompanyInterface $company;
 
     protected function setUp(): void
     {

@@ -14,6 +14,9 @@ final class SettingFormFactory implements SettingFormFactoryInterface
     {
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function create(RequestConfiguration $requestConfiguration, array $data): FormInterface
     {
         $formType = (string) $requestConfiguration->getFormType();

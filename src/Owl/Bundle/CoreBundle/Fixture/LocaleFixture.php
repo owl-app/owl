@@ -24,7 +24,7 @@ class LocaleFixture extends AbstractFixture
     /**
      * @param string $baseLocaleCode
      */
-    public function __construct(private FactoryInterface $localeFactory, private ObjectManager $localeManager, private $baseLocaleCode)
+    public function __construct(private FactoryInterface $localeFactory, private ObjectManager $localeManager, private string $baseLocaleCode)
     {
     }
 
@@ -59,7 +59,7 @@ class LocaleFixture extends AbstractFixture
     {
         $optionsNode
             ->children()
-                ->scalarNode('load_default_locale')->defaultTrue()->end()
+                ->booleanNode('load_default_locale')->defaultTrue()->end()
                 ->arrayNode('locales')->scalarPrototype()->end()
         ;
     }

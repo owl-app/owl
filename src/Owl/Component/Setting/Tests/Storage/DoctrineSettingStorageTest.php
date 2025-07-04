@@ -17,9 +17,11 @@ class DoctrineSettingStorageTest extends TestCase
 
     private string $settingClass;
 
-    private SettingRepositoryInterface&MockObject $repository;
+    /** @var SettingRepositoryInterface&MockObject */
+    private $repository;
 
-    private EntityManagerInterface&MockObject $entityManager;
+    /** @var EntityManagerInterface&MockObject */
+    private $entityManager;
 
     protected function setUp(): void
     {
@@ -49,7 +51,7 @@ class DoctrineSettingStorageTest extends TestCase
 
         $settings = [$setting1, $setting2];
 
-        $this->repository->method('finAllBySectionAndKeys')
+        $this->repository->method('findAllBySectionAndKeys')
             ->with($section, $keys)
             ->willReturn($settings);
 
@@ -68,7 +70,7 @@ class DoctrineSettingStorageTest extends TestCase
         $section = 'nonexistent';
         $keys = ['nonexistent_key'];
 
-        $this->repository->method('finAllBySectionAndKeys')
+        $this->repository->method('findAllBySectionAndKeys')
             ->with($section, $keys)
             ->willReturn([]);
 
@@ -158,7 +160,7 @@ class DoctrineSettingStorageTest extends TestCase
         $setting = $this->createMock(SettingInterface::class);
         $setting->method('getName')->willReturn('site_name');
 
-        $this->repository->method('finAllBySection')
+        $this->repository->method('findAllBySection')
             ->with($section)
             ->willReturn([$setting]);
 
@@ -177,7 +179,7 @@ class DoctrineSettingStorageTest extends TestCase
 
         $settings = [$setting1, $setting2];
 
-        $this->repository->method('finAllBySection')
+        $this->repository->method('findAllBySection')
             ->with($section)
             ->willReturn($settings);
 
@@ -195,7 +197,7 @@ class DoctrineSettingStorageTest extends TestCase
     {
         $section = 'nonexistent';
 
-        $this->repository->method('finAllBySection')
+        $this->repository->method('findAllBySection')
             ->with($section)
             ->willReturn([]);
 

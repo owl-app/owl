@@ -8,5 +8,8 @@ use Doctrine\ORM\QueryBuilder;
 
 interface RepositoryInterface
 {
+    /**
+     * @param int[] $ids
+     */
     public function findById(array $ids): QueryBuilder;
 }

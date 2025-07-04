@@ -48,6 +48,9 @@ class NotificationRepository extends EntityRepository implements NotificationRep
             ->getOneOrNullResult();
     }
 
+    /**
+     * @return NotificationInterface[]
+     */
     public function findAllNotAccepted(AdminUserInterface $user, string $groupAssigned): array
     {
         $qb = $this->createAssignedQueryBuilder($user, $groupAssigned);

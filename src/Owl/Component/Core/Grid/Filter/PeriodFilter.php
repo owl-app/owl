@@ -13,7 +13,7 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
 /** @experimental */
 final class PeriodFilter implements FilterInterface
 {
-    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = []): void
     {
         if (empty($data)) {
             return;
@@ -21,7 +21,7 @@ final class PeriodFilter implements FilterInterface
 
         $expressionBuilder = $dataSource->getExpressionBuilder();
         $field = $options['field'] ?? $name;
-        $type = $data['type'] ?? ($options['type']);
+        $type = $data['type'] ?? ($options['type'] ?? '');
 
         if ($type == PeriodTypeEnum::TYPE_ALL->value) {
             return;

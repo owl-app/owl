@@ -36,6 +36,7 @@ final class OwlStatusExtension extends AbstractResourceExtension
     }
 
     /**
+     * @param array<string, array<string, array>> $resources
      * @return array<string, array>
      */
     private function resolveResources(array $resources, ContainerBuilder $container): array

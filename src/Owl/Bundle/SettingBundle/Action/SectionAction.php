@@ -11,6 +11,7 @@ use Owl\Bridge\SyliusResource\Controller\RedirectHandlerInterface;
 use Owl\Bridge\SyliusResource\Controller\RequestConfiguration;
 use Owl\Bridge\SyliusResource\Exception\InvalidResponseException;
 use Owl\Bundle\SettingBundle\Factory\SettingFormFactoryInterface;
+use Owl\Component\Setting\Model\SettingInterface;
 use Owl\Component\Setting\Storage\SettingStorageInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
@@ -74,6 +75,11 @@ final class SectionAction extends AbstractResourceAction
         return $vars['setting_section'];
     }
 
+    /**
+     * @param SettingInterface[] $settings
+     *
+     * @return array<string, mixed>
+     */
     private function mapToArray(array $settings): array
     {
         $mappedValues = [];

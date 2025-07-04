@@ -35,7 +35,7 @@ final class AvailablePermissionType extends AbstractResourceType
     /**
      * @inheritdoc
      */
-    public function finishView(FormView $view, FormInterface $form, array $options)
+    public function finishView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['checked'] = $options['exist'] ? 'checked' : false;
         $view->vars['description_permission'] = $options['description_permission'];

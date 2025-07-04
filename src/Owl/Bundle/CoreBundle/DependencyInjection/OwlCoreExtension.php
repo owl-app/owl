@@ -23,7 +23,7 @@ final class OwlCoreExtension extends AbstractResourceExtension implements Prepen
 {
     use PrependDoctrineMigrationsTrait;
 
-    /** @var array */
+    /** @var array<string> */
     private static $bundles = [
         'sylius_addressing',
         'sylius_attribute',

@@ -19,7 +19,8 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Component\Resource\Exception\RaceConditionException;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\ResourceInterface as SyliusResourceInterface;
+use Sylius\Resource\Model\ResourceInterface as SyliusNewResourceInterface;
 
 final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
 {
@@ -31,7 +32,7 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
      * @throws RaceConditionException
      */
     public function handle(
-        ResourceInterface $resource,
+        SyliusResourceInterface|SyliusNewResourceInterface $resource,
         RequestConfiguration $requestConfiguration,
         ObjectManager $manager,
     ): void {

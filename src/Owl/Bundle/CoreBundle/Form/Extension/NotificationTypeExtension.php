@@ -23,7 +23,7 @@ final class NotificationTypeExtension extends AbstractTypeExtension
     }
 
     /**
-     * @return NotificationType::class
+     * @return class-string<NotificationType>
      */
     public function getExtendedType(): string
     {
@@ -31,7 +31,7 @@ final class NotificationTypeExtension extends AbstractTypeExtension
     }
 
     /**
-     * @return list{NotificationType::class}
+     * @return iterable<class-string<NotificationType>>
      */
     public static function getExtendedTypes(): iterable
     {

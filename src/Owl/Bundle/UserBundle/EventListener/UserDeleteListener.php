@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface as CoreUserInterface;
 use Webmozart\Assert\Assert;
 
 final class UserDeleteListener
@@ -64,11 +65,10 @@ final class UserDeleteListener
         }
 
         $loggedUser = $token->getUser();
-        if (!$loggedUser) {
+        if (!$loggedUser instanceof CoreUserInterface) {
             return false;
         }
 
-        /** @var UserInterface $loggedUser */
-        return $loggedUser->getId() === $user->getId() && $loggedUser->getRoles() === $user->getRoles();
+        return $loggedUser->getId() === $user->getId();
     }
 }

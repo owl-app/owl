@@ -17,7 +17,7 @@ final class AuthorizationChecker implements AuthorizationCheckerInterface
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function isGranted(RequestConfiguration $configuration, $permission = null): bool
+    public function isGranted(RequestConfiguration $configuration, mixed $permission = null): bool
     {
         $route = $configuration->getRequest()->attributes->get('_route');
 

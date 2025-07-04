@@ -17,5 +17,5 @@ use Owl\Component\User\Model\UserInterface;
 
 interface UserLoginInterface
 {
-    public function login(UserInterface $user, ?string $firewallName = null);
+    public function login(UserInterface $user, ?string $firewallName = null): void;
 }

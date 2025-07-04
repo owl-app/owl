@@ -18,7 +18,14 @@ final class CollectionProvider implements CollectionProviderInterface
     ) {
     }
 
-    public function get(EntityRepository $repository, ?array $criteria = [], ?array $repositoryOptions = [], array $sorting = [], bool $isPaginated = false): array|Pagerfanta
+    /**
+     * @param EntityRepository<object> $repository
+     * @param array<string, mixed> $criteria
+     * @param array<string, mixed> $repositoryOptions
+     * @param array<string, string> $sorting
+     * @return array<object>|Pagerfanta<object>
+     */
+    public function get(EntityRepository $repository, ?array $criteria = [], array $repositoryOptions = [], array $sorting = [], bool $isPaginated = false): array|Pagerfanta
     {
         $queryBuilder = $this->getQueryBuilder($repository, $repositoryOptions);
 
@@ -39,7 +46,11 @@ final class CollectionProvider implements CollectionProviderInterface
         return $queryBuilder->getQuery()->getResult();
     }
 
-    private function getQueryBuilder(EntityRepository $repository, ?array $repositoryOptions = []): QueryBuilder
+    /**
+     * @param EntityRepository<object> $repository
+     * @param array<string, mixed> $repositoryOptions
+     */
+    private function getQueryBuilder(EntityRepository $repository, array $repositoryOptions = []): QueryBuilder
     {
         if (isset($repositoryOptions['method'])) {
             $method = $repositoryOptions['method'];

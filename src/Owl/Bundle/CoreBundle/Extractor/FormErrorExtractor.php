@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\CoreBundle\Extractor;
 
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 
 final class FormErrorExtractor

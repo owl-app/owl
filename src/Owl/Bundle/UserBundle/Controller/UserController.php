@@ -223,7 +223,7 @@ class UserController extends BaseController
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $isValid) {
             $userRepository = $this->repository;
 
-            /** @var UserRepositoryInterface $userRepository */
+            /** @var UserRepositoryInterface<UserInterface> $userRepository */
             Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
 
             $user = $userRepository->findOneByEmail($passwordReset->getEmail());
@@ -396,7 +396,7 @@ class UserController extends BaseController
         return null;
     }
 
-    private function getSyliusAttribute(Request $request, string $attribute, string|null $default = null)
+    private function getSyliusAttribute(Request $request, string $attribute, string|null $default = null): mixed
     {
         $attributes = $request->attributes->get('_sylius');
 

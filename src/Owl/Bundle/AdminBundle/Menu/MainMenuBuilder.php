@@ -8,13 +8,13 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Owl\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class MainMenuBuilder
 {
     public const EVENT_NAME = 'owl.menu.admin.main';
 
-    /** @var AuthorizationChecker */
+    /** @var AuthorizationCheckerInterface */
     public $authorizationChecker;
 
     /** @var FactoryInterface */
@@ -23,14 +23,14 @@ final class MainMenuBuilder
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    public function __construct(AuthorizationChecker $authorizationChecker, FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker, FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
         $this->authorizationChecker = $authorizationChecker;
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function createMenu(array $options): ItemInterface
+    public function createMenu(array $options = []): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 

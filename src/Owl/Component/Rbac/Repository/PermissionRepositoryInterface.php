@@ -9,11 +9,6 @@ use Owl\Component\Rbac\Model\AuthItemInterface;
 use Owl\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @template T of PermissionInterface
- *
- * @extends RepositoryInterface<T>
- */
 interface PermissionRepositoryInterface extends RepositoryInterface
 {
     /**
@@ -21,5 +16,8 @@ interface PermissionRepositoryInterface extends RepositoryInterface
      */
     public function findAllNames(): array;
 
-    public function findOneByName(array ...$name): QueryBuilder;
+    /**
+     * @return QueryBuilder|null
+     */
+    public function findOneByName(string $name): ?QueryBuilder;
 }

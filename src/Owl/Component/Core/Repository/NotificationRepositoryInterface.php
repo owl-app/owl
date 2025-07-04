@@ -8,13 +8,11 @@ use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Model\NotificationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @template T of NotificationInterface
- *
- * @extends RepositoryInterface<T>
- */
 interface NotificationRepositoryInterface extends RepositoryInterface
 {
+    /**
+     * @return NotificationInterface[]
+     */
     public function findAllNotAccepted(AdminUserInterface $user, string $groupAssigned): array;
 
     public function findNotAccepted(int $id, AdminUserInterface $user, string $groupAssigned): ?NotificationInterface;

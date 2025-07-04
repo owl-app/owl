@@ -7,6 +7,7 @@ namespace Owl\Bundle\CoreBundle\Updater;
 use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Updater\SingleRoleUpdaterInterface;
 use Yiisoft\Rbac\ManagerInterface;
+use Yiisoft\Rbac\Role;
 
 final class SingleRoleUpdater implements SingleRoleUpdaterInterface
 {
@@ -28,6 +29,9 @@ final class SingleRoleUpdater implements SingleRoleUpdaterInterface
         }
     }
 
+    /**
+     * @param Role[] $roles
+     */
     private function deleteAssignedRoles(array $roles, string $userId): void
     {
         if ($roles) {

@@ -31,11 +31,10 @@ class InvoiceSerie implements InvoiceSerieInterface
     protected $isDefault = false;
 
     /** @var Collection<array-key, SequenceInterface> */
-    protected $sequences = [];
+    protected $sequences;
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, SequenceInterface> $this->sequences */
         $this->sequences = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -95,6 +94,9 @@ class InvoiceSerie implements InvoiceSerieInterface
         $this->isDefault = $isDefault;
     }
 
+    /**
+     * @return Collection<array-key, SequenceInterface>
+     */
     public function getSequences(): Collection
     {
         return $this->sequences;

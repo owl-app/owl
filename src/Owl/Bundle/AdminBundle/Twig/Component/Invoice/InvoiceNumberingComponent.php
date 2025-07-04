@@ -30,6 +30,7 @@ class InvoiceNumberingComponent
 
     public const OWL_ADMIN_NUMBER_WITH_SERIE_CHANGED = 'owl:admin:number_with_serie_changed';
 
+    /** @var array<string, mixed> */
     #[LiveProp(hydrateWith: 'hydrateSeries', dehydrateWith: 'dehydrateSeries')]
     public array $series = [];
 
@@ -54,12 +55,14 @@ class InvoiceNumberingComponent
         $this->setLiveResponder($liveReponser);
     }
 
+    /** @return array<string, mixed> */
     public function hydrateSeries(string $series): array
     {
         return json_decode($series, true);
     }
 
-    public function dehydrateSeries(array|null $series): string
+    /** @param array<string, mixed>|null $series */
+    public function dehydrateSeries(?array $series): string
     {
         return json_encode($series ?? []);
     }
@@ -88,7 +91,7 @@ class InvoiceNumberingComponent
     }
 
     #[LiveAction]
-    public function confirm()
+    public function confirm(): void
     {
         $this->submitForm(true);
 

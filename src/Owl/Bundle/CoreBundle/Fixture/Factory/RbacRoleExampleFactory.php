@@ -63,7 +63,7 @@ class RbacRoleExampleFactory extends AbstractExampleFactory implements ExampleFa
                 return $this->faker->sentence();
             })
             ->setDefined('setting')
-            ->setAllowedTypes('setting', ['array'])
+            ->setAllowedTypes('setting', ['array', 'null'])
             ->setDefault('all_permissions', false)
         ;
     }

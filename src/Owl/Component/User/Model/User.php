@@ -73,7 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * We need at least one role to be able to authenticate
      *
-     * @var array
+     * @var array<string>
      */
     protected $roles;
 
@@ -242,6 +242,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
     }
 
+    /**
+     * @return array<string>
+     */
     public function getRoles(): array
     {
         return $this->roles;

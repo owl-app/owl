@@ -13,9 +13,15 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\ApiBundle\ApiPlatform;
 
+use Owl\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMergerInterface;
+
 /** @experimental */
 final class ApiResourceConfigurationMerger implements ApiResourceConfigurationMergerInterface
 {
+    /**
+     * @param array<array<mixed>> $configs
+     * @return array<mixed>
+     */
     public function mergeConfigs(...$configs): array
     {
         $resultingConfig = [];

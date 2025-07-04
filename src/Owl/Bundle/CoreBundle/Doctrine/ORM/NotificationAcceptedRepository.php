@@ -16,7 +16,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class NotificationAcceptedRepository extends EntityRepository implements NotificationAcceptedRepositoryInterface
 {
-    public function findByNotification($notificationId): QueryBuilder
+    public function findByNotification(int $notificationId): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
 

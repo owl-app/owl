@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\Command;
 
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ObjectManager;
 use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
@@ -50,7 +51,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
         if (!$input->getArgument('email')) {
             $question = new Question('Please enter an email:');
-            $question->setValidator(function (?string $email) {
+            $question->setValidator(function (?string $email): string {
                 if (!filter_var($email, \FILTER_VALIDATE_EMAIL)) {
                     throw new \RuntimeException('The email you entered is invalid.');
                 }
@@ -63,7 +64,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
         if (!$input->getArgument('roles')) {
             $question = new Question('Please enter user\'s roles (separated by space):');
-            $question->setValidator(function (?string $roles) {
+            $question->setValidator(function (?string $roles): string {
                 if (strlen($roles) < 1) {
                     throw new \RuntimeException('The value cannot be blank.');
                 }
@@ -81,7 +82,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     /**
      * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $email = $input->getArgument('email');
         $securityRoles = $input->getArgument('roles');
@@ -122,6 +123,9 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         return $this->getContainer()->get('doctrine')->getManagerForClass($class);
     }
 
+    /**
+     * @return UserRepositoryInterface<UserInterface>
+     */
     protected function getUserRepository(string $userType): UserRepositoryInterface
     {
         $class = $this->getUserModelClass($userType);

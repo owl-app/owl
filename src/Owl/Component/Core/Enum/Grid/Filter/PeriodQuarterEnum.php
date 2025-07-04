@@ -14,6 +14,9 @@ enum PeriodQuarterEnum: string
     case TYPE_Q3 = '3';
     case TYPE_Q4 = '4';
 
+    /**
+     * @return array<string, string>
+     */
     public static function getPeriodRange(int|string $quarter): array
     {
         if (is_int($quarter)) {

@@ -7,6 +7,7 @@ namespace Owl\Component\Rbac\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Webmozart\Assert\Assert;
+use Owl\Component\Rbac\Model\PermissionInterface;
 
 class Role extends AuthItem implements RoleInterface
 {
@@ -18,6 +19,9 @@ class Role extends AuthItem implements RoleInterface
         return 'role';
     }
 
+    /**
+     * @var Collection<int, PermissionInterface>
+     */
     protected Collection $permissions;
 
     public function __construct()
@@ -26,6 +30,9 @@ class Role extends AuthItem implements RoleInterface
         $this->permissions = new ArrayCollection();
     }
 
+    /**
+     * @return Collection<int, PermissionInterface>
+     */
     public function getPermissions(): Collection
     {
         return $this->permissions;

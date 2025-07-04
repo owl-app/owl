@@ -17,15 +17,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class FileFactoryTest extends TestCase
 {
-    /** @var FactoryInterface<FileInterface>&MockObject */
+    /** @var FactoryInterface&MockObject */
     private FactoryInterface $factory;
 
-    /** @var FileFactory<FileInterface> */
+    /** @var FileFactory */
     private FileFactory $fileFactory;
 
-    private FileableInterface&ResourceInterface&Stub $subject;
+    /** @var FileableInterface&ResourceInterface&Stub */
+    private $subject;
 
-    private FileInterface&MockObject $file;
+    /** @var FileInterface&MockObject */
+    private FileInterface $file;
 
     protected function setUp(): void
     {

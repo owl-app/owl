@@ -8,6 +8,8 @@ use Stringable;
 use Yiisoft\Rbac\AssignmentsStorageInterface;
 use Yiisoft\Rbac\ItemsStorageInterface;
 use Yiisoft\Rbac\ManagerInterface;
+use Yiisoft\Rbac\PermissionInterface;
+use Yiisoft\Rbac\RoleInterface;
 
 final class DirectPermissionUserProvider implements DirectPermissionUserProviderInterface
 {
@@ -18,6 +20,9 @@ final class DirectPermissionUserProvider implements DirectPermissionUserProvider
     ) {
     }
 
+    /**
+     * @return (PermissionInterface|RoleInterface)[]
+     */
     public function getPermission(int|Stringable|string $userId): array
     {
         $userId = (string) $userId;

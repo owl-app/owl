@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Bridge\SyliusResource\Doctrine\Orm;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 
 final class QueryBuilderApplicator implements QueryBuilderApplicatorInterface
@@ -49,9 +51,9 @@ final class QueryBuilderApplicator implements QueryBuilderApplicatorInterface
     }
 
     /**
-     * @return \Doctrine\ORM\Mapping\ClassMetadata<object>
+     * @return ClassMetadata<object>
      */
-    private function getClassMetadata(QueryBuilder $queryBuilder, string $resourceClass): \Doctrine\ORM\Mapping\ClassMetadata
+    private function getClassMetadata(QueryBuilder $queryBuilder, string $resourceClass): ClassMetadata
     {
         return $queryBuilder->getEntityManager()->getClassMetadata($resourceClass);
     }

@@ -8,5 +8,8 @@ use Stringable;
 
 interface DirectPermissionUserProviderInterface
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function getPermission(int|Stringable|string $userId): array;
 }

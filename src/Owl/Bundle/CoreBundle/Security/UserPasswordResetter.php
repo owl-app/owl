@@ -17,6 +17,7 @@ use Owl\Bundle\UserBundle\Exception\UserNotFoundException;
 use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
 use Owl\Component\User\Security\PasswordUpdaterInterface;
+use DateInterval;
 
 final readonly class UserPasswordResetter implements UserPasswordResetterInterface
 {
@@ -39,7 +40,7 @@ final readonly class UserPasswordResetter implements UserPasswordResetterInterfa
             throw new UserNotFoundException(message: sprintf('No user found with reset token: %s', $token));
         }
 
-        $lifetime = new \DateInterval($this->tokenTtl);
+        $lifetime = new DateInterval($this->tokenTtl);
 
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
             throw new \InvalidArgumentException('Password reset token has expired');

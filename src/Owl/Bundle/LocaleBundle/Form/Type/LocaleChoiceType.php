@@ -54,7 +54,7 @@ final class LocaleChoiceType extends AbstractType
     }
 
     /**
-     * @return ChoiceType::class
+     * @return string
      */
     public function getParent(): string
     {
@@ -62,7 +62,7 @@ final class LocaleChoiceType extends AbstractType
     }
 
     /**
-     * @return 'sylius_locale_choice'
+     * @return string
      */
     public function getBlockPrefix(): string
     {

@@ -31,7 +31,7 @@ class TaxRateSnapshot implements TaxRateSnapshotInterface
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function getId()
+    public function getId(): int|string|null
     {
         return $this->id;
     }

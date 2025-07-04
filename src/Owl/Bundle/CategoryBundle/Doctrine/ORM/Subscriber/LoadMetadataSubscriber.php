@@ -10,9 +10,12 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
-    /** @var array */
+    /** @var array<string, array{subject: string, category: array{classes: array{model: string}}}> */
     private $subjects;
 
+    /**
+     * @param array<string, array{subject: string, category: array{classes: array{model: string}}}> $subjects
+     */
     public function __construct(array $subjects)
     {
         $this->subjects = $subjects;

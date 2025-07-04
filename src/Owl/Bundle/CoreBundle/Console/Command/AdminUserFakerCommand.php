@@ -5,13 +5,17 @@ declare(strict_types=1);
 namespace Owl\Bundle\CoreBundle\Console\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Connection;
 use Owl\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Faker\Factory;
 
 class AdminUserFakerCommand extends ContainerAwareCommand
 {
@@ -21,7 +25,7 @@ class AdminUserFakerCommand extends ContainerAwareCommand
         private EntityManagerInterface $adminUserManager,
         private RepositoryInterface $roleRepository,
         private ExampleFactoryInterface $userFactory,
-        private $hasher,
+        private UserPasswordEncoderInterface $hasher,
     ) {
         parent::__construct();
     }
@@ -43,9 +47,10 @@ class AdminUserFakerCommand extends ContainerAwareCommand
     {
         $roles = $this->roleRepository->findAll();
         $count = $input->getOption('count');
-        $faker = \Faker\Factory::create();
+        $faker = Factory::create();
         $batchSize = 500;
 
+        /** @var Connection $connection */
         $connection = $this->adminUserManager->getConnection();
         $connection->getConfiguration()->setMiddlewares([]);
         $connection->beginTransaction();
@@ -54,6 +59,7 @@ class AdminUserFakerCommand extends ContainerAwareCommand
             $firstName = $faker->firstName();
             $lastName = $faker->lastName();
             shuffle($roles);
+            /** @var ResourceInterface $role */
             $role = $roles[0];
 
             $connection->insert('owl_admin_user', [
@@ -65,10 +71,10 @@ class AdminUserFakerCommand extends ContainerAwareCommand
                 'enabled' => rand(0, 1),
                 'locked' => 0,
                 'password_hash' => '',
-                'hasher_name' => $this->hasher,
+                'hasher_name' => $this->hasher->getEncoder(null)->getName(),
                 'note' => $faker->sentence(),
-                'role_id' => $role->getName(),
-                'roles' => serialize([$role->getName()]),
+                'role_id' => $role->getId(),
+                'roles' => serialize([$role->getId()]),
                 'created_at' => date('Y-m-d H:i:s'),
                 'locale_code' => 'en',
             ]);

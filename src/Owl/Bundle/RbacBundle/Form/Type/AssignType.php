@@ -48,7 +48,7 @@ final class AssignType extends AbstractType
         ]);
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['checked'] = $options['exist'] ? 'checked' : false;
         $view->vars['disabled'] = $options['disabled'] ? 'disabled' : false;

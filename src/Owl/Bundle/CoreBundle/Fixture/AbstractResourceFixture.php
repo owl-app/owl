@@ -106,7 +106,8 @@ abstract class AbstractResourceFixture implements FixtureInterface
     }
 
     /**
-     * @return list<mixed>
+     * @param array<string, mixed> $options
+     * @return list<string>
      */
     private function prepareReferences(array &$options): array
     {
@@ -123,11 +124,14 @@ abstract class AbstractResourceFixture implements FixtureInterface
         return $references;
     }
 
+    /**
+     * @param array<string, object> $resourceReferences
+     */
     private function addReferences(array $resourceReferences): void
     {
         if ($resourceReferences) {
             foreach ($resourceReferences as $name => $resource) {
-                $this->referenceRepository->addReference($name, $resource);
+                $this->referenceRepository?->addReference($name, $resource);
             }
         }
     }

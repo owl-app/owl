@@ -8,6 +8,7 @@ use Exception;
 use Owl\Bridge\SyliusResource\Controller\BaseController;
 use Owl\Bundle\RbacBundle\Factory\PermissionFormFactoryInterface;
 use Owl\Component\Rbac\Model\RoleInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yiisoft\Rbac\ManagerInterface;
@@ -48,7 +49,7 @@ final class RoleController extends BaseController
     /**
      * @return Response|null
      */
-    private function changePermission(string $action, Request $request, ManagerInterface $rbacManager)
+    private function changePermission(string $action, Request $request, ManagerInterface $rbacManager): ?Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $formOptions = array_merge(
@@ -81,7 +82,7 @@ final class RoleController extends BaseController
 
                     return $this->createRestView($configuration, $responseData, Response::HTTP_OK);
                 }
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 $responseData = [
                     'message' => $e->getMessage(),
                 ];
@@ -96,5 +97,7 @@ final class RoleController extends BaseController
 
             return $this->createRestView($configuration, $responseData, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+
+        return null;
     }
 }

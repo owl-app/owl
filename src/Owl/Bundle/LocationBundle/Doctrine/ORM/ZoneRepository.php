@@ -111,4 +111,40 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    private function createByAddressQueryBuilder(?string $countryCode, ?string $provinceCode): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->select('o', 'members')
+            ->leftJoin('o.members', 'members')
+        ;
+
+        $orConditions = [];
+
+        if ($countryCode !== null) {
+            $orConditions[] = $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq('o.type', ':country'),
+                $queryBuilder->expr()->eq('members.code', ':countryCode'),
+            );
+
+            $queryBuilder->setParameter('country', ZoneInterface::TYPE_COUNTRY);
+            $queryBuilder->setParameter('countryCode', $countryCode);
+        }
+
+        if ($provinceCode !== null) {
+            $orConditions[] = $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq('o.type', ':province'),
+                $queryBuilder->expr()->eq('members.code', ':provinceCode'),
+            );
+
+            $queryBuilder->setParameter('province', ZoneInterface::TYPE_PROVINCE);
+            $queryBuilder->setParameter('provinceCode', $provinceCode);
+        }
+
+        if ($orConditions !== []) {
+            $queryBuilder->andWhere($queryBuilder->expr()->orX(...$orConditions));
+        }
+
+        return $queryBuilder;
+    }
 }

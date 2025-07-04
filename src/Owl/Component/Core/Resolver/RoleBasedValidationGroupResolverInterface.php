@@ -8,5 +8,8 @@ use Symfony\Component\Form\FormInterface;
 
 interface RoleBasedValidationGroupResolverInterface
 {
+    /**
+     * @return string[]
+     */
     public function __invoke(FormInterface $form): array;
 }

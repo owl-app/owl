@@ -25,13 +25,13 @@ final class RoleTypeExtension extends AbstractTypeExtension
             ])
             ->add('name', TextType::class, [
                 'label' => 'owl.ui.canonical_name',
-                'disabled' => $data?->getId() !== null ? true : false,
+                'disabled' => $data?->getId() !== null,
             ])
         ;
     }
 
     /**
-     * @return RoleType::class
+     * @return class-string<RoleType>
      */
     public function getExtendedType(): string
     {
@@ -39,7 +39,7 @@ final class RoleTypeExtension extends AbstractTypeExtension
     }
 
     /**
-     * @return list{RoleType::class}
+     * @return iterable<class-string<RoleType>>
      */
     public static function getExtendedTypes(): iterable
     {

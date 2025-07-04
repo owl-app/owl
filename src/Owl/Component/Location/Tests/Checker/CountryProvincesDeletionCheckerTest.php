@@ -17,10 +17,10 @@ final class CountryProvincesDeletionCheckerTest extends TestCase
 {
     private CountryProvincesDeletionChecker $checker;
 
-    /** @var RepositoryInterface&MockObject */
+    /** @var RepositoryInterface<ZoneMemberInterface>&MockObject */
     private $zoneMemberRepository;
 
-    /** @var RepositoryInterface&MockObject */
+    /** @var RepositoryInterface<Province>&MockObject */
     private $provinceRepository;
 
     protected function setUp(): void

@@ -16,6 +16,7 @@ namespace Owl\Component\Core\Provider;
 use Owl\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
@@ -36,7 +37,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
         $locales = $this->localeRepository->findAll();
 
         return array_map(
-            function (LocaleInterface $locale) {
+            function (LocaleInterface $locale): string {
                 return (string) $locale->getCode();
             },
             $locales,

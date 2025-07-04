@@ -40,7 +40,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
-        return $this->createQueryBuilder('o')
+        return $queryBuilder
             ->where(
                 $queryBuilder->expr()->in('o.id', $ids),
             );

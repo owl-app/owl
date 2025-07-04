@@ -60,6 +60,9 @@ abstract class ArgumentizedCompositeServicePass implements CompilerPassInterface
         $container->setAlias($this->serviceId, $this->compositeId)->setPublic(true);
     }
 
+    /**
+     * @param array<string, array<array<string, mixed>>> $tags
+     */
     private function addMethodCalls(Definition $contextDefinition, string $id, array $tags): void
     {
         foreach ($tags as $attributes) {
@@ -67,6 +70,9 @@ abstract class ArgumentizedCompositeServicePass implements CompilerPassInterface
         }
     }
 
+    /**
+     * @param array<string, mixed> $attributes
+     */
     private function addMethodCall(Definition $contextDefinition, string $id, array $attributes): void
     {
         $contextDefinition->addMethodCall($this->methodName, [new Reference($id), $attributes]);

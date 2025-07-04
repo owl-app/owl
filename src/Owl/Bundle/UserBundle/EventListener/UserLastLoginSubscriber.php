@@ -20,6 +20,7 @@ use Owl\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
+use Symfony\Component\Security\Core\User\UserInterface as CoreUserInterface;
 
 final class UserLastLoginSubscriber implements EventSubscriberInterface
 {
@@ -56,7 +57,7 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         $this->updateUserLastLogin($event->getUser());
     }
 
-    private function updateUserLastLogin(\Symfony\Component\Security\Core\User\UserInterface|null $user): void
+    private function updateUserLastLogin(CoreUserInterface|null $user): void
     {
         if (!$user instanceof $this->userClass) {
             return;

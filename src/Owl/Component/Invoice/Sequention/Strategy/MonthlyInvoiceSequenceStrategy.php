@@ -6,6 +6,7 @@ namespace Owl\Component\Invoice\Sequention\Strategy;
 
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 class MonthlyInvoiceSequenceStrategy extends DateBasedInvoiceSequenceStrategy
 {
@@ -21,7 +22,8 @@ class MonthlyInvoiceSequenceStrategy extends DateBasedInvoiceSequenceStrategy
         ]);
 
         if (!$sequence) {
-            return $this->invoiceSequenceFactory->create($invoiceSerie, $year, $month);
+            /** @var SequenceInterface */
+            $sequence = $this->invoiceSequenceFactory->create($invoiceSerie, $year, $month);
         }
 
         return $sequence;

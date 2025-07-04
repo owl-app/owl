@@ -16,12 +16,15 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class InvoiceTaxRateRepository extends EntityRepository implements InvoiceTaxRateRepositoryInterface
 {
+    /**
+     * @return TaxRateInterface[]
+     */
     public function findByZone(ZoneInterface $zone): array
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.zones', 'zones')
             ->where('zones.id = :zonesId')
-            ->setParameter('zonesId', $zone)
+            ->setParameter('zonesId', $zone->getId())
             ->orderBy('o.amount', 'DESC')
             ->getQuery()
             ->getResult();

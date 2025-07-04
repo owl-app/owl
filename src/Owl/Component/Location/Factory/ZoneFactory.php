@@ -39,6 +39,9 @@ final class ZoneFactory implements ZoneFactoryInterface
         return $zone;
     }
 
+    /**
+     * @param array<string> $membersCodes
+     */
     public function createWithMembers(array $membersCodes): ZoneInterface
     {
         /** @var ZoneInterface $zone */

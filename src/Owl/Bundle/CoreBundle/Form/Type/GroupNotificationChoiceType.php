@@ -26,7 +26,7 @@ final class GroupNotificationChoiceType extends AbstractType
     }
 
     /**
-     * @return ChoiceType::class
+     * @return string
      */
     public function getParent(): string
     {
@@ -34,7 +34,7 @@ final class GroupNotificationChoiceType extends AbstractType
     }
 
     /**
-     * @return 'owl_group_notification_choice'
+     * @return string
      */
     public function getBlockPrefix(): string
     {
@@ -42,7 +42,7 @@ final class GroupNotificationChoiceType extends AbstractType
     }
 
     /**
-     * @return array<string, 'ALL'|mixed>
+     * @return array<string, string>
      */
     private function getOptions(): array
     {

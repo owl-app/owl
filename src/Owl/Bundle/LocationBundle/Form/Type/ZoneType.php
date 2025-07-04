@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace Owl\Bundle\LocationBundle\Form\Type;
 
 use Owl\Bundle\LocationBundle\Form\EventListener\BuildZoneFormSubscriber;
+use Owl\Bundle\LocationBundle\Form\Type\ZoneTypeChoiceType;
+use Owl\Bundle\LocationBundle\Form\Type\ZoneMemberType;
+use Owl\Bundle\LocationBundle\Form\Type\CountryCodeChoiceType;
+use Owl\Bundle\LocationBundle\Form\Type\ProvinceCodeChoiceType;
+use Owl\Bundle\LocationBundle\Form\Type\ZoneCodeChoiceType;
 use Owl\Component\Location\Model\ZoneInterface;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -85,6 +90,9 @@ final class ZoneType extends AbstractResourceType
         return $zoneMemberEntryTypes[$zoneMemberType];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function getZoneMemberEntryOptions(string $zoneMemberType): array
     {
         $zoneMemberEntryOptions = [

@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Owl\Component\Core\Model\Rbac\RoleInterface;
 use Owl\Component\User\Model\User;
+use Owl\Component\Core\Model\NotificationAcceptedInterface;
+use Owl\Component\Core\Model\AdminUserRegistrationDataInterface;
 
 class AdminUser extends User implements AdminUserInterface
 {
@@ -29,7 +31,7 @@ class AdminUser extends User implements AdminUserInterface
     /** @var string */
     protected $localeCode;
 
-    /** @var array */
+    /** @var array<string, mixed> */
     protected $permissions = [];
 
     /** @var RoleInterface */
@@ -41,7 +43,7 @@ class AdminUser extends User implements AdminUserInterface
     /** @var AdminUserRegistrationDataInterface|null */
     protected $registration;
 
-    /** @var mixed[] */
+    /** @var array<string, mixed> */
     protected $preferences = [];
 
     public function __construct()
@@ -185,7 +187,10 @@ class AdminUser extends User implements AdminUserInterface
         return null !== $this->registration;
     }
 
-    public function getPreferences(): ?array
+    /**
+     * @return array<string, mixed>
+     */
+    public function getPreferences(): array
     {
         return $this->preferences;
     }

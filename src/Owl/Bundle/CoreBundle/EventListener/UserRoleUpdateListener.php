@@ -6,6 +6,7 @@ namespace Owl\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Doctrine\Persistence\ObjectManager;
 use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Updater\SingleRoleUpdaterInterface;
 use Webmozart\Assert\Assert;

@@ -60,7 +60,9 @@ EOT
         }
 
         if (!$error) {
-            $output->writeln($successMessages);
+            foreach ($successMessages as $message) {
+                $output->writeln($message);
+            }
             $this->getEntityManager($input->getOption('user-type'))->flush();
         } else {
             $output->writeln(sprintf('<error>No roles removed from User "%s".</error>', $user->getEmail()));

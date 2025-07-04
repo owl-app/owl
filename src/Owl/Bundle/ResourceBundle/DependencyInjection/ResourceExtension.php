@@ -18,7 +18,7 @@ final class ResourceExtension extends Extension
 
         $loader->load('resource.xml');
 
-        /** @var array $bundles */
+        /** @var array<string, string> $bundles */
         $bundles = $container->getParameter('kernel.bundles');
         if (array_key_exists('SyliusGridBundle', $bundles)) {
             $loader->load('services/integrations/grid.xml');

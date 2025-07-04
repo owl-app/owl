@@ -42,6 +42,9 @@ EOT
             );
     }
 
+    /**
+     * @param array<string> $securityRoles
+     */
     protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void
     {
         $error = false;
@@ -60,7 +63,9 @@ EOT
         }
 
         if (!$error) {
-            $output->writeln($successMessages);
+            foreach ($successMessages as $message) {
+                $output->writeln($message);
+            }
             $this->getEntityManager($input->getOption('user-type'))->flush();
         } else {
             $output->writeln(sprintf('<error>No roles added to User "%s".</error>', $user->getEmail()));

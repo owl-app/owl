@@ -6,7 +6,7 @@ namespace Owl\Bundle\CoreBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PrePersistEventArgs;
 use Owl\Component\Core\Context\AdminUserContextInterface;
 use Owl\Component\Core\Model\Authorization\OwnerableUserInterface;
 use Owl\Component\User\Model\UserAwareInterface;
@@ -30,7 +30,7 @@ final class AddOwnerSubscriber implements EventSubscriber
         ];
     }
 
-    public function prePersist(LifecycleEventArgs $args): void
+    public function prePersist(PrePersistEventArgs $args): void
     {
         $entity = $args->getObject();
 

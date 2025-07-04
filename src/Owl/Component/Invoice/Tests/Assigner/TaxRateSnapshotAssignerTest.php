@@ -222,7 +222,6 @@ class TaxRateSnapshotAssignerTest extends TestCase
         $taxRateSnapshot->method('isNameChanged')->willReturn(true);
         $taxRateSnapshot->method('isAmountChanged')->willReturn(false);
 
-        $taxRateSnapshot->method('getCode')->willReturn('VAT');
         $taxRateSnapshot->method('getName')->willReturn('Value Added Tax');
         $taxRateSnapshot->method('getAmount')->willReturn(0.23);
 

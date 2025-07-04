@@ -28,6 +28,9 @@ final class YearType extends AbstractType
         return 'owl_year_choice';
     }
 
+    /**
+     * @return array<int, int>
+     */
     private function getYearsRange(): array
     {
         $currentYear = (int) date('Y');

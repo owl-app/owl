@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Owl\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\CollectionProviderInterface;
 use Owl\Bundle\CoreBundle\Form\Type\UserChoiceType;
 use Owl\Component\Core\Context\AdminUserContextInterface;
@@ -35,7 +36,7 @@ final class AddOwnerFormSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $isAdminSystem = $this->adminUserContext->isAdminSystem();
 
-        if ($data instanceof OwnerableUserInterface && ($isAdminSystem)) {
+        if ($data instanceof OwnerableUserInterface && $isAdminSystem) {
             $form
                 ->add('user', UserChoiceType::class, [
                     'choices' => $this->collectionProvider->get(
@@ -44,7 +45,7 @@ final class AddOwnerFormSubscriber implements EventSubscriberInterface
                         [
                             'method' => 'findEnabledWithOwner',
                             'arguments' => [
-                                'userId' => $data->getUser() ? $data->getUser()->getId() : null,
+                                'userId' => $data->getUser()?->getId(),
                             ],
                         ],
                     ),

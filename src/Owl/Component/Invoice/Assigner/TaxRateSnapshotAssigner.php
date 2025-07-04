@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Owl\Component\Invoice\Factory\InvoiceTaxRateSnapshotFactoryInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Model\LineItemInterface;
+use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
@@ -63,7 +64,7 @@ class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
         if ($existingSnapshot) {
             $lineItem->setTaxRateSnapshot($existingSnapshot);
         } else {
-            $snapshot = $this->invoiceTaxRateSnapshotFactory->create(...$dataSnapshot);
+            $snapshot = $this->invoiceTaxRateSnapshotFactory->createNew($dataSnapshot);
 
             $lineItem->setTaxRateSnapshot($snapshot);
         }

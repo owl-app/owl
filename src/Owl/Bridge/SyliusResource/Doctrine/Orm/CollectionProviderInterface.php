@@ -11,5 +11,12 @@ interface CollectionProviderInterface
 {
     public const TYPE = 'collection';
 
-    public function get(EntityRepository $repository, ?array $criteria = [], ?array $repositoryOptions = [], array $sorting = [], bool $isPaginated = false): array|Pagerfanta;
+    /**
+     * @param EntityRepository<object> $repository
+     * @param array<string, mixed> $criteria
+     * @param array<string, mixed> $repositoryOptions
+     * @param array<string, string> $sorting
+     * @return array<object>|Pagerfanta<object>
+     */
+    public function get(EntityRepository $repository, ?array $criteria = [], array $repositoryOptions = [], array $sorting = [], bool $isPaginated = false): array|Pagerfanta;
 }

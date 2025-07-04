@@ -17,6 +17,11 @@ class RedirectResponseFactory implements RedirectResponseFactoryInterface
     ) {
     }
 
+    /**
+     * @param Request $request
+     * @param string|array{route?: string, params?: array} $redirectRoute
+     * @return Response
+     */
     public function create(Request $request, string|array $redirectRoute): Response
     {
         $url = is_array($redirectRoute)

@@ -29,7 +29,7 @@ final class NotificationFactory implements NotificationFactoryInterface
 
     public function createAction(string $status, AdminUserInterface $owner): NotificationInterface
     {
-        /** @var NotificationInterface $channel */
+        /** @var NotificationInterface $notification */
         $notification = $this->defaultFactory->createNew();
         $notification->setUser($owner);
 

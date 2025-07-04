@@ -21,10 +21,10 @@ final class AdminUserType extends UserType
     private EventSubscriberInterface $addOwnerFormSubscriber;
 
     public function __construct(
+        EventSubscriberInterface $addOwnerFormSubscriber,
         string $dataClass,
         array $validationGroups = [],
         ?string $fallbackLocale = null,
-        EventSubscriberInterface $addOwnerFormSubscriber,
     ) {
         parent::__construct($dataClass, $validationGroups);
 

@@ -27,7 +27,7 @@ class LocaleHelper
     /**
      * @param string $locale
      */
-    public static function getLanguage($locale): string
+    public static function getLanguage(string $locale): string
     {
         return self::$locales[$locale] ?? $locale;
     }

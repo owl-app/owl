@@ -59,7 +59,7 @@ final class InvoiceNumberingType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'series' => [],
@@ -71,7 +71,12 @@ final class InvoiceNumberingType extends AbstractType
         return 'owl_invoice_numbering';
     }
 
-    private function getSeriesChoices(array $series)
+    /**
+     * @param array<array<string, mixed>> $series
+     *
+     * @return array<string, string>
+     */
+    private function getSeriesChoices(array $series): array
     {
         $options = [];
 
@@ -84,6 +89,11 @@ final class InvoiceNumberingType extends AbstractType
         return $options;
     }
 
+    /**
+     * @param array<array<string, mixed>> $series
+     *
+     * @return array<string, array<string, string|array<string, string>>>
+     */
     private function getHelpTranslations(array $series): array
     {
         $translations = [];

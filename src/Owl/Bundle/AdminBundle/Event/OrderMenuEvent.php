@@ -17,6 +17,9 @@ class OrderMenuEvent extends MenuBuilderEvent
         parent::__construct($factory, $menu);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getOrder(): array
     {
         return $this->order;

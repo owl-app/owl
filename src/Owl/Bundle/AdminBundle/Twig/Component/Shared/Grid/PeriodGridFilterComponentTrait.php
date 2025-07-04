@@ -13,8 +13,11 @@ trait PeriodGridFilterComponentTrait
 {
     use FilterDataComponentTrait;
 
+    /**
+     * @param array<string, array<string, mixed>> $period
+     */
     #[LiveAction]
-    public function changePeriod(#[LiveArg] $field, #[LiveArg] array $period): void
+    public function changePeriod(#[LiveArg] string $field, #[LiveArg] array $period): void
     {
         $flatAvailableFilters = array_merge(...array_values($this->availableFilters));
 

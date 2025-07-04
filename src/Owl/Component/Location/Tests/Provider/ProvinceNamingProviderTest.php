@@ -15,7 +15,7 @@ final class ProvinceNamingProviderTest extends TestCase
 {
     private ProvinceNamingProvider $provider;
 
-    /** @var RepositoryInterface&MockObject */
+    /** @var RepositoryInterface<Province>&MockObject */
     private $provinceRepository;
 
     protected function setUp(): void

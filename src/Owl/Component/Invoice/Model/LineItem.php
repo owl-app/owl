@@ -163,14 +163,14 @@ class LineItem implements LineItemInterface
     public function getTaxRateAmount(): ?float
     {
         if (null === $this->getTaxRateSnapshot()) {
-            return $this->taxRate?->getAmount();
+            return $this->taxRate->getAmount();
         }
 
-        if ($this->getTaxRateSnapshot()->getCode() === $this->getTaxRate()?->getCode()) {
-            return $this->getTaxRateSnapshot()?->getAmount();
+        if ($this->getTaxRateSnapshot()->getCode() === $this->taxRate->getCode()) {
+            return $this->getTaxRateSnapshot()->getAmount();
         }
 
-        return $this->getTaxRate()?->getAmount();
+        return $this->taxRate->getAmount();
     }
 
     public function isTaxRateNameDiffrent(): bool
@@ -179,7 +179,7 @@ class LineItem implements LineItemInterface
             return false;
         }
 
-        if ($this->getTaxRateSnapshot()->getName() === $this->getTaxRate()?->getName()) {
+        if ($this->getTaxRateSnapshot()->getName() === $this->taxRate->getName()) {
             return false;
         }
 
@@ -192,7 +192,7 @@ class LineItem implements LineItemInterface
             return false;
         }
 
-        if ($this->getTaxRateSnapshot()->getAmount() !== $this->getTaxRate()?->getAmount()) {
+        if ($this->getTaxRateSnapshot()->getAmount() !== $this->taxRate->getAmount()) {
             return true;
         }
 
@@ -218,6 +218,9 @@ class LineItem implements LineItemInterface
         $this->recalculateTotals();
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function getUnitLabels(): array
     {
         return [
@@ -235,7 +238,7 @@ class LineItem implements LineItemInterface
         }
 
         $taxRateAmount = $this->getTaxRateAmount() ?? 0;
-        $totalPrice = $this->getTotalPrice() ?? 0;
+        $totalPrice = $this->getTotalPrice();
 
         switch ($calculateValuesFrom) {
             case CalculateValuesFromEnum::FROM_NET->value:

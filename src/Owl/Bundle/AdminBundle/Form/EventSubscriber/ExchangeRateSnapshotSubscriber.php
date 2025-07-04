@@ -31,7 +31,7 @@ final class ExchangeRateSnapshotSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
-        /** @var InvoiceInterface $invoice */
+        /** @var InvoiceInterface|null $invoice */
         $invoice = $event->getData();
 
         if ($invoice === null || $invoice->getExchangeRateSnapshot() === null) {
@@ -56,11 +56,11 @@ final class ExchangeRateSnapshotSubscriber implements EventSubscriberInterface
     public function submit(FormEvent $event): void
     {
         $form = $event->getForm();
-        /** @var InvoiceInterface $invoice */
+        /** @var InvoiceInterface|null $invoice */
         $invoice = $event->getData();
 
         if (
-            !$form->has('exchangeRateSnapshot') && $this->exchangeRateCurrencyResolver->resolve($invoice)
+            !$form->has('exchangeRateSnapshot') && $invoice !== null && $this->exchangeRateCurrencyResolver->resolve($invoice)
         ) {
             $this->createExchangeRateSnapshotForm($form);
         }

@@ -6,15 +6,14 @@ namespace Owl\Bundle\CoreBundle\EventListener;
 
 use Owl\Bundle\CoreBundle\Util\RefererPathTrait;
 use Owl\Component\Core\Model\AdminUserInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class RefererListener
 {
     use RefererPathTrait;
-
-    private Session $sessionManager;
 
     private TokenStorageInterface $tokenStorage;
 
@@ -30,14 +29,12 @@ final class RefererListener
         $currentUrl = $request->getRequestUri();
         $token = $this->tokenStorage->getToken();
         $user = $token !== null ? $token->getUser() : null;
-        $hasReferer = $request->attributes->get('_sylius')['vars']['referer'] ?? false;
+        $hasReferer = $request->attributes->get('_sylius', [])['vars']['referer'] ?? false;
 
         if (null !== $token && $user instanceof AdminUserInterface && $request->isMethodSafe() && !$request->isXmlHttpRequest()) {
             if ($hasReferer) {
                 $this->saveRefererPath($session, $currentUrl);
             }
         }
-
-        return;
     }
 }

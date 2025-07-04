@@ -40,10 +40,10 @@
         </service>
 
         <service id="owl.form.type.admin_user" class="Owl\Bundle\CoreBundle\Form\Type\User\AdminUserType">
+            <argument type="service" id="owl.form.subscriber.add_owner" />
             <argument>%owl.model.admin_user.class%</argument>
             <argument>%owl.form.type.admin_user.validation_groups%</argument>
             <argument>%locale%</argument>
-            <argument type="service" id="owl.form.subscriber.add_owner" />
             <tag name="form.type" />
         </service>
 
@@ -124,9 +124,9 @@
         </service>
 
         <service id="owl.form.type.admin_user_registration" class="Owl\Bundle\CoreBundle\Form\Type\User\AdminUserRegistrationType">
+            <argument type="service" id="owl.form.subscriber.admin_user_registration" />
             <argument>%owl.model.admin_user.class%</argument>
             <argument>%owl.form.type.admin_user_registration.validation_groups%</argument>
-            <argument type="service" id="owl.form.subscriber.admin_user_registration" />
             <tag name="form.type" />
         </service>
 

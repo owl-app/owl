@@ -12,6 +12,7 @@ use Owl\Component\Rbac\Repository\PermissionRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormView;
 
 final class PermissionFormFactory implements PermissionFormFactoryInterface
 {
@@ -25,7 +26,7 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
     }
 
     /**
-     * @return array<list{mixed,...}>
+     * @return array<list<array{mixed,...}>>
      */
     public function createByRoutes(RequestConfiguration $requestConfiguration): array
     {
@@ -45,7 +46,9 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
     }
 
     /**
-     * @return array<list{mixed,...}>
+     * @param array<string> $assignedPermissions
+     * @param array<string> $disabledPermissions
+     * @return array<list<array{mixed,...}>>
      */
     public function createByExists(RequestConfiguration $requestConfiguration, array $assignedPermissions, array $disabledPermissions = [], bool $withRoles = false): array
     {
@@ -77,7 +80,7 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
         return $formsPermission;
     }
 
-    private function createForm(AuthItemInterface $permission, RequestConfiguration $requestConfiguration, bool $exist, array $customFormOptions = []): \Symfony\Component\Form\FormView
+    private function createForm(AuthItemInterface $permission, RequestConfiguration $requestConfiguration, bool $exist, array $customFormOptions = []): FormView
     {
         $formOptions = array_merge($requestConfiguration->getFormOptions(), $customFormOptions, [
             'description_permission' => $permission->getDescription(),

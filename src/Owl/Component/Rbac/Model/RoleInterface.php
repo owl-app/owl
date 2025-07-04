@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Owl\Component\Rbac\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 interface RoleInterface extends AuthItemInterface
 {
+    /**
+     * @return Collection<int, PermissionInterface>
+     */
     public function getPermissions(): Collection;
 
     public function hasPermissions(): bool;

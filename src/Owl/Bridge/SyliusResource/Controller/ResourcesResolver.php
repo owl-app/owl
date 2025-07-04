@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Owl\Bridge\SyliusResource\Controller;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\CollectionProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface as SyliusRepositoryInterface;
 
 final class ResourcesResolver implements ResourcesResolverInterface
 {
@@ -18,7 +20,11 @@ final class ResourcesResolver implements ResourcesResolverInterface
     ) {
     }
 
-    public function getResources(RequestConfiguration $requestConfiguration, EntityRepository|RepositoryInterface $repository)
+    /**
+     * @param EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository
+     * @return iterable
+     */
+    public function getResources(RequestConfiguration $requestConfiguration, $repository): iterable
     {
         $method = $requestConfiguration->getRepositoryMethod();
 

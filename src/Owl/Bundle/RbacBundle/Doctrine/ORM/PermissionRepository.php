@@ -25,7 +25,7 @@ class PermissionRepository extends EntityRepository implements PermissionReposit
         ;
     }
 
-    public function findOneByName(array ...$name): QueryBuilder
+    public function findOneByName(string $name): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.name = :name')

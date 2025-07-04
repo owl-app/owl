@@ -14,6 +14,13 @@ class RbacPermissionExampleFactory implements ExampleFactoryInterface
     ) {
     }
 
+    /**
+     * @param array{
+     *     name: string,
+     *     group: string,
+     *     description: string
+     * } $options
+     */
     public function create(array $options = []): PermissionInterface
     {
         /** @var PermissionInterface $rbacPermission */

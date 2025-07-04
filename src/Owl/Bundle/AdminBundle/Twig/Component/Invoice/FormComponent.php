@@ -37,8 +37,6 @@ class FormComponent
     use ComponentToolsTrait;
     use LiveCollectionTrait;
     use TemplatePropTrait;
-
-    /** @use ResourceFormComponentTrait<ProductInterface> */
     use ResourceFormComponentTrait;
 
     #[LiveProp]
@@ -75,9 +73,11 @@ class FormComponent
 
     protected function instantiateForm(): FormInterface
     {
-        $this->resource->setType($this->type);
+        /** @var InvoiceInterface $resource */
+        $resource = $this->resource;
+        $resource->setType($this->type);
 
-        return $this->formFactory->create($this->formClass, $this->resource);
+        return $this->formFactory->create($this->formClass, $resource);
     }
 
     #[PostMount]
@@ -184,7 +184,7 @@ class FormComponent
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
         /** @var InvoiceSerieInterface $serie */
-        $serie = $invoice?->getSerie();
+        $serie = $invoice->getSerie();
 
         if (null === $serie) {
             return;
@@ -198,8 +198,7 @@ class FormComponent
 
         $this->formValues['sequenceNumber'] = $this->getFormView()
             ->offsetGet('sequenceNumber')
-            ->vars['value'] = $nextCounter
-        ;
+            ->vars['value'] = $nextCounter;
         $this->fullNumberPreview = $fullNumber;
     }
 

@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Owl\Bridge\SyliusResource\Doctrine\Orm\Resource;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\ItemProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface as SyliusRepositoryInterface;
 
 final class SingleResourceProvider implements SingleResourceProviderInterface
 {
@@ -18,7 +20,10 @@ final class SingleResourceProvider implements SingleResourceProviderInterface
     ) {
     }
 
-    public function get(RequestConfiguration $requestConfiguration, EntityRepository|RepositoryInterface $repository): ?ResourceInterface
+    /**
+     * @param EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository
+     */
+    public function get(RequestConfiguration $requestConfiguration, $repository): ?ResourceInterface
     {
         $method = $requestConfiguration->getRepositoryMethod();
 

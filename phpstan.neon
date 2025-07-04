@@ -20,6 +20,7 @@ parameters:
         - '**/Bundle/*/test/src/**.php'
         - '**/Bundle/*/Tests/**.php'
         - 'src/Owl/Behat/**.php'
+        - '**/Component/*/Tests/**.php'
 
         # Vendor files in subpackages
         - '**/Bundle/*/vendor/**.php'

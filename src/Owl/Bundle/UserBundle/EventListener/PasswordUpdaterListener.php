@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\EventListener;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Security\PasswordUpdaterInterface;

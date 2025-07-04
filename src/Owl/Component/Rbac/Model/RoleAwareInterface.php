@@ -8,5 +8,5 @@ interface RoleAwareInterface
 {
     public function getRole(): ?RoleInterface;
 
-    public function setRole(?RoleInterface $role);
+    public function setRole(?RoleInterface $role): void;
 }

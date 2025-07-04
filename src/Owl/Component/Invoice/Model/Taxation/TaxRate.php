@@ -40,7 +40,7 @@ class TaxRate implements TaxRateInterface
         $this->zones = new ArrayCollection();
     }
 
-    public function getId()
+    public function getId(): mixed
     {
         return $this->id;
     }
@@ -105,6 +105,9 @@ class TaxRate implements TaxRateInterface
         $this->endDate = $endDate;
     }
 
+    /**
+     * @return Collection<array-key, ZoneInterface>
+     */
     public function getZones(): Collection
     {
         return $this->zones;

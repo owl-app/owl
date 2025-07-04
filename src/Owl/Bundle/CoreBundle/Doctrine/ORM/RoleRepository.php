@@ -16,6 +16,9 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class RoleRepository extends EntityRepository implements RoleRepositoryInterface
 {
+    /**
+     * @return RoleInterface[]
+     */
     public function findWithoutAdminSystem(): array
     {
         return $this->createQueryBuilder('o')
@@ -26,7 +29,7 @@ class RoleRepository extends EntityRepository implements RoleRepositoryInterface
         ;
     }
 
-    public function findByCanonicalName(string $canonicalName): RoleInterface
+    public function findByCanonicalName(string $canonicalName): ?RoleInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.name = :name')

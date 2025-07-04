@@ -8,12 +8,12 @@ use Owl\Component\Status\Model\OwnerInterface;
 use Owl\Component\Status\Model\StatusInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @template T of StatusInterface
- *
- * @extends FactoryInterface<T>
- */
 interface StatusFactoryInterface extends FactoryInterface
 {
+    /**
+     * @param string $parentName
+     * @param OwnerInterface|null $owner
+     * @return StatusInterface
+     */
     public function createForSubjectWithOwner(string $parentName, ?OwnerInterface $owner): StatusInterface;
 }

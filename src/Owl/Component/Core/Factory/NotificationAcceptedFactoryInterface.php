@@ -9,11 +9,6 @@ use Owl\Component\Core\Model\NotificationAcceptedInterface;
 use Owl\Component\Core\Model\NotificationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @template T of NotificationAcceptedInterface
- *
- * @extends FactoryInterface<T>
- */
 interface NotificationAcceptedFactoryInterface extends FactoryInterface
 {
     public function createAction(NotificationInterface $notification, AdminUserInterface $user): NotificationAcceptedInterface;

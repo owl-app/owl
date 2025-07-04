@@ -32,7 +32,7 @@ final class RequiredProvinceCodeValidator extends ConstraintValidator
             }
         }
 
-        /** @var (ProvinceCodeAwareInterface&CountryCodeAwareInterface)|null $validatedSerie */
+        /** @var (ProvinceCodeAwareInterface&CountryCodeAwareInterface)|null $validated */
         $validated = $this->context->getObject();
 
         Assert::isInstanceOf($validated, ProvinceCodeAwareInterface::class);
@@ -41,7 +41,7 @@ final class RequiredProvinceCodeValidator extends ConstraintValidator
         /** @var CountryInterface|null $country */
         $country = $this->countryRepository->findOneBy(['code' => $validated->getCountryCode()]);
 
-        if (!empty($validated->getCountryCode()) && $country->hasProvinces() && empty($value)) {
+        if (!empty($validated->getCountryCode()) && $country?->hasProvinces() && empty($value)) {
             $this->context->buildViolation($constraint->message)
                 ->addViolation()
             ;

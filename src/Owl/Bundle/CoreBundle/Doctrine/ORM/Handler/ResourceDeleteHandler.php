@@ -18,8 +18,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceDeleteHandlerInterface;
 use Sylius\Component\Resource\Exception\DeleteHandlingException;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Model\ResourceInterface as SyliusResourceInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface as SyliusRepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface as SyliusPersistenceRepositoryInterface;
 
 final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
 {
@@ -30,7 +31,7 @@ final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
     /**
      * @throws DeleteHandlingException
      */
-    public function handle(ResourceInterface $resource, RepositoryInterface $repository): void
+    public function handle(SyliusResourceInterface $resource, SyliusPersistenceRepositoryInterface $repository): void
     {
         $this->entityManager->beginTransaction();
 

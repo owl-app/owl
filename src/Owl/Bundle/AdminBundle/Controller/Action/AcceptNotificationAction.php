@@ -8,6 +8,8 @@ use FOS\RestBundle\View\View;
 use Owl\Bridge\SyliusResource\Controller\AbstractResourceAction;
 use Owl\Component\Core\Context\AdminUserContextInterface;
 use Owl\Component\Core\Factory\NotificationAcceptedFactoryInterface;
+use Owl\Component\Core\Model\NotificationInterface;
+use Owl\Component\Core\Model\NotificationAcceptedInterface;
 use Owl\Component\Core\Repository\NotificationRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;

@@ -8,12 +8,10 @@ use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Owl\Component\Location\Model\ZoneInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @template T of TaxRateInterface
- *
- * @extends RepositoryInterface<T>
- */
 interface InvoiceTaxRateRepositoryInterface extends RepositoryInterface
 {
+    /**
+     * @return TaxRateInterface[]
+     */
     public function findByZone(ZoneInterface $zone): array;
 }

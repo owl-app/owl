@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Owl\Bundle\AdminBundle\Twig;
 
 use Owl\Component\Core\Manager\UserPreferenceManagerInterface;
+use Owl\Component\Core\Model\Company\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Pagerfanta\Pagerfanta;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -28,6 +29,10 @@ final class InvoicesSummaryExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param Pagerfanta<InvoiceInterface> $invoices
+     * @return array<string, float|string>
+     */
     public function getAllCurrencies(string $gridName, Pagerfanta $invoices): array
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -37,12 +42,17 @@ final class InvoicesSummaryExtension extends AbstractExtension
             return [];
         }
 
+        /** @var CompanyInterface|null $company */
         $company = $this->companyRepository->find($company);
 
+        if (null === $company) {
+            return [];
+        }
+
         $sum = [
-            'subtotal' => 0,
-            'tax' => 0,
-            'total' => 0,
+            'subtotal' => 0.0,
+            'tax' => 0.0,
+            'total' => 0.0,
             'currency' => $company->getCurrency()->getCode(),
         ];
 

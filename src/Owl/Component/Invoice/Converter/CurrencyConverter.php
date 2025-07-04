@@ -9,7 +9,7 @@ class CurrencyConverter
     /**
      * Rounds the amount to the specified precision.
      *
-     * @param float $amount The amount to round.
+     * @param float|int $amount The amount to round.
      *
      * @return float The rounded amount.
      */
@@ -31,7 +31,7 @@ class CurrencyConverter
      */
     public static function toMajor(int $amount): float
     {
-        return self::defaultRound($amount / 100, 2);
+        return self::defaultRound($amount / 100);
     }
 
     /**

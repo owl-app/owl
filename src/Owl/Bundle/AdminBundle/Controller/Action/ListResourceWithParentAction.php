@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Owl\Bundle\AdminBundle\Controller\Action;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bridge\SyliusResource\Controller\AbstractResourceAction;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\ItemProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;

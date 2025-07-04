@@ -34,7 +34,7 @@ final class BuildCountryFormSubscriber implements EventSubscriberInterface
 
     public function preSetData(FormEvent $event): void
     {
-        /** @var CountryCodeAwareInterface&ProvinceCodeAwareInterface $resource */
+        /** @var CountryCodeAwareInterface&ProvinceCodeAwareInterface|null $resource */
         $resource = $event->getData();
 
         if (null === $resource) {
@@ -46,7 +46,6 @@ final class BuildCountryFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var CountryInterface|null $country */
         $this->addFieldProvinceCode($event, $countryCode);
     }
 

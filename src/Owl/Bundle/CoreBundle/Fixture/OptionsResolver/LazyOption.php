@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Exception\ResourceNotFoundException;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Webmozart\Assert\Assert;
@@ -82,11 +84,7 @@ final class LazyOption
      */
     public static function randomOnes(RepositoryInterface $repository, int $amount, array $criteria = []): \Closure
     {
-        return /**
-         * @return (\Sylius\Component\Resource\Model\ResourceInterface|mixed)[]
-         * @return list{0?: \Sylius\Component\Resource\Model\ResourceInterface|mixed,...}
-         */
-        function (Options $options) use ($repository, $amount, $criteria): array {
+        return function (Options $options) use ($repository, $amount, $criteria): array {
             $objects = $repository->findBy($criteria);
 
             if ($objects instanceof Collection) {
@@ -111,11 +109,7 @@ final class LazyOption
      */
     public static function all(RepositoryInterface $repository): \Closure
     {
-        return /**
-         * @return \Sylius\Component\Resource\Model\ResourceInterface[]
-         * @return array<\Sylius\Component\Resource\Model\ResourceInterface>
-         */
-        function (Options $options) use ($repository): array {
+        return function (Options $options) use ($repository): array {
             return $repository->findAll();
         };
     }
@@ -125,11 +119,7 @@ final class LazyOption
      */
     public static function findBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return /**
-         * @return (object|null)[]|null
-         * @return list{0?: object|null,...}|null
-         */
-        function (Options $options, ?array $previousValues) use ($repository, $field, $criteria): array|null {
+        return function (Options $options, ?array $previousValues) use ($repository, $field, $criteria): ?array {
             if (null === $previousValues || [] === $previousValues) {
                 return $previousValues;
             }
@@ -152,20 +142,17 @@ final class LazyOption
      */
     public static function findOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return
-            /** @param mixed $previousValue */
-            function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
-                if (null === $previousValue || [] === $previousValue) {
-                    return null;
-                }
-
-                if (is_object($previousValue)) {
-                    return $previousValue;
-                }
-
-                return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
+        return function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
+            if (null === $previousValue || [] === $previousValue) {
+                return null;
             }
-        ;
+
+            if (is_object($previousValue)) {
+                return $previousValue;
+            }
+
+            return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
+        };
     }
 
     /**
@@ -173,32 +160,29 @@ final class LazyOption
      */
     public static function getOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return
-            /** @param mixed $previousValue */
-            function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
-                if (null === $previousValue || [] === $previousValue) {
-                    return null;
-                }
-
-                if (is_object($previousValue)) {
-                    return $previousValue;
-                }
-
-                $resource = $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
-
-                if (null === $resource) {
-                    throw new ResourceNotFoundException(
-                        sprintf(
-                            'The %s resource for field %s with value %s was not found',
-                            $repository->getClassName(),
-                            $field,
-                            $previousValue,
-                        ),
-                    );
-                }
-
-                return $resource;
+        return function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
+            if (null === $previousValue || [] === $previousValue) {
+                return null;
             }
-        ;
+
+            if (is_object($previousValue)) {
+                return $previousValue;
+            }
+
+            $resource = $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
+
+            if (null === $resource) {
+                throw new ResourceNotFoundException(
+                    sprintf(
+                        'The %s resource for field %s with value %s was not found',
+                        $repository->getClassName(),
+                        $field,
+                        $previousValue,
+                    ),
+                );
+            }
+
+            return $resource;
+        };
     }
 }

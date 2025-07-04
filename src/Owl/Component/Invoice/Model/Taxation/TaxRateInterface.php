@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Model\Taxation;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Owl\Component\Location\Model\ZoneInterface;
 use Sylius\Resource\Model\CodeAwareInterface;
 use Sylius\Resource\Model\ResourceInterface;
@@ -35,13 +36,16 @@ interface TaxRateInterface extends
 
     public function setEndDate(?\DateTimeInterface $endDate): void;
 
+    /**
+     * @return Collection<int, ZoneInterface>
+     */
     public function getZones(): Collection;
 
-    public function hasZone(ZoneInterface $product): bool;
+    public function hasZone(ZoneInterface $zone): bool;
 
     public function addZone(ZoneInterface $zone): void;
 
-    public function removeZone(ZoneInterface $product): void;
+    public function removeZone(ZoneInterface $zone): void;
 
     public function clearZones(): void;
 }

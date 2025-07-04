@@ -50,6 +50,9 @@ final class UserPreferenceManager implements UserPreferenceManagerInterface
         return $user->getPreferences();
     }
 
+    /**
+     * @param array<mixed>|null $array
+     */
     private function setNestedValue(?array &$array, string $keyPath, mixed $value): void
     {
         if (!is_array($array)) {
@@ -69,6 +72,9 @@ final class UserPreferenceManager implements UserPreferenceManagerInterface
         $current = $value;
     }
 
+    /**
+     * @param array<mixed>|null $array
+     */
     private function getNestedValue(?array $array, string $keyPath, mixed $default = null): mixed
     {
         if (!is_array($array)) {

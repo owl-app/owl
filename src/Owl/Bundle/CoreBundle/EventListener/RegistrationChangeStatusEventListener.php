@@ -6,6 +6,7 @@ namespace Owl\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bundle\CoreBundle\Event\RegistrationEvents;
+use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Model\AdminUserRegistrationDataInterface;
 use Owl\Component\Core\Updater\SingleRoleUpdaterInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -33,12 +34,15 @@ final class RegistrationChangeStatusEventListener
     {
         $status = $adminUserRegistrationData->getStatus();
 
+        $user = $adminUserRegistrationData->getUser();
+        Assert::isInstanceOf($user, AdminUserInterface::class);
+
         if ($status === AdminUserRegistrationDataInterface::STATUS_ACCEPTED) {
-            $this->roleUpdater->assign($adminUserRegistrationData->getUser());
+            $this->roleUpdater->assign($user);
         }
 
         $adminUserRegistrationData->setChangeStatusAt(new \DateTime());
-        $adminUserRegistrationData->getUser()->setEnabled($status === AdminUserRegistrationDataInterface::STATUS_ACCEPTED);
+        $user->setEnabled($status === AdminUserRegistrationDataInterface::STATUS_ACCEPTED);
 
         $this->adminUserRegistrationDataManager->persist($adminUserRegistrationData);
         $this->adminUserRegistrationDataManager->flush();

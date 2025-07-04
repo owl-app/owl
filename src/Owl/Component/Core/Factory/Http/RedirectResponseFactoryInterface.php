@@ -9,5 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface RedirectResponseFactoryInterface
 {
+    /**
+     * @param string|string[] $redirectRoute
+     */
     public function create(Request $request, string|array $redirectRoute): Response;
 }

@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 class BuyerSnapshotAssigner implements SnapshotAssignerInterface
 {
@@ -35,7 +36,7 @@ class BuyerSnapshotAssigner implements SnapshotAssignerInterface
             'postcode' => $newBuyer->getPostcode(),
         ]);
 
-        if ($existingSnapshot) {
+        if ($existingSnapshot instanceof BuyerInterface) {
             $invoice->setBuyer($existingSnapshot);
         }
     }
@@ -44,11 +45,11 @@ class BuyerSnapshotAssigner implements SnapshotAssignerInterface
     {
         if (
             ($newBuyer !== null && $oldBuyer === null) ||
-            $newBuyer->getCompany() !== $oldBuyer->getCompany() ||
-            $newBuyer->getTaxNumber() !== $oldBuyer->getTaxNumber() ||
-            $newBuyer->getStreet() !== $oldBuyer->getStreet() ||
-            $newBuyer->getCity() !== $oldBuyer->getCity() ||
-            $newBuyer->getPostcode() !== $oldBuyer->getPostcode()
+            $newBuyer->getCompany() !== ($oldBuyer?->getCompany() ?? '') ||
+            $newBuyer->getTaxNumber() !== ($oldBuyer?->getTaxNumber() ?? '') ||
+            $newBuyer->getStreet() !== ($oldBuyer?->getStreet() ?? '') ||
+            $newBuyer->getCity() !== ($oldBuyer?->getCity() ?? '') ||
+            $newBuyer->getPostcode() !== ($oldBuyer?->getPostcode() ?? '')
         ) {
             return true;
         }

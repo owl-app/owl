@@ -6,13 +6,14 @@ namespace Owl\Component\Core\Model;
 
 use Owl\Component\Notification\Model\NotificationInterface as BaseNotificationInterface;
 use Owl\Component\User\Model\UserInterface as BaseUserInterface;
+use Owl\Component\Core\Model\AdminUserInterface;
 
 class NotificationAccepted implements NotificationAcceptedInterface
 {
     /** @var mixed */
     protected $id;
 
-    /** @var \Owl\Component\Core\Model\AdminUserInterface|null * */
+    /** @var AdminUserInterface|null * */
     protected $user;
 
     /** @var NotificationInterface */

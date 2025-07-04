@@ -10,6 +10,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class InvoiceSequenceIncrementStrategyChoiceType extends AbstractResourceType
 {
+    /**
+     * @param array<string, string> $strategies
+     */
     public function __construct(private array $strategies)
     {
     }

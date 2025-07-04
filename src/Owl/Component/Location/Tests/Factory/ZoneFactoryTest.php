@@ -16,10 +16,10 @@ final class ZoneFactoryTest extends TestCase
 {
     private ZoneFactory $factory;
 
-    /** @var FactoryInterface&MockObject */
+    /** @var FactoryInterface<Zone>&MockObject */
     private $zoneFactory;
 
-    /** @var FactoryInterface&MockObject */
+    /** @var FactoryInterface<ZoneMember>&MockObject */
     private $zoneMemberFactory;
 
     protected function setUp(): void

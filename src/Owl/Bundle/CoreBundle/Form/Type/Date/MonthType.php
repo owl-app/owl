@@ -34,6 +34,9 @@ final class MonthType extends AbstractType
         return 'owl_month_choice';
     }
 
+    /**
+     * @return array<string, int>
+     */
     private function getLocalizedMonths(): array
     {
         $months = [];

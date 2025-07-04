@@ -6,6 +6,7 @@ namespace Owl\Bundle\AdminBundle\Notification;
 
 use Owl\Component\Core\Context\AdminUserContextInterface;
 use Owl\Component\Core\Repository\NotificationRepositoryInterface;
+use Owl\Component\Core\Model\NotificationInterface;
 
 class NotificationProvider implements NotificationProviderInterface
 {

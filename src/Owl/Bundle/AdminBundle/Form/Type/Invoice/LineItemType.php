@@ -43,14 +43,14 @@ final class LineItemType extends AbstractType
                 'currency' => $currency,
             ])
             ->add('taxRate', TaxRateChoiceType::class, [
-                'choices' => $company?->getZone() ? $this->invoiceTaxRateRepository->findByZone($company?->getZone()) : [],
+                'choices' => $company->getZone() ? $this->invoiceTaxRateRepository->findByZone($company->getZone()) : [],
                 'label' => 'owl.invoice.line_item.tax_rate.label',
             ])
         ;
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
             if ($event->getForm()->has('totalPrice')) {
-                $event->getForm()->get('totalPrice')->setData($event->getData()?->gettotalPrice());
+                $event->getForm()->get('totalPrice')->setData($event->getData()?->getTotalPrice());
             }
         });
 

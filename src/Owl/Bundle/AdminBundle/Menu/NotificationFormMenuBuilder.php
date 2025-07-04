@@ -23,6 +23,9 @@ final class NotificationFormMenuBuilder
         $this->eventDispatcher = $eventDispatcher;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function createMenu(array $options = []): ItemInterface
     {
         $menu = $this->factory->createItem('root');

@@ -26,7 +26,7 @@ class ExchangeRateSnapshot implements ExchangeRateSnapshotInterface
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function getId()
+    public function getId(): mixed
     {
         return $this->id;
     }
