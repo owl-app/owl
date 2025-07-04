@@ -58,11 +58,11 @@ class TaxRateSnapshotAssigner implements SnapshotAssignerInterface
         /** @var TaxRateSnapshotInterface|null $existingSnapshot */
         $existingSnapshot = $this->taxRateSnapshotRepository->findOneBy($dataSnapshot);
 
-        if ($taxRateSnapshot) {
+        if ($taxRateSnapshot !== null) {
             $this->entityManager->detach($taxRateSnapshot);
         }
 
-        if ($existingSnapshot) {
+        if ($existingSnapshot !== null) {
             $lineItem->setTaxRateSnapshot($existingSnapshot);
         } else {
             /** @var TaxRateSnapshotInterface $snapshot */

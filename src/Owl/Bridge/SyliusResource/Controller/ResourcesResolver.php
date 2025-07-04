@@ -10,6 +10,7 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface as SyliusRepositoryInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class ResourcesResolver implements ResourcesResolverInterface
 {
@@ -19,10 +20,10 @@ final class ResourcesResolver implements ResourcesResolverInterface
     }
 
     /**
-     * @param EntityRepository<object>|RepositoryInterface|SyliusRepositoryInterface<object> $repository
-     * @return iterable<object>
+     * @param EntityRepository<ResourceInterface>|RepositoryInterface<ResourceInterface>|SyliusRepositoryInterface<ResourceInterface> $repository
+     * @return iterable<ResourceInterface>
      */
-    public function getResources(RequestConfiguration $requestConfiguration, $repository): iterable
+    public function getResources(RequestConfiguration $requestConfiguration, EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository): iterable
     {
         $method = $requestConfiguration->getRepositoryMethod();
 

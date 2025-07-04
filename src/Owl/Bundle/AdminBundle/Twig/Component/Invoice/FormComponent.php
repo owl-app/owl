@@ -9,7 +9,6 @@ use Owl\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Owl\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Owl\Component\Core\Invoice\Currency\ExchangeRateCurrencyResolverInterface;
 use Owl\Component\Core\Model\CompanyInterface;
-use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Core\Resolver\ExchangeRateResolverInterface;
 use Owl\Component\Invoice\Calculator\LineDataCalculator;
@@ -20,7 +19,6 @@ use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -59,7 +57,6 @@ class FormComponent
     /**
      * @param RepositoryInterface<InvoiceInterface> $invoiceRepository
      * @param RepositoryInterface<CompanyInterface> $companyRepository
-     * @param RepositoryInterface<ContractorInterface> $contractorRepository
      */
     public function __construct(
         RepositoryInterface $invoiceRepository,
@@ -68,7 +65,6 @@ class FormComponent
         string $formClass,
         private ExchangeRateCurrencyResolverInterface $exchangeRateCurrencyResolver,
         private RepositoryInterface $companyRepository,
-        RepositoryInterface $contractorRepository, // This parameter is unused, but kept as per rules.
         private readonly InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
         private ServiceRegistryInterface $registryInvoiceSequenceStrategy,
         private ExchangeRateResolverInterface $exchangeRateResolver,
@@ -131,11 +127,7 @@ class FormComponent
         /** @var InvoiceInterface $invoice */
         $invoice = $this->getForm()->getData();
 
-        if ($invoice->isPaid()) {
-            $this->showPaymentDate = true;
-        } else {
-            $this->showPaymentDate = false;
-        }
+        $this->showPaymentDate = $invoice->isPaid();
     }
 
     #[LiveAction]

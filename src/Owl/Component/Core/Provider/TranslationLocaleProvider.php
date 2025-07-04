@@ -16,18 +16,17 @@ namespace Owl\Component\Core\Provider;
 use Owl\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
-    /** @var RepositoryInterface<LocaleInterface> */
-    private $localeRepository;
+    /** @var RepositoryInterface */
+    private RepositoryInterface $localeRepository;
 
     /** @var string */
-    private $defaultLocaleCode;
+    private string $defaultLocaleCode;
 
     /**
-     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     * @param RepositoryInterface $localeRepository
      */
     public function __construct(RepositoryInterface $localeRepository, string $defaultLocaleCode)
     {

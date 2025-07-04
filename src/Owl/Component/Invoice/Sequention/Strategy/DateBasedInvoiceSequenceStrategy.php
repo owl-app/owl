@@ -15,8 +15,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 abstract class DateBasedInvoiceSequenceStrategy implements InvoiceSequenceStrategyInterface
 {
     /**
-     * @param RepositoryInterface<SequenceInterface> $sequenceRepository
-     * @param InvoiceSequenceFactoryInterface<SequenceInterface> $invoiceSequenceFactory
+     * @param RepositoryInterface $sequenceRepository
+     * @param InvoiceSequenceFactoryInterface $invoiceSequenceFactory
      */
     public function __construct(
         protected readonly RepositoryInterface $sequenceRepository,

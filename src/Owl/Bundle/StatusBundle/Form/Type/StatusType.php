@@ -10,16 +10,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Owl\Component\Status\Model\StatusableInterface;
 
 abstract class StatusType extends AbstractResourceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var ResourceInterface|null $resource */
+        /** @var ResourceInterface|StatusableInterface|null $resource */
         $resource = $builder->getData();
 
         $choices = [];
-        if ($resource instanceof \Owl\Component\Status\Model\StatusableInterface) {
+        if ($resource instanceof StatusableInterface) {
             $choices = array_flip($resource->getStatusesLabels());
         }
 

@@ -9,6 +9,7 @@ use Owl\Component\Core\Model\Company\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\Invoice;
 use Owl\Component\Invoice\Assigner\SnapshotAssignerInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
+use Owl\Component\Invoice\Model\Seller\SellerInterface;
 
 class SellerSnapshotByCompanyAssigner implements SnapshotAssignerInterface
 {

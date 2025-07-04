@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Owl\Bundle\CoreBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\CollectionProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

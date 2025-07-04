@@ -20,7 +20,7 @@ final class ItemProvider implements ItemProviderInterface
     }
 
     /**
-     * @param EntityRepository<object> $repository
+     * @param EntityRepository<ResourceInterface> $repository
      * @param array<string, mixed>|null $criteria
      * @param array<string, mixed>|null $repositoryOptions
      */
@@ -56,7 +56,7 @@ final class ItemProvider implements ItemProviderInterface
     }
 
     /**
-     * @param EntityRepository<object> $repository
+     * @param EntityRepository<ResourceInterface> $repository
      * @param array<string, mixed> $arguments
      * @param array<string, mixed>|null $criteria
      * @return array<string, mixed>|null
@@ -79,7 +79,7 @@ final class ItemProvider implements ItemProviderInterface
     }
 
     /**
-     * @param EntityRepository<object> $repository
+     * @param EntityRepository<ResourceInterface> $repository
      * @param array<string, mixed> $arguments
      */
     private function getQueryBuilder(EntityRepository $repository, ?string $method, array $arguments): QueryBuilder
@@ -92,7 +92,7 @@ final class ItemProvider implements ItemProviderInterface
     }
 
     /**
-     * @param EntityRepository<object> $repository
+     * @param EntityRepository<ResourceInterface> $repository
      */
     private function getIdentifierFieldName(EntityRepository $repository): string
     {

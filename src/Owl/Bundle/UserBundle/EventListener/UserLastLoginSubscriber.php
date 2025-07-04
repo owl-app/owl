@@ -16,7 +16,7 @@ namespace Owl\Bundle\UserBundle\EventListener;
 use Doctrine\Persistence\ObjectManager;
 use Owl\Bundle\UserBundle\Event\UserEvent;
 use Owl\Bundle\UserBundle\UserEvents;
-use Owl\Component\User\Model\UserInterface;
+use Owl\Component\User\Model\UserInterface as ComponentUserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
@@ -57,13 +57,13 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         $this->updateUserLastLogin($event->getUser());
     }
 
-    private function updateUserLastLogin(CoreUserInterface $user = null): void
+    private function updateUserLastLogin(?CoreUserInterface $user): void
     {
-        if (!$user instanceof $this->userClass) {
+        if ($user === null || !$user instanceof $this->userClass) {
             return;
         }
 
-        if (!$user instanceof UserInterface) {
+        if (!$user instanceof ComponentUserInterface) {
             throw new \UnexpectedValueException('In order to use this subscriber, your class has to implement UserInterface');
         }
 

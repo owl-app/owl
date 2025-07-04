@@ -67,7 +67,7 @@ final class LazyOption
     public static function randomOneOrNull(
         RepositoryInterface $repository,
         int $chanceOfRandomOne = 100,
-        array $criteria = [],
+        array $criteria = []
     ): \Closure {
         return function (Options $options) use ($repository, $chanceOfRandomOne, $criteria): ?object {
             if (random_int(1, 100) > $chanceOfRandomOne) {
@@ -160,7 +160,7 @@ final class LazyOption
      */
     public static function findOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
+        return function (Options $options, $previousValue): ?object {
             if (null === $previousValue || [] === $previousValue) {
                 return null;
             }
@@ -180,7 +180,7 @@ final class LazyOption
      */
     public static function getOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
+        return function (Options $options, $previousValue): ?object {
             if (null === $previousValue || [] === $previousValue) {
                 return null;
             }
@@ -197,8 +197,8 @@ final class LazyOption
                         'The %s resource for field %s with value %s was not found',
                         $repository->getClassName(),
                         $field,
-                        (string) $previousValue,
-                    ),
+                        (string) $previousValue
+                    )
                 );
             }
 

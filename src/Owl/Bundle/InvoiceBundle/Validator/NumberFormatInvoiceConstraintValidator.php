@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class NumberFormatInvoiceConstraintValidator extends ConstraintValidator
 {
@@ -24,7 +25,9 @@ class NumberFormatInvoiceConstraintValidator extends ConstraintValidator
 
         $propertyPath = $this->context->getPropertyPath();
 
-        foreach (iterator_to_array($this->context->getViolations()) as $violation) {
+        /** @var ConstraintViolationListInterface $violations */
+        $violations = $this->context->getViolations();
+        foreach (iterator_to_array($violations) as $violation) {
             if (str_starts_with($violation->getPropertyPath(), $propertyPath)) {
                 return;
             }

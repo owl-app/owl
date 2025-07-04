@@ -16,11 +16,10 @@ namespace Owl\Bundle\UserBundle\Provider;
 use Symfony\Component\Security\Core\User\UserProviderInterface as BaseUserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * @extends BaseUserProviderInterface<UserInterface>
+ */
 interface UserProviderInterface extends BaseUserProviderInterface
 {
-    /**
-     * @template TUser of UserInterface
-     *
-     * @extends BaseUserProviderInterface<TUser>
-     */
+    public function loadUserByIdentifier(string $identifier): UserInterface;
 }

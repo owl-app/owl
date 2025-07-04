@@ -21,9 +21,9 @@ final class SingleResourceProvider implements SingleResourceProviderInterface
     }
 
     /**
-     * @param EntityRepository<object>|RepositoryInterface|SyliusRepositoryInterface<object> $repository
+     * @param EntityRepository<ResourceInterface>|RepositoryInterface<ResourceInterface>|SyliusRepositoryInterface<ResourceInterface> $repository
      */
-    public function get(RequestConfiguration $requestConfiguration, $repository): ?ResourceInterface
+    public function get(RequestConfiguration $requestConfiguration, EntityRepository|RepositoryInterface|SyliusRepositoryInterface $repository): ?ResourceInterface
     {
         $method = $requestConfiguration->getRepositoryMethod();
 

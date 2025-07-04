@@ -1,14 +1,9 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Type object in generic type Sylius\\\\Resource\\\\Doctrine\\\\Persistence\\\\RepositoryInterface\\<object\\> in PHPDoc tag @param for parameter \\$repository is not subtype of template type T of Sylius\\\\Resource\\\\Model\\\\ResourceInterface of interface Sylius\\\\Resource\\\\Doctrine\\\\Persistence\\\\RepositoryInterface\\.$#"
+			message: "#^PHPDoc tag @param for parameter \\$repository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Sylius\\\\Component\\\\Resource\\\\Model\\\\ResourceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
 			count: 1
 			path: src/Owl/Bridge/SyliusResource/Controller/ResourcesResolver.php
-
-		-
-			message: "#^Parameter \\#1 \\$repository \\(Doctrine\\\\ORM\\\\EntityRepository\\<object\\>\\) of method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\ItemProvider\\:\\:get\\(\\) should be compatible with parameter \\$repository \\(Doctrine\\\\ORM\\\\EntityRepository\\<Sylius\\\\Component\\\\Resource\\\\Model\\\\ResourceInterface\\>\\) of method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\ItemProviderInterface\\:\\:get\\(\\)$#"
-			count: 1
-			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/ItemProvider.php
 
 		-
 			message: "#^Unable to resolve the template type T in call to method Owl\\\\Bridge\\\\SyliusResource\\\\Doctrine\\\\Orm\\\\QueryBuilderApplicator\\:\\:getClassMetadata\\(\\)$#"
@@ -16,14 +11,9 @@ parameters:
 			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/QueryBuilderApplicator.php
 
 		-
-			message: "#^Type object in generic type Sylius\\\\Resource\\\\Doctrine\\\\Persistence\\\\RepositoryInterface\\<object\\> in PHPDoc tag @param for parameter \\$repository is not subtype of template type T of Sylius\\\\Resource\\\\Model\\\\ResourceInterface of interface Sylius\\\\Resource\\\\Doctrine\\\\Persistence\\\\RepositoryInterface\\.$#"
+			message: "#^PHPDoc tag @param for parameter \\$repository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Sylius\\\\Component\\\\Resource\\\\Model\\\\ResourceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
 			count: 1
 			path: src/Owl/Bridge/SyliusResource/Doctrine/Orm/Resource/SingleResourceProvider.php
-
-		-
-			message: "#^Constructor of class Owl\\\\Bundle\\\\AdminBundle\\\\Twig\\\\Component\\\\Invoice\\\\FormComponent has an unused parameter \\$contractorRepository\\.$#"
-			count: 1
-			path: src/Owl/Bundle/AdminBundle/Twig/Component/Invoice/FormComponent.php
 
 		-
 			message: "#^Property Owl\\\\Bundle\\\\CoreBundle\\\\Console\\\\Command\\\\AdminUserFakerCommand\\:\\:\\$hasher is never read, only written\\.$#"
@@ -48,6 +38,21 @@ parameters:
 		-
 			message: "#^Throwing object of an unknown class Sylius\\\\Component\\\\Resource\\\\Exception\\\\ResourceNotFoundException\\.$#"
 			count: 1
+			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
+
+		-
+			message: "#^Undefined variable\\: \\$criteria$#"
+			count: 2
+			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
+
+		-
+			message: "#^Undefined variable\\: \\$field$#"
+			count: 3
+			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
+
+		-
+			message: "#^Undefined variable\\: \\$repository$#"
+			count: 3
 			path: src/Owl/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
 
 		-
@@ -111,17 +116,12 @@ parameters:
 			path: src/Owl/Bundle/CoreBundle/Rbac/DirectPermissionUserProvider.php
 
 		-
-			message: "#^Constructor of class Owl\\\\Bundle\\\\InvoiceBundle\\\\Form\\\\Type\\\\Taxation\\\\TaxRateType has an unused parameter \\$buildCountryFormSubscriber\\.$#"
-			count: 1
-			path: src/Owl/Bundle/InvoiceBundle/Form/Type/Taxation/TaxRateType.php
-
-		-
 			message: "#^Property Owl\\\\Bundle\\\\InvoiceBundle\\\\Validator\\\\NumberFormatInvoiceConstraintValidator\\:\\:\\$translator is never read, only written\\.$#"
 			count: 1
 			path: src/Owl/Bundle/InvoiceBundle/Validator/NumberFormatInvoiceConstraintValidator.php
 
 		-
-			message: "#^Call to an undefined method Owl\\\\Component\\\\Status\\\\Model\\\\StatusableInterface&Sylius\\\\Component\\\\Resource\\\\Model\\\\ResourceInterface\\:\\:getStatusesLabels\\(\\)\\.$#"
+			message: "#^Call to an undefined method Owl\\\\Component\\\\Status\\\\Model\\\\StatusableInterface\\:\\:getStatusesLabels\\(\\)\\.$#"
 			count: 1
 			path: src/Owl/Bundle/StatusBundle/Form/Type/StatusType.php
 
@@ -147,6 +147,11 @@ parameters:
 
 		-
 			message: "#^Interface Owl\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface extends generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#"
+			count: 1
+			path: src/Owl/Bundle/UserBundle/Provider/UserProviderInterface.php
+
+		-
+			message: "#^Template type TUser of method Owl\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface\\:\\:loadUserByIdentifier\\(\\) is not referenced in a parameter\\.$#"
 			count: 1
 			path: src/Owl/Bundle/UserBundle/Provider/UserProviderInterface.php
 
@@ -206,24 +211,9 @@ parameters:
 			path: src/Owl/Component/Core/Invoice/Snapshot/SellerSnapshotByCompanyAssigner.php
 
 		-
-			message: "#^PHPDoc tag @param for parameter \\$localeRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Locale\\\\Model\\\\LocaleInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Provider/TranslationLocaleProvider.php
-
-		-
-			message: "#^PHPDoc tag @var for property Owl\\\\Component\\\\Core\\\\Provider\\\\TranslationLocaleProvider\\:\\:\\$localeRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Locale\\\\Model\\\\LocaleInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
-			count: 1
-			path: src/Owl/Component/Core/Provider/TranslationLocaleProvider.php
-
-		-
 			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Assigner\\\\TaxRateSnapshotAssigner\\:\\:__construct\\(\\) has parameter \\$invoiceTaxRateSnapshotFactory with generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceTaxRateSnapshotFactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Owl/Component/Invoice/Assigner/TaxRateSnapshotAssigner.php
-
-		-
-			message: "#^Call to an undefined method Owl\\\\Component\\\\Invoice\\\\Model\\\\InvoiceInterface\\:\\:setNumber\\(\\)\\.$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Factory/InvoiceFactory.php
 
 		-
 			message: "#^Type Owl\\\\Component\\\\Invoice\\\\Model\\\\InvoiceInterface in generic type Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\InvoiceInterface\\> in PHPDoc tag @implements is not subtype of template type T of Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactoryInterface of interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceFactoryInterface\\.$#"
@@ -231,12 +221,7 @@ parameters:
 			path: src/Owl/Component/Invoice/Factory/InvoiceFactory.php
 
 		-
-			message: "#^PHPDoc tag @param for parameter \\$sequenceRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
-			count: 1
-			path: src/Owl/Component/Invoice/Sequention/Strategy/DateBasedInvoiceSequenceStrategy.php
-
-		-
-			message: "#^PHPDoc type for property Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\DateBasedInvoiceSequenceStrategy\\:\\:\\$sequenceRepository contains generic type Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface\\<Owl\\\\Component\\\\Invoice\\\\Model\\\\SequenceInterface\\> but interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface is not generic\\.$#"
+			message: "#^Method Owl\\\\Component\\\\Invoice\\\\Sequention\\\\Strategy\\\\DateBasedInvoiceSequenceStrategy\\:\\:__construct\\(\\) has parameter \\$invoiceSequenceFactory with generic interface Owl\\\\Component\\\\Invoice\\\\Factory\\\\InvoiceSequenceFactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Owl/Component/Invoice/Sequention/Strategy/DateBasedInvoiceSequenceStrategy.php
 
