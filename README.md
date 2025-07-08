@@ -1,4 +1,6 @@
-# Owl
+<p align="center">
+    <img src="https://raw.githubusercontent.com/owl-app/time-tracker/refs/heads/main/libs/app/core/src/assets/logo.webp" width="150px" alt="Owl logo" />
+</p>
 
 **Owl** is an advanced, modular invoicing and business management platform built on **Sylius architecture** and Symfony 6.4. The system provides a comprehensive solution for invoice generation, business document management, and financial operations with advanced role-based access control (RBAC), and modern user interface.
 
