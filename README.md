@@ -135,6 +135,15 @@ $ php bin/console sylius:theme:assets:install public/_themes/owl/admin
 $ symfony serve:start
 ```
 
+## 🔐 Login:
+
+Admin system:
+
+```bash
+l: owl@owl.com
+p: test123
+```
+
 ## 🧪 Testing
 
 ### Unit Tests (PHPUnit)
