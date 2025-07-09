@@ -5,7 +5,7 @@ owl:
         due_payment_date: Payment due date
         number: Invoice number
         type: Invoice type
-        format_number: Format invoice number
+        format_number: "Format invoice number (example: __NUMBER__/__MM__/__YYYY__)"
         types:
             sales: Sales
             proforma: Proforma

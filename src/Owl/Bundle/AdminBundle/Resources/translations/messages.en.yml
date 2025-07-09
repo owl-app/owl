@@ -291,6 +291,7 @@ owl:
             update_user: Edit user
             bulk_delete_user: Bulk delete user
             show_history_route: History route
+            profile_user: Profile user
             list_permissions_assign_to_user: List permissions assigned to user
             assign_permission_to_user: Assigning permissions to user
             revoke_permission_to_user: Remove user permission
