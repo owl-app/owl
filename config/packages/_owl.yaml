@@ -1,7 +1,6 @@
 imports:
      - { resource: "@OwlCoreBundle/Resources/config/app/config.yml" }
      - { resource: "@OwlAdminBundle/Resources/config/app/config.yml" }
-     - { resource: "@OwlApiBundle/Resources/config/app/config.yaml" }
      - { resource: "../parameters.yaml" }
 
 sylius_theme:

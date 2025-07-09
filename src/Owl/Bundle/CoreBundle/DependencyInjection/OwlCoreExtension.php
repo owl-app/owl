@@ -72,7 +72,6 @@ final class OwlCoreExtension extends AbstractResourceExtension implements Prepen
         $this->prependSyliusThemeBundle($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
-        $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
         $this->prependSyliusResourceBundle($container, $config);
     }
 
@@ -134,34 +133,5 @@ final class OwlCoreExtension extends AbstractResourceExtension implements Prepen
         }
 
         $container->prependExtensionConfig('sylius_theme', ['context' => 'owl.theme.context.role_based']);
-    }
-
-    private function prependJmsSerializerIfAdminApiBundleIsNotPresent(ContainerBuilder $container): void
-    {
-        if (!$container->hasExtension('jms_serializer')) {
-            return;
-        }
-
-        if ($container->hasExtension('owl_admin_api')) {
-            return;
-        }
-
-        $container->prependExtensionConfig('jms_serializer', [
-            'metadata' => [
-                'directories' => [
-                    'owl-core' => [
-                        'namespace_prefix' => 'Owl\Component\Core',
-                        'path' => '@OwlCoreBundle/Resources/config/serializer',
-                    ],
-                    'owl-core-rbac' => [
-                        'namespace_prefix' => 'Owl\Component\Rbac',
-                        'path' => '@OwlCoreBundle/Resources/config/serializer/rbac',
-                    ],
-                ],
-            ],
-            'property_naming' => [
-                'id' => 'jms_serializer.identical_property_naming_strategy',
-            ],
-        ]);
     }
 }

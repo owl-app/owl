@@ -1,6 +1,7 @@
 parameters:
-    owl.security.admin_regex: "(?!%owl.security.api_route%)^/%owl_admin.path_name%"
-    owl.security.api_regex: "(?!%owl.security.api_route%/docs)^%owl.security.api_route%"
+    owl.security.admin_regex: "^/%owl_admin.path_name%"
+    # owl.security.admin_regex: "(?!%owl.security.api_route%)^/%owl_admin.path_name%"
+    # owl.security.api_regex: "(?!%owl.security.api_route%/docs)^%owl.security.api_route%"
 
 security:
     enable_authenticator_manager: true
@@ -21,7 +22,8 @@ security:
         admin:
             switch_user: true
             context: admin
-            pattern: "%owl.security.admin_regex%|%owl.security.api_route%/docs"
+            # pattern: "%owl.security.admin_regex%|%owl.security.api_route%/docs"
+            pattern: "%owl.security.admin_regex%"
             provider: owl_admin_user_provider
             form_login:
                 provider: owl_admin_user_provider
@@ -44,24 +46,24 @@ security:
                 path: owl_admin_logout
                 target: owl_admin_login
 
-        api:
-            pattern: "%owl.security.api_regex%"
-            provider: owl_api_user_provider
-            stateless: true
-            entry_point: jwt
-            json_login:
-                check_path: "%owl.security.api_route%/authentication-token"
-                username_path: email
-                password_path: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            jwt: true
+        # api:
+        #     pattern: "%owl.security.api_regex%"
+        #     provider: owl_api_user_provider
+        #     stateless: true
+        #     entry_point: jwt
+        #     json_login:
+        #         check_path: "%owl.security.api_route%/authentication-token"
+        #         username_path: email
+        #         password_path: password
+        #         success_handler: lexik_jwt_authentication.handler.authentication_success
+        #         failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        #     jwt: true
 
     access_control:
-        - { path: "%owl.security.api_regex%/reset-password-requests", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "%owl.security.api_regex%/.*", role: ROLE_API_ACCESS }
-        - { path: "%owl.security.api_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "%owl.security.api_route%/docs", role: ROLE_ADMIN_SYSTEM }
+        # - { path: "%owl.security.api_regex%/reset-password-requests", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: "%owl.security.api_regex%/.*", role: ROLE_API_ACCESS }
+        # - { path: "%owl.security.api_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: "%owl.security.api_route%/docs", role: ROLE_ADMIN_SYSTEM }
 
         - { path: "%owl.security.admin_regex%_partial", role: PUBLIC_ACCESS, ips: [127.0.0.1, ::1] }
         - { path: "%owl.security.admin_regex%_partial", roles: ROLE_NO_ACCESS, methods: [GET] }
