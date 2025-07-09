@@ -215,7 +215,6 @@
     },
     "autoload": {
         "psr-4": {
-            "Owl\\Behat\\": "src/Owl/Behat/",
             "Owl\\Bridge\\": "src/Owl/Bridge/",
             "Owl\\Bundle\\": "src/Owl/Bundle/",
             "Owl\\Component\\": "src/Owl/Component/",

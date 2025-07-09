@@ -51,3 +51,6 @@ yarn-error.log
 /config/jwt/*.pem
 !/config/jwt/*-test.pem
 ###< lexik/jwt-authentication-bundle ###
+
+# IDE
+.cursor/*
