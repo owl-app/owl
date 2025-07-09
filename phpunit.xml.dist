@@ -9,6 +9,7 @@
     <testsuites>
         <testsuite name="Owl Test Suite">
             <directory>src/Owl/Component/*/Tests</directory>
+            <directory>src/Owl/Bundle/*/Tests</directory>
         </testsuite>
     </testsuites>
 

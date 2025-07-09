@@ -4,10 +4,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="owl.admin.menu.subscriber.order" class="Owl\Bundle\AdminBundle\EventSubscriber\OrderMenuSubscriber">
-            <tag name="kernel.event_subscriber" />
-        </service>
-
         <service id="owl.admin.menu_builder.main" class="Owl\Bundle\AdminBundle\Menu\MainMenuBuilder">
             <argument type="service" id="security.authorization_checker" />
             <argument type="service" id="knp_menu.factory" />
