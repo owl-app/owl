@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Owl\Component\Core\Invoice\Currency;
 
-use Owl\Component\Core\Model\Company\CompanyInterface;
-use Owl\Component\Core\Model\Contractor\ContractorInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
