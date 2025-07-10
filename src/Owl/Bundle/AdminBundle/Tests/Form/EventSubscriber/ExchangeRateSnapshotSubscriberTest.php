@@ -9,14 +9,16 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Owl\Bundle\AdminBundle\Form\EventSubscriber\ExchangeRateSnapshotSubscriber;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\ExchangeRateSnapshot;
 use Owl\Component\Core\Invoice\Currency\ExchangeRateCurrencyResolverInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
+use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
 
 #[CoversClass(ExchangeRateSnapshotSubscriber::class)]
 final class ExchangeRateSnapshotSubscriberTest extends TestCase
@@ -62,8 +64,8 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
     public function it_creates_exchange_rate_snapshot_form_when_invoice_has_snapshot(): void
     {
         // Arrange
-        $exchangeRateSnapshot = $this->createMock(\stdClass::class);
-        
+        $exchangeRateSnapshot = $this->createMock(ExchangeRateSnapshotInterface::class);
+
         $this->event
             ->expects($this->once())
             ->method('getForm')
@@ -142,7 +144,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
     {
         // Arrange
         $data = ['exchangeRateSnapshot' => ['rate' => 1.23]];
-        
+
         $this->event
             ->expects($this->once())
             ->method('getForm')
@@ -218,11 +220,12 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
             ->with('exchangeRateSnapshot')
             ->willReturn(false);
 
+        $currency = $this->createMock(CurrencyInterface::class);
         $this->exchangeRateCurrencyResolver
             ->expects($this->once())
             ->method('resolve')
             ->with($this->invoice)
-            ->willReturn(true);
+            ->willReturn($currency);
 
         $this->form
             ->expects($this->once())
@@ -321,7 +324,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
             ->expects($this->once())
             ->method('resolve')
             ->with($this->invoice)
-            ->willReturn(false);
+            ->willReturn(null);
 
         $this->form
             ->expects($this->never())

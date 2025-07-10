@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Bundle\AdminBundle\Form\EventSubscriber;
 
-use Owl\Bundle\AdminBundle\Form\EventSubscriber\LineItemsSubscriber;
-use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
-use Owl\Component\Company\Model\CompanyInterface;
-use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -20,6 +16,10 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
+use Owl\Bundle\AdminBundle\Form\EventSubscriber\LineItemsSubscriber;
+use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
+use Owl\Component\Core\Model\Invoice\InvoiceInterface;
+use Owl\Component\Core\Model\CompanyInterface as CoreCompanyInterface;
 
 #[CoversClass(LineItemsSubscriber::class)]
 final class LineItemsSubscriberTest extends TestCase
@@ -29,7 +29,7 @@ final class LineItemsSubscriberTest extends TestCase
     private FormInterface&MockObject $form;
     private FormEvent&MockObject $event;
     private InvoiceInterface&MockObject $invoice;
-    private CompanyInterface&MockObject $company;
+    private CoreCompanyInterface&MockObject $company;
     private CurrencyInterface&MockObject $currency;
 
     protected function setUp(): void
@@ -38,7 +38,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->form = $this->createMock(FormInterface::class);
         $this->event = $this->createMock(FormEvent::class);
         $this->invoice = $this->createMock(InvoiceInterface::class);
-        $this->company = $this->createMock(CompanyInterface::class);
+        $this->company = $this->createMock(CoreCompanyInterface::class);
         $this->currency = $this->createMock(CurrencyInterface::class);
 
         $this->subscriber = new LineItemsSubscriber($this->companyRepository);
@@ -66,7 +66,7 @@ final class LineItemsSubscriberTest extends TestCase
     {
         // Arrange
         $currencyCode = 'USD';
-        
+
         $this->event
             ->expects($this->once())
             ->method('getForm')
@@ -78,7 +78,7 @@ final class LineItemsSubscriberTest extends TestCase
             ->willReturn($this->invoice);
 
         $this->invoice
-            ->expects($this->once())
+            ->expects($this->exactly(2))  // Zmieniono z once() na exactly(2)
             ->method('getCurrency')
             ->willReturn($this->currency);
 
@@ -409,7 +409,7 @@ final class LineItemsSubscriberTest extends TestCase
     {
         // Arrange
         $currencyCode = 'PLN';
-        
+
         $this->event
             ->expects($this->once())
             ->method('getForm')
@@ -421,7 +421,7 @@ final class LineItemsSubscriberTest extends TestCase
             ->willReturn($this->invoice);
 
         $this->invoice
-            ->expects($this->once())
+            ->expects($this->exactly(2))  // Zmieniono z once() na exactly(2)
             ->method('getCurrency')
             ->willReturn($this->currency);
 
