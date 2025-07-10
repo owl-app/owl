@@ -243,31 +243,6 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    /**
-     * @return array<string, array<string, mixed>>
-     */
-    public static function invalidIdDataProvider(): array
-    {
-        return [
-            'zero id' => [
-                'id' => 0,
-                'expectedMessage' => 'The parent has not been found',
-            ],
-            'negative id' => [
-                'id' => -1,
-                'expectedMessage' => 'The parent has not been found',
-            ],
-            'string id' => [
-                'id' => 'invalid',
-                'expectedMessage' => 'The parent has not been found',
-            ],
-            'null id' => [
-                'id' => null,
-                'expectedMessage' => 'The parent has not been found',
-            ],
-        ];
-    }
-
     #[Test]
     public function it_handles_item_provider_exception(): void
     {
@@ -618,6 +593,41 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->assertSame($expectedContent, $result->getContent());
     }
 
+    private function createRequestWithId(mixed $id): Request
+    {
+        $request = new Request();
+        if ($id !== null) {
+            $request->attributes->set('id', $id);
+        }
+
+        return $request;
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    public static function invalidIdDataProvider(): array
+    {
+        return [
+            'zero id' => [
+                'id' => 0,
+                'expectedMessage' => 'The parent has not been found',
+            ],
+            'negative id' => [
+                'id' => -1,
+                'expectedMessage' => 'The parent has not been found',
+            ],
+            'string id' => [
+                'id' => 'invalid',
+                'expectedMessage' => 'The parent has not been found',
+            ],
+            'null id' => [
+                'id' => null,
+                'expectedMessage' => 'The parent has not been found',
+            ],
+        ];
+    }
+
     /**
      * @return array<string, array<string, mixed>>
      */
@@ -633,15 +643,5 @@ final class ListResourceWithParentActionTest extends TestCase
                 'expectedContent' => 'invalid resources',
             ],
         ];
-    }
-
-    private function createRequestWithId(mixed $id): Request
-    {
-        $request = new Request();
-        if ($id !== null) {
-            $request->attributes->set('id', $id);
-        }
-
-        return $request;
     }
 }
