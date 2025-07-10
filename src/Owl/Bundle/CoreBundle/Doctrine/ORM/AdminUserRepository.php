@@ -6,7 +6,6 @@ namespace Owl\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Owl\Bundle\UserBundle\Doctrine\ORM\UserRepository;
-use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Model\RoleAwareInterface;
 use Owl\Component\Core\Repository\AdminUserRepositoryInterface;
 

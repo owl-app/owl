@@ -17,7 +17,7 @@ interface ParentableFactoryInterface extends FactoryInterface
     public function getResourceParents(string $name): ResourceInterface;
 
     /**
-     * @param array<string, ResourceInterface> $resources 
+     * @param array<string, ResourceInterface> $resources
      */
     public function setResourceParents(array $resources): void;
 }

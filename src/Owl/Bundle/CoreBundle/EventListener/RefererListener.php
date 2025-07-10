@@ -6,8 +6,6 @@ namespace Owl\Bundle\CoreBundle\EventListener;
 
 use Owl\Bundle\CoreBundle\Util\RefererPathTrait;
 use Owl\Component\Core\Model\AdminUserInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 

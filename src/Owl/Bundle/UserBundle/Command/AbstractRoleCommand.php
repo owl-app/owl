@@ -15,7 +15,6 @@ namespace Owl\Bundle\UserBundle\Command;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\Persistence\ObjectRepository;
 use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
@@ -145,6 +144,7 @@ abstract class AbstractRoleCommand extends Command
 
         /**
          * @phpstan-var class-string<UserInterface> $class
+         *
          * @var UserRepositoryInterface $repository
          */
         $repository = $this->getEntityManager($userType)->getRepository($class);
@@ -161,9 +161,8 @@ abstract class AbstractRoleCommand extends Command
             /**
              * @param array<string, mixed> $userTypeConfig
              */
-            fn (array $userTypeConfig): bool =>
-                isset($userTypeConfig['user']['classes']['model'])
-                && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true)
+            fn (array $userTypeConfig): bool => isset($userTypeConfig['user']['classes']['model']) &&
+                is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true),
         );
 
         return array_keys($userTypes);
@@ -175,9 +174,9 @@ abstract class AbstractRoleCommand extends Command
     protected function getUserModelClass(string $userType): string
     {
         if (
-            !isset($this->usersConfig[$userType]['user']['classes']['model'])
-            || empty($this->usersConfig[$userType]['user']['classes']['model'])
-            || !is_string($this->usersConfig[$userType]['user']['classes']['model'])
+            !isset($this->usersConfig[$userType]['user']['classes']['model']) ||
+            empty($this->usersConfig[$userType]['user']['classes']['model']) ||
+            !is_string($this->usersConfig[$userType]['user']['classes']['model'])
         ) {
             throw new \InvalidArgumentException(sprintf('User type %s misconfigured.', $userType));
         }

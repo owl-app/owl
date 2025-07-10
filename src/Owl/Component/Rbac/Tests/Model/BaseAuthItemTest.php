@@ -15,7 +15,7 @@ final class BaseAuthItemTest extends TestCase
     protected function setUp(): void
     {
         // Tworzę anonimową klasę rozszerzającą BaseAuthItem dla testów
-        $this->authItem = new class extends BaseAuthItem {
+        $this->authItem = new class() extends BaseAuthItem {
             public function getType(): string
             {
                 return 'test';
@@ -89,4 +89,4 @@ final class BaseAuthItemTest extends TestCase
         $this->authItem->setUpdatedAt($date);
         self::assertSame($date, $this->authItem->getUpdatedAt());
     }
-} 
+}

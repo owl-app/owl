@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Bridge\SyliusResource\Controller;
 
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface as SyliusRedirectHandlerInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 interface RedirectHandlerInterface extends SyliusRedirectHandlerInterface
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Owl\Bridge\SyliusResource\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration as SyliusRequestConfiguration;
-use Sylius\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -22,9 +22,6 @@ final class RedirectHandler implements RedirectHandlerInterface
         $this->router = $router;
     }
 
-    /**
-     * @param SyliusRequestConfiguration $configuration
-     */
     public function redirectToResource(SyliusRequestConfiguration $configuration, ResourceInterface $resource): Response
     {
         $redirect = $configuration->getParameters()->get('redirect');
@@ -48,9 +45,6 @@ final class RedirectHandler implements RedirectHandlerInterface
         }
     }
 
-    /**
-     * @param SyliusRequestConfiguration $configuration
-     */
     public function redirectToIndex(SyliusRequestConfiguration $configuration, ?ResourceInterface $resource = null): Response
     {
         return $this->redirectToRoute(
@@ -61,7 +55,6 @@ final class RedirectHandler implements RedirectHandlerInterface
     }
 
     /**
-     * @param SyliusRequestConfiguration $configuration
      * @param array<string, mixed> $parameters
      */
     public function redirectToRoute(SyliusRequestConfiguration $configuration, string $route, array $parameters = []): Response
@@ -73,9 +66,6 @@ final class RedirectHandler implements RedirectHandlerInterface
         return $this->redirect($configuration, $this->router->generate($route, $parameters));
     }
 
-    /**
-     * @param SyliusRequestConfiguration $configuration
-     */
     public function redirect(SyliusRequestConfiguration $configuration, string $url, int $status = 302): Response
     {
         if ($configuration->isHeaderRedirection()) {
@@ -87,9 +77,6 @@ final class RedirectHandler implements RedirectHandlerInterface
         return new RedirectResponse($url . $configuration->getRedirectHash(), $status);
     }
 
-    /**
-     * @param SyliusRequestConfiguration $configuration
-     */
     public function redirectToReferer(SyliusRequestConfiguration $configuration): Response
     {
         return $this->redirect($configuration, (string) $configuration->getRedirectReferer());

@@ -11,9 +11,6 @@ use Twig\Environment;
 
 final class DashboardController
 {
-    /**
-     * @param Environment $templatingEngine
-     */
     public function __construct(
         private SettingStorageInterface $settingStorage,
         private Environment $templatingEngine,

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Owl\Component\Core\Model;
 
-use Owl\Component\Notification\Model\NotificationInterface as BaseNotificationInterface;
-use Owl\Component\Core\Model\AdminUserInterface;
-
 class NotificationAccepted implements NotificationAcceptedInterface
 {
     /** @var mixed */

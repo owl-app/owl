@@ -11,15 +11,11 @@ trait FilterDataComponentTrait
 {
     use ComponentWithFormTrait;
 
-    /**
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> */
     #[LiveProp]
     public array $activeCriteria = [];
 
-    /**
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> */
     #[LiveProp]
     public array $availableFilters = [];
 }

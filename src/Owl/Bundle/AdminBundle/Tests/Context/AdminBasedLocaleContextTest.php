@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Bundle\AdminBundle\Context;
 
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Owl\Bundle\AdminBundle\Context\AdminBasedLocaleContext;
 use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Locale\Context\LocaleContextInterface;
 use Owl\Component\Locale\Context\LocaleNotFoundException;
 use Owl\Component\User\Model\UserInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 

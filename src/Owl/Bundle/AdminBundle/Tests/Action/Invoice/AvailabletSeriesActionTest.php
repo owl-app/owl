@@ -10,7 +10,6 @@ use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -26,13 +25,21 @@ use Twig\Environment;
 final class AvailabletSeriesActionTest extends TestCase
 {
     private AvailabletSeriesAction $action;
+
     private RepositoryInterface&MockObject $serieRepository;
+
     private InvoiceNumberGeneratorInterface&MockObject $invoiceNumberGenerator;
+
     private ServiceRegistryInterface&MockObject $registryInvoiceSequenceStrategy;
+
     private Environment&MockObject $twig;
+
     private Request&MockObject $request;
+
     private InvoiceSerieInterface&MockObject $invoiceSerie;
+
     private InvoiceSequenceStrategyInterface&MockObject $sequenceStrategy;
+
     private SequenceInterface&MockObject $invoiceSequence;
 
     protected function setUp(): void
@@ -50,7 +57,7 @@ final class AvailabletSeriesActionTest extends TestCase
             $this->serieRepository,
             $this->invoiceNumberGenerator,
             $this->registryInvoiceSequenceStrategy,
-            $this->twig
+            $this->twig,
         );
     }
 
@@ -151,7 +158,7 @@ final class AvailabletSeriesActionTest extends TestCase
     {
         // Arrange
         $type = 'invoice';
-        
+
         $query = $this->createMock(ParameterBag::class);
         $query
             ->expects($this->once())
@@ -177,7 +184,7 @@ final class AvailabletSeriesActionTest extends TestCase
         // Arrange
         $type = 'invoice';
         $dateString = '2024-01-15';
-        
+
         $query = $this->createMock(ParameterBag::class);
         $query
             ->expects($this->once())

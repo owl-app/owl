@@ -17,7 +17,7 @@ final class PasswordResetTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $passwordReset = new PasswordReset();
-        
+
         $this->assertInstanceOf(PasswordReset::class, $passwordReset);
     }
 
@@ -25,7 +25,7 @@ final class PasswordResetTest extends TestCase
     public function it_has_null_password_by_default(): void
     {
         $passwordReset = new PasswordReset();
-        
+
         $this->assertNull($passwordReset->getPassword());
     }
 
@@ -34,9 +34,9 @@ final class PasswordResetTest extends TestCase
     {
         $password = 'new-secure-password';
         $passwordReset = new PasswordReset();
-        
+
         $passwordReset->setPassword($password);
-        
+
         $this->assertSame($password, $passwordReset->getPassword());
     }
 
@@ -45,9 +45,9 @@ final class PasswordResetTest extends TestCase
     {
         $passwordReset = new PasswordReset();
         $passwordReset->setPassword('some-password');
-        
+
         $passwordReset->setPassword(null);
-        
+
         $this->assertNull($passwordReset->getPassword());
     }
 
@@ -55,9 +55,9 @@ final class PasswordResetTest extends TestCase
     public function it_can_set_empty_string_password(): void
     {
         $passwordReset = new PasswordReset();
-        
+
         $passwordReset->setPassword('');
-        
+
         $this->assertSame('', $passwordReset->getPassword());
     }
 
@@ -84,9 +84,9 @@ final class PasswordResetTest extends TestCase
     public function it_handles_various_password_formats(string $password): void
     {
         $passwordReset = new PasswordReset();
-        
+
         $passwordReset->setPassword($password);
-        
+
         $this->assertSame($password, $passwordReset->getPassword());
     }
 
@@ -95,14 +95,14 @@ final class PasswordResetTest extends TestCase
     {
         $initialPassword = 'initial-password';
         $newPassword = 'new-password';
-        
+
         $passwordReset = new PasswordReset();
         $passwordReset->setPassword($initialPassword);
-        
+
         $this->assertSame($initialPassword, $passwordReset->getPassword());
-        
+
         $passwordReset->setPassword($newPassword);
-        
+
         $this->assertSame($newPassword, $passwordReset->getPassword());
     }
 
@@ -111,9 +111,9 @@ final class PasswordResetTest extends TestCase
     {
         $password = 'test-password';
         $passwordReset = new PasswordReset();
-        
+
         $passwordReset->setPassword($password);
-        
+
         // Multiple calls should return the same value
         $this->assertSame($password, $passwordReset->getPassword());
         $this->assertSame($password, $passwordReset->getPassword());
@@ -125,9 +125,9 @@ final class PasswordResetTest extends TestCase
     {
         $password = '   ';
         $passwordReset = new PasswordReset();
-        
+
         $passwordReset->setPassword($password);
-        
+
         $this->assertSame($password, $passwordReset->getPassword());
     }
 
@@ -136,9 +136,9 @@ final class PasswordResetTest extends TestCase
     {
         $password = '  password  ';
         $passwordReset = new PasswordReset();
-        
+
         $passwordReset->setPassword($password);
-        
+
         $this->assertSame($password, $passwordReset->getPassword());
         $this->assertStringStartsWith('  ', $passwordReset->getPassword());
         $this->assertStringEndsWith('  ', $passwordReset->getPassword());
@@ -149,9 +149,9 @@ final class PasswordResetTest extends TestCase
     {
         $password = 'PaSsWoRd123';
         $passwordReset = new PasswordReset();
-        
+
         $passwordReset->setPassword($password);
-        
+
         $this->assertSame($password, $passwordReset->getPassword());
         $this->assertNotSame(strtolower($password), $passwordReset->getPassword());
         $this->assertNotSame(strtoupper($password), $passwordReset->getPassword());
@@ -162,9 +162,9 @@ final class PasswordResetTest extends TestCase
     {
         $password = '0';
         $passwordReset = new PasswordReset();
-        
+
         $passwordReset->setPassword($password);
-        
+
         $this->assertSame($password, $passwordReset->getPassword());
         $this->assertNotNull($passwordReset->getPassword());
     }
@@ -174,9 +174,9 @@ final class PasswordResetTest extends TestCase
     {
         $password = 'false';
         $passwordReset = new PasswordReset();
-        
+
         $passwordReset->setPassword($password);
-        
+
         $this->assertSame($password, $passwordReset->getPassword());
     }
 
@@ -185,11 +185,11 @@ final class PasswordResetTest extends TestCase
     {
         $passwordReset = new PasswordReset();
         $passwordReset->setPassword('initial-password');
-        
+
         $this->assertNotNull($passwordReset->getPassword());
-        
+
         $passwordReset->setPassword(null);
-        
+
         $this->assertNull($passwordReset->getPassword());
     }
 }

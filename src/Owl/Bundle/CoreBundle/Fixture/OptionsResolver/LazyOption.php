@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -67,7 +66,7 @@ final class LazyOption
     public static function randomOneOrNull(
         RepositoryInterface $repository,
         int $chanceOfRandomOne = 100,
-        array $criteria = []
+        array $criteria = [],
     ): \Closure {
         return function (Options $options) use ($repository, $chanceOfRandomOne, $criteria): ?object {
             if (random_int(1, 100) > $chanceOfRandomOne) {
@@ -195,8 +194,8 @@ final class LazyOption
                         'The %s resource for field %s with value %s was not found',
                         $repository->getClassName(),
                         $field,
-                        (string) $previousValue
-                    )
+                        (string) $previousValue,
+                    ),
                 );
             }
 

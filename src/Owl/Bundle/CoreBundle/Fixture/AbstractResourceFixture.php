@@ -111,6 +111,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
 
     /**
      * @param array{random: int, prototype: array<mixed>, custom: array<string, array<string, mixed>>} $options
+     *
      * @return list<string>
      */
     private function prepareReferences(array &$options): array

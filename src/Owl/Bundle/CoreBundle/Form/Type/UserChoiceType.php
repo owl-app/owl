@@ -12,9 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class UserChoiceType extends AbstractType
 {
-    /**
-     * @var EntityRepository<object>
-     */
+    /** @var EntityRepository<object> */
     private EntityRepository $userRepository;
 
     private CollectionProviderInterface $collectionProvider;

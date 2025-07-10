@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Bundle\AdminBundle\Form\EventSubscriber;
 
+use Owl\Bundle\AdminBundle\Form\EventSubscriber\TaxRateSnapshotSubscriber;
+use Owl\Component\Invoice\Model\LineItemInterface;
+use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
+use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -15,22 +19,26 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\ResolvedFormTypeInterface;
-use Owl\Bundle\AdminBundle\Form\EventSubscriber\TaxRateSnapshotSubscriber;
-use Owl\Component\Invoice\Model\LineItemInterface;
-use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
-use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
 
 #[CoversClass(TaxRateSnapshotSubscriber::class)]
 final class TaxRateSnapshotSubscriberTest extends TestCase
 {
     private TaxRateSnapshotSubscriber $subscriber;
+
     private FormInterface&MockObject $form;
+
     private FormEvent&MockObject $event;
+
     private LineItemInterface&MockObject $lineItem;
+
     private TaxRateInterface&MockObject $taxRate;
+
     private TaxRateSnapshotInterface&MockObject $taxRateSnapshot;
+
     private FormInterface&MockObject $taxRateForm;
+
     private FormConfigInterface&MockObject $taxRateConfig;
+
     private ResolvedFormTypeInterface&MockObject $taxRateType;
 
     protected function setUp(): void
@@ -158,7 +166,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
             ->expects($this->exactly(2))
             ->method('add')
             ->willReturnCallback(function ($name, $type, $options = []) use (&$callCount) {
-                $callCount++;
+                ++$callCount;
                 if ($callCount === 1) {
                     $this->assertEquals('snapshotNameOverwrite', $name);
                     $this->assertEquals(CheckboxType::class, $type);
@@ -172,6 +180,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
                     $this->assertArrayHasKey('choice_label', $options);
                     $this->assertIsCallable($options['choice_label']);
                 }
+
                 return $this->form;
             });
 
@@ -812,12 +821,13 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
             ->expects($this->exactly(2))
             ->method('remove')
             ->willReturnCallback(function ($fieldName) use (&$removeCallCount) {
-                $removeCallCount++;
+                ++$removeCallCount;
                 if ($removeCallCount === 1) {
                     $this->assertEquals('snapshotNameOverwrite', $fieldName);
                 } elseif ($removeCallCount === 2) {
                     $this->assertEquals('snapshotAmountOverwrite', $fieldName);
                 }
+
                 return $this->form;
             });
 
@@ -866,12 +876,6 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         // Act
         $this->subscriber->submit($this->event);
     }
-
-
-
-
-
-
 
     #[Test]
     public function it_does_not_add_any_fields_when_tax_rate_snapshot_is_null_on_post_set_data(): void
@@ -1211,12 +1215,13 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
             ->expects($this->exactly(2))
             ->method('remove')
             ->willReturnCallback(function ($fieldName) use (&$removeCallCount) {
-                $removeCallCount++;
+                ++$removeCallCount;
                 if ($removeCallCount === 1) {
                     $this->assertEquals('snapshotNameOverwrite', $fieldName);
                 } elseif ($removeCallCount === 2) {
                     $this->assertEquals('snapshotAmountOverwrite', $fieldName);
                 }
+
                 return $this->form;
             });
 

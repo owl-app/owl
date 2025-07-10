@@ -25,17 +25,11 @@ final class GroupNotificationChoiceType extends AbstractType
         ]);
     }
 
-    /**
-     * @return string
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * @return string
-     */
     public function getBlockPrefix(): string
     {
         return 'owl_group_notification_choice';

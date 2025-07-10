@@ -8,8 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Owl\Component\Core\Model\Rbac\RoleInterface;
 use Owl\Component\User\Model\User;
-use Owl\Component\Core\Model\NotificationAcceptedInterface;
-use Owl\Component\Core\Model\AdminUserRegistrationDataInterface;
 
 class AdminUser extends User implements AdminUserInterface
 {

@@ -20,7 +20,6 @@ final class FileFactoryTest extends TestCase
     /** @var FactoryInterface&MockObject */
     private FactoryInterface $factory;
 
-    /** @var FileFactory */
     private FileFactory $fileFactory;
 
     /** @var FileableInterface&ResourceInterface&Stub */

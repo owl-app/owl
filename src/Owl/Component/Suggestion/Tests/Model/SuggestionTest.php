@@ -72,4 +72,4 @@ final class SuggestionTest extends TestCase
         $this->suggestion->setUpdatedAt($dateTime);
         self::assertSame($dateTime, $this->suggestion->getUpdatedAt());
     }
-} 
+}

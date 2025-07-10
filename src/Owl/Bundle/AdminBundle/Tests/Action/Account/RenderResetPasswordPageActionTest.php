@@ -6,7 +6,6 @@ namespace Tests\Owl\Bundle\AdminBundle\Action\Account;
 
 use Owl\Bundle\AdminBundle\Action\Account\RenderResetPasswordPageAction;
 use Owl\Bundle\AdminBundle\Form\Type\ResetPasswordType;
-use Owl\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Owl\Component\Core\Factory\Http\RedirectResponseFactoryInterface;
 use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
@@ -30,14 +29,23 @@ use Twig\Environment;
 final class RenderResetPasswordPageActionTest extends TestCase
 {
     private RenderResetPasswordPageAction $action;
+
     private UserRepositoryInterface&MockObject $userRepository;
+
     private FormFactoryInterface&MockObject $formFactory;
+
     private RequestStack&MockObject $requestStack;
+
     private RedirectResponseFactoryInterface&MockObject $redirectResponseFactory;
+
     private Environment&MockObject $twig;
+
     private AdminUserInterface&MockObject $adminUser;
+
     private FormInterface&MockObject $form;
+
     private Request&MockObject $request;
+
     private string $tokenTtl;
 
     protected function setUp(): void
@@ -58,7 +66,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
             $this->requestStack,
             $this->redirectResponseFactory,
             $this->twig,
-            $this->tokenTtl
+            $this->tokenTtl,
         );
     }
 
@@ -157,7 +165,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
 
         $session = $this->createMock(Session::class);
         $flashBag = $this->createMock(FlashBagInterface::class);
-        
+
         $this->requestStack
             ->expects($this->once())
             ->method('getSession')
@@ -218,7 +226,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
 
         $session = $this->createMock(Session::class);
         $flashBag = $this->createMock(FlashBagInterface::class);
-        
+
         $this->requestStack
             ->expects($this->once())
             ->method('getSession')
@@ -258,14 +266,14 @@ final class RenderResetPasswordPageActionTest extends TestCase
         // Arrange
         $token = 'valid-token';
         $customTtl = 'PT2H';
-        
+
         $action = new RenderResetPasswordPageAction(
             $this->userRepository,
             $this->formFactory,
             $this->requestStack,
             $this->redirectResponseFactory,
             $this->twig,
-            $customTtl
+            $customTtl,
         );
 
         $this->userRepository
@@ -279,6 +287,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
             ->method('isPasswordRequestNonExpired')
             ->with($this->callback(function (\DateInterval $interval) use ($customTtl) {
                 $expected = new \DateInterval($customTtl);
+
                 return $interval->h === $expected->h && $interval->i === $expected->i;
             }))
             ->willReturn(true);
@@ -438,14 +447,14 @@ final class RenderResetPasswordPageActionTest extends TestCase
     {
         // Arrange
         $invalidTtl = 'invalid-ttl';
-        
+
         $action = new RenderResetPasswordPageAction(
             $this->userRepository,
             $this->formFactory,
             $this->requestStack,
             $this->redirectResponseFactory,
             $this->twig,
-            $invalidTtl
+            $invalidTtl,
         );
 
         $token = 'valid-token';
@@ -517,7 +526,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
             ->method('render')
             ->with(
                 $this->identicalTo('@OwlAdmin/security/reset_password.html.twig'),
-                $this->identicalTo(['form' => $formView])
+                $this->identicalTo(['form' => $formView]),
             )
             ->willReturn('<html>content</html>');
 

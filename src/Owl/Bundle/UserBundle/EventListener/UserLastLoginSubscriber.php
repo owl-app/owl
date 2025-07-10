@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\EventListener;
 
+use DateTime;
 use Doctrine\Persistence\ObjectManager;
 use Owl\Bundle\UserBundle\Event\UserEvent;
 use Owl\Bundle\UserBundle\UserEvents;
 use Owl\Component\User\Model\UserInterface as ComponentUserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\User\UserInterface as CoreUserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
-use Symfony\Component\Security\Core\User\UserInterface as CoreUserInterface;
 use UnexpectedValueException;
-use DateTime;
 
 final class UserLastLoginSubscriber implements EventSubscriberInterface
 {

@@ -13,6 +13,7 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 final class UniqueTokenGeneratorTest extends TestCase
 {
     private RandomnessGeneratorInterface $randomnessGenerator;
+
     private UniquenessCheckerInterface $uniquenessChecker;
 
     protected function setUp(): void
@@ -26,7 +27,7 @@ final class UniqueTokenGeneratorTest extends TestCase
         $generator = new UniqueTokenGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            10
+            10,
         );
 
         self::assertInstanceOf(GeneratorInterface::class, $generator);
@@ -37,7 +38,7 @@ final class UniqueTokenGeneratorTest extends TestCase
         $generator = new UniqueTokenGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            10
+            10,
         );
 
         self::assertInstanceOf(UniqueTokenGenerator::class, $generator);
@@ -51,7 +52,7 @@ final class UniqueTokenGeneratorTest extends TestCase
         new UniqueTokenGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            0
+            0,
         );
     }
 
@@ -63,7 +64,7 @@ final class UniqueTokenGeneratorTest extends TestCase
         new UniqueTokenGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            -1
+            -1,
         );
     }
 
@@ -72,7 +73,7 @@ final class UniqueTokenGeneratorTest extends TestCase
         $generator = new UniqueTokenGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            10
+            10,
         );
 
         $this->randomnessGenerator->expects(self::once())
@@ -95,7 +96,7 @@ final class UniqueTokenGeneratorTest extends TestCase
         $generator = new UniqueTokenGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            10
+            10,
         );
 
         $this->randomnessGenerator->expects(self::exactly(3))
@@ -107,21 +108,24 @@ final class UniqueTokenGeneratorTest extends TestCase
             ->method('isUnique')
             ->willReturnCallback(function ($token) {
                 static $callCount = 0;
-                $callCount++;
-                
+                ++$callCount;
+
                 if ($callCount === 1) {
                     self::assertSame('token1', $token);
+
                     return false;
                 }
                 if ($callCount === 2) {
                     self::assertSame('token2', $token);
+
                     return false;
                 }
                 if ($callCount === 3) {
                     self::assertSame('unique_token', $token);
+
                     return true;
                 }
-                
+
                 throw new \Exception('Unexpected call');
             });
 
@@ -135,7 +139,7 @@ final class UniqueTokenGeneratorTest extends TestCase
         $generator = new UniqueTokenGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            20
+            20,
         );
 
         $this->randomnessGenerator->expects(self::once())
@@ -158,7 +162,7 @@ final class UniqueTokenGeneratorTest extends TestCase
         $generator = new UniqueTokenGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            1
+            1,
         );
 
         $this->randomnessGenerator->expects(self::once())

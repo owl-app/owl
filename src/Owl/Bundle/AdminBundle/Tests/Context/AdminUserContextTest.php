@@ -24,10 +24,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class AdminUserContextTest extends TestCase
 {
     private AdminUserContext $context;
+
     private TokenStorageInterface&MockObject $tokenStorage;
+
     private TokenInterface&MockObject $token;
+
     private AdminUserInterface&MockObject $adminUser;
+
     private RoleInterface&MockObject $role;
+
     private RoleSettingInterface&MockObject $roleSetting;
 
     protected function setUp(): void
@@ -73,7 +78,7 @@ final class AdminUserContextTest extends TestCase
     {
         // Arrange
         $regularUser = $this->createMock(UserInterface::class);
-        
+
         $this->tokenStorage
             ->expects($this->once())
             ->method('getToken')
@@ -110,7 +115,7 @@ final class AdminUserContextTest extends TestCase
     {
         // Arrange
         $canonicalName = 'ROLE_ADMIN';
-        
+
         $this->tokenStorage
             ->expects($this->once())
             ->method('getToken')
@@ -190,7 +195,7 @@ final class AdminUserContextTest extends TestCase
     {
         // Arrange
         $theme = 'dark-theme';
-        
+
         $this->tokenStorage
             ->expects($this->once())
             ->method('getToken')

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\AdminBundle\Twig;
 
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Owl\Component\Core\Manager\UserPreferenceManagerInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Pagerfanta\Pagerfanta;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -33,6 +33,7 @@ final class InvoicesSummaryExtension extends AbstractExtension
 
     /**
      * @param Pagerfanta<InvoiceInterface> $invoices
+     *
      * @return array<string, float|string>
      */
     public function getAllCurrencies(string $gridName, Pagerfanta $invoices): array

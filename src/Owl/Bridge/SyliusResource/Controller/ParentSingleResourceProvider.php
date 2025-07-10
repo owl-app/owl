@@ -7,10 +7,10 @@ namespace Owl\Bridge\SyliusResource\Controller;
 use LogicException;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\ItemProviderInterface;
 use Sylius\Component\Registry\ServiceRegistry;
-use Sylius\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\Registry;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sylius\Resource\Metadata\MetadataInterface;
 use Sylius\Resource\Model\ResourceInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ParentSingleResourceProvider implements ParentSingleResourceProviderInterface
 {
@@ -58,6 +58,7 @@ final class ParentSingleResourceProvider implements ParentSingleResourceProvider
 
     /**
      * @param array<string, mixed> $resourceParent
+     *
      * @throws \LogicException
      */
     private function getMetadata(array $resourceParent): MetadataInterface
@@ -71,6 +72,7 @@ final class ParentSingleResourceProvider implements ParentSingleResourceProvider
 
     /**
      * @param array<string, mixed> $resourceParent
+     *
      * @throws \LogicException
      */
     private function getRepositoryParam(array $resourceParent, string $param): mixed

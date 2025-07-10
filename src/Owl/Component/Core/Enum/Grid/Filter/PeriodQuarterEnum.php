@@ -6,7 +6,6 @@ namespace Owl\Component\Core\Enum\Grid\Filter;
 
 use DateTime;
 use UnhandledMatchError;
-use LogicException;
 
 enum PeriodQuarterEnum: string
 {
@@ -16,7 +15,6 @@ enum PeriodQuarterEnum: string
     case TYPE_Q4 = '4';
 
     /**
-     * @param int|string $quarter
      * @return array<string, string>
      */
     public static function getPeriodRange(int|string $quarter): array

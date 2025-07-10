@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\StatusBundle\Form\Type;
 
+use Owl\Component\Status\Model\StatusableInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Owl\Component\Status\Model\StatusableInterface;
 
 abstract class StatusType extends AbstractResourceType
 {

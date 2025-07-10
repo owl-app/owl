@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Owl\Component\Invoice\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 use Owl\Component\Invoice\Model\Buyer\BuyerAwareInterface;
 use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
 use Owl\Component\Invoice\Model\Seller\SellerAwareInterface;

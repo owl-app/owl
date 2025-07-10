@@ -9,9 +9,7 @@ namespace Owl\Bundle\TinymceBundle\Helper;
  */
 class LocaleHelper
 {
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     private static array $locales = [
         'bn' => 'bn_BD',
         'bg' => 'bg_BG',

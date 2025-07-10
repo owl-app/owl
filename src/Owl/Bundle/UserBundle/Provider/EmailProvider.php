@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Owl\Bundle\UserBundle\Provider;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-use Owl\Component\User\Model\UserInterface as OwlUserInterface;
 
 class EmailProvider extends AbstractUserProvider
 {

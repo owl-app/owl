@@ -16,6 +16,7 @@ interface SettingRepositoryInterface extends RepositoryInterface
 
     /**
      * @param string[] $keys
+     *
      * @return SettingInterface[]
      */
     public function finAllBySectionAndKeys(string $section, array $keys): array;

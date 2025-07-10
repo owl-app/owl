@@ -56,6 +56,7 @@ final class OwlUserExtension extends AbstractResourceExtension
 
     /**
      * @param array<string, array<string, array<string, mixed>>> $resources
+     *
      * @return array<string, array<string, mixed>>
      */
     private function resolveResources(array $resources, ContainerBuilder $container): array

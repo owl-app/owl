@@ -4,29 +4,33 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Bundle\AdminBundle\Form\EventSubscriber;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Owl\Bundle\AdminBundle\Form\EventSubscriber\ExchangeRateSnapshotSubscriber;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\ExchangeRateSnapshot;
 use Owl\Component\Core\Invoice\Currency\ExchangeRateCurrencyResolverInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 
 #[CoversClass(ExchangeRateSnapshotSubscriber::class)]
 final class ExchangeRateSnapshotSubscriberTest extends TestCase
 {
     private ExchangeRateSnapshotSubscriber $subscriber;
+
     private ExchangeRateCurrencyResolverInterface&MockObject $exchangeRateCurrencyResolver;
+
     private FormInterface&MockObject $form;
+
     private FormEvent&MockObject $event;
+
     private InvoiceInterface&MockObject $invoice;
 
     protected function setUp(): void
@@ -37,7 +41,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->invoice = $this->createMock(InvoiceInterface::class);
 
         $this->subscriber = new ExchangeRateSnapshotSubscriber(
-            $this->exchangeRateCurrencyResolver
+            $this->exchangeRateCurrencyResolver,
         );
     }
 

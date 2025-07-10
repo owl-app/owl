@@ -17,7 +17,6 @@ use Owl\Component\File\Model\UploaderInterface;
 use Owl\Component\Status\Model\OwnerInterface as StatusOwnerInterface;
 use Owl\Component\User\Model\PermissionUserInterface;
 use Owl\Component\User\Model\UserInterface as BaseUserInterface;
-use Owl\Component\Core\Model\AdminUserRegistrationDataInterface;
 
 interface AdminUserInterface extends
     BaseUserInterface,

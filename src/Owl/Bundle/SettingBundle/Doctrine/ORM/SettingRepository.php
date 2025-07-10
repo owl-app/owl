@@ -28,6 +28,7 @@ class SettingRepository extends EntityRepository implements SettingRepositoryInt
 
     /**
      * @param array<string> $keys
+     *
      * @return array<T>
      */
     public function finAllBySectionAndKeys(string $section, array $keys): array

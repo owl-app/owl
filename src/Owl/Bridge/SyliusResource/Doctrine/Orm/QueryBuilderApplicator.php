@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Owl\Bridge\SyliusResource\Doctrine\Orm;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 
 final class QueryBuilderApplicator implements QueryBuilderApplicatorInterface
 {
     /**
-     * @param QueryBuilder $queryBuilder
      * @param class-string $resourceClass
      * @param array<string, mixed> $criteria
      */
@@ -42,7 +40,6 @@ final class QueryBuilderApplicator implements QueryBuilderApplicatorInterface
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
      * @param class-string $resourceClass
      * @param array<string, string> $sorting
      */
@@ -63,14 +60,15 @@ final class QueryBuilderApplicator implements QueryBuilderApplicatorInterface
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
      * @param class-string $resourceClass
+     *
      * @return ClassMetadata<object>
      */
     private function getClassMetadata(QueryBuilder $queryBuilder, string $resourceClass): ClassMetadata
     {
         /** @var ClassMetadata<object> $metadata */
         $metadata = $queryBuilder->getEntityManager()->getClassMetadata($resourceClass);
+
         return $metadata;
     }
 

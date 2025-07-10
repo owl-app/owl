@@ -13,6 +13,7 @@ use PHPUnit\Framework\TestCase;
 final class PasswordUpdaterTest extends TestCase
 {
     private UserPasswordHasherInterface $passwordHasher;
+
     private PasswordUpdater $passwordUpdater;
 
     protected function setUp(): void
@@ -29,7 +30,7 @@ final class PasswordUpdaterTest extends TestCase
     public function testUpdatePasswordWithPlainPassword(): void
     {
         $user = $this->createMock(CredentialsHolderInterface::class);
-        
+
         $user->expects(self::once())
             ->method('getPlainPassword')
             ->willReturn('plain_password');
@@ -52,7 +53,7 @@ final class PasswordUpdaterTest extends TestCase
     public function testUpdatePasswordWithEmptyPlainPassword(): void
     {
         $user = $this->createMock(CredentialsHolderInterface::class);
-        
+
         $user->expects(self::once())
             ->method('getPlainPassword')
             ->willReturn('');
@@ -72,7 +73,7 @@ final class PasswordUpdaterTest extends TestCase
     public function testUpdatePasswordWithNullPlainPassword(): void
     {
         $user = $this->createMock(CredentialsHolderInterface::class);
-        
+
         $user->expects(self::once())
             ->method('getPlainPassword')
             ->willReturn(null);
@@ -92,7 +93,7 @@ final class PasswordUpdaterTest extends TestCase
     public function testUpdatePasswordWithWhitespacePlainPassword(): void
     {
         $user = $this->createMock(CredentialsHolderInterface::class);
-        
+
         $user->expects(self::once())
             ->method('getPlainPassword')
             ->willReturn('   ');
@@ -115,7 +116,7 @@ final class PasswordUpdaterTest extends TestCase
     public function testUpdatePasswordWithZeroAsPlainPassword(): void
     {
         $user = $this->createMock(CredentialsHolderInterface::class);
-        
+
         $user->expects(self::once())
             ->method('getPlainPassword')
             ->willReturn('0');

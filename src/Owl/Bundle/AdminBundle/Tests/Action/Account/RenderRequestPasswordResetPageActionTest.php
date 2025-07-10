@@ -20,8 +20,11 @@ use Twig\Environment;
 final class RenderRequestPasswordResetPageActionTest extends TestCase
 {
     private RenderRequestPasswordResetPageAction $action;
+
     private Environment&MockObject $twig;
+
     private FormFactoryInterface&MockObject $formFactory;
+
     private FormInterface&MockObject $form;
 
     protected function setUp(): void
@@ -32,7 +35,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
 
         $this->action = new RenderRequestPasswordResetPageAction(
             $this->twig,
-            $this->formFactory
+            $this->formFactory,
         );
     }
 
@@ -188,7 +191,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
             ->method('render')
             ->with(
                 $this->identicalTo('@OwlAdmin/security/request_password_reset.html.twig'),
-                $this->identicalTo(['form' => $formView])
+                $this->identicalTo(['form' => $formView]),
             )
             ->willReturn('<html>content</html>');
 

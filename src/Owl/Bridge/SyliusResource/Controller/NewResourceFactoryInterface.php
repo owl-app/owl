@@ -13,6 +13,7 @@ interface NewResourceFactoryInterface extends SyliusNewResourceFactoryInterface
 {
     /**
      * @template T of ResourceInterface
+     *
      * @param FactoryInterface<T> $factory
      * @param array<string, mixed> $resourceParents
      */

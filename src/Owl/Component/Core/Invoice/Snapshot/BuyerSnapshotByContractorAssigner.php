@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Owl\Component\Core\Invoice\Snapshot;
 
 use Owl\Component\Core\Factory\BuyerFactoryInterface;
+use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Core\Model\Invoice\Invoice;
 use Owl\Component\Invoice\Assigner\SnapshotAssignerInterface;
-use Owl\Component\Invoice\Model\InvoiceInterface;
-use Owl\Component\Core\Model\ContractorInterface;
 use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
+use Owl\Component\Invoice\Model\InvoiceInterface;
 
 /**
  * @template T of BuyerInterface
@@ -17,7 +17,6 @@ use Owl\Component\Invoice\Model\Buyer\BuyerInterface;
 class BuyerSnapshotByContractorAssigner implements SnapshotAssignerInterface
 {
     /**
-     * @param SnapshotAssignerInterface $decoratedBuyerSnapshotRepository
      * @param BuyerFactoryInterface<T> $buyerFactory
      */
     public function __construct(

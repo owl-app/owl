@@ -12,6 +12,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class TokenUniquenessCheckerTest extends TestCase
 {
     private RepositoryInterface $repository;
+
     private TokenUniquenessChecker $checker;
 
     protected function setUp(): void

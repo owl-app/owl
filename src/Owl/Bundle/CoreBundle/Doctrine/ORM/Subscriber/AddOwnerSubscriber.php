@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Owl\Bundle\CoreBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\PrePersistEventArgs;
+use Doctrine\ORM\Events;
 use Owl\Component\Core\Context\AdminUserContextInterface;
 use Owl\Component\Core\Model\Authorization\OwnerableUserInterface;
 use Owl\Component\User\Model\UserAwareInterface;

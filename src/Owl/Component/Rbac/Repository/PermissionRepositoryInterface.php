@@ -14,8 +14,5 @@ interface PermissionRepositoryInterface extends RepositoryInterface
      */
     public function findAllNames(): array;
 
-    /**
-     * @return QueryBuilder|null
-     */
     public function findOneByName(string $name): ?QueryBuilder;
 }

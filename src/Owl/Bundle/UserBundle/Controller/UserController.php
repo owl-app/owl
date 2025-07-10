@@ -221,7 +221,7 @@ class UserController extends BaseController
         }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $isValid) {
-            /** @var  UserRepositoryInterface $userRepository */
+            /** @var UserRepositoryInterface $userRepository */
             $userRepository = $this->repository;
 
             Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);

@@ -24,20 +24,27 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Twig\Environment;
 
 #[CoversClass(RequestPasswordResetAction::class)]
 final class RequestPasswordResetActionTest extends TestCase
 {
     private RequestPasswordResetAction $action;
+
     private FormFactoryInterface&MockObject $formFactory;
+
     private MessageBusInterface&MockObject $messageBus;
+
     private RequestStack&MockObject $requestStack;
+
     private RedirectResponseFactoryInterface&MockObject $redirectResponseFactory;
+
     private Environment&MockObject $twig;
+
     private FormInterface&MockObject $form;
+
     private Request&MockObject $request;
 
     protected function setUp(): void
@@ -148,7 +155,7 @@ final class RequestPasswordResetActionTest extends TestCase
 
         $session = $this->createMock(Session::class);
         $flashBag = $this->createMock(FlashBagInterface::class);
-        
+
         // FlashBagProvider oczekuje FlashBagInterface z getBag('flashes')
         $session
             ->expects($this->once())
@@ -231,7 +238,7 @@ final class RequestPasswordResetActionTest extends TestCase
 
         $session = $this->createMock(Session::class);
         $flashBag = $this->createMock(FlashBagInterface::class);
-        
+
         // FlashBagProvider oczekuje FlashBagInterface z getBag('flashes')
         $session
             ->expects($this->once())
@@ -303,7 +310,7 @@ final class RequestPasswordResetActionTest extends TestCase
         // Assert
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response->getStatusCode());
-        
+
         $content = json_decode($response->getContent(), true);
         $this->assertArrayHasKey('status', $content);
         $this->assertArrayHasKey('errors', $content);

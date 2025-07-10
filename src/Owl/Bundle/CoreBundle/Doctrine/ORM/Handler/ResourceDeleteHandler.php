@@ -29,6 +29,7 @@ final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
 
     /**
      * @param RepositoryInterface<ResourceInterface> $repository
+     *
      * @throws DeleteHandlingException
      */
     public function handle(ResourceInterface $resource, RepositoryInterface $repository): void

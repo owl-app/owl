@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Owl\Component\Setting\Storage;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Owl\Component\Setting\Model\SettingInterface;
 use Owl\Component\Setting\Repository\SettingRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use DateTime;
 
 /**
  * @property SettingRepositoryInterface $repositorySetting

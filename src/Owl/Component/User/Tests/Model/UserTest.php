@@ -210,7 +210,7 @@ final class UserTest extends TestCase
 
         // Adding same role twice should not duplicate
         $this->user->addRole('ROLE_USER');
-        self::assertCount(1, array_filter($this->user->getRoles(), fn($role) => $role === 'ROLE_USER'));
+        self::assertCount(1, array_filter($this->user->getRoles(), fn ($role) => $role === 'ROLE_USER'));
     }
 
     public function testAddRoleConvertsToUppercase(): void
@@ -224,7 +224,7 @@ final class UserTest extends TestCase
     {
         $this->user->addRole('ROLE_USER');
         $this->user->addRole('ROLE_ADMIN');
-        
+
         $this->user->removeRole('ROLE_USER');
         self::assertNotContains('ROLE_USER', $this->user->getRoles());
         self::assertContains('ROLE_ADMIN', $this->user->getRoles());
@@ -241,7 +241,7 @@ final class UserTest extends TestCase
     {
         $this->user->addRole('ROLE_USER');
         $originalRoles = $this->user->getRoles();
-        
+
         $this->user->removeRole('ROLE_ADMIN');
         self::assertSame($originalRoles, $this->user->getRoles());
     }
@@ -257,7 +257,7 @@ final class UserTest extends TestCase
         $ttl = new \DateInterval('PT1H'); // 1 hour
         $requestedAt = new \DateTime('-30 minutes');
         $this->user->setPasswordRequestedAt($requestedAt);
-        
+
         self::assertTrue($this->user->isPasswordRequestNonExpired($ttl));
     }
 
@@ -266,7 +266,7 @@ final class UserTest extends TestCase
         $ttl = new \DateInterval('PT1H'); // 1 hour
         $requestedAt = new \DateTime('-2 hours');
         $this->user->setPasswordRequestedAt($requestedAt);
-        
+
         self::assertFalse($this->user->isPasswordRequestNonExpired($ttl));
     }
 

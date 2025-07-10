@@ -16,7 +16,6 @@ final class UserPermissionsDeleteListener
     }
 
     /**
-     * @param AdminUserInterface $adminUser
      * @param LifecycleEventArgs<EntityManagerInterface> $event
      */
     public function preRemove(AdminUserInterface $adminUser, LifecycleEventArgs $event): void

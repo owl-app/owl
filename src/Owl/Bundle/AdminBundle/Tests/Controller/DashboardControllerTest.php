@@ -19,8 +19,11 @@ use Twig\Environment;
 final class DashboardControllerTest extends TestCase
 {
     private DashboardController $controller;
+
     private SettingStorageInterface&MockObject $settingStorage;
+
     private Environment&MockObject $templatingEngine;
+
     private Request&MockObject $request;
 
     protected function setUp(): void
@@ -31,7 +34,7 @@ final class DashboardControllerTest extends TestCase
 
         $this->controller = new DashboardController(
             $this->settingStorage,
-            $this->templatingEngine
+            $this->templatingEngine,
         );
     }
 
@@ -221,7 +224,7 @@ final class DashboardControllerTest extends TestCase
             ->method('getBySectionAndKeys')
             ->with(
                 $this->identicalTo('system'),
-                $this->identicalTo(['description_dashboard'])
+                $this->identicalTo(['description_dashboard']),
             )
             ->willReturn([]);
 

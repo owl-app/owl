@@ -26,13 +26,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class LoggedInAdminUserProviderTest extends TestCase
 {
     private LoggedInAdminUserProvider $provider;
+
     private Security&MockObject $security;
+
     private TokenStorageInterface&MockObject $tokenStorage;
+
     private RequestStack&MockObject $requestStack;
+
     private UserRepositoryInterface&MockObject $adminUserRepository;
+
     private AdminUserInterface&MockObject $adminUser;
+
     private TokenInterface&MockObject $token;
+
     private Request&MockObject $request;
+
     private SessionInterface&MockObject $session;
 
     protected function setUp(): void
@@ -50,7 +58,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
             $this->security,
             $this->tokenStorage,
             $this->requestStack,
-            $this->adminUserRepository
+            $this->adminUserRepository,
         );
     }
 
@@ -191,7 +199,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
     {
         // Arrange
         $regularUser = $this->createMock(UserInterface::class);
-        
+
         $this->security
             ->expects($this->once())
             ->method('getUser')
@@ -308,7 +316,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
     {
         // Arrange
         $serializedToken = 'serialized-token-data';
-        
+
         $this->security
             ->expects($this->once())
             ->method('getUser')
@@ -389,7 +397,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
     {
         // Arrange
         $invalidToken = 'invalid-token-data';
-        
+
         $this->security
             ->expects($this->once())
             ->method('getUser')
@@ -488,7 +496,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         // Arrange
         $securityUserMock = $securityUser === 'admin' ? $this->adminUser : ($securityUser === 'regular' ? $this->createMock(UserInterface::class) : null);
         $tokenStorageUserMock = $tokenStorageUser === 'admin' ? $this->adminUser : ($tokenStorageUser === 'regular' ? $this->createMock(UserInterface::class) : null);
-        
+
         $this->security
             ->expects($this->once())
             ->method('getUser')

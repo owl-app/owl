@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Bundle\AdminBundle\Form\EventSubscriber;
 
+use Owl\Bundle\AdminBundle\Form\EventSubscriber\LineItemsSubscriber;
+use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
+use Owl\Component\Core\Model\CompanyInterface as CoreCompanyInterface;
+use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -16,20 +20,22 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
-use Owl\Bundle\AdminBundle\Form\EventSubscriber\LineItemsSubscriber;
-use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
-use Owl\Component\Core\Model\Invoice\InvoiceInterface;
-use Owl\Component\Core\Model\CompanyInterface as CoreCompanyInterface;
 
 #[CoversClass(LineItemsSubscriber::class)]
 final class LineItemsSubscriberTest extends TestCase
 {
     private LineItemsSubscriber $subscriber;
+
     private RepositoryInterface&MockObject $companyRepository;
+
     private FormInterface&MockObject $form;
+
     private FormEvent&MockObject $event;
+
     private InvoiceInterface&MockObject $invoice;
+
     private CoreCompanyInterface&MockObject $company;
+
     private CurrencyInterface&MockObject $currency;
 
     protected function setUp(): void

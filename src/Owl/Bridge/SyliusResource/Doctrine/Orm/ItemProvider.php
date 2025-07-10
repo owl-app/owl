@@ -6,8 +6,6 @@ namespace Owl\Bridge\SyliusResource\Doctrine\Orm;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\EntityManagerInterface;
 use Owl\Bridge\SyliusResource\Doctrine\Common\Applicator\ResourceFilterApplicatorInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -59,6 +57,7 @@ final class ItemProvider implements ItemProviderInterface
      * @param EntityRepository<ResourceInterface> $repository
      * @param array<string, mixed> $arguments
      * @param array<string, mixed>|null $criteria
+     *
      * @return array<string, mixed>|null
      */
     private function getCriteria(EntityRepository $repository, ?string $method, array $arguments, ?array $criteria): ?array

@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Owl\Component\Invoice\Model\Seller\SellerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
 class SellerSnapshotAssigner implements SnapshotAssignerInterface
 {

@@ -7,11 +7,10 @@ namespace Owl\Bundle\InvoiceBundle\Validator;
 use Owl\Component\Invoice\Model\InvoiceInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Webmozart\Assert\Assert;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Owl\Bundle\InvoiceBundle\Validator\NumberFormatInvoiceConstraint;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Webmozart\Assert\Assert;
 
 class NumberFormatInvoiceConstraintValidator extends ConstraintValidator
 {

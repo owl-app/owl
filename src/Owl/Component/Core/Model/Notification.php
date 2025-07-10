@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Owl\Component\File\Model\FileInterface;
 use Owl\Component\Notification\Model\Notification as BaseNotification;
-use Owl\Component\User\Model\UserInterface as BaseUserInterface;
 
 class Notification extends BaseNotification implements NotificationInterface
 {

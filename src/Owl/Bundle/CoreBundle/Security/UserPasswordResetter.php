@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\CoreBundle\Security;
 
+use DateInterval;
 use Owl\Bundle\UserBundle\Exception\UserNotFoundException;
 use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
 use Owl\Component\User\Security\PasswordUpdaterInterface;
-use DateInterval;
 
 final readonly class UserPasswordResetter implements UserPasswordResetterInterface
 {

@@ -8,7 +8,6 @@ use Owl\Component\Core\Invoice\Currency\ExchangeRateCurrencyResolverInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface as CoreInvoiceInterface;
 use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
 use Owl\Component\Invoice\Model\InvoiceInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class ExchangeRateSnapshotAssigner implements SnapshotAssignerInterface

@@ -13,6 +13,7 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 final class UniquePinGeneratorTest extends TestCase
 {
     private RandomnessGeneratorInterface $randomnessGenerator;
+
     private UniquenessCheckerInterface $uniquenessChecker;
 
     protected function setUp(): void
@@ -26,7 +27,7 @@ final class UniquePinGeneratorTest extends TestCase
         $generator = new UniquePinGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            4
+            4,
         );
 
         self::assertInstanceOf(GeneratorInterface::class, $generator);
@@ -37,7 +38,7 @@ final class UniquePinGeneratorTest extends TestCase
         $generator = new UniquePinGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            6
+            6,
         );
 
         self::assertInstanceOf(UniquePinGenerator::class, $generator);
@@ -51,7 +52,7 @@ final class UniquePinGeneratorTest extends TestCase
         new UniquePinGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            0
+            0,
         );
     }
 
@@ -63,7 +64,7 @@ final class UniquePinGeneratorTest extends TestCase
         new UniquePinGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            -1
+            -1,
         );
     }
 
@@ -72,7 +73,7 @@ final class UniquePinGeneratorTest extends TestCase
         $generator = new UniquePinGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            4
+            4,
         );
 
         $this->randomnessGenerator->expects(self::once())
@@ -95,7 +96,7 @@ final class UniquePinGeneratorTest extends TestCase
         $generator = new UniquePinGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            4
+            4,
         );
 
         $this->randomnessGenerator->expects(self::exactly(3))
@@ -107,21 +108,24 @@ final class UniquePinGeneratorTest extends TestCase
             ->method('isUnique')
             ->willReturnCallback(function ($pin) {
                 static $callCount = 0;
-                $callCount++;
-                
+                ++$callCount;
+
                 if ($callCount === 1) {
                     self::assertSame('1234', $pin);
+
                     return false;
                 }
                 if ($callCount === 2) {
                     self::assertSame('5678', $pin);
+
                     return false;
                 }
                 if ($callCount === 3) {
                     self::assertSame('9012', $pin);
+
                     return true;
                 }
-                
+
                 throw new \Exception('Unexpected call');
             });
 
@@ -135,7 +139,7 @@ final class UniquePinGeneratorTest extends TestCase
         $generator = new UniquePinGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            6
+            6,
         );
 
         $this->randomnessGenerator->expects(self::once())
@@ -158,7 +162,7 @@ final class UniquePinGeneratorTest extends TestCase
         $generator = new UniquePinGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            1
+            1,
         );
 
         $this->randomnessGenerator->expects(self::once())
@@ -181,7 +185,7 @@ final class UniquePinGeneratorTest extends TestCase
         $generator = new UniquePinGenerator(
             $this->randomnessGenerator,
             $this->uniquenessChecker,
-            10
+            10,
         );
 
         $this->randomnessGenerator->expects(self::once())

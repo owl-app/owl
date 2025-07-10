@@ -50,6 +50,7 @@ final class PermissionFormFactory implements PermissionFormFactoryInterface
     /**
      * @param array<string> $assignedPermissions
      * @param array<string> $disabledPermissions
+     *
      * @return array<string, list<FormView>>
      */
     public function createByExists(RequestConfiguration $requestConfiguration, array $assignedPermissions, array $disabledPermissions = [], bool $withRoles = false): array

@@ -16,7 +16,6 @@ namespace Owl\Bundle\LocaleBundle\Context;
 use Owl\Component\Locale\Context\LocaleContextInterface;
 use Owl\Component\Locale\Context\LocaleNotFoundException;
 use Owl\Component\Locale\Provider\LocaleProviderInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class RequestBasedLocaleContext implements LocaleContextInterface

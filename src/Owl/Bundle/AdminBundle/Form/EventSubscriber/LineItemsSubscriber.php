@@ -7,7 +7,6 @@ namespace Owl\Bundle\AdminBundle\Form\EventSubscriber;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
 use Owl\Component\Company\Model\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
-use Sylius\Component\Currency\Repository\CurrencyRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;

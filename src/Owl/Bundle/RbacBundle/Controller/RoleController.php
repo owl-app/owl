@@ -8,7 +8,6 @@ use Exception;
 use Owl\Bridge\SyliusResource\Controller\BaseController;
 use Owl\Bundle\RbacBundle\Factory\PermissionFormFactoryInterface;
 use Owl\Component\Rbac\Model\RoleInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yiisoft\Rbac\ManagerInterface;
@@ -46,9 +45,6 @@ final class RoleController extends BaseController
         return $this->changePermission('remove', $request, $rbacManager);
     }
 
-    /**
-     * @return Response|null
-     */
     private function changePermission(string $action, Request $request, ManagerInterface $rbacManager): ?Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

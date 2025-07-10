@@ -15,7 +15,6 @@ namespace Owl\Bundle\CoreBundle\CommandHandler\Admin\Account;
 
 use Owl\Bundle\CoreBundle\Command\Admin\Account\SendResetPasswordEmail;
 use Owl\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
-use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
@@ -23,9 +22,6 @@ use Webmozart\Assert\Assert;
 #[AsMessageHandler]
 final class SendResetPasswordEmailHandler
 {
-    /**
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,

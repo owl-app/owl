@@ -43,4 +43,4 @@ final class PermissionTest extends TestCase
     {
         self::assertSame('permission', $this->permission->getType());
     }
-} 
+}

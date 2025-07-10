@@ -44,4 +44,4 @@ final class AuthAssignmentTest extends TestCase
         $this->authAssignment->setUpdatedAt($date);
         self::assertSame($date, $this->authAssignment->getUpdatedAt());
     }
-} 
+}

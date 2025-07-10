@@ -13,19 +13,13 @@ use Sylius\Resource\Model\TranslatableInterface;
 
 class TranslatableEntityLocaleAssignerTest extends TestCase
 {
-    /**
-     * @var LocaleContextInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var LocaleContextInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $localeContext;
 
-    /**
-     * @var TranslationLocaleProviderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var TranslationLocaleProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $translationLocaleProvider;
 
-    /**
-     * @var TranslatableInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var TranslatableInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $translatableEntity;
 
     private TranslatableEntityLocaleAssigner $localeAssigner;
@@ -46,7 +40,7 @@ class TranslatableEntityLocaleAssignerTest extends TestCase
 
         $this->localeAssigner = new TranslatableEntityLocaleAssigner(
             $this->localeContext,
-            $this->translationLocaleProvider
+            $this->translationLocaleProvider,
         );
     }
 
@@ -132,4 +126,4 @@ class TranslatableEntityLocaleAssignerTest extends TestCase
         // Wykonanie
         $this->localeAssigner->assignLocale($this->translatableEntity);
     }
-} 
+}

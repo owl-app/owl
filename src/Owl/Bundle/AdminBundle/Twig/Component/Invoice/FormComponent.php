@@ -39,6 +39,7 @@ class FormComponent
     use ComponentToolsTrait;
     use LiveCollectionTrait;
     use TemplatePropTrait;
+
     /** @use ResourceFormComponentTrait<T> */
     use ResourceFormComponentTrait;
 

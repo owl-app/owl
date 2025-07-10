@@ -7,7 +7,6 @@ namespace Tests\Owl\Component\Rbac\Tests\Model;
 use Doctrine\Common\Collections\Collection;
 use Owl\Component\Rbac\Model\AuthItemInterface;
 use Owl\Component\Rbac\Model\Permission;
-use Owl\Component\Rbac\Model\PermissionInterface;
 use Owl\Component\Rbac\Model\Role;
 use Owl\Component\Rbac\Model\RoleInterface;
 use PHPUnit\Framework\TestCase;
@@ -88,4 +87,4 @@ final class RoleTest extends TestCase
 
         self::assertCount(1, $this->role->getPermissions());
     }
-} 
+}

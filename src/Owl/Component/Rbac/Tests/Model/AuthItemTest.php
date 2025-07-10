@@ -15,7 +15,7 @@ final class AuthItemTest extends TestCase
     protected function setUp(): void
     {
         // Tworzę anonimową klasę rozszerzającą AuthItem dla testów
-        $this->authItem = new class extends AuthItem {
+        $this->authItem = new class() extends AuthItem {
             public function getType(): string
             {
                 return 'test';
@@ -38,4 +38,4 @@ final class AuthItemTest extends TestCase
         $this->authItem->setName('test-item');
         self::assertSame('test-item', $this->authItem->getName());
     }
-} 
+}

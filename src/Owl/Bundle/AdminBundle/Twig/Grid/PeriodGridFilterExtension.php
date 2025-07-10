@@ -31,6 +31,7 @@ final class PeriodGridFilterExtension extends AbstractExtension
 
     /**
      * @param array<string, mixed> $activeCriteria
+     *
      * @return array<string, array<string, mixed>>
      */
     public function generateLinkNavigation(string $field, string $route, array $activeCriteria): array
@@ -55,6 +56,7 @@ final class PeriodGridFilterExtension extends AbstractExtension
 
     /**
      * @param array<string, mixed> $activeCriteria
+     *
      * @return array<string, array<string, mixed>>
      */
     public function generateDataNavigation(string $field, array $activeCriteria): array
@@ -88,6 +90,7 @@ final class PeriodGridFilterExtension extends AbstractExtension
 
     /**
      * @param array<string, mixed> $activeCriteria
+     *
      * @return array{0: array<string, mixed>|null, 1: array<string, array<string, mixed>>}
      */
     private function getNavigationData(string $field, array $activeCriteria): array
@@ -109,6 +112,7 @@ final class PeriodGridFilterExtension extends AbstractExtension
 
     /**
      * @param array<string, mixed> $criteria
+     *
      * @return array<string, array<string, mixed>>
      */
     private function generateMonthNavigation(array $criteria): array
@@ -174,6 +178,7 @@ final class PeriodGridFilterExtension extends AbstractExtension
 
     /**
      * @param array<string, mixed> $criteria
+     *
      * @return array<string, array<string, mixed>>
      */
     private function generateQuarterNavigation(array $criteria): array
@@ -239,6 +244,7 @@ final class PeriodGridFilterExtension extends AbstractExtension
 
     /**
      * @param array<string, mixed> $criteria
+     *
      * @return array<string, array<string, mixed>>
      */
     private function generateYearNavigation(array $criteria): array

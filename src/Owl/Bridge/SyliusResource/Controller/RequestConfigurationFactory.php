@@ -7,8 +7,8 @@ namespace Owl\Bridge\SyliusResource\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration as SyliusRequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Sylius\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
@@ -20,13 +20,10 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     /** @var RouterInterface */
     private $router;
 
-    /**
-     * @var class-string<RequestConfiguration>
-     */
+    /** @var class-string<RequestConfiguration> */
     private string $configurationClass;
 
     /**
-     * @param RequestConfigurationFactoryInterface $decorated
      * @param class-string<RequestConfiguration> $configurationClass
      */
     public function __construct(RequestConfigurationFactoryInterface $decorated, RouterInterface $router, string $configurationClass)
@@ -91,6 +88,7 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
 
     /**
      * @param array<string, mixed> $vars
+     *
      * @return array{url?: mixed, route?: mixed|string|null, parameters?: array<never, never>}
      */
     private function getRefereUrl(Request $request, SyliusRequestConfiguration $configuration, array $vars, string $action): array

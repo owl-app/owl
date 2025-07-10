@@ -6,13 +6,13 @@ namespace Owl\Bridge\SyliusResource\Grid\View;
 
 use Owl\Bridge\SyliusResource\Doctrine\Orm\CollectionProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
+use Sylius\Resource\Metadata\MetadataInterface;
 
 final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
 {

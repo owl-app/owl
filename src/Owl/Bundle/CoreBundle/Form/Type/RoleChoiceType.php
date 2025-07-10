@@ -28,17 +28,11 @@ final class RoleChoiceType extends AbstractType
         ]);
     }
 
-    /**
-     * @return string
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * @return string
-     */
     public function getBlockPrefix(): string
     {
         return 'owl_role_choice';
