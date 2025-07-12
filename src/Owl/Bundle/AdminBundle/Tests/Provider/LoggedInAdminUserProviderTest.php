@@ -4,44 +4,39 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Bundle\AdminBundle\Provider;
 
+use PHPUnit\Framework\Attributes\Test;
 use Owl\Bundle\AdminBundle\Provider\LoggedInAdminUserProvider;
 use Owl\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface;
 use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[CoversClass(LoggedInAdminUserProvider::class)]
 final class LoggedInAdminUserProviderTest extends TestCase
 {
-    private LoggedInAdminUserProvider $provider;
+    private MockObject&Security $security;
 
-    private Security&MockObject $security;
+    private MockObject&TokenStorageInterface $tokenStorage;
 
-    private TokenStorageInterface&MockObject $tokenStorage;
+    private MockObject&RequestStack $requestStack;
 
-    private RequestStack&MockObject $requestStack;
+    private MockObject&UserRepositoryInterface $adminUserRepository;
 
-    private UserRepositoryInterface&MockObject $adminUserRepository;
+    private LoggedInAdminUserProvider $loggedInAdminUserProvider;
 
-    private AdminUserInterface&MockObject $adminUser;
+    private const SECURITY_SESSION_KEY = '_security_admin';
 
-    private TokenInterface&MockObject $token;
-
-    private Request&MockObject $request;
-
-    private SessionInterface&MockObject $session;
+    private const SERIALIZED_TOKEN = 'O:74:"Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken":3:{i:0;N;i:1;s:4:"main";i:2;a:5:{i:0;C:34:"Owl\Component\Core\Model\AdminUser":50:{a:6:{i:0;N;i:1;N;i:2;b:0;i:3;b:0;i:4;i:404;i:5;N;}}i:1;b:1;i:2;N;i:3;a:0:{}i:4;a:1:{i:0;s:5:"admin";}}}';
 
     protected function setUp(): void
     {
@@ -49,12 +44,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->tokenStorage = $this->createMock(TokenStorageInterface::class);
         $this->requestStack = $this->createMock(RequestStack::class);
         $this->adminUserRepository = $this->createMock(UserRepositoryInterface::class);
-        $this->adminUser = $this->createMock(AdminUserInterface::class);
-        $this->token = $this->createMock(TokenInterface::class);
-        $this->request = $this->createMock(Request::class);
-        $this->session = $this->createMock(SessionInterface::class);
-
-        $this->provider = new LoggedInAdminUserProvider(
+        $this->loggedInAdminUserProvider = new LoggedInAdminUserProvider(
             $this->security,
             $this->tokenStorage,
             $this->requestStack,
@@ -63,490 +53,258 @@ final class LoggedInAdminUserProviderTest extends TestCase
     }
 
     #[Test]
-    public function it_implements_logged_in_admin_user_provider_interface(): void
+    public function it_implements_logged_in_admin_user_provider(): void
     {
-        $this->assertInstanceOf(LoggedInAdminUserProviderInterface::class, $this->provider);
+        $this->assertInstanceOf(LoggedInAdminUserProviderInterface::class, $this->loggedInAdminUserProvider);
     }
 
     #[Test]
-    public function it_returns_admin_user_from_security_component(): void
+    public function it_returns_true_when_user_is_in_security(): void
     {
-        // Arrange
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn($this->adminUser);
+        $adminUser = $this->createMock(AdminUserInterface::class);
 
-        // Act
-        $result = $this->provider->getUser();
+        $this->security->expects($this->once())->method('getUser')->willReturn($adminUser);
 
-        // Assert
-        $this->assertSame($this->adminUser, $result);
+        $this->tokenStorage->expects($this->never())->method('getToken');
+        $this->requestStack->expects($this->never())->method('getMainRequest');
+        $this->requestStack->expects($this->never())->method('getSession');
+
+        $this->assertTrue($this->loggedInAdminUserProvider->hasUser());
     }
 
     #[Test]
-    public function it_returns_admin_user_from_token_storage_when_security_fails(): void
+    public function it_returns_true_when_user_is_in_token_storage(): void
     {
-        // Arrange
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn(null);
+        $token = $this->createMock(TokenInterface::class);
+        $adminUser = $this->createMock(AdminUserInterface::class);
 
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn($this->token);
+        $this->security->expects($this->once())->method('getUser')->willReturn(null);
 
-        $this->token
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn($this->adminUser);
+        $token->expects($this->once())->method('getUser')->willReturn($adminUser);
+        $this->tokenStorage->expects($this->once())->method('getToken')->willReturn($token);
 
-        // Act
-        $result = $this->provider->getUser();
+        $this->requestStack->expects($this->never())->method('getMainRequest');
+        $this->requestStack->expects($this->never())->method('getSession');
 
-        // Assert
-        $this->assertSame($this->adminUser, $result);
+        $this->assertTrue($this->loggedInAdminUserProvider->hasUser());
     }
 
     #[Test]
-    public function it_returns_admin_user_from_session_when_other_methods_fail(): void
+    public function it_returns_true_when_user_is_in_main_request_session_token(): void
     {
-        // Arrange
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn(null);
+        $request = $this->createMock(Request::class);
+        $session = $this->createMock(SessionInterface::class);
+        $token = $this->createMock(TokenInterface::class);
 
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn(null);
+        $this->security->expects($this->once())->method('getUser')->willReturn(null);
+        $this->tokenStorage->expects($this->once())->method('getToken')->willReturn($token);
 
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getMainRequest')
-            ->willReturn($this->request);
+        $token->expects($this->once())->method('getUser')->willReturn(null);
 
-        $this->request
-            ->expects($this->once())
-            ->method('getSession')
-            ->willReturn($this->session);
-
-        $this->session
-            ->expects($this->exactly(2))
+        $session->expects($this->once())
             ->method('get')
-            ->with('_security_admin')
-            ->willReturn(null);
+            ->with(self::SECURITY_SESSION_KEY)
+            ->willReturn('serialized_token')
+        ;
 
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getSession')
-            ->willReturn($this->session);
+        $request->expects($this->once())->method('getSession')->willReturn($session);
 
-        // Act
-        $result = $this->provider->getUser();
+        $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn($request);
+        $this->requestStack->expects($this->never())->method('getSession');
 
-        // Assert
-        $this->assertNull($result);
+        $this->assertTrue($this->loggedInAdminUserProvider->hasUser());
     }
 
     #[Test]
-    public function it_returns_null_when_no_user_found_anywhere(): void
+    public function it_returns_true_when_user_is_in_current_request_session_token(): void
     {
-        // Arrange
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn(null);
+        $session = $this->createMock(SessionInterface::class);
+        $token = $this->createMock(TokenInterface::class);
 
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn(null);
+        $this->security->expects($this->once())->method('getUser')->willReturn(null);
+        $this->tokenStorage->expects($this->once())->method('getToken')->willReturn($token);
 
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getMainRequest')
-            ->willReturn($this->request);
+        $token->expects($this->once())->method('getUser')->willReturn(null);
 
-        $this->request
-            ->expects($this->once())
-            ->method('getSession')
-            ->willReturn($this->session);
-
-        $this->session
-            ->expects($this->exactly(2))
+        $session->expects($this->once())
             ->method('get')
-            ->with('_security_admin')
-            ->willReturn(null);
+            ->with(self::SECURITY_SESSION_KEY)
+            ->willReturn('serialized_token')
+        ;
 
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getSession')
-            ->willReturn($this->session);
+        $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn(null);
+        $this->requestStack->expects($this->once())->method('getSession')->willReturn($session);
 
-        // Act
-        $result = $this->provider->getUser();
-
-        // Assert
-        $this->assertNull($result);
+        $this->assertTrue($this->loggedInAdminUserProvider->hasUser());
     }
 
     #[Test]
-    public function it_returns_null_when_security_returns_non_admin_user(): void
+    public function it_returns_false_when_there_is_no_user(): void
     {
-        // Arrange
-        $regularUser = $this->createMock(UserInterface::class);
+        $sessionMock = $this->createMock(Session::class);
 
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn($regularUser);
+        $this->security->expects($this->once())->method('getUser')->willReturn(null);
+        $this->tokenStorage->expects($this->once())->method('getToken')->willReturn(null);
+        $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn(null);
 
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn(null);
-
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getMainRequest')
-            ->willReturn($this->request);
-
-        $this->request
-            ->expects($this->once())
-            ->method('getSession')
-            ->willReturn($this->session);
-
-        $this->session
-            ->expects($this->exactly(2))
+        $sessionMock->expects($this->once())
             ->method('get')
-            ->with('_security_admin')
-            ->willReturn(null);
+            ->with(self::SECURITY_SESSION_KEY)
+            ->willReturn(null)
+        ;
 
-        $this->requestStack
-            ->expects($this->once())
+        $this->requestStack->expects($this->once())->method('getSession')->willReturn($sessionMock);
+
+        $this->assertFalse($this->loggedInAdminUserProvider->hasUser());
+    }
+
+    #[Test]
+    public function it_returns_false_when_user_cannot_be_provided_and_session_is_not_available_in_current_request(): void
+    {
+        $this->security->expects($this->once())->method('getUser')->willReturn(null);
+        $this->tokenStorage->expects($this->once())->method('getToken')->willReturn(null);
+        $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn(null);
+
+        $this->requestStack->expects($this->once())
             ->method('getSession')
-            ->willReturn($this->session);
+            ->willThrowException(new SessionNotFoundException())
+        ;
 
-        // Act
-        $result = $this->provider->getUser();
-
-        // Assert
-        $this->assertNull($result);
+        $this->assertFalse($this->loggedInAdminUserProvider->hasUser());
     }
 
     #[Test]
-    public function it_handles_session_not_found_exception(): void
+    public function it_returns_false_when_user_cannot_be_provided_and_session_is_not_available_in_main_request(): void
     {
-        // Arrange
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn(null);
+        $requestMock = $this->createMock(Request::class);
 
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn(null);
+        $this->security->expects($this->once())->method('getUser')->willReturn(null);
+        $this->tokenStorage->expects($this->once())->method('getToken')->willReturn(null);
+        $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn($requestMock);
 
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getMainRequest')
-            ->willReturn($this->request);
-
-        $this->request
-            ->expects($this->once())
+        $requestMock->expects($this->once())
             ->method('getSession')
-            ->willThrowException(new SessionNotFoundException());
+            ->willThrowException(new SessionNotFoundException())
+        ;
 
-        // Act
-        $result = $this->provider->getUser();
-
-        // Assert
-        $this->assertNull($result);
+        $this->assertFalse($this->loggedInAdminUserProvider->hasUser());
     }
 
     #[Test]
-    public function it_returns_true_when_has_admin_user_from_security(): void
+    public function it_gets_user_from_security(): void
     {
-        // Arrange
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn($this->adminUser);
+        $adminUserMock = $this->createMock(AdminUserInterface::class);
 
-        // Act
-        $result = $this->provider->hasUser();
+        $this->security->expects($this->once())->method('getUser')->willReturn($adminUserMock);
 
-        // Assert
-        $this->assertTrue($result);
+        $this->tokenStorage->expects($this->never())->method('getToken');
+        $this->requestStack->expects($this->never())->method('getMainRequest');
+        $this->requestStack->expects($this->never())->method('getSession');
+        $this->adminUserRepository->expects($this->never())->method('find');
+
+        $this->assertSame($adminUserMock, $this->loggedInAdminUserProvider->getUser());
     }
 
     #[Test]
-    public function it_returns_true_when_has_admin_user_from_token_storage(): void
+    public function it_gets_user_from_token_storage(): void
     {
-        // Arrange
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn(null);
+        $token = $this->createMock(TokenInterface::class);
+        $adminUser = $this->createMock(AdminUserInterface::class);
 
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn($this->token);
+        $this->security->expects($this->once())->method('getUser')->willReturn(null);
 
-        $this->token
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn($this->adminUser);
+        $token->expects($this->once())->method('getUser')->willReturn($adminUser);
+        $this->tokenStorage->expects($this->once())->method('getToken')->willReturn($token);
 
-        // Act
-        $result = $this->provider->hasUser();
+        $this->requestStack->expects($this->never())->method('getMainRequest');
+        $this->requestStack->expects($this->never())->method('getSession');
+        $this->adminUserRepository->expects($this->never())->method('find');
 
-        // Assert
-        $this->assertTrue($result);
+        $this->assertSame($adminUser, $this->loggedInAdminUserProvider->getUser());
     }
 
     #[Test]
-    public function it_returns_true_when_has_serialized_token_in_session(): void
+    public function it_gets_user_from_main_request_session(): void
     {
-        // Arrange
-        $serializedToken = 'serialized-token-data';
+        $request = $this->createMock(Request::class);
+        $session = $this->createMock(Session::class);
+        $adminUser = $this->createMock(AdminUserInterface::class);
 
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn(null);
+        $this->security->method('getUser')->willReturn(null);
+        $this->tokenStorage->method('getToken')->willReturn(null);
 
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn(null);
-
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getMainRequest')
-            ->willReturn($this->request);
-
-        $this->request
-            ->expects($this->once())
-            ->method('getSession')
-            ->willReturn($this->session);
-
-        $this->session
+        $session
             ->expects($this->once())
             ->method('get')
-            ->with('_security_admin')
-            ->willReturn($serializedToken);
+            ->with(self::SECURITY_SESSION_KEY)
+            ->willReturn(self::SERIALIZED_TOKEN)
+        ;
 
-        // Act
-        $result = $this->provider->hasUser();
+        $request->method('getSession')->willReturn($session);
 
-        // Assert
-        $this->assertTrue($result);
+        $this->requestStack->method('getMainRequest')->willReturn($request);
+
+        $adminUser->method('getId')->willReturn(404);
+
+        $this->adminUserRepository
+            ->expects($this->once())
+            ->method('find')
+            ->with(404)
+            ->willReturn($adminUser)
+        ;
+
+        $result = $this->loggedInAdminUserProvider->getUser();
+
+        $this->assertSame($adminUser, $result);
     }
 
     #[Test]
-    public function it_returns_false_when_has_no_user_anywhere(): void
+    public function it_gets_user_from_current_request_session(): void
     {
-        // Arrange
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn(null);
+        $session = $this->createMock(Session::class);
+        $adminUser = $this->createMock(AdminUserInterface::class);
 
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn(null);
+        $this->security->method('getUser')->willReturn(null);
+        $this->tokenStorage->method('getToken')->willReturn(null);
+        $this->requestStack->method('getMainRequest')->willReturn(null);
 
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getMainRequest')
-            ->willReturn($this->request);
+        $this->requestStack->method('getSession')->willReturn($session);
 
-        $this->request
-            ->expects($this->once())
-            ->method('getSession')
-            ->willReturn($this->session);
-
-        $this->session
-            ->expects($this->exactly(2))
-            ->method('get')
-            ->with('_security_admin')
-            ->willReturn(null);
-
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getSession')
-            ->willReturn($this->session);
-
-        // Act
-        $result = $this->provider->hasUser();
-
-        // Assert
-        $this->assertFalse($result);
-    }
-
-    #[Test]
-    public function it_returns_null_when_session_token_is_not_serializable(): void
-    {
-        // Arrange
-        $invalidToken = 'invalid-token-data';
-
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn(null);
-
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn(null);
-
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getMainRequest')
-            ->willReturn($this->request);
-
-        $this->request
-            ->expects($this->once())
-            ->method('getSession')
-            ->willReturn($this->session);
-
-        $this->session
+        $session
             ->expects($this->once())
             ->method('get')
-            ->with('_security_admin')
-            ->willReturn($invalidToken);
+            ->with(self::SECURITY_SESSION_KEY)
+            ->willReturn(self::SERIALIZED_TOKEN)
+        ;
 
-        // Act
-        $result = $this->provider->getUser();
+        $adminUser->method('getId')->willReturn(404);
 
-        // Assert
-        $this->assertNull($result);
+        $this->adminUserRepository
+            ->expects($this->once())
+            ->method('find')
+            ->with(404)
+            ->willReturn($adminUser)
+        ;
+
+        $result = $this->loggedInAdminUserProvider->getUser();
+
+        $this->assertSame($adminUser, $result);
     }
 
     #[Test]
-    public function it_handles_session_not_found_exception_gracefully_in_has_user(): void
+    public function it_returns_null_when_user_cannot_be_provided(): void
     {
-        // Arrange
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn(null);
+        $this->security->expects($this->once())->method('getUser')->willReturn(null);
+        $this->tokenStorage->expects($this->once())->method('getToken')->willReturn(null);
+        $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn(null);
 
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn(null);
-
-        $this->requestStack
-            ->expects($this->once())
-            ->method('getMainRequest')
-            ->willReturn($this->request);
-
-        $this->request
-            ->expects($this->once())
+        $this->requestStack->expects($this->once())
             ->method('getSession')
-            ->willThrowException(new SessionNotFoundException());
+            ->willThrowException(new SessionNotFoundException())
+        ;
 
-        // Act
-        $result = $this->provider->hasUser();
+        $this->adminUserRepository->expects($this->never())->method('find');
 
-        // Assert
-        $this->assertFalse($result);
-    }
-
-    /**
-     * @return array<string, array<string, mixed>>
-     */
-    public static function userRetrievalScenarioProvider(): array
-    {
-        return [
-            'security returns admin user' => [
-                'securityUser' => 'admin',
-                'tokenStorageUser' => null,
-                'sessionToken' => null,
-                'expected' => 'admin',
-            ],
-            'token storage returns admin user' => [
-                'securityUser' => null,
-                'tokenStorageUser' => 'admin',
-                'sessionToken' => null,
-                'expected' => 'admin',
-            ],
-            'no user found' => [
-                'securityUser' => null,
-                'tokenStorageUser' => null,
-                'sessionToken' => null,
-                'expected' => null,
-            ],
-        ];
-    }
-
-    #[Test]
-    #[DataProvider('userRetrievalScenarioProvider')]
-    public function it_follows_correct_user_retrieval_priority(?string $securityUser, ?string $tokenStorageUser, ?string $sessionToken, ?string $expected): void
-    {
-        // Arrange
-        $securityUserMock = $securityUser === 'admin' ? $this->adminUser : ($securityUser === 'regular' ? $this->createMock(UserInterface::class) : null);
-        $tokenStorageUserMock = $tokenStorageUser === 'admin' ? $this->adminUser : ($tokenStorageUser === 'regular' ? $this->createMock(UserInterface::class) : null);
-
-        $this->security
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn($securityUserMock);
-
-        if ($securityUser === null) {
-            $this->tokenStorage
-                ->expects($this->once())
-                ->method('getToken')
-                ->willReturn($tokenStorageUser ? $this->token : null);
-
-            if ($tokenStorageUser) {
-                $this->token
-                    ->expects($this->once())
-                    ->method('getUser')
-                    ->willReturn($tokenStorageUserMock);
-            }
-        }
-
-        if ($securityUser === null && $tokenStorageUser === null) {
-            $this->requestStack
-                ->expects($this->once())
-                ->method('getMainRequest')
-                ->willReturn($this->request);
-
-            $this->request
-                ->expects($this->once())
-                ->method('getSession')
-                ->willReturn($this->session);
-
-            $this->session
-                ->expects($this->exactly(2))
-                ->method('get')
-                ->with('_security_admin')
-                ->willReturn(null);
-
-            $this->requestStack
-                ->expects($this->once())
-                ->method('getSession')
-                ->willReturn($this->session);
-        }
-
-        // Act
-        $result = $this->provider->getUser();
-
-        // Assert
-        if ($expected === 'admin') {
-            $this->assertSame($this->adminUser, $result);
-        } else {
-            $this->assertNull($result);
-        }
+        $this->assertNull($this->loggedInAdminUserProvider->getUser());
     }
 }

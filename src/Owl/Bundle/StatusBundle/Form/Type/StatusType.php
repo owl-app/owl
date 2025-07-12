@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\StatusBundle\Form\Type;
 
-use Owl\Component\Status\Model\StatusableInterface;
+use Owl\Component\Status\Model\Status;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,16 +15,12 @@ abstract class StatusType extends AbstractResourceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var ResourceInterface|StatusableInterface|null $resource */
+        /** @var Status|null $resource */
         $resource = $builder->getData();
 
         $choices = [];
-        if ($resource instanceof StatusableInterface) {
-            if (method_exists($resource, 'getStatusLabels')) {
-                /** @var array<string, string> $labels */
-                $labels = $resource->getStatusLabels();
-                $choices = array_flip($labels);
-            }
+        if ($resource instanceof Status) {
+            $choices = array_flip($resource->getStatusesLabels());
         }
 
         $builder
