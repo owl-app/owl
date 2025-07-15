@@ -47,3 +47,6 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 # IDE
 .cursor/*
+
+# AI
+.owl/*
