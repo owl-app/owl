@@ -7,9 +7,7 @@ namespace Tests\Owl\Bundle\AdminBundle\Controller\Action;
 use Doctrine\ORM\EntityRepository;
 use Owl\Bridge\SyliusResource\Doctrine\Orm\ItemProviderInterface;
 use Owl\Bundle\AdminBundle\Controller\Action\ListResourceWithParentAction;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
@@ -29,7 +27,6 @@ use Owl\Bridge\SyliusResource\Controller\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Twig\Environment;
 
-#[CoversClass(ListResourceWithParentAction::class)]
 final class ListResourceWithParentActionTest extends TestCase
 {
     private ListResourceWithParentAction $action;
@@ -77,8 +74,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->setContainer($this->container);
     }
 
-    #[Test]
-    public function it_successfully_lists_resources_with_parent(): void
+    public function testSuccessfullyListsResourcesWithParent(): void
     {
         // Arrange
         $parentId = 123;
@@ -155,8 +151,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->assertSame('rendered content', $result->getContent());
     }
 
-    #[Test]
-    public function it_throws_access_denied_exception_when_not_authorized(): void
+    public function testThrowsAccessDeniedExceptionWhenNotAuthorized(): void
     {
         // Arrange
         $parentId = 123;
@@ -190,8 +185,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_throws_not_found_exception_when_parent_resource_not_found(): void
+    public function testThrowsNotFoundExceptionWhenParentResourceNotFound(): void
     {
         // Arrange
         $parentId = 999;
@@ -209,8 +203,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_throws_not_found_exception_when_id_attribute_is_missing(): void
+    public function testThrowsNotFoundExceptionWhenIdAttributeIsMissing(): void
     {
         // Arrange
         $request = new Request();
@@ -222,9 +215,8 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
     #[DataProvider('invalidIdDataProvider')]
-    public function it_handles_various_invalid_id_scenarios(
+    public function testHandlesVariousInvalidIdScenarios(
         mixed $id,
         string $expectedMessage
     ): void {
@@ -243,8 +235,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_handles_item_provider_exception(): void
+    public function testHandlesItemProviderException(): void
     {
         // Arrange
         $parentId = 123;
@@ -262,8 +253,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_handles_request_configuration_factory_exception(): void
+    public function testHandlesRequestConfigurationFactoryException(): void
     {
         // Arrange
         $parentId = 123;
@@ -287,8 +277,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_handles_resources_collection_provider_exception(): void
+    public function testHandlesResourcesCollectionProviderException(): void
     {
         // Arrange
         $parentId = 123;
@@ -322,8 +311,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_handles_event_dispatcher_exception(): void
+    public function testHandlesEventDispatcherException(): void
     {
         // Arrange
         $parentId = 123;
@@ -363,8 +351,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_handles_twig_rendering_exception(): void
+    public function testHandlesTwigRenderingException(): void
     {
         // Arrange
         $parentId = 123;
@@ -432,8 +419,7 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_works_with_authorized_access(): void
+    public function testWorksWithAuthorizedAccess(): void
     {
         // Arrange
         $parentId = 123;
@@ -514,9 +500,8 @@ final class ListResourceWithParentActionTest extends TestCase
         $this->assertSame('authorized content', $result->getContent());
     }
 
-    #[Test]
     #[DataProvider('emptyResourcesDataProvider')]
-    public function it_handles_empty_resources_collection(
+    public function testHandlesEmptyResourcesCollection(
         array $resources,
         string $expectedContent
     ): void {

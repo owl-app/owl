@@ -24,8 +24,7 @@ final class InvoiceSnapshotAssignListenerTest extends TestCase
         $this->listener = new InvoiceSnapshotAssignListener($this->registrySnapshotAssigner);
     }
 
-    #[Test]
-    public function it_assigns_snapshots_using_all_registered_assigners(): void
+    public function testAssignsSnapshotsUsingAllRegisteredAssigners(): void
     {
         // Arrange
         $invoice = $this->createMock(InvoiceInterface::class);
@@ -56,8 +55,7 @@ final class InvoiceSnapshotAssignListenerTest extends TestCase
         // Assertions are covered by the mock expectations above
     }
 
-    #[Test]
-    public function it_handles_empty_registry(): void
+    public function testHandlesEmptyRegistry(): void
     {
         // Arrange
         $invoice = $this->createMock(InvoiceInterface::class);
@@ -76,8 +74,7 @@ final class InvoiceSnapshotAssignListenerTest extends TestCase
         // No exceptions should be thrown when registry is empty
     }
 
-    #[Test]
-    public function it_throws_exception_when_subject_is_not_invoice_interface(): void
+    public function testThrowsExceptionWhenSubjectIsNotInvoiceInterface(): void
     {
         // Arrange
         $invalidSubject = new \stdClass();
@@ -88,8 +85,7 @@ final class InvoiceSnapshotAssignListenerTest extends TestCase
         $this->listener->assignSnapshot($event);
     }
 
-    #[Test]
-    public function it_assigns_snapshots_in_priority_order(): void
+    public function testAssignsSnapshotsInPriorityOrder(): void
     {
         // Arrange
         $invoice = $this->createMock(InvoiceInterface::class);
@@ -127,8 +123,7 @@ final class InvoiceSnapshotAssignListenerTest extends TestCase
         $this->assertSame(['assigner1', 'assigner2'], $callOrder);
     }
 
-    #[Test]
-    public function it_break_assignment_if_one_assigner_fails(): void
+    public function testBreakAssignmentIfOneAssignerFails(): void
     {
         // Arrange
         $invoice = $this->createMock(InvoiceInterface::class);
@@ -159,8 +154,7 @@ final class InvoiceSnapshotAssignListenerTest extends TestCase
         $this->listener->assignSnapshot($event);
     }
 
-    #[Test]
-    public function it_calls_assign_on_single_assigner(): void
+    public function testCallsAssignOnSingleAssigner(): void
     {
         // Arrange
         $invoice = $this->createMock(InvoiceInterface::class);

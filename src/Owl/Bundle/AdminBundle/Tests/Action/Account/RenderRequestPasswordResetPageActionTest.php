@@ -6,8 +6,6 @@ namespace Tests\Owl\Bundle\AdminBundle\Action\Account;
 
 use Owl\Bundle\AdminBundle\Action\Account\RenderRequestPasswordResetPageAction;
 use Owl\Bundle\AdminBundle\Form\Type\RequestPasswordResetType;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -16,7 +14,6 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-#[CoversClass(RenderRequestPasswordResetPageAction::class)]
 final class RenderRequestPasswordResetPageActionTest extends TestCase
 {
     private RenderRequestPasswordResetPageAction $action;
@@ -39,8 +36,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_renders_request_password_reset_page(): void
+    public function testRendersRequestPasswordResetPage(): void
     {
         // Arrange
         $formView = $this->createMock(FormView::class);
@@ -74,8 +70,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
     }
 
-    #[Test]
-    public function it_handles_form_factory_exception(): void
+    public function testHndlesFormFactoryException(): void
     {
         // Arrange
         $this->formFactory
@@ -90,8 +85,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
         ($this->action)();
     }
 
-    #[Test]
-    public function it_handles_form_view_creation_exception(): void
+    public function testHandlesFormViewCreationException(): void
     {
         // Arrange
         $this->formFactory
@@ -111,8 +105,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
         ($this->action)();
     }
 
-    #[Test]
-    public function it_handles_twig_render_exception(): void
+    public function testHandlesTwigRenderException(): void
     {
         // Arrange
         $formView = $this->createMock(FormView::class);
@@ -142,8 +135,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
         ($this->action)();
     }
 
-    #[Test]
-    public function it_always_creates_form_with_correct_type(): void
+    public function testAlwaysCreatesFormWithCorrectType(): void
     {
         // Arrange
         $formView = $this->createMock(FormView::class);
@@ -170,8 +162,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
         // Assert - expectations are verified by PHPUnit
     }
 
-    #[Test]
-    public function it_always_renders_correct_template(): void
+    public function testAlwaysRendersCorrectTemplate(): void
     {
         // Arrange
         $formView = $this->createMock(FormView::class);
@@ -201,8 +192,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
         // Assert - expectations are verified by PHPUnit
     }
 
-    #[Test]
-    public function it_returns_response_with_correct_status_code(): void
+    public function testReturnsResponseWithCorrectStatusCode(): void
     {
         // Arrange
         $formView = $this->createMock(FormView::class);
@@ -229,8 +219,7 @@ final class RenderRequestPasswordResetPageActionTest extends TestCase
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
     }
 
-    #[Test]
-    public function it_returns_response_with_correct_content_type(): void
+    public function testReturnsResponseWithCorrectContentType(): void
     {
         // Arrange
         $formView = $this->createMock(FormView::class);

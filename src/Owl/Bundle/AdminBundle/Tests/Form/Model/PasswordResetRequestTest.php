@@ -5,32 +5,26 @@ declare(strict_types=1);
 namespace Tests\Owl\Bundle\AdminBundle\Form\Model;
 
 use Owl\Bundle\AdminBundle\Form\Model\PasswordResetRequest;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(PasswordResetRequest::class)]
 final class PasswordResetRequestTest extends TestCase
 {
-    #[Test]
-    public function it_can_be_instantiated(): void
+    public function testCanBeInstantiated(): void
     {
         $passwordResetRequest = new PasswordResetRequest();
 
         $this->assertInstanceOf(PasswordResetRequest::class, $passwordResetRequest);
     }
 
-    #[Test]
-    public function it_has_null_email_by_default(): void
+    public function testHasNullEmailByDefault(): void
     {
         $passwordResetRequest = new PasswordResetRequest();
 
         $this->assertNull($passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_can_set_and_get_email(): void
+    public function testCanSetAndGetEmail(): void
     {
         $email = 'test@example.com';
         $passwordResetRequest = new PasswordResetRequest();
@@ -40,8 +34,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_can_set_null_email(): void
+    public function testCanSetNullEmail(): void
     {
         $passwordResetRequest = new PasswordResetRequest();
         $passwordResetRequest->setEmail('test@example.com');
@@ -51,8 +44,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertNull($passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_can_set_empty_string_email(): void
+    public function testCanSetEmptyStringEmail(): void
     {
         $passwordResetRequest = new PasswordResetRequest();
 
@@ -83,9 +75,8 @@ final class PasswordResetRequestTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('emailProvider')]
-    public function it_handles_various_email_formats(string $email): void
+    public function testHandlesVariousEmailFormats(string $email): void
     {
         $passwordResetRequest = new PasswordResetRequest();
 
@@ -94,8 +85,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_allows_email_to_be_overwritten(): void
+    public function testAllowsEmailToBeOverwritten(): void
     {
         $initialEmail = 'initial@example.com';
         $newEmail = 'new@example.com';
@@ -110,8 +100,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($newEmail, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_maintains_email_state(): void
+    public function testMaintainsEmailState(): void
     {
         $email = 'test@example.com';
         $passwordResetRequest = new PasswordResetRequest();
@@ -124,8 +113,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_with_whitespace(): void
+    public function testHandlesEmailWithWhitespace(): void
     {
         $email = '  test@example.com  ';
         $passwordResetRequest = new PasswordResetRequest();
@@ -135,8 +123,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_does_not_trim_email(): void
+    public function testDoesNotTrimEmail(): void
     {
         $email = '  test@example.com  ';
         $passwordResetRequest = new PasswordResetRequest();
@@ -148,8 +135,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertStringEndsWith('  ', $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_preserves_email_case(): void
+    public function testPreservesEmailCase(): void
     {
         $email = 'Test@Example.Com';
         $passwordResetRequest = new PasswordResetRequest();
@@ -161,8 +147,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertNotSame(strtoupper($email), $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_invalid_email_format(): void
+    public function testHandlesInvalidEmailFormat(): void
     {
         $invalidEmail = 'not-an-email';
         $passwordResetRequest = new PasswordResetRequest();
@@ -172,8 +157,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($invalidEmail, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_with_special_characters(): void
+    public function testHandlesEmailWithSpecialCharacters(): void
     {
         $email = 'user+tag@example.com';
         $passwordResetRequest = new PasswordResetRequest();
@@ -183,8 +167,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_can_reset_email_to_null_after_being_set(): void
+    public function testCanResetEmailToNullAfterBeingSet(): void
     {
         $passwordResetRequest = new PasswordResetRequest();
         $passwordResetRequest->setEmail('test@example.com');
@@ -196,8 +179,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertNull($passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_with_only_whitespace(): void
+    public function testHandlesEmailWithOnlyWhitespace(): void
     {
         $email = '   ';
         $passwordResetRequest = new PasswordResetRequest();
@@ -207,8 +189,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_with_newlines(): void
+    public function testHandlesEmailWithNewlines(): void
     {
         $email = "test@example.com\n";
         $passwordResetRequest = new PasswordResetRequest();
@@ -218,8 +199,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_with_tabs(): void
+    public function testHandlesEmailWithTabs(): void
     {
         $email = "test@example.com\t";
         $passwordResetRequest = new PasswordResetRequest();
@@ -229,8 +209,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_very_long_email(): void
+    public function testHandlesVeryLongEmail(): void
     {
         $localPart = str_repeat('a', 64);
         $domain = str_repeat('b', 63) . '.com';
@@ -242,8 +221,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_with_multiple_at_signs(): void
+    public function testHandlesEmailWithMultipleAtSigns(): void
     {
         $email = 'user@@example.com';
         $passwordResetRequest = new PasswordResetRequest();
@@ -253,8 +231,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_starting_with_dot(): void
+    public function testHandlesEmailStartingWithDot(): void
     {
         $email = '.user@example.com';
         $passwordResetRequest = new PasswordResetRequest();
@@ -264,8 +241,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_ending_with_dot(): void
+    public function testHandlesEmailEndingWithDot(): void
     {
         $email = 'user.@example.com';
         $passwordResetRequest = new PasswordResetRequest();
@@ -275,8 +251,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_with_consecutive_dots(): void
+    public function testHandlesEmailWithConsecutiveDots(): void
     {
         $email = 'user..name@example.com';
         $passwordResetRequest = new PasswordResetRequest();
@@ -286,8 +261,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_without_domain(): void
+    public function testHandlesEmailWithoutDomain(): void
     {
         $email = 'user@';
         $passwordResetRequest = new PasswordResetRequest();
@@ -297,8 +271,7 @@ final class PasswordResetRequestTest extends TestCase
         $this->assertSame($email, $passwordResetRequest->getEmail());
     }
 
-    #[Test]
-    public function it_handles_email_without_at_sign(): void
+    public function testHandlesEmailWithoutAtSign(): void
     {
         $email = 'userexample.com';
         $passwordResetRequest = new PasswordResetRequest();

@@ -9,13 +9,10 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Owl\Bundle\CategoryBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(LoadMetadataSubscriber::class)]
 final class LoadMetadataSubscriberTest extends TestCase
 {
     private EntityManagerInterface&MockObject $entityManager;
@@ -28,8 +25,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->metadata = $this->createMock(ClassMetadata::class);
     }
 
-    #[Test]
-    public function it_returns_subscribed_events(): void
+    public function testReturnsSubscribedEvents(): void
     {
         // Arrange
         $subjects = [];
@@ -42,8 +38,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->assertSame(['loadClassMetadata'], $events);
     }
 
-    #[Test]
-    public function it_does_not_modify_metadata_when_class_is_not_a_subject(): void
+    public function testDoesNotModifyMetadataWhenClassIsNotASubject(): void
     {
         // Arrange
         $subjects = [
@@ -70,8 +65,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->assertTrue(true);
     }
 
-    #[Test]
-    public function it_maps_many_to_one_category_relation_when_class_is_subject(): void
+    public function testMapsManyToOneCategoryRelationWhenClassIsSubject(): void
     {
         // Arrange
         $subjects = [
@@ -125,8 +119,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $subscriber->loadClassMetadata($eventArgs);
     }
 
-    #[Test]
-    public function it_uses_field_name_when_column_name_is_not_available(): void
+    public function testUsesFieldNameWhenColumnNameIsNotAvailable(): void
     {
         // Arrange
         $subjects = [
@@ -179,8 +172,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $subscriber->loadClassMetadata($eventArgs);
     }
 
-    #[Test]
-    public function it_handles_multiple_subjects_configuration(): void
+    public function testHandlesMultipleSubjectsConfiguration(): void
     {
         // Arrange
         $subjects = [
@@ -242,8 +234,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $subscriber->loadClassMetadata($eventArgs);
     }
 
-    #[Test]
-    public function it_constructs_with_empty_subjects_array(): void
+    public function testConstructsWithEmptySubjectsArray(): void
     {
         // Arrange & Act
         $subscriber = new LoadMetadataSubscriber([]);
@@ -253,9 +244,8 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->assertSame(['loadClassMetadata'], $subscriber->getSubscribedEvents());
     }
 
-    #[Test]
     #[DataProvider('subjectsDataProvider')]
-    public function it_handles_various_subject_configurations(array $subjects, string $className, bool $shouldMap): void
+    public function testHandlesVariousSubjectConfigurations(array $subjects, string $className, bool $shouldMap): void
     {
         // Arrange
         $subscriber = new LoadMetadataSubscriber($subjects);

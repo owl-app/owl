@@ -132,6 +132,7 @@
         "owl/file-bundle": "self.version",
         "owl/locale-bundle": "self.version",
         "owl/notification-bundle": "self.version",
+        "owl/location-bundle": "self.version",
         "owl/rbac-bundle": "self.version",
         "owl/rbac-manager-bundle": "self.version",
         "owl/setting-bundle": "self.version",
@@ -228,7 +229,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Owl\\Tests\\": "tests/"
+            "Owl\\Tests\\": "tests/",
+            "Tests\\Owl\\Bundle\\LocationBundle\\": "src/Owl/Bundle/LocationBundle/Tests/"
         }
     },
     "prefer-stable": true,

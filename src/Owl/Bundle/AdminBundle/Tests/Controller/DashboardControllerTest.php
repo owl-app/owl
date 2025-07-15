@@ -6,16 +6,13 @@ namespace Tests\Owl\Bundle\AdminBundle\Controller;
 
 use Owl\Bundle\AdminBundle\Controller\DashboardController;
 use Owl\Component\Setting\Storage\SettingStorageInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-#[CoversClass(DashboardController::class)]
 final class DashboardControllerTest extends TestCase
 {
     private DashboardController $controller;
@@ -38,8 +35,7 @@ final class DashboardControllerTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_renders_dashboard_index_with_settings(): void
+    public function testRendersDashboardIndexWithSettings(): void
     {
         // Arrange
         $settings = [
@@ -68,8 +64,7 @@ final class DashboardControllerTest extends TestCase
         $this->assertSame('<html>dashboard content</html>', $response->getContent());
     }
 
-    #[Test]
-    public function it_handles_empty_settings(): void
+    public function testHandlesEmptySettings(): void
     {
         // Arrange
         $settings = [];
@@ -96,8 +91,7 @@ final class DashboardControllerTest extends TestCase
         $this->assertSame('<html>dashboard empty</html>', $response->getContent());
     }
 
-    #[Test]
-    public function it_handles_null_settings(): void
+    public function testHandlesNullSettings(): void
     {
         // Arrange
         $this->settingStorage
@@ -122,8 +116,7 @@ final class DashboardControllerTest extends TestCase
         $this->assertSame('<html>dashboard empty</html>', $response->getContent());
     }
 
-    #[Test]
-    public function it_handles_setting_storage_exception(): void
+    public function testHandlesSettingStorageException(): void
     {
         // Arrange
         $this->settingStorage
@@ -138,8 +131,7 @@ final class DashboardControllerTest extends TestCase
         $this->controller->indexAction($this->request);
     }
 
-    #[Test]
-    public function it_handles_templating_engine_exception(): void
+    public function testHandlesTemplatingEngineException(): void
     {
         // Arrange
         $settings = ['description_dashboard' => 'Test'];
@@ -188,9 +180,8 @@ final class DashboardControllerTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('settingsProvider')]
-    public function it_renders_dashboard_with_various_settings(array $settings, string $expectedTemplate): void
+    public function testRendersDashboardWithVariousSettings(array $settings, string $expectedTemplate): void
     {
         // Arrange
         $this->settingStorage
@@ -215,8 +206,7 @@ final class DashboardControllerTest extends TestCase
         $this->assertSame('<html>rendered content</html>', $response->getContent());
     }
 
-    #[Test]
-    public function it_always_requests_system_section_and_description_dashboard_key(): void
+    public function testAlwaysRequestsSystemSectionAndDescriptionDashboardKey(): void
     {
         // Arrange
         $this->settingStorage
@@ -239,8 +229,7 @@ final class DashboardControllerTest extends TestCase
         // Assert - expectations are verified by PHPUnit
     }
 
-    #[Test]
-    public function it_creates_response_with_default_status_code(): void
+    public function testCreatesResponseWithDefaultStatusCode(): void
     {
         // Arrange
         $this->settingStorage

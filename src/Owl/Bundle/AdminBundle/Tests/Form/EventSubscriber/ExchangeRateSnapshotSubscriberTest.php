@@ -9,9 +9,7 @@ use Owl\Bundle\AdminBundle\Form\Type\Invoice\ExchangeRateSnapshot;
 use Owl\Component\Core\Invoice\Currency\ExchangeRateCurrencyResolverInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
 use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshotInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -20,7 +18,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
-#[CoversClass(ExchangeRateSnapshotSubscriber::class)]
 final class ExchangeRateSnapshotSubscriberTest extends TestCase
 {
     private ExchangeRateSnapshotSubscriber $subscriber;
@@ -45,14 +42,12 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_implements_event_subscriber_interface(): void
+    public function testImplementsEventSubscriberInterface(): void
     {
         $this->assertInstanceOf(EventSubscriberInterface::class, $this->subscriber);
     }
 
-    #[Test]
-    public function it_subscribes_to_correct_events(): void
+    public function testSubscribesToCorrectEvents(): void
     {
         $events = ExchangeRateSnapshotSubscriber::getSubscribedEvents();
 
@@ -64,8 +59,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->assertSame('submit', $events[FormEvents::SUBMIT]);
     }
 
-    #[Test]
-    public function it_creates_exchange_rate_snapshot_form_when_invoice_has_snapshot(): void
+    public function testCreatesExchangeRateSnapshotFormWhenInvoiceHasSnapshot(): void
     {
         // Arrange
         $exchangeRateSnapshot = $this->createMock(ExchangeRateSnapshotInterface::class);
@@ -94,8 +88,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSetData($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_when_invoice_is_null(): void
+    public function testDoesNotCreateFormWhenInvoiceIsNull(): void
     {
         // Arrange
         $this->event
@@ -116,8 +109,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSetData($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_when_invoice_has_no_snapshot(): void
+    public function testDoesNotCreateFormWhenInvoiceHasNoSnapshot(): void
     {
         // Arrange
         $this->event
@@ -143,8 +135,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSetData($this->event);
     }
 
-    #[Test]
-    public function it_creates_form_on_pre_submit_when_data_contains_exchange_rate_snapshot(): void
+    public function testCreatesFormOnPreSubmitWhenDataContainsExchangeRateSnapshot(): void
     {
         // Arrange
         $data = ['exchangeRateSnapshot' => ['rate' => 1.23]];
@@ -181,9 +172,8 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('invalidPreSubmitDataProvider')]
-    public function it_does_not_create_form_on_pre_submit_with_invalid_data(mixed $data): void
+    public function testDoesNotCreateFormOnPreSubmitWithInvalidData(mixed $data): void
     {
         // Arrange
         $this->event
@@ -204,8 +194,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_creates_form_on_submit_when_conditions_are_met(): void
+    public function testCreatesFormOnSubmitWhenConditionsAreMet(): void
     {
         // Arrange
         $this->event
@@ -240,8 +229,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_on_submit_when_form_already_has_field(): void
+    public function testDoesNotCreateFormOnSubmitWhenFormAlreadyHasField(): void
     {
         // Arrange
         $this->event
@@ -272,8 +260,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_on_submit_when_invoice_is_null(): void
+    public function testDoesNotCreateFormOnSubmitWhenInvoiceIsNull(): void
     {
         // Arrange
         $this->event
@@ -304,8 +291,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_on_submit_when_resolver_returns_false(): void
+    public function testDoesNotCreateFormOnSubmitWhenResolverReturnsFalse(): void
     {
         // Arrange
         $this->event
@@ -338,8 +324,7 @@ final class ExchangeRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_handles_exchange_rate_currency_resolver_exception(): void
+    public function testHandlesExchangeRateCurrencyResolverException(): void
     {
         // Arrange
         $this->event

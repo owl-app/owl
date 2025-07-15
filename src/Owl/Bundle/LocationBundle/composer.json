@@ -63,6 +63,9 @@
         }
     },
     "autoload-dev": {
+        "psr-4": {
+            "Tests\\Owl\\Bundle\\LocationBundle\\": "Tests/"
+        },
         "classmap": [
             "test/app/AppKernel.php"
         ]

@@ -37,8 +37,7 @@ final class LoadMetadataSubscriberTest extends TestCase
             ->willReturn($this->metadataFactory);
     }
 
-    #[Test]
-    public function it_returns_subscribed_events(): void
+    public function testReturnsSubscribedEvents(): void
     {
         // Arrange
         $this->subscriber = new LoadMetadataSubscriber([]);
@@ -50,8 +49,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->assertSame(['loadClassMetadata'], $subscribedEvents);
     }
 
-    #[Test]
-    public function it_maps_file_entity_many_to_one_associations_when_file_model_matches(): void
+    public function testMapsFileEntityManyToOneAssociationsWhenFileModelMatches(): void
     {
         // Arrange
         $subjects = [
@@ -128,8 +126,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->subscriber->loadClassMetadata($this->eventArgs);
     }
 
-    #[Test]
-    public function it_maps_subject_entity_one_to_many_association_when_subject_model_matches(): void
+    public function testMapsSubjectEntityOneToManyAssociationWhenSubjectModelMatches(): void
     {
         // Arrange
         $subjects = [
@@ -169,8 +166,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->subscriber->loadClassMetadata($this->eventArgs);
     }
 
-    #[Test]
-    public function it_uses_column_name_when_available_in_field_mapping(): void
+    public function testUsesColumnNameWhenAvailableInFieldMapping(): void
     {
         // Arrange
         $subjects = [
@@ -247,8 +243,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->subscriber->loadClassMetadata($this->eventArgs);
     }
 
-    #[Test]
-    public function it_processes_multiple_subjects_configuration(): void
+    public function testProcessesMultipleSubjectsConfiguration(): void
     {
         // Arrange
         $subjects = [
@@ -304,8 +299,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->subscriber->loadClassMetadata($this->eventArgs);
     }
 
-    #[Test]
-    public function it_does_nothing_when_no_subjects_match(): void
+    public function testDoesNothingWhenNoSubjectsMatch(): void
     {
         // Arrange
         $subjects = [
@@ -339,8 +333,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->subscriber->loadClassMetadata($this->eventArgs);
     }
 
-    #[Test]
-    public function it_handles_empty_subjects_array(): void
+    public function testHandlesEmptySubjectsArray(): void
     {
         // Arrange
         $this->subscriber = new LoadMetadataSubscriber([]);
@@ -358,9 +351,8 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->subscriber->loadClassMetadata($this->eventArgs);
     }
 
-    #[Test]
     #[DataProvider('subjectMappingDataProvider')]
-    public function it_creates_correct_subject_mapping_for_different_subjects(
+    public function testCreatesCorrectSubjectMappingForDifferentSubjects(
         string $subject,
         string $expectedJoinColumnName
     ): void {
@@ -413,8 +405,7 @@ final class LoadMetadataSubscriberTest extends TestCase
         $this->subscriber->loadClassMetadata($this->eventArgs);
     }
 
-    #[Test]
-    public function it_maps_both_file_and_subject_entities_for_matching_configuration(): void
+    public function testMapsBothFileAndSubjectEntitiesForMatchingConfiguration(): void
     {
         // Arrange
         $subjects = [

@@ -15,9 +15,7 @@ use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -26,7 +24,6 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-#[CoversClass(FormComponent::class)]
 final class FormComponentTest extends TestCase
 {
     private FormComponent $component;
@@ -83,8 +80,7 @@ final class FormComponentTest extends TestCase
         $this->component->resource = $this->invoice;
     }
 
-    #[Test]
-    public function it_initializes_preview_with_generated_number(): void
+    public function testInitializesPreviewWithGeneratedNumber(): void
     {
         // Arrange
         $serie = $this->createMock(InvoiceSerieInterface::class);
@@ -167,9 +163,8 @@ final class FormComponentTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('lineItemDefaultValuesProvider')]
-    public function it_sets_default_values_for_line_items(array $lineItems, array $expected): void
+    public function testSetsDefaultValuesForLineItems(array $lineItems, array $expected): void
     {
         // Arrange
         $this->component->formValues = ['lineItems' => $lineItems];
@@ -181,8 +176,7 @@ final class FormComponentTest extends TestCase
         $this->assertEquals($expected, $this->component->formValues['lineItems']);
     }
 
-    #[Test]
-    public function it_does_not_process_line_items_when_not_set(): void
+    public function testDoesNotProcessLineItemsWhenNotSet(): void
     {
         // Arrange
         $this->component->formValues = [];
@@ -205,9 +199,8 @@ final class FormComponentTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('paymentDateProvider')]
-    public function it_toggles_show_payment_date_based_on_invoice_status(bool $isPaid, bool $expectedShow): void
+    public function testTogglesShowPaymentDateBasedOnInvoiceStatus(bool $isPaid, bool $expectedShow): void
     {
         // Arrange
         $this->form
@@ -225,8 +218,7 @@ final class FormComponentTest extends TestCase
         $this->assertEquals($expectedShow, $this->component->showPaymentDate);
     }
 
-    #[Test]
-    public function it_changes_company_and_updates_currency(): void
+    public function testChangesCompanyAndUpdatesCurrency(): void
     {
         $company = $this->createMock(CompanyInterface::class);
         $currency = $this->createMock(CurrencyInterface::class);
@@ -262,8 +254,7 @@ final class FormComponentTest extends TestCase
         $this->component->changeCompany();
     }
 
-    #[Test]
-    public function it_does_nothing_when_company_is_null(): void
+    public function testDoesNothingWhenCompanyIsNull(): void
     {
         // Arrange
         $this->component->formValues = ['company' => null];
@@ -279,8 +270,7 @@ final class FormComponentTest extends TestCase
         $this->assertArrayNotHasKey('currency', $this->component->formValues);
     }
 
-    #[Test]
-    public function it_does_not_set_currency_when_company_not_found(): void
+    public function testDoesNotSetCurrencyWhenCompanyNotFound(): void
     {
         $company = $this->createMock(CompanyInterface::class);
 
@@ -308,8 +298,7 @@ final class FormComponentTest extends TestCase
         $this->assertArrayNotHasKey('currency', $this->component->formValues);
     }
 
-    #[Test]
-    public function it_changes_exchange_rate_currency(): void
+    public function testChangesExchangeRateCurrency(): void
     {
         // Arrange
         $this->form
@@ -323,8 +312,7 @@ final class FormComponentTest extends TestCase
         $this->assertTrue(true);
     }
 
-    #[Test]
-    public function it_handles_date_issue_changed_with_serie(): void
+    public function testHandlesDateIssueChangedWithSerie(): void
     {
         // Arrange
         $serie = $this->createMock(InvoiceSerieInterface::class);
@@ -376,8 +364,7 @@ final class FormComponentTest extends TestCase
         $this->assertEquals('INV/2023/456', $this->component->fullNumberPreview);
     }
 
-    #[Test]
-    public function it_does_nothing_when_serie_is_null_in_date_issue_changed(): void
+    public function testDoesNothingWhenSerieIsNullInDateIssueChanged(): void
     {
         // Arrange
         $this->invoice
@@ -426,9 +413,8 @@ final class FormComponentTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('calculationProvider')]
-    public function it_calculates_quantity_changed(string $unitPrice, string $quantity, float $expectedTotal, bool $expectedResult): void
+    public function testCalculatesQuantityChanged(string $unitPrice, string $quantity, float $expectedTotal, bool $expectedResult): void
     {
         // Arrange
         $this->component->formValues = [
@@ -449,8 +435,7 @@ final class FormComponentTest extends TestCase
         }
     }
 
-    #[Test]
-    public function it_handles_unit_price_changed(): void
+    public function testHandlesUnitPriceChanged(): void
     {
         // Arrange
         $this->component->formValues = [
@@ -466,8 +451,7 @@ final class FormComponentTest extends TestCase
         $this->assertEquals(51.0, $this->component->formValues['lineItems']['0']['totalPrice']);
     }
 
-    #[Test]
-    public function it_handles_sum_changed(): void
+    public function testHandlesSumChanged(): void
     {
         // Arrange
         $this->component->formValues = [
@@ -483,8 +467,7 @@ final class FormComponentTest extends TestCase
         $this->assertTrue(isset($this->component->formValues['lineItems']['0']['unitPrice']));
     }
 
-    #[Test]
-    public function it_handles_number_with_serie_changed(): void
+    public function testHandlesNumberWithSerieChanged(): void
     {
         // Arrange
         $this->component->formValues = [];
@@ -499,8 +482,7 @@ final class FormComponentTest extends TestCase
         $this->assertEquals('PREVIEW123', $this->component->fullNumberPreview);
     }
 
-    #[Test]
-    public function it_handles_null_exchange_rate_currency(): void
+    public function testHandlesNullExchangeRateCurrency(): void
     {
         // Arrange
         $this->component->formValues = ['currency' => 'USD'];
@@ -514,8 +496,7 @@ final class FormComponentTest extends TestCase
         $this->assertEquals('', $this->component->exchangeRateCurrency);
     }
 
-    #[Test]
-    public function it_handles_missing_currency_in_form_values(): void
+    public function testHandlesMissingCurrencyInFormValues(): void
     {
         // Arrange
         $this->component->formValues = [];

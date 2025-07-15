@@ -8,8 +8,6 @@ use Owl\Bundle\AdminBundle\Form\EventSubscriber\TaxRateSnapshotSubscriber;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateInterface;
 use Owl\Component\Invoice\Model\Taxation\TaxRateSnapshotInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,7 +18,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\ResolvedFormTypeInterface;
 
-#[CoversClass(TaxRateSnapshotSubscriber::class)]
 final class TaxRateSnapshotSubscriberTest extends TestCase
 {
     private TaxRateSnapshotSubscriber $subscriber;
@@ -55,14 +52,12 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber = new TaxRateSnapshotSubscriber();
     }
 
-    #[Test]
-    public function it_implements_event_subscriber_interface(): void
+    public function testImplementsEventSubscriberInterface(): void
     {
         $this->assertInstanceOf(EventSubscriberInterface::class, $this->subscriber);
     }
 
-    #[Test]
-    public function it_subscribes_to_correct_events(): void
+    public function testSubscribesToCorrectEvents(): void
     {
         $events = TaxRateSnapshotSubscriber::getSubscribedEvents();
 
@@ -74,8 +69,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->assertSame('submit', $events[FormEvents::SUBMIT]);
     }
 
-    #[Test]
-    public function it_does_not_add_fields_when_line_item_is_null_on_post_set_data(): void
+    public function testDoesNotAddFieldsWhenLineItemIsNullOnPostSetData(): void
     {
         // Arrange
         $this->event
@@ -96,8 +90,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->postSetData($this->event);
     }
 
-    #[Test]
-    public function it_adds_name_overwrite_field_when_tax_rate_name_is_different(): void
+    public function testAddsNameOverwriteFieldWhenTaxRateNameIsDifferent(): void
     {
         // Arrange
         $this->event
@@ -188,8 +181,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->postSetData($this->event);
     }
 
-    #[Test]
-    public function it_adds_amount_overwrite_field_when_tax_rate_amount_is_different(): void
+    public function testAddsAmountOverwriteFieldWhenTaxRateAmountIsDifferent(): void
     {
         // Arrange
         $this->event
@@ -230,8 +222,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->postSetData($this->event);
     }
 
-    #[Test]
-    public function it_adds_both_overwrite_fields_when_both_name_and_amount_are_different(): void
+    public function testAddsBothOverwriteFieldsWhenBothNameAndAmountAreDifferent(): void
     {
         // Arrange
         $this->event
@@ -298,8 +289,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->postSetData($this->event);
     }
 
-    #[Test]
-    public function it_returns_early_when_tax_rate_is_null_on_pre_submit(): void
+    public function testReturnsEarlyWhenTaxRateIsNullOnPreSubmit(): void
     {
         // Arrange
         $data = ['taxRate' => null];
@@ -332,8 +322,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_returns_early_when_tax_rate_snapshot_is_null_on_pre_submit(): void
+    public function testReturnsEarlyWhenTaxRateSnapshotIsNullOnPreSubmit(): void
     {
         // Arrange
         $data = ['taxRate' => 'TAX01'];
@@ -371,8 +360,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_returns_early_when_tax_rate_code_changed_on_pre_submit(): void
+    public function testReturnsEarlyWhenTaxRateCodeChangedOnPreSubmit(): void
     {
         // Arrange
         $data = ['taxRate' => 'TAX02'];
@@ -420,8 +408,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_updates_name_when_snapshot_name_overwrite_is_enabled(): void
+    public function testUpdatesNameWhenSnapshotNameOverwriteIsEnabled(): void
     {
         // Arrange
         $data = [
@@ -478,8 +465,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_updates_amount_when_snapshot_amount_overwrite_is_enabled(): void
+    public function testUpdatesAmountWhenSnapshotAmountOverwriteIsEnabled(): void
     {
         // Arrange
         $data = [
@@ -536,8 +522,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_updates_both_name_and_amount_when_both_overwrites_are_enabled(): void
+    public function testUpdatesBothNameAndAmountWhenBothOverwritesAreEnabled(): void
     {
         // Arrange
         $data = [
@@ -605,8 +590,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_returns_early_when_tax_rate_is_null_on_submit(): void
+    public function testReturnsEarlyWhenTaxRateIsNullOnSubmit(): void
     {
         // Arrange
         $this->event
@@ -632,8 +616,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_returns_early_when_tax_rate_snapshot_is_null_on_submit(): void
+    public function testReturnsEarlyWhenTaxRateSnapshotIsNullOnSubmit(): void
     {
         // Arrange
         $this->event
@@ -664,8 +647,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_removes_name_overwrite_field_when_tax_rate_code_changed_and_name_not_changed(): void
+    public function testRemovesNameOverwriteFieldWhenTaxRateCodeChangedAndNameNotChanged(): void
     {
         // Arrange
         $this->event
@@ -718,8 +700,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_removes_amount_overwrite_field_when_tax_rate_code_changed_and_amount_not_changed(): void
+    public function testRemovesAmountOverwriteFieldWhenTaxRateCodeChangedAndAmountNotChanged(): void
     {
         // Arrange
         $this->event
@@ -772,8 +753,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_removes_both_overwrite_fields_when_tax_rate_code_changed_and_neither_name_nor_amount_changed(): void
+    public function testRemovesBothOverwriteFieldsWhenTaxRateCodeChangedAndNeitherNameNorAmountChanged(): void
     {
         // Arrange
         $this->event
@@ -835,8 +815,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_does_not_remove_fields_when_tax_rate_codes_are_same(): void
+    public function testDoesNotRemoveFieldsWhenTaxRateCodesAreSame(): void
     {
         // Arrange
         $this->event
@@ -877,8 +856,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_does_not_add_any_fields_when_tax_rate_snapshot_is_null_on_post_set_data(): void
+    public function testDoesNotAddAnyFieldsWhenTaxRateSnapshotIsNullOnPostSetData(): void
     {
         // Arrange
         $this->event
@@ -916,8 +894,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->postSetData($this->event);
     }
 
-    #[Test]
-    public function it_does_not_add_any_fields_when_both_name_and_amount_are_not_different(): void
+    public function testDoesNotAddAnyFieldsWhenBothNameAndAmountAreNotDifferent(): void
     {
         // Arrange
         $this->event
@@ -953,8 +930,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->postSetData($this->event);
     }
 
-    #[Test]
-    public function it_handles_string_values_for_overwrite_flags_in_pre_submit(): void
+    public function testHandlesStringValuesForOverwriteFlagsInPreSubmit(): void
     {
         // Arrange
         $data = [
@@ -1016,8 +992,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_handles_empty_data_array_in_pre_submit(): void
+    public function testHandlesEmptyDataArrayInPreSubmit(): void
     {
         // Arrange
         $data = [];
@@ -1063,8 +1038,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_handles_null_line_item_in_pre_submit(): void
+    public function testHandlesNullLineItemInPreSubmit(): void
     {
         // Arrange
         $data = ['taxRate' => 'TAX01'];
@@ -1088,8 +1062,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_handles_non_integer_overwrite_values_in_pre_submit(): void
+    public function testHandlesNonIntegerOverwriteValuesInPreSubmit(): void
     {
         // Arrange
         $data = [
@@ -1144,8 +1117,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_handles_null_form_data_in_submit(): void
+    public function testHandlesNullFormDataInSubmit(): void
     {
         // Arrange
         $this->event
@@ -1166,8 +1138,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_removes_both_fields_when_tax_rate_codes_differ_and_both_changes_are_false(): void
+    public function testRemovesBothFieldsWhenTaxRateCodesDifferAndBothChangesAreFalse(): void
     {
         // Arrange
         $this->event
@@ -1229,8 +1200,7 @@ final class TaxRateSnapshotSubscriberTest extends TestCase
         $this->subscriber->submit($this->event);
     }
 
-    #[Test]
-    public function it_does_not_remove_fields_when_tax_rate_codes_differ_but_both_changes_are_true(): void
+    public function testDoesNotRemoveFieldsWhenTaxRateCodesDifferButBothChangesAreTrue(): void
     {
         // Arrange
         $this->event

@@ -9,9 +9,7 @@ use Owl\Bundle\AdminBundle\Form\Model\PasswordResetRequest;
 use Owl\Bundle\AdminBundle\Form\Type\RequestPasswordResetType;
 use Owl\Bundle\CoreBundle\Command\Admin\Account\RequestResetPasswordEmail;
 use Owl\Component\Core\Factory\Http\RedirectResponseFactoryInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -28,7 +26,6 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Twig\Environment;
 
-#[CoversClass(RequestPasswordResetAction::class)]
 final class RequestPasswordResetActionTest extends TestCase
 {
     private RequestPasswordResetAction $action;
@@ -66,8 +63,7 @@ final class RequestPasswordResetActionTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_renders_password_reset_form_on_get_request(): void
+    public function testRendersPasswordResetFormOnGetRequest(): void
     {
         // Arrange
         $this->formFactory
@@ -113,8 +109,7 @@ final class RequestPasswordResetActionTest extends TestCase
         $this->assertSame('<html>form</html>', $response->getContent());
     }
 
-    #[Test]
-    public function it_processes_valid_form_submission_and_redirects(): void
+    public function testProcessesValidFormSubmissionAndRedirects(): void
     {
         // Arrange
         $email = 'test@example.com';
@@ -196,8 +191,7 @@ final class RequestPasswordResetActionTest extends TestCase
         $this->assertSame($redirectResponse, $response);
     }
 
-    #[Test]
-    public function it_uses_default_redirect_route_when_no_custom_route_specified(): void
+    public function testUsesDefaultRedirectRouteWhenNoCustomRouteSpecified(): void
     {
         // Arrange
         $email = 'test@example.com';
@@ -274,8 +268,7 @@ final class RequestPasswordResetActionTest extends TestCase
         $this->assertSame($redirectResponse, $response);
     }
 
-    #[Test]
-    public function it_returns_json_response_for_ajax_request_with_form_errors(): void
+    public function testReturnsJsonResponseForAjaxRequestWithFormErrors(): void
     {
         // Arrange
         $this->formFactory
@@ -317,8 +310,7 @@ final class RequestPasswordResetActionTest extends TestCase
         $this->assertSame('error', $content['status']);
     }
 
-    #[Test]
-    public function it_renders_form_with_errors_for_non_ajax_invalid_submission(): void
+    public function testRendersFormWithErrorsForNonAjaxInvalidSubmission(): void
     {
         // Arrange
         $this->formFactory
@@ -369,8 +361,7 @@ final class RequestPasswordResetActionTest extends TestCase
         $this->assertSame('<html>form with errors</html>', $response->getContent());
     }
 
-    #[Test]
-    public function it_handles_null_form_data_gracefully(): void
+    public function testHandlesNullFormDataGracefully(): void
     {
         // Arrange
         $this->formFactory
@@ -417,9 +408,8 @@ final class RequestPasswordResetActionTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('requestMethodProvider')]
-    public function it_handles_different_request_methods(string $method, bool $isSubmitted): void
+    public function testHandlesDifferentRequestMethods(string $method, bool $isSubmitted): void
     {
         // Arrange
         $this->formFactory

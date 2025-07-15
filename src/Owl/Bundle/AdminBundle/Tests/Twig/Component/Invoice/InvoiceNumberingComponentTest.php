@@ -7,16 +7,13 @@ namespace Tests\Owl\Bundle\CompanyBundle\Twig\Component\Invoice;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\InvoiceNumberingType;
 use Owl\Bundle\AdminBundle\Twig\Component\Invoice\InvoiceNumberingComponent;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\LiveResponder;
 
-#[CoversClass(InvoiceNumberingComponent::class)]
 final class InvoiceNumberingComponentTest extends TestCase
 {
     private InvoiceNumberingComponent $component;
@@ -47,14 +44,12 @@ final class InvoiceNumberingComponentTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_can_be_instantiated(): void
+    public function testCanBeInstantiated(): void
     {
         $this->assertInstanceOf(InvoiceNumberingComponent::class, $this->component);
     }
 
-    #[Test]
-    public function it_has_correct_event_constant(): void
+    public function testHasCorrectEventConstant(): void
     {
         $this->assertEquals(
             'owl:admin:number_with_serie_changed',
@@ -62,8 +57,7 @@ final class InvoiceNumberingComponentTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_initializes_with_default_values(): void
+    public function testInitializesWithDefaultValues(): void
     {
         $this->assertEquals([], $this->component->series);
         $this->assertEquals('', $this->component->issueDate);
@@ -96,17 +90,15 @@ final class InvoiceNumberingComponentTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('seriesHydrationProvider')]
-    public function it_hydrates_series_correctly(string $series, array $expected): void
+    public function testHydratesSeriesCorrectly(string $series, array $expected): void
     {
         $result = $this->component->hydrateSeries($series);
 
         $this->assertEquals($expected, $result);
     }
 
-    #[Test]
-    public function it_handles_invalid_json_during_hydration(): void
+    public function testHandlesInvalidJsonDuringHydration(): void
     {
         $this->expectException(\TypeError::class);
         $this->component->hydrateSeries('invalid json');
@@ -140,9 +132,8 @@ final class InvoiceNumberingComponentTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('seriesDehydrationProvider')]
-    public function it_dehydrates_series_correctly(?array $series, string $expected): void
+    public function testDehydratesSeriesCorrectly(?array $series, string $expected): void
     {
         $result = $this->component->dehydrateSeries($series);
 
@@ -185,9 +176,8 @@ final class InvoiceNumberingComponentTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('preReRenderProvider')]
-    public function it_handles_pre_re_render_correctly(
+    public function testHandlesPreReRenderCorrectly(
         array $formData,
         array $series,
         string $issueDate,
@@ -228,8 +218,7 @@ final class InvoiceNumberingComponentTest extends TestCase
         $this->assertEquals($expectedFullNumberPreview, $this->component->fullNumberPreview);
     }
 
-    #[Test]
-    public function it_handles_invalid_date_in_pre_re_render(): void
+    public function testHandlesInvalidDateInPreReRender(): void
     {
         // Arrange
         $this->component->series = ['serie1' => ['format' => 'INV/{###}']];
@@ -265,9 +254,8 @@ final class InvoiceNumberingComponentTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('confirmActionProvider')]
-    public function it_handles_confirm_action_correctly(
+    public function testHandlesConfirmActionCorrectly(
         array $formData,
         string $fullNumberPreview,
         string $expectedFullNumber,
@@ -329,9 +317,8 @@ final class InvoiceNumberingComponentTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('changeSerieProvider')]
-    public function it_handles_change_serie_action_correctly(
+    public function testHandlesChangeSerieActionCorrectly(
         string $serieValue,
         array $series,
         string $expectedSerie,
@@ -356,8 +343,7 @@ final class InvoiceNumberingComponentTest extends TestCase
         }
     }
 
-    #[Test]
-    public function it_handles_hydration_with_proper_json_flags(): void
+    public function testHandlesHydrationWithProperJsonFlags(): void
     {
         // Test the corrected hydration logic that should use JSON_THROW_ON_ERROR
         $validJson = '{"test": "value"}';

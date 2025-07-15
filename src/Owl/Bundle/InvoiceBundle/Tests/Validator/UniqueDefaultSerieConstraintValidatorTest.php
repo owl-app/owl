@@ -7,18 +7,14 @@ namespace Owl\Bundle\InvoiceBundle\Tests\Validator;
 use Owl\Bundle\InvoiceBundle\Validator\UniqueDefaultSerieConstraint;
 use Owl\Bundle\InvoiceBundle\Validator\UniqueDefaultSerieConstraintValidator;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
-#[CoversClass(UniqueDefaultSerieConstraintValidator::class)]
 class UniqueDefaultSerieConstraintValidatorTest extends TestCase
 {
     private UniqueDefaultSerieConstraintValidator $validator;
@@ -36,8 +32,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->initialize($this->context);
     }
 
-    #[Test]
-    public function it_returns_early_when_value_is_not_true(): void
+    public function testReturnsEarlyWhenValueIsNotTrue(): void
     {
         $this->context->expects($this->never())->method('getPropertyPath');
         $this->repository->expects($this->never())->method('findOneBy');
@@ -45,8 +40,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(false, $this->constraint);
     }
 
-    #[Test]
-    public function it_returns_early_when_value_is_null(): void
+    public function testReturnsEarlyWhenValueIsNull(): void
     {
         $this->context->expects($this->never())->method('getPropertyPath');
         $this->repository->expects($this->never())->method('findOneBy');
@@ -54,8 +48,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(null, $this->constraint);
     }
 
-    #[Test]
-    public function it_returns_early_when_value_is_string(): void
+    public function testReturnsEarlyWhenValueIsString(): void
     {
         $this->context->expects($this->never())->method('getPropertyPath');
         $this->repository->expects($this->never())->method('findOneBy');
@@ -63,8 +56,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate('false', $this->constraint);
     }
 
-    #[Test]
-    public function it_returns_early_when_existing_violation_found_for_same_property(): void
+    public function testReturnsEarlyWhenExistingViolationFoundForSameProperty(): void
     {
         $propertyPath = 'isDefault';
         $existingViolation = $this->createMock(ConstraintViolation::class);
@@ -80,8 +72,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_returns_early_when_violation_with_matching_property_path_prefix_exists(): void
+    public function testReturnsEarlyWhenViolationWithMatchingPropertyPathPrefixExists(): void
     {
         $propertyPath = 'serie.isDefault';
         $existingViolation = $this->createMock(ConstraintViolation::class);
@@ -97,8 +88,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_does_not_add_violation_when_no_existing_default_serie_found(): void
+    public function testDoesNotAddViolationWhenNoExistingDefaultSerieFound(): void
     {
         $violations = new ConstraintViolationList();
         $validatedSerie = $this->createMock(InvoiceSerieInterface::class);
@@ -118,8 +108,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_does_not_add_violation_when_existing_default_serie_is_same_as_validated_serie(): void
+    public function testDoesNotAddViolationWhenExistingDefaultSerieIsSameAsValidatedSerie(): void
     {
         $violations = new ConstraintViolationList();
         $validatedSerie = $this->createMock(InvoiceSerieInterface::class);
@@ -142,8 +131,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_adds_violation_when_different_default_serie_exists(): void
+    public function testAddsViolationWhenDifferentDefaultSerieExists(): void
     {
         $violations = new ConstraintViolationList();
         $validatedSerie = $this->createMock(InvoiceSerieInterface::class);
@@ -178,8 +166,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_handles_null_validated_serie_id(): void
+    public function testHandlesNullValidatedSerieId(): void
     {
         $violations = new ConstraintViolationList();
         $validatedSerie = $this->createMock(InvoiceSerieInterface::class);
@@ -214,8 +201,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_handles_null_existing_serie_id(): void
+    public function testHandlesNullExistingSerieId(): void
     {
         $violations = new ConstraintViolationList();
         $validatedSerie = $this->createMock(InvoiceSerieInterface::class);
@@ -250,8 +236,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_continues_validation_when_violation_with_non_matching_property_path_exists(): void
+    public function testContinuesValidationWhenViolationWithNonMatchingPropertyPathExists(): void
     {
         $propertyPath = 'isDefault';
         $existingViolation = $this->createMock(ConstraintViolation::class);
@@ -275,8 +260,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_handles_different_invoice_types(): void
+    public function testHandlesDifferentInvoiceTypes(): void
     {
         $violations = new ConstraintViolationList();
         $validatedSerie = $this->createMock(InvoiceSerieInterface::class);
@@ -311,8 +295,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_handles_null_invoice_type(): void
+    public function testHandlesNullInvoiceType(): void
     {
         $violations = new ConstraintViolationList();
         $validatedSerie = $this->createMock(InvoiceSerieInterface::class);
@@ -332,8 +315,7 @@ class UniqueDefaultSerieConstraintValidatorTest extends TestCase
         $this->validator->validate(true, $this->constraint);
     }
 
-    #[Test]
-    public function it_handles_empty_format_in_existing_serie(): void
+    public function testHandlesEmptyFormatInExistingSerie(): void
     {
         $violations = new ConstraintViolationList();
         $validatedSerie = $this->createMock(InvoiceSerieInterface::class);

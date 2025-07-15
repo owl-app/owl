@@ -11,13 +11,10 @@ use Owl\Bundle\LocationBundle\Form\EventListener\BuildCountryFormSubscriber;
 use Owl\Bundle\LocationBundle\Form\Type\CountryCodeChoiceType;
 use Owl\Bundle\LocationBundle\Form\Type\ZoneChoiceType;
 use Owl\Component\Location\Model\CountryCodeAwareInterface;
-use Owl\Component\Location\Model\CountryInterface;
 use Owl\Component\Location\Model\ProvinceCodeAwareInterface;
 use Owl\Component\Location\Model\ZoneInterface;
 use Owl\Component\Location\Repository\ZoneRepositoryInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -28,7 +25,13 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-#[CoversClass(LocationFieldsExtension::class)]
+/**
+ * Test interface that combines both location interfaces for easier mocking
+ */
+interface TestableLocationData extends CountryCodeAwareInterface, ProvinceCodeAwareInterface
+{
+}
+
 final class LocationFieldsExtensionTest extends TestCase
 {
     private LocationFieldsExtension $extension;
@@ -68,28 +71,24 @@ final class LocationFieldsExtensionTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_extends_abstract_type_extension(): void
+    public function testExtendsAbstractTypeExtension(): void
     {
         $this->assertInstanceOf(AbstractTypeExtension::class, $this->extension);
     }
 
-    #[Test]
-    public function it_extends_company_type(): void
+    public function testExtendsCompanyType(): void
     {
         $extendedTypes = LocationFieldsExtension::getExtendedTypes();
 
         $this->assertContains(CompanyType::class, $extendedTypes);
     }
 
-    #[Test]
-    public function it_implements_event_subscriber_interface(): void
+    public function testImplementsEventSubscriberInterface(): void
     {
         $this->assertInstanceOf(EventSubscriberInterface::class, $this->buildCountryFormSubscriber);
     }
 
-    #[Test]
-    public function it_builds_form_with_country_code_field(): void
+    public function testBuildsFormWithCountryCodeField(): void
     {
         // Arrange
         $options = [];
@@ -122,8 +121,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->extension->buildForm($this->formBuilder, $options);
     }
 
-    #[Test]
-    public function it_adds_event_subscriber_to_form_builder(): void
+    public function testAddsEventSubscriberToFormBuilder(): void
     {
         // Arrange
         $options = [];
@@ -148,8 +146,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->extension->buildForm($this->formBuilder, $options);
     }
 
-    #[Test]
-    public function it_adds_event_listeners_to_form_builder(): void
+    public function testAddsEventListenersToFormBuilder(): void
     {
         // Arrange
         $options = [];
@@ -189,8 +186,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->assertIsCallable($eventListenerCalls[2][1]);
     }
 
-    #[Test]
-    public function it_handles_pre_set_data_event_with_null_data(): void
+    public function testHandlesPreSetDataEventWithNullData(): void
     {
         // Arrange
         $this->formEvent
@@ -206,8 +202,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->triggerPreSetDataEvent(null);
     }
 
-    #[Test]
-    public function it_handles_pre_set_data_event_with_null_country_code(): void
+    public function testHandlesPreSetDataEventWithNullCountryCode(): void
     {
         // Arrange
         $data = $this->createMockDataWithCountryAndProvince(null, 'PL-01');
@@ -225,8 +220,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->triggerPreSetDataEvent($data);
     }
 
-    #[Test]
-    public function it_handles_pre_set_data_event_with_valid_country_code(): void
+    public function testHandlesPreSetDataEventWithValidCountryCode(): void
     {
         // Arrange
         $countryCode = 'PL';
@@ -268,8 +262,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->triggerPreSetDataEvent($data);
     }
 
-    #[Test]
-    public function it_handles_pre_submit_event_with_null_data(): void
+    public function testHandlesPreSubmitEventWithNullData(): void
     {
         // Arrange
         $this->formEvent
@@ -285,8 +278,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->triggerPreSubmitEvent(null);
     }
 
-    #[Test]
-    public function it_handles_pre_submit_event_with_non_array_data(): void
+    public function testHandlesPreSubmitEventWithNonArrayData(): void
     {
         // Arrange
         $this->formEvent
@@ -320,9 +312,8 @@ final class LocationFieldsExtensionTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('invalidPreSubmitDataProvider')]
-    public function it_handles_pre_submit_event_with_invalid_data(array $data): void
+    public function testHandlesPreSubmitEventWithInvalidData(array $data): void
     {
         // Arrange
         $this->formEvent
@@ -338,8 +329,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->triggerPreSubmitEvent($data);
     }
 
-    #[Test]
-    public function it_handles_pre_submit_event_with_valid_data(): void
+    public function testHandlesPreSubmitEventWithValidData(): void
     {
         // Arrange
         $data = [
@@ -382,8 +372,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->triggerPreSubmitEvent($data);
     }
 
-    #[Test]
-    public function it_handles_pre_submit_event_with_missing_province_code(): void
+    public function testHandlesPreSubmitEventWithMissingProvinceCode(): void
     {
         // Arrange
         $data = [
@@ -425,8 +414,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->triggerPreSubmitEvent($data);
     }
 
-    #[Test]
-    public function it_handles_submit_event_with_valid_data_and_province_code_field(): void
+    public function testHandlesSubmitEventWithValidDataAndProvinceCodeField(): void
     {
         // Arrange
         $data = $this->createMockDataWithCountryAndProvince('PL', 'PL-01');
@@ -455,8 +443,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->triggerSubmitEvent($data);
     }
 
-    #[Test]
-    public function it_handles_submit_event_with_valid_data_and_no_province_code_field(): void
+    public function testHandlesSubmitEventWithValidDataAndNoProvinceCodeField(): void
     {
         // Arrange
         $data = $this->createMockDataWithCountryAndProvince('PL', 'PL-01');
@@ -486,8 +473,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->triggerSubmitEvent($data);
     }
 
-    #[Test]
-    public function it_creates_zone_choice_form_removes_zone_when_province_code_empty(): void
+    public function testCreatesZoneChoiceFormRemovesZoneWhenProvinceCodeEmpty(): void
     {
         // Arrange
         $countryCode = 'PL';
@@ -516,8 +502,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->callCreateZoneChoiceForm($countryCode, $provinceCode);
     }
 
-    #[Test]
-    public function it_creates_zone_choice_form_with_zones(): void
+    public function testCreatesZoneChoiceFormWithZones(): void
     {
         // Arrange
         $countryCode = 'PL';
@@ -587,9 +572,8 @@ final class LocationFieldsExtensionTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('createZoneChoiceFormDataProvider')]
-    public function it_creates_zone_choice_form_with_various_scenarios(
+    public function testCreatesZoneChoiceFormWithVariousScenarios(
         string $countryCode,
         ?string $provinceCode,
         bool $hasProvinceCode,
@@ -647,8 +631,7 @@ final class LocationFieldsExtensionTest extends TestCase
         $this->callCreateZoneChoiceForm($countryCode, $provinceCode);
     }
 
-    #[Test]
-    public function it_gets_subscribed_events_from_build_country_form_subscriber(): void
+    public function testGetsSubscribedEventsFromBuildCountryFormSubscriber(): void
     {
         $events = BuildCountryFormSubscriber::getSubscribedEvents();
 
@@ -744,11 +727,4 @@ final class LocationFieldsExtensionTest extends TestCase
 
         return $mock;
     }
-}
-
-/**
- * Test interface that combines both location interfaces for easier mocking
- */
-interface TestableLocationData extends CountryCodeAwareInterface, ProvinceCodeAwareInterface
-{
 }

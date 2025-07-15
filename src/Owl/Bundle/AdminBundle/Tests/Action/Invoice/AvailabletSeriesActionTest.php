@@ -9,8 +9,6 @@ use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
 use Owl\Component\Invoice\Sequention\Strategy\InvoiceSequenceStrategyInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -21,7 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Twig\Environment;
 
-#[CoversClass(AvailabletSeriesAction::class)]
 final class AvailabletSeriesActionTest extends TestCase
 {
     private AvailabletSeriesAction $action;
@@ -61,8 +58,7 @@ final class AvailabletSeriesActionTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_renders_available_series_with_valid_data(): void
+    public function testRendersAvailableSeriesWithValidData(): void
     {
         // Arrange
         $type = 'invoice';
@@ -153,8 +149,7 @@ final class AvailabletSeriesActionTest extends TestCase
         $this->assertSame('<html>available series</html>', $response->getContent());
     }
 
-    #[Test]
-    public function it_throws_exception_when_date_is_missing(): void
+    public function testThrowsExceptionWhenDateIsMissing(): void
     {
         // Arrange
         $type = 'invoice';
@@ -178,8 +173,7 @@ final class AvailabletSeriesActionTest extends TestCase
         }
     }
 
-    #[Test]
-    public function it_handles_empty_series_list(): void
+    public function testHandlesEmptySeriesList(): void
     {
         // Arrange
         $type = 'invoice';

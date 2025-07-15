@@ -7,14 +7,11 @@ namespace Owl\Bundle\FileBundle\Tests\EventListener;
 use Owl\Bundle\FileBundle\EventListener\FileUploadListener;
 use Owl\Component\File\Model\FileInterface;
 use Owl\Component\File\Uploader\FileUploaderInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\InvalidArgumentException;
 
-#[CoversClass(FileUploadListener::class)]
 final class FileUploadListenerTest extends TestCase
 {
     private FileUploaderInterface&MockObject $uploader;
@@ -26,8 +23,7 @@ final class FileUploadListenerTest extends TestCase
         $this->listener = new FileUploadListener($this->uploader);
     }
 
-    #[Test]
-    public function it_uploads_file_when_resource_has_file(): void
+    public function testUploadsFileWhenResourceHasFile(): void
     {
         // Arrange
         $file = $this->createMock(\SplFileInfo::class);
@@ -47,8 +43,7 @@ final class FileUploadListenerTest extends TestCase
         // Assertion is handled by the mock expectation
     }
 
-    #[Test]
-    public function it_does_not_upload_file_when_resource_has_no_file(): void
+    public function testDoesNotUploadFileWhenResourceHasNoFile(): void
     {
         // Arrange
         $resource = $this->createMock(FileInterface::class);
@@ -66,8 +61,7 @@ final class FileUploadListenerTest extends TestCase
         // Assertion is handled by the mock expectation
     }
 
-    #[Test]
-    public function it_throws_exception_when_event_subject_is_not_file_interface(): void
+    public function testThrowsExceptionWhenEventSubjectIsNotFileInterface(): void
     {
         // Arrange
         $invalidResource = new \stdClass();
@@ -80,8 +74,7 @@ final class FileUploadListenerTest extends TestCase
         $this->listener->uploadFile($event);
     }
 
-    #[Test]
-    public function it_throws_exception_when_event_subject_is_null(): void
+    public function testThrowsExceptionWhenEventSubjectIsNull(): void
     {
         // Arrange
         $event = new GenericEvent(null);
@@ -93,8 +86,7 @@ final class FileUploadListenerTest extends TestCase
         $this->listener->uploadFile($event);
     }
 
-    #[Test]
-    public function it_throws_exception_when_event_subject_is_string(): void
+    public function testThrowsExceptionWhenEventSubjectIsString(): void
     {
         // Arrange
         $event = new GenericEvent('invalid_subject');
@@ -106,8 +98,7 @@ final class FileUploadListenerTest extends TestCase
         $this->listener->uploadFile($event);
     }
 
-    #[Test]
-    public function it_throws_exception_when_event_subject_is_array(): void
+    public function testThrowsExceptionWhenEventSubjectIsArray(): void
     {
         // Arrange
         $event = new GenericEvent(['invalid' => 'subject']);
@@ -119,8 +110,7 @@ final class FileUploadListenerTest extends TestCase
         $this->listener->uploadFile($event);
     }
 
-    #[Test]
-    public function it_calls_uploader_with_correct_resource(): void
+    public function testCallsUploaderWithCorrectResource(): void
     {
         // Arrange
         $file = $this->createMock(\SplFileInfo::class);
@@ -142,8 +132,7 @@ final class FileUploadListenerTest extends TestCase
         // Assertion is handled by the mock expectation callback
     }
 
-    #[Test]
-    public function it_handles_file_interface_with_empty_file_properly(): void
+    public function testHandlesFileInterfaceWithEmptyFileProperly(): void
     {
         // Arrange
         $resource = $this->createMock(FileInterface::class);
@@ -162,8 +151,7 @@ final class FileUploadListenerTest extends TestCase
         $this->addToAssertionCount(1);
     }
 
-    #[Test]
-    public function it_works_with_different_file_types(): void
+    public function testWorksWithDifferentFileTypes(): void
     {
         // Arrange
         $file = new \SplFileInfo(__FILE__);

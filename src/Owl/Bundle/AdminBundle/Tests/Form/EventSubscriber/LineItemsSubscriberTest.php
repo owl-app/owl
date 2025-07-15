@@ -8,9 +8,7 @@ use Owl\Bundle\AdminBundle\Form\EventSubscriber\LineItemsSubscriber;
 use Owl\Bundle\AdminBundle\Form\Type\Invoice\LineItemType;
 use Owl\Component\Core\Model\CompanyInterface as CoreCompanyInterface;
 use Owl\Component\Core\Model\Invoice\InvoiceInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -21,7 +19,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
-#[CoversClass(LineItemsSubscriber::class)]
 final class LineItemsSubscriberTest extends TestCase
 {
     private LineItemsSubscriber $subscriber;
@@ -50,14 +47,12 @@ final class LineItemsSubscriberTest extends TestCase
         $this->subscriber = new LineItemsSubscriber($this->companyRepository);
     }
 
-    #[Test]
-    public function it_implements_event_subscriber_interface(): void
+    public function testImplementsEventSubscriberInterface(): void
     {
         $this->assertInstanceOf(EventSubscriberInterface::class, $this->subscriber);
     }
 
-    #[Test]
-    public function it_subscribes_to_correct_events(): void
+    public function testSubscribesToCorrectEvents(): void
     {
         $events = LineItemsSubscriber::getSubscribedEvents();
 
@@ -67,8 +62,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->assertSame('preSubmit', $events[FormEvents::PRE_SUBMIT]);
     }
 
-    #[Test]
-    public function it_creates_line_items_form_on_post_set_data(): void
+    public function testCreatesLineItemsFormOnPostSetData(): void
     {
         // Arrange
         $currencyCode = 'USD';
@@ -114,8 +108,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->subscriber->postSetData($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_when_invoice_is_not_invoice_interface(): void
+    public function testDoesNotCreateFormWhenInvoiceIsNotInvoiceInterface(): void
     {
         // Arrange
         $this->event
@@ -136,8 +129,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->subscriber->postSetData($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_when_invoice_has_no_currency(): void
+    public function testDoesNotCreateFormWhenInvoiceHasNoCurrency(): void
     {
         // Arrange
         $this->event
@@ -163,8 +155,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->subscriber->postSetData($this->event);
     }
 
-    #[Test]
-    public function it_creates_form_on_pre_submit_with_valid_data(): void
+    public function testCreatesFormOnPreSubmitWithValidData(): void
     {
         // Arrange
         $companyId = 123;
@@ -224,9 +215,8 @@ final class LineItemsSubscriberTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('invalidPreSubmitDataProvider')]
-    public function it_does_not_create_form_on_pre_submit_with_invalid_data(mixed $data): void
+    public function testDoesNotCreateFormOnPreSubmitWithInvalidData(mixed $data): void
     {
         // Arrange
         $this->event
@@ -251,8 +241,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_when_line_items_already_exists(): void
+    public function testDoesNotCreateFormWhenLineItemsAlreadyExists(): void
     {
         // Arrange
         $data = [
@@ -288,8 +277,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_when_company_not_found(): void
+    public function testDoesNotCreateFormWhenCompanyNotFound(): void
     {
         // Arrange
         $companyId = 123;
@@ -328,8 +316,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_does_not_create_form_when_found_object_is_not_company(): void
+    public function testDoesNotCreateFormWhenFoundObjectIsNotCompany(): void
     {
         // Arrange
         $companyId = 123;
@@ -368,8 +355,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_handles_repository_exception(): void
+    public function testHandlesRepositoryException(): void
     {
         // Arrange
         $companyId = 123;
@@ -410,8 +396,7 @@ final class LineItemsSubscriberTest extends TestCase
         $this->subscriber->preSubmit($this->event);
     }
 
-    #[Test]
-    public function it_creates_line_items_form_with_correct_options(): void
+    public function testCreatesLineItemsFormWithCorrectOptions(): void
     {
         // Arrange
         $currencyCode = 'PLN';

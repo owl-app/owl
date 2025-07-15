@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Owl\Bundle\AdminBundle\Provider;
 
-use PHPUnit\Framework\Attributes\Test;
 use Owl\Bundle\AdminBundle\Provider\LoggedInAdminUserProvider;
 use Owl\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface;
 use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -21,7 +19,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-#[CoversClass(LoggedInAdminUserProvider::class)]
 final class LoggedInAdminUserProviderTest extends TestCase
 {
     private MockObject&Security $security;
@@ -52,14 +49,12 @@ final class LoggedInAdminUserProviderTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_implements_logged_in_admin_user_provider(): void
+    public function testImplementsLoggedInAdminUserProvider(): void
     {
         $this->assertInstanceOf(LoggedInAdminUserProviderInterface::class, $this->loggedInAdminUserProvider);
     }
 
-    #[Test]
-    public function it_returns_true_when_user_is_in_security(): void
+    public function testReturnsTrueWhenUserIsInSecurity(): void
     {
         $adminUser = $this->createMock(AdminUserInterface::class);
 
@@ -72,8 +67,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertTrue($this->loggedInAdminUserProvider->hasUser());
     }
 
-    #[Test]
-    public function it_returns_true_when_user_is_in_token_storage(): void
+    public function testReturnsTrueWhenUserIsInTokenStorage(): void
     {
         $token = $this->createMock(TokenInterface::class);
         $adminUser = $this->createMock(AdminUserInterface::class);
@@ -89,8 +83,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertTrue($this->loggedInAdminUserProvider->hasUser());
     }
 
-    #[Test]
-    public function it_returns_true_when_user_is_in_main_request_session_token(): void
+    public function testReturnsTrueWhenUserIsInMainRequestSessionToken(): void
     {
         $request = $this->createMock(Request::class);
         $session = $this->createMock(SessionInterface::class);
@@ -115,8 +108,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertTrue($this->loggedInAdminUserProvider->hasUser());
     }
 
-    #[Test]
-    public function it_returns_true_when_user_is_in_current_request_session_token(): void
+    public function testReturnsTrueWhenUserIsInCurrentRequestSessionToken(): void
     {
         $session = $this->createMock(SessionInterface::class);
         $token = $this->createMock(TokenInterface::class);
@@ -138,8 +130,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertTrue($this->loggedInAdminUserProvider->hasUser());
     }
 
-    #[Test]
-    public function it_returns_false_when_there_is_no_user(): void
+    public function testReturnsFalseWhenThereIsNoUser(): void
     {
         $sessionMock = $this->createMock(Session::class);
 
@@ -158,8 +149,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertFalse($this->loggedInAdminUserProvider->hasUser());
     }
 
-    #[Test]
-    public function it_returns_false_when_user_cannot_be_provided_and_session_is_not_available_in_current_request(): void
+    public function testReturnsFalseWhenUserCannotBeProvidedAndSessionIsNotAvailableInCurrentRequest(): void
     {
         $this->security->expects($this->once())->method('getUser')->willReturn(null);
         $this->tokenStorage->expects($this->once())->method('getToken')->willReturn(null);
@@ -173,8 +163,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertFalse($this->loggedInAdminUserProvider->hasUser());
     }
 
-    #[Test]
-    public function it_returns_false_when_user_cannot_be_provided_and_session_is_not_available_in_main_request(): void
+    public function testReturnsFalseWhenUserCannotBeProvidedAndSessionIsNotAvailableInMainRequest(): void
     {
         $requestMock = $this->createMock(Request::class);
 
@@ -190,8 +179,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertFalse($this->loggedInAdminUserProvider->hasUser());
     }
 
-    #[Test]
-    public function it_gets_user_from_security(): void
+    public function testGetsUserFromSecurity(): void
     {
         $adminUserMock = $this->createMock(AdminUserInterface::class);
 
@@ -205,8 +193,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertSame($adminUserMock, $this->loggedInAdminUserProvider->getUser());
     }
 
-    #[Test]
-    public function it_gets_user_from_token_storage(): void
+    public function testGetsUserFromTokenStorage(): void
     {
         $token = $this->createMock(TokenInterface::class);
         $adminUser = $this->createMock(AdminUserInterface::class);
@@ -223,8 +210,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertSame($adminUser, $this->loggedInAdminUserProvider->getUser());
     }
 
-    #[Test]
-    public function it_gets_user_from_main_request_session(): void
+    public function testGetsUserFromMainRequestSession(): void
     {
         $request = $this->createMock(Request::class);
         $session = $this->createMock(Session::class);
@@ -258,8 +244,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertSame($adminUser, $result);
     }
 
-    #[Test]
-    public function it_gets_user_from_current_request_session(): void
+    public function testGetsUserFromCurrentRequestSession(): void
     {
         $session = $this->createMock(Session::class);
         $adminUser = $this->createMock(AdminUserInterface::class);
@@ -291,8 +276,7 @@ final class LoggedInAdminUserProviderTest extends TestCase
         $this->assertSame($adminUser, $result);
     }
 
-    #[Test]
-    public function it_returns_null_when_user_cannot_be_provided(): void
+    public function testReturnsNullWhenUserCannotBeProvided(): void
     {
         $this->security->expects($this->once())->method('getUser')->willReturn(null);
         $this->tokenStorage->expects($this->once())->method('getToken')->willReturn(null);

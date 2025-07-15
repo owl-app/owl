@@ -24,8 +24,7 @@ final class GenerateNumberInvoiceListenerTest extends TestCase
         $this->listener = new GenerateNumberInvoiceListener($this->invoiceNumberGenerator);
     }
 
-    #[Test]
-    public function it_generates_full_number_when_serie_is_present(): void
+    public function testGeneratesFullNumberWhenSerieIsPresent(): void
     {
         // Arrange
         $issueDate = new \DateTime('2024-01-15');
@@ -60,8 +59,7 @@ final class GenerateNumberInvoiceListenerTest extends TestCase
         // Assertions are covered by the mock expectations above
     }
 
-    #[Test]
-    public function it_does_not_generate_full_number_when_serie_is_null(): void
+    public function testDoesNotGenerateFullNumberWhenSerieIsNull(): void
     {
         // Arrange
         $invoice = $this->createMock(InvoiceInterface::class);
@@ -83,8 +81,7 @@ final class GenerateNumberInvoiceListenerTest extends TestCase
         // Assertions are covered by the mock expectations above
     }
 
-    #[Test]
-    public function it_throws_exception_when_subject_is_not_invoice_interface(): void
+    public function testThrowsExceptionWhenSubjectIsNotInvoiceInterface(): void
     {
         // Arrange
         $invalidSubject = new \stdClass();
@@ -95,8 +92,7 @@ final class GenerateNumberInvoiceListenerTest extends TestCase
         $this->listener->preCreate($event);
     }
 
-    #[Test]
-    public function it_generates_full_number_with_different_sequence_numbers(): void
+    public function testGeneratesFullNumberWithDifferentSequenceNumbers(): void
     {
         // Arrange
         $issueDate = new \DateTime('2024-03-20');
@@ -131,8 +127,7 @@ final class GenerateNumberInvoiceListenerTest extends TestCase
         // Assertions are covered by the mock expectations above
     }
 
-    #[Test]
-    public function it_handles_different_date_formats(): void
+    public function testHandlesDifferentDateFormats(): void
     {
         // Arrange
         $issueDate = new \DateTimeImmutable('2024-12-31');

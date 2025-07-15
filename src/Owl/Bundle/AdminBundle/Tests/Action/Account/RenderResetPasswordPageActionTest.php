@@ -70,8 +70,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_renders_reset_password_page_when_token_is_valid(): void
+    public function testRendersResetPasswordPageWhenTokenIsValid(): void
     {
         // Arrange
         $token = 'valid-token';
@@ -118,8 +117,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
     }
 
-    #[Test]
-    public function it_redirects_to_login_when_token_is_invalid(): void
+    public function testRedirectsToLoginWhenTokenIsInvalid(): void
     {
         // Arrange
         $token = 'invalid-token';
@@ -144,8 +142,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         $this->assertSame($redirectResponse, $response);
     }
 
-    #[Test]
-    public function it_redirects_when_token_is_expired(): void
+    public function testRedirectsWhenTokenIsExpired(): void
     {
         // Arrange
         $token = 'expired-token';
@@ -204,8 +201,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         $this->assertSame($redirectResponse, $response);
     }
 
-    #[Test]
-    public function it_uses_custom_redirect_route_when_specified_for_expired_token(): void
+    public function testUsesCustomRedirectRouteWhenSpecifiedForExpiredToken(): void
     {
         // Arrange
         $token = 'expired-token';
@@ -260,8 +256,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         $this->assertSame($redirectResponse, $response);
     }
 
-    #[Test]
-    public function it_creates_date_interval_with_correct_ttl(): void
+    public function testCreatesDateIntervalWithCorrectTtl(): void
     {
         // Arrange
         $token = 'valid-token';
@@ -329,9 +324,8 @@ final class RenderResetPasswordPageActionTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('tokenProvider')]
-    public function it_handles_various_token_formats(?string $token): void
+    public function testHandlesVariousTokenFormats(?string $token): void
     {
         // Arrange
         $this->userRepository
@@ -353,8 +347,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
     }
 
-    #[Test]
-    public function it_handles_repository_exception(): void
+    public function testHandlesRepositoryException(): void
     {
         // Arrange
         $token = 'valid-token';
@@ -371,8 +364,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         ($this->action)($this->request, $token);
     }
 
-    #[Test]
-    public function it_handles_form_factory_exception(): void
+    public function testHandlesFormFactoryException(): void
     {
         // Arrange
         $token = 'valid-token';
@@ -400,8 +392,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         ($this->action)($this->request, $token);
     }
 
-    #[Test]
-    public function it_handles_twig_render_exception(): void
+    public function testHandlesTwigRenderException(): void
     {
         // Arrange
         $token = 'valid-token';
@@ -442,8 +433,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         ($this->action)($this->request, $token);
     }
 
-    #[Test]
-    public function it_handles_invalid_ttl_format(): void
+    public function testHandlesInvalidTtlFormat(): void
     {
         // Arrange
         $invalidTtl = 'invalid-ttl';
@@ -470,8 +460,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         $action($this->request, $token);
     }
 
-    #[Test]
-    public function it_handles_admin_user_password_request_check_exception(): void
+    public function testHandlesAdminUserPasswordRequestCheckException(): void
     {
         // Arrange
         $token = 'valid-token';
@@ -494,8 +483,7 @@ final class RenderResetPasswordPageActionTest extends TestCase
         ($this->action)($this->request, $token);
     }
 
-    #[Test]
-    public function it_always_uses_correct_template(): void
+    public function testAlwaysUsesCorrectTemplate(): void
     {
         // Arrange
         $token = 'valid-token';

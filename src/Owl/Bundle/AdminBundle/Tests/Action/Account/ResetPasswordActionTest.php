@@ -9,9 +9,7 @@ use Owl\Bundle\AdminBundle\Form\Model\PasswordReset;
 use Owl\Bundle\AdminBundle\Form\Type\ResetPasswordType;
 use Owl\Bundle\CoreBundle\Command\Admin\Account\ResetPassword;
 use Owl\Component\Core\Factory\Http\RedirectResponseFactoryInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -28,7 +26,6 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Twig\Environment;
 
-#[CoversClass(ResetPasswordAction::class)]
 final class ResetPasswordActionTest extends TestCase
 {
     private ResetPasswordAction $action;
@@ -66,8 +63,7 @@ final class ResetPasswordActionTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_renders_reset_password_form_on_get_request(): void
+    public function testRendersResetPasswordFormOnGetRequest(): void
     {
         // Arrange
         $token = 'reset-token-123';
@@ -115,8 +111,7 @@ final class ResetPasswordActionTest extends TestCase
         $this->assertSame('<html>reset form</html>', $response->getContent());
     }
 
-    #[Test]
-    public function it_processes_valid_password_reset_and_redirects(): void
+    public function testProcessesValidPasswordResetAndRedirects(): void
     {
         // Arrange
         $token = 'reset-token-123';
@@ -204,8 +199,7 @@ final class ResetPasswordActionTest extends TestCase
         $this->assertSame($redirectResponse, $response);
     }
 
-    #[Test]
-    public function it_returns_json_response_for_ajax_request_with_validation_errors(): void
+    public function testReturnsJsonResponseForAjaxRequestWithValidationErrors(): void
     {
         // Arrange
         $token = 'reset-token-123';
@@ -261,9 +255,8 @@ final class ResetPasswordActionTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('invalidTokenProvider')]
-    public function it_handles_invalid_tokens(string $token): void
+    public function testHandlesInvalidTokens(string $token): void
     {
         // Arrange
         $this->formFactory
@@ -308,8 +301,7 @@ final class ResetPasswordActionTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
     }
 
-    #[Test]
-    public function it_handles_null_password_reset_data(): void
+    public function testHandlesNullPasswordResetData(): void
     {
         // Arrange
         $token = 'reset-token-123';
@@ -349,8 +341,7 @@ final class ResetPasswordActionTest extends TestCase
         ($this->action)($this->request, $token);
     }
 
-    #[Test]
-    public function it_uses_custom_redirect_route_when_specified(): void
+    public function testUsesCustomRedirectRouteWhenSpecified(): void
     {
         // Arrange
         $token = 'reset-token-123';
@@ -429,8 +420,7 @@ final class ResetPasswordActionTest extends TestCase
         $this->assertSame($redirectResponse, $response);
     }
 
-    #[Test]
-    public function it_renders_form_with_errors_for_non_ajax_invalid_submission(): void
+    public function testRendersFormWithErrorsForNonAjaxInvalidSubmission(): void
     {
         // Arrange
         $token = 'reset-token-123';

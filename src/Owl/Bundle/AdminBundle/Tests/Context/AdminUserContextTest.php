@@ -10,9 +10,7 @@ use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\Core\Model\Rbac\RoleInterface;
 use Owl\Component\Core\Model\Rbac\RoleSettingInterface;
 use Owl\Component\Core\Model\RoleAwareInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -20,7 +18,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[CoversClass(AdminUserContext::class)]
 final class AdminUserContextTest extends TestCase
 {
     private AdminUserContext $context;
@@ -46,14 +43,12 @@ final class AdminUserContextTest extends TestCase
         $this->context = new AdminUserContext($this->tokenStorage);
     }
 
-    #[Test]
-    public function it_implements_admin_user_context_interface(): void
+    public function testImplementsAdminUserContextInterface(): void
     {
         $this->assertInstanceOf(AdminUserContextInterface::class, $this->context);
     }
 
-    #[Test]
-    public function it_returns_admin_user_when_authenticated(): void
+    public function testReturnsAdminUserWhenAuthenticated(): void
     {
         // Arrange
         $this->tokenStorage
@@ -73,8 +68,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertSame($this->adminUser, $result);
     }
 
-    #[Test]
-    public function it_returns_null_when_user_is_not_admin_user(): void
+    public function testReturnsNullWhenUserIsNotAdminUser(): void
     {
         // Arrange
         $regularUser = $this->createMock(UserInterface::class);
@@ -96,8 +90,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertNull($result);
     }
 
-    #[Test]
-    public function it_throws_exception_when_no_token_available(): void
+    public function testThrowsExceptionEhenNoTokenAvailable(): void
     {
         // Arrange
         $this->tokenStorage
@@ -110,8 +103,7 @@ final class AdminUserContextTest extends TestCase
         $this->context->getUser();
     }
 
-    #[Test]
-    public function it_returns_role_canonical_name_when_user_has_role(): void
+    public function testReturnsRoleCanonicalNameWhenUserHasRole(): void
     {
         // Arrange
         $canonicalName = 'ROLE_ADMIN';
@@ -143,8 +135,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertSame($canonicalName, $result);
     }
 
-    #[Test]
-    public function it_returns_null_when_user_has_no_role(): void
+    public function testReturnsNullWhenUserHasNoRole(): void
     {
         // Arrange
         $this->tokenStorage
@@ -169,8 +160,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertNull($result);
     }
 
-    #[Test]
-    public function it_returns_null_when_no_user_available(): void
+    public function testReturnsNullWhenNoUserAvailable(): void
     {
         // Arrange
         $this->tokenStorage
@@ -190,8 +180,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertNull($result);
     }
 
-    #[Test]
-    public function it_returns_theme_from_role_setting(): void
+    public function testReturnsThemeFromRoleSetting(): void
     {
         // Arrange
         $theme = 'dark-theme';
@@ -228,8 +217,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertSame($theme, $result);
     }
 
-    #[Test]
-    public function it_returns_null_when_no_role_setting_available(): void
+    public function testReturnsNullWhenNoRoleSettingAvailable(): void
     {
         // Arrange
         $this->tokenStorage
@@ -259,8 +247,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertNull($result);
     }
 
-    #[Test]
-    public function it_returns_true_when_user_is_admin_system(): void
+    public function testReturnsTrueWhenUserIsAdminSystem(): void
     {
         // Arrange
         $this->tokenStorage
@@ -290,8 +277,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertTrue($result);
     }
 
-    #[Test]
-    public function it_returns_false_when_user_is_not_admin_system(): void
+    public function testReturnsFalseWhenUserIsNotAdminSystem(): void
     {
         // Arrange
         $this->tokenStorage
@@ -321,8 +307,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertFalse($result);
     }
 
-    #[Test]
-    public function it_returns_true_when_user_is_user_role(): void
+    public function testReturnsTrueWhenUserIsUserRole(): void
     {
         // Arrange
         $this->tokenStorage
@@ -352,8 +337,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertTrue($result);
     }
 
-    #[Test]
-    public function it_returns_false_when_user_is_not_user_role(): void
+    public function testReturnsFalseWhenUserIsNotUserRole(): void
     {
         // Arrange
         $this->tokenStorage
@@ -407,9 +391,8 @@ final class AdminUserContextTest extends TestCase
         ];
     }
 
-    #[Test]
     #[DataProvider('roleScenarioProvider')]
-    public function it_correctly_identifies_role_types(string $roleName, bool $expectedIsAdminSystem, bool $expectedIsUser): void
+    public function testCorrectlyIdentifiesRoleTypes(string $roleName, bool $expectedIsAdminSystem, bool $expectedIsUser): void
     {
         // Arrange
         $this->tokenStorage
@@ -441,8 +424,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertSame($expectedIsUser, $isUser);
     }
 
-    #[Test]
-    public function it_handles_null_user_for_role_checks(): void
+    public function testHandlesNullUserForRoleChecks(): void
     {
         // Arrange
         $this->tokenStorage
@@ -464,8 +446,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertFalse($isUser);
     }
 
-    #[Test]
-    public function it_handles_user_without_role_for_role_checks(): void
+    public function testHandlesUserWithoutRoleForRoleChecks(): void
     {
         // Arrange
         $this->tokenStorage
@@ -492,8 +473,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertFalse($isUser);
     }
 
-    #[Test]
-    public function it_handles_authentication_exception_in_role_checks(): void
+    public function testHandlesAuthenticationExceptionInRoleChecks(): void
     {
         // Arrange
         $this->tokenStorage
@@ -506,8 +486,7 @@ final class AdminUserContextTest extends TestCase
         $this->context->isAdminSystem();
     }
 
-    #[Test]
-    public function it_handles_theme_retrieval_with_no_user(): void
+    public function testHandlesThemeRetrievalWithNoUser(): void
     {
         // Arrange
         $this->tokenStorage
@@ -527,8 +506,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertNull($result);
     }
 
-    #[Test]
-    public function it_handles_theme_retrieval_with_user_without_role(): void
+    public function testHandlesThemeRetrievalWithUserWithoutRole(): void
     {
         // Arrange
         $this->tokenStorage
@@ -553,8 +531,7 @@ final class AdminUserContextTest extends TestCase
         $this->assertNull($result);
     }
 
-    #[Test]
-    public function it_handles_authentication_exception_in_theme_retrieval(): void
+    public function testHandlesAuthenticationExceptionInThemeRetrieval(): void
     {
         // Arrange
         $this->tokenStorage
@@ -567,8 +544,7 @@ final class AdminUserContextTest extends TestCase
         $this->context->getTheme();
     }
 
-    #[Test]
-    public function it_handles_authentication_exception_in_role_canonical_name_retrieval(): void
+    public function testHandlesAuthenticationExceptionInRoleCanonicalNameRetrieval(): void
     {
         // Arrange
         $this->tokenStorage

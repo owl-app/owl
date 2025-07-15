@@ -12,9 +12,7 @@ use Owl\Component\Core\Factory\NotificationAcceptedFactoryInterface;
 use Owl\Component\Core\Model\NotificationAcceptedInterface;
 use Owl\Component\Core\Model\NotificationInterface;
 use Owl\Component\Core\Repository\NotificationRepositoryInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
@@ -34,7 +32,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-#[CoversClass(AcceptNotificationAction::class)]
 final class AcceptNotificationActionTest extends TestCase
 {
     private ContainerInterface&MockObject $container;
@@ -107,8 +104,7 @@ final class AcceptNotificationActionTest extends TestCase
         $this->action->setContainer($this->container);
     }
 
-    #[Test]
-    public function it_successfully_accepts_notification_with_valid_csrf_token(): void
+    public function testSuccessfullyAcceptsNotificationWithValidCsrfToken(): void
     {
         // Arrange
         $notificationId = 123;
@@ -178,8 +174,7 @@ final class AcceptNotificationActionTest extends TestCase
         $this->assertSame($response, $result);
     }
 
-    #[Test]
-    public function it_throws_http_exception_when_csrf_token_is_invalid(): void
+    public function testThrowsHttpExceptionWhenCsrfTokenIsInvalid(): void
     {
         // Arrange
         $notificationId = 123;
@@ -222,8 +217,7 @@ final class AcceptNotificationActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_throws_not_found_exception_when_notification_not_found(): void
+    public function testThrowsNotFoundExceptionWhenNotificationNotFound(): void
     {
         // Arrange
         $notificationId = 999;
@@ -255,8 +249,7 @@ final class AcceptNotificationActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_throws_not_found_exception_when_id_attribute_is_missing(): void
+    public function testThrowsNotFoundExceptionWhenIdAttributeIsMissing(): void
     {
         // Arrange
         $request = new Request();
@@ -287,9 +280,8 @@ final class AcceptNotificationActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
     #[DataProvider('invalidCsrfTokenDataProvider')]
-    public function it_handles_various_invalid_csrf_token_scenarios(
+    public function testHandlesVariousInvalidCsrfTokenScenarios(
         ?string $csrfToken,
         string $expectedMessage
     ): void {
@@ -333,9 +325,8 @@ final class AcceptNotificationActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
     #[DataProvider('invalidIdDataProvider')]
-    public function it_handles_various_invalid_id_scenarios(
+    public function testHandlesVariousInvalidIdScenarios(
         mixed $id,
         string $expectedMessage
     ): void {
@@ -368,8 +359,7 @@ final class AcceptNotificationActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_handles_notification_accepted_factory_exception(): void
+    public function testHandlesNotificationAcceptedFactoryException(): void
     {
         // Arrange
         $notificationId = 123;
@@ -423,8 +413,7 @@ final class AcceptNotificationActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_handles_repository_add_exception(): void
+    public function testHandlesRepositoryAddException(): void
     {
         // Arrange
         $notificationId = 123;
@@ -484,8 +473,7 @@ final class AcceptNotificationActionTest extends TestCase
         $this->action->__invoke($request);
     }
 
-    #[Test]
-    public function it_handles_view_handler_exception(): void
+    public function testHandlesViewHandlerException(): void
     {
         // Arrange
         $notificationId = 123;

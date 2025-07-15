@@ -32,8 +32,7 @@ final class InvoiceSequenceIncrementListenerTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_updates_sequence_counter_and_persists_when_serie_is_present(): void
+    public function testUpdatesSequenceCounterAndPersistsWhenSerieIsPresent(): void
     {
         // Arrange
         $sequenceNumber = 123;
@@ -76,8 +75,7 @@ final class InvoiceSequenceIncrementListenerTest extends TestCase
         // Assertions are covered by the mock expectations above
     }
 
-    #[Test]
-    public function it_does_not_update_sequence_when_serie_is_null(): void
+    public function testDoesNotUpdateSequenceWhenSerieIsNull(): void
     {
         // Arrange
         $invoice = $this->createMock(InvoiceInterface::class);
@@ -100,8 +98,7 @@ final class InvoiceSequenceIncrementListenerTest extends TestCase
         // Assertions are covered by the mock expectations above
     }
 
-    #[Test]
-    public function it_throws_exception_when_subject_is_not_invoice_interface(): void
+    public function testThrowsExceptionWhenSubjectIsNotInvoiceInterface(): void
     {
         // Arrange
         $invalidSubject = new \stdClass();
@@ -112,8 +109,7 @@ final class InvoiceSequenceIncrementListenerTest extends TestCase
         $this->listener->preCreate($event);
     }
 
-    #[Test]
-    public function it_handles_different_sequence_increment_strategies(): void
+    public function testHandlesDifferentSequenceIncrementStrategies(): void
     {
         // Arrange
         $sequenceNumber = 456;
@@ -156,8 +152,7 @@ final class InvoiceSequenceIncrementListenerTest extends TestCase
         // Assertions are covered by the mock expectations above
     }
 
-    #[Test]
-    public function it_handles_different_date_formats(): void
+    public function testHandlesDifferentDateFormats(): void
     {
         // Arrange
         $sequenceNumber = 789;
