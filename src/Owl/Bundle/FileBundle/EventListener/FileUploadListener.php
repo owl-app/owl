@@ -21,6 +21,7 @@ final class FileUploadListener
     public function uploadFile(GenericEvent $event): void
     {
         $resource = $event->getSubject();
+
         Assert::isInstanceOf($resource, FileInterface::class);
 
         if (null !== $resource->getFile()) {
