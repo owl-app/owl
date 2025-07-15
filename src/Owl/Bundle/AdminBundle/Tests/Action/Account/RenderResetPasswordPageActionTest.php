@@ -9,9 +9,7 @@ use Owl\Bundle\AdminBundle\Form\Type\ResetPasswordType;
 use Owl\Component\Core\Factory\Http\RedirectResponseFactoryInterface;
 use Owl\Component\Core\Model\AdminUserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -25,7 +23,6 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Twig\Environment;
 
-#[CoversClass(RenderResetPasswordPageAction::class)]
 final class RenderResetPasswordPageActionTest extends TestCase
 {
     private RenderResetPasswordPageAction $action;
