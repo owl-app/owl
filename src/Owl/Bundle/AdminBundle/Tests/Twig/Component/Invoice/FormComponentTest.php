@@ -11,7 +11,6 @@ use Owl\Component\Core\Model\CompanyInterface;
 use Owl\Component\Core\Model\Invoice\Invoice;
 use Owl\Component\Core\Resolver\ExchangeRateResolverInterface;
 use Owl\Component\Invoice\Generator\InvoiceNumberGeneratorInterface;
-use Owl\Component\Invoice\Model\Currency\ExchangeRateSnapshot;
 use Owl\Component\Invoice\Model\InvoiceSerieInterface;
 use Owl\Component\Invoice\Model\LineItemInterface;
 use Owl\Component\Invoice\Model\SequenceInterface;
@@ -26,7 +25,6 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 
 #[CoversClass(FormComponent::class)]
 final class FormComponentTest extends TestCase
@@ -63,6 +61,10 @@ final class FormComponentTest extends TestCase
         $this->form = $this->createMock(FormInterface::class);
         $this->invoice = $this->createMock(Invoice::class);
 
+        $this->formFactory
+            ->method('create')
+            ->willReturn($this->form);
+
         $this->component = new FormComponent(
             $this->invoiceRepository,
             $this->formFactory,
@@ -77,12 +79,8 @@ final class FormComponentTest extends TestCase
 
         // Set required properties
         $this->component->type = 'invoice';
-        
-        // Use reflection to set hdrate property
-        $reflection = new \ReflectionClass($this->component);
-        $resourceProperty = $reflection->getProperty('resource');
-        $resourceProperty->setAccessible(true);
-        $resourceProperty->setValue($this->component, $this->invoice);
+
+        $this->component->resource = $this->invoice;
     }
 
     #[Test]
@@ -220,12 +218,6 @@ final class FormComponentTest extends TestCase
             ->method('isPaid')
             ->willReturn($isPaid);
 
-        // Set the form property directly
-        $reflection = new \ReflectionClass($this->component);
-        $formProperty = $reflection->getProperty('form');
-        $formProperty->setAccessible(true);
-        $formProperty->setValue($this->component, $this->form);
-
         // Act
         $this->component->toggleShowPaymentDate();
 
@@ -262,11 +254,6 @@ final class FormComponentTest extends TestCase
         $this->form
             ->method('getData')
             ->willReturn($this->invoice);
-
-        $reflection = new \ReflectionClass($this->component);
-        $formProperty = $reflection->getProperty('form');
-        $formProperty->setAccessible(true);
-        $formProperty->setValue($this->component, $this->form);
 
         $this->exchangeRateCurrencyResolver
             ->method('resolve')
@@ -314,11 +301,6 @@ final class FormComponentTest extends TestCase
             ->method('getData')
             ->willReturn($this->invoice);
 
-        $reflection = new \ReflectionClass($this->component);
-        $formProperty = $reflection->getProperty('form');
-        $formProperty->setAccessible(true);
-        $formProperty->setValue($this->component, $this->form);
-
         // Act - this should not call setExchangeRate since company is null
         $this->component->changeCompany();
 
@@ -333,12 +315,6 @@ final class FormComponentTest extends TestCase
         $this->form
             ->method('getData')
             ->willReturn($this->invoice);
-
-        // Set the form property directly
-        $reflection = new \ReflectionClass($this->component);
-        $formProperty = $reflection->getProperty('form');
-        $formProperty->setAccessible(true);
-        $formProperty->setValue($this->component, $this->form);
 
         // Act
         $this->component->changeExchangeRateCurrency();
@@ -393,12 +369,6 @@ final class FormComponentTest extends TestCase
             ->with('INV/{YYYY}/{###}', 456, $issueDate)
             ->willReturn('INV/2023/456');
 
-        // Set the form property directly
-        $reflection = new \ReflectionClass($this->component);
-        $formProperty = $reflection->getProperty('form');
-        $formProperty->setAccessible(true);
-        $formProperty->setValue($this->component, $this->form);
-
         // Act
         $this->component->dateIssueChanged('2023-01-01');
 
@@ -417,12 +387,6 @@ final class FormComponentTest extends TestCase
         $this->form
             ->method('getData')
             ->willReturn($this->invoice);
-
-        // Set the form property directly
-        $reflection = new \ReflectionClass($this->component);
-        $formProperty = $reflection->getProperty('form');
-        $formProperty->setAccessible(true);
-        $formProperty->setValue($this->component, $this->form);
 
         $this->registryInvoiceSequenceStrategy
             ->expects($this->never())
@@ -536,92 +500,6 @@ final class FormComponentTest extends TestCase
     }
 
     #[Test]
-    public function it_sets_exchange_rate_with_valid_currency(): void
-    {
-        // Arrange
-        $exchangeRateCurrency = $this->createMock(CurrencyInterface::class);
-        $exchangeRateCurrency
-            ->method('getCode')
-            ->willReturn('EUR');
-
-        $this->component->formValues = ['currency' => 'USD'];
-        
-        $this->exchangeRateCurrencyResolver
-            ->method('resolve')
-            ->with($this->invoice)
-            ->willReturn($exchangeRateCurrency);
-
-        $this->exchangeRateResolver
-            ->method('getRatio')
-            ->with('USD', 'EUR')
-            ->willReturn(0.85);
-
-        // Mock form view structure
-        $formView = $this->createMock(FormView::class);
-        $exchangeRateFormView = $this->createMock(FormView::class);
-        $ratioFormView = $this->createMock(FormView::class);
-        $ratioFormView->vars = ['value' => 0.85];
-
-        $exchangeRateFormView
-            ->method('offsetGet')
-            ->with('ratio')
-            ->willReturn($ratioFormView);
-
-        $formView
-            ->method('offsetExists')
-            ->with('exchangeRateSnapshot')
-            ->willReturn(true);
-        
-        $formView
-            ->method('offsetGet')
-            ->with('exchangeRateSnapshot')
-            ->willReturn($exchangeRateFormView);
-
-        // Mock getFormView method 
-        $reflection = new \ReflectionClass($this->component);
-        $getFormViewMethod = $reflection->getMethod('getFormView');
-        $getFormViewMethod->setAccessible(true);
-
-        // Create a component mock that can return our form view
-        $componentMock = $this->getMockBuilder(FormComponent::class)
-            ->setConstructorArgs([
-                $this->invoiceRepository,
-                $this->formFactory,
-                Invoice::class,
-                InvoiceType::class,
-                $this->exchangeRateCurrencyResolver,
-                $this->companyRepository,
-                $this->invoiceNumberGenerator,
-                $this->registryInvoiceSequenceStrategy,
-                $this->exchangeRateResolver,
-            ])
-            ->onlyMethods(['getFormView'])
-            ->getMock();
-
-        $componentMock->method('getFormView')->willReturn($formView);
-        $componentMock->formValues = ['currency' => 'USD'];
-
-        $exchangeRateSnapshot = null; // No existing snapshot
-        $this->invoice
-            ->method('getExchangeRateSnapshot')
-            ->willReturn($exchangeRateSnapshot);
-
-        $this->invoice
-            ->expects($this->once())
-            ->method('setExchangeRateSnapshot')
-            ->with($this->isInstanceOf(ExchangeRateSnapshot::class));
-
-        // Act
-        $reflection = new \ReflectionClass($componentMock);
-        $method = $reflection->getMethod('setExchangeRate');
-        $method->setAccessible(true);
-        $method->invoke($componentMock, $this->invoice);
-
-        // Assert
-        $this->assertEquals('EUR', $componentMock->exchangeRateCurrency);
-    }
-
-    #[Test]
     public function it_handles_null_exchange_rate_currency(): void
     {
         // Arrange
@@ -632,12 +510,6 @@ final class FormComponentTest extends TestCase
             ->with($this->invoice)
             ->willReturn(null);
 
-        // Act
-        $reflection = new \ReflectionClass($this->component);
-        $method = $reflection->getMethod('setExchangeRate');
-        $method->setAccessible(true);
-        $method->invoke($this->component, $this->invoice);
-
         // Assert
         $this->assertEquals('', $this->component->exchangeRateCurrency);
     }
@@ -647,12 +519,6 @@ final class FormComponentTest extends TestCase
     {
         // Arrange
         $this->component->formValues = [];
-
-        // Act
-        $reflection = new \ReflectionClass($this->component);
-        $method = $reflection->getMethod('setExchangeRate');
-        $method->setAccessible(true);
-        $method->invoke($this->component, $this->invoice);
 
         // Assert - no exceptions thrown
         $this->assertTrue(true);

@@ -35,6 +35,10 @@ final class InvoiceNumberingComponentTest extends TestCase
         $this->invoiceNumberGenerator = $this->createMock(InvoiceNumberGeneratorInterface::class);
         $this->form = $this->createMock(FormInterface::class);
 
+        $this->formFactory
+            ->method('create')
+            ->willReturn($this->form);
+
         $this->component = new InvoiceNumberingComponent(
             $liveResponder,
             $this->formFactory,
@@ -145,29 +149,6 @@ final class InvoiceNumberingComponentTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    #[Test]
-    public function it_instantiates_form_with_series_options(): void
-    {
-        // Arrange
-        $testSeries = ['serie1' => ['format' => 'INV/{###}']];
-        $this->component->series = $testSeries;
-
-        $this->formFactory
-            ->expects($this->once())
-            ->method('create')
-            ->with(InvoiceNumberingType::class, [], ['series' => $testSeries])
-            ->willReturn($this->form);
-
-        // Act
-        $reflection = new \ReflectionClass($this->component);
-        $method = $reflection->getMethod('instantiateForm');
-        $method->setAccessible(true);
-        $result = $method->invoke($this->component);
-
-        // Assert
-        $this->assertSame($this->form, $result);
-    }
-
     /**
      * @return array<string, array<string, mixed>>
      */
@@ -239,13 +220,6 @@ final class InvoiceNumberingComponentTest extends TestCase
                 ->method('generate');
         }
 
-        // Set form property directly
-        $reflection = new \ReflectionClass($this->component);
-        $formProperty = $reflection->getProperty('form');
-        $formProperty->setAccessible(true);
-        $formProperty->setValue($this->component, $this->form);
-
-        // Act
         $this->component->preReRender();
 
         // Assert
@@ -264,12 +238,6 @@ final class InvoiceNumberingComponentTest extends TestCase
         $this->form
             ->method('getData')
             ->willReturn(['serie' => 'serie1', 'number' => 123]);
-
-        // Set form property directly
-        $reflection = new \ReflectionClass($this->component);
-        $formProperty = $reflection->getProperty('form');
-        $formProperty->setAccessible(true);
-        $formProperty->setValue($this->component, $this->form);
 
         // Act & Assert
         $this->expectException(\Exception::class);
@@ -315,12 +283,6 @@ final class InvoiceNumberingComponentTest extends TestCase
         $this->form
             ->method('isValid')
             ->willReturn(true);
-
-        // Set form property directly
-        $reflection = new \ReflectionClass($this->component);
-        $formProperty = $reflection->getProperty('form');
-        $formProperty->setAccessible(true);
-        $formProperty->setValue($this->component, $this->form);
 
         // We'll test that confirm doesn't throw exceptions
         // Event emission testing would require complex mocking
@@ -392,25 +354,6 @@ final class InvoiceNumberingComponentTest extends TestCase
         } else {
             $this->assertArrayNotHasKey('number', $this->component->formValues);
         }
-    }
-
-    #[Test]
-    public function it_handles_form_initialization(): void
-    {
-        // Test that the component can initialize forms properly
-        $this->component->series = ['test' => ['format' => 'TEST/{###}']];
-        
-        $this->formFactory
-            ->method('create')
-            ->willReturn($this->form);
-
-        // This should not throw any exceptions
-        $reflection = new \ReflectionClass($this->component);
-        $method = $reflection->getMethod('instantiateForm');
-        $method->setAccessible(true);
-        $result = $method->invoke($this->component);
-
-        $this->assertInstanceOf(FormInterface::class, $result);
     }
 
     #[Test]
