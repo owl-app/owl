@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\RbacBundle\Tests\Doctrine\ORM\Subscriber;
 
+use Doctrine\Common\EventSubscriber;
 use Owl\Bundle\RbacBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -31,9 +32,12 @@ class LoadMetadataSubscriberTest extends TestCase
 
     public function testGetSubscribedEventsReturnsCorrectEvents(): void
     {
-        $result = $this->subscriber->getSubscribedEvents();
+        $events = $this->subscriber->getSubscribedEvents();
 
-        $this->assertSame(['loadClassMetadata'], $result);
+        $this->assertIsArray($events);
+        $this->assertCount(1, $events);
+        $this->assertContains('loadClassMetadata', $events);
+        $this->assertSame(['loadClassMetadata'], $events);
     }
 
     public function testLoadClassMetadataSetsTableNameWhenClassMatches(): void
@@ -61,6 +65,6 @@ class LoadMetadataSubscriberTest extends TestCase
 
     public function testImplementsEventSubscriberInterface(): void
     {
-        $this->assertInstanceOf('Doctrine\Common\EventSubscriber', $this->subscriber);
+        $this->assertInstanceOf(EventSubscriber::class, $this->subscriber);
     }
 }
