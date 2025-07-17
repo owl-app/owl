@@ -1,30 +1,21 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Owl\Bundle\LocaleBundle\Twig;
 
-use Owl\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
+use Owl\Component\Locale\Context\LocaleContextInterface;
+use Owl\Component\Locale\Context\LocaleNotFoundException;
+use Owl\Component\Locale\Converter\LocaleConverterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 final class LocaleExtension extends AbstractExtension
 {
-    /** @var LocaleHelperInterface */
-    private $localeHelper;
-
-    public function __construct(LocaleHelperInterface $localeHelper)
-    {
-        $this->localeHelper = $localeHelper;
+    public function __construct(
+        private LocaleConverterInterface $localeConverter,
+        private LocaleContextInterface $localeContext,
+    ) {
     }
 
     /**
@@ -33,12 +24,34 @@ final class LocaleExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
+            new TwigFilter('sylius_locale_name', [$this, 'convertCodeToName']),
             new TwigFilter('sylius_locale_country', [$this, 'getCountryCode']),
         ];
     }
 
-    public function getCountryCode(string $locale): string
+    public function convertCodeToName(string $code, ?string $localeCode = null): string
+    {
+        try {
+            return $this->localeConverter->convertCodeToName($code, $this->getLocaleCode($localeCode));
+        } catch (\InvalidArgumentException) {
+            return $code;
+        }
+    }
+
+    public function getLocaleCode(?string $localeCode): ?string
+    {
+        if (null !== $localeCode) {
+            return $localeCode;
+        }
+
+        try {
+            return $this->localeContext->getLocaleCode();
+        } catch (LocaleNotFoundException) {
+            return null;
+        }
+    }
+
+    public function getCountryCode(string $locale): ?string
     {
         return \Locale::getRegion($locale);
     }

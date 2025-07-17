@@ -54,14 +54,9 @@
             <tag name="kernel.event_listener" event="kernel.request" priority="4" />
         </service>
 
-        <service id="owl.templating.helper.locale" class="Owl\Bundle\LocaleBundle\Templating\Helper\LocaleHelper">
+        <service id="owl.twig.extension.locale" class="Owl\Bundle\LocaleBundle\Twig\LocaleExtension" public="false">
             <argument type="service" id="owl.locale_converter" />
             <argument type="service" id="owl.context.locale" />
-            <tag name="templating.helper" alias="owl_locale" />
-        </service>
-
-        <service id="owl.twig.extension.locale" class="Owl\Bundle\LocaleBundle\Twig\LocaleExtension" public="false">
-            <argument type="service" id="owl.templating.helper.locale" />
             <tag name="twig.extension" />
         </service>
     </services>
