@@ -1,0 +1,10 @@
+Owl\Component\Core\Model\Rbac\RoleSetting:
+    exclusion_policy: NONE
+    xml_root_name: rbac_role_setting
+    properties:
+        displayName:
+            expose: true
+            groups: [AjaxShow]
+        theme:
+            expose: true
+            groups: [AjaxShow]

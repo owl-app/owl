@@ -1,3 +1,0 @@
-Owl\Component\Core\Model\Service:
-    exclusion_policy: ALL
-    xml_root_name: service

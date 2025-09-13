@@ -51,7 +51,6 @@ owl_admin_rbac_role_update:
             permission: true
             template: "@OwlAdmin/shared/crud/modal/update.html.twig"
             vars:
-                serialization_groups: [AjaxShow]
                 form:
                     ajax: true
                 permission:

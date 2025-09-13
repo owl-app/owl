@@ -16,14 +16,6 @@ class Role extends BaseRole implements RoleInterface
         return (string) $this->getSetting()?->getDisplayName();
     }
 
-    /**
-     * @return 'role'
-     */
-    public function getType(): string
-    {
-        return 'role';
-    }
-
     public function getCanonicalName(): string
     {
         return $this->getName();

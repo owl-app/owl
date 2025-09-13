@@ -1,0 +1,12 @@
+Owl\Component\Rbac\Model\BaseAuthItem:
+    exclusion_policy: NONE
+    xml_root_name: rbac_base_auth_item
+    properties:
+        name:
+            expose: true
+            type: string
+            groups: [AjaxShow]
+        description:
+            expose: true
+            type: string
+            groups: [AjaxShow]
