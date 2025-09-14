@@ -17,7 +17,7 @@
 
         <service id="owl.twig.extension.file_path" class="Owl\Bundle\FileBundle\Twig\FilePathExtension" public="false">
             <argument>%owl_file.file_path%</argument>
-            <argument type="service" id="router.request_context" />
+            <argument type="service" id="request_stack" />
             <tag name="twig.extension" />
         </service>
 

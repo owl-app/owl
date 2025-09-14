@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\FileBundle\Twig;
 
-use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -14,10 +14,15 @@ final class FilePathExtension extends AbstractExtension
 
     private string $baseUrl;
 
-    public function __construct(string $baseFilePath, RequestContext $requestContext)
+    public function __construct(string $baseFilePath, RequestStack $requestStack)
     {
         $this->baseFilePath = $baseFilePath;
-        $this->baseUrl = sprintf('%s://%s', $requestContext->getScheme(), $requestContext->getHost());
+        $this->baseUrl = '';
+
+        $request = $requestStack->getCurrentRequest();
+        if ($request) {
+            $this->baseUrl = $request->getSchemeAndHttpHost();
+        }
     }
 
     /**
