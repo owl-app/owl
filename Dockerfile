@@ -1,10 +1,10 @@
 # the different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/compose/compose-file/#target
 
-ARG PHP_VERSION=8.1
-ARG NODE_VERSION=18
+ARG PHP_VERSION=8.4
+ARG NODE_VERSION=22
 ARG NGINX_VERSION=1.21
-ARG ALPINE_VERSION=3.16
+ARG ALPINE_VERSION=3.20
 ARG COMPOSER_VERSION=2.4
 ARG PHP_EXTENSION_INSTALLER_VERSION=latest
 
@@ -20,6 +20,7 @@ RUN apk add --no-cache \
         file \
         gettext \
         unzip \
+        git \
     ;
 
 COPY --from=php_extension_installer /usr/bin/install-php-extensions /usr/local/bin/
@@ -50,26 +51,23 @@ ENV APP_ENV=prod
 # prevent the reinstallation of vendors at every changes in the source code
 COPY composer.* symfony.lock ./
 RUN set -eux; \
-    composer install --prefer-dist --no-autoloader --no-interaction --no-scripts --no-progress --no-dev; \
-    composer clear-cache
+    composer install --prefer-dist --no-autoloader --no-interaction --no-scripts --no-progress --no-dev;
 
 # copy only specifically what we need
 COPY .env .env.prod ./
-COPY assets assets/
 COPY bin bin/
 COPY config config/
+COPY migrations migrations/
 COPY public public/
 COPY src src/
 COPY templates templates/
-COPY translations translations/
 COPY themes themes/
+COPY translations translations/
 
 RUN set -eux; \
     mkdir -p var/cache var/log; \
     composer dump-autoload --classmap-authoritative; \
-    APP_SECRET='' composer run-script post-install-cmd; \
-    chmod +x bin/console; sync; \
-    bin/console sylius:theme:assets:install public --no-interaction
+    chmod +x bin/console; sync;
 
 VOLUME /srv/owl/var
 
@@ -84,30 +82,29 @@ FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS owl_node
 WORKDIR /srv/owl
 
 RUN set -eux; \
-	apk add --no-cache --virtual .build-deps \
-		g++ \
-		gcc \
-		make \
-	;
+    apk add --no-cache --virtual .build-deps \
+        g++ \
+        gcc \
+        make \
+    ;
 
 # prevent the reinstallation of vendors at every changes in the source code
-COPY package.json yarn.* ./
-COPY --from=base /srv/owl/src/Owl/Bundle/UiBundle/Resources/private        src/Owl/Bundle/UiBundle/Resources/private/
-COPY --from=base /srv/owl/src/Owl/Bundle/AdminBundle/Resources/private     src/Owl/Bundle/AdminBundle/Resources/private/
+COPY package.json package-lock.json ./
+COPY --from=base /srv/owl/src/Owl/Bundle/AdminBundle              src/Owl/Bundle/AdminBundle/
+COPY --from=base /srv/owl/vendor/symfony/ux-autocomplete/assets       vendor/symfony/ux-autocomplete/assets
+COPY --from=base /srv/owl/vendor/symfony/ux-live-component/assets     vendor/symfony/ux-live-component/assets
 RUN set -eux; \
-    yarn install; \
-    yarn cache clean
-
-COPY --from=base /srv/owl/assets ./assets
+    npm install; \
+    npm cache verify
 
 COPY webpack.config.js ./
-RUN yarn build:prod
+RUN npm run build
 
 COPY .docker/node/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
-CMD ["yarn", "build:prod"]
+CMD ["npm", "build:prod"]
 
 FROM base AS owl_php_prod
 
@@ -131,7 +128,7 @@ WORKDIR /srv/owl
 
 ENV APP_ENV=dev
 
-COPY .env.test .env.test_cached ./
+COPY .env.test ./
 
 RUN set -eux; \
     composer install --prefer-dist --no-autoloader --no-interaction --no-scripts --no-progress; \
@@ -146,7 +143,7 @@ WORKDIR /srv/owl
 
 ENV APP_ENV=test
 
-COPY .env.test .env.test_cached ./
+COPY .env.test ./
 
 RUN set -eux; \
     composer install --prefer-dist --no-autoloader --no-interaction --no-scripts --no-progress; \
@@ -155,9 +152,9 @@ RUN set -eux; \
 FROM owl_php_prod AS owl_cron
 
 RUN set -eux; \
-	apk add --no-cache --virtual .build-deps \
-		apk-cron \
-	;
+    apk add --no-cache --virtual .build-deps \
+        apk-cron \
+    ;
 
 COPY .docker/cron/crontab /etc/crontabs/root
 COPY .docker/cron/docker-entrypoint.sh /usr/local/bin/docker-entrypoint

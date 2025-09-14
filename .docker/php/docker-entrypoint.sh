@@ -9,11 +9,11 @@ fi
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
     mkdir -p var/cache var/log var/sessions
     # public/files
-    setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
-    setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
+    # setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
+    # setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
 
     if [ "$APP_ENV" != 'prod' ]; then
-        composer install --prefer-dist --no-progress --no-interaction
+        composer install --prefer-dist --no-progress --no-interaction --no-scripts
 
         mkdir -p public/_themes/owl/admin
         bin/console assets:install --no-interaction
@@ -25,6 +25,8 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
         (>&2 echo "Waiting for Migrations container to finish")
         sleep 1;
     done;
+
+    bin/console ca:cl
 fi
 
 exec docker-php-entrypoint "$@"
