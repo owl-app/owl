@@ -100,6 +100,10 @@ RUN set -eux; \
 COPY webpack.config.js ./
 RUN npm run build
 
+RUN npm install -g corepack \
+    yarn set version stable \
+    yarn install
+
 COPY .docker/node/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 

@@ -19,10 +19,13 @@
         "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets"
     },
     "devDependencies": {
+        "@babel/core": "^7.28.4",
         "@dotenvx/dotenvx": "^1.44.1",
         "@hotwired/stimulus": "^3.0.0",
         "@playwright/test": "^1.52.0",
         "@symfony/stimulus-bridge": "^3.2.0",
+        "@symfony/webpack-encore": "^5.2",
+        "babel-loader": "^10.0.0",
         "eslint": "^8.57.1",
         "eslint-config-standard": "^17.1.0",
         "eslint-plugin-import": "^2.31.0",
